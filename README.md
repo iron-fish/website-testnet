@@ -1,3 +1,7 @@
+# website-testnet
+
+The website for the Iron Fish testnet. The rest of the Iron Fish website can be found in [iron-fish/website](https://github.com/iron-fish/website).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
