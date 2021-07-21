@@ -1,3 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "extended-regular";
+  src: url("/font/extendedregular/favoritextended-regular-webfont.eot");
+  src: url("/font/extendedregular/favoritextended-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/font/extendedregular/favoritextended-regular-webfont.woff2")
+      format("woff2"),
+    url("/font/extendedregular/favoritextended-regular-webfont.woff")
+      format("woff"),
+    url("/font/extendedregular/favoritextended-regular-webfont.ttf")
+      format("truetype"),
+    url("/font/extendedregular/favoritextended-regular-webfont.svg#_.book")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "mono-regular";
+  src: url("/font/monoregular/favoritmono-regular-webfont.eot");
+  src: url("/font/monoregular/favoritmono-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/font/monoregular/favoritmono-regular-webfont.woff2") format("woff2"),
+    url("/font/monoregular/favoritmono-regular-webfont.woff") format("woff"),
+    url("/font/monoregular/favoritmono-regular-webfont.ttf") format("truetype"),
+    url("/font/monoregular/favoritmono-regular-webfont.svg#_.book")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "favorit-regular";
+  src: url("/font/regular/favorit-regular-webfont.eot");
+  src: url("/font/regular/favorit-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/font/regular/favorit-regular-webfont.woff2") format("woff2"),
+    url("/font/regular/favorit-regular-webfont.woff") format("woff"),
+    url("/font/regular/favorit-regular-webfont.ttf") format("truetype"),
+    url("/font/regular/favorit-regular-webfont.svg#_.book") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ifm-container-width: 1406px;
+  --ifm-container-index-width: 1171px;
+  --ifm-global-radius: 0.2rem;
+  --ifm-background-color: #fff;
+  --ifm-font-family-base: favorit-regular, "Helvetica", sans-serif;
+  --ifm-font-size-base: 100%;
+  --ifm-font-color-base-inverse: #000;
+  --ifm-heading-color: #000;
+  --ifm-font-color-base: #000;
+  --ifm-index-color-primary: #252120;
+  --ifm-features-separator-color: #dadada;
+  --ifm-spacing-horizontal: 0px;
+  --ifm-table-stripe-background: #1e016f0a;
+  --ifm-list-left-padding: 1rem;
+  --ifm-list-border-color: #ffe7ba;
+
+  --ifm-color-primary: #000;
+  --ifm-color-thirty: #687086;
+  --ifm-color-primary-contrast: #fff;
+  --ifm-color-primary-dark: #1d0070;
+  --ifm-color-primary-darker: #1d0070;
+  --ifm-color-primary-darkest: #1d0070;
+  --ifm-color-primary-light: #000;
+  --ifm-color-primary-lighter: #1d0070;
+  --ifm-color-primary-lightest: #1d0070;
+  --ifm-color-secondary: #1d0070;
+  --ifm-color-secondary-hover: #1d0070;
+  --ifm-color-emphasis-300: transparent;
+
+  --ifm-button-color: #fff;
+  --ifm-button-border-color: #000;
+  --ifm-button-background-color: #fbebcf;
+  --ifm-button-background-active-color: #ebe5e5;
+  --ifm-button-font-weight: normal;
+  --ifm-button-padding-horizontal: 0.7rem;
+
+  --ifm-contrast-background-color: #1d0070;
+  --ifm-navbar-background-color: #1d0070;
+  --ifm-navbar-background-contrast-color: #1d0070;
+  --ifm-navbar-link-color: #1d0070;
+  --ifm-navbar-link-hover-color: #1d0070;
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-height: 90px;
+  --ifm-navbar-padding-vertical: 30px;
+
+  --ifm-menu-color-background-active: none;
+  --ifm-menu-color-background-hover: none;
+  --ifm-menu-color: #9976ff;
+  --ifm-menu-color-active: #fff;
+  --ifm-menu-link-padding-vertical: 5px;
+  --ifm-menu-padding-vertical: 15px;
+  --ifm-menu-link-padding-horizontal: 20px;
+
+  --ifm-link-color: #0055ff;
+  --ifm-link-decoration: underline;
+
+  --ifm-toc-border-color: transparent;
+  --ifm-toc-link-color: #100060;
+
+  --ifm-footer-padding-vertical: 0.7rem;
+  --ifm-footer-background-color: #fff;
+  --ifm-footer-link-color: #1d0070;
+
+  --ifm-code-font-size: 1rem;
+  --ifm-code-background: #1e016f0a;
+  --ifm-list-item-margin: 20px;
+  --ifm-pagination-nav-color-hover: transparent;
+  --ifm-docs-column-margin-right: 55px;
+
+  --ifm-font-header-button: "extended-regular", "helvetica", sans-serif;
+  --ifm-large-container-horizontal-padding: 81px;
+  --ifm-large-vertical-padding: 128px;
+  --ifm-medium-vertical-padding: 64px;
+  --ifm-small-vertical-padding: 32px;
+  --ifm-main-title-width: 100%;
+  --ifm-main-title-font-size: 80px;
+  --ifm-main-title-line-height: 83px;
+  --ifm-main-title-align: center;
+  --ifm-main-title-padding: 0px;
+  --ifm-font-size-subtitle: 46px;
+  --ifm-line-height-subtitle: 55px;
+  --ifm-navbar--toggle-right: 35px;
+  --ifm-markdown-horizontal-padding: 0px;
+  --ifm-code-background-color: #1a395b;
+  --ifm-toc-width: 233px;
+
+  --ifm-blue-header-padding-top: 163px;
+  --ifm-text-container-width: 820px;
+  --ifm-navbar-sidebar-width: 100vw;
+}
+
 html,
 body {
   padding: 0;
