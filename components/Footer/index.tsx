@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Button from '../Button'
+import Logo from '../Logo'
 
 type Props = {
   title: string
@@ -31,14 +32,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row w-52 md:w-full m-auto justify-between py-14">
           <div className="mt-1">
             <a href="https://www.ironfish.network">
-              <Image
-                src="/logo.svg"
-                alt="Iron Fish index"
-                layout="fixed"
-                width="165"
-                height="18"
-                role="presentation"
-              />
+              <Logo />
             </a>
             <p className="mt-3 text-xs w-60">
               Iron Fish is a novel cryptocurrency focused on privacy and
