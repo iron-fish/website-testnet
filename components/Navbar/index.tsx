@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
+import GetStarted from './GetStarted'
 import Logo from '../Logo'
 import Close from '../icons/Close'
 import Menu from '../icons/Menu'
@@ -16,12 +17,18 @@ type NavbarFlyoutProps = {
   closeFlyout: () => unknown,
 }
 
-function NavbarLinks({ className = "" }: { className?: string }) {
+type NavbarLinksProps = {
+  className?: string,
+  getStartedClicked: () => unknown,
+  getStartedVisible?: boolean,
+}
+
+function NavbarLinks({ className = "", getStartedClassName = "absolute left-0 right-0 bottom-0 border-b-2 border-black", getStartedClicked, getStartedVisible = false }: NavbarLinksProps) {
   return (
     <>
-      <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-        <a className={className}>Get started</a>
-      </Link>
+      <button onClick={getStartedClicked} className={className}>
+        <span className="flex items-center h-full relative">Get Started<span className={`${getStartedVisible ? getStartedClassName : ''}`}></span></span>
+      </button>
       <Link href="https://ironfish.network/docs/whitepaper/1_introduction">
         <a className={className}>Whitepaper</a>
       </Link>
@@ -49,15 +56,15 @@ function NavbarFlyout({ fill, flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
           <div><Logo fill={fill} width={190} height={32} /></div>
           <button onClick={closeFlyout}><Close /></button>
         </div>
-        <NavbarLinks className="leading-relaxed text-4xl" />
+        <NavbarLinks className="leading-relaxed text-4xl" getStartedClicked={() => {}} />
       </div>
     </div>
   );
 }
 
 function Navbar({ fill = 'white', className = 'bg-black text-white' }: NavbarProps) { 
-
-  const [ flyoutVisible, setFlyoutVisible ] = React.useState(false)
+  const [flyoutVisible, setFlyoutVisible] = React.useState(false)
+  const [getStartedVisible, setGetStartedVisible] = React.useState(false)
 
   React.useEffect(() => {
     if (flyoutVisible) {
@@ -70,15 +77,16 @@ function Navbar({ fill = 'white', className = 'bg-black text-white' }: NavbarPro
   return (
     <nav className={`font-extended ${className}`}>
       <NavbarFlyout fill={fill} flyoutVisible={flyoutVisible} closeFlyout={() => setFlyoutVisible(false)} />
-      <div className="flex items-center justify-between px-3 lg:px-16 py-7">
-        <div><Logo fill={fill} width={190} height={32}></Logo></div>
-        <div className="hidden md:block lg:text-xl">
-          <NavbarLinks className="px-3 lg:px-4 whitespace-nowrap" />
+      <div className="flex items-stretch justify-between px-3 lg:px-16">
+        <div className="py-7"><Logo fill={fill} width={190} height={32}></Logo></div>
+        <div className="hidden md:flex items-center lg:text-xl">
+          <NavbarLinks className="px-3 lg:px-4 h-full flex items-center whitespace-nowrap" getStartedVisible={getStartedVisible} getStartedClicked={() => setGetStartedVisible(!getStartedVisible)} />
         </div>
         <button className="md:hidden" onClick={() => setFlyoutVisible(true)}>
           <Menu />
         </button>
       </div>
+      {getStartedVisible && <GetStarted />}
     </nav>
   );
 }

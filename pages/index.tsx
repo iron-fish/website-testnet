@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar fill="white" className="bg-black text-white" />
+      <Navbar fill="black" className="bg-white text-black" />
 
       <main >
         <h1>
