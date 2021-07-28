@@ -19,6 +19,7 @@ type NavbarFlyoutProps = {
 
 type NavbarLinksProps = {
   className?: string,
+  getStartedClassName?: string,
   getStartedClicked: () => unknown,
   getStartedVisible?: boolean,
 }
