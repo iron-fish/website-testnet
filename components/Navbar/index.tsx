@@ -86,7 +86,7 @@ function Navbar({ fill = 'white', className = 'bg-black text-white' }: NavbarPro
           <Menu />
         </button>
       </div>
-      {getStartedVisible && <GetStarted />}
+      {getStartedVisible && <div className="hidden md:flex"><GetStarted /></div>}
     </nav>
   );
 }
