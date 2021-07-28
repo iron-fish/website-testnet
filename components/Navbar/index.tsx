@@ -12,7 +12,6 @@ type NavbarProps = {
 }
 
 type NavbarFlyoutProps = {
-  fill: string,
   flyoutVisible: boolean,
   closeFlyout: () => unknown,
 }
@@ -49,12 +48,12 @@ function NavbarLinks({ className = "", getStartedClassName = "absolute left-0 ri
   );
 }
 
-function NavbarFlyout({ fill, flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
+function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
   return (
     <div className={`absolute h-screen w-screen bg-ifblue text-white font-extended transition-all transform-gpu ${!flyoutVisible ? '-translate-x-full' : ''}`}>
       <div className="flex flex-col px-5">
         <div className="flex my-10 justify-between items-center">
-          <div><Logo fill={fill} width={190} height={32} /></div>
+          <div><Logo fill="white" width={190} height={32} /></div>
           <button onClick={closeFlyout}><Close /></button>
         </div>
         <NavbarLinks className="leading-relaxed text-4xl" getStartedClicked={() => {}} />
@@ -77,7 +76,7 @@ function Navbar({ fill = 'white', className = 'bg-black text-white' }: NavbarPro
 
   return (
     <nav className={`font-extended ${className}`}>
-      <NavbarFlyout fill={fill} flyoutVisible={flyoutVisible} closeFlyout={() => setFlyoutVisible(false)} />
+      <NavbarFlyout flyoutVisible={flyoutVisible} closeFlyout={() => setFlyoutVisible(false)} />
       <div className="flex items-stretch justify-between px-3 lg:px-16">
         <div className="py-7"><Logo fill={fill} width={190} height={32}></Logo></div>
         <div className="hidden md:flex items-center lg:text-xl">
