@@ -32,8 +32,8 @@ const TestnetGridElement = ({ href, header, body, cubeClassName }: TestnetGridEl
 function GetStarted() {
   return (
     <div className="absolute bg-white left-0 right-0">
-    <div className="flex border-b border-t">
-      <div className="flex justify-end border-r p-8 w-2/6">
+    <div className="flex justify-center border-b border-t">
+      <div className="flex justify-end border-r p-8">
         <div style={{ maxWidth: "14rem" }}>
           <SectionHeader>IRON FISH CLI</SectionHeader>
           <div>
@@ -46,7 +46,7 @@ function GetStarted() {
           </div>
         </div>
       </div>
-      <div className="flex p-8 w-4/6">
+      <div className="flex p-8">
         <div>
           <SectionHeader>INCENTIVIZED TESTNET</SectionHeader>
           <div className="grid grid-rows-2 grid-cols-2 gap-4 -m-4">
