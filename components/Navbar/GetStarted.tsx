@@ -1,6 +1,7 @@
 import React from "react"
 
 import Cube from './Cube'
+import Link from 'next/link'
 
 type SectionHeaderProps = {
   children?: React.ReactNode;
@@ -11,19 +12,22 @@ const SectionHeader = ({ children, className }: SectionHeaderProps) =>
   <h3 className={`font-favorit text-ifgray text-sm mb-7 ${className}`}>{children}</h3>
 
 type TestnetGridElementProps = {
-  header: string; 
+  header: string;
+  href: string;
   body: string;
   cubeClassName: string;
 }
 
-const TestnetGridElement = ({ header, body, cubeClassName }: TestnetGridElementProps) => 
-  <a href="google.com" className="flex items-center p-4 rounded hover:bg-iflightgray">
-    <Cube className={cubeClassName} />
-    <div className="flex flex-col ml-4">
-      <h5>{header}</h5>
-      <p className="font-favorit text-ifgray text-sm">{body}</p>
-    </div>
-  </a>
+const TestnetGridElement = ({ href, header, body, cubeClassName }: TestnetGridElementProps) =>
+  <Link href={href}>
+    <a className="flex items-center p-4 rounded hover:bg-iflightgray">
+      <Cube className={cubeClassName} />
+      <div className="flex flex-col ml-4">
+        <h5>{header}</h5>
+        <p className="font-favorit text-ifgray text-sm">{body}</p>
+      </div>
+    </a>
+  </Link>
 
 function GetStarted() {
   return (
@@ -46,10 +50,10 @@ function GetStarted() {
         <div>
           <SectionHeader>INCENTIVIZED TESTNET</SectionHeader>
           <div className="grid grid-rows-2 grid-cols-2 gap-4 -m-4">
-            <TestnetGridElement header="About the Testnet" body="How to earn points" cubeClassName="text-iforange" />
-            <TestnetGridElement header="Testnet Community" body="From our supporters" cubeClassName="text-ifbeige" />
-            <TestnetGridElement header="Testnet Leaderboard" body="Earn your way to the top" cubeClassName="text-ifpink" />
-            <TestnetGridElement header="Testnet FAQ" body="Frequently asked questions" cubeClassName="text-iflightblue" />
+            <TestnetGridElement href="/about" header="About the Testnet" body="How to earn points" cubeClassName="text-iforange" />
+            <TestnetGridElement href="/community" header="Testnet Community" body="From our supporters" cubeClassName="text-ifbeige" />
+            <TestnetGridElement href="/leaderboard" header="Testnet Leaderboard" body="Earn your way to the top" cubeClassName="text-ifpink" />
+            <TestnetGridElement href="/faq" header="Testnet FAQ" body="Frequently asked questions" cubeClassName="text-iflightblue" />
           </div>
         </div>
       </div>
