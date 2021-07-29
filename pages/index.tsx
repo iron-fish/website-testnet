@@ -14,7 +14,7 @@ export default function Home() {
 
         <Navbar fill="black" className="bg-white text-black" />
 
-        <main className="flex-1">
+        <main className="bg-iforange flex-1">
           <h1 className="text-2xl">Welcome to Testnet.</h1>
         </main>
 
