@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 
-import * as API from '../../api'
+import * as API from '../../apiClient'
 
 type Props = {
   events: ReadonlyArray<API.ApiEvent>,
@@ -53,6 +53,7 @@ export default function User({ events, user }: Props) {
 
           <table>
             <thead>
+              <tr>
                 <th>ID</th>
                 <th>Email</th>
                 <th>Graffiti</th>
@@ -61,18 +62,19 @@ export default function User({ events, user }: Props) {
                 <th>Telegram</th>
                 <th>Created At</th>
                 <th>Updated At</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{user.id}</td>
-                    <td>{user.email}</td>
-                    <td>{user.graffiti}</td>
-                    <td>{user.total_points}</td>
-                    <td>{user.discord_username}</td>
-                    <td>{user.telegram_username}</td>
-                    <td>{user.created_at}</td>
-                    <td>{user.updated_at}</td>
-                </tr>
+              <tr>
+                <td>{user.id}</td>
+                <td>{user.email}</td>
+                <td>{user.graffiti}</td>
+                <td>{user.total_points}</td>
+                <td>{user.discord_username}</td>
+                <td>{user.telegram_username}</td>
+                <td>{user.created_at}</td>
+                <td>{user.updated_at}</td>
+              </tr>
             </tbody>
           </table>
 
@@ -80,12 +82,14 @@ export default function User({ events, user }: Props) {
 
           <table>
             <thead>
+              <tr>
                 <th>ID</th>    
                 <th>Type</th>
                 <th>Points</th>
                 <th>Occurred At</th>
                 <th>Created At</th>
                 <th>Updated At</th>
+              </tr>
             </thead>
             <tbody>
               {events.map(e => (

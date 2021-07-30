@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-import * as API from '../api'
+import * as API from '../apiClient'
 
 type Props = {
   users: ReadonlyArray<API.ApiUser>,
@@ -41,14 +41,16 @@ export default function Leaderboard({ users }: Props) {
 
           <table>
             <thead>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Graffiti</th>
-              <th>Total Points</th>
-              <th>Discord</th>
-              <th>Telegram</th>
-              <th>Created At</th>
-              <th>Updated At</th>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Graffiti</th>
+                <th>Total Points</th>
+                <th>Discord</th>
+                <th>Telegram</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+              </tr>
             </thead>
             <tbody>
               {users.map((user) => {
