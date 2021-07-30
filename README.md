@@ -6,7 +6,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Create an `.env.local` file:
+
+```
+API_URL=<insert Iron Fish API URL here>
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
