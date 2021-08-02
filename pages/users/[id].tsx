@@ -46,7 +46,7 @@ export default function User({ events, user }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <Navbar fill="black" className="bg-white text-black" />
+        <Navbar fill="black" className="bg-iforange text-black" />
 
         <main className="bg-iforange flex-1 items-center flex flex-col">
           <h1 className="text-2xl">User: {user.graffiti}</h1>

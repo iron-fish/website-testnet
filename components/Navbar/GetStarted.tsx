@@ -31,7 +31,7 @@ const TestnetGridElement = ({ href, header, body, cubeClassName }: TestnetGridEl
 
 function GetStarted() {
   return (
-    <div className="absolute bg-white left-0 right-0">
+    <div className="absolute bg-white left-0 right-0 shadow-navbar">
     <div className="flex justify-center border-b border-t">
       <div className="flex justify-end border-r p-8">
         <div style={{ maxWidth: "14rem" }}>

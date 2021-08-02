@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      boxShadow: {
+        navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
+      },
       colors: {
         ifbeige: {
           DEFAULT: '#FFF4E0'

@@ -75,7 +75,7 @@ function Navbar({ fill = 'white', className = 'bg-black text-white' }: NavbarPro
   }, [flyoutVisible])
 
   return (
-    <nav className={`font-extended ${className}`}>
+    <nav className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${getStartedVisible ? 'bg-white text-black' : className}`}>
       <NavbarFlyout flyoutVisible={flyoutVisible} closeFlyout={() => setFlyoutVisible(false)} />
       <div className="flex items-stretch justify-between px-3 lg:px-16">
         <div className="py-7"><Logo fill={fill} width={190} height={32}></Logo></div>

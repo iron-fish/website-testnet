@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
 
-        <Navbar fill="black" className="bg-white text-black" />
+        <Navbar fill="black" className="bg-iforange text-black" />
 
         <main className="bg-iforange flex-1">
           <h1 className="text-2xl">Welcome to Community.</h1>
