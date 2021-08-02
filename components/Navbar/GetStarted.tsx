@@ -33,7 +33,7 @@ function GetStarted() {
   return (
     <div className="absolute bg-white left-0 right-0 shadow-navbar">
     <div className="flex justify-center border-b border-t">
-      <div className="flex justify-end border-r p-8">
+      <div className="flex justify-end border-r p-8 pb-10">
         <div style={{ maxWidth: "14rem" }}>
           <SectionHeader>IRON FISH CLI</SectionHeader>
           <div>
@@ -46,7 +46,7 @@ function GetStarted() {
           </div>
         </div>
       </div>
-      <div className="flex p-8">
+      <div className="flex p-8 pb-10 pl-14">
         <div>
           <SectionHeader>INCENTIVIZED TESTNET</SectionHeader>
           <div className="grid grid-rows-2 grid-cols-2 gap-4 -m-4">
