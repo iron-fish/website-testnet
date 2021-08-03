@@ -29,7 +29,7 @@ const TestnetGridElement = ({ href, header, body, cubeClassName }: TestnetGridEl
     </a>
   </Link>
 
-function GetStarted() {
+function Testnet() {
   return (
     <div className="absolute bg-white left-0 right-0 shadow-navbar">
     <div className="flex justify-center border-b border-t">
@@ -62,5 +62,5 @@ function GetStarted() {
   )
 }
   
-export default GetStarted
+export default Testnet
   
