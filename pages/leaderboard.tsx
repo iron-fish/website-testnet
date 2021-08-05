@@ -1,12 +1,10 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import Button from '../components/Button'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Search from '../components/icons/Search'
-import FishAvatar from '../components/leaderboard/FishAvatar'
 
 import * as API from '../apiClient'
 import LeaderboardRow from '../components/leaderboard/LeaderboardRow'
@@ -91,7 +89,7 @@ export default function Leaderboard({ users }: Props) {
 
             {users.map((user, i) => {
               return <div key={user.id} className="mb-3">
-                <LeaderboardRow rank={i + 1} graffiti={user.graffiti} points={user.total_points} />
+                <LeaderboardRow id={user.id} rank={i + 1} graffiti={user.graffiti} points={user.total_points} />
               </div>
             })}
 
