@@ -26,6 +26,9 @@ module.exports = {
           DEFAULT: '#FFA542'
         },
         ifpink: {
+          DEFAULT: '#FFC2EB',
+        },
+        ifcubepink: {
           DEFAULT: '#FF94DB'
         },
       },

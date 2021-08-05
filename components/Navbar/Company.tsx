@@ -38,7 +38,7 @@ function Company() {
           <div className="flex justify-between -m-4">
             <TestnetGridElement href="https://ironfish.network/about" header="About Us" body="Learn who Iron Fish is" cubeClassName="text-iforange" />
             <TestnetGridElement href="https://ironfish.network/careers" header="Careers" body="We're hiring!" cubeClassName="text-ifbeige" />
-            <TestnetGridElement href="https://ironfish.network/blog" header="Blog" body="What we've got to say" cubeClassName="text-ifpink" />
+            <TestnetGridElement href="https://ironfish.network/blog" header="Blog" body="What we've got to say" cubeClassName="text-ifcubepink" />
             <TestnetGridElement href="https://ironfish.network/faq" header="FAQ" body="Frequently asked questions" cubeClassName="text-iflightblue" />
           </div>
         </div>

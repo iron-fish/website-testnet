@@ -52,7 +52,7 @@ function Testnet() {
           <div className="grid grid-rows-2 grid-cols-2 gap-4 -m-4">
             <TestnetGridElement href="/about" header="About the Testnet" body="How to earn points" cubeClassName="text-iforange" />
             <TestnetGridElement href="/community" header="Testnet Community" body="From our supporters" cubeClassName="text-ifbeige" />
-            <TestnetGridElement href="/leaderboard" header="Testnet Leaderboard" body="Earn your way to the top" cubeClassName="text-ifpink" />
+            <TestnetGridElement href="/leaderboard" header="Testnet Leaderboard" body="Earn your way to the top" cubeClassName="text-ifcubepink" />
             <TestnetGridElement href="/faq" header="Testnet FAQ" body="Frequently asked questions" cubeClassName="text-iflightblue" />
           </div>
         </div>
