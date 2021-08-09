@@ -152,7 +152,7 @@ function Navbar({
         </div>
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
-            className="px-3 lg:px-4 h-full flex items-center whitespace-nowrap"
+            className="px-4.5 lg:px-4 h-full flex items-center whitespace-nowrap"
             companyVisible={companyVisible}
             companyClicked={() =>
               setSubnavState(companyVisible ? null : 'company')
