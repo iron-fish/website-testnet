@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Head from "next/head"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 
 export default function Home() {
   return (
@@ -11,13 +11,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar fill="black" className="bg-iforange text-black" />
 
-        <Navbar fill="black" className="bg-iforange text-black" />
-
-        <main className="bg-iforange flex-1">
-          <h1 className="text-2xl">Welcome to Testnet.</h1>
-        </main>
-
+      <main className="bg-iforange flex-1">
+        <h1 className="text-2xl">Welcome to Testnet.</h1>
+      </main>
 
       <Footer />
     </div>

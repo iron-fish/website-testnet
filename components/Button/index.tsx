@@ -1,14 +1,19 @@
-import React from "react";
+import React from "react"
 
 type Props = {
-  children?: React.ReactNode;
-  className?: string;
-  colorClassName?: string;
+  children?: React.ReactNode
+  className?: string
+  colorClassName?: string
 }
 
-function Button({ children, className = "", colorClassName = "bg-black text-white hover:bg-transparent hover:text-black" }: Props) {
+function Button({
+  children,
+  className = "",
+  colorClassName = "bg-black text-white hover:bg-transparent hover:text-black",
+}: Props) {
   return (
-    <button className={`
+    <button
+      className={`
         flex 
         justify-center
         items-center
@@ -22,10 +27,11 @@ function Button({ children, className = "", colorClassName = "bg-black text-whit
         border-2
         ${colorClassName}
         ${className}
-    `}>
-        {children}
+    `}
+    >
+      {children}
     </button>
-  );
+  )
 }
 
-export default Button;
+export default Button
