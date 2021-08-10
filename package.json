@@ -6,7 +6,8 @@
     "dev": "nps dev",
     "build": "nps build",
     "start": "nps start",
-    "lint": "nps lint"
+    "lint": "nps lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "11.0.1",
