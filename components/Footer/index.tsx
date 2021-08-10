@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 import Button from '../Button'
 import Logo from '../Logo'
 
 type Props = {
   title: string
-  links: Array<{ link: string, name: string }>
+  links: Array<{ link: string; name: string }>
 }
 
 const LinksBlock = ({ title, links }: Props) => {
@@ -15,17 +15,17 @@ const LinksBlock = ({ title, links }: Props) => {
     <div className="mt-8 md:mt-0 mx-1">
       <h3 className="font-extended mb-2 text-xl">{title}</h3>
       <ul>
-        {links.map((link) => (
+        {links.map(link => (
           <li className="font-extended leading-loose" key={link.link}>
             <Link href={link.link}>{link.name}</Link>
           </li>
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-function Footer() { 
+function Footer() {
   return (
     <footer className="font-extended border-t text-ifblue">
       <div className="px-0 md:px-12">
@@ -44,16 +44,16 @@ function Footer() {
             title="Company"
             links={[
               {
-                link: "/about/",
-                name: "About Us",
+                link: '/about/',
+                name: 'About Us',
               },
               {
-                link: "/careers/",
-                name: "Careers",
+                link: '/careers/',
+                name: 'Careers',
               },
               {
-                link: "/blog/",
-                name: "Blog",
+                link: '/blog/',
+                name: 'Blog',
               },
             ]}
           />
@@ -65,16 +65,16 @@ function Footer() {
               //   name: "Get started",
               // },
               {
-                link: "https://explorer.ironfish.network/",
-                name: "Block Explorer",
+                link: 'https://explorer.ironfish.network/',
+                name: 'Block Explorer',
               },
               {
-                link: "/docs/whitepaper/1_introduction",
-                name: "Whitepaper",
+                link: '/docs/whitepaper/1_introduction',
+                name: 'Whitepaper',
               },
               {
-                link: "/faq/",
-                name: "FAQ",
+                link: '/faq/',
+                name: 'FAQ',
               },
             ]}
           />
@@ -138,7 +138,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

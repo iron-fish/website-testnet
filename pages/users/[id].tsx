@@ -8,11 +8,11 @@ import Navbar from '../../components/Navbar'
 import * as API from '../../apiClient'
 
 type Props = {
-  events: ReadonlyArray<API.ApiEvent>,
-  user: API.ApiUser,
+  events: ReadonlyArray<API.ApiEvent>
+  user: API.ApiUser
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async context => {
   if (typeof context.query.id !== 'string') {
     return {
       notFound: true,
@@ -20,9 +20,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   }
 
   const [user, events] = await Promise.all([
-    API.getUser(context.query.id), API.listEvents(context.query.id)
+    API.getUser(context.query.id),
+    API.listEvents(context.query.id),
   ])
-  
+
   if ('error' in events || 'error' in user) {
     return {
       notFound: true,
@@ -46,65 +47,65 @@ export default function User({ events, user }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <Navbar fill="black" className="bg-iforange text-black" />
+      <Navbar fill="black" className="bg-iforange text-black" />
 
-        <main className="bg-iforange flex-1 items-center flex flex-col">
-          <h1 className="text-2xl">User: {user.graffiti}</h1>
+      <main className="bg-iforange flex-1 items-center flex flex-col">
+        <h1 className="text-2xl">User: {user.graffiti}</h1>
 
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Graffiti</th>
-                <th>Total Points</th>
-                <th>Discord</th>
-                <th>Telegram</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Graffiti</th>
+              <th>Total Points</th>
+              <th>Discord</th>
+              <th>Telegram</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{user.id}</td>
+              <td>{user.email}</td>
+              <td>{user.graffiti}</td>
+              <td>{user.total_points}</td>
+              <td>{user.discord_username}</td>
+              <td>{user.telegram_username}</td>
+              <td>{user.created_at}</td>
+              <td>{user.updated_at}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h1 className="text-2xl">Events: {events.length}</h1>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Points</th>
+              <th>Occurred At</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map(e => (
+              <tr key={e.id}>
+                <td>{e.id}</td>
+                <td>{e.type}</td>
+                <td>{e.points}</td>
+                <td>{e.occurred_at}</td>
+                <td>{e.created_at}</td>
+                <td>{e.updated_at}</td>
               </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.graffiti}</td>
-                <td>{user.total_points}</td>
-                <td>{user.discord_username}</td>
-                <td>{user.telegram_username}</td>
-                <td>{user.created_at}</td>
-                <td>{user.updated_at}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h1 className="text-2xl">Events: {events.length}</h1>
-
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>    
-                <th>Type</th>
-                <th>Points</th>
-                <th>Occurred At</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-              </tr>
-            </thead>
-            <tbody>
-              {events.map(e => (
-                <tr key={e.id}>
-                    <td>{e.id}</td>
-                    <td>{e.type}</td>
-                    <td>{e.points}</td>
-                    <td>{e.occurred_at}</td>
-                    <td>{e.created_at}</td>
-                    <td>{e.updated_at}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </main>
+            ))}
+          </tbody>
+        </table>
+      </main>
 
       <Footer />
     </div>

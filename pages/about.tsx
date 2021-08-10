@@ -11,13 +11,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar fill="black" className="bg-iforange text-black" />
 
-        <Navbar fill="black" className="bg-iforange text-black" />
-
-        <main className="bg-iforange flex-1">
-          <h1 className="text-2xl">Welcome to About.</h1>
-        </main>
-
+      <main className="bg-iforange flex-1">
+        <h1 className="text-2xl">Welcome to About.</h1>
+      </main>
 
       <Footer />
     </div>
