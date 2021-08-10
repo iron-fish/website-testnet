@@ -69,7 +69,10 @@ export default function Leaderboard({ users }: Props) {
             <div className="border-r border-black flex h-full items-center justify-between px-5">
               <label className="flex flex-col font-favorit text-xs">
                 Region:
-                <input className="text-lg bg-transparent" value="Global" />
+                <input
+                  className="text-lg bg-transparent"
+                  placeholder="Global"
+                />
               </label>
               <Image
                 src="/arrow_drop_down_black.png"
@@ -84,7 +87,7 @@ export default function Leaderboard({ users }: Props) {
                 View:
                 <input
                   className="text-lg bg-transparent"
-                  value="Total Points"
+                  placeholder="Total Points"
                 />
               </label>
               <Image
