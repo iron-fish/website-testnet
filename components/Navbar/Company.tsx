@@ -44,7 +44,7 @@ function Company() {
       <div className="flex flex-col items-center border-b border-t p-8 pb-10">
         <div className="w-5/6">
           <SectionHeader>COMPANY</SectionHeader>
-          <div className="flex">
+          <div className="flex justify-center">
             <TestnetGridElement
               href="https://ironfish.network/about"
               header="About Us"
