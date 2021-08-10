@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 
-import Cube from "./Cube"
-import Link from "next/link"
+import Cube from './Cube'
+import Link from 'next/link'
 
 type SectionHeaderProps = {
   children?: React.ReactNode
@@ -43,7 +43,7 @@ function Testnet() {
     <div className="absolute bg-white left-0 right-0 shadow-navbar">
       <div className="flex justify-center border-b border-t">
         <div className="flex justify-end border-r p-8 pb-10">
-          <div style={{ maxWidth: "14rem" }}>
+          <div style={{ maxWidth: '14rem' }}>
             <SectionHeader>IRON FISH CLI</SectionHeader>
             <div>
               <h4 className="text-xl mb-1">Installation Guide</h4>

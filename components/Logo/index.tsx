@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 type Props = {
   fill?: string
@@ -6,7 +6,7 @@ type Props = {
   height?: number
 }
 
-function Logo({ fill = "#1D0070", width = 165, height = 18 }: Props) {
+function Logo({ fill = '#1D0070', width = 165, height = 18 }: Props) {
   return (
     <svg
       width={width}

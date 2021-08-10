@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 
-import Cube from "./Cube"
-import Link from "next/link"
+import Cube from './Cube'
+import Link from 'next/link'
 
 type SectionHeaderProps = {
   children?: React.ReactNode

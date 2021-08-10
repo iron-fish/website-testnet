@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 
 type CubeProps = { className?: string }
 
-function Cube({ className = "text-green-600" }: CubeProps) {
+function Cube({ className = 'text-green-600' }: CubeProps) {
   return (
     <svg
       className={className}

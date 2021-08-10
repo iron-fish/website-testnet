@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 type Props = {
   children?: React.ReactNode
@@ -8,8 +8,8 @@ type Props = {
 
 function Button({
   children,
-  className = "",
-  colorClassName = "bg-black text-white hover:bg-transparent hover:text-black",
+  className = '',
+  colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
 }: Props) {
   return (
     <button

@@ -1,19 +1,19 @@
-import React from "react"
-import Link from "next/link"
+import React from 'react'
+import Link from 'next/link'
 
-import FishAvatar from "./FishAvatar"
+import FishAvatar from './FishAvatar'
 
 const fishAvatarColors = [
-  "#FFAFAF",
-  "#94ED6B",
-  "#A3E9FF",
-  "#7657CE",
-  "#E7B453",
-  "#54FF17",
-  "#1D4423",
-  "#D46161",
-  "#AFF1FF",
-  "#F1CB00",
+  '#FFAFAF',
+  '#94ED6B',
+  '#A3E9FF',
+  '#7657CE',
+  '#E7B453',
+  '#54FF17',
+  '#1D4423',
+  '#D46161',
+  '#AFF1FF',
+  '#F1CB00',
 ]
 
 // djb2 (xor)
@@ -60,7 +60,7 @@ function LeaderboardRow({ id, rank, graffiti, points }: Props) {
   return (
     <div
       className="bg-white border border-black rounded flex items-center px-10"
-      style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.19)" }}
+      style={{ boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.19)' }}
     >
       <div className="font-extended text-2xl w-24">{rankStr}</div>
       <div className="flex flex-1 items-center font-extended text-2xl">

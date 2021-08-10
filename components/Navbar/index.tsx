@@ -1,12 +1,12 @@
-import React from "react"
-import Link from "next/link"
+import React from 'react'
+import Link from 'next/link'
 
-import Button from "../Button"
-import Company from "./Company"
-import Testnet from "./Testnet"
-import Logo from "../Logo"
-import Close from "../icons/Close"
-import Menu from "../icons/Menu"
+import Button from '../Button'
+import Company from './Company'
+import Testnet from './Testnet'
+import Logo from '../Logo'
+import Close from '../icons/Close'
+import Menu from '../icons/Menu'
 
 type NavbarProps = {
   className?: string
@@ -28,8 +28,8 @@ type NavbarLinksProps = {
 }
 
 function NavbarLinks({
-  className = "",
-  selectedClassName = "absolute left-0 right-0 bottom-0 border-b-2 border-black",
+  className = '',
+  selectedClassName = 'absolute left-0 right-0 bottom-0 border-b-2 border-black',
   companyClicked,
   companyVisible = false,
   testnetClicked,
@@ -46,36 +46,36 @@ function NavbarLinks({
       <button onClick={companyClicked} className={className}>
         <span
           className={`flex items-center h-full relative ${
-            companyVisible ? "text-ifgray" : ""
+            companyVisible ? 'text-ifgray' : ''
           }`}
         >
           Company
           <span
             className={`ml-2 text-black ${
-              companyVisible ? "transform-gpu rotate-180" : ""
+              companyVisible ? 'transform-gpu rotate-180' : ''
             }`}
           >
             ▾
           </span>
-          <span className={`${companyVisible ? selectedClassName : ""}`} />
+          <span className={`${companyVisible ? selectedClassName : ''}`} />
         </span>
       </button>
       <span className={className}>|</span>
       <button onClick={testnetClicked} className={className}>
         <span
           className={`flex items-center h-full relative ${
-            testnetVisible ? "text-ifgray" : ""
+            testnetVisible ? 'text-ifgray' : ''
           }`}
         >
           Testnet
           <span
             className={`ml-2 text-black ${
-              testnetVisible ? "transform-gpu rotate-180" : ""
+              testnetVisible ? 'transform-gpu rotate-180' : ''
             }`}
           >
             ▾
           </span>
-          <span className={`${testnetVisible ? selectedClassName : ""}`} />
+          <span className={`${testnetVisible ? selectedClassName : ''}`} />
         </span>
       </button>
       <Button
@@ -94,7 +94,7 @@ function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
   return (
     <div
       className={`absolute h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
-        !flyoutVisible ? "-translate-x-full" : ""
+        !flyoutVisible ? '-translate-x-full' : ''
       }`}
     >
       <div className="flex flex-col px-5">
@@ -117,29 +117,29 @@ function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
 }
 
 function Navbar({
-  fill = "white",
-  className = "bg-black text-white",
+  fill = 'white',
+  className = 'bg-black text-white',
 }: NavbarProps) {
   const [flyoutVisible, setFlyoutVisible] = React.useState(false)
   const [subnavState, setSubnavState] = React.useState<
-    null | "testnet" | "company"
+    null | 'testnet' | 'company'
   >(null)
 
-  const companyVisible = subnavState === "company"
-  const testnetVisible = subnavState === "testnet"
+  const companyVisible = subnavState === 'company'
+  const testnetVisible = subnavState === 'testnet'
 
   React.useEffect(() => {
     if (flyoutVisible) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = "initial"
+      document.body.style.overflow = 'initial'
     }
   }, [flyoutVisible])
 
   return (
     <nav
       className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
-        subnavState !== null ? "bg-white text-black" : className
+        subnavState !== null ? 'bg-white text-black' : className
       }`}
     >
       <NavbarFlyout
@@ -155,11 +155,11 @@ function Navbar({
             className="px-3 lg:px-4 h-full flex items-center whitespace-nowrap"
             companyVisible={companyVisible}
             companyClicked={() =>
-              setSubnavState(companyVisible ? null : "company")
+              setSubnavState(companyVisible ? null : 'company')
             }
             testnetVisible={testnetVisible}
             testnetClicked={() =>
-              setSubnavState(testnetVisible ? null : "testnet")
+              setSubnavState(testnetVisible ? null : 'testnet')
             }
           />
         </div>

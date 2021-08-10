@@ -1,11 +1,11 @@
-import { GetServerSideProps } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import Footer from "../../components/Footer"
-import Navbar from "../../components/Navbar"
+import Footer from '../../components/Footer'
+import Navbar from '../../components/Navbar'
 
-import * as API from "../../apiClient"
+import * as API from '../../apiClient'
 
 type Props = {
   events: ReadonlyArray<API.ApiEvent>
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async context => {
-  if (typeof context.query.id !== "string") {
+  if (typeof context.query.id !== 'string') {
     return {
       notFound: true,
     }
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     API.listEvents(context.query.id),
   ])
 
-  if ("error" in events || "error" in user) {
+  if ('error' in events || 'error' in user) {
     return {
       notFound: true,
     }

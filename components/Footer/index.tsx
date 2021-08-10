@@ -1,9 +1,9 @@
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import Button from "../Button"
-import Logo from "../Logo"
+import Button from '../Button'
+import Logo from '../Logo'
 
 type Props = {
   title: string
@@ -44,16 +44,16 @@ function Footer() {
             title="Company"
             links={[
               {
-                link: "/about/",
-                name: "About Us",
+                link: '/about/',
+                name: 'About Us',
               },
               {
-                link: "/careers/",
-                name: "Careers",
+                link: '/careers/',
+                name: 'Careers',
               },
               {
-                link: "/blog/",
-                name: "Blog",
+                link: '/blog/',
+                name: 'Blog',
               },
             ]}
           />
@@ -65,16 +65,16 @@ function Footer() {
               //   name: "Get started",
               // },
               {
-                link: "https://explorer.ironfish.network/",
-                name: "Block Explorer",
+                link: 'https://explorer.ironfish.network/',
+                name: 'Block Explorer',
               },
               {
-                link: "/docs/whitepaper/1_introduction",
-                name: "Whitepaper",
+                link: '/docs/whitepaper/1_introduction',
+                name: 'Whitepaper',
               },
               {
-                link: "/faq/",
-                name: "FAQ",
+                link: '/faq/',
+                name: 'FAQ',
               },
             ]}
           />
