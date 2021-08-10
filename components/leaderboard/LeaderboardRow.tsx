@@ -53,7 +53,6 @@ type Props = {
 
 function LeaderboardRow({ id, rank, graffiti, points }: Props) {
   const avatarColor = getColor(graffiti)
-  console.error(avatarColor)
   const rankStr = ordinalSuffix(rank)
   const pointsStr = points.toLocaleString()
 
