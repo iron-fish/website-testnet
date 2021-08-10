@@ -3,8 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      padding: {
-        '4.5': '1.125rem'
+      spacing: {
+        4.5: '1.125rem',
       },
       boxShadow: {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
