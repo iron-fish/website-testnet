@@ -28,7 +28,7 @@ const TestnetGridElement = ({
   cubeClassName,
 }: TestnetGridElementProps) => (
   <Link href={href}>
-    <a className="flex items-center p-4 rounded hover:bg-iflightgray">
+    <a className="flex items-center mr-4 p-4 rounded hover:bg-iflightgray">
       <Cube className={cubeClassName} />
       <div className="flex flex-col ml-4">
         <h5>{header}</h5>
@@ -44,7 +44,7 @@ function Company() {
       <div className="flex flex-col items-center border-b border-t p-8 pb-10">
         <div className="w-5/6">
           <SectionHeader>COMPANY</SectionHeader>
-          <div className="flex justify-between -m-4">
+          <div className="flex">
             <TestnetGridElement
               href="https://ironfish.network/about"
               header="About Us"
