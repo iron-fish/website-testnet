@@ -79,7 +79,7 @@ function NavbarLinks({
         </span>
       </button>
       <Button
-        className="h-12 ml-3 py-4 px-6"
+        className="h-12 ml-3 py-3 px-6"
         colorClassName="bg-transparent text-black hover:bg-black hover:text-white"
       >
         <Link href="/login">
