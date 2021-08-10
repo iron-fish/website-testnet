@@ -2,6 +2,9 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    minWidth: {
+      6: '1.5rem',
+    },
     extend: {
       spacing: {
         4.5: '1.125rem',
