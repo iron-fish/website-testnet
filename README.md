@@ -22,6 +22,10 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Development
+
+*Optional* Run `npx husky install` in order to set up your git hooks locally.
+
 ## Scripts
 
 1. Add [nps](https://www.npmjs.com/package/nps) using either `yarn global add nps` or `npm i nps -g`
