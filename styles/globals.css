@@ -3,46 +3,46 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "extended-regular";
-  src: url("/font/extendedregular/favoritextended-regular-webfont.eot");
-  src: url("/font/extendedregular/favoritextended-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/extendedregular/favoritextended-regular-webfont.woff2")
-      format("woff2"),
-    url("/font/extendedregular/favoritextended-regular-webfont.woff")
-      format("woff"),
-    url("/font/extendedregular/favoritextended-regular-webfont.ttf")
-      format("truetype"),
-    url("/font/extendedregular/favoritextended-regular-webfont.svg#_.book")
-      format("svg");
+  font-family: 'extended-regular';
+  src: url('/font/extendedregular/favoritextended-regular-webfont.eot');
+  src: url('/font/extendedregular/favoritextended-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/extendedregular/favoritextended-regular-webfont.woff2')
+      format('woff2'),
+    url('/font/extendedregular/favoritextended-regular-webfont.woff')
+      format('woff'),
+    url('/font/extendedregular/favoritextended-regular-webfont.ttf')
+      format('truetype'),
+    url('/font/extendedregular/favoritextended-regular-webfont.svg#_.book')
+      format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "mono-regular";
-  src: url("/font/monoregular/favoritmono-regular-webfont.eot");
-  src: url("/font/monoregular/favoritmono-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/monoregular/favoritmono-regular-webfont.woff2") format("woff2"),
-    url("/font/monoregular/favoritmono-regular-webfont.woff") format("woff"),
-    url("/font/monoregular/favoritmono-regular-webfont.ttf") format("truetype"),
-    url("/font/monoregular/favoritmono-regular-webfont.svg#_.book")
-      format("svg");
+  font-family: 'mono-regular';
+  src: url('/font/monoregular/favoritmono-regular-webfont.eot');
+  src: url('/font/monoregular/favoritmono-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/monoregular/favoritmono-regular-webfont.woff2') format('woff2'),
+    url('/font/monoregular/favoritmono-regular-webfont.woff') format('woff'),
+    url('/font/monoregular/favoritmono-regular-webfont.ttf') format('truetype'),
+    url('/font/monoregular/favoritmono-regular-webfont.svg#_.book')
+      format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "favorit-regular";
-  src: url("/font/regular/favorit-regular-webfont.eot");
-  src: url("/font/regular/favorit-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/regular/favorit-regular-webfont.woff2") format("woff2"),
-    url("/font/regular/favorit-regular-webfont.woff") format("woff"),
-    url("/font/regular/favorit-regular-webfont.ttf") format("truetype"),
-    url("/font/regular/favorit-regular-webfont.svg#_.book") format("svg");
+  font-family: 'favorit-regular';
+  src: url('/font/regular/favorit-regular-webfont.eot');
+  src: url('/font/regular/favorit-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/regular/favorit-regular-webfont.woff2') format('woff2'),
+    url('/font/regular/favorit-regular-webfont.woff') format('woff'),
+    url('/font/regular/favorit-regular-webfont.ttf') format('truetype'),
+    url('/font/regular/favorit-regular-webfont.svg#_.book') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -53,7 +53,7 @@
   --ifm-container-index-width: 1171px;
   --ifm-global-radius: 0.2rem;
   --ifm-background-color: #fff;
-  --ifm-font-family-base: favorit-regular, "Helvetica", sans-serif;
+  --ifm-font-family-base: favorit-regular, 'Helvetica', sans-serif;
   --ifm-font-size-base: 100%;
   --ifm-font-color-base-inverse: #000;
   --ifm-heading-color: #000;
@@ -118,7 +118,7 @@
   --ifm-pagination-nav-color-hover: transparent;
   --ifm-docs-column-margin-right: 55px;
 
-  --ifm-font-header-button: "extended-regular", "helvetica", sans-serif;
+  --ifm-font-header-button: 'extended-regular', 'helvetica', sans-serif;
   --ifm-large-container-horizontal-padding: 81px;
   --ifm-large-vertical-padding: 128px;
   --ifm-medium-vertical-padding: 64px;
@@ -138,6 +138,178 @@
   --ifm-blue-header-padding-top: 163px;
   --ifm-text-container-width: 820px;
   --ifm-navbar-sidebar-width: 100vw;
+}
+/* adding this class allows for the offset shadow appearance on the main sections */
+.offset-box {
+  border: 2px solid black;
+  position: relative;
+  transform-style: preserve-3d;
+  width: calc(100% - 26px);
+  transition: width 0.3s ease-out;
+}
+/* this is the magic part which necessitates it not being in tailwind */
+.offset-box::after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: calc(1.75rem + 2px);
+  border: 2px solid black;
+  transform: translateZ(-1px);
+  z-index: -1;
+}
+
+/* To support custom radio buttons */
+.radio-group {
+  height: 2.5em;
+  margin-bottom: 0.5em;
+}
+.radio-option {
+  /* width: 6em; */
+  margin-left: 1.25em;
+  margin-right: 1.35em;
+  display: block;
+  position: relative;
+  text-align: right;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* hide the actual input */
+.radio-option .radio-input {
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+}
+/* custom pseudo-input */
+.radio-fake {
+  position: absolute;
+  margin-left: -1.5em;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+}
+.radio-option:focus .radio-input ~ .radio-fake,
+.radio-input:focus ~ .radio-fake {
+  border: 1px dashed black;
+}
+/* appearance when checked */
+.radio-option .radio-input:checked ~ .radio-fake {
+  background-color: white;
+}
+/* inner radio fake */
+.radio-fake::after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+/* inner radio fake when checked */
+.radio-option .radio-input:checked ~ .radio-fake::after {
+  display: block;
+}
+.radio-option .radio-fake::after {
+  top: 2px;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: black;
+}
+.radio-text {
+  /* position: absolute; */
+  /* right: 0; */
+}
+
+.rel {
+  position: relative;
+}
+.abs {
+  position: absolute;
+}
+.fish-scale {
+  left: calc(50% - 3rem);
+  transform: scale(0.4);
+}
+
+.ironfish-loader {
+  background-color: black;
+  clip-path: url(#fishclip);
+  width: 20rem;
+  height: 14rem;
+  display: flex;
+  margin: 0 auto;
+  animation: float 3.5s infinite ease;
+  transform-origin: 58% 42%;
+}
+.ironfish-loader::after {
+  background-color: var(--ifm-color-secondary);
+  height: 14rem;
+  width: 18rem;
+  content: '';
+  display: block;
+  animation: swipe 3.5s infinite ease-in;
+}
+
+.ironfish-loader.bw::after {
+  background-color: white;
+}
+
+.ironfish-loader.bg::after {
+  background-color: #ECECEC;
+}
+
+.ironfish-loader.bo::after {
+  background-color: #FFA542;
+}
+
+@keyframes float {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.25);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  75% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes swipe {
+  0% {
+    width: 0%;
+  }
+
+  25% {
+    width: 0%;
+  }
+
+  50% {
+    width: 100%;
+  }
+
+  75% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
 }
 
 html,

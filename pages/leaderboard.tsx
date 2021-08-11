@@ -106,18 +106,16 @@ export default function Leaderboard({ users }: Props) {
             <div>TOTAL POINTS</div>
           </div>
 
-          {users.map((user, i) => {
-            return (
-              <div key={user.id} className="mb-3">
-                <LeaderboardRow
-                  id={user.id}
-                  rank={user.rank}
-                  graffiti={user.graffiti}
-                  points={user.total_points}
-                />
-              </div>
-            )
-          })}
+          {users.map(user => (
+            <div key={user.id} className="mb-3">
+              <LeaderboardRow
+                id={user.id}
+                rank={user.rank}
+                graffiti={user.graffiti}
+                points={user.total_points}
+              />
+            </div>
+          ))}
 
           <div className="mb-24"></div>
         </div>
