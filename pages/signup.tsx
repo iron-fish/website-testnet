@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import type { Dispatch, SetStateAction, ChangeEvent } from 'react'
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -44,7 +46,28 @@ const LabelledRow = ({
   </FormRow>
 )
 
+const trigger = (fn: Dispatch<SetStateAction<string>>) => (e: ChangeEvent) => {
+  const value = (e.target as HTMLInputElement).value
+  fn(value)
+}
+
+const Warning = () => (
+  <div className={`p-2 w-11/12 sm:w-7/12 mb-4 bg-statusyellow`}>
+    <strong>Please note</strong>: US participants are not eligible for Iron Fish
+    coin rewards
+  </div>
+)
+
 export default function SignUp() {
+  const [$email, $setEmail] = useState<string>('')
+  const [$graffiti, $setGraffiti] = useState<string>('')
+  const [$social, $setSocial] = useState<string>('')
+  const [$country, $setCountry] = useState<string>('US')
+  const setEmail = trigger($setEmail)
+  const setGraffiti = trigger($setGraffiti)
+  const setSocial = trigger($setSocial)
+  const setCountry = trigger($setCountry)
+  const countryWarning = $country === 'US'
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -65,6 +88,13 @@ export default function SignUp() {
             return (
               <LabelledRow key={id} id={id} label={label}>
                 <input
+                  onChange={
+                    id === 'email'
+                      ? setEmail
+                      : id === 'graffiti'
+                      ? setGraffiti
+                      : setSocial
+                  }
                   className="font-favorit"
                   id={id}
                   type="text"
@@ -74,7 +104,7 @@ export default function SignUp() {
             )
           })}
           <LabelledRow key="country" id="country" label="Country">
-            <select>
+            <select onChange={setCountry} value={$country}>
               {countries.map(({ code, name }: Country) => (
                 <option key={code} value={code}>
                   {name}
@@ -82,6 +112,7 @@ export default function SignUp() {
               ))}
             </select>
           </LabelledRow>
+          {countryWarning && <Warning />}
         </section>
       </main>
       <Footer />

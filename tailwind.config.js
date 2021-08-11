@@ -13,8 +13,8 @@ module.exports = {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
       },
       colors: {
-        black: {
-          DEFAULT: '#000000',
+        statusyellow: {
+          DEFAULT: '#FFF18A',
         },
         ifbeige: {
           DEFAULT: '#FFF4E0',
