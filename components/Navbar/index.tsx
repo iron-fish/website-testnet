@@ -93,7 +93,7 @@ function NavbarLinks({
 function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
   return (
     <div
-      className={`absolute h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
+      className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
         !flyoutVisible ? '-translate-x-full' : ''
       }`}
     >
