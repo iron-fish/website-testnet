@@ -40,7 +40,7 @@ const TestnetGridElement = ({
 
 function Company() {
   return (
-    <div className="absolute bg-white left-0 right-0 shadow-navbar">
+    <div className="absolute bg-white left-0 right-0 shadow-navbar z-20">
       <div className="flex flex-col items-center border-b border-t p-8 pb-10">
         <div>
           <div className="flex flex-col">

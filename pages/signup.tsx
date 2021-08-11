@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import type { Dispatch, SetStateAction, ChangeEvent } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import Button from '../components/Button'
 import { Country, countries } from '../data/countries'
 
 type FormRowProps = {
@@ -52,9 +54,24 @@ const trigger = (fn: Dispatch<SetStateAction<string>>) => (e: ChangeEvent) => {
 }
 
 const Warning = () => (
-  <div className={`p-2 w-11/12 sm:w-7/12 mb-4 bg-statusyellow`}>
+  <div className={`p-2 w-11/12 sm:w-7/12 mb-8 bg-statusyellow text-sm`}>
     <strong>Please note</strong>: US participants are not eligible for Iron Fish
     coin rewards
+  </div>
+)
+
+const FinePrint = () => (
+  <span className="font-favorit p-2 w-11/12 sm:w-7/12 mb-4 text-xs text-center">
+    By clicking on sign up, you agree to Iron Fish&apos;s Testnet Guidelines.
+  </span>
+)
+
+const LoginCTA = () => (
+  <div className="text-center text-xl">
+    Have an account?{' '}
+    <Link href="/login">
+      <a className="text-iflightblue">Log In</a>
+    </Link>
   </div>
 )
 
@@ -79,7 +96,7 @@ export default function SignUp() {
       <Navbar fill="black" className="bg-ifpink text-black" />
 
       <main className="bg-ifpink flex-1 font-extended">
-        <section className="offset-box z-10 w-4/5 flex flex-col m-auto py-8 px-2 md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center">
+        <section className="offset-box z-10 w-4/5 flex flex-col m-auto py-8 px-2 md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8">
           <h1 className="text-2xl text-center mb-8">
             Sign up and get incentivized.
           </h1>
@@ -113,6 +130,11 @@ export default function SignUp() {
             </select>
           </LabelledRow>
           {countryWarning && <Warning />}
+          <Button className="w-11/12 sm:w-7/12 mb-4 text-md md:text-lg">
+            Sign Up
+          </Button>
+          <FinePrint />
+          <LoginCTA />
         </section>
       </main>
       <Footer />
