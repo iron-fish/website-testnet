@@ -5,131 +5,96 @@ import Link from 'next/link'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Button from '../components/Button'
-import { Country, countries } from '../data/countries'
-
-type FormRowProps = {
-  className?: string
-  children?: React.ReactNode
-}
-
-const FormRow = ({ className = '', children }: FormRowProps) => (
-  <div
-    className={`flex flex-col p-2 w-11/12 sm:w-7/12 mb-4 border-2 rounded-md border-solid border-black ${className}`}
-  >
-    {children}
-  </div>
-)
+import { CountryWithCode, countries } from '../data/countries'
+import LoginCTA from '../components/signup/LoginCTA'
+import Note from '../components/signup/Note'
+import FinePrint from '../components/signup/FinePrint'
+import LabelledRow from '../components/signup/LabelledRow'
+import TextField from '../components/signup/TextField'
 
 const FIELDS = [
-  { label: 'Email', placeholder: 'Your email' },
-  { label: 'Graffiti', placeholder: 'Your tag' },
-  { label: 'Discord or Telegram', placeholder: 'Your proof' },
+  { id: 'email', label: 'Email', placeholder: 'Your email' },
+  { id: 'graffiti', label: 'Graffiti', placeholder: 'Your tag' },
+  { id: 'social', label: 'Discord or Telegram', placeholder: 'Your proof' },
 ]
-
-type LabelledRowProps = {
-  id: string
-  label: string
-  required?: boolean
-  children?: React.ReactNode
-}
-
-const LabelledRow = ({
-  id,
-  label,
-  children,
-  required = true,
-}: LabelledRowProps) => (
-  <FormRow>
-    <label htmlFor={id} className="text-sm font-favorit">
-      {label}
-      {required && <span className="text-md text-gray-500">*</span>}
-    </label>
-    {children}
-  </FormRow>
-)
 
 const trigger = (fn: Dispatch<SetStateAction<string>>) => (e: ChangeEvent) => {
   const value = (e.target as HTMLInputElement).value
   fn(value)
 }
 
-const Warning = () => (
-  <div className={`p-2 w-11/12 sm:w-7/12 mb-8 bg-statusyellow text-sm`}>
-    <strong>Please note</strong>: US participants are not eligible for Iron Fish
-    coin rewards
-  </div>
-)
+// naive validators
+const UNSET = 'UNSET'
+const validateEmail = (x: string) => {
+  const dot = x.indexOf('.')
+  return x.indexOf('@') > 0 && dot > 0 && dot !== x.length - 1
+}
+const exists = (x: string) => x !== UNSET && x.trim().length > 0
 
-const FinePrint = () => (
-  <span className="font-favorit p-2 w-11/12 sm:w-7/12 mb-4 text-xs text-center">
-    By clicking on sign up, you agree to Iron Fish&apos;s Testnet Guidelines.
-  </span>
-)
-
-const LoginCTA = () => (
-  <div className="text-center text-xl">
-    Have an account?{' '}
-    <Link href="/login">
-      <a className="text-iflightblue">Log In</a>
-    </Link>
-  </div>
-)
+const DEFAULT_TOUCHED_STATE: Record<string, boolean> = {
+  email: false,
+  graffiti: false,
+  social: false,
+}
 
 export default function SignUp() {
-  const [$email, $setEmail] = useState<string>('')
-  const [$graffiti, $setGraffiti] = useState<string>('')
-  const [$social, $setSocial] = useState<string>('')
-  const [$country, $setCountry] = useState<string>('US')
+  const [$email, $setEmail] = useState<string>(UNSET)
+  const [$graffiti, $setGraffiti] = useState<string>(UNSET)
+  const [$social, $setSocial] = useState<string>(UNSET)
+  const [$country, $setCountry] = useState<string>('USA')
+  const [$fields, $fieldToucher] = useState<Record<string, boolean>>(
+    DEFAULT_TOUCHED_STATE
+  )
+  const touch = (key: string) => () =>
+    $fieldToucher({ ...$fields, [key]: true })
   const setEmail = trigger($setEmail)
   const setGraffiti = trigger($setGraffiti)
   const setSocial = trigger($setSocial)
   const setCountry = trigger($setCountry)
-  const countryWarning = $country === 'US'
+  const countryNote = $country === 'USA'
+  const validEmail = exists($email) && validateEmail($email)
+  const validGraffiti = exists($graffiti)
+  const validSocial = exists($social)
+
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <title>SignUp</title>
-        <meta name="description" content="SignUp" />
+        <title>Sign up</title>
+        <meta name="description" content="Sign up" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Navbar fill="black" className="bg-ifpink text-black" />
-
       <main className="bg-ifpink flex-1 font-extended">
         <section className="offset-box z-10 w-4/5 flex flex-col m-auto py-8 px-2 md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8">
           <h1 className="text-2xl text-center mb-8">
             Sign up and get incentivized.
           </h1>
-          {FIELDS.map(({ label, placeholder }) => {
-            const id = label.toLowerCase().replace(/\s/g, '-')
-            return (
-              <LabelledRow key={id} id={id} label={label}>
-                <input
-                  onChange={
-                    id === 'email'
-                      ? setEmail
-                      : id === 'graffiti'
-                      ? setGraffiti
-                      : setSocial
-                  }
-                  className="font-favorit"
-                  id={id}
-                  type="text"
-                  placeholder={placeholder}
-                />
-              </LabelledRow>
-            )
-          })}
-          <LabelledRow key="country" id="country" label="Country">
+          {FIELDS.map(field => ({
+            ...field,
+            touched: $fields[field.id],
+            onBlur: touch(field.id),
+            ...(field.id === 'email'
+              ? { value: $email, setter: setEmail, valid: validEmail }
+              : field.id === 'graffiti'
+              ? {
+                  value: $graffiti,
+                  setter: setGraffiti,
+                  valid: validGraffiti,
+                }
+              : { value: $social, setter: setSocial, valid: validSocial }),
+          })).map(props => (
+            <TextField {...props} key={props.id} />
+          ))}
+          <LabelledRow key="country" id="country" label="Country" valid>
             <select onChange={setCountry} value={$country}>
-              {countries.map(({ code, name }: Country) => (
+              {countries.map(({ code, name }: CountryWithCode) => (
                 <option key={code} value={code}>
                   {name}
                 </option>
               ))}
             </select>
           </LabelledRow>
-          {countryWarning && <Warning />}
+          {countryNote && <Note />}
           <Button className="w-11/12 sm:w-7/12 mb-4 text-md md:text-lg">
             Sign Up
           </Button>
