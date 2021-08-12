@@ -8,8 +8,10 @@ import { CountryWithCode, countries } from '../data/countries'
 import LoginCTA from '../components/signup/LoginCTA'
 import Note from '../components/signup/Note'
 import FinePrint from '../components/signup/FinePrint'
+import FieldError from '../components/signup/FieldError'
 import LabelledRow from '../components/signup/LabelledRow'
 import TextField from '../components/signup/TextField'
+import { createUser } from '../apiClient'
 
 const FIELDS = [
   { id: 'email', label: 'Email', placeholder: 'Your email' },
@@ -37,6 +39,7 @@ const DEFAULT_TOUCHED_STATE: Record<string, boolean> = {
 }
 
 export default function SignUp() {
+  const [$error, $setError] = useState<string>(UNSET)
   const [$email, $setEmail] = useState<string>(UNSET)
   const [$graffiti, $setGraffiti] = useState<string>(UNSET)
   const [$social, $setSocial] = useState<string>(UNSET)
@@ -46,14 +49,25 @@ export default function SignUp() {
   )
   const touch = (key: string) => () =>
     $fieldToucher({ ...$fields, [key]: true })
-  const setEmail = trigger($setEmail)
-  const setGraffiti = trigger($setGraffiti)
-  const setSocial = trigger($setSocial)
-  const setCountry = trigger($setCountry)
+  const [setEmail, setGraffiti, setSocial, setCountry] = [
+    $setEmail,
+    $setGraffiti,
+    $setSocial,
+    $setCountry,
+  ].map(fn => trigger(fn))
   const countryNote = $country === 'USA'
   const validEmail = exists($email) && validateEmail($email)
   const validGraffiti = exists($graffiti)
   const validSocial = exists($social)
+  const submit = async () => {
+    if (!validEmail || !validGraffiti || !validSocial) {
+      $setError('Please correct the invalid fields below')
+      return
+    }
+    const result = await createUser($email, $graffiti, $country)
+    // eslint-disable-next-line no-console
+    console.log('RESULT', result)
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -68,6 +82,7 @@ export default function SignUp() {
           <h1 className="text-2xl text-center mb-8">
             Sign up and get incentivized.
           </h1>
+          {$error !== UNSET && <FieldError text={$error} size="text-md" />}
           {FIELDS.map(field => ({
             ...field,
             touched: $fields[field.id],
@@ -94,7 +109,10 @@ export default function SignUp() {
             </select>
           </LabelledRow>
           {countryNote && <Note />}
-          <RawButton className="w-11/12 sm:w-7/12 mb-4 text-lg md:text-xl p-3 md:py-5 md:px-4">
+          <RawButton
+            className="w-11/12 sm:w-7/12 mb-4 text-lg md:text-xl p-3 md:py-5 md:px-4"
+            onClick={submit}
+          >
             Sign Up
           </RawButton>
           <FinePrint />
