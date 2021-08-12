@@ -20,7 +20,7 @@ export const LabelledRow = ({
 }: LabelledRowProps) => (
   <>
     <FormRow valid={valid}>
-      <label htmlFor={id} className="text-sm font-favorit">
+      <label htmlFor={id} className="text-xs font-favorit">
         {label}
         {required && <span className="text-md text-gray-500">*</span>}
       </label>

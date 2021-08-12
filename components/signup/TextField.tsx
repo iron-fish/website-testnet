@@ -33,7 +33,6 @@ export const TextField = ({
       {...(touched ? { onClick: onBlur } : {})}
       onBlur={onBlur}
       onChange={setter}
-      className="font-favorit"
       id={id}
       type="text"
       placeholder={placeholder}
