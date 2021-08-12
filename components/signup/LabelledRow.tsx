@@ -1,5 +1,5 @@
 import FormRow from './FormRow'
-import FieldError from './FieldError'
+import { FieldError } from './FieldStatus'
 
 interface LabelledRowProps {
   id: string

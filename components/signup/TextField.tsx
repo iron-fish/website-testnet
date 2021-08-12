@@ -30,7 +30,6 @@ export const TextField = ({
     }
   >
     <input
-      {...(touched ? { onClick: onBlur } : {})}
       onBlur={onBlur}
       onChange={setter}
       id={id}

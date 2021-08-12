@@ -20,9 +20,9 @@ type NavbarFlyoutProps = {
 
 type NavbarLinksProps = {
   className?: string
-  companyClicked: () => unknown
+  companyClicked?: () => unknown
   companyVisible?: boolean
-  testnetClicked: () => unknown
+  testnetClicked?: () => unknown
   testnetVisible?: boolean
   selectedClassName?: string
 }
@@ -106,11 +106,7 @@ function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
             <Close />
           </button>
         </div>
-        <NavbarLinks
-          className="leading-relaxed text-4xl"
-          companyClicked={() => {}}
-          testnetClicked={() => {}}
-        />
+        <NavbarLinks className="leading-relaxed text-4xl" />
       </div>
     </div>
   )
