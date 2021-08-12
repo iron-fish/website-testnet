@@ -1,6 +1,7 @@
 {
   "extends": ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
   "rules": {
-    "no-console": 2
+    "no-console": 2,
+    "no-unused-vars" [2, {varsIgnorePattern: "^_", argsIgnorePattern: "^_"}
   }
 }

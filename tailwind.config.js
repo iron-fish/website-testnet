@@ -16,6 +16,9 @@ module.exports = {
         statusyellow: {
           DEFAULT: '#FFF18A',
         },
+        statusred: {
+          DEFAULT: '#F15929',
+        },
         ifbeige: {
           DEFAULT: '#FFF4E0',
         },
