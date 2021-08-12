@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction, ChangeEvent } from 'react'
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import Button from '../components/Button'
+import { RawButton } from '../components/Button'
 import { CountryWithCode, countries } from '../data/countries'
 import LoginCTA from '../components/signup/LoginCTA'
 import Note from '../components/signup/Note'
@@ -94,9 +94,9 @@ export default function SignUp() {
             </select>
           </LabelledRow>
           {countryNote && <Note />}
-          <Button className="w-11/12 sm:w-7/12 mb-4 text-md md:text-lg">
+          <RawButton className="w-11/12 sm:w-7/12 mb-4 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Sign Up
-          </Button>
+          </RawButton>
           <FinePrint />
           <LoginCTA />
         </section>

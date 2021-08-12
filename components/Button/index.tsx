@@ -1,12 +1,11 @@
 import React from 'react'
 
-type Props = {
+interface Props {
   children?: React.ReactNode
   className?: string
   colorClassName?: string
 }
-
-function Button({
+export function RawButton({
   children,
   className = '',
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
@@ -20,8 +19,6 @@ function Button({
         font-extended
         rounded-full
         whitespace-nowrap
-        p-4
-        h-10
         transition
         border-black
         border-2
@@ -31,6 +28,21 @@ function Button({
     >
       {children}
     </button>
+  )
+}
+
+function Button({
+  children,
+  className = '',
+  colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
+}: Props) {
+  return (
+    <RawButton
+      colorClassName={colorClassName}
+      className={`p-4 h-10 ${className}`}
+    >
+      {children}
+    </RawButton>
   )
 }
 
