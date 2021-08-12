@@ -3,21 +3,9 @@ import type { Dispatch, SetStateAction, ChangeEvent } from 'react'
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { RawButton } from '../components/Button'
-import { CountryWithCode, countries } from '../data/countries'
-import LoginCTA from '../components/signup/LoginCTA'
-import Note from '../components/signup/Note'
-import FinePrint from '../components/signup/FinePrint'
-import FieldError from '../components/signup/FieldError'
-import LabelledRow from '../components/signup/LabelledRow'
-import TextField from '../components/signup/TextField'
-import { createUser } from '../apiClient'
-
-const FIELDS = [
-  { id: 'email', label: 'Email', placeholder: 'Your email' },
-  { id: 'graffiti', label: 'Graffiti', placeholder: 'Your tag' },
-  { id: 'social', label: 'Discord or Telegram', placeholder: 'Your proof' },
-]
+import { FieldError } from '../components/signup/FieldStatus'
+import SignUpForm from '../components/signup/SignUpForm'
+import { createUser, matchError, matchEntity } from '../apiClient'
 
 const trigger = (fn: Dispatch<SetStateAction<string>>) => (e: ChangeEvent) => {
   const value = (e.target as HTMLInputElement).value
@@ -44,11 +32,14 @@ export default function SignUp() {
   const [$graffiti, $setGraffiti] = useState<string>(UNSET)
   const [$social, $setSocial] = useState<string>(UNSET)
   const [$country, $setCountry] = useState<string>('USA')
+  const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$fields, $fieldToucher] = useState<Record<string, boolean>>(
     DEFAULT_TOUCHED_STATE
   )
-  const touch = (key: string) => () =>
+  const touch = (key: string) => () => {
+    testInvalid()
     $fieldToucher({ ...$fields, [key]: true })
+  }
   const [setEmail, setGraffiti, setSocial, setCountry] = [
     $setEmail,
     $setGraffiti,
@@ -56,17 +47,38 @@ export default function SignUp() {
     $setCountry,
   ].map(fn => trigger(fn))
   const countryNote = $country === 'USA'
-  const validEmail = exists($email) && validateEmail($email)
-  const validGraffiti = exists($graffiti)
-  const validSocial = exists($social)
-  const submit = async () => {
-    if (!validEmail || !validGraffiti || !validSocial) {
+  const validEmail = () => exists($email) && validateEmail($email)
+  const validGraffiti = () => exists($graffiti)
+  const validSocial = () => exists($social)
+  const testInvalid = () => {
+    const invalid =
+      ($fields.email && !validEmail()) ||
+      ($fields.graffiti && !validGraffiti()) ||
+      ($fields.social && !validSocial())
+    if (invalid) {
       $setError('Please correct the invalid fields below')
-      return
+    } else {
+      $setError(UNSET)
     }
+    return invalid
+  }
+  const submit = async () => {
+    if (testInvalid()) return
     const result = await createUser($email, $graffiti, $country)
-    // eslint-disable-next-line no-console
-    console.log('RESULT', result)
+    if ('error' in result) {
+      const error = '' + result.message
+      $setError(error)
+      if (matchError(result) === 'USER_EXISTS') {
+        const entity = matchEntity(error)
+        const matched = [$email, $graffiti, $social].indexOf(entity)
+        // eslint-disable-next-line no-console
+        console.log('matched', matched)
+      }
+    } else {
+      $setSignedUp(true)
+      // eslint-disable-next-line no-console
+      console.log('RESULT', result)
+    }
   }
 
   return (
@@ -83,40 +95,27 @@ export default function SignUp() {
             Sign up and get incentivized.
           </h1>
           {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-          {FIELDS.map(field => ({
-            ...field,
-            touched: $fields[field.id],
-            onBlur: touch(field.id),
-            ...(field.id === 'email'
-              ? { value: $email, setter: setEmail, valid: validEmail }
-              : field.id === 'graffiti'
-              ? {
-                  value: $graffiti,
-                  setter: setGraffiti,
-                  valid: validGraffiti,
-                }
-              : { value: $social, setter: setSocial, valid: validSocial }),
-          })).map(props => (
-            <TextField {...props} key={props.id} />
-          ))}
-          <LabelledRow key="country" id="country" label="Country" valid>
-            <select onChange={setCountry} value={$country}>
-              {countries.map(({ code, name }: CountryWithCode) => (
-                <option key={code} value={code}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </LabelledRow>
-          {countryNote && <Note />}
-          <RawButton
-            className="w-11/12 sm:w-7/12 mb-4 text-lg md:text-xl p-3 md:py-5 md:px-4"
-            onClick={submit}
-          >
-            Sign Up
-          </RawButton>
-          <FinePrint />
-          <LoginCTA />
+          {!$signedUp && (
+            <SignUpForm
+              {...{
+                $fields,
+                $email,
+                $graffiti,
+                touch,
+                setEmail,
+                validEmail,
+                setGraffiti,
+                validGraffiti,
+                $social,
+                setSocial,
+                validSocial,
+                $country,
+                setCountry,
+                countryNote,
+                submit,
+              }}
+            />
+          )}
         </section>
       </main>
       <Footer />
