@@ -7,7 +7,7 @@ export type ApiEvent = {
   id: number;
   created_at: string;
   updated_at: string;
-  type: string;
+  type: EventType;
   occurred_at: string;
   points: number;
   user_id: number;
@@ -23,6 +23,8 @@ export type ApiUser = {
   telegram_username: string | null;
   total_points: number;
 }
+
+export type EventType = 'BLOCK_MINED' | 'BUG_CAUGHT' | 'COMMUNITY_CONTRIBUTION' | 'NODE_HOSTED' | 'PULL_REQUEST_MERGED' | 'SOCIAL_MEDIA_PROMOTION'
 
 type ApiError = {
   statusCode: number;

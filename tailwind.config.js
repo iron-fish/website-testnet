@@ -19,6 +19,9 @@ module.exports = {
         ifblue: {
           DEFAULT: '#1D0070',
         },
+        ifsubtextgray: {
+          DEFAULT: '#AFAFAF',
+        },
         iflightgray: {
           DEFAULT: '#ECECEC',
         },
