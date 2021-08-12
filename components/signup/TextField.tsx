@@ -6,7 +6,7 @@ interface TextFieldProps {
   label: string
   placeholder: string
   onBlur: () => void
-  setter: (e: ChangeEvent) => void
+  setter: (_e: ChangeEvent) => void
   value: string
   touched: boolean
   valid: boolean
