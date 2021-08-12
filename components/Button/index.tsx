@@ -1,15 +1,16 @@
-import React from 'react'
+import { FC, MouseEventHandler } from 'react'
 
-interface Props {
-  children?: React.ReactNode
-  className?: string
+type ButtonProps = {
   colorClassName?: string
+  className?: string
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
-export function RawButton({
+export const RawButton: FC<ButtonProps> = ({
   children,
   className = '',
+  onClick,
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
-}: Props) {
+}) => {
   return (
     <button
       className={`
@@ -25,19 +26,22 @@ export function RawButton({
         ${colorClassName}
         ${className}
     `}
+      onClick={onClick}
     >
       {children}
     </button>
   )
 }
 
-function Button({
+const Button: FC<ButtonProps> = ({
   children,
   className = '',
+  onClick,
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
-}: Props) {
+}) => {
   return (
     <RawButton
+      onClick={onClick}
       colorClassName={colorClassName}
       className={`p-4 h-10 ${className}`}
     >

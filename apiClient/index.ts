@@ -2,8 +2,8 @@ import { Alpha3Code } from 'iso-3166-1-ts'
 // Client for ironfish-http-api.
 
 // Environment variables set in Vercel config.
-const API_URL = process.env.API_URL
-const API_KEY = process.env.API_KEY
+const API_URL = process.env.API_URL || 'http://localhost:8003'
+const API_KEY = process.env.API_KEY || 'test'
 
 export type ApiEvent = {
   id: number
