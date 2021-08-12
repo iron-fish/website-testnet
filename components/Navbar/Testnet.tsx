@@ -28,7 +28,7 @@ const TestnetGridElement = ({
   cubeClassName,
 }: TestnetGridElementProps) => (
   <Link href={href}>
-    <a className="flex items-center p-4 rounded hover:bg-iflightgray">
+    <a className="flex items-center py-4 px-6 rounded hover:bg-iflightgray">
       <Cube className={cubeClassName} />
       <div className="flex flex-col ml-4">
         <h5>{header}</h5>
@@ -61,7 +61,7 @@ function Testnet() {
         <div className="flex p-8 pb-10 pl-14">
           <div>
             <SectionHeader>INCENTIVIZED TESTNET</SectionHeader>
-            <div className="grid grid-rows-2 grid-cols-2 gap-4 -m-4">
+            <div className="grid grid-rows-2 grid-cols-2 gap-4 -ml-6">
               <TestnetGridElement
                 href="/about"
                 header="About the Testnet"
