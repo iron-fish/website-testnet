@@ -22,7 +22,7 @@ const RadioOptions = ({
           type="radio"
           name={groupName}
           value={value}
-          checked={value === choice}
+          defaultChecked={value === choice}
         />
         <span className="mx-1">{name}</span>
       </label>
