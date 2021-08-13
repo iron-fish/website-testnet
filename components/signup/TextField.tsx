@@ -1,37 +1,27 @@
-import type { ChangeEvent } from 'react'
 import LabelledRow from './LabelledRow'
+import { Field } from '../../hooks/useForm'
 
-interface TextFieldProps {
-  id: string
-  label: string
-  placeholder: string
-  onBlur: () => void
-  setter: (_e: ChangeEvent) => void
-  value: string
-  touched: boolean
-  valid: boolean
-}
 export const TextField = ({
   id,
   label,
   placeholder,
-  value,
+  errorText,
+  defaultValue,
   valid,
-  touched,
-  setter,
+  onChange,
   onBlur,
-}: TextFieldProps) => (
+}: Field) => (
   <LabelledRow
+    key={id}
     id={id}
     label={label}
-    valid={!touched || (touched && value !== 'UNSET' && valid)}
-    errorText={
-      id === 'email' ? 'Valid email address required' : 'This field is required'
-    }
+    valid={valid}
+    errorText={errorText}
   >
     <input
+      defaultValue={defaultValue}
       onBlur={onBlur}
-      onChange={setter}
+      onChange={onChange}
       id={id}
       type="text"
       placeholder={placeholder}
