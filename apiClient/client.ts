@@ -7,8 +7,11 @@ import {
 } from './types'
 
 // Environment variables set in Vercel config.
-const API_URL = process.env.API_URL || 'http://localhost:8003'
-const API_KEY = process.env.API_KEY || 'test'
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY
+
+// eslint-disable-next-line no-console
+console.log({ API_URL, API_KEY })
 
 export async function listLeaderboard(): Promise<
   ListLeaderboardResponse | ApiError
