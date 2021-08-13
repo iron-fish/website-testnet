@@ -23,7 +23,7 @@ export const SignUpForm = ({
     {country?.value === 'USA' && (
       <Note>
         <strong>Please note</strong>: US participants are not eligible for Iron
-        Fish
+        Fish coin rewards
       </Note>
     )}
     <RawButton
