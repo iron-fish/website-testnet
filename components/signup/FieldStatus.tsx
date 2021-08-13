@@ -6,17 +6,15 @@ enum FieldStatusFeedback {
 interface FieldStatusProps {
   feedback: FieldStatusFeedback
   text: string
-  size?: string
 }
 export const FieldStatus = ({
   feedback = FieldStatusFeedback.BAD,
   text,
-  size = 'text-xs',
 }: FieldStatusProps) => (
   <div
     className={`font-favorit ${
-      feedback === FieldStatusFeedback.BAD ? 'bg-statusred' : 'bg-statusyellow'
-    } text-white ${size} text-center w-11/12 p-2 sm:w-7/12 mb-4 rounded`}
+      feedback === FieldStatusFeedback.BAD ? 'bg-alertred' : 'bg-alertyellow'
+    } text-white text-xs text-center w-11/12 p-2 sm:w-7/12 mt-2 rounded`}
   >
     {text}
   </div>
