@@ -1,7 +1,13 @@
-export const Note = () => (
-  <div className={`p-2 w-11/12 sm:w-7/12 mb-8 bg-statusyellow text-sm`}>
-    <strong>Please note</strong>: US participants are not eligible for Iron Fish
-    coin rewards
+import { ReactNode } from 'react'
+
+interface NoteProps {
+  children: ReactNode
+  size?: string
+}
+
+export const Note = ({ children, size = 'w-11/12 sm:w-7/12' }: NoteProps) => (
+  <div className={`p-2 text-sm mb-8 bg-statusyellow text-center ${size}`}>
+    {children}
   </div>
 )
 export default Note
