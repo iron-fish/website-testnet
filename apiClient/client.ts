@@ -15,9 +15,6 @@ const BROWSER_API_KEY = process.env.NEXT_PUBLIC_API_KEY
 const API_URL = SERVER_API_URL || BROWSER_API_URL
 const API_KEY = SERVER_API_KEY || BROWSER_API_KEY
 
-// eslint-disable-next-line no-console
-console.log({ API_URL, API_KEY })
-
 export async function listLeaderboard(): Promise<
   ListLeaderboardResponse | ApiError
 > {
@@ -40,15 +37,25 @@ export async function listEvents(
 export async function createUser(
   email: string,
   graffiti: string,
+  socialChoice: string,
+  social: string,
   country_code: string
 ): Promise<ApiUser | ApiError> {
+  const body = JSON.stringify({
+    email,
+    graffiti,
+    country_code,
+    [socialChoice]: social,
+  })
+  // eslint-disable-next-line no-console
+  console.log('body', body)
   const res = await fetch(`${API_URL}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${API_KEY}`,
     },
-    body: JSON.stringify({ email, graffiti, country_code }),
+    body,
   })
   return await res.json()
 }

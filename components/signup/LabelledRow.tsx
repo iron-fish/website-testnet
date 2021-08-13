@@ -20,10 +20,12 @@ export const LabelledRow = ({
 }: LabelledRowProps) => (
   <>
     <FormRow valid={valid}>
-      <label htmlFor={id} className="text-xs font-favorit">
-        {label}
-        {required && <span className="text-md text-gray-500">*</span>}
-      </label>
+      {label.length > 0 && (
+        <label htmlFor={id} className="text-xs font-favorit">
+          {label}
+          {required && <span className="text-md text-gray-500">*</span>}
+        </label>
+      )}
       {children}
     </FormRow>
     {!valid && <FieldError text={errorText} />}
