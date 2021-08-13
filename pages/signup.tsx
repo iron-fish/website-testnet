@@ -38,11 +38,16 @@ const FIELDS = {
   },
   social: {
     id: 'social',
-    label: 'Discord or Telegram',
+    label: '',
     placeholder: 'Your proof',
     defaultValue: UNSET,
     validation: exists,
     defaultErrorText,
+    isRadioed: true,
+    options: [
+      { name: 'Discord', value: 'discord_username' },
+      { name: 'Telegram', value: 'telegram_username' },
+    ],
   },
   country: {
     id: 'country',
@@ -78,10 +83,17 @@ export default function SignUp() {
     const email = $email?.value
     const graffiti = $graffiti?.value
     const social = $social?.value
+    const socialChoice = $social?.choice
     const country = $country?.value
     if (testInvalid()) return
 
-    const result = await createUser(email, graffiti, country)
+    const result = await createUser(
+      email,
+      graffiti,
+      socialChoice,
+      social,
+      country
+    )
     if ('error' in result) {
       const error = '' + result.message
       $setError(error)

@@ -1,5 +1,34 @@
+import { Dispatch, SetStateAction } from 'react'
 import LabelledRow from './LabelledRow'
-import { Field } from '../../hooks/useForm'
+import { Field, NameValue } from '../../hooks/useForm'
+
+interface OptionsProps {
+  groupName: string
+  options: NameValue[]
+  choice: string
+  setChoice: Dispatch<SetStateAction<string>>
+}
+
+const RadioOptions = ({
+  groupName,
+  options,
+  choice,
+  setChoice,
+}: OptionsProps) => (
+  <div>
+    {options.map(({ name, value }) => (
+      <label key={value} onClick={() => setChoice(value)} className="text-xs">
+        <input
+          type="radio"
+          name={groupName}
+          value={value}
+          checked={value === choice}
+        />
+        <span className="mx-1">{name}</span>
+      </label>
+    ))}
+  </div>
+)
 
 export const TextField = ({
   id,
@@ -10,6 +39,10 @@ export const TextField = ({
   valid,
   onChange,
   onBlur,
+  options = [],
+  choice,
+  setChoice,
+  isRadioed,
 }: Field) => (
   <LabelledRow
     key={id}
@@ -18,6 +51,14 @@ export const TextField = ({
     valid={valid}
     errorText={errorText}
   >
+    {isRadioed && options.length > 0 && (
+      <RadioOptions
+        groupName={`${id}-group`}
+        options={options}
+        choice={choice}
+        setChoice={setChoice}
+      />
+    )}
     <input
       defaultValue={defaultValue}
       onBlur={onBlur}

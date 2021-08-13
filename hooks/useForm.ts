@@ -12,6 +12,7 @@ export interface ProvidedField {
   defaultValue: string
   validation: (v: string) => boolean
   placeholder?: string
+  isRadioed?: boolean
   options?: NameValue[]
   defaultErrorText?: string
 }
@@ -25,10 +26,21 @@ export interface Field extends ProvidedField {
   touched: boolean
   errorText?: string
   setError: Dispatch<SetStateAction<string>>
+  choice: string
+  setChoice: Dispatch<SetStateAction<string>>
 }
 
 export function useField(provided: ProvidedField): Field | null {
   const [$value, $setter] = useState<string>(provided.defaultValue)
+  const radioOption =
+    provided &&
+    provided.options &&
+    provided.options[0] &&
+    provided.options[0].value
+  const [$choice, $setChoice] = useState<string>(
+    provided.isRadioed && radioOption ? radioOption : ''
+  )
+
   const [$valid, $setValid] = useState<boolean>(false)
   const [$touched, $setTouched] = useState<boolean>(false)
   const [$field, $setField] = useState<Field | null>(null)
@@ -53,8 +65,19 @@ export function useField(provided: ProvidedField): Field | null {
       touched: $touched,
       errorText: valid ? undefined : $error,
       setError: $setError,
+      choice: $choice,
+      setChoice: $setChoice,
     })
-  }, [$value, $touched, provided, $valid, $setValid, $error])
+  }, [
+    provided,
+    $value,
+    $touched,
+    $valid,
+    $setValid,
+    $error,
+    $choice,
+    $setChoice,
+  ])
   return $field
 }
 
