@@ -45,8 +45,8 @@ const FIELDS = {
     defaultErrorText,
     isRadioed: true,
     options: [
-      { name: 'Discord', value: 'discord_username' },
-      { name: 'Telegram', value: 'telegram_username' },
+      { name: 'Discord', value: 'discord' },
+      { name: 'Telegram', value: 'telegram' },
     ],
   },
   country: {
