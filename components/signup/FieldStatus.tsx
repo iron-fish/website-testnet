@@ -12,9 +12,9 @@ export const FieldStatus = ({
   text,
 }: FieldStatusProps) => (
   <div
-    className={`font-favorit ${
+    className={`${
       feedback === FieldStatusFeedback.BAD ? 'bg-alertred' : 'bg-alertyellow'
-    } text-white text-xs text-center w-11/12 p-2 sm:w-7/12 mt-2 rounded`}
+    } font-favorit text-white text-xs text-center p-2 w-full mt-2 rounded`}
   >
     {text}
   </div>
