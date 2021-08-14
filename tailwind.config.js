@@ -3,7 +3,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      borderRadius: {
+        plus: '0.3125rem',
+      },
       spacing: {
+        px3: '0.1875rem',
         4.5: '1.125rem',
       },
       minWidth: {

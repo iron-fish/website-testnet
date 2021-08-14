@@ -6,7 +6,7 @@ interface FormRowProps {
 
 export const FormRow = ({ className = '', valid, children }: FormRowProps) => (
   <div
-    className={`flex flex-col p-2 mt-3 w-11/12 sm:w-7/12 border rounded-md border-solid ${
+    className={`font-favorit flex flex-col px-2 py-3 mt-3 w-full border rounded-plus border-solid h-16 max-h-16 ${
       valid ? 'border-black' : 'border-alertred'
     } ${className}`}
   >

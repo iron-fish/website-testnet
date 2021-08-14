@@ -15,7 +15,7 @@ const RadioOptions = ({
   choice,
   setChoice,
 }: OptionsProps) => (
-  <div>
+  <div className="flex">
     {options.map(({ name, value }) => (
       <label key={value} onClick={() => setChoice(value)} className="text-xs">
         <input
