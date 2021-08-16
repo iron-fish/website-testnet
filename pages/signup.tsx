@@ -122,7 +122,7 @@ export default function SignUp() {
           {$error !== UNSET && <FieldError text={$error} size="text-md" />}
           {$signedUp ? (
             <>
-              <Note size="">
+              <Note className="mb-8">
                 Please check your email to validate your account
               </Note>
               <p className="p-2 text-center text-sm">
