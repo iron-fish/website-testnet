@@ -10,6 +10,9 @@ module.exports = {
         px3: '0.1875rem',
         4.5: '1.125rem',
       },
+      maxWidth: {
+        section: '52.5rem',
+      },
       minWidth: {
         6: '1.5rem',
       },
