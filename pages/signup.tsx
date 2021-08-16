@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 import Note from '../components/signup/Note'
 import { FieldError } from '../components/signup/FieldStatus'
 import SignUpForm from '../components/signup/SignUpForm'
-import { createUser, matchError, matchEntity } from '../apiClient'
+import { createUser } from '../apiClient'
 import { useField } from '../hooks/useForm'
 
 // naive validators
@@ -97,19 +97,6 @@ export default function SignUp() {
     if ('error' in result) {
       const error = '' + result.message
       $setError(error)
-      if (matchError(result) === 'USER_EXISTS') {
-        const entity = matchEntity(error)
-        const matched = [email, graffiti, social].indexOf(entity)
-        /* eslint-disable no-console */
-        if (matched === 0) {
-          console.log('email invalid')
-        } else if (matched === 1) {
-          console.log('graffiti invalid')
-        } else if (matched === 2) {
-          console.log('social invalid')
-        }
-        /* eslint-enable no-console */
-      }
     } else {
       $setSignedUp(true)
       // eslint-disable-next-line no-console

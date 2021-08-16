@@ -139,11 +139,13 @@
   --ifm-text-container-width: 820px;
   --ifm-navbar-sidebar-width: 100vw;
 }
+/* adding this class allows for the offset shadow appearance on the main sections */
 .offset-box {
   border: 2px solid black;
   position: relative;
   transform-style: preserve-3d;
 }
+/* this is the magic part which necessitates it not being in tailwind */
 .offset-box::after {
   content: '';
   height: 100%;
@@ -154,6 +156,69 @@
   border: 2px solid black;
   transform: translateZ(-1px);
   z-index: -1;
+}
+
+/* To support custom radio buttons */
+.radio-group {
+  height: 2.5em;
+  margin-bottom: 0.5em;
+}
+.radio-option {
+  /* width: 6em; */
+  margin-left: 1.25em;
+  margin-right: 0.9em;
+  display: block;
+  position: relative;
+  text-align: right;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* hide the actual input */
+.radio-option .radio-input {
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+}
+/* custom pseudo-input */
+.radio-fake {
+  position: absolute;
+  margin-left: -1.5em;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+}
+/* appearance when checked */
+.radio-option .radio-input:checked ~ .radio-fake {
+  background-color: white;
+}
+/* inner radio fake */
+.radio-fake::after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+/* inner radio fake when checked */
+.radio-option .radio-input:checked ~ .radio-fake::after {
+  display: block;
+}
+.radio-option .radio-fake::after {
+  top: 2px;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: black;
+}
+.radio-text {
+  /* position: absolute; */
+  /* right: 0; */
 }
 
 html,
