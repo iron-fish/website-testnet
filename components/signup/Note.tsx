@@ -6,7 +6,9 @@ interface NoteProps {
 }
 
 export const Note = ({ children, size = 'w-full' }: NoteProps) => (
-  <div className={`p-2 text-sm mb-8 mt-2 bg-alertyellow text-center ${size}`}>
+  <div
+    className={`p-2 max-w-sm text-sm mt-2 bg-alertyellow text-center ${size}`}
+  >
     {children}
   </div>
 )
