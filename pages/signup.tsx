@@ -117,7 +117,7 @@ export default function SignUp() {
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">
-        <section className="offset-box z-10 w-4/5 min-h-section max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5">
+        <section className="offset-box z-10 w-4/5 min-h-section max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5 pb-16">
           <h1 className="text-4xl text-center mb-4 mt-16">
             {$signedUp
               ? `Thank you for signing up!`
