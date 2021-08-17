@@ -21,7 +21,7 @@ export const SignUpForm = ({
     {textFields.map(t => t && <TextField key={t.id} {...t} />)}
     {country && <Select {...country} />}
     {country?.value === 'USA' && (
-      <Note>
+      <Note className="mb-4">
         <strong>Please note</strong>: US participants are not eligible for Iron
         Fish coin rewards
       </Note>
