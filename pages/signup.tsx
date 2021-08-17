@@ -83,9 +83,9 @@ export default function SignUp() {
     if (invalid || untouched) {
       if (untouched) {
         $setError('Please fill out all fields')
-        if (noEmail) $email?.setValid(false)
-        if (noGraffiti) $graffiti?.setValid(false)
-        if (noSocial) $social?.setValid(false)
+        if (noEmail) $email?.setTouched(true)
+        if (noGraffiti) $graffiti?.setTouched(true)
+        if (noSocial) $social?.setTouched(true)
       } else {
         $setError('Please correct the invalid fields below')
       }
