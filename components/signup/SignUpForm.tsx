@@ -27,7 +27,7 @@ export const SignUpForm = ({
       </Note>
     )}
     <RawButton
-      className="w-full mt-6 max-w-md mb-4 text-lg md:text-xl p-3 md:py-5 md:px-4"
+      className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
       onClick={submit}
     >
       Sign Up
