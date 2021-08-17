@@ -14,7 +14,7 @@ export const FieldStatus = ({
   <div
     className={`${
       feedback === FieldStatusFeedback.BAD ? 'bg-alertred' : 'bg-alertyellow'
-    } font-favorit text-white text-xs text-center p-2 w-full mt-2 rounded max-w-sm`}
+    } font-favorit text-white text-xs text-center p-2 w-full mt-2 rounded max-w-md`}
   >
     {text}
   </div>

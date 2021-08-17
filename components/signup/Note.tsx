@@ -12,7 +12,7 @@ export const Note = ({
   className = '',
 }: NoteProps) => (
   <div
-    className={`p-2 max-w-sm text-sm mt-2 bg-alertyellow text-center ${size} ${className}`}
+    className={`p-2 max-w-md text-sm mt-2 bg-alertyellow text-center ${size} ${className}`}
   >
     {children}
   </div>
