@@ -145,6 +145,7 @@
   position: relative;
   transform-style: preserve-3d;
   width: calc(100% - 26px);
+  transition: width 0.3s ease-out;
 }
 /* this is the magic part which necessitates it not being in tailwind */
 .offset-box::after {
