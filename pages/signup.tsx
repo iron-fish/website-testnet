@@ -69,23 +69,40 @@ export default function SignUp() {
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
+  const scrollUp = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   const testInvalid = () => {
+    const noEmail = !$email?.touched
+    const noGraffiti = !$graffiti?.touched
+    const noSocial = !$social?.touched
+    const untouched = noEmail || noGraffiti || noSocial
     const invalid = !$email?.valid || !$graffiti?.valid || !$social?.valid
-    if (invalid) {
-      $setError('Please correct the invalid fields below')
+    if (invalid || untouched) {
+      if (untouched) {
+        $setError('Please fill out all fields')
+        if (noEmail) $email?.setValid(false)
+        if (noGraffiti) $graffiti?.setValid(false)
+        if (noSocial) $social?.setValid(false)
+      } else {
+        $setError('Please correct the invalid fields below')
+      }
+      scrollUp()
     } else {
       $setError(UNSET)
     }
-    return invalid
+    return invalid || untouched
   }
   const submit = async () => {
     if (!$email || !$graffiti || !$social || !$country) return
+    if (testInvalid()) return
     const email = $email?.value
     const graffiti = $graffiti?.value
     const social = $social?.value
     const socialChoice = $social?.choice
     const country = $country?.value
-    if (testInvalid()) return
 
     const result = await createUser(
       email,
@@ -99,10 +116,7 @@ export default function SignUp() {
       $setError(error)
     } else {
       $setSignedUp(true)
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
+      scrollUp()
       // eslint-disable-next-line no-console
       console.log('RESULT', result)
     }
