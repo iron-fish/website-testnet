@@ -99,6 +99,10 @@ export default function SignUp() {
       $setError(error)
     } else {
       $setSignedUp(true)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
       // eslint-disable-next-line no-console
       console.log('RESULT', result)
     }
