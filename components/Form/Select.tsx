@@ -1,5 +1,5 @@
+import { NameValue, Field } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
-import { NameValue, Field } from '../../hooks/useForm'
 
 interface SelectField extends Field {
   noDefault?: boolean

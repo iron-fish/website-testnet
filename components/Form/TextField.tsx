@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
+import { Field, NameValue } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
-import { Field, NameValue } from '../../hooks/useForm'
 
 interface OptionsProps {
   groupName: string

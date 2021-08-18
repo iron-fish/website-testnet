@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-import Button from '../Button'
+import Button from 'components/Button'
+import Logo from 'components/Logo'
+import Close from 'components/icons/Close'
+import Menu from 'components/icons/Menu'
 import Company from './Company'
 import Testnet from './Testnet'
-import Logo from '../Logo'
-import Close from '../icons/Close'
-import Menu from '../icons/Menu'
 
 type NavbarProps = {
   className?: string

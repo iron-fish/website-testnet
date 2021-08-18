@@ -1,10 +1,10 @@
-import { RawButton } from '../Button'
+import { RawButton } from 'components/Button'
+import TextField from 'components/Form/TextField'
+import Note from 'components/Form/Note'
+import Select from 'components/Form/Select'
 import LoginCTA from './LoginCTA'
-import Note from '../Form/Note'
 import FinePrint from './FinePrint'
-import TextField from '../Form/TextField'
-import Select from '../Form/Select'
-import { Field } from '../../hooks/useForm'
+import { Field } from 'hooks/useForm'
 
 interface SignUpFormProps {
   textFields: (Field | null)[]

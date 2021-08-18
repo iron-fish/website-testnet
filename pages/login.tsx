@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import TextField from '../components/Form/TextField'
-import { useField } from '../hooks/useForm'
-import { RawButton } from '../components/Button'
-import { FieldError } from '../components/Form/FieldStatus'
-import { scrollUp } from '../utils/scroll'
-import { UNSET, validateEmail, exists, defaultErrorText } from '../utils/forms'
-import { login } from '../apiClient'
+import Footer from 'components/Footer'
+import Navbar from 'components/Navbar'
+import TextField from 'components/Form/TextField'
+import { useField } from 'hooks/useForm'
+import { RawButton } from 'components/Button'
+import { FieldError } from 'components/Form/FieldStatus'
+import { scrollUp } from 'utils/scroll'
+import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
+import { login } from 'apiClient'
 
 const FIELDS = {
   email: {

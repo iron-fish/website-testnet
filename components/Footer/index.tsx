@@ -2,8 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Button from '../Button'
-import Logo from '../Logo'
+import Button from 'components/Button'
+import Logo from 'components/Logo'
 
 type Props = {
   title: string
