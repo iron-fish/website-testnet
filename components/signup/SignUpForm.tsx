@@ -21,7 +21,7 @@ export const SignUpForm = ({
 }: SignUpFormProps) => {
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
-    if (country?.value) {
+    if (country?.valid) {
       $setLoaded(true)
     }
   }, [$loaded, $setLoaded, country])

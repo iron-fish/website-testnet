@@ -52,13 +52,15 @@ const FIELDS = {
   country: {
     id: 'country',
     label: 'Country',
-    defaultValue: 'USA',
+    defaultValue: UNSET,
     options: countries.map(({ code, name }: CountryWithCode) => ({
       name,
       value: code,
     })),
     validation: () => true,
     defaultErrorText,
+    noDefault: true,
+    defaultLabel: 'Select a country',
   },
 }
 

@@ -1,24 +1,37 @@
 import LabelledRow from './LabelledRow'
 import { NameValue, Field } from '../../hooks/useForm'
 
+interface SelectField extends Field {
+  noDefault?: boolean
+  defaultLabel?: string
+}
+
 export const Select = ({
   id,
   options = [],
+  noDefault = false,
+  defaultLabel = '',
   label,
   errorText,
+  defaultValue,
   valid,
   value,
   onChange,
-}: Field) => (
-  <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
-    <select onChange={onChange} value={value}>
-      {options.map(({ value, name }: NameValue) => (
-        <option key={value} value={value}>
-          {name}
-        </option>
-      ))}
-    </select>
-  </LabelledRow>
-)
+}: SelectField) => {
+  const allOptions = noDefault
+    ? [{ name: defaultLabel, value: defaultValue }].concat(options)
+    : options
+  return (
+    <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
+      <select onChange={onChange} value={value}>
+        {allOptions.map(({ value: option, name }: NameValue) => (
+          <option key={value} value={option}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </LabelledRow>
+  )
+}
 
 export default Select
