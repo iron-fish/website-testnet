@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { CountryWithCode, countries } from '../data/countries'
@@ -9,6 +9,7 @@ import { FieldError } from '../components/signup/FieldStatus'
 import SignUpForm from '../components/signup/SignUpForm'
 import { createUser } from '../apiClient'
 import { useField } from '../hooks/useForm'
+import Loader from '../components/Loader'
 
 // naive validators
 const UNSET = ''
@@ -71,6 +72,12 @@ export default function SignUp() {
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
+  const [$loaded, $setLoaded] = useState<boolean>(false)
+  useEffect(() => {
+    if ($country?.valid) {
+      $setLoaded(true)
+    }
+  }, [$loaded, $setLoaded, $country])
   const scrollUp = () =>
     window.scrollTo({
       top: 0,
@@ -105,6 +112,7 @@ export default function SignUp() {
     const social = $social?.value
     const socialChoice = $social?.choice
     const country = $country?.value
+    $setLoaded(false)
 
     const result = await createUser(
       email,
@@ -118,6 +126,7 @@ export default function SignUp() {
       $setError(error)
     } else {
       $setSignedUp(true)
+      $setLoaded(true)
       scrollUp()
       // eslint-disable-next-line no-console
       console.log('RESULT', result)
@@ -134,30 +143,36 @@ export default function SignUp() {
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">
         <section className="offset-box z-10 md:w-4/5 min-h-section max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5 pb-16">
-          <h1 className="text-4xl text-center mb-4 mt-16">
-            {$signedUp
-              ? `Thank you for signing up!`
-              : `Sign up and get incentivized.`}
-          </h1>
-          {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-          {$signedUp ? (
-            <>
-              <Note className="mb-8">
-                Please check your email to validate your account
-              </Note>
-              <p className="p-2 text-center text-sm">
-                Have any questions for our team?{' '}
-                <Link href="https://discord.gg/EkQkEcm8DH">
-                  <a className=" text-iflightblue">Find us on Discord.</a>
-                </Link>
-              </p>
-            </>
+          {!$loaded ? (
+            <Loader />
           ) : (
-            <SignUpForm
-              textFields={textFields}
-              country={$country}
-              submit={submit}
-            />
+            <>
+              <h1 className="text-4xl text-center mb-4 mt-16">
+                {$signedUp
+                  ? `Thank you for signing up!`
+                  : `Sign up and get incentivized.`}
+              </h1>
+              {$error !== UNSET && <FieldError text={$error} size="text-md" />}
+              {$signedUp ? (
+                <>
+                  <Note className="mb-8">
+                    Please check your email to validate your account
+                  </Note>
+                  <p className="p-2 text-center text-sm">
+                    Have any questions for our team?{' '}
+                    <Link href="https://discord.gg/EkQkEcm8DH">
+                      <a className=" text-iflightblue">Find us on Discord.</a>
+                    </Link>
+                  </p>
+                </>
+              ) : (
+                <SignUpForm
+                  textFields={textFields}
+                  country={$country}
+                  submit={submit}
+                />
+              )}
+            </>
           )}
         </section>
       </main>
