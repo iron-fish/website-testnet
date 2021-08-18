@@ -196,6 +196,10 @@
   background-color: white;
   border: 1px solid black;
 }
+.radio-option:focus .radio-input ~ .radio-fake,
+.radio-input:focus ~ .radio-fake {
+  border: 1px dashed black;
+}
 /* appearance when checked */
 .radio-option .radio-input:checked ~ .radio-fake {
   background-color: white;
