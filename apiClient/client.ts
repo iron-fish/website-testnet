@@ -59,3 +59,20 @@ export async function createUser(
   })
   return await res.json()
 }
+
+export async function login(
+  email: string,
+  socialChoice: string,
+  social: string
+): Promise<ApiUser | ApiError> {
+  const body = JSON.stringify({ email, [socialChoice]: social })
+  const res = await fetch(`${API_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${API_KEY}`,
+    },
+    body,
+  })
+  return await res.json()
+}

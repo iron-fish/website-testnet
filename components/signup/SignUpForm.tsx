@@ -1,9 +1,9 @@
 import { RawButton } from '../Button'
 import LoginCTA from './LoginCTA'
-import Note from './Note'
+import Note from '../Form/Note'
 import FinePrint from './FinePrint'
-import TextField from './TextField'
-import Select from './Select'
+import TextField from '../Form/TextField'
+import Select from '../Form/Select'
 import { Field } from '../../hooks/useForm'
 
 interface SignUpFormProps {

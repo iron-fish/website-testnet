@@ -4,21 +4,14 @@ import Link from 'next/link'
 import { CountryWithCode, countries } from '../data/countries'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import Note from '../components/signup/Note'
-import { FieldError } from '../components/signup/FieldStatus'
+import Note from '../components/Form/Note'
+import { FieldError } from '../components/Form/FieldStatus'
 import SignUpForm from '../components/signup/SignUpForm'
 import { createUser } from '../apiClient'
 import { useField } from '../hooks/useForm'
 import Loader from '../components/Loader'
-
-// naive validators
-const UNSET = ''
-const validateEmail = (x: string) => {
-  const dot = x.indexOf('.')
-  return x.indexOf('@') > 0 && dot > 0 && dot !== x.length - 1
-}
-const exists = (x: string) => x.trim().length > 0
-const defaultErrorText = `This field is required`
+import { scrollUp } from '../utils/scroll'
+import { UNSET, validateEmail, exists, defaultErrorText } from '../utils/forms'
 
 const FIELDS = {
   email: {
@@ -78,11 +71,6 @@ export default function SignUp() {
       $setLoaded(true)
     }
   }, [$loaded, $setLoaded, $country])
-  const scrollUp = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
   const testInvalid = () => {
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
