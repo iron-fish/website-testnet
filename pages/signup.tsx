@@ -58,7 +58,7 @@ const FIELDS = {
       name,
       value: code,
     })),
-    validation: () => true,
+    validation: (x: string) => x !== UNSET,
     defaultErrorText,
     noDefault: true,
     defaultLabel: 'Select a country',
@@ -87,14 +87,18 @@ export default function SignUp() {
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
     const noSocial = !$social?.touched
-    const untouched = noEmail || noGraffiti || noSocial
-    const invalid = !$email?.valid || !$graffiti?.valid || !$social?.valid
+    // for old men
+    const noCountry = !$country?.touched
+    const untouched = noEmail || noGraffiti || noSocial || noCountry
+    const invalid =
+      !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
     if (invalid || untouched) {
       if (untouched) {
         $setError('Please fill out all fields')
         if (noEmail) $email?.setTouched(true)
         if (noGraffiti) $graffiti?.setTouched(true)
         if (noSocial) $social?.setTouched(true)
+        if (noCountry) $country?.setTouched(true)
       } else {
         $setError('Please correct the invalid fields below')
       }
