@@ -25,7 +25,7 @@ export const Select = ({
     <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
       <select onChange={onChange} value={value}>
         {allOptions.map(({ value: option, name }: NameValue) => (
-          <option key={value} value={option}>
+          <option key={option} value={option}>
             {name}
           </option>
         ))}
