@@ -11,6 +11,7 @@ const SERVER_API_URL = process.env.API_URL
 const SERVER_API_KEY = process.env.API_KEY
 const BROWSER_API_URL = process.env.NEXT_PUBLIC_API_URL
 const BROWSER_API_KEY = process.env.NEXT_PUBLIC_API_KEY
+const MAGIC_LINK_KEY = process.env.NEXT_PUBLIC_MAGIC_SECRET_KEY
 
 const API_URL = SERVER_API_URL || BROWSER_API_URL
 const API_KEY = SERVER_API_KEY || BROWSER_API_KEY
@@ -61,16 +62,16 @@ export async function createUser(
 }
 
 export async function login(
-  email: string,
-  socialChoice: string,
-  social: string
+  email: string
+  // socialChoice: string,
+  // social: string
 ): Promise<ApiUser | ApiError> {
-  const body = JSON.stringify({ email, [socialChoice]: social })
+  const body = JSON.stringify({ email }) //, [socialChoice]: social })
   const res = await fetch(`${API_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${MAGIC_LINK_KEY}`,
     },
     body,
   })

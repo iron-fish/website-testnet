@@ -37,18 +37,19 @@ const FIELDS = {
 export default function Login() {
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
-  const $social = useField(FIELDS.social)
-  const textFields = [$email, $social]
+  //  const $social = useField(FIELDS.social)
+  //  const textFields = [$email, $social]
+  const textFields = [$email]
   const testInvalid = () => {
     const noEmail = !$email?.touched
-    const noSocial = !$social?.touched
-    const untouched = noEmail || noSocial
-    const invalid = !$email?.valid || !$social?.valid
+    //    const noSocial = !$social?.touched
+    const untouched = noEmail // || nosocial
+    const invalid = !$email?.valid // || !$social?.valid
     if (invalid || untouched) {
       if (untouched) {
         $setError('Please fill out all fields')
         if (noEmail) $email?.setTouched(true)
-        if (noSocial) $social?.setTouched(true)
+        //        if (noSocial) $social?.setTouched(true)
       } else {
         $setError('Please correct the invalid fields below')
       }
@@ -59,13 +60,14 @@ export default function Login() {
     return invalid || untouched
   }
   const submit = async () => {
-    if (!$email || !$social) return
+    // if (!$email || !$social) return
+    if (!$email) return
     if (testInvalid()) return
     const email = $email?.value
-    const social = $social?.value
-    const socialChoice = $social?.choice
+    //    const social = $social?.value
+    //    const socialChoice = $social?.choice
 
-    const result = await login(email, socialChoice, social)
+    const result = await login(email) // , socialChoice, social)
     if ('error' in result) {
       const error = '' + result.message
       $setError(error)
