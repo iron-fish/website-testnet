@@ -1,44 +1,9 @@
-import React from 'react'
-
-import Cube from './Cube'
-import Link from 'next/link'
-
-type SectionHeaderProps = {
-  children?: React.ReactNode
-  className?: string
-}
-
-const SectionHeader = ({ children, className }: SectionHeaderProps) => (
-  <h3 className={`font-favorit text-ifgray text-sm mb-7 ${className}`}>
-    {children}
-  </h3>
-)
-
-type TestnetGridElementProps = {
-  header: string
-  href: string
-  body: string
-  cubeClassName: string
-}
-
-const TestnetGridElement = ({
-  href,
-  header,
-  body,
-  cubeClassName,
-}: TestnetGridElementProps) => (
-  <Link href={href}>
-    <a className="flex items-center py-4 px-6 rounded hover:bg-iflightgray">
-      <Cube className={cubeClassName} />
-      <div className="flex flex-col ml-4">
-        <h5>{header}</h5>
-        <p className="font-favorit text-ifgray text-sm">{body}</p>
-      </div>
-    </a>
-  </Link>
-)
+import TestnetGridElement from './TestnetGridElement'
+import SectionHeader from './SectionHeader'
 
 function Testnet() {
+  const elementClassName = `py-4 px-6`
+  const textClassName = `ml-4`
   return (
     <div className="absolute bg-white left-0 right-0 shadow-navbar">
       <div className="flex justify-center border-b border-t">
@@ -66,24 +31,32 @@ function Testnet() {
                 href="/about"
                 header="About the Testnet"
                 body="How to earn points"
+                className={elementClassName}
+                textClassName={textClassName}
                 cubeClassName="text-iforange"
               />
               <TestnetGridElement
                 href="/community"
                 header="Testnet Community"
                 body="From our supporters"
+                className={elementClassName}
+                textClassName={textClassName}
                 cubeClassName="text-ifbeige"
               />
               <TestnetGridElement
                 href="/leaderboard"
                 header="Testnet Leaderboard"
                 body="Earn your way to the top"
+                className={elementClassName}
+                textClassName={textClassName}
                 cubeClassName="text-ifcubepink"
               />
               <TestnetGridElement
                 href="/faq"
                 header="Testnet FAQ"
                 body="Frequently asked questions"
+                className={elementClassName}
+                textClassName={textClassName}
                 cubeClassName="text-iflightblue"
               />
             </div>
