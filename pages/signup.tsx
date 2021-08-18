@@ -74,7 +74,7 @@ export default function SignUp() {
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
-    if ($country?.valid) {
+    if ($country) {
       $setLoaded(true)
     }
   }, [$loaded, $setLoaded, $country])
