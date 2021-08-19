@@ -100,8 +100,7 @@ export async function tokenLogin(): Promise<ApiUser | ApiError | LocalError> {
     const token = await magic.auth.loginWithCredential()
     /* eslint-disable-next-line no-console */
     console.log('TOKEN', token)
-    const res = await fetch(`${API_URL}/login`, {
-      method: 'POST',
+    const res = await fetch(`/api/login`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
