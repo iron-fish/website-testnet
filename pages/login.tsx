@@ -50,20 +50,24 @@ export default function Login() {
     return invalid || untouched
   }, [$email, $setError])
   const submit = useCallback(async () => {
-    if (!$email) return
-    if (testInvalid()) return
-    $setLoaded(false)
-    const email = $email?.value
+    try {
+      if (!$email) return
+      if (testInvalid()) return
+      $setLoaded(false)
+      const email = $email?.value
 
-    const result = await login(email)
-    if ('error' in result) {
-      const error = '' + result.message
-      $setError(error)
-    } else {
-      /* eslint-disable-next-line no-console */
-      console.log('RESULT', result)
-      $setLoaded(true)
-      $setError('HEY GREAT')
+      const result = await login(email)
+      if ('error' in result) {
+        const error = '' + result.message
+        $setError(error)
+      } else {
+        /* eslint-disable-next-line no-console */
+        console.log('RESULT', result)
+        $setLoaded(true)
+        $setError('HEY GREAT')
+      }
+    } catch (e) {
+      $setError(e.message)
     }
   }, [$email, testInvalid])
   return (
