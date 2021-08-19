@@ -57,12 +57,18 @@ export default function Login() {
       const email = $email?.value
 
       const result = await login(email)
+      /* eslint-disable-next-line no-console */
+      console.log('RESULT', { result })
       if ('error' in result) {
         const error = '' + result.message
         $setError(error)
+      } else if (
+        result &&
+        'statusCode' in result &&
+        result.statusCode !== 200
+      ) {
+        $setError('' + result.message)
       } else {
-        /* eslint-disable-next-line no-console */
-        console.log('RESULT', result)
         $setLoaded(true)
         $setError('HEY GREAT')
       }

@@ -23,3 +23,10 @@ export const matchEntity = (x: string) =>
     .slice(KNOWN_ERRORS.USER_EXISTS.message.length, Infinity)
     .trim()
     .replace(/["']/g, '')
+
+export class LocalError extends Error {
+  constructor(message: string, public statusCode: number) {
+    super(message)
+    Object.setPrototypeOf(this, LocalError.prototype)
+  }
+}
