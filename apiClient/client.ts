@@ -66,6 +66,8 @@ export async function createUser(
 export async function login(
   email: string
 ): Promise<ApiUser | ApiError | LocalError> {
+  /* eslint-disable-next-line no-console */
+  console.log({ magic, window })
   if (typeof window === 'undefined' || !magic) {
     return new LocalError('Only runnable in the browser')
   }
