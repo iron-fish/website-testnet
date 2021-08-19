@@ -23,6 +23,7 @@ export interface Field extends ProvidedField {
   onChange: (e: ChangeEvent) => void
   onBlur: () => void
   valid: boolean
+  setTouched: Dispatch<SetStateAction<boolean>>
   touched: boolean
   errorText?: string
   setError: Dispatch<SetStateAction<string>>
@@ -62,6 +63,7 @@ export function useField(provided: ProvidedField): Field | null {
       onBlur: () => {
         $setTouched(true)
       },
+      setTouched: $setTouched,
       touched: $touched,
       errorText: valid ? undefined : $error,
       setError: $setError,

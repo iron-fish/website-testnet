@@ -15,18 +15,29 @@ const RadioOptions = ({
   choice,
   setChoice,
 }: OptionsProps) => (
-  <div>
-    {options.map(({ name, value }) => (
-      <label key={value} onClick={() => setChoice(value)} className="text-xs">
-        <input
-          type="radio"
-          name={groupName}
-          value={value}
-          defaultChecked={value === choice}
-        />
-        <span className="mx-1">{name}</span>
-      </label>
-    ))}
+  <div className="flex radio-group text-xs">
+    {options.map(({ name, value }, idx) => {
+      const checked = value === choice
+      const activeClass = checked ? 'active' : 'inactive'
+      return (
+        <label
+          key={value}
+          onClick={() => setChoice(value)}
+          className={`radio-option ${activeClass} mr-2`}
+        >
+          <input
+            className="radio-input"
+            type="radio"
+            name={groupName}
+            value={value}
+            defaultChecked={checked}
+            tabIndex={idx}
+          />
+          <span className={`radio-fake ${activeClass}`} />
+          <span className={`radio-text`}>{name}</span>
+        </label>
+      )
+    })}
   </div>
 )
 

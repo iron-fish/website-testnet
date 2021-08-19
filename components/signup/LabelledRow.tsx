@@ -21,7 +21,7 @@ export const LabelledRow = ({
   <>
     <FormRow valid={valid}>
       {label.length > 0 && (
-        <label htmlFor={id} className="text-xs font-favorit">
+        <label htmlFor={id} className="text-xs mb-px3">
           {label}
           {required && <span className="text-md text-gray-500">*</span>}
         </label>

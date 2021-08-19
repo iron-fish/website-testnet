@@ -6,8 +6,8 @@ interface FormRowProps {
 
 export const FormRow = ({ className = '', valid, children }: FormRowProps) => (
   <div
-    className={`flex flex-col p-2 w-11/12 sm:w-7/12 mb-4 border rounded-md border-solid ${
-      valid ? 'border-black' : 'border-statusred'
+    className={`font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md ${
+      valid ? 'border-black' : 'border-alertred'
     } ${className}`}
   >
     {children}

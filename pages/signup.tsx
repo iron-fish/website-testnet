@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { CountryWithCode, countries } from '../data/countries'
@@ -7,8 +7,9 @@ import Navbar from '../components/Navbar'
 import Note from '../components/signup/Note'
 import { FieldError } from '../components/signup/FieldStatus'
 import SignUpForm from '../components/signup/SignUpForm'
-import { createUser, matchError, matchEntity } from '../apiClient'
+import { createUser } from '../apiClient'
 import { useField } from '../hooks/useForm'
+import Loader from '../components/Loader'
 
 // naive validators
 const UNSET = ''
@@ -52,13 +53,15 @@ const FIELDS = {
   country: {
     id: 'country',
     label: 'Country',
-    defaultValue: 'USA',
+    defaultValue: UNSET,
     options: countries.map(({ code, name }: CountryWithCode) => ({
       name,
       value: code,
     })),
-    validation: () => true,
+    validation: (x: string) => x !== UNSET,
     defaultErrorText,
+    noDefault: true,
+    defaultLabel: 'Select a country',
   },
 }
 
@@ -69,23 +72,51 @@ export default function SignUp() {
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
+  const [$loaded, $setLoaded] = useState<boolean>(false)
+  useEffect(() => {
+    if ($country) {
+      $setLoaded(true)
+    }
+  }, [$loaded, $setLoaded, $country])
+  const scrollUp = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   const testInvalid = () => {
-    const invalid = !$email?.valid || !$graffiti?.valid || !$social?.valid
-    if (invalid) {
-      $setError('Please correct the invalid fields below')
+    const noEmail = !$email?.touched
+    const noGraffiti = !$graffiti?.touched
+    const noSocial = !$social?.touched
+    // for old men
+    const noCountry = !$country?.touched
+    const untouched = noEmail || noGraffiti || noSocial || noCountry
+    const invalid =
+      !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
+    if (invalid || untouched) {
+      if (untouched) {
+        $setError('Please fill out all fields')
+        if (noEmail) $email?.setTouched(true)
+        if (noGraffiti) $graffiti?.setTouched(true)
+        if (noSocial) $social?.setTouched(true)
+        if (noCountry) $country?.setTouched(true)
+      } else {
+        $setError('Please correct the invalid fields below')
+      }
+      scrollUp()
     } else {
       $setError(UNSET)
     }
-    return invalid
+    return invalid || untouched
   }
   const submit = async () => {
     if (!$email || !$graffiti || !$social || !$country) return
+    if (testInvalid()) return
     const email = $email?.value
     const graffiti = $graffiti?.value
     const social = $social?.value
     const socialChoice = $social?.choice
     const country = $country?.value
-    if (testInvalid()) return
+    $setLoaded(false)
 
     const result = await createUser(
       email,
@@ -97,21 +128,10 @@ export default function SignUp() {
     if ('error' in result) {
       const error = '' + result.message
       $setError(error)
-      if (matchError(result) === 'USER_EXISTS') {
-        const entity = matchEntity(error)
-        const matched = [email, graffiti, social].indexOf(entity)
-        /* eslint-disable no-console */
-        if (matched === 0) {
-          console.log('email invalid')
-        } else if (matched === 1) {
-          console.log('graffiti invalid')
-        } else if (matched === 2) {
-          console.log('social invalid')
-        }
-        /* eslint-enable no-console */
-      }
     } else {
       $setSignedUp(true)
+      $setLoaded(true)
+      scrollUp()
       // eslint-disable-next-line no-console
       console.log('RESULT', result)
     }
@@ -126,31 +146,37 @@ export default function SignUp() {
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">
-        <section className="offset-box z-10 w-4/5 flex flex-col m-auto py-8 px-2 md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8">
-          <h1 className="text-2xl text-center mb-8">
-            {$signedUp
-              ? `Thank you for signing up!`
-              : `Sign up and get incentivized.`}
-          </h1>
-          {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-          {$signedUp ? (
-            <>
-              <Note size="">
-                Please check your email to validate your account
-              </Note>
-              <p className="p-2 text-center text-sm">
-                Have any questions for our team?{' '}
-                <Link href="https://discord.gg/EkQkEcm8DH">
-                  <a className=" text-iflightblue">Find us on Discord.</a>
-                </Link>
-              </p>
-            </>
+        <section className="offset-box z-10 md:w-4/5 min-h-section max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5 pb-16">
+          {!$loaded ? (
+            <Loader />
           ) : (
-            <SignUpForm
-              textFields={textFields}
-              country={$country}
-              submit={submit}
-            />
+            <>
+              <h1 className="text-4xl text-center mb-4 mt-16">
+                {$signedUp
+                  ? `Thank you for signing up!`
+                  : `Sign up and get incentivized.`}
+              </h1>
+              {$error !== UNSET && <FieldError text={$error} size="text-md" />}
+              {$signedUp ? (
+                <>
+                  <Note className="mb-8">
+                    Please check your email to validate your account
+                  </Note>
+                  <p className="p-2 text-center text-sm">
+                    Have any questions for our team?{' '}
+                    <Link href="https://discord.gg/EkQkEcm8DH">
+                      <a className=" text-iflightblue">Find us on Discord.</a>
+                    </Link>
+                  </p>
+                </>
+              ) : (
+                <SignUpForm
+                  textFields={textFields}
+                  country={$country}
+                  submit={submit}
+                />
+              )}
+            </>
           )}
         </section>
       </main>

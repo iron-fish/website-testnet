@@ -3,10 +3,17 @@ import { ReactNode } from 'react'
 interface NoteProps {
   children: ReactNode
   size?: string
+  className?: string
 }
 
-export const Note = ({ children, size = 'w-11/12 sm:w-7/12' }: NoteProps) => (
-  <div className={`p-2 text-sm mb-8 bg-statusyellow text-center ${size}`}>
+export const Note = ({
+  children,
+  size = 'w-full',
+  className = '',
+}: NoteProps) => (
+  <div
+    className={`p-2 max-w-md text-sm mt-2 bg-alertyellow text-center ${size} ${className}`}
+  >
     {children}
   </div>
 )
