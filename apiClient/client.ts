@@ -3,8 +3,10 @@ import {
   ListLeaderboardResponse,
   ListEventsResponse,
   ApiUser,
+  LocalError,
   ApiError,
 } from './types'
+import { magic } from 'utils/magic'
 
 // Environment variables set in Vercel config.
 const SERVER_API_URL = process.env.API_URL
@@ -63,17 +65,24 @@ export async function createUser(
 
 export async function login(
   email: string
-  // socialChoice: string,
-  // social: string
-): Promise<ApiUser | ApiError> {
-  const body = JSON.stringify({ email }) //, [socialChoice]: social })
-  const res = await fetch(`${API_URL}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${MAGIC_LINK_KEY}`,
-    },
-    body,
-  })
-  return await res.json()
+): Promise<ApiUser | ApiError | LocalError> {
+  if (typeof window === 'undefined' || !magic) {
+    return new LocalError('Only runnable in the browser')
+  }
+  try {
+    const token = await magic.auth.loginWithMagicLink({
+      email,
+      redirectURI: new URL('/callback', window.location.origin).href,
+    })
+    const res = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res.json()
+  } catch (e) {
+    return new LocalError(e.message)
+  }
 }

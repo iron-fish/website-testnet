@@ -27,6 +27,13 @@ export type ApiError = {
   error: string
 }
 
+export class LocalError extends Error {
+  constructor(message: string) {
+    super(message)
+    Object.setPrototypeOf(this, LocalError.prototype)
+  }
+}
+
 export type ListEventsResponse = {
   data: ReadonlyArray<ApiEvent>
 }
