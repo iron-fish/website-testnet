@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Loader from 'components/Loader'
@@ -67,11 +67,11 @@ export default function SignUp() {
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
-    if ($country) {
+    if ($country?.label) {
       $setLoaded(true)
     }
-  }, [$loaded, $setLoaded, $country])
-  const testInvalid = () => {
+  }, [$setLoaded, $country])
+  const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
     const noSocial = !$social?.touched
@@ -95,8 +95,8 @@ export default function SignUp() {
       $setError(UNSET)
     }
     return invalid || untouched
-  }
-  const submit = async () => {
+  }, [$country, $email, $graffiti, $social])
+  const submit = useCallback(async () => {
     if (!$email || !$graffiti || !$social || !$country) return
     if (testInvalid()) return
     const email = $email?.value
@@ -123,7 +123,7 @@ export default function SignUp() {
       // eslint-disable-next-line no-console
       console.log('RESULT', result)
     }
-  }
+  }, [$email, $graffiti, $social, $country, testInvalid])
   const textFields = [$email, $graffiti, $social]
   return (
     <div className="min-h-screen flex flex-col">
