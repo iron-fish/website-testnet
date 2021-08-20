@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
+import useLogin from 'hooks/useLogin'
 
 export default function Home() {
+  const $metadata = useLogin()
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -14,7 +16,11 @@ export default function Home() {
       <Navbar fill="black" className="bg-iforange text-black" />
 
       <main className="bg-iforange flex-1">
-        <h1 className="text-2xl">Welcome to Testnet.</h1>
+        <h1 className="text-2xl">
+          {$metadata && $metadata.email
+            ? `Welcome to Testnet, ${$metadata.email}!`
+            : `Welcome to Testnet.`}
+        </h1>
       </main>
 
       <Footer />
