@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Loader from 'components/Loader'
@@ -120,8 +121,7 @@ export default function SignUp() {
       $setSignedUp(true)
       $setLoaded(true)
       scrollUp()
-      // eslint-disable-next-line no-console
-      console.log('RESULT', result)
+      Router.push(`/login?email=${email}&autoLogin=true`)
     }
   }, [$email, $graffiti, $social, $country, testInvalid])
   const textFields = [$email, $graffiti, $social]

@@ -4,6 +4,7 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import TextField from 'components/Form/TextField'
 import { useField } from 'hooks/useForm'
+import { useQuery } from 'hooks/useQuery'
 import { RawButton } from 'components/Button'
 import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
@@ -23,15 +24,15 @@ const FIELDS = {
 }
 
 export default function Login() {
+  const $queryEmail = useQuery('email')
+  const $queryAutoLogin = useQuery('autoLogin')
+  if ($queryEmail) {
+    FIELDS.email.defaultValue = $queryEmail
+  }
   const [$error, $setError] = useState<string>(UNSET)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
   const textFields = [$email]
-  useEffect(() => {
-    if ($email) {
-      $setLoaded(true)
-    }
-  }, [$email, $setLoaded])
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
     const untouched = noEmail
@@ -49,6 +50,7 @@ export default function Login() {
     }
     return invalid || untouched
   }, [$email, $setError])
+
   const submit = useCallback(async () => {
     try {
       if (!$email) return
@@ -61,12 +63,14 @@ export default function Login() {
       console.log('RESULT', { result })
       if ('error' in result) {
         const error = '' + result.message
+        $setLoaded(true)
         $setError(error)
       } else if (
         result &&
         'statusCode' in result &&
         result.statusCode !== 200
       ) {
+        $setLoaded(true)
         $setError('' + result.message)
       } else {
         $setLoaded(true)
@@ -76,6 +80,18 @@ export default function Login() {
       $setError(e.message)
     }
   }, [$email, testInvalid])
+
+  useEffect(() => {
+    if ($email) {
+      $setLoaded(true)
+      if ($queryEmail) {
+        $email.setter($queryEmail)
+        if ($queryAutoLogin === 'true') {
+          submit()
+        }
+      }
+    }
+  }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
