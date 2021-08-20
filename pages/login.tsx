@@ -25,6 +25,7 @@ const FIELDS = {
 
 export default function Login() {
   const $queryEmail = useQuery('email')
+  const $queryAutoLogin = useQuery('autoLogin')
   if ($queryEmail) {
     FIELDS.email.defaultValue = $queryEmail
   }
@@ -81,12 +82,12 @@ export default function Login() {
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
-      if ($queryEmail) {
+      if ($queryEmail && $queryAutoLogin === 'true') {
         $email.setter($queryEmail)
         submit()
       }
     }
-  }, [$email, $setLoaded, $queryEmail, submit])
+  }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
