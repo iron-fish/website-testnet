@@ -82,9 +82,11 @@ export default function Login() {
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
-      if ($queryEmail && $queryAutoLogin === 'true') {
+      if ($queryEmail) {
         $email.setter($queryEmail)
-        submit()
+        if ($queryAutoLogin === 'true') {
+          submit()
+        }
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
