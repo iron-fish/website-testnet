@@ -121,7 +121,7 @@ export default function SignUp() {
       $setSignedUp(true)
       $setLoaded(true)
       scrollUp()
-      Router.push(`/login?email=${email}`)
+      Router.push(`/login?email=${email}&autoLogin=true`)
     }
   }, [$email, $graffiti, $social, $country, testInvalid])
   const textFields = [$email, $graffiti, $social]
