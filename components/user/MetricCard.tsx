@@ -16,13 +16,16 @@ export default function MetricCard({
 }: MetricCardProp) {
   return (
     <OffsetBorderContainer>
-      <div className="p-8" style={{ minWidth: 288, maxWidth: 288 }}>
-        <div className="font-extended mb-4 whitespace-nowrap">{title}</div>
+      <div
+        className="font-extended p-8"
+        style={{ minWidth: 288, maxWidth: 288 }}
+      >
+        <div className=" mb-4 whitespace-nowrap">{title}</div>
         <div className="flex gap-4">
-          <div className="font-extended text-5xl">{value}</div>
-          <div className="mt-1">
-            <div className="font-favorit leading-tight">{subValueTop}</div>
-            <div className="font-favorit text-ifsubtextgray leading-tight whitespace-nowrap	">
+          <div className="text-5xl">{value}</div>
+          <div className="font-favorit mt-1">
+            <div className="leading-tight">{subValueTop}</div>
+            <div className="text-ifsubtextgray leading-tight whitespace-nowrap	">
               {subValueBottom}
             </div>
           </div>
