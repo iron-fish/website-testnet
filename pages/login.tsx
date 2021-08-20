@@ -63,12 +63,14 @@ export default function Login() {
       console.log('RESULT', { result })
       if ('error' in result) {
         const error = '' + result.message
+        $setLoaded(true)
         $setError(error)
       } else if (
         result &&
         'statusCode' in result &&
         result.statusCode !== 200
       ) {
+        $setLoaded(true)
         $setError('' + result.message)
       } else {
         $setLoaded(true)
