@@ -8,6 +8,9 @@ export type ApiEvent = {
   points: number
   user_id: number
 }
+export type LoginEvent = {
+  authenticated: boolean
+}
 
 export type ApiUser = {
   graffiti: string

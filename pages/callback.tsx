@@ -9,7 +9,7 @@ const Callback = () => {
       const res = await tokenLogin()
       // eslint-disable-next-line no-console
       console.log('TOKEN RES', res)
-      if (res && 'statusCode' in res && res.statusCode === 200) {
+      if ('authenticated' in res) {
         Router.push('/')
       }
     }

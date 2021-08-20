@@ -5,6 +5,7 @@ import {
   ListEventsResponse,
   ApiUser,
   ApiError,
+  LoginEvent,
 } from './types'
 import { LocalError } from './errors'
 
@@ -90,7 +91,7 @@ export async function login(
   }
 }
 
-export async function tokenLogin(): Promise<ApiUser | ApiError | LocalError> {
+export async function tokenLogin(): Promise<LoginEvent | LocalError> {
   /* eslint-disable-next-line no-console */
   console.log({ magic, window })
   if (typeof window === 'undefined' || !magic) {
