@@ -139,26 +139,6 @@
   --ifm-text-container-width: 820px;
   --ifm-navbar-sidebar-width: 100vw;
 }
-/* adding this class allows for the offset shadow appearance on the main sections */
-.offset-box {
-  border: 2px solid black;
-  position: relative;
-  transform-style: preserve-3d;
-  width: calc(100% - 26px);
-  transition: width 0.3s ease-out;
-}
-/* this is the magic part which necessitates it not being in tailwind */
-.offset-box::after {
-  content: '';
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  margin-top: 1rem;
-  margin-left: calc(1.75rem + 2px);
-  border: 2px solid black;
-  transform: translateZ(-1px);
-  z-index: -1;
-}
 
 html,
 body {

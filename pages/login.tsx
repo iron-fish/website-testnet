@@ -3,11 +3,14 @@ import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import TextField from 'components/Form/TextField'
-import { useField } from 'hooks/useForm'
-import { useQuery } from 'hooks/useQuery'
+import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import { RawButton } from 'components/Button'
 import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
+import SignupCTA from 'components/login/SignupCTA'
+
+import { useField } from 'hooks/useForm'
+import { useQuery } from 'hooks/useQuery'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
 import { login } from 'apiClient'
@@ -101,25 +104,34 @@ export default function Login() {
       <Navbar fill="black" className="bg-ifpink text-black" />
 
       <main className="bg-ifpink flex-1 font-extended">
-        <section className="offset-box z-10 md:w-4/5 max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5 pb-16">
-          {$loaded ? (
-            <>
-              <h1 className="text-4xl text-center mb-4 mt-16">
-                Log in to the testnet.
-              </h1>
-              {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-              {textFields.map(t => t && <TextField key={t.id} {...t} />)}
-              <RawButton
-                className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
-                onClick={submit}
-              >
-                Login
-              </RawButton>
-            </>
-          ) : (
-            <Loader />
-          )}
-        </section>
+        <div className="md:w-4/5 w-full max-w-section my-16 mx-auto transition-width">
+          <OffsetBorderContainer>
+            <div className="flex justify-center">
+              <div className="flex flex-col items-center md:px-4 px-5 pb-16">
+                {$loaded ? (
+                  <>
+                    <h1 className="text-4xl text-center mb-4 mt-16">
+                      Log in to the testnet.
+                    </h1>
+                    {$error !== UNSET && (
+                      <FieldError text={$error} size="text-md" />
+                    )}
+                    {textFields.map(t => t && <TextField key={t.id} {...t} />)}
+                    <RawButton
+                      className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
+                      onClick={submit}
+                    >
+                      Login
+                    </RawButton>
+                  </>
+                ) : (
+                  <Loader />
+                )}
+                <SignupCTA />
+              </div>
+            </div>
+          </OffsetBorderContainer>
+        </div>
       </main>
       <Footer />
     </div>

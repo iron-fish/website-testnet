@@ -6,6 +6,7 @@ import Loader from 'components/Loader'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
+import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import { FieldError } from 'components/Form/FieldStatus'
 import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
@@ -134,39 +135,50 @@ export default function SignUp() {
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">
-        <section className="offset-box z-10 md:w-4/5 min-h-section max-w-section flex flex-col m-auto md:px-4 h-auto mb-16 border-opacity-100 border-2 border-solid border-black bg-white items-center mt-8 px-5 pb-16">
-          {!$loaded ? (
-            <Loader />
-          ) : (
-            <>
-              <h1 className="text-4xl text-center mb-4 mt-16">
-                {$signedUp
-                  ? `Thank you for signing up!`
-                  : `Sign up and get incentivized.`}
-              </h1>
-              {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-              {$signedUp ? (
-                <>
-                  <Note className="mb-8">
-                    Please check your email to validate your account
-                  </Note>
-                  <p className="p-2 text-center text-sm">
-                    Have any questions for our team?{' '}
-                    <Link href="https://discord.gg/EkQkEcm8DH">
-                      <a className=" text-iflightblue">Find us on Discord.</a>
-                    </Link>
-                  </p>
-                </>
+        <div className="md:w-4/5 w-full max-w-section my-16 mx-auto transition-width">
+          <OffsetBorderContainer>
+            <div
+              style={{ minHeight: '43rem', maxWidth: '53.5rem' }}
+              className="flex flex-col m-auto h-auto items-center mt-8 px-5 pb-16"
+            >
+              {!$loaded ? (
+                <Loader />
               ) : (
-                <SignUpForm
-                  textFields={textFields}
-                  country={$country}
-                  submit={submit}
-                />
+                <>
+                  <h1 className="text-4xl text-center mb-4 mt-16">
+                    {$signedUp
+                      ? `Thank you for signing up!`
+                      : `Sign up and get incentivized.`}
+                  </h1>
+                  {$error !== UNSET && (
+                    <FieldError text={$error} size="text-md" />
+                  )}
+                  {$signedUp ? (
+                    <>
+                      <Note className="mb-8">
+                        Please check your email to validate your account
+                      </Note>
+                      <p className="p-2 text-center text-sm">
+                        Have any questions for our team?{' '}
+                        <Link href="https://discord.gg/EkQkEcm8DH">
+                          <a className=" text-iflightblue">
+                            Find us on Discord.
+                          </a>
+                        </Link>
+                      </p>
+                    </>
+                  ) : (
+                    <SignUpForm
+                      textFields={textFields}
+                      country={$country}
+                      submit={submit}
+                    />
+                  )}
+                </>
               )}
-            </>
-          )}
-        </section>
+            </div>
+          </OffsetBorderContainer>
+        </div>
       </main>
       <Footer />
     </div>

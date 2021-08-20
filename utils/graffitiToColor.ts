@@ -11,7 +11,6 @@ const fishAvatarColors = [
   '#F1CB00',
 ]
 
-  
 export function graffitiToColor(graffiti: string): string {
   // djb2 (xor)
   let hash = 5381

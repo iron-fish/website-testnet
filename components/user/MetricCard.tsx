@@ -1,5 +1,5 @@
 import React from 'react'
-import OffsetBorderContainer from '../OffsetBorderContainer'
+import { Box as OffsetBorderBox } from 'components/OffsetBorder'
 
 type MetricCardProp = {
   title: string
@@ -15,7 +15,7 @@ export default function MetricCard({
   subValueBottom,
 }: MetricCardProp) {
   return (
-    <OffsetBorderContainer>
+    <OffsetBorderBox>
       <div
         className="font-extended p-8"
         style={{ minWidth: 288, maxWidth: 288 }}
@@ -31,6 +31,6 @@ export default function MetricCard({
           </div>
         </div>
       </div>
-    </OffsetBorderContainer>
+    </OffsetBorderBox>
   )
 }
