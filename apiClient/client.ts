@@ -78,7 +78,7 @@ export async function login(
     })
     /* eslint-disable-next-line no-console */
     console.log('TOKEN', token)
-    const res = await fetch(`${API_URL}/login`, {
+    const res = await fetch(`/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
