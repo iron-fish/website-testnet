@@ -32,11 +32,6 @@ export default function Login() {
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
   const textFields = [$email]
-  useEffect(() => {
-    if ($email) {
-      $setLoaded(true)
-    }
-  }, [$email, $setLoaded])
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
     const untouched = noEmail
@@ -54,6 +49,7 @@ export default function Login() {
     }
     return invalid || untouched
   }, [$email, $setError])
+
   const submit = useCallback(async () => {
     try {
       if (!$email) return
@@ -81,6 +77,16 @@ export default function Login() {
       $setError(e.message)
     }
   }, [$email, testInvalid])
+
+  useEffect(() => {
+    if ($email) {
+      $setLoaded(true)
+      if ($queryEmail) {
+        $email.setter($queryEmail)
+        submit()
+      }
+    }
+  }, [$email, $setLoaded, $queryEmail, submit])
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
