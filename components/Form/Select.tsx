@@ -25,6 +25,7 @@ export const Select = ({
   return (
     <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
       <select
+        className="appearance-none border-0 bg-select bg-no-repeat bg-right"
         onChange={e => {
           onChange(e)
           setTouched(true)

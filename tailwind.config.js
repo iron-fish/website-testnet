@@ -22,6 +22,9 @@ module.exports = {
       boxShadow: {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
       },
+      backgroundImage: () => ({
+        select: "url('/arrow_drop_down_black.png')",
+      }),
       colors: {
         alertyellow: {
           DEFAULT: '#FFF18A',
