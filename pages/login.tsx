@@ -4,6 +4,7 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import TextField from 'components/Form/TextField'
 import { useField } from 'hooks/useForm'
+import { useQuery } from 'hooks/useQuery'
 import { RawButton } from 'components/Button'
 import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
@@ -23,6 +24,10 @@ const FIELDS = {
 }
 
 export default function Login() {
+  const $queryEmail = useQuery('email')
+  if ($queryEmail) {
+    FIELDS.email.defaultValue = $queryEmail
+  }
   const [$error, $setError] = useState<string>(UNSET)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
