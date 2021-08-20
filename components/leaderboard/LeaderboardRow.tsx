@@ -2,47 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import FishAvatar from './FishAvatar'
-
-const fishAvatarColors = [
-  '#FFAFAF',
-  '#94ED6B',
-  '#A3E9FF',
-  '#7657CE',
-  '#E7B453',
-  '#54FF17',
-  '#1D4423',
-  '#D46161',
-  '#AFF1FF',
-  '#F1CB00',
-]
-
-// djb2 (xor)
-function getColor(graffiti: string): string {
-  let hash = 5381
-
-  for (let i = 0; i < graffiti.length; i++) {
-    hash = (hash * 33) ^ graffiti.charCodeAt(i)
-  }
-
-  return fishAvatarColors[(hash >>> 0) % fishAvatarColors.length]
-}
-
-// From https://stackoverflow.com/a/13627586
-function ordinalSuffix(num: number): string {
-  const j = num % 10
-  const k = num % 100
-
-  if (j === 1 && k !== 11) {
-    return `${num}st`
-  }
-  if (j == 2 && k != 12) {
-    return `${num}nd`
-  }
-  if (j == 3 && k != 13) {
-    return `${num}rd`
-  }
-  return `${num}th`
-}
+import { graffitiToColor, numberToOrdinal } from '../../utils'
 
 type Props = {
   id: number
@@ -52,8 +12,8 @@ type Props = {
 }
 
 function LeaderboardRow({ id, rank, graffiti, points }: Props) {
-  const avatarColor = getColor(graffiti)
-  const rankStr = ordinalSuffix(rank)
+  const avatarColor = graffitiToColor(graffiti)
+  const rankStr = numberToOrdinal(rank)
   const pointsStr = points.toLocaleString()
 
   return (

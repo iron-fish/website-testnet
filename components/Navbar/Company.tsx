@@ -8,7 +8,7 @@ function Company() {
   const elementClassName = `mr-2 lg:mr-4 p-2 lg:p-4`
   const textClassName = `ml-2 lg:ml-4`
   return (
-    <div className="absolute bg-white left-0 right-0 shadow-navbar">
+    <div className="absolute bg-white left-0 right-0 shadow-navbar z-10">
       <div className="flex flex-col items-center border-b border-t p-8 pb-10">
         <div>
           <div className="flex flex-col">
