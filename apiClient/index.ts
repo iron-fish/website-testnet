@@ -75,7 +75,7 @@ export type MetricsConfigResponse = {
 export async function listLeaderboard(): Promise<
   ListLeaderboardResponse | ApiError
 > {
-  const res = await fetch(`${API_URL}/users?order_by=total_points`)
+  const res = await fetch(`${API_URL}/users?order_by=rank`)
   return await res.json()
 }
 
