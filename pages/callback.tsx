@@ -7,8 +7,6 @@ const Callback = () => {
   useEffect(() => {
     const call = async () => {
       const res = await tokenLogin()
-      // eslint-disable-next-line no-console
-      console.log('TOKEN RES', res)
       if ('authenticated' in res) {
         Router.push('/')
       }
