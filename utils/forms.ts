@@ -8,7 +8,7 @@ export const validateEmail = (x: string) => {
 export const exists = (x: string) => x.trim().length > 0
 export const defaultErrorText = `This field is required`
 
-export function trigger(setter: Dispatch<SetStateAction<string>>) {
+export function setStateOnChange(setter: Dispatch<SetStateAction<string>>) {
   return (e: ChangeEvent) => {
     setter((e.target as HTMLInputElement).value)
   }

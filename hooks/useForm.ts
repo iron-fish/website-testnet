@@ -1,6 +1,6 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
-import { trigger } from 'utils/forms'
+import { setStateOnChange } from 'utils/forms'
 
 export interface NameValue {
   name: string
@@ -63,7 +63,7 @@ export function useField(provided: ProvidedField): Field | null {
       valid,
       setValid: $setValid,
       setter: $setter,
-      onChange: trigger($setter),
+      onChange: setStateOnChange($setter),
       onBlur: () => {
         $setTouched(true)
       },
