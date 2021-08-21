@@ -111,7 +111,7 @@ export default function Leaderboard({ users }: Props) {
               <div key={user.id} className="mb-3">
                 <LeaderboardRow
                   id={user.id}
-                  rank={i + 1}
+                  rank={user.rank}
                   graffiti={user.graffiti}
                   points={user.total_points}
                 />
