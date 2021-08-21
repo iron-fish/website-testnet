@@ -104,6 +104,7 @@ export async function getMetricsConfig(): Promise<
   const res = await fetch(`${API_URL}/metrics/config`)
   return await res.json()
 }
+
 export async function login(
   email: string
 ): Promise<ApiUser | ApiError | LocalError> {
