@@ -1,3 +1,4 @@
+import styles from './index.module.css'
 import { Dispatch, SetStateAction } from 'react'
 import { Field, NameValue } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
@@ -15,7 +16,7 @@ const RadioOptions = ({
   choice,
   setChoice,
 }: OptionsProps) => (
-  <div className="flex radio-group text-xs">
+  <div className={`flex ${styles.radioGroup} text-xs`}>
     {options.map(({ name, value }, idx) => {
       const checked = value === choice
       const activeClass = checked ? 'active' : 'inactive'
@@ -23,18 +24,18 @@ const RadioOptions = ({
         <label
           key={value}
           onClick={() => setChoice(value)}
-          className={`radio-option ${activeClass} mr-2`}
+          className={`${styles.radioOption} ${activeClass} mr-2`}
         >
           <input
-            className="radio-input"
+            className={styles.radioInput}
             type="radio"
             name={groupName}
             value={value}
             defaultChecked={checked}
             tabIndex={idx}
           />
-          <span className={`radio-fake ${activeClass}`} />
-          <span className={`radio-text`}>{name}</span>
+          <span className={`${styles.radioFake} ${activeClass}`} />
+          <span className={styles.radioText}>{name}</span>
         </label>
       )
     })}

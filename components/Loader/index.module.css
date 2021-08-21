@@ -1,0 +1,79 @@
+.fishScale {
+  left: calc(50% - 3rem);
+  transform: scale(0.4);
+}
+
+.ironfishLoader {
+  background-color: black;
+  clip-path: url(#fishclip);
+  width: 20rem;
+  height: 14rem;
+  display: flex;
+  margin: 0 auto;
+  animation: float 3.5s infinite ease;
+  transform-origin: 58% 42%;
+}
+.ironfishLoader::after {
+  /* background-color: var(--ifm-color-secondary); */
+  background-color: #FFA542;
+  height: 14rem;
+  width: 18rem;
+  content: '';
+  display: block;
+  animation: swipe 3.5s infinite ease-in;
+}
+
+.blackWhite::after {
+  background-color: white;
+}
+
+.blackGray::after {
+  background-color: #ECECEC;
+}
+
+.blackOrange::after {
+  background-color: #FFA542;
+}
+
+@keyframes float {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.25);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  75% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes swipe {
+  0% {
+    width: 0%;
+  }
+
+  25% {
+    width: 0%;
+  }
+
+  50% {
+    width: 100%;
+  }
+
+  75% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
