@@ -1,5 +1,6 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
+import { setStateOnChange } from 'utils/forms'
 
 export interface NameValue {
   name: string
@@ -18,6 +19,8 @@ export interface ProvidedField {
 }
 export interface Field extends ProvidedField {
   value: string
+  disabled: boolean
+  setDisabled: Dispatch<SetStateAction<boolean>>
   setter: Dispatch<SetStateAction<string>>
   setValid: Dispatch<SetStateAction<boolean>>
   onChange: (e: ChangeEvent) => void
@@ -33,6 +36,7 @@ export interface Field extends ProvidedField {
 
 export function useField(provided: ProvidedField): Field | null {
   const [$value, $setter] = useState<string>(provided.defaultValue)
+  // TODO: tried writing this with nullish coalescing but it yelled and I got tired
   const radioOption =
     provided &&
     provided.options &&
@@ -41,7 +45,7 @@ export function useField(provided: ProvidedField): Field | null {
   const [$choice, $setChoice] = useState<string>(
     provided.isRadioed && radioOption ? radioOption : ''
   )
-
+  const [$disabled, $setDisabled] = useState<boolean>(false)
   const [$valid, $setValid] = useState<boolean>(false)
   const [$touched, $setTouched] = useState<boolean>(false)
   const [$field, $setField] = useState<Field | null>(null)
@@ -52,14 +56,14 @@ export function useField(provided: ProvidedField): Field | null {
     $setValid(valid)
     $setField({
       ...provided,
+      disabled: $disabled,
+      setDisabled: $setDisabled,
       defaultValue,
       value: $value,
       valid,
       setValid: $setValid,
       setter: $setter,
-      onChange: (e: ChangeEvent) => {
-        $setter((e.target as HTMLInputElement).value)
-      },
+      onChange: setStateOnChange($setter),
       onBlur: () => {
         $setTouched(true)
       },
@@ -71,6 +75,8 @@ export function useField(provided: ProvidedField): Field | null {
       setChoice: $setChoice,
     })
   }, [
+    $disabled,
+    $setDisabled,
     provided,
     $value,
     $touched,
@@ -82,13 +88,3 @@ export function useField(provided: ProvidedField): Field | null {
   ])
   return $field
 }
-
-// export function useForm<T>(provided: ProvidedField<T>[]) {
-//   const [$fields, $setFields] = useState<MutableRefObject<Field<T> | null>[]>(
-//     []
-//   )
-//   useEffect(() => {
-//     $setFields(provided.map(p => useField(p)))
-//   }, [provided, $fields, $setFields])
-//   return [$fields, $setFields]
-// }

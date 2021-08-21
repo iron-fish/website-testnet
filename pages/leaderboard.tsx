@@ -1,13 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Button from '../components/Button'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import Search from '../components/icons/Search'
+import Button from 'components/Button'
+import Footer from 'components/Footer'
+import Navbar from 'components/Navbar'
+import Search from 'components/icons/Search'
 
-import * as API from '../apiClient'
-import LeaderboardRow from '../components/leaderboard/LeaderboardRow'
+import * as API from 'apiClient'
+import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 
 type Props = {
   users: ReadonlyArray<API.ApiUser>

@@ -3,7 +3,7 @@ import { FieldError } from './FieldStatus'
 
 interface LabelledRowProps {
   id: string
-  label: string
+  label?: string
   required?: boolean
   valid: boolean
   errorText?: string
@@ -12,7 +12,7 @@ interface LabelledRowProps {
 
 export const LabelledRow = ({
   id,
-  label,
+  label = '',
   children,
   valid,
   required = true,

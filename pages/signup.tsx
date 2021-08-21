@@ -1,24 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { CountryWithCode, countries } from '../data/countries'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import Note from '../components/signup/Note'
-import { FieldError } from '../components/signup/FieldStatus'
-import SignUpForm from '../components/signup/SignUpForm'
-import { createUser } from '../apiClient'
-import { useField } from '../hooks/useForm'
-import Loader from '../components/Loader'
-
-// naive validators
-const UNSET = ''
-const validateEmail = (x: string) => {
-  const dot = x.indexOf('.')
-  return x.indexOf('@') > 0 && dot > 0 && dot !== x.length - 1
-}
-const exists = (x: string) => x.trim().length > 0
-const defaultErrorText = `This field is required`
+import Loader from 'components/Loader'
+import Footer from 'components/Footer'
+import Navbar from 'components/Navbar'
+import Note from 'components/Form/Note'
+import { FieldError } from 'components/Form/FieldStatus'
+import SignUpForm from 'components/signup/SignUpForm'
+import { CountryWithCode, countries } from 'data/countries'
+import { createUser } from 'apiClient'
+import { useField } from 'hooks/useForm'
+import { scrollUp } from 'utils/scroll'
+import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
 const FIELDS = {
   email: {
@@ -74,16 +68,11 @@ export default function SignUp() {
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
-    if ($country) {
+    if ($country?.label) {
       $setLoaded(true)
     }
-  }, [$loaded, $setLoaded, $country])
-  const scrollUp = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  const testInvalid = () => {
+  }, [$setLoaded, $country])
+  const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
     const noSocial = !$social?.touched
@@ -107,8 +96,8 @@ export default function SignUp() {
       $setError(UNSET)
     }
     return invalid || untouched
-  }
-  const submit = async () => {
+  }, [$country, $email, $graffiti, $social])
+  const submit = useCallback(async () => {
     if (!$email || !$graffiti || !$social || !$country) return
     if (testInvalid()) return
     const email = $email?.value
@@ -132,10 +121,9 @@ export default function SignUp() {
       $setSignedUp(true)
       $setLoaded(true)
       scrollUp()
-      // eslint-disable-next-line no-console
-      console.log('RESULT', result)
+      Router.push(`/login?email=${email}&autoLogin=true`)
     }
-  }
+  }, [$email, $graffiti, $social, $country, testInvalid])
   const textFields = [$email, $graffiti, $social]
   return (
     <div className="min-h-screen flex flex-col">
