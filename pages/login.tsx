@@ -72,7 +72,7 @@ export default function Login() {
         $setError('' + result.message)
       } else {
         $setLoaded(true)
-        $setError('HEY GREAT')
+        $setError('Check your email')
       }
     } catch (e) {
       $setError(e.message)
