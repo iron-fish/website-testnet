@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Link from 'next/link'
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 

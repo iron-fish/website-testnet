@@ -1,0 +1,65 @@
+.radioGroup {
+  height: 2.5em;
+  margin-bottom: 0.5em;
+}
+.radioOption {
+  /* width: 6em; */
+  margin-left: 1.25em;
+  margin-right: 1.35em;
+  display: block;
+  position: relative;
+  text-align: right;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* hide the actual input */
+.radioOption .radioInput {
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+}
+/* custom pseudo-input */
+.radioFake {
+  position: absolute;
+  margin-left: -1.5em;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+}
+.radioOption:focus .radioInput ~ .radioFake,
+.radioInput:focus ~ .radioFake {
+  border: 1px dashed black;
+}
+/* appearance when checked */
+.radioOption .radioInput:checked ~ .radioFake {
+  background-color: white;
+}
+/* inner radio fake */
+.radioFake::after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+/* inner radio fake when checked */
+.radioOption .radioInput:checked ~ .radioFake::after {
+  display: block;
+}
+.radioOption .radioFake::after {
+  top: 2px;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: black;
+}
+.radioText {
+  /* position: absolute; */
+  /* right: 0; */
+}

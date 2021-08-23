@@ -5,7 +5,7 @@ function Testnet() {
   const elementClassName = `py-4 px-6`
   const textClassName = `ml-4`
   return (
-    <div className="absolute bg-white left-0 right-0 shadow-navbar z-10">
+    <div className="absolute bg-white left-0 right-0 shadow-navbar z-20">
       <div className="flex justify-center border-b border-t">
         <div className="flex justify-end border-r p-8 pb-10">
           <div style={{ maxWidth: '14rem' }}>

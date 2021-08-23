@@ -1,13 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Button from '../components/Button'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import Search from '../components/icons/Search'
+import Button from 'components/Button'
+import Footer from 'components/Footer'
+import Navbar from 'components/Navbar'
+import Search from 'components/icons/Search'
 
-import * as API from '../apiClient'
-import LeaderboardRow from '../components/leaderboard/LeaderboardRow'
+import * as API from 'apiClient'
+import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 
 type Props = {
   users: ReadonlyArray<API.ApiUser>
@@ -106,18 +106,16 @@ export default function Leaderboard({ users }: Props) {
             <div>TOTAL POINTS</div>
           </div>
 
-          {users.map((user, i) => {
-            return (
-              <div key={user.id} className="mb-3">
-                <LeaderboardRow
-                  id={user.id}
-                  rank={user.rank}
-                  graffiti={user.graffiti}
-                  points={user.total_points}
-                />
-              </div>
-            )
-          })}
+          {users.map(user => (
+            <div key={user.id} className="mb-3">
+              <LeaderboardRow
+                id={user.id}
+                rank={user.rank}
+                graffiti={user.graffiti}
+                points={user.total_points}
+              />
+            </div>
+          ))}
 
           <div className="mb-24"></div>
         </div>

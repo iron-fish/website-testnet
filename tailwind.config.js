@@ -3,8 +3,18 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      borderRadius: {
+        plus: '0.3125rem',
+      },
       spacing: {
+        px3: '0.1875rem',
         4.5: '1.125rem',
+      },
+      minHeight: {
+        section: '43rem',
+      },
+      maxWidth: {
+        section: '52.5rem',
       },
       minWidth: {
         6: '1.5rem',
@@ -13,6 +23,12 @@ module.exports = {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
       },
       colors: {
+        alertyellow: {
+          DEFAULT: '#FFF18A',
+        },
+        alertred: {
+          DEFAULT: '#F15929',
+        },
         ifbeige: {
           DEFAULT: '#FFF4E0',
         },

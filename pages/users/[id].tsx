@@ -2,14 +2,14 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-import Footer from '../../components/Footer'
-import Navbar from '../../components/Navbar'
-import OffsetBorderContainer from '../../components/OffsetBorderContainer'
-import FishAvatar from '../../components/user/FishAvatar'
-import Tabs from '../../components/user/Tabs'
+import Footer from 'components/Footer'
+import Navbar from 'components/Navbar'
+import OffsetBorderContainer from 'components/OffsetBorderContainer'
+import FishAvatar from 'components/user/FishAvatar'
+import Tabs from 'components/user/Tabs'
 
-import * as API from '../../apiClient'
-import { graffitiToColor, numberToOrdinal } from '../../utils'
+import * as API from 'apiClient'
+import { graffitiToColor, numberToOrdinal } from 'utils'
 
 type Props = {
   events: ReadonlyArray<API.ApiEvent>

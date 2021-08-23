@@ -3,46 +3,46 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "extended-regular";
-  src: url("/font/extendedregular/favoritextended-regular-webfont.eot");
-  src: url("/font/extendedregular/favoritextended-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/extendedregular/favoritextended-regular-webfont.woff2")
-      format("woff2"),
-    url("/font/extendedregular/favoritextended-regular-webfont.woff")
-      format("woff"),
-    url("/font/extendedregular/favoritextended-regular-webfont.ttf")
-      format("truetype"),
-    url("/font/extendedregular/favoritextended-regular-webfont.svg#_.book")
-      format("svg");
+  font-family: 'extended-regular';
+  src: url('/font/extendedregular/favoritextended-regular-webfont.eot');
+  src: url('/font/extendedregular/favoritextended-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/extendedregular/favoritextended-regular-webfont.woff2')
+      format('woff2'),
+    url('/font/extendedregular/favoritextended-regular-webfont.woff')
+      format('woff'),
+    url('/font/extendedregular/favoritextended-regular-webfont.ttf')
+      format('truetype'),
+    url('/font/extendedregular/favoritextended-regular-webfont.svg#_.book')
+      format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "mono-regular";
-  src: url("/font/monoregular/favoritmono-regular-webfont.eot");
-  src: url("/font/monoregular/favoritmono-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/monoregular/favoritmono-regular-webfont.woff2") format("woff2"),
-    url("/font/monoregular/favoritmono-regular-webfont.woff") format("woff"),
-    url("/font/monoregular/favoritmono-regular-webfont.ttf") format("truetype"),
-    url("/font/monoregular/favoritmono-regular-webfont.svg#_.book")
-      format("svg");
+  font-family: 'mono-regular';
+  src: url('/font/monoregular/favoritmono-regular-webfont.eot');
+  src: url('/font/monoregular/favoritmono-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/monoregular/favoritmono-regular-webfont.woff2') format('woff2'),
+    url('/font/monoregular/favoritmono-regular-webfont.woff') format('woff'),
+    url('/font/monoregular/favoritmono-regular-webfont.ttf') format('truetype'),
+    url('/font/monoregular/favoritmono-regular-webfont.svg#_.book')
+      format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "favorit-regular";
-  src: url("/font/regular/favorit-regular-webfont.eot");
-  src: url("/font/regular/favorit-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/font/regular/favorit-regular-webfont.woff2") format("woff2"),
-    url("/font/regular/favorit-regular-webfont.woff") format("woff"),
-    url("/font/regular/favorit-regular-webfont.ttf") format("truetype"),
-    url("/font/regular/favorit-regular-webfont.svg#_.book") format("svg");
+  font-family: 'favorit-regular';
+  src: url('/font/regular/favorit-regular-webfont.eot');
+  src: url('/font/regular/favorit-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/regular/favorit-regular-webfont.woff2') format('woff2'),
+    url('/font/regular/favorit-regular-webfont.woff') format('woff'),
+    url('/font/regular/favorit-regular-webfont.ttf') format('truetype'),
+    url('/font/regular/favorit-regular-webfont.svg#_.book') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -53,7 +53,7 @@
   --ifm-container-index-width: 1171px;
   --ifm-global-radius: 0.2rem;
   --ifm-background-color: #fff;
-  --ifm-font-family-base: favorit-regular, "Helvetica", sans-serif;
+  --ifm-font-family-base: favorit-regular, 'Helvetica', sans-serif;
   --ifm-font-size-base: 100%;
   --ifm-font-color-base-inverse: #000;
   --ifm-heading-color: #000;
@@ -118,7 +118,7 @@
   --ifm-pagination-nav-color-hover: transparent;
   --ifm-docs-column-margin-right: 55px;
 
-  --ifm-font-header-button: "extended-regular", "helvetica", sans-serif;
+  --ifm-font-header-button: 'extended-regular', 'helvetica', sans-serif;
   --ifm-large-container-horizontal-padding: 81px;
   --ifm-large-vertical-padding: 128px;
   --ifm-medium-vertical-padding: 64px;
@@ -138,6 +138,26 @@
   --ifm-blue-header-padding-top: 163px;
   --ifm-text-container-width: 820px;
   --ifm-navbar-sidebar-width: 100vw;
+}
+/* adding this class allows for the offset shadow appearance on the main sections */
+.offset-box {
+  border: 2px solid black;
+  position: relative;
+  transform-style: preserve-3d;
+  width: calc(100% - 26px);
+  transition: width 0.3s ease-out;
+}
+/* this is the magic part which necessitates it not being in tailwind */
+.offset-box::after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: calc(1.75rem + 2px);
+  border: 2px solid black;
+  transform: translateZ(-1px);
+  z-index: -1;
 }
 
 html,

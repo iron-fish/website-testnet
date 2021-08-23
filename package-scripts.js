@@ -6,5 +6,6 @@ module.exports = {
     lint: 'next lint',
     precommit: 'nps care',
     care: 'nps build lint',
+    dry: 'twly --boring --lines 3',
   },
 }

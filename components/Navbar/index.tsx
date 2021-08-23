@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-import Button from '../Button'
+import Button from 'components/Button'
+import Logo from 'components/Logo'
+import Close from 'components/icons/Close'
+import Menu from 'components/icons/Menu'
 import Company from './Company'
 import Testnet from './Testnet'
-import Logo from '../Logo'
-import Close from '../icons/Close'
-import Menu from '../icons/Menu'
 
 type NavbarProps = {
   className?: string
@@ -20,9 +20,9 @@ type NavbarFlyoutProps = {
 
 type NavbarLinksProps = {
   className?: string
-  companyClicked: () => unknown
+  companyClicked?: () => unknown
   companyVisible?: boolean
-  testnetClicked: () => unknown
+  testnetClicked?: () => unknown
   testnetVisible?: boolean
   selectedClassName?: string
 }
@@ -93,7 +93,7 @@ function NavbarLinks({
 function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
   return (
     <div
-      className={`absolute h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
+      className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
         !flyoutVisible ? '-translate-x-full' : ''
       }`}
     >
@@ -106,11 +106,7 @@ function NavbarFlyout({ flyoutVisible, closeFlyout }: NavbarFlyoutProps) {
             <Close />
           </button>
         </div>
-        <NavbarLinks
-          className="leading-relaxed text-4xl"
-          companyClicked={() => {}}
-          testnetClicked={() => {}}
-        />
+        <NavbarLinks className="leading-relaxed text-4xl" />
       </div>
     </div>
   )
