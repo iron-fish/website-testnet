@@ -18,6 +18,9 @@ const shortform = (name: string) => {
     .trim()
     .replace(/\s+/g, '-')
   const eq = equals(clean)
+  if (name === 'Virgin Islands (British)' || name === 'Virgin Islands (U.S.)') {
+    return name
+  }
   if (eq('united-states-of-america')) {
     return 'United States'
   }
