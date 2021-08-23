@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as API from '../../../apiClient'
+import * as API from 'apiClient'
 import AllTimeMetricCard from './AllTimeMetricCard'
 
 type AllTimeContentProps = {

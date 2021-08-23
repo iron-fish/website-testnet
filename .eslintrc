@@ -5,7 +5,7 @@
     "next",
     "next/core-web-vitals",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
   ],
   "rules": {
     "no-shadow": "off",
@@ -16,9 +16,10 @@
     "@typescript-eslint/no-unused-vars": [
       2,
       {
-        varsIgnorePattern: "^_",
-        argsIgnorePattern: "^_"
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
       }
-    ]
+    ],
+    "no-restricted-imports": ["error", { "patterns": ["\\.\\./.*"] }]
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import * as API from '../../../apiClient'
-import MetricCard from '../MetricCard'
-import { numberToOrdinal } from '../../../utils'
+import * as API from 'apiClient'
+import MetricCard from 'components/user/MetricCard'
+import { numberToOrdinal } from 'utils'
 
 type AllTimeMetricCardProps = {
   title: string

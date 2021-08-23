@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import FishAvatar from './FishAvatar'
-import { graffitiToColor, numberToOrdinal } from '../../utils'
+import { graffitiToColor, numberToOrdinal } from 'utils'
 
 type Props = {
   id: number

@@ -1,2 +1,6 @@
+export * from './forms'
 export * from './graffitiToColor'
+export * from './index'
+export * from './magic'
 export * from './numberToOrdinal'
+export * from './scroll'
