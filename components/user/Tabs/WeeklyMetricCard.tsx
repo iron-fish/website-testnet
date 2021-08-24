@@ -1,7 +1,7 @@
 import React from 'react'
 
-import * as API from '../../../apiClient'
-import MetricCard from '../MetricCard'
+import * as API from 'apiClient'
+import MetricCard from 'components/user/MetricCard'
 
 type WeeklyMetricCardProps = {
   title: string
