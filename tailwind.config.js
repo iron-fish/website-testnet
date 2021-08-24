@@ -22,6 +22,10 @@ module.exports = {
       boxShadow: {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
       },
+      transitionProperty: {
+        height: 'height',
+        width: 'width',
+      },
       colors: {
         alertyellow: {
           DEFAULT: '#FFF18A',

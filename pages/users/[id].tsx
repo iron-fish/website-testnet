@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
-import OffsetBorderContainer from 'components/OffsetBorderContainer'
+import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import FishAvatar from 'components/user/FishAvatar'
 import Tabs from 'components/user/Tabs'
 
