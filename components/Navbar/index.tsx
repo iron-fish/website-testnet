@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { RawButton } from 'components/Button'
 import Logo from 'components/Logo'
 import Close from 'components/icons/Close'
 import Menu from 'components/icons/Menu'
 
 import Company from './Company'
 import Testnet from './Testnet'
+import LoginButton from './LoginButton'
 
 type NavbarProps = {
   className?: string
@@ -78,14 +78,7 @@ function NavbarLinks({
           <span className={`${testnetVisible ? selectedClassName : ''}`} />
         </span>
       </button>
-      <RawButton
-        className="h-12 ml-4 py-3 px-6 text-center"
-        colorClassName="bg-transparent text-black hover:bg-black hover:text-white"
-      >
-        <Link href="/login">
-          <a>Login</a>
-        </Link>
-      </RawButton>
+      <LoginButton />
     </>
   )
 }
@@ -142,13 +135,13 @@ function Navbar({
         flyoutVisible={$flyoutVisible}
         closeFlyout={() => $setFlyoutVisible(false)}
       />
-      <div className="flex items-stretch justify-between px-3 lg:px-16">
+      <div className="flex items-stretch justify-between px-3 lg:px-10 lg2:px-16 max-w-menu m-auto">
         <div className="py-7">
           <Logo fill={fill} width={190} height={32}></Logo>
         </div>
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
-            className="md:px-1 lg:px-4.5 h-full flex items-center whitespace-nowrap"
+            className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
             companyVisible={companyVisible}
             companyClicked={() =>
               $setSubnavState(companyVisible ? null : 'company')

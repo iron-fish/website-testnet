@@ -1,30 +1,33 @@
+import styles from './index.module.css'
+
 type BreakpointProps = {
   left: number
+  label: string
 }
 
-const Breakpoint = ({ left }: BreakpointProps) => (
+const Breakpoint = ({ left, label }: BreakpointProps) => (
   <div
+    className={styles.breakpoint}
     style={{
-      position: 'fixed',
-      height: '100vh',
-      width: '1rem',
-      zIndex: 100,
-      top: '0',
       left,
-      borderLeft: '1px dashed lime',
-      opacity: '0.5',
-      cursor: 'crosshair',
     }}
+    data-label={label}
+    data-left={left}
   />
 )
+const points = [
+  { label: 'sm', left: 640 },
+  { label: 'md', left: 768 },
+  { label: 'lg', left: 1024 },
+  { label: 'xl', left: 1280 },
+  { label: '2xl', left: 1536 },
+]
 
 const Breakpoints = () => (
   <>
-    <Breakpoint left={760} />
-    <Breakpoint left={1024} />
-    <Breakpoint left={1152} />
-    <Breakpoint left={1440} />
-    <Breakpoint left={1700} />
+    {points.map(({ label, left }) => (
+      <Breakpoint key={label} left={left} label={label} />
+    ))}
   </>
 )
 

@@ -4,6 +4,18 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        lg2: '1152px',
+        xl: '1280px',
+        // custom
+        xl2: '1440px',
+        '2xl': '1536px',
+        // custom extra large
+        '3xl': '1700px',
+      },
       borderRadius: {
         plus: '0.3125rem',
       },
@@ -16,6 +28,7 @@ module.exports = {
       },
       maxWidth: {
         section: '52.5rem',
+        menu: '70rem',
       },
       minWidth: {
         6: '1.5rem',
@@ -26,6 +39,11 @@ module.exports = {
       transitionProperty: {
         height: 'height',
         width: 'width',
+        font: 'font-size',
+        padding: 'padding',
+      },
+      transitionDuration: {
+        fast: '0.3s',
       },
       colors: {
         alertyellow: {
