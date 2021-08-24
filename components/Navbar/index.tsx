@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 
-import Button from 'components/Button'
+import { RawButton } from 'components/Button'
 import Logo from 'components/Logo'
 import Close from 'components/icons/Close'
 import Menu from 'components/icons/Menu'
+
 import Company from './Company'
 import Testnet from './Testnet'
 
@@ -60,7 +61,6 @@ function NavbarLinks({
           <span className={`${companyVisible ? selectedClassName : ''}`} />
         </span>
       </button>
-      <span className={className}>|</span>
       <button onClick={testnetClicked} className={className}>
         <span
           className={`flex items-center h-full relative ${
@@ -78,14 +78,14 @@ function NavbarLinks({
           <span className={`${testnetVisible ? selectedClassName : ''}`} />
         </span>
       </button>
-      <Button
-        className="h-12 ml-4 py-3 px-6"
+      <RawButton
+        className="h-12 ml-4 py-3 px-6 text-center"
         colorClassName="bg-transparent text-black hover:bg-black hover:text-white"
       >
         <Link href="/login">
-          <a>Testnet Login</a>
+          <a>Login</a>
         </Link>
-      </Button>
+      </RawButton>
     </>
   )
 }
@@ -116,31 +116,31 @@ function Navbar({
   fill = 'white',
   className = 'bg-black text-white',
 }: NavbarProps) {
-  const [flyoutVisible, setFlyoutVisible] = React.useState(false)
-  const [subnavState, setSubnavState] = React.useState<
+  const [$flyoutVisible, $setFlyoutVisible] = React.useState(false)
+  const [$subnavState, $setSubnavState] = React.useState<
     null | 'testnet' | 'company'
   >(null)
 
-  const companyVisible = subnavState === 'company'
-  const testnetVisible = subnavState === 'testnet'
+  const companyVisible = $subnavState === 'company'
+  const testnetVisible = $subnavState === 'testnet'
 
   React.useEffect(() => {
-    if (flyoutVisible) {
+    if ($flyoutVisible) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'initial'
     }
-  }, [flyoutVisible])
+  }, [$flyoutVisible])
 
   return (
     <nav
       className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
-        subnavState !== null ? 'bg-white text-black' : className
+        $subnavState !== null ? 'bg-white text-black' : className
       }`}
     >
       <NavbarFlyout
-        flyoutVisible={flyoutVisible}
-        closeFlyout={() => setFlyoutVisible(false)}
+        flyoutVisible={$flyoutVisible}
+        closeFlyout={() => $setFlyoutVisible(false)}
       />
       <div className="flex items-stretch justify-between px-3 lg:px-16">
         <div className="py-7">
@@ -148,18 +148,18 @@ function Navbar({
         </div>
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
-            className="px-3 lg:px-4.5 h-full flex items-center whitespace-nowrap"
+            className="md:px-1 lg:px-4.5 h-full flex items-center whitespace-nowrap"
             companyVisible={companyVisible}
             companyClicked={() =>
-              setSubnavState(companyVisible ? null : 'company')
+              $setSubnavState(companyVisible ? null : 'company')
             }
             testnetVisible={testnetVisible}
             testnetClicked={() =>
-              setSubnavState(testnetVisible ? null : 'testnet')
+              $setSubnavState(testnetVisible ? null : 'testnet')
             }
           />
         </div>
-        <button className="md:hidden" onClick={() => setFlyoutVisible(true)}>
+        <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
           <Menu />
         </button>
       </div>
