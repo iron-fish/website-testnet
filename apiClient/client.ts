@@ -118,6 +118,14 @@ export async function login(
     })
     /* eslint-disable-next-line no-console */
     console.log({ didToken: token })
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line
+      /* @ts-ignore */
+      window.magic = magic
+      // eslint-disable-next-line
+      /* @ts-ignore */
+      window.token = token
+    }
     const call = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
