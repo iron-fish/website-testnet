@@ -1,6 +1,7 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -10,6 +11,7 @@ import Tabs from 'components/user/Tabs'
 
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
+import { countries, countryCode3to2 } from 'data/countries'
 
 type Props = {
   events: ReadonlyArray<API.ApiEvent>
@@ -90,6 +92,10 @@ export default function User({
     0
   )
 
+  const alpha2CountryCode = countryCode3to2(user.country_code)
+  const country = countries.find(c => c.code === user.country_code)
+  const shortCountryName = country ? country.name : user.country_code
+
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -130,9 +136,24 @@ export default function User({
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col items-center">
                 <FishAvatar color={avatarColor} />
-                <div>{user.country_code}</div>
+                <div className="mt-4">
+                  {alpha2CountryCode && (
+                    <div className="flex border border-black">
+                      <Image
+                        src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/${alpha2CountryCode.toLowerCase()}.svg`}
+                        alt={shortCountryName}
+                        className="border border-black"
+                        height={18}
+                        width={24}
+                        layout="fixed"
+                        title={shortCountryName}
+                      />
+                    </div>
+                  )}
+                  {!alpha2CountryCode && <span>{shortCountryName}</span>}
+                </div>
               </div>
             </div>
 
