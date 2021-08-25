@@ -116,6 +116,8 @@ export async function login(
       email,
       redirectURI: new URL('/callback', window.location.origin).href,
     })
+    /* eslint-disable-next-line no-console */
+    console.log({ didToken: token })
     const call = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
