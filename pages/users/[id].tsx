@@ -113,17 +113,17 @@ export default function User({
                 <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
                   <div>
                     <div>All Time Rank</div>
-                    <div className="text-3xl">{ordinalRank}</div>
+                    <div className="text-3xl mt-2">{ordinalRank}</div>
                   </div>
                   <div>
                     <div>Total Points</div>
-                    <div className="text-3xl">
+                    <div className="text-3xl mt-2">
                       {user.total_points.toLocaleString()}
                     </div>
                   </div>
                   <div>
                     <div>Weekly Points</div>
-                    <div className="text-3xl">
+                    <div className="text-3xl mt-2">
                       {weeklyMetrics.points.toLocaleString()} /{' '}
                       {totalWeeklyLimit.toLocaleString()}
                     </div>
