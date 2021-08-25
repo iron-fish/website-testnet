@@ -123,6 +123,7 @@ export async function login(
         Authorization: `Bearer ${token}`,
       },
     })
+    /* eslint-disable-next-line no-console */
     console.log({ call: call.json() })
     const res = await fetch(`/api/login`, {
       method: 'POST',

@@ -4,6 +4,7 @@ import useLogin from 'hooks/useLogin'
 
 export const LoginButton = () => {
   const $metadata = useLogin()
+  /* eslint-disable-next-line no-console */
   console.log({ $metadata })
   return (
     <Button
