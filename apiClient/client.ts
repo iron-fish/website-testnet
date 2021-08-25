@@ -124,7 +124,7 @@ export async function login(
       },
     })
     /* eslint-disable-next-line no-console */
-    console.log({ call: call.json() })
+    console.log({ call })
     const res = await fetch(`/api/login`, {
       method: 'POST',
       headers: {
