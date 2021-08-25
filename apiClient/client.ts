@@ -116,6 +116,14 @@ export async function login(
       email,
       redirectURI: new URL('/callback', window.location.origin).href,
     })
+    const call = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    console.log({ call: call.json() })
     const res = await fetch(`/api/login`, {
       method: 'POST',
       headers: {

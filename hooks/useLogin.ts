@@ -14,7 +14,7 @@ export function useLogin(redirect?: string) {
   useEffect(() => {
     const checkLoggedIn = async () => {
       // this is likely a case where we're working in not-the-browser
-      if (!magic || !magic.user) return
+      if ($metadata || !magic || !magic.user) return
 
       const loggedIn = await magic.user.isLoggedIn()
       if (loggedIn) {
@@ -25,7 +25,7 @@ export function useLogin(redirect?: string) {
       }
     }
     // ts is fine with this
-    checkLoggedIn()
+    if (!$metadata) checkLoggedIn()
   }, [$metadata, $setMetadata, redirect])
 
   return $metadata
