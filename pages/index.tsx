@@ -2,9 +2,11 @@ import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import useLogin from 'hooks/useLogin'
+import useNav from 'hooks/useNav'
 
 export default function Home() {
   const $metadata = useLogin()
+  const { hideNav } = useNav()
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -15,7 +17,11 @@ export default function Home() {
 
       <Navbar fill="black" className="bg-iforange text-black" />
 
-      <main className="bg-iforange flex-1">
+      <main
+        className="bg-iforange flex-1"
+        onMouseMove={hideNav}
+        onMouseOver={hideNav}
+      >
         <h1 className="text-2xl">
           {$metadata && $metadata.email
             ? `Welcome to Testnet, ${$metadata.email}!`
