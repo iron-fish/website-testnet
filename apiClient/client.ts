@@ -135,7 +135,7 @@ export async function login(email: string): Promise<any> {
     const data = await fetch(`${API_URL}/me`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     /* eslint-disable-next-line no-console */
