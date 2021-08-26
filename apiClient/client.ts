@@ -126,6 +126,7 @@ export async function login(
       /* @ts-ignore */
       window.token = token
     }
+    console.log(`Requesting ${API_URL}/login`)
     const call = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
@@ -142,7 +143,6 @@ export async function login(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      credentials: 'include',
     })
     return res.json()
   } catch (e) {
