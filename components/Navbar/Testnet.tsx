@@ -21,8 +21,8 @@ function Testnet({ condensed = false }: TestnetProps) {
         >
           <div
             className={`flex ${
-              condensed ? `justify-start p-4` : `justify-end border-r p-8`
-            } pb-10`}
+              condensed ? `justify-start p-4` : `justify-end border-r p-8 pb-10`
+            }`}
           >
             <div style={{ maxWidth: condensed ? undefined : '14rem' }}>
               <SectionHeader>IRON FISH CLI</SectionHeader>
