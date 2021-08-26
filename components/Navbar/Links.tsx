@@ -3,52 +3,9 @@ import Link from 'next/link'
 
 import SubnavButton from './SubnavButton'
 import LoginButton from './LoginButton'
-/*
-export type NavbarLinksProps = {
-  className?: string
-  toggleNavCompany?: () => unknown
-  toggleNavTestnet?: () => unknown
-  selectedClassName?: string
-}
+import Company from './Company'
+import Testnet from './Testnet'
 
-export function NavbarLinks({
-  className = '',
-  selectedClassName = 'absolute left-0 right-0 bottom-0 border-b-2 border-black',
-}: NavbarLinksProps) {
-  const {
-    isCompanyVisible,
-    isTestnetVisible,
-    toggleNavCompany,
-    toggleNavTestnet,
-  } = useNav()
-  const buttonStyles = { className, selectedClassName }
-
-  return (
-    <>
-      <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-        <a className={className}>Get Started</a>
-      </Link>
-      <Link href="https://ironfish.network/docs/whitepaper/1_introduction">
-        <a className={className}>Whitepaper</a>
-      </Link>
-      <SubnavButton
-        label="Company"
-        {...buttonStyles}
-        isVisible={isCompanyVisible()}
-        onMouseOver={toggleNavCompany}
-      />
-      <SubnavButton
-        label="Testnet"
-        {...buttonStyles}
-        isVisible={isTestnetVisible()}
-        onMouseOver={toggleNavTestnet}
-      />
-      <LoginButton />
-    </>
-  )
-}
-export default NavbarLinks
-   */
 type NavbarLinksProps = {
   className?: string
   companyClicked?: () => unknown
@@ -56,6 +13,7 @@ type NavbarLinksProps = {
   testnetClicked?: () => unknown
   testnetVisible?: boolean
   selectedClassName?: string
+  condensed?: boolean
 }
 
 export function NavbarLinks({
@@ -65,6 +23,7 @@ export function NavbarLinks({
   companyVisible = false,
   testnetClicked,
   testnetVisible = false,
+  condensed = false,
 }: NavbarLinksProps) {
   const buttonStyles = { className, selectedClassName }
   return (
@@ -79,14 +38,28 @@ export function NavbarLinks({
         label="Company"
         {...buttonStyles}
         isVisible={companyVisible}
-        onClick={companyClicked}
-      />
+        condensed
+        toggle={companyClicked}
+      >
+        {condensed && companyVisible && (
+          <div className="md:hidden">
+            <Company condensed />
+          </div>
+        )}
+      </SubnavButton>
       <SubnavButton
         label="Testnet"
         {...buttonStyles}
         isVisible={testnetVisible}
-        onClick={testnetClicked}
-      />
+        condensed
+        toggle={testnetClicked}
+      >
+        {condensed && testnetVisible && (
+          <div className="md:hidden">
+            <Testnet condensed />
+          </div>
+        )}
+      </SubnavButton>
       <LoginButton />
     </>
   )

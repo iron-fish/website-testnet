@@ -1,7 +1,11 @@
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 
-function Testnet() {
+type TestnetProps = {
+  condensed?: boolean
+}
+
+function Testnet({ condensed = false }: TestnetProps) {
   const elementClassName = `py-4 px-6`
   const textClassName = `ml-4`
   return (

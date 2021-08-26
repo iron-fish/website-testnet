@@ -3,7 +3,11 @@ import React from 'react'
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 
-function Company() {
+type CompanyProps = {
+  condensed?: boolean
+}
+
+function Company({ condensed = false }: CompanyProps) {
   const elementClassName = `mr-2 lg:mr-4 p-2 lg:p-4`
   const textClassName = `ml-2 lg:ml-4`
   return (

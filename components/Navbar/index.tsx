@@ -2,7 +2,7 @@ import React from 'react'
 
 import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
-import { useNav } from 'hooks/useNav'
+import { useNav, NavState } from 'hooks/useNav'
 
 import Company from './Company'
 import Testnet from './Testnet'
@@ -30,17 +30,23 @@ function Navbar({
   } = useNav()
   const companyVisible = isCompanyVisible()
   const testnetVisible = isTestnetVisible()
-
+  const navBarLinksProps = {
+    companyVisible,
+    companyClicked: toggleNavCompany,
+    testnetVisible,
+    testnetClicked: toggleNavTestnet,
+  }
   return (
     <nav
       className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
-        $subnavState !== null ? 'bg-white text-black' : className
+        $subnavState !== NavState.NONE ? 'bg-white text-black' : className
       }`}
       onMouseLeave={hideNav}
     >
       <NavbarFlyout
         flyoutVisible={$flyoutVisible}
         closeFlyout={() => $setFlyoutVisible(false)}
+        {...navBarLinksProps}
       />
       <div className="flex items-stretch justify-between px-3 lg:px-10 lg2:px-16 max-w-menu m-auto">
         <div className="py-7">
@@ -49,10 +55,8 @@ function Navbar({
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
             className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
-            companyVisible={companyVisible}
-            companyClicked={toggleNavCompany}
-            testnetVisible={testnetVisible}
-            testnetClicked={toggleNavTestnet}
+            condensed={false}
+            {...navBarLinksProps}
           />
         </div>
         <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
@@ -64,7 +68,7 @@ function Navbar({
           <Company />
         </div>
       ) : testnetVisible ? (
-        <div className="hidden md:flex">
+        <div className="hidden md:fle">
           <Testnet />
         </div>
       ) : null}

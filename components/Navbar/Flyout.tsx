@@ -5,12 +5,26 @@ import NavbarLinks from './Links'
 export type NavbarFlyoutProps = {
   flyoutVisible: boolean
   closeFlyout: () => unknown
+  companyClicked: () => unknown
+  testnetClicked: () => unknown
+  companyVisible: boolean
+  testnetVisible: boolean
 }
 
 export function NavbarFlyout({
   flyoutVisible,
   closeFlyout,
+  companyClicked,
+  testnetClicked,
+  companyVisible,
+  testnetVisible,
 }: NavbarFlyoutProps) {
+  const navbarLinksProps = {
+    companyClicked,
+    testnetClicked,
+    companyVisible,
+    testnetVisible,
+  }
   return (
     <div
       className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
@@ -26,7 +40,11 @@ export function NavbarFlyout({
             <Close />
           </button>
         </div>
-        <NavbarLinks className="leading-relaxed text-4xl" />
+        <NavbarLinks
+          className="leading-relaxed text-4xl"
+          condensed
+          {...navbarLinksProps}
+        />
       </div>
     </div>
   )
