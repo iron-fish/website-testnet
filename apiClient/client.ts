@@ -115,16 +115,6 @@ export async function login(email: string): Promise<any> {
       email,
       redirectURI: new URL('/callback', window.location.origin).href,
     })
-    /* eslint-disable-next-line no-console */
-    console.log({ didToken: token })
-    if (typeof window !== 'undefined') {
-      // eslint-disable-next-line
-      /* @ts-ignore */
-      window.magic = magic
-      // eslint-disable-next-line
-      /* @ts-ignore */
-      window.token = token
-    }
     const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
@@ -138,8 +128,6 @@ export async function login(email: string): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
     })
-    /* eslint-disable-next-line no-console */
-    console.log({ auth })
     return data.json()
   } catch (e) {
     return new LocalError(e.message, 500)

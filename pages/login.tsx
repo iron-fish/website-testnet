@@ -74,6 +74,8 @@ export default function Login() {
         $setLoaded(true)
         $setError('' + result.message)
       } else {
+        // eslint-disable-next-line
+        console.log({ result })
         $setLoaded(true)
         $setError('Check your email')
       }
