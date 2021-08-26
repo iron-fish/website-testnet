@@ -27,7 +27,7 @@ export function NavbarFlyout({
   }
   return (
     <div
-      className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu ${
+      className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu overflow-y-auto ${
         !flyoutVisible ? '-translate-x-full' : ''
       }`}
     >
