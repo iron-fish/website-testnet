@@ -140,7 +140,7 @@ export async function tokenLogin(): Promise<LoginEvent | LocalError> {
   }
   try {
     const token = await magic.auth.loginWithCredential()
-    const res = await fetch(`/api/login`, {
+    const res = await fetch(`${API_URL}/login`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
