@@ -105,9 +105,8 @@ export async function getMetricsConfig(): Promise<
   return await res.json()
 }
 
-export async function login(
-  email: string
-): Promise<ApiUser | ApiError | LocalError> {
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export async function login(email: string): Promise<any> {
   if (typeof window === 'undefined' || !magic) {
     return new LocalError('Only runnable in the browser', 500)
   }
@@ -126,23 +125,21 @@ export async function login(
       /* @ts-ignore */
       window.token = token
     }
-    const call = await fetch(`${API_URL}/login`, {
+    const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
-    /* eslint-disable-next-line no-console */
-    console.log({ call })
-    const res = await fetch(`/api/login`, {
+    const data = await fetch(`${API_URL}/me`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
-    return res.json()
+    return { auth: auth.json(), data: data.json() }
   } catch (e) {
     return new LocalError(e.message, 500)
   }
