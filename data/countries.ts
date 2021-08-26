@@ -1,4 +1,4 @@
-import { records, Alpha3Code, EnglishShortName } from 'iso-3166-1-ts'
+import { records, Alpha3Code, EnglishShortName, findByAlpha3 } from 'iso-3166-1-ts'
 
 export type Country = {
   alpha3: Alpha3Code
@@ -45,3 +45,7 @@ export const countries = records
     }
   })
   .sort((a: CountryWithCode, b: CountryWithCode) => (a.name > b.name ? 1 : -1))
+
+export const countryCode3to2 = (alpha3Code: string): string | undefined => {
+  return findByAlpha3(alpha3Code)?.alpha2
+}

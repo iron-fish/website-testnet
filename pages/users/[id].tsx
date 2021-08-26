@@ -6,6 +6,7 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import FishAvatar from 'components/user/FishAvatar'
+import Flag from 'components/user/Flag'
 import Tabs from 'components/user/Tabs'
 
 import * as API from 'apiClient'
@@ -130,9 +131,11 @@ export default function User({
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col items-center">
                 <FishAvatar color={avatarColor} />
-                <div>{user.country_code}</div>
+                <div className="mt-4">
+                  <Flag code={user.country_code} />
+                </div>
               </div>
             </div>
 
