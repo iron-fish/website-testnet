@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 
@@ -32,10 +34,12 @@ function Testnet({ condensed = false }: TestnetProps) {
                   An in-depth walkthrough of how to set up Iron Fish on your
                   machine.
                 </p>
-                <a className="flex font-favorit text-ifgray text-sm">
-                  <span>Read the walkthrough</span>
-                  <span className="ml-2">&#x203A;</span>
-                </a>
+                <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
+                  <a className="flex font-favorit text-ifgray text-sm">
+                    <span>Read the walkthrough</span>
+                    <span className="ml-2">&#x203A;</span>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
