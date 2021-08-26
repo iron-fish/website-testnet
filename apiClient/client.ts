@@ -136,7 +136,7 @@ export async function login(
       credentials: 'include',
     })
     /* eslint-disable-next-line no-console */
-    console.log({ call })
+    console.log('here', { call })
     const res = await fetch(`/api/login`, {
       method: 'POST',
       headers: {
