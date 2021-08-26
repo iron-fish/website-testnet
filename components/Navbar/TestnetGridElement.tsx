@@ -26,10 +26,12 @@ const TestnetGridElement = ({
     >
       <Cube className={cubeClassName} />
       <div className={`flex flex-col ${textClassName}`}>
-        <h5>{header}</h5>
+        <div className="flex flex-row">
+          <h5>{header}</h5>
+          <RightArrow className="absolute right-0 md:hidden" />
+        </div>
         <p className="font-favorit text-ifgray text-sm">{body}</p>
       </div>
-      <RightArrow className="absolute right-0  md:hidden" />
     </a>
   </Link>
 )

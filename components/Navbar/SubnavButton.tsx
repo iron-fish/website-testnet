@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import Disclosable from 'components/icons/Disclosable'
 
 export type SubnavButtonProps = {
   label: string
@@ -30,11 +31,11 @@ export const SubnavButton = ({
         >
           {label}
           <span
-            className={`ml-2 text-black ${
-              isVisible ? 'transform-gpu rotate-180' : ''
+            className={`ml-2 text-blacg transition-transform duration-500 ${
+              isVisible ? 'transform-gpu -rotate-180' : ''
             }`}
           >
-            ▾
+            <Disclosable className="w-6 md:w-4" />
           </span>
         </span>
       </button>

@@ -44,6 +44,7 @@ module.exports = {
         width: 'width',
         font: 'font-size',
         padding: 'padding',
+        transform: 'transform',
       },
       transitionDuration: {
         fast: '0.3s',
