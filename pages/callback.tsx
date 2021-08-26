@@ -9,9 +9,11 @@ const Callback = () => {
       // eslint-disable-next-line
       console.log({ res })
       if ('authenticated' in res) {
+        /*
         if (typeof window !== 'undefined') {
           window.close()
         }
+         */
       }
     }
     call()
