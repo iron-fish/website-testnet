@@ -133,12 +133,13 @@ export async function login(email: string): Promise<any> {
       },
     })
     const data = await fetch(`${API_URL}/me`, {
-      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     })
+    /* eslint-disable-next-line no-console */
+    console.log({ auth, data })
     return { auth: auth.json(), data: data.json() }
   } catch (e) {
     return new LocalError(e.message, 500)
