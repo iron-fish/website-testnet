@@ -1,10 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
 
 import Logo from 'components/Logo'
-import Close from 'components/icons/Close'
 import Menu from 'components/icons/Menu'
-import { useNav, NavState } from 'hooks/useNav'
+import { useNav } from 'hooks/useNav'
 
 import Company from './Company'
 import Testnet from './Testnet'
@@ -20,28 +18,25 @@ function Navbar({
   fill = 'white',
   className = 'bg-black text-white',
 }: NavbarProps) {
-  // const [$flyoutVisible, $setFlyoutVisible] = React.useState(false)
-  // const [$subnavState, $setSubnavState] = React.useState<
-  //   null | 'testnet' | 'company'
-  // >(null)
-
-  // React.useEffect(() => {
-  //   if ($flyoutVisible) {
-  //     document.body.style.overflow = 'hidden'
-  //   } else {
-  //     document.body.style.overflow = 'initial'
-  //   }
-  // }, [$flyoutVisible])
-  const { $flyoutVisible, $setFlyoutVisible, $subnavState, $setSubnavState } =
-    useNav()
-  const companyVisible = $subnavState === NavState.COMPANY
-  const testnetVisible = $subnavState === NavState.TESTNET
+  const {
+    isCompanyVisible,
+    isTestnetVisible,
+    $flyoutVisible,
+    $setFlyoutVisible,
+    $subnavState,
+    toggleNavCompany,
+    toggleNavTestnet,
+    hideNav,
+  } = useNav()
+  const companyVisible = isCompanyVisible()
+  const testnetVisible = isTestnetVisible()
 
   return (
     <nav
       className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
         $subnavState !== null ? 'bg-white text-black' : className
       }`}
+      onMouseLeave={hideNav}
     >
       <NavbarFlyout
         flyoutVisible={$flyoutVisible}
@@ -55,29 +50,24 @@ function Navbar({
           <NavbarLinks
             className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
             companyVisible={companyVisible}
-            companyClicked={() =>
-              $setSubnavState(companyVisible ? null : NavState.COMPANY)
-            }
+            companyClicked={toggleNavCompany}
             testnetVisible={testnetVisible}
-            testnetClicked={() =>
-              $setSubnavState(testnetVisible ? null : NavState.TESTNET)
-            }
+            testnetClicked={toggleNavTestnet}
           />
         </div>
         <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
           <Menu />
         </button>
       </div>
-      {companyVisible && (
+      {companyVisible ? (
         <div className="hidden md:flex">
           <Company />
         </div>
-      )}
-      {testnetVisible && (
+      ) : testnetVisible ? (
         <div className="hidden md:flex">
           <Testnet />
         </div>
-      )}
+      ) : null}
     </nav>
   )
 }

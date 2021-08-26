@@ -1,18 +1,21 @@
 import { useCallback, useEffect, useState } from 'react'
+// import { debounce } from 'throttle-debounce'
 
 export enum NavState {
+  NONE = 'hidden',
   COMPANY = 'company',
   TESTNET = 'testnet',
 }
 
 export function useNav() {
   const [$flyoutVisible, $setFlyoutVisible] = useState(false)
-  const [$subnavState, $setSubnavState] = useState<null | NavState>(null)
+  const [$subnavState, $setSubnavState] = useState<NavState>(NavState.NONE)
 
   const hideNav = useCallback(() => {
-    $setFlyoutVisible(false)
-    $setSubnavState(null)
-  }, [$setSubnavState, $setFlyoutVisible])
+    if ($subnavState !== NavState.NONE) {
+      $setSubnavState(NavState.NONE)
+    }
+  }, [$subnavState, $setSubnavState])
 
   useEffect(() => {
     if ($flyoutVisible) {

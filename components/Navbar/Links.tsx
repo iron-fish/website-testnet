@@ -1,7 +1,7 @@
 // import { useNav, NavState } from 'hooks/useNav'
 import Link from 'next/link'
 
-// import SubnavButton from './SubnavButton'
+import SubnavButton from './SubnavButton'
 import LoginButton from './LoginButton'
 /*
 export type NavbarLinksProps = {
@@ -66,6 +66,7 @@ export function NavbarLinks({
   testnetClicked,
   testnetVisible = false,
 }: NavbarLinksProps) {
+  const buttonStyles = { className, selectedClassName }
   return (
     <>
       <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
@@ -74,40 +75,18 @@ export function NavbarLinks({
       <Link href="https://ironfish.network/docs/whitepaper/1_introduction">
         <a className={className}>Whitepaper</a>
       </Link>
-      <button onClick={companyClicked} className={className}>
-        <span
-          className={`flex items-center h-full relative ${
-            companyVisible ? 'text-ifgray' : ''
-          }`}
-        >
-          Company
-          <span
-            className={`ml-2 text-black ${
-              companyVisible ? 'transform-gpu rotate-180' : ''
-            }`}
-          >
-            ▾
-          </span>
-          <span className={`${companyVisible ? selectedClassName : ''}`} />
-        </span>
-      </button>
-      <button onClick={testnetClicked} className={className}>
-        <span
-          className={`flex items-center h-full relative ${
-            testnetVisible ? 'text-ifgray' : ''
-          }`}
-        >
-          Testnet
-          <span
-            className={`ml-2 text-black ${
-              testnetVisible ? 'transform-gpu rotate-180' : ''
-            }`}
-          >
-            ▾
-          </span>
-          <span className={`${testnetVisible ? selectedClassName : ''}`} />
-        </span>
-      </button>
+      <SubnavButton
+        label="Company"
+        {...buttonStyles}
+        isVisible={companyVisible}
+        onClick={companyClicked}
+      />
+      <SubnavButton
+        label="Testnet"
+        {...buttonStyles}
+        isVisible={testnetVisible}
+        onClick={testnetClicked}
+      />
       <LoginButton />
     </>
   )

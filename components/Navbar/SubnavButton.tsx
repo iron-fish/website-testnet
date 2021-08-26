@@ -3,17 +3,17 @@ export type SubnavButtonProps = {
   className?: string
   // selectedClassName: string
   isVisible: boolean
-  onMouseOver?: () => unknown
+  onClick?: () => unknown
 }
 
 export const SubnavButton = ({
   label,
   isVisible,
-  onMouseOver,
+  onClick,
   className,
 }: // selectedClassName,
 SubnavButtonProps) => (
-  <button onMouseOver={onMouseOver} className={className}>
+  <button onMouseEnter={onClick} className={className}>
     <span
       className={`flex items-center justify-between h-full relative ${
         isVisible ? 'text-ifgray' : ''

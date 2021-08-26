@@ -17,11 +17,7 @@ export default function Home() {
 
       <Navbar fill="black" className="bg-iforange text-black" />
 
-      <main
-        className="bg-iforange flex-1"
-        onMouseMove={hideNav}
-        onMouseOver={hideNav}
-      >
+      <main className="bg-iforange flex-1">
         <h1 className="text-2xl">
           {$metadata && $metadata.email
             ? `Welcome to Testnet, ${$metadata.email}!`
