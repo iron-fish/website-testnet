@@ -20,9 +20,6 @@ export const SubnavButton = ({
   const eventedProps = condensed
     ? { onClick: toggle }
     : { onMouseEnter: toggle }
-  if (!condensed) {
-    console.log({ eventedProps, label })
-  }
   return (
     <>
       <button {...eventedProps} className={className}>

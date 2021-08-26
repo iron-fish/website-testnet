@@ -23,6 +23,9 @@ module.exports = {
         px3: '0.1875rem',
         4.5: '1.125rem',
       },
+      inset: {
+        5.5: '88px',
+      },
       minHeight: {
         section: '43rem',
       },

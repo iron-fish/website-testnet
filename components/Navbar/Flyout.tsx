@@ -41,8 +41,8 @@ export function NavbarFlyout({
           </button>
         </div>
         <NavbarLinks
-          className="leading-relaxed text-4xl"
           condensed
+          className="leading-relaxed text-4xl"
           {...navbarLinksProps}
         />
       </div>

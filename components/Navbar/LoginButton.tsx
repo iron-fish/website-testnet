@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import Button from 'components/Button'
-import useLogin from 'hooks/useLogin'
 
 export const LoginButton = () => {
-  const $metadata = useLogin()
   return (
     <Button
       className="h-12 ml-4 py-3 px-6 text-center"

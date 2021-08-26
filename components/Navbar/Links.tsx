@@ -23,7 +23,7 @@ export function NavbarLinks({
   companyVisible = false,
   testnetClicked,
   testnetVisible = false,
-  condensed = false,
+  condensed,
 }: NavbarLinksProps) {
   const buttonStyles = { className, selectedClassName }
   return (
@@ -38,27 +38,19 @@ export function NavbarLinks({
         label="Company"
         {...buttonStyles}
         isVisible={companyVisible}
-        condensed
         toggle={companyClicked}
+        condensed={condensed}
       >
-        {condensed && companyVisible && (
-          <div className="md:hidden">
-            <Company condensed />
-          </div>
-        )}
+        {companyVisible && <Company condensed={condensed} />}
       </SubnavButton>
       <SubnavButton
         label="Testnet"
         {...buttonStyles}
         isVisible={testnetVisible}
-        condensed
         toggle={testnetClicked}
+        condensed={condensed}
       >
-        {condensed && testnetVisible && (
-          <div className="md:hidden">
-            <Testnet condensed />
-          </div>
-        )}
+        {testnetVisible && <Testnet condensed={condensed} />}
       </SubnavButton>
       <LoginButton />
     </>

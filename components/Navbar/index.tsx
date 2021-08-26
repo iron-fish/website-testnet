@@ -4,8 +4,6 @@ import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
 import { useNav, NavState } from 'hooks/useNav'
 
-import Company from './Company'
-import Testnet from './Testnet'
 import NavbarLinks from './Links'
 import NavbarFlyout from './Flyout'
 
@@ -41,7 +39,11 @@ function Navbar({
       className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
         $subnavState !== NavState.NONE ? 'bg-white text-black' : className
       }`}
-      onMouseLeave={hideNav}
+      onMouseLeave={() => {
+        if (!$flyoutVisible) {
+          hideNav()
+        }
+      }}
     >
       <NavbarFlyout
         flyoutVisible={$flyoutVisible}
@@ -55,7 +57,6 @@ function Navbar({
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
             className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
-            condensed={false}
             {...navBarLinksProps}
           />
         </div>
@@ -63,15 +64,6 @@ function Navbar({
           <Menu />
         </button>
       </div>
-      {companyVisible ? (
-        <div className="hidden md:flex">
-          <Company />
-        </div>
-      ) : testnetVisible ? (
-        <div className="hidden md:fle">
-          <Testnet />
-        </div>
-      ) : null}
     </nav>
   )
 }
