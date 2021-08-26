@@ -142,6 +142,7 @@ export async function login(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
+      credentials: 'include',
     })
     return res.json()
   } catch (e) {
