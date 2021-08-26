@@ -132,6 +132,7 @@ export async function login(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
+      credentials: 'include',
     })
     /* eslint-disable-next-line no-console */
     console.log({ call })
