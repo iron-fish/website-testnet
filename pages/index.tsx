@@ -2,11 +2,9 @@ import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import useLogin from 'hooks/useLogin'
-import useNav from 'hooks/useNav'
 
 export default function Home() {
   const $metadata = useLogin()
-  const { hideNav } = useNav()
   return (
     <div className="min-h-screen flex flex-col">
       <Head>

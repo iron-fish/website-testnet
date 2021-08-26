@@ -36,13 +36,19 @@ export function useNav() {
   )
 
   const toggleNavCompany = useCallback(
-    () => $setSubnavState(isCompanyVisible() ? null : NavState.COMPANY),
-    [$setSubnavState, isCompanyVisible]
+    () =>
+      $setSubnavState(
+        $subnavState === NavState.COMPANY ? NavState.NONE : NavState.COMPANY
+      ),
+    [$setSubnavState, $subnavState]
   )
 
   const toggleNavTestnet = useCallback(
-    () => $setSubnavState(isTestnetVisible() ? null : NavState.TESTNET),
-    [$setSubnavState, isTestnetVisible]
+    () =>
+      $setSubnavState(
+        $subnavState === NavState.TESTNET ? NavState.NONE : NavState.TESTNET
+      ),
+    [$setSubnavState, $subnavState]
   )
 
   return {
