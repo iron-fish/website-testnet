@@ -122,13 +122,15 @@ export async function login(email: string): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
     })
-    const data = await fetch(`${API_URL}/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return data.json()
+    if (auth) {
+      const data = await fetch(`${API_URL}/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      return data.json()
+    }
   } catch (e) {
     return new LocalError(e.message, 500)
   }

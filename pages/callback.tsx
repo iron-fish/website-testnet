@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Router from 'next/router'
 import Loader from 'components/Loader'
 import { tokenLogin } from 'apiClient/client'
 
@@ -8,7 +7,9 @@ const Callback = () => {
     const call = async () => {
       const res = await tokenLogin()
       if ('authenticated' in res) {
-        Router.push('/')
+        if (typeof window !== 'undefined') {
+          window.close()
+        }
       }
     }
     call()
