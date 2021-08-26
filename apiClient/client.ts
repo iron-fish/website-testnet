@@ -139,8 +139,8 @@ export async function login(email: string): Promise<any> {
       },
     })
     /* eslint-disable-next-line no-console */
-    console.log({ auth, data })
-    return { auth: auth.json(), data: data.json() }
+    console.log({ auth })
+    return data.json()
   } catch (e) {
     return new LocalError(e.message, 500)
   }
