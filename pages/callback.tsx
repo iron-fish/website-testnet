@@ -6,6 +6,8 @@ const Callback = () => {
   useEffect(() => {
     const call = async () => {
       const res = await tokenLogin()
+      // eslint-disable-next-line
+      console.log({ res })
       if ('authenticated' in res) {
         if (typeof window !== 'undefined') {
           window.close()
