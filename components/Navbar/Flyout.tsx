@@ -32,7 +32,7 @@ export function NavbarFlyout({
       } md:hidden`}
     >
       <div className="flex flex-col px-5 max-w-xl mx-auto">
-        <div className="flex my-10 justify-between items-center">
+        <div className="flex mt-7 mb-10 justify-between items-center">
           <div>
             <Logo fill="black" width={190} height={32} />
           </div>
