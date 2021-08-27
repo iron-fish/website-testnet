@@ -41,7 +41,7 @@ export const SubnavButton = ({
       </button>
       {children}
       {condensed && label === 'Testnet' && !children && (
-        <div className="w-full h-4" />
+        <div className="w-full h-12" />
       )}
     </>
   )

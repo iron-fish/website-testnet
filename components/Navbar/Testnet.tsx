@@ -43,7 +43,7 @@ function Testnet({ condensed = false }: TestnetProps) {
               </div>
             </div>
           </div>
-          <div className={`flex ${condensed ? 'p-4' : 'p-8 pl-14'} pb-4`}>
+          <div className={`flex ${condensed ? 'p-4' : 'p-8 pl-14'} pb-12`}>
             <div className={condensed ? 'w-full' : ''}>
               <SectionHeader>INCENTIVIZED TESTNET</SectionHeader>
               <div
