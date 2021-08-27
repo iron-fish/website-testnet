@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
+import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
+import { getUserDetails } from 'apiClient/client'
 
 // reusable magic login context
 // MagicUserMetadata takes the form of:
@@ -9,7 +11,12 @@ import { magic, MagicUserMetadata } from 'utils/magic'
 
 // const $metadata = useLogin('/go-somewhere-if-it-does-not-work')
 export function useLogin(redirect?: string) {
-  const [$metadata, $setMetadata] = useState<MagicUserMetadata | null>(null)
+  const [$error, $setError] = useState<ApiError | LocalError | null>(null)
+  const [$magicMetadata, $setMagicMetadata] =
+    useState<MagicUserMetadata | null>(null)
+  const [$metadata, $setMetadata] = useState<
+    ApiUserMetadata | LocalError | null
+  >(null)
   // ts hates useEffect(async () => {})
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -18,7 +25,14 @@ export function useLogin(redirect?: string) {
 
       const loggedIn = await magic.user.isLoggedIn()
       if (loggedIn) {
-        $setMetadata(await magic.user.getMetadata())
+        $setMagicMetadata(await magic.user.getMetadata())
+        const token = await magic.user.getIdToken()
+        const details = await getUserDetails(token)
+        if ('error' in details) {
+          $setError(details)
+        } else {
+          $setMetadata(details)
+        }
       } else if (typeof redirect === 'string') {
         // if redirect string is provided and we're not logged in, cya!
         Router.push(redirect)
@@ -28,7 +42,7 @@ export function useLogin(redirect?: string) {
     if (!$metadata) checkLoggedIn()
   }, [$metadata, $setMetadata, redirect])
 
-  return $metadata
+  return { metadata: $metadata, magicMetadata: $magicMetadata, error: $error }
 }
 
 export default useLogin

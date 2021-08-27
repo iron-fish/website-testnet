@@ -68,3 +68,17 @@ export type MetricsConfigResponse = {
     [key in EventType]: number
   }
 }
+
+export type ApiUserMetadata = {
+  id: number
+  created_at: string
+  updated_at: string
+  email: string
+  graffiti: string
+  total_points: number
+  country_code: string
+  email_notifications: boolean
+  last_login_at: string
+  discord: string
+  telegram: string
+}
