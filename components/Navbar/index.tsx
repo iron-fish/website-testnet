@@ -56,7 +56,7 @@ function Navbar({
         </div>
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks
-            className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
+            className="px-1.5 lg:px-3 h-full flex items-center whitespace-nowrap transition-font duration-300 transition-padding"
             {...navBarLinksProps}
           />
         </div>
