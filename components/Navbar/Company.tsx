@@ -21,7 +21,7 @@ function Company({ condensed = false }: CompanyProps) {
             condensed
               ? 'w-full items-start p-2'
               : 'border-b border-t items-center p-8'
-          } pb-10`}
+          }`}
         >
           <div className={condensed ? 'w-full' : ''}>
             <div className={`flex flex-col ${condensed ? 'w-full' : ''}`}>
