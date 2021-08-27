@@ -10,7 +10,9 @@ const Callback = () => {
       console.log({ res })
       if ('authenticated' in res) {
         if (typeof window !== 'undefined') {
-          window.close()
+          // eslint-disable-next-line
+          // @ts-ignore
+          open(location, '_self').close()
         }
       }
     }
