@@ -123,6 +123,8 @@ export async function login(email: string): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
     })
+    // eslint-disable-next-line
+    console.log({ auth })
     return auth.json()
   } catch (e) {
     return new LocalError(e.message, 500)
