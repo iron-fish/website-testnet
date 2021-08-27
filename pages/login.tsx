@@ -69,12 +69,10 @@ export default function Login() {
         const error = '' + user.message
         $setLoaded(true)
         $setError(error)
-      } else if (user && 'statusCode' in user && user.statusCode !== 200) {
+      } else if (user && 'status' in user && user.status !== 200) {
         $setLoaded(true)
         $setError('' + user.message)
       } else {
-        // eslint-disable-next-line
-        console.log({ user })
         $setLoaded(true)
         Router.push(`/users/${user.id}`)
       }
