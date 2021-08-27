@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-import Router from 'next/router'
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -62,19 +61,21 @@ export default function Login() {
       $setLoaded(false)
       const email = $email?.value
 
-      const user = await login(email)
-      // eslint-disable-next-line
-      console.log('USER?', user)
-      if ('error' in user) {
-        const error = '' + user.message
+      const result = await login(email)
+      if ('error' in result) {
+        const error = '' + result.message
         $setLoaded(true)
         $setError(error)
-      } else if (user && 'status' in user && user.status !== 200) {
+      } else if (
+        result &&
+        'statusCode' in result &&
+        result.statusCode !== 200
+      ) {
         $setLoaded(true)
-        $setError('' + user.message)
+        $setError('' + result.message)
       } else {
         $setLoaded(true)
-        Router.push(`/users/${user.id}`)
+        $setError('Check your email')
       }
     } catch (e) {
       $setError(e.message)
