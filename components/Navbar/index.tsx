@@ -23,15 +23,19 @@ function Navbar({
     $setFlyoutVisible,
     $subnavState,
     toggleNavCompany,
+    enterNavCompany,
     toggleNavTestnet,
+    enterNavTestnet,
     hideNav,
   } = useNav()
   const companyVisible = isCompanyVisible()
   const testnetVisible = isTestnetVisible()
   const navBarLinksProps = {
     companyVisible,
+    companyHovered: enterNavCompany,
     companyClicked: toggleNavCompany,
     testnetVisible,
+    testnetHovered: enterNavTestnet,
     testnetClicked: toggleNavTestnet,
   }
   return (

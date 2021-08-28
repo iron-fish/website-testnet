@@ -8,8 +8,10 @@ import Testnet from './Testnet'
 type NavbarLinksProps = {
   className?: string
   companyClicked?: () => unknown
+  companyHovered?: () => unknown
   companyVisible?: boolean
   testnetClicked?: () => unknown
+  testnetHovered?: () => unknown
   testnetVisible?: boolean
   selectedClassName?: string
   condensed?: boolean
@@ -19,8 +21,10 @@ export function NavbarLinks({
   className = '',
   selectedClassName = 'absolute left-0 right-0 bottom-0 border-b-2 border-black',
   companyClicked,
+  companyHovered,
   companyVisible = false,
   testnetClicked,
+  testnetHovered,
   testnetVisible = false,
   condensed,
 }: NavbarLinksProps) {
@@ -38,6 +42,7 @@ export function NavbarLinks({
         {...buttonStyles}
         isVisible={companyVisible}
         toggle={companyClicked}
+        enter={companyHovered}
         condensed={condensed}
       >
         {companyVisible && <Company condensed={condensed} />}
@@ -47,6 +52,7 @@ export function NavbarLinks({
         {...buttonStyles}
         isVisible={testnetVisible}
         toggle={testnetClicked}
+        enter={testnetHovered}
         condensed={condensed}
       >
         {testnetVisible && <Testnet condensed={condensed} />}

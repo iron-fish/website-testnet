@@ -41,6 +41,11 @@ export function useNav() {
       ),
     [$setSubnavState, $subnavState]
   )
+  const enterNavCompany = useCallback(() => {
+    if ($subnavState !== NavState.COMPANY) {
+      $setSubnavState(NavState.COMPANY)
+    }
+  }, [$setSubnavState, $subnavState])
 
   const toggleNavTestnet = useCallback(
     () =>
@@ -49,6 +54,11 @@ export function useNav() {
       ),
     [$setSubnavState, $subnavState]
   )
+  const enterNavTestnet = useCallback(() => {
+    if ($subnavState !== NavState.TESTNET) {
+      $setSubnavState(NavState.TESTNET)
+    }
+  }, [$setSubnavState, $subnavState])
 
   return {
     $flyoutVisible,
@@ -57,7 +67,9 @@ export function useNav() {
     $setSubnavState,
     hideNav,
     toggleNavCompany,
+    enterNavCompany,
     toggleNavTestnet,
+    enterNavTestnet,
     isTestnetVisible,
     isCompanyVisible,
   }

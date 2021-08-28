@@ -6,6 +6,7 @@ export type SubnavButtonProps = {
   className?: string
   isVisible: boolean
   toggle?: () => unknown
+  enter?: () => unknown
   children?: ReactNode
   condensed?: boolean
 }
@@ -14,13 +15,12 @@ export const SubnavButton = ({
   label,
   isVisible,
   toggle,
+  enter,
   className,
   children,
   condensed = false,
 }: SubnavButtonProps) => {
-  const eventedProps = condensed
-    ? { onClick: toggle }
-    : { onMouseEnter: toggle }
+  const eventedProps = condensed ? { onClick: toggle } : { onMouseEnter: enter }
   return (
     <>
       <button {...eventedProps} className={className}>
