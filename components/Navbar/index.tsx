@@ -50,7 +50,7 @@ function Navbar({
         closeFlyout={() => $setFlyoutVisible(false)}
         {...navBarLinksProps}
       />
-      <div className="flex items-stretch justify-between px-3 lg:px-10 lg2:px-16 max-w-menu m-auto">
+      <div className="flex items-stretch justify-between px-3 lg:px-10 2lg:px-16 max-w-menu m-auto">
         <div className="py-7">
           <Logo fill={fill} width={190} height={32}></Logo>
         </div>

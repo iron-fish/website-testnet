@@ -5,16 +5,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        lg2: '1152px',
-        xl: '1280px',
-        // custom
-        xl2: '1440px',
-        '2xl': '1536px',
-        // custom extra large
-        '3xl': '1700px',
+        '2lg': '1152px',
       },
       borderRadius: {
         plus: '0.3125rem',
