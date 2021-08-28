@@ -31,7 +31,7 @@ export const SubnavButton = ({
         >
           {label}
           <span
-            className={`ml-2 text-blacg transition-transform duration-500 ${
+            className={`ml-2 transition-transform duration-500 ${
               isVisible ? 'transform-gpu -rotate-180' : ''
             }`}
           >

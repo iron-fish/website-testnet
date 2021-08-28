@@ -6,10 +6,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Create an `.env.local` file:
+Create an `.env.local` file. You can copy the existing template (`cp .env.template .env.local`)
 
 ```
-API_URL=<insert Iron Fish API URL here>
+NEXT_PUBLIC_API_URL=https://ironfish-api-staging.herokuapp.com
+API_URL=https://ironfish-api-staging.herokuapp.com
+# NEXT_PUBLIC_API_URL=http://localhost:8003
+# API_URL=http://localhost:8003
+NEXT_PUBLIC_API_KEY=test
+NEXT_PUBLIC_MAGIC_SECRET_KEY=test
 ```
 
 Then, run the development server:
