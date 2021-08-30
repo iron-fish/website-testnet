@@ -20,7 +20,7 @@ export const BackToTop = ({ visibleAfter = 280 }) => {
   }, [$setVisibility, visibleAfter])
   return (
     <div
-      className={`fixed flex cursor-pointer right-12 bottom-96 z-10 transition-opacity duration-300 ${
+      className={`hidden fixed md:flex cursor-pointer right-12 bottom-96 z-10 transition-opacity duration-300 ${
         $visible
           ? 'opacity-100 pointer-events-auto'
           : 'opacity-0 pointer-events-none'
