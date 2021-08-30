@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        '2lg': '1152px',
+      },
       borderRadius: {
         plus: '0.3125rem',
       },
@@ -11,11 +14,15 @@ module.exports = {
         px3: '0.1875rem',
         4.5: '1.125rem',
       },
+      inset: {
+        5.5: '88px',
+      },
       minHeight: {
         section: '43rem',
       },
       maxWidth: {
         section: '52.5rem',
+        menu: '70rem',
       },
       minWidth: {
         6: '1.5rem',
@@ -26,6 +33,12 @@ module.exports = {
       transitionProperty: {
         height: 'height',
         width: 'width',
+        font: 'font-size',
+        padding: 'padding',
+        transform: 'transform',
+      },
+      transitionDuration: {
+        fast: '0.3s',
       },
       colors: {
         alertyellow: {
