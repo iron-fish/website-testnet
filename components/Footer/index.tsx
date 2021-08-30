@@ -27,7 +27,7 @@ const LinksBlock = ({ title, links }: Props) => {
 
 function Footer() {
   return (
-    <footer className="font-extended border-t text-ifblue">
+    <footer className="font-extended border-t text-ifblue z-50 relative bg-white">
       <div className="px-0 md:px-12">
         <div className="flex flex-col md:flex-row w-52 md:w-full m-auto justify-between py-14">
           <div className="mt-1">

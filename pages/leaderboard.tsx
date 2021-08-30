@@ -7,6 +7,7 @@ import Button from 'components/Button'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Search from 'components/icons/Search'
+import BackToTop from 'components/BackToTop'
 
 import * as API from 'apiClient'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
@@ -40,6 +41,7 @@ export default function Leaderboard({ users }: Props) {
 
       <Navbar fill="black" className="bg-ifpink text-black" />
 
+      <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
         <div className="w-2/3">
           <h1 className="text-center text-6xl mt-24 mb-8 font-extended">
@@ -125,7 +127,6 @@ export default function Leaderboard({ users }: Props) {
           <div className="mb-24"></div>
         </div>
       </main>
-
       <Footer />
     </div>
   )
