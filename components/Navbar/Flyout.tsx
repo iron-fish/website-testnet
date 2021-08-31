@@ -28,7 +28,7 @@ export function NavbarFlyout({
   return (
     <div
       className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu overflow-y-auto pb-6 ${
-        !flyoutVisible ? '-translate-x-full' : ''
+        !flyoutVisible ? '-translate-x-full' : 'pb-16'
       } md:hidden`}
     >
       <div className="flex flex-col px-5 max-w-xl mx-auto">
