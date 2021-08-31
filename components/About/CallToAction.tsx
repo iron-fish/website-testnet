@@ -26,7 +26,7 @@ export const CallToAction = ({
 }: CTAProps) => {
   const button = ctaText ? (
     <RawButton
-      border=""
+      border="border"
       className="m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
       colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
     >

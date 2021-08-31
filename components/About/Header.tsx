@@ -5,9 +5,7 @@ type AboutProps = {
   className?: string
 }
 export const AboutHeader = ({ className, children }: AboutProps) => (
-  <h2
-    className={`text-2xl mt-24 mb-8 font-extended  md:text-3xl lg:text-4xl ${className}`}
-  >
+  <h2 className={`text-4xl mt-24 mb-8 font-extended lg:text-5xl ${className}`}>
     {children}
   </h2>
 )
