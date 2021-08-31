@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import Head from 'next/head'
 import Img from 'next/image'
 
@@ -11,6 +13,21 @@ import { BasicLink } from 'components/About/Link'
 import { AboutHeader } from 'components/About/Header'
 import { renderColumn } from 'components/About/CallToAction'
 import { NFTCard } from 'components/About/NFTCard'
+import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
+
+type ArrowButtonProps = {
+  children: ReactNode
+  onClick: () => unknown
+}
+
+const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
+  <div
+    className="border rounded-full w-12 h-12 border-black flex items-center justify-center hover:bg-ifpink cursor-pointer m-2"
+    onClick={onClick}
+  >
+    {children}
+  </div>
+)
 
 const cards = [
   {
@@ -125,6 +142,40 @@ const callsToAction = {
   ],
 }
 export default function About() {
+  const [$cardScroll, $setCardScroll] = useState<number>(0)
+  const [$scrollWidth, $setScrollWidth] = useState<number>(0)
+  const $cards = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const reportWindowSize = () => {
+      $setScrollWidth(window.innerWidth)
+      $setCardScroll(0)
+      if ($cards && $cards.current) {
+        $cards.current.scrollTo({ left: 0, behavior: 'smooth' })
+      }
+    }
+    reportWindowSize()
+    window.addEventListener('resize', reportWindowSize)
+    return () => window.removeEventListener('resize', reportWindowSize)
+  }, [$setScrollWidth, $setCardScroll, $cards])
+  const scrollLeft = useCallback(() => {
+    const left = $cardScroll - Math.round($scrollWidth * 0.75)
+    if ($cards && $cards.current && $cards.current.scrollWidth) {
+      const start = left >= 0 ? left : 0
+      $setCardScroll(start)
+      $cards.current.scrollTo({ left: start, behavior: 'smooth' })
+    }
+  }, [$setCardScroll, $cardScroll, $cards, $scrollWidth])
+  const scrollRight = useCallback(() => {
+    const right = $cardScroll + Math.round($scrollWidth * 0.75)
+    if ($cards && $cards.current && $cards.current.scrollWidth) {
+      const scrollWidth = $cards.current.scrollWidth || 0
+      if (scrollWidth && right) {
+        const end = right <= scrollWidth ? right : scrollWidth
+        $setCardScroll(end)
+        $cards.current.scrollTo({ left: end, behavior: 'smooth' })
+      }
+    }
+  }, [$setCardScroll, $cardScroll, $cards, $scrollWidth])
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -181,11 +232,25 @@ export default function About() {
           <AboutHeader className="text-center w-full">
             Win a Category, win an NFT!
           </AboutHeader>
+          <p className="text-center max-w-lg m-auto text-justify mb-14">
+            At the end of the testnet if you’re the leader in any of the
+            categories mentioned above, you’ll not only earn extra points as a
+            prize, but also an Iron Fish NFT. Filter the leaderboard to see
+            category leaders.
+          </p>
         </div>
-        <div className="flex flex-row w-full">
+        <div className="flex flex-row w-full overflow-x-hidden" ref={$cards}>
           {cards.map(nft => (
             <NFTCard key={nft.title} {...nft} />
           ))}
+        </div>
+        <div className="m-auto flex mt-4">
+          <ArrowButton onClick={scrollLeft}>
+            <ArrowLeft />
+          </ArrowButton>
+          <ArrowButton onClick={scrollRight}>
+            <ArrowRight />
+          </ArrowButton>
         </div>
         <div className="mb-24"></div>
       </main>

@@ -15,7 +15,7 @@ export const NFTCard = ({ title, content, pic }: NFTProps) => {
       <Box>
         <div
           className="p-2 flex flex-col justify-between content-between"
-          style={{ minHeight: '34rem' }}
+          style={{ minHeight: '36rem' }}
         >
           <strong className="uppercase">NFT Reward</strong>
           <h4 className="py-3 font-extended text-3xl">{title}</h4>
