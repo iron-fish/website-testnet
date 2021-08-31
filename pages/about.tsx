@@ -122,8 +122,7 @@ const guidelines = {
     },
     {
       title: 'Lost Work',
-      content:
-        'Work will be logged hourly. In the event of a technical problem or reorg some of your work may be lost and will not reflect in your reward.',
+      content: `Work will be logged hourly. In the event of a technical problem or reorg some of your work may be lost and will not reflect in your reward. If you sign up after you've mined, points will not be assigned retroactively.`,
       behind: 'ifpink',
     },
     {
@@ -251,8 +250,10 @@ export default function About() {
           <p className="text-justify text-lg md:text-center md:text-2xl mb-8 font-favorit">
             Sign up for our incentivized testnet to participate in various
             activities that will earn you points which you can reedem for $IRON
-            - our privacy coin. The sooner you are to signup, the longer you’ll
-            have to earn points!
+            - our privacy coin.
+            <div className="block bg-ifpink p-2 w-full mt-2">
+              The sooner you sign up, the longer you’ll have to earn points!
+            </div>
           </p>
           <RawButton className="m-auto w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Get Incentivized
