@@ -142,13 +142,11 @@ const callsToAction = {
   ],
 }
 export default function About() {
-  const [$cardScroll, $setCardScroll] = useState<number>(0)
   const [$scrollWidth, $setScrollWidth] = useState<number>(0)
   const $cards = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const reportWindowSize = () => {
       $setScrollWidth(window.innerWidth)
-      $setCardScroll(0)
       if ($cards && $cards.current) {
         $cards.current.scrollTo({ left: 0, behavior: 'smooth' })
       }
@@ -156,26 +154,24 @@ export default function About() {
     reportWindowSize()
     window.addEventListener('resize', reportWindowSize)
     return () => window.removeEventListener('resize', reportWindowSize)
-  }, [$setScrollWidth, $setCardScroll, $cards])
+  }, [$setScrollWidth, $cards])
   const scrollLeft = useCallback(() => {
-    const left = $cardScroll - Math.round($scrollWidth * 0.75)
     if ($cards && $cards.current && $cards.current.scrollWidth) {
+      const left = $cards.current.scrollLeft - Math.round($scrollWidth * 0.75)
       const start = left >= 0 ? left : 0
-      $setCardScroll(start)
       $cards.current.scrollTo({ left: start, behavior: 'smooth' })
     }
-  }, [$setCardScroll, $cardScroll, $cards, $scrollWidth])
+  }, [$cards, $scrollWidth])
   const scrollRight = useCallback(() => {
-    const right = $cardScroll + Math.round($scrollWidth * 0.75)
     if ($cards && $cards.current && $cards.current.scrollWidth) {
-      const scrollWidth = $cards.current.scrollWidth || 0
-      if (scrollWidth && right) {
-        const end = right <= scrollWidth ? right : scrollWidth
-        $setCardScroll(end)
+      const furthest = $cards.current.scrollWidth || 0
+      const right = $cards.current.scrollLeft + Math.round($scrollWidth * 0.75)
+      if (furthest && right) {
+        const end = right <= furthest ? right : furthest
         $cards.current.scrollTo({ left: end, behavior: 'smooth' })
       }
     }
-  }, [$setCardScroll, $cardScroll, $cards, $scrollWidth])
+  }, [$cards, $scrollWidth])
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -239,7 +235,7 @@ export default function About() {
             category leaders.
           </p>
         </div>
-        <div className="flex flex-row w-full overflow-x-hidden" ref={$cards}>
+        <div className="flex flex-row w-full overflow-x-auto" ref={$cards}>
           {cards.map(nft => (
             <NFTCard key={nft.title} {...nft} />
           ))}

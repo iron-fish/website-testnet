@@ -12,7 +12,7 @@ export const NFTCard = ({ title, content, pic }: NFTProps) => {
       className="mx-2 block min-w-card-sm md:min-w-card-md lg:min-w-card-lg"
       style={{ maxWidth: '22rem' }}
     >
-      <Box>
+      <Box behind="white">
         <div
           className="p-2 flex flex-col justify-between content-between"
           style={{ minHeight: '36rem' }}
