@@ -135,11 +135,11 @@ export default function SignUp() {
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">
-        <div className="md:w-4/5 w-full max-w-section my-16 mx-auto transition-width">
+        <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
           <OffsetBorderContainer>
             <div
               style={{ minHeight: '43rem', maxWidth: '53.5rem' }}
-              className="flex flex-col m-auto h-auto items-center mt-8 px-5 pb-16"
+              className="flex flex-col m-auto h-auto items-center mt-8 px-5 pb-2"
             >
               {!$loaded ? (
                 <Loader />
