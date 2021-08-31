@@ -4,12 +4,14 @@ type ButtonProps = {
   colorClassName?: string
   className?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
+  border?: string
 }
 export const RawButton: FC<ButtonProps> = ({
   children,
   className = '',
   onClick,
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
+  border = '-2',
 }) => {
   return (
     <button
@@ -22,7 +24,7 @@ export const RawButton: FC<ButtonProps> = ({
         whitespace-nowrap
         transition
         border-black
-        border-2
+        border${border}
         ${colorClassName}
         ${className}
     `}
