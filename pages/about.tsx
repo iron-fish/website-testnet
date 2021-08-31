@@ -8,66 +8,72 @@ import { Box } from 'components/OffsetBorder/Box'
 
 type CTAProps = {
   title: string
-  children: ReactNode
+  content?: string
+  children?: ReactNode
   kind?: string
   earn?: number
   points?: string[]
   ctaText?: string
 }
 
-const callsToAction = [
-  {
-    title: `Mining the testnet`,
-    content:
-      'Actively mining our testnet earns you points for blocks that you mine.',
-    points: ['1 block = 10 points', 'Mine 100 blocks a week'],
-    ctaText: 'Install Iron Fish',
-  },
-  {
-    title: 'Finding Bugs',
-    content:
-      'Do so by providing a detailed account of your bug on our discord channel.',
-    points: ['1 bug = 100 points', 'Report up to 10 bugs a week'],
-    ctaText: 'Document Bugs',
-  },
+const callsToAction = {
+  columnOne: [
+    {
+      title: 'Finding Bugs',
+      content:
+        'Do so by providing a detailed account of your bug on our discord channel.',
+      points: ['1 bug = 100 points', 'Report up to 10 bugs a week'],
+      ctaText: 'Document Bugs',
+    },
 
-  {
-    title: 'Promoting the Testnet',
-    content: 'Tweets, blogs, poems, you name it; you’ll earn points from them.',
-    points: ['1 Promotion = 10 points', 'Make 100 promotions a week'],
-    ctaText: 'Talk about us',
-  },
-  {
-    title: 'Submit a Pull Request',
-    content: 'Submit a PR to be reviewed by one of our teammates.',
-    points: ['Points commensurate with quality of PR'],
-    ctaText: 'Write some code',
-  },
-  {
-    title: 'Being an Explorer',
-    content:
-      'The Explorer category is a way for our team to award participants who have made significant contributions to the testnet that don’t fall within a defined category. These are subjective considerations made by the Iron Fish team.',
-    earn: 0,
-  },
-  {
-    title: 'Contributing to the Community',
-    content:
-      'Contributing to the community means helping us make our testnet more accessible to a wider audience. For example, translating our getting started doc to another language is a great way to make Iron Fish more accessible.',
-    points: [
-      'Points commensurate with quality of contribution.',
-      'Email us before submitting your contribution so we can help you',
-    ],
-    ctaText: 'Contribute Today',
-  },
+    {
+      title: 'Contributing to the Community',
+      content:
+        'Contributing to the community means helping us make our testnet more accessible to a wider audience. For example, translating our getting started doc to another language is a great way to make Iron Fish more accessible.',
+      points: [
+        'Points commensurate with quality of contribution.',
+        'Email us before submitting your contribution so we can help you',
+      ],
+      ctaText: 'Contribute Today',
+    },
+    {
+      title: 'Being an Explorer',
+      content:
+        'The Explorer category is a way for our team to award participants who have made significant contributions to the testnet that don’t fall within a defined category. These are subjective considerations made by the Iron Fish team.',
+      earn: 0,
+    },
+  ],
+  columnTwo: [
+    {
+      title: `Mining the testnet`,
+      content:
+        'Actively mining our testnet earns you points for blocks that you mine.',
+      points: ['1 block = 10 points', 'Mine 100 blocks a week'],
+      ctaText: 'Install Iron Fish',
+    },
+    {
+      title: 'Promoting the Testnet',
+      content:
+        'Tweets, blogs, poems, you name it; you’ll earn points from them.',
+      points: ['1 Promotion = 10 points', 'Make 100 promotions a week'],
+      ctaText: 'Talk about us',
+    },
+    {
+      title: 'Submit a Pull Request',
+      content: 'Submit a PR to be reviewed by one of our teammates.',
+      points: ['Points commensurate with quality of PR'],
+      ctaText: 'Write some code',
+    },
 
-  {
-    title: 'More Categories',
-    content:
-      'As our incentivized testnet grows we will inevitably add categories to it. If you have any great suggestions on what we could add, please reach out on Discord.',
-    earn: 0,
-    kind: 'coming soon',
-  },
-]
+    {
+      title: 'More Categories',
+      content:
+        'As our incentivized testnet grows we will inevitably add categories to it. If you have any great suggestions on what we could add, please reach out on Discord.',
+      earn: 0,
+      kind: 'coming soon',
+    },
+  ],
+}
 
 const EarnBox = ({
   children,
@@ -77,7 +83,7 @@ const EarnBox = ({
   earn = 1000,
   ctaText,
 }: CTAProps) => (
-  <div className="mb-3 w-full even:lg:-mt-44 odd:lg:mr-3 even:lg:-mr-8 odd:lg:-ml-4 lg:w-1/2">
+  <div className="mb-3">
     <Box behind="ifpink">
       <div className="m-4 pb-2" style={{ minHeight: '20rem' }}>
         <strong className="uppercase">{kind}</strong>
@@ -104,7 +110,7 @@ const EarnBox = ({
         {ctaText && (
           <RawButton
             border=""
-            className="m-auto w-full mt-8 max-w-md mb-2 text-lg p-3"
+            className="m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
             colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
           >
             {ctaText}
@@ -113,6 +119,12 @@ const EarnBox = ({
       </div>
     </Box>
   </div>
+)
+
+const renderColumn = ({ title, content, ...ctaProps }: CTAProps) => (
+  <EarnBox title={title} key={title} {...ctaProps}>
+    {content}
+  </EarnBox>
 )
 
 export default function Leaderboard() {
@@ -144,12 +156,13 @@ export default function Leaderboard() {
           <h2 className="text-left text-4xl mt-24 mb-8 font-extended md:w-1/2 md:text-5xl ">
             Participation Categories
           </h2>
-          <div className="flex column flex-wrap md:row">
-            {callsToAction.map(({ title, content, ...ctaProps }) => (
-              <EarnBox title={title} key={title} {...ctaProps}>
-                {content}
-              </EarnBox>
-            ))}
+          <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col w-full lg:w-1/2 lg:mr-2">
+              {callsToAction.columnOne.map(renderColumn)}
+            </div>
+            <div className="flex flex-col w-full lg:w-1/2 lg:ml-1 lg:-mt-32">
+              {callsToAction.columnTwo.map(renderColumn)}
+            </div>
           </div>
           <div className="mb-24"></div>
         </div>
