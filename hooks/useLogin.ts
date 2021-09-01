@@ -18,18 +18,17 @@ export function useLogin(redirect?: string) {
   // ts hates useEffect(async () => {})
   useEffect(() => {
     const checkLoggedIn = async () => {
-      // this is likely a case where we're working in not-the-browser
       if ($metadata || !magic || !magic.user) return
 
-      const loggedIn = await magic.user.isLoggedIn()
+      const token = await magic.user.getIdToken()
       // eslint-disable-next-line
-      console.log({ loggedIn })
-      if (loggedIn) {
-        $setMagicMetadata(await magic.user.getMetadata())
-        const token = await magic.user.getIdToken()
+      console.log({ token })
+      if (token) {
+        const mmeta = await magic.user.getMetadata()
+        $setMagicMetadata(mmeta)
         const details = await getUserDetails(token)
         // eslint-disable-next-line
-        console.log({ token, details })
+        console.log({ token, details, mmeta })
         if ('error' in details) {
           $setError(details)
         }
@@ -37,9 +36,9 @@ export function useLogin(redirect?: string) {
         // if redirect string is provided and we're not logged in, cya!
         Router.push(redirect)
       }
+      // ts is fine with this
+      if (!$metadata) checkLoggedIn()
     }
-    // ts is fine with this
-    if (!$metadata) checkLoggedIn()
   }, [$metadata, $setMetadata, redirect])
 
   return { metadata: $metadata, magicMetadata: $magicMetadata, error: $error }
