@@ -232,6 +232,7 @@ export default function About() {
       }
     }
   }, [$cards, $scrollWidth])
+  const highlight = 'block bg-ifpink p-2 w-full mt-2'
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -250,11 +251,11 @@ export default function About() {
           <p className="text-justify text-lg md:text-center md:text-2xl mb-8 font-favorit">
             Sign up for our incentivized testnet to participate in various
             activities that will earn you points which you can reedem for $IRON
-            - our privacy coin.
-            <div className="block bg-ifpink p-2 w-full mt-2">
-              The sooner you sign up, the longer you’ll have to earn points!
-            </div>
+            &mdash; our privacy coin.
           </p>
+          <div className={highlight}>
+            The sooner you sign up, the longer you’ll have to earn points!
+          </div>
           <RawButton className="m-auto w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Get Incentivized
           </RawButton>
