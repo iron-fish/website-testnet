@@ -14,9 +14,7 @@ export function useLogin(redirect?: string) {
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
     useState<MagicUserMetadata | null>(null)
-  const [$metadata, $setMetadata] = useState<
-    ApiUserMetadata | LocalError | null
-  >(null)
+  const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
   // ts hates useEffect(async () => {})
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -30,8 +28,6 @@ export function useLogin(redirect?: string) {
         const details = await getUserDetails(token)
         if ('error' in details) {
           $setError(details)
-        } else {
-          $setMetadata(details)
         }
       } else if (typeof redirect === 'string') {
         // if redirect string is provided and we're not logged in, cya!
