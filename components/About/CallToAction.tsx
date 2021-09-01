@@ -35,7 +35,7 @@ export const CallToAction = ({
   ) : null
   return (
     <div className="mb-3">
-      <Box behind="ifpink">
+      <Box behind="bg-ifpink">
         <div className="m-4 pb-2">
           <strong className="uppercase">{kind}</strong>
           <h3 className="text-left text-2xl md:text-3xl mt-3 mb-4 font-extended">

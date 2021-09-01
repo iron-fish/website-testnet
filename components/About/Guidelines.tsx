@@ -8,7 +8,7 @@ type GuidelineProps = {
 
 export const Guideline = ({ content, title, behind }: GuidelineProps) => (
   <div className="mb-3">
-    <Box behind={behind} background="iforange">
+    <Box behind={behind} background="bg-iforange">
       <div className="m-4 pb-2">
         <h3 className="text-left text-xl md:text-2xl mt-3 mb-4 font-extended">
           {title}

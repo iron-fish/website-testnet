@@ -54,19 +54,19 @@ export const guidelines = {
       title: 'Mining',
       content:
         'Miners must enter their private key to be eligible for reward. AML/KYC check may be required depending on reward amount.',
-      behind: 'white',
+      behind: 'bg-white',
     },
     {
       title: 'Maintenance',
       content:
         'Iron Fish might restart the chain regularly for development purposes. Your score will be saved before a restart happens.',
-      behind: 'ifpink',
+      behind: 'bg-ifpink',
     },
     {
       title: 'Unforeseeable',
       content:
         'In the unlikely event that legal or regulatory issues arise, rewards may be restructured, postponed, or even cancelled.',
-      behind: 'white',
+      behind: 'bg-white',
     },
   ],
   columnTwo: [
@@ -74,24 +74,24 @@ export const guidelines = {
       title: 'Rewards',
       content:
         'Rewards will be encoded into the genesis block and vest linearly over 6 months after mainnet launch.',
-      behind: 'ifpink',
+      behind: 'bg-ifpink',
     },
     {
       title: 'Blocks',
       content:
         'Scores will be calculated in $ORE. Blocks that are mined but not added to the chain won’t be counted.',
-      behind: 'white',
+      behind: 'bg-white',
     },
     {
       title: 'Lost Work',
       content: `Work will be logged hourly. In the event of a technical problem or reorg some of your work may be lost and will not reflect in your reward. If you sign up after you've mined, points will not be assigned retroactively.`,
-      behind: 'ifpink',
+      behind: 'bg-ifpink',
     },
     {
       title: 'Weekly Cycles',
       content:
         'The Monday to Sunday cycles in which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, that category can no longer earn that participant points until the following week when the cycle has reset.',
-      behind: 'white',
+      behind: 'bg-white',
     },
   ],
 }
