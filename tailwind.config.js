@@ -26,6 +26,9 @@ module.exports = {
       },
       minWidth: {
         6: '1.5rem',
+        'card-sm': '66.66%',
+        'card-md': '46%',
+        'card-lg': '26.57%',
       },
       boxShadow: {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
