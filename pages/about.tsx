@@ -232,7 +232,6 @@ export default function About() {
       }
     }
   }, [$cards, $scrollWidth])
-  const highlight = 'block bg-ifpink p-2 w-full mt-2'
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -253,8 +252,10 @@ export default function About() {
             activities that will earn you points which you can reedem for $IRON
             &mdash; our privacy coin.
           </p>
-          <div className={highlight}>
-            The sooner you sign up, the longer you’ll have to earn points!
+          <div className="flex mt-2">
+            <div className="text-center bg-ifpink p-2 text-lg rounded m-auto">
+              The sooner you sign up, the longer you’ll have to earn points!
+            </div>
           </div>
           <RawButton className="m-auto w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Get Incentivized
