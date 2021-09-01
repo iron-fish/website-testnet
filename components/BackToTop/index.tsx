@@ -27,7 +27,7 @@ export const BackToTop = ({ visibleAfter = 280 }) => {
       }`}
       onClick={() => scrollUp()}
     >
-      <Box background="ifpink">
+      <Box background="bg-ifpink">
         <div className="w-16 h-16 flex items-center justify-center">
           <UpArrow />
         </div>
