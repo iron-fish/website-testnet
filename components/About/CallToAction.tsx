@@ -53,9 +53,7 @@ export const CallToAction = ({
           )}
           {earn > 0 && (
             <div className="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md">
-              Earn up to{' '}
-              {earn.toLocaleString('en-US', { minimumFractionDigits: 0 })}{' '}
-              points a week
+              Earn up to {earn.toLocaleString('en-US')} points a week
             </div>
           )}
           {ctaText && href && button ? (
