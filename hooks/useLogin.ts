@@ -21,14 +21,15 @@ export function useLogin(redirect?: string) {
       // this is likely a case where we're working in not-the-browser
       if ($metadata || !magic || !magic.user) return
 
-      const loggedIn = await magic.user.isLoggedIn()
-      if (loggedIn) {
-        $setMagicMetadata(await magic.user.getMetadata())
-        const token = await magic.user.getIdToken()
-        const details = await getUserDetails(token)
-        if ('error' in details) {
-          $setError(details)
+      const ping = await getUserDetails()
+      // eslint-disable-next-line
+      console.log({ ping })
+      if (ping) {
+        if ('error' in ping) {
+          $setError(ping)
         }
+        // $setMagicMetadata(await magic.user.getMetadata())
+        // const token = await magic.user.getIdToken()
       } else if (typeof redirect === 'string') {
         // if redirect string is provided and we're not logged in, cya!
         Router.push(redirect)

@@ -131,14 +131,13 @@ export async function login(email: string): Promise<any> {
   }
 }
 
-export async function getUserDetails(
-  token: string
-): Promise<ApiUserMetadata | ApiError | LocalError> {
+export async function getUserDetails(): Promise<
+  ApiUserMetadata | ApiError | LocalError
+> {
   try {
     const data = await fetch(`${API_URL}/me`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
     })
     return data.json()
