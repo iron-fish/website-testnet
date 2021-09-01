@@ -27,7 +27,7 @@ export function NavbarFlyout({
   }
   return (
     <div
-      className={`absolute z-20 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu overflow-y-auto ${
+      className={`absolute z-50 h-screen w-screen bg-white text-black font-extended transition-all transform-gpu overflow-y-auto ${
         !flyoutVisible ? '-translate-x-full pb-6' : 'pb-32'
       } md:hidden`}
     >
