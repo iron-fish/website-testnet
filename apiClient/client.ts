@@ -123,7 +123,9 @@ export async function login(email: string): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
     })
-    return auth.json()
+    if (auth) {
+      return { statusCode: 200, loaded: true }
+    }
   } catch (e) {
     return new LocalError(e.message, 500)
   }
