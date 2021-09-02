@@ -123,6 +123,8 @@ export async function login(
         Authorization: `Bearer ${token}`,
       },
     })
+    // eslint-disable-next-line
+    console.log({ res })
     return res.json()
   } catch (e) {
     return new LocalError(e.message, 500)
@@ -141,6 +143,8 @@ export async function tokenLogin(): Promise<LoginEvent | LocalError> {
         Authorization: `Bearer ${token}`,
       },
     })
+    // eslint-disable-next-line
+    console.log({ res })
     return res.json()
   } catch (e) {
     return new LocalError(e.message, 500)
