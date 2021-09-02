@@ -33,11 +33,12 @@ export function useLogin(redirect?: string) {
         $setMagicMetadata(await magic.user.getMetadata())
         const token = await magic.user.getIdToken()
         const details = await getUserDetails(token)
-        if ('error' in details) {
+        if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
           $setError(details)
         } else {
           $setStatus(STATUS.LOADED)
+          $setMetadata(details)
         }
       } else if (typeof redirect === 'string') {
         // if redirect string is provided and we're not logged in, cya!
