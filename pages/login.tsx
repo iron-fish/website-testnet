@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -76,6 +77,7 @@ export default function Login() {
       } else {
         $setLoaded(true)
         $setError('Check your email')
+        setTimeout(() => Router.push('/leaderboard'), 2e3)
       }
     } catch (e) {
       $setError(e.message)
