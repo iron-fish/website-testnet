@@ -4,10 +4,9 @@ import { useLogin } from 'hooks/useLogin'
 
 export const LoginButton = () => {
   const hello = useLogin()
-  // eslint-disable-next-line
-  console.log({ hello })
   const { status, checkLoggedIn, error, metadata } = hello
   if (error) {
+    // TODO: Find a way to resolve this better, but keep for now
     // eslint-disable-next-line
     console.log({ error, status })
     return null

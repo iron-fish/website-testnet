@@ -4,9 +4,7 @@ import Navbar from 'components/Navbar'
 import useLogin from 'hooks/useLogin'
 
 export default function Home() {
-  const { magicMetadata, metadata, error } = useLogin()
-  // eslint-disable-next-line
-  console.log({ magicMetadata, metadata, error })
+  const { magicMetadata } = useLogin()
   return (
     <div className="min-h-screen flex flex-col">
       <Head>

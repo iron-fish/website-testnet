@@ -33,8 +33,6 @@ export function useLogin(redirect?: string) {
         $setMagicMetadata(await magic.user.getMetadata())
         const token = await magic.user.getIdToken()
         const details = await getUserDetails(token)
-        // eslint-disable-next-line
-        console.log({ token, details })
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
           $setError(details)
