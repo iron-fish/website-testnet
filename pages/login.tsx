@@ -63,6 +63,8 @@ export default function Login() {
       const email = $email?.value
 
       const result = await login(email)
+      // eslint-disable-next-line no-console
+      console.log({ result })
       if ('error' in result) {
         const error = '' + result.message
         $setLoaded(true)
