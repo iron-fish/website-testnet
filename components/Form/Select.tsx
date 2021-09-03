@@ -2,25 +2,27 @@ import { NameValue, Field } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
 
 interface SelectField extends Field {
-  noDefault?: boolean
+  useDefault?: boolean
   defaultLabel?: string
+  className?: string
 }
 
 export const Select = ({
   options = [],
-  noDefault = false,
+  useDefault = false,
   defaultLabel = '',
   defaultValue,
   value,
   onChange,
   setTouched,
+  className,
 }: SelectField) => {
-  const allOptions = noDefault
+  const allOptions = useDefault
     ? [{ name: defaultLabel, value: defaultValue }].concat(options)
     : options
   return (
     <select
-      className="bg-transparent"
+      className={`bg-transparent ${className || ''}`}
       onChange={e => {
         onChange(e)
         setTouched(true)

@@ -55,7 +55,7 @@ const FIELDS = {
     })),
     validation: (x: string) => x !== UNSET,
     defaultErrorText,
-    noDefault: true,
+    useDefault: true,
     defaultLabel: 'Select a country',
   },
 }
