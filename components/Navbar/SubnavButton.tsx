@@ -2,13 +2,13 @@ import { ReactNode } from 'react'
 import Disclosable from 'components/icons/Disclosable'
 
 export type SubnavButtonProps = {
-  label: string
-  className?: string
-  isVisible: boolean
-  toggle?: () => unknown
-  enter?: () => unknown
   children?: ReactNode
+  className?: string
   condensed?: boolean
+  enter?: () => unknown
+  isVisible: boolean
+  label: string
+  toggle?: () => unknown
 }
 
 export const SubnavButton = ({

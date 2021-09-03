@@ -25,6 +25,7 @@ export const matchEntity = (x: string) =>
     .replace(/["']/g, '')
 
 export class LocalError extends Error {
+  static readonly error = true
   constructor(message: string, public statusCode: number) {
     super(message)
     Object.setPrototypeOf(this, LocalError.prototype)

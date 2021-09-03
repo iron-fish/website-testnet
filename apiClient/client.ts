@@ -1,6 +1,7 @@
 // Client for ironfish-http-api.
 import { magic } from 'utils/magic'
 import {
+  ApiUserMetadata,
   ApiError,
   ApiUser,
   ListEventsResponse,
@@ -105,9 +106,8 @@ export async function getMetricsConfig(): Promise<
   return await res.json()
 }
 
-export async function login(
-  email: string
-): Promise<ApiUser | ApiError | LocalError> {
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export async function login(email: string): Promise<any> {
   if (typeof window === 'undefined' || !magic) {
     return new LocalError('Only runnable in the browser', 500)
   }
@@ -116,14 +116,32 @@ export async function login(
       email,
       redirectURI: new URL('/callback', window.location.origin).href,
     })
-    const res = await fetch(`/api/login`, {
+    const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
-    return res.json()
+    if (auth) {
+      return { statusCode: 200, loaded: true }
+    }
+  } catch (e) {
+    return new LocalError(e.message, 500)
+  }
+}
+
+export async function getUserDetails(
+  token: string
+): Promise<ApiUserMetadata | ApiError | LocalError> {
+  try {
+    const data = await fetch(`${API_URL}/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return data.json()
   } catch (e) {
     return new LocalError(e.message, 500)
   }

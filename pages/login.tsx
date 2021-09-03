@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -76,6 +77,7 @@ export default function Login() {
       } else {
         $setLoaded(true)
         $setError('Check your email')
+        setTimeout(() => Router.push('/leaderboard'), 2e3)
       }
     } catch (e) {
       $setError(e.message)
@@ -120,6 +122,11 @@ export default function Login() {
                     <RawButton
                       className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
                       onClick={submit}
+                      onKeyPress={(e: KeyboardEvent<HTMLButtonElement>) => {
+                        if (e.key === 'Enter') {
+                          submit()
+                        }
+                      }}
                     >
                       Login
                     </RawButton>

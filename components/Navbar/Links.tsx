@@ -10,23 +10,23 @@ type NavbarLinksProps = {
   companyClicked?: () => unknown
   companyHovered?: () => unknown
   companyVisible?: boolean
+  condensed?: boolean
+  selectedClassName?: string
   testnetClicked?: () => unknown
   testnetHovered?: () => unknown
   testnetVisible?: boolean
-  selectedClassName?: string
-  condensed?: boolean
 }
 
 export function NavbarLinks({
   className = '',
-  selectedClassName = 'absolute left-0 right-0 bottom-0 border-b-2 border-black',
   companyClicked,
   companyHovered,
   companyVisible = false,
+  condensed,
+  selectedClassName = 'absolute left-0 right-0 bottom-0 border-b-2 border-black',
   testnetClicked,
   testnetHovered,
   testnetVisible = false,
-  condensed,
 }: NavbarLinksProps) {
   const buttonStyles = { className, selectedClassName }
   return (

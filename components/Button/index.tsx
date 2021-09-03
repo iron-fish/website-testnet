@@ -1,15 +1,17 @@
-import { FC, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler, KeyboardEvent } from 'react'
 
 type ButtonProps = {
   colorClassName?: string
   className?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
+  onKeyPress?: (e: KeyboardEvent<HTMLButtonElement>) => void
   border?: string
 }
 export const RawButton: FC<ButtonProps> = ({
   children,
   className = '',
   onClick,
+  onKeyPress,
   border = `border-2`,
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
 }) => {
@@ -29,6 +31,7 @@ export const RawButton: FC<ButtonProps> = ({
         ${className}
     `}
       onClick={onClick}
+      onKeyPress={onKeyPress}
     >
       {children}
     </button>

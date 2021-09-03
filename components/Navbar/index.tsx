@@ -17,26 +17,26 @@ function Navbar({
   className = 'bg-black text-white',
 }: NavbarProps) {
   const {
-    isCompanyVisible,
-    isTestnetVisible,
     $flyoutVisible,
     $setFlyoutVisible,
     $subnavState,
-    toggleNavCompany,
     enterNavCompany,
-    toggleNavTestnet,
     enterNavTestnet,
     hideNav,
+    isCompanyVisible,
+    isTestnetVisible,
+    toggleNavCompany,
+    toggleNavTestnet,
   } = useNav()
   const companyVisible = isCompanyVisible()
   const testnetVisible = isTestnetVisible()
   const navBarLinksProps = {
-    companyVisible,
-    companyHovered: enterNavCompany,
     companyClicked: toggleNavCompany,
-    testnetVisible,
-    testnetHovered: enterNavTestnet,
+    companyHovered: enterNavCompany,
+    companyVisible,
     testnetClicked: toggleNavTestnet,
+    testnetHovered: enterNavTestnet,
+    testnetVisible,
   }
   return (
     <nav

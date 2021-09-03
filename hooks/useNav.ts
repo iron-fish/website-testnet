@@ -63,15 +63,15 @@ export function useNav() {
   return {
     $flyoutVisible,
     $setFlyoutVisible,
-    $subnavState,
     $setSubnavState,
-    hideNav,
-    toggleNavCompany,
+    $subnavState,
     enterNavCompany,
-    toggleNavTestnet,
     enterNavTestnet,
-    isTestnetVisible,
+    hideNav,
     isCompanyVisible,
+    isTestnetVisible,
+    toggleNavCompany,
+    toggleNavTestnet,
   }
 }
 export default useNav

@@ -4,7 +4,7 @@ import Navbar from 'components/Navbar'
 import useLogin from 'hooks/useLogin'
 
 export default function Home() {
-  const $metadata = useLogin()
+  const { magicMetadata } = useLogin()
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -17,8 +17,8 @@ export default function Home() {
 
       <main className="bg-iforange flex-1">
         <h1 className="text-2xl">
-          {$metadata && $metadata.email
-            ? `Welcome to Testnet, ${$metadata.email}!`
+          {magicMetadata && magicMetadata.email
+            ? `Welcome to Testnet, ${magicMetadata.email}!`
             : `Welcome to Testnet.`}
         </h1>
       </main>
