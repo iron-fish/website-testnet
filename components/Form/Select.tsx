@@ -1,4 +1,5 @@
 import { NameValue, Field } from 'hooks/useForm'
+import styles from './Select.module.css'
 import LabelledRow from './LabelledRow'
 
 interface SelectField extends Field {
@@ -22,7 +23,7 @@ export const Select = ({
     : options
   return (
     <select
-      className={`bg-transparent ${className || ''}`}
+      className={`${styles.customSelect} bg-transparent ${className || ''}`}
       onChange={e => {
         onChange(e)
         setTouched(true)
