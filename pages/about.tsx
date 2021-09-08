@@ -70,7 +70,7 @@ export default function About() {
               The sooner you sign up, the longer you’ll have to earn points!
             </div>
           </div>
-          <RawButton className="m-auto w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
+          <RawButton className="m-auto w-full mt-8 max-w-[240px] mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Get Incentivized
           </RawButton>
           <AboutHeader className="md:w-1/2">
@@ -138,7 +138,7 @@ export default function About() {
             <br />
             Start earning points!
           </h3>
-          <RawButton className="m-auto mt-8 max-w-md mb-12 text-lg md:text-xl px-4 py-3 md:py-5 md:px-4">
+          <RawButton className="m-auto mt-8 max-w-[240px] mb-12 text-lg md:text-xl px-4 py-3 md:py-5 md:px-4">
             Get Incentivized
           </RawButton>
         </div>
