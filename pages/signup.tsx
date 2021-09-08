@@ -3,7 +3,6 @@ import Router from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Loader from 'components/Loader'
-import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
@@ -180,7 +179,6 @@ export default function SignUp() {
           </OffsetBorderContainer>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

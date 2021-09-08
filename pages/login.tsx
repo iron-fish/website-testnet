@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
-import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import TextField from 'components/Form/TextField'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
@@ -140,7 +139,6 @@ export default function Login() {
           </OffsetBorderContainer>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }
