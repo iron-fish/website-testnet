@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import SubnavButton from './SubnavButton'
 import LoginButton from './LoginButton'
@@ -28,14 +29,16 @@ export function NavbarLinks({
   testnetHovered,
   testnetVisible = false,
 }: NavbarLinksProps) {
-  const buttonStyles = { className, selectedClassName }
+  const itemPadding = [`px-2`, `lg:px-3.5`, `3xl:px-5`]
+  const cc = clsx([className, ...itemPadding])
+  const buttonStyles = { className: cc, selectedClassName }
   return (
     <>
       <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-        <a className={className}>Get Started</a>
+        <a className={cc}>Get Started</a>
       </Link>
       <Link href="https://ironfish.network/docs/whitepaper/1_introduction">
-        <a className={className}>Whitepaper</a>
+        <a className={cc}>Whitepaper</a>
       </Link>
       <SubnavButton
         label="Company"
