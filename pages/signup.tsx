@@ -138,7 +138,7 @@ export default function SignUp() {
           <OffsetBorderContainer>
             <div
               style={{ minHeight: '43rem', maxWidth: '53.5rem' }}
-              className="flex flex-col m-auto h-auto items-center mt-8 px-5 pb-2"
+              className="flex flex-col m-auto h-auto items-center px-5 pb-2"
             >
               {!$loaded ? (
                 <Loader />
