@@ -45,10 +45,16 @@ export async function createUser(
   return await res.json()
 }
 
-export async function listLeaderboard(): Promise<
-  ListLeaderboardResponse | ApiError
-> {
-  const res = await fetch(`${API_URL}/users?order_by=rank`)
+export async function listLeaderboard({
+  search,
+}: {
+  search?: string
+} = {}): Promise<ListLeaderboardResponse | ApiError> {
+  const params = new URLSearchParams({ order_by: 'rank' })
+  if (search) {
+    params.append('search', search)
+  }
+  const res = await fetch(`${API_URL}/users?${params.toString()}`)
   return await res.json()
 }
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -11,6 +12,7 @@ import { Select } from 'components/Form/Select'
 
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
+import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
@@ -69,6 +71,31 @@ const FIELDS = {
 export default function Leaderboard({ users }: Props) {
   const $country = useField(FIELDS.country)
   const $view = useField(FIELDS.view)
+  const [$users, $setUsers] = useState(users)
+
+  // Search field hooks
+  const [$search, $setSearch] = useState('')
+  const $debouncedSearch = useDebounce($search, 300)
+  const [$hasSearched, $setHasSearched] = useState(false)
+
+  useEffect(() => {
+    // Drop the initial value, since results will be preloaded
+    if (!$hasSearched) {
+      $setHasSearched(true)
+      return
+    }
+
+    const func = async () => {
+      const result = await API.listLeaderboard({ search: $debouncedSearch })
+      if (!('error' in result)) {
+        $setUsers(result.data)
+      }
+    }
+    func()
+    // Don't re-fire the effect when hasSearched updates
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [$debouncedSearch])
+
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -106,6 +133,10 @@ export default function Leaderboard({ users }: Props) {
               <input
                 className="text-lg pl-2 md:pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
                 placeholder="Search"
+                onChange={e => {
+                  $setSearch(e.target.value)
+                }}
+                value={$search}
               />
             </div>
             <div className="border-r border-black flex h-full items-center justify-between px-5">
@@ -127,7 +158,7 @@ export default function Leaderboard({ users }: Props) {
             <div>TOTAL POINTS</div>
           </div>
 
-          {users.map(user => (
+          {$users.map(user => (
             <div className="mb-3" key={user.id}>
               <Link href={`/users/${user.id}`}>
                 <a>
