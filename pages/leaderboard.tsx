@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import Button from 'components/Button'
@@ -8,6 +7,11 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Search from 'components/icons/Search'
 import BackToTop from 'components/BackToTop'
+import { Select } from 'components/Form/Select'
+
+import { countries, CountryWithCode } from 'data/countries'
+import { defaultErrorText } from 'utils/forms'
+import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
@@ -30,7 +34,41 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
   }
 }
 
+const FIELDS = {
+  country: {
+    id: 'country',
+    label: 'Country',
+    options: countries.map(({ code, name }: CountryWithCode) => ({
+      name,
+      value: code,
+    })),
+    validation: () => true,
+    defaultErrorText,
+    useDefault: true,
+    defaultValue: 'Global',
+    defaultLabel: 'Global',
+  },
+  view: {
+    id: 'view',
+    label: 'View',
+    options: [
+      { name: 'Blocks Mined', value: 'BLOCKS_MINED' },
+      { name: 'Bugs Caught', value: 'BUGS_CAUGHT' },
+      { name: 'Promotions', value: 'PROMOTIONS' },
+      { name: 'PRs Merged', value: 'PRS_MERGED' },
+      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTIONS' },
+    ],
+    validation: () => true,
+    defaultErrorText,
+    useDefault: true,
+    defaultValue: 'Total Points',
+    defaultLabel: 'Total Points',
+  },
+}
+
 export default function Leaderboard({ users }: Props) {
+  const $country = useField(FIELDS.country)
+  const $view = useField(FIELDS.view)
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -61,49 +99,28 @@ export default function Leaderboard({ users }: Props) {
           </div>
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
-            <div className="border-r border-black flex flex-1 h-full items-center">
-              <div className="pl-10">
+            <div className="border-r border-black flex h-full items-center">
+              <div className="pl-4 md:pl-10">
                 <Search />
               </div>
               <input
-                className="text-lg pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
-                placeholder="Search Leaderboard"
+                className="text-lg pl-2 md:pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
+                placeholder="Search"
               />
             </div>
             <div className="border-r border-black flex h-full items-center justify-between px-5">
               <label className="flex flex-col font-favorit text-xs">
                 Region:
-                <input
-                  className="text-lg bg-transparent"
-                  placeholder="Global"
-                />
+                {$country && $country.value && <Select {...$country} />}
               </label>
-              <Image
-                src="/arrow_drop_down_black.png"
-                layout="fixed"
-                width="24"
-                height="24"
-                alt=""
-              />
             </div>
             <div className="h-full flex items-center justify-between px-5">
               <label className="flex flex-col font-favorit text-xs">
                 View:
-                <input
-                  className="text-lg bg-transparent"
-                  placeholder="Total Points"
-                />
+                {$view && $view.value && <Select {...$view} />}
               </label>
-              <Image
-                src="/arrow_drop_down_black.png"
-                layout="fixed"
-                width="24"
-                height="24"
-                alt=""
-              />
             </div>
           </div>
-
           <div className="font-extended flex px-10 mb-4">
             <div className="w-24">RANK</div>
             <div className="flex-1">USERNAME</div>

@@ -1,44 +1,52 @@
 import { NameValue, Field } from 'hooks/useForm'
+import styles from './Select.module.css'
 import LabelledRow from './LabelledRow'
 
 interface SelectField extends Field {
-  noDefault?: boolean
+  useDefault?: boolean
   defaultLabel?: string
+  className?: string
 }
 
 export const Select = ({
-  id,
   options = [],
-  noDefault = false,
+  useDefault = false,
   defaultLabel = '',
-  label,
-  errorText,
   defaultValue,
-  valid,
   value,
   onChange,
   setTouched,
+  className,
 }: SelectField) => {
-  const allOptions = noDefault
+  const allOptions = useDefault
     ? [{ name: defaultLabel, value: defaultValue }].concat(options)
     : options
   return (
+    <select
+      className={`${styles.customSelect} bg-transparent ${className || ''}`}
+      onChange={e => {
+        onChange(e)
+        setTouched(true)
+      }}
+      value={value}
+    >
+      {allOptions.map(({ value: option, name }: NameValue) => (
+        <option key={option} value={option}>
+          {name}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+export const LabelledSelect = (props: SelectField) => {
+  const { id, label, errorText, valid } = props
+
+  return (
     <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
-      <select
-        onChange={e => {
-          onChange(e)
-          setTouched(true)
-        }}
-        value={value}
-      >
-        {allOptions.map(({ value: option, name }: NameValue) => (
-          <option key={option} value={option}>
-            {name}
-          </option>
-        ))}
-      </select>
+      <Select {...props} />
     </LabelledRow>
   )
 }
 
-export default Select
+export default LabelledSelect
