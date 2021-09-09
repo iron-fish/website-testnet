@@ -166,7 +166,7 @@ export default function About() {
                 className="list-style-none w-full m-auto flex justify-between relative h-8 my-6"
                 key={text}
               >
-                <div className="text-2xl font-extended absolute left-0 bg-iforange h-8 z-10 pr-4">
+                <div className="text-2xl font-extended absolute left-0 bg-iflightorange h-8 z-10 pr-4">
                   <Link href={href}>{text}</Link>
                 </div>
                 <div className="w-full relative flex justify-between">
