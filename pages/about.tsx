@@ -60,16 +60,13 @@ export default function About() {
           <h1 className="text-left md:text-center text-5xl md:text-6xl mt-24 mb-8 font-extended">
             About the Incentivized Testnet
           </h1>
-          <p className="text-justify text-lg md:text-center md:text-2xl mb-8 font-favorit">
+          <p className="text-justify text-xl md:text-center mb-8 font-favorit">
             Sign up for our incentivized testnet to participate in various
             activities that will earn you points which you can redeem for $IRON
             &mdash; our privacy coin.
+            <br />
+            The sooner you sign up, the longer you’ll have to earn points!
           </p>
-          <div className="flex mt-2">
-            <div className="text-center bg-ifpink p-2 text-lg rounded m-auto">
-              The sooner you sign up, the longer you’ll have to earn points!
-            </div>
-          </div>
           <RawButton className="m-auto w-full mt-8 max-w-[240px] mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
             Get Incentivized
           </RawButton>
