@@ -53,9 +53,9 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar fill="black" className="bg-iforange text-black" />
+      <Navbar fill="black" className="bg-iflightorange text-black" />
 
-      <main className="bg-iforange flex-1 items-center flex flex-col">
+      <main className="bg-iflightorange flex-1 items-center flex flex-col">
         <div className="w-4/5 md:w-2/3">
           <h1 className="text-left md:text-center text-5xl md:text-6xl mt-24 mb-8 font-extended">
             About the Incentivized Testnet

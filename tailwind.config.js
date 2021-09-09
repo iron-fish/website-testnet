@@ -75,6 +75,9 @@ module.exports = {
         ifgray: {
           DEFAULT: '#6A737D',
         },
+        iflightorange: {
+          DEFAULT: '#FFCD85',
+        },
         iforange: {
           DEFAULT: '#FFA542',
         },
