@@ -37,6 +37,9 @@ module.exports = {
         'card-md': '46%',
         'card-lg': '26.57%',
       },
+      padding: {
+        13: '3.125rem',
+      },
       boxShadow: {
         navbar: '0px 4px 12px rgba(0, 0, 0, 0.12)',
       },

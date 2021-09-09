@@ -46,7 +46,7 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
 export default function About() {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col font-favorit">
       <Head>
         <title>About</title>
         <meta name="description" content="About" />
