@@ -92,7 +92,7 @@ export default function About() {
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
           </div>
-          <AboutHeader className="md:w-1/2">The Leaderboard</AboutHeader>
+          <AboutHeader className="md:w-1/2 mt-48">The Leaderboard</AboutHeader>
           <p className="w-full md:w-2/3">
             Not only does earning points help you climb the Leaderboard, but the
             more points you have means the more $IRON you redeem at the end of
