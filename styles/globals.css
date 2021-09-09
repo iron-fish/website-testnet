@@ -156,3 +156,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+p {
+  line-height: 2.4rem !important;
+}
