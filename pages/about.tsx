@@ -93,7 +93,7 @@ export default function About() {
             </div>
           </div>
           <AboutHeader className="md:w-1/2 mt-48">The Leaderboard</AboutHeader>
-          <p className="w-full md:w-2/3">
+          <p className="w-full md:w-2/3 text-2xl">
             Not only does earning points help you climb the Leaderboard, but the
             more points you have means the more $IRON you redeem at the end of
             the testnet. Placing in the top 10 also earns you bonus points!
