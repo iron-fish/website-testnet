@@ -7,6 +7,7 @@ import leaderboardPic from 'public/leaderboard.png'
 import interTubesPic from 'public/intertubes.png'
 
 import { RawButton } from 'components/Button'
+import { PageBanner } from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 
@@ -57,20 +58,14 @@ export default function About() {
 
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
         <div className="w-4/5 md:w-2/3">
-          <h1 className="text-left md:text-center text-5xl md:text-6xl mt-24 mb-8 font-extended">
-            About the Incentivized Testnet
-          </h1>
-          <div className="container mx-auto w-3/4">
-            <p className="text-justify text-lg md:text-center md:text-2xl mb-8 font-favorit">
-              Sign up for the Iron Fish incentivized testnet to help make Iron
-              Fish great 💖. Participation is rewarded in points which will be
-              redeemable for $IRON at a later time (see Testnet Guidelines for
-              more details).
-            </p>
-          </div>
-          <RawButton className="m-auto w-full mt-8 max-w-[240px] mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4">
-            Sign Up
-          </RawButton>
+          <PageBanner
+            title="About the Incentivized Testnet"
+            text="Sign up for the Iron Fish incentivized testnet to help make Iron
+          Fish great 💖. Participation is rewarded in points which will be
+          redeemable for $IRON at a later time (see Testnet Guidelines for
+          more details)."
+            buttonText="Sign Up"
+          ></PageBanner>
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
