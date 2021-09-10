@@ -1,21 +1,18 @@
 import { FC } from 'react'
 import RawButton from '../Button'
 
-type ButtonProps = {
-  colorClassName?: string
-  className?: string
+type PageBannerProps = {
   title: string
   text: string
   buttonText: string
 }
-export const PageBanner: FC<ButtonProps> = ({
-  className = '',
+export const PageBanner: FC<PageBannerProps> = ({
   title = '',
   text = '',
   buttonText,
 }) => {
   return (
-    <div className={className}>
+    <div>
       <h1 className="text-left md:text-center text-5xl md:text-6xl mt-24 mb-8 font-extended">
         {title}
       </h1>
@@ -24,7 +21,7 @@ export const PageBanner: FC<ButtonProps> = ({
           {text}
         </p>
       </div>
-      <RawButton className="m-auto w-full mb-32 mt-8 max-w-[240px] text-lg md:text-xl p-3 md:py-5 md:px-4">
+      <RawButton className="m-auto mt-8 mb-32 text-lg md:text-xl px-7 py-4">
         {buttonText}
       </RawButton>
     </div>

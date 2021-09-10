@@ -78,7 +78,7 @@ function Footer() {
               },
             ]}
           />
-          <Button className="mt-8 md:mt-0">
+          <Button className="p-4 h-10 mt-8 md:mt-0">
             <a href="mailto:contact@ironfish.network">Drop us a line!</a>
           </Button>
         </div>
