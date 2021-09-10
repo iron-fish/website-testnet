@@ -116,6 +116,7 @@ export default function Leaderboard({ users }: Props) {
           node hosting, and more! Click someone’s user name to see a breakdown
           of their activity."
             buttonText="Sign Up"
+            buttonClassName="mb-16"
           ></PageBanner>
 
           <div className="h-16 border border-black rounded flex items-center mb-8">

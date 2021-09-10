@@ -5,11 +5,13 @@ type PageBannerProps = {
   title: string
   text: string
   buttonText: string
+  buttonClassName?: string
 }
 export const PageBanner: FC<PageBannerProps> = ({
-  title = '',
-  text = '',
+  title,
+  text,
   buttonText,
+  buttonClassName = '',
 }) => {
   return (
     <div>
@@ -21,7 +23,9 @@ export const PageBanner: FC<PageBannerProps> = ({
           {text}
         </p>
       </div>
-      <RawButton className="m-auto mt-8 mb-32 text-lg md:text-xl px-7 py-4">
+      <RawButton
+        className={`m-auto mt-8 text-lg md:text-xl px-7 py-4 ${buttonClassName}`}
+      >
         {buttonText}
       </RawButton>
     </div>

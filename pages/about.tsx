@@ -65,6 +65,7 @@ export default function About() {
           redeemable for $IRON at a later time (see Testnet Guidelines for
           more details)."
             buttonText="Sign Up"
+            buttonClassName="mb-32"
           ></PageBanner>
           <AboutHeader className="md:w-1/2">
             Participation Categories
