@@ -86,6 +86,7 @@ module.exports = {
         },
         ifpink: {
           DEFAULT: '#FFC2EB',
+          subtext: '#D089B9',
         },
         ifcubepink: {
           DEFAULT: '#FF94DB',

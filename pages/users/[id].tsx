@@ -5,15 +5,20 @@ import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
+import EventsPaginationButton from 'components/user/EventsPaginationButton'
 import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs from 'components/user/Tabs'
+import usePaginatedEvents from 'hooks/usePaginatedEvents'
 
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 
+// The number of events to display in the Recent Activity list.
+const EVENTS_LIMIT = 7
+
 type Props = {
-  events: ReadonlyArray<API.ApiEvent>
+  events: API.ListEventsResponse
   user: API.ApiUser
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
@@ -47,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
   const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
     await Promise.all([
       API.getUser(context.query.id),
-      API.listEvents(context.query.id),
+      API.listEvents({ userId: context.query.id, limit: EVENTS_LIMIT }),
       API.getUserAllTimeMetrics(context.query.id),
       API.getUserWeeklyMetrics(context.query.id),
       API.getMetricsConfig(),
@@ -67,7 +72,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
 
   return {
     props: {
-      events: events.data,
+      events: events,
       user: user,
       allTimeMetrics: allTimeMetrics,
       weeklyMetrics: weeklyMetrics,
@@ -90,6 +95,10 @@ export default function User({
     (acc, cur) => acc + cur,
     0
   )
+
+  // Recent Activity hooks
+  const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
+    usePaginatedEvents(user.id.toString(), EVENTS_LIMIT, events)
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -159,7 +168,7 @@ export default function User({
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {events.map(e => (
+                {$events.map(e => (
                   <tr key={e.id} className="border-b border-black">
                     <td className="py-4">{displayEventType(e.type)}</td>
                     <td>{new Date(e.occurred_at).toLocaleString()}</td>
@@ -170,6 +179,18 @@ export default function User({
             </table>
           </div>
         </OffsetBorderContainer>
+        {/* Recent Activity Pagination */}
+        <div className="flex mt-8 font-favorit gap-x-1.5">
+          <EventsPaginationButton
+            disabled={!$hasPrevious}
+            onClick={fetchPrevious}
+          >{`<< Previous`}</EventsPaginationButton>
+          <div>{`|`}</div>
+          <EventsPaginationButton
+            disabled={!$hasNext}
+            onClick={fetchNext}
+          >{`Next >>`}</EventsPaginationButton>
+        </div>
       </main>
 
       <Footer />
