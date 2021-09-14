@@ -7,7 +7,7 @@ import leaderboardPic from 'public/leaderboard.png'
 import interTubesPic from 'public/intertubes.png'
 
 import { RawButton } from 'components/Button'
-import { PageBanner } from 'components/PageBanner'
+import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 
