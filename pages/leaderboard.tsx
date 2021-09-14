@@ -3,12 +3,12 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import Button from 'components/Button'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Search from 'components/icons/Search'
 import BackToTop from 'components/BackToTop'
 import { Select } from 'components/Form/Select'
+import PageBanner from 'components/PageBanner'
 
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
@@ -17,7 +17,6 @@ import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
-
 type Props = {
   users: ReadonlyArray<API.ApiUser>
 }
@@ -109,21 +108,15 @@ export default function Leaderboard({ users }: Props) {
       <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
         <div className="w-2/3">
-          <h1 className="text-center text-6xl mt-24 mb-8 font-extended">
-            Testnet Leaderboard
-          </h1>
-          <p className="text-center text-2xl mb-8 font-favorit">
-            Our incentivized testnet leaderboard shows you who the top point
-            getters are for all-time score, miners, bug catchers, net promoters,
-            node hosting, and more! Click someone’s user name to see a breakdown
-            of their activity.
-          </p>
-
-          <div className="flex justify-center mb-16">
-            <Button className="py-5">
-              <a href="mailto:contact@ironfish.network">Get Incentivized</a>
-            </Button>
-          </div>
+          <PageBanner
+            title="Testnet Leaderboard"
+            text="Our incentivized testnet leaderboard shows you who the top point
+          getters are for all-time score, miners, bug catchers, net promoters,
+          node hosting, and more! Click someone’s user name to see a breakdown
+          of their activity."
+            buttonText="Sign Up"
+            buttonClassName="mb-16"
+          />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
             <div className="border-r border-black flex h-full items-center">
