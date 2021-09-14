@@ -116,7 +116,7 @@ export default function Leaderboard({ users }: Props) {
           of their activity."
             buttonText="Sign Up"
             buttonClassName="mb-16"
-          ></PageBanner>
+          />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
             <div className="border-r border-black flex h-full items-center">
