@@ -16,8 +16,7 @@ import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
-import LeaderboardRow from 'components/Leaderbaord/LeaderboardRow'
-
+import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 type Props = {
   users: ReadonlyArray<API.ApiUser>
 }

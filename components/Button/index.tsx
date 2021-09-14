@@ -49,7 +49,7 @@ const Button: FC<ButtonProps> = ({
     <RawButton
       onClick={onClick}
       colorClassName={colorClassName}
-      className={className}
+      className={`p-4 h-10 ${className}`}
       border={border}
     >
       {children}

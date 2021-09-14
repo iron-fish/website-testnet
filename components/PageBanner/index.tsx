@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import RawButton from '../Button'
+import { RawButton } from '../Button'
 
 type PageBannerProps = {
   title: string
