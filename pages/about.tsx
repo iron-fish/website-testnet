@@ -66,7 +66,7 @@ export default function About() {
           more details)."
             buttonText="Sign Up"
             buttonClassName="mb-32"
-          ></PageBanner>
+          />
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
