@@ -6,7 +6,7 @@ import { RawButton } from 'components/Button'
 
 type CTAProps = {
   title: string
-  content?: string
+  content?: ReactNode
   children?: ReactNode
   kind?: string
   earn?: number

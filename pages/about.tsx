@@ -60,12 +60,10 @@ export default function About() {
         <div className="w-4/5 md:w-2/3">
           <PageBanner
             title="About the Incentivized Testnet"
-            text="Sign up for the Iron Fish incentivized testnet to help make Iron
-          Fish great 💖. Participation is rewarded in points which will be
-          redeemable for $IRON at a later time (see Testnet Guidelines for
-          more details)."
+            text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points, which will be redeemable for $IRON at a later time (see Testnet Guidelines for more details)."
             buttonText="Sign Up"
             buttonClassName="mb-32"
+            buttonLink="/signup"
           />
           <AboutHeader className="md:w-1/2">
             Participation Categories

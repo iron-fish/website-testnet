@@ -1,4 +1,6 @@
 import { FC } from 'react'
+import Link from 'next/link'
+
 import { RawButton } from '../Button'
 
 type PageBannerProps = {
@@ -6,12 +8,14 @@ type PageBannerProps = {
   text: string
   buttonText: string
   buttonClassName?: string
+  buttonLink: string
 }
 export const PageBanner: FC<PageBannerProps> = ({
   title,
   text,
   buttonText,
   buttonClassName = '',
+  buttonLink,
 }) => {
   return (
     <div>
@@ -23,11 +27,13 @@ export const PageBanner: FC<PageBannerProps> = ({
           {text}
         </p>
       </div>
-      <RawButton
-        className={`m-auto mt-8 text-lg md:text-xl px-7 py-4 ${buttonClassName}`}
-      >
-        {buttonText}
-      </RawButton>
+      <Link href={buttonLink} passHref>
+        <RawButton
+          className={`m-auto mt-8 text-lg md:text-xl px-7 py-4 ${buttonClassName}`}
+        >
+          {buttonText}
+        </RawButton>
+      </Link>
     </div>
   )
 }
