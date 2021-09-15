@@ -44,12 +44,6 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
   </div>
 )
 
-const IncentivizedButton = () => (
-  <RawButton className="m-auto w-full max-w-[240px] text-lg md:text-xl p-3 md:py-5 md:px-4">
-    Get Incentivized
-  </RawButton>
-)
-
 export default function About() {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   return (
@@ -68,7 +62,7 @@ export default function About() {
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points, which will be redeemable for $IRON at a later time (see Testnet Guidelines for more details)."
             buttonText="Sign Up"
-            buttonClassName="m-auto w-full max-w-[240px] text-lg md:text-xl p-3 md:py-5 md:px-4"
+            buttonClassName="m-auto mb-32 w-full max-w-[240px] text-lg md:text-xl p-3 md:py-5 md:px-4"
             buttonLink="/signup"
           />
           <AboutHeader className="md:w-1/2">
@@ -136,7 +130,9 @@ export default function About() {
             <br />
             Start earning points!
           </h3>
-          <IncentivizedButton />
+          <RawButton className="m-auto w-full max-w-[240px] text-lg md:text-xl p-3 md:py-5 md:px-4">
+            Get Incentivized
+          </RawButton>
         </div>
         <div id="guidelines" className="mt-12 mx-3 sm:w-3/4 md:w-2/3">
           <AboutHeader className="text-left text-4xl w-1/2">
