@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Head from 'next/head'
 import Img from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
 import interTubesPic from 'public/intertubes.png'
@@ -37,7 +38,19 @@ type ArrowButtonProps = {
 
 const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
   <div
-    className="border rounded-full w-12 h-12 border-black flex items-center justify-center hover:bg-ifpink cursor-pointer m-2"
+    className={clsx(
+      'border',
+      'border-black',
+      'cursor-pointer',
+      'flex',
+      'h-12',
+      'items-center',
+      'justify-center',
+      'm-2',
+      'rounded-full',
+      'w-12',
+      'hover:bg-ifpink'
+    )}
     onClick={onClick}
   >
     {children}
@@ -62,7 +75,17 @@ export default function About() {
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points, which will be redeemable for $IRON at a later time (see Testnet Guidelines for more details)."
             buttonText="Sign Up"
-            buttonClassName="mb-32"
+            buttonClassName={clsx(
+              'm-auto',
+              'mb-32',
+              'w-full',
+              'max-w-[240px]',
+              'text-lg',
+              'p-3',
+              'md:text-xl',
+              'md:py-5',
+              'md:px-4'
+            )}
             buttonLink="/signup"
           />
           <AboutHeader className="md:w-1/2">
@@ -130,7 +153,20 @@ export default function About() {
             <br />
             Start earning points!
           </h3>
-          <RawButton className="m-auto mt-8 max-w-[240px] mb-12 text-lg md:text-xl px-4 py-3 md:py-5 md:px-4">
+          <RawButton
+            className={clsx(
+              'm-auto',
+              'mt-8',
+              'mb-12',
+              'max-w-[240px]',
+              'text-lg',
+              'px-4',
+              'py-3',
+              'md:text-xl',
+              'md:py-5',
+              'md:px-4'
+            )}
+          >
             Get Incentivized
           </RawButton>
         </div>
