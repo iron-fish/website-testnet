@@ -1,5 +1,3 @@
-import { BasicLink } from 'components/About/Link'
-
 export const cards = [
   {
     title: 'Big Winner',
@@ -102,19 +100,8 @@ export const callsToAction = {
   columnOne: [
     {
       title: 'Finding Bugs',
-      content: (
-        <>
-          If you found a bug in the Iron Fish full node implementation, please
-          submit the issue{' '}
-          <BasicLink href="https://github.com/iron-fish/ironfish/issues">
-            here
-          </BasicLink>
-          {'. '}
-          Issues are reviewed by the core development team on a rolling basis
-          and awarded by the end of the week. The issue will be accepted if it’s
-          a legitimate bug and not a duplicate of an existing issue.
-        </>
-      ),
+      content:
+        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue.',
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
       href: 'https://github.com/iron-fish/ironfish/issues',
@@ -128,7 +115,7 @@ export const callsToAction = {
         'Medium contribution = 100 points ',
         'Large contribution = 1000 points ',
       ],
-      ctaText: 'Email Us',
+      ctaText: 'Email us',
       href: 'mailto:testnet@ironfish.network',
     },
     {
@@ -136,25 +123,17 @@ export const callsToAction = {
       content:
         'Sometimes the community does something amazing that doesn’t fall under any of these categories. Email us at testnet@ironfish.network with your Iron Fish graffiti and let us know about it!',
       earn: 0,
-      ctaText: 'Email Us',
+      ctaText: 'Email us',
       href: 'mailto:testnet@ironfish.network',
     },
   ],
   columnTwo: [
     {
       title: `Mining the testnet`,
-      content: (
-        <>
-          Once you sign up for the incentivized testnet, actively mining
-          automatically earns you points for blocks that are mined and accepted
-          to the main chain. See our{' '}
-          <BasicLink href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-            Get Started Page
-          </BasicLink>{' '}
-          on how to start mining.
-        </>
-      ),
+      content:
+        'Once you sign up for the incentivized testnet, actively mining automatically earns you points for blocks that are mined and accepted to the main chain.',
       points: ['1 block = 10 points'],
+      ctaText: 'Get started with mining',
       href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
     },
     {
@@ -166,21 +145,13 @@ export const callsToAction = {
         'Medium promotion = 100 points ',
         'Large promotion = 1000 points ',
       ],
-      ctaText: 'Email Us',
+      ctaText: 'Email us',
       href: 'mailto:testnet@ironfish.network',
     },
     {
       title: 'Submit a Pull Request',
-      content: (
-        <>
-          Submit a PR to the{' '}
-          <BasicLink href="https://github.com/iron-fish/ironfish">
-            Iron Fish repo
-          </BasicLink>
-          {'. '}
-          Points are earned if the PR gets accepted and merged.
-        </>
-      ),
+      content:
+        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged.',
       points: [
         'Small PR = 250 points',
         'Medium PR = 750 points',
@@ -192,16 +163,10 @@ export const callsToAction = {
 
     {
       title: 'More Categories',
-      content: (
-        <>
-          If you have suggestions on other categories we should add, please
-          reach out to us on{' '}
-          <BasicLink href="https://discord.com/invite/EkQkEcm8DH">
-            Discord
-          </BasicLink>
-          .
-        </>
-      ),
+      content:
+        'Let us know if you have suggestions for other categories we should add!',
+      ctaText: 'Reach out on Discord',
+      href: 'https://discord.com/invite/EkQkEcm8DH',
       earn: 0,
       kind: 'coming soon',
     },
