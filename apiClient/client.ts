@@ -98,10 +98,24 @@ export async function getUserAllTimeMetrics(
   return await res.json()
 }
 
-export async function listEvents(
+export async function listEvents({
+  userId,
+  after,
+  limit,
+  before,
+}: {
   userId: string
-): Promise<ListEventsResponse | ApiError> {
-  const res = await fetch(`${API_URL}/events?user_id=${userId}`)
+  after?: string
+  limit?: number
+  before?: string
+}): Promise<ListEventsResponse | ApiError> {
+  const params = new URLSearchParams({
+    user_id: userId,
+    ...(after ? { after } : {}),
+    ...(before ? { before } : {}),
+    ...(limit ? { limit: limit.toString() } : {}),
+  })
+  const res = await fetch(`${API_URL}/events?${params.toString()}`)
   return await res.json()
 }
 

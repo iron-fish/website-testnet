@@ -35,6 +35,10 @@ export type ApiError = {
 
 export type ListEventsResponse = {
   data: ReadonlyArray<ApiEvent>
+  metadata: {
+    has_next: boolean
+    has_previous: boolean
+  }
 }
 
 export type ListLeaderboardResponse = {
