@@ -111,8 +111,8 @@ export async function listEvents({
 }): Promise<ListEventsResponse | ApiError> {
   const params = new URLSearchParams({
     user_id: userId,
-    ...(after ? { after: after } : {}),
-    ...(before ? { before: before } : {}),
+    ...(after ? { after } : {}),
+    ...(before ? { before } : {}),
     ...(limit ? { limit: limit.toString() } : {}),
   })
   const res = await fetch(`${API_URL}/events?${params.toString()}`)
