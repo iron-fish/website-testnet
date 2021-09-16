@@ -47,6 +47,7 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
       'items-center',
       'justify-center',
       'm-2',
+      'mt-16',
       'rounded-full',
       'w-12',
       'hover:bg-ifpink'
