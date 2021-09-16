@@ -146,7 +146,7 @@ export default function About() {
         <div className="w-full flex mt-10 border-black border-b">
           <Intertubes />
         </div>
-        <div className="w-full flex mt-10 border-black border-b flex-col">
+        <div className="w-full flex mt-16 border-black border-b flex-col">
           <h3 className="font-extended text-3xl md:text-4xl m-auto text-center">
             What are you waiting for?
             <br />
@@ -156,7 +156,7 @@ export default function About() {
             className={clsx(
               'm-auto',
               'mt-8',
-              'mb-12',
+              'mb-16',
               'max-w-[240px]',
               'text-lg',
               'px-4',

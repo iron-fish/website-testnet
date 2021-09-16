@@ -13,7 +13,7 @@ NFT Section
                    Now each description will roughly be the same length, and the cards can now be the same height as one another.
 - [x] - IRO-1082 - Cute little navigation arrows - make the top margin 64px.
 - [x] - IRO-1083 - (WHAT ARE YOU WAITING FOR SECTION 1/2) testnet fish illustration, use attached svg
-- [ ] - IRO-1085 - (WHAT ARE YOU WAITING FOR SECTION 2/2) Margin
+- [x] - IRO-1085 - (WHAT ARE YOU WAITING FOR SECTION 2/2) Margin
                    Change margin under the button to 64px
                    Change the margin above the text of "What are you waiting for?
                    Start earning points!" to 64px.
