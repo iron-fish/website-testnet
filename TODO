@@ -4,7 +4,7 @@ NFT Section
 
 - [x] - IRO-1071 - Make the margin above the h2 200px top
 - [x] - IRO-1072 - Make the paragraph text below the h2 the same as the paragraph's under the other h2's, mentioned in other feedback (24px font, 32px line height).
-- [ ] - IRO-1078 - Spacing within NFT card... click to read more
+- [x] - IRO-1078 - Spacing within NFT card... click to read more
                    https://linear.app/ironfish/issue/IRO-1056/category-cards I mentioned the spacing requests.
                    Could we apply those same styles in this card but only above the NFT card itself.
                    Photo below. Let me know if this is too vague. 
