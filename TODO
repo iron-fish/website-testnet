@@ -9,7 +9,7 @@ NFT Section
                    Could we apply those same styles in this card but only above the NFT card itself.
                    Photo below. Let me know if this is too vague. 
 - [x] - IRO-1079 - Double the margin on the left and right sides of the NFT cards.
-- [ ] - IRO-1081 - Community contribution NFT description - add, " to our entire community" to the end of that sentence.
+- [x] - IRO-1081 - Community contribution NFT description - add, " to our entire community" to the end of that sentence.
                    Now each description will roughly be the same length, and the cards can now be the same height as one another.
 - [ ] - IRO-1082 - Cute little navigation arrows - make the top margin 64px.
 - [ ] - IRO-1083 - (WHAT ARE YOU WAITING FOR SECTION 1/2) testnet fish illustration, use attached svg

@@ -31,7 +31,8 @@ export const cards = [
   },
   {
     title: 'Community Contributor',
-    content: 'Earn this NFT by making our testnet more accessible.',
+    content:
+      'Earn this NFT by making our testnet more accessible to our entire community.',
     pic: '/reward-contributor.png',
   },
   {
