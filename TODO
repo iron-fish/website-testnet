@@ -12,7 +12,7 @@ NFT Section
 - [x] - IRO-1081 - Community contribution NFT description - add, " to our entire community" to the end of that sentence.
                    Now each description will roughly be the same length, and the cards can now be the same height as one another.
 - [x] - IRO-1082 - Cute little navigation arrows - make the top margin 64px.
-- [ ] - IRO-1083 - (WHAT ARE YOU WAITING FOR SECTION 1/2) testnet fish illustration, use attached svg
+- [x] - IRO-1083 - (WHAT ARE YOU WAITING FOR SECTION 1/2) testnet fish illustration, use attached svg
 - [ ] - IRO-1085 - (WHAT ARE YOU WAITING FOR SECTION 2/2) Margin
                    Change margin under the button to 64px
                    Change the margin above the text of "What are you waiting for?

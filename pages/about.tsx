@@ -5,7 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
-import interTubesPic from 'public/intertubes.png'
+import Intertubes from 'components/About/ImageIntertubes'
 
 import { RawButton } from 'components/Button'
 import PageBanner from 'components/PageBanner'
@@ -144,9 +144,7 @@ export default function About() {
           </ArrowButton>
         </div>
         <div className="w-full flex mt-10 border-black border-b">
-          <div className="w-4/5 md:w-2/5 m-auto max-w-4xl">
-            <Img src={interTubesPic} layout="responsive" />
-          </div>
+          <Intertubes />
         </div>
         <div className="w-full flex mt-10 border-black border-b flex-col">
           <h3 className="font-extended text-3xl md:text-4xl m-auto text-center">
