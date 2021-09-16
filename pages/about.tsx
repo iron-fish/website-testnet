@@ -119,7 +119,7 @@ export default function About() {
           <div className="flex md:ml-24">
             <Img src={leaderboardPic} />
           </div>
-          <AboutHeader className="text-center w-full">
+          <AboutHeader className="text-center w-full mt-48">
             Win a Category, win an NFT!
           </AboutHeader>
           <p className="text-center max-w-lg m-auto text-justify mb-14">
