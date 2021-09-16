@@ -7,7 +7,7 @@ type NFTProps = {
 }
 
 export const NFTCard = ({ title, content, pic }: NFTProps) => (
-  <div className="mx-2 block min-w-card-sm md:min-w-card-md lg:min-w-card-lg max-w-[22rem]">
+  <div className="mx-4 block min-w-card-sm md:min-w-card-md lg:min-w-card-lg max-w-[22rem]">
     <Box behind="bg-white">
       <div
         className="pt-14 flex flex-col justify-between content-between"
