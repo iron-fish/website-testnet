@@ -1,8 +1,12 @@
 import 'styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
+import { LoginContext } from 'contexts/LoginContext'
+import useLogin from 'hooks/useLogin'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const loginValue = useLogin()
+
   return (
     <>
       <Head>
@@ -11,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
       </Head>
-      <Component {...pageProps} />
+      <LoginContext.Provider value={loginValue}>
+        <Component {...pageProps} />
+      </LoginContext.Provider>
     </>
   )
 }

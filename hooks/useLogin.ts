@@ -4,7 +4,7 @@ import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
 
-enum STATUS {
+export enum STATUS {
   LOADING = 'loading',
   FAILED = 'failed',
   LOADED = 'loaded',
@@ -28,11 +28,22 @@ export function useLogin(redirect?: string) {
       // this is likely a case where we're working in not-the-browser
       if ($metadata || !magic || !magic.user) return
 
-      const loggedIn = await magic.user.isLoggedIn()
-      if (loggedIn) {
-        $setMagicMetadata(await magic.user.getMetadata())
-        const token = await magic.user.getIdToken()
-        const details = await getUserDetails(token)
+      // check if we're logged in and fetch token with one call
+      // magic.user.isLoggedIn makes this same call anyway
+      let token
+      try {
+        token = await magic.user.getIdToken()
+      } catch (err) {
+        return
+      }
+
+      if (token) {
+        const [magicMd, details] = await Promise.all([
+          magic.user.getMetadata(),
+          getUserDetails(token),
+        ])
+
+        $setMagicMetadata(magicMd)
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
           $setError(details)
