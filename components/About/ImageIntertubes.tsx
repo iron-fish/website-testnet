@@ -1,6 +1,11 @@
 export default function Intertubes() {
   return (
-    <svg viewBox="0 0 1106 472" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 1106 472"
+      className="max-w-[69rem] m-auto"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g clipPath="url(#clip0)">
         <path
           d="M586.36 237.228C586.308 237.228 586.255 237.228 586.202 237.228C586.255 237.228 586.308 237.228 586.36 237.228C586.36 237.28 586.36 237.228 586.36 237.228Z"
