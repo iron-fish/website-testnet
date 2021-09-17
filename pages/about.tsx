@@ -135,7 +135,7 @@ export default function About() {
             <NFTCard key={nft.title} {...nft} />
           ))}
         </div>
-        <div className="m-auto flex mt-4">
+        <div className="m-auto flex">
           <ArrowButton onClick={scrollLeft}>
             <ArrowLeft />
           </ArrowButton>
