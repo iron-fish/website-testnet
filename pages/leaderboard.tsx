@@ -163,7 +163,11 @@ export default function Leaderboard({ users }: Props) {
               <>
                 <div className="w-24">RANK</div>
                 <div className="flex-1">USERNAME</div>
-                <div>TOTAL POINTS</div>
+                {$view && $view.value && (
+                  <div className="uppercase">
+                    {$view.value.replace(/_/g, ' ')}
+                  </div>
+                )}
               </>
             )}
           </div>
