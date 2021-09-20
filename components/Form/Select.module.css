@@ -1,5 +1,6 @@
 .customSelect {
   appearance: none;
+  width: 100%;
   background-image: url(public/arrow_drop_down_black.png);
   background-repeat: no-repeat;
   background-position: right;

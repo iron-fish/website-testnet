@@ -128,7 +128,7 @@ export default function Leaderboard({ users }: Props) {
           />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
-            <div className="border-r border-black flex h-full items-center">
+            <div className="border-r border-black flex h-full items-center w-1/2">
               <div className="pl-4 md:pl-10">
                 <Search />
               </div>
@@ -141,16 +141,20 @@ export default function Leaderboard({ users }: Props) {
                 value={$search}
               />
             </div>
-            <div className="border-r border-black flex h-full items-center justify-between px-5">
+            <div className="border-r border-black flex h-full items-center justify-between px-5 w-1/4">
               <label className="flex flex-col font-favorit text-xs">
                 Region:
-                {$country && $country.value && <Select {...$country} />}
+                {$country && $country.value && (
+                  <Select {...$country} className="text-lg" />
+                )}
               </label>
             </div>
-            <div className="h-full flex items-center justify-between px-5">
+            <div className="h-full flex items-center justify-between px-5 w-1/4">
               <label className="flex flex-col font-favorit text-xs">
                 View:
-                {$view && $view.value && <Select {...$view} />}
+                {$view && $view.value && (
+                  <Select {...$view} className="text-lg" />
+                )}
               </label>
             </div>
           </div>
