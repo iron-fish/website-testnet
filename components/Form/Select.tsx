@@ -22,20 +22,22 @@ export const Select = ({
     ? [{ name: defaultLabel, value: defaultValue }].concat(options)
     : options
   return (
-    <select
-      className={`${styles.customSelect} bg-transparent ${className || ''}`}
-      onChange={e => {
-        onChange(e)
-        setTouched(true)
-      }}
-      value={value}
-    >
-      {allOptions.map(({ value: option, name }: NameValue) => (
-        <option key={option} value={option}>
-          {name}
-        </option>
-      ))}
-    </select>
+    <div className={styles.customSelectWrapper}>
+      <select
+        className={`${styles.customSelect} bg-transparent ${className || ''}`}
+        onChange={e => {
+          onChange(e)
+          setTouched(true)
+        }}
+        value={value}
+      >
+        {allOptions.map(({ value: option, name }: NameValue) => (
+          <option key={option} value={option}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </div>
   )
 }
 

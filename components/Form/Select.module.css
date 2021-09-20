@@ -1,7 +1,21 @@
+.customSelectWrapper {
+  width: 100%;
+  position: relative;
+}
 .customSelect {
   appearance: none;
   width: 100%;
+  position: relative;
+}
+.customSelectWrapper::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1rem;
+  height: 2rem;
+  text-align: center;
   background-image: url(public/arrow_drop_down_black.png);
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center center;
+  background-color: #ffc2eb;
 }

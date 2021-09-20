@@ -141,16 +141,16 @@ export default function Leaderboard({ users }: Props) {
                 value={$search}
               />
             </div>
-            <div className="border-r border-black flex h-full items-center justify-between px-5 w-1/4">
-              <label className="flex flex-col font-favorit text-xs">
+            <div className="border-r border-black flex h-full items-center justify-between w-1/4">
+              <label className="flex flex-col font-favorit text-xs px-2.5">
                 Region:
                 {$country && $country.value && (
                   <Select {...$country} className="text-lg" />
                 )}
               </label>
             </div>
-            <div className="h-full flex items-center justify-between px-5 w-1/4">
-              <label className="flex flex-col font-favorit text-xs">
+            <div className="h-full flex items-center justify-between w-1/4">
+              <label className="flex flex-col font-favorit text-xs px-2.5">
                 View:
                 {$view && $view.value && (
                   <Select {...$view} className="text-lg" />
@@ -159,9 +159,13 @@ export default function Leaderboard({ users }: Props) {
             </div>
           </div>
           <div className="font-extended flex px-10 mb-4">
-            <div className="w-24">RANK</div>
-            <div className="flex-1">USERNAME</div>
-            <div>TOTAL POINTS</div>
+            {$users.length > 0 && (
+              <>
+                <div className="w-24">RANK</div>
+                <div className="flex-1">USERNAME</div>
+                <div>TOTAL POINTS</div>
+              </>
+            )}
           </div>
           {$users.length > 0 ? (
             $users.map(user => (
