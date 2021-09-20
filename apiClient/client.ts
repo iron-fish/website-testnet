@@ -1,8 +1,6 @@
 // Client for ironfish-http-api.
 import { magic } from 'utils/magic'
 
-import { Alpha3Code } from 'iso-3166-1-ts'
-
 import {
   ApiUserMetadata,
   ApiError,
