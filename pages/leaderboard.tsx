@@ -16,6 +16,7 @@ import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
+import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 type Props = {
   users: ReadonlyArray<API.ApiUser>
@@ -85,7 +86,14 @@ export default function Leaderboard({ users }: Props) {
     }
 
     const func = async () => {
-      const result = await API.listLeaderboard({ search: $debouncedSearch })
+      const countrySearch =
+        $country && $country.value && $country.value !== 'Global'
+          ? { country_code: $country.value }
+          : {}
+      const result = await API.listLeaderboard({
+        search: $debouncedSearch,
+        ...countrySearch,
+      })
       if (!('error' in result)) {
         $setUsers(result.data)
       }
@@ -93,7 +101,7 @@ export default function Leaderboard({ users }: Props) {
     func()
     // Don't re-fire the effect when hasSearched updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [$debouncedSearch])
+  }, [$debouncedSearch, $country])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -151,20 +159,23 @@ export default function Leaderboard({ users }: Props) {
             <div className="flex-1">USERNAME</div>
             <div>TOTAL POINTS</div>
           </div>
-
-          {$users.map(user => (
-            <div className="mb-3" key={user.id}>
-              <Link href={`/users/${user.id}`}>
-                <a>
-                  <LeaderboardRow
-                    rank={user.rank}
-                    graffiti={user.graffiti}
-                    points={user.total_points}
-                  />
-                </a>
-              </Link>
-            </div>
-          ))}
+          {$users.length > 0 ? (
+            $users.map(user => (
+              <div className="mb-3" key={user.id}>
+                <Link href={`/users/${user.id}`}>
+                  <a>
+                    <LeaderboardRow
+                      rank={user.rank}
+                      graffiti={user.graffiti}
+                      points={user.total_points}
+                    />
+                  </a>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <NoResults />
+          )}
 
           <div className="mb-24"></div>
         </div>
