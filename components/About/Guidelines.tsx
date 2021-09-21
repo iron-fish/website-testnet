@@ -10,13 +10,13 @@ type GuidelineProps = {
 export const Guideline = ({ content, title, behind }: GuidelineProps) => (
   <div className="mb-3">
     <Box behind={behind} background="bg-iflightorange">
-      <div className="m-4 pb-2">
+      <div className="p-12">
         <h3
           className={clsx(
             'font-extended',
             'mb-4',
             'mt-3',
-            'text-4xl',
+            'text-3xl',
             'text-left'
           )}
         >
