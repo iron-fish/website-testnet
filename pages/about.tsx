@@ -114,7 +114,7 @@ export default function About() {
             more points you have means the more $IRON you redeem at the end of
             the testnet. Placing in the top 10 also earns you bonus points!
           </p>
-          <div className="mt-8 mb-4 block">
+          <div className="mt-8 mb-4 block text-2xl">
             <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
           </div>
           <div className="flex md:ml-24">
