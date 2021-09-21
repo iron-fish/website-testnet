@@ -104,7 +104,7 @@ export default function Leaderboard({ users }: Props) {
   }, [$debouncedSearch, $country])
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col font-favorit">
       <Head>
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
