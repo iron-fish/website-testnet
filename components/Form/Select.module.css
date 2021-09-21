@@ -18,4 +18,5 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #ffc2eb;
+  pointer-events: none;
 }

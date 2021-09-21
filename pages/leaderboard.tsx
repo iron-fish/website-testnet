@@ -142,7 +142,7 @@ export default function Leaderboard({ users }: Props) {
               />
             </div>
             <div className="border-r border-black flex h-full items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5">
+              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
                 Region:
                 {$country && $country.value && (
                   <Select {...$country} className="text-lg" />
@@ -150,7 +150,7 @@ export default function Leaderboard({ users }: Props) {
               </label>
             </div>
             <div className="h-full flex items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5">
+              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
                 View:
                 {$view && $view.value && (
                   <Select {...$view} className="text-lg" />
