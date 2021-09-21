@@ -16,6 +16,7 @@ import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 
 import * as API from 'apiClient'
+import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 type Props = {
   users: ReadonlyArray<API.ApiUser>
@@ -85,7 +86,14 @@ export default function Leaderboard({ users }: Props) {
     }
 
     const func = async () => {
-      const result = await API.listLeaderboard({ search: $debouncedSearch })
+      const countrySearch =
+        $country && $country.value && $country.value !== 'Global'
+          ? { country_code: $country.value }
+          : {}
+      const result = await API.listLeaderboard({
+        search: $debouncedSearch,
+        ...countrySearch,
+      })
       if (!('error' in result)) {
         $setUsers(result.data)
       }
@@ -93,10 +101,10 @@ export default function Leaderboard({ users }: Props) {
     func()
     // Don't re-fire the effect when hasSearched updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [$debouncedSearch])
+  }, [$debouncedSearch, $country])
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col font-favorit">
       <Head>
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
@@ -120,7 +128,7 @@ export default function Leaderboard({ users }: Props) {
           />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
-            <div className="border-r border-black flex h-full items-center">
+            <div className="border-r border-black flex h-full items-center w-1/2">
               <div className="pl-4 md:pl-10">
                 <Search />
               </div>
@@ -133,38 +141,49 @@ export default function Leaderboard({ users }: Props) {
                 value={$search}
               />
             </div>
-            <div className="border-r border-black flex h-full items-center justify-between px-5">
-              <label className="flex flex-col font-favorit text-xs">
+            <div className="border-r border-black flex h-full items-center justify-between w-1/4">
+              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
                 Region:
-                {$country && $country.value && <Select {...$country} />}
+                {$country && $country.value && (
+                  <Select {...$country} className="text-lg" />
+                )}
               </label>
             </div>
-            <div className="h-full flex items-center justify-between px-5">
-              <label className="flex flex-col font-favorit text-xs">
+            <div className="h-full flex items-center justify-between w-1/4">
+              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
                 View:
-                {$view && $view.value && <Select {...$view} />}
+                {$view && $view.value && (
+                  <Select {...$view} className="text-lg" />
+                )}
               </label>
             </div>
           </div>
           <div className="font-extended flex px-10 mb-4">
-            <div className="w-24">RANK</div>
-            <div className="flex-1">USERNAME</div>
-            <div>TOTAL POINTS</div>
+            {$users.length > 0 && (
+              <>
+                <div className="w-24">RANK</div>
+                <div className="flex-1">USERNAME</div>
+                <div>TOTAL POINTS</div>
+              </>
+            )}
           </div>
-
-          {$users.map(user => (
-            <div className="mb-3" key={user.id}>
-              <Link href={`/users/${user.id}`}>
-                <a>
-                  <LeaderboardRow
-                    rank={user.rank}
-                    graffiti={user.graffiti}
-                    points={user.total_points}
-                  />
-                </a>
-              </Link>
-            </div>
-          ))}
+          {$users.length > 0 ? (
+            $users.map(user => (
+              <div className="mb-3" key={user.id}>
+                <Link href={`/users/${user.id}`}>
+                  <a>
+                    <LeaderboardRow
+                      rank={user.rank}
+                      graffiti={user.graffiti}
+                      points={user.total_points}
+                    />
+                  </a>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <NoResults />
+          )}
 
           <div className="mb-24"></div>
         </div>

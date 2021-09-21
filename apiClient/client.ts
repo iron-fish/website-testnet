@@ -1,5 +1,6 @@
 // Client for ironfish-http-api.
 import { magic } from 'utils/magic'
+
 import {
   ApiUserMetadata,
   ApiError,
@@ -47,12 +48,19 @@ export async function createUser(
 
 export async function listLeaderboard({
   search,
+  country_code: countryCode,
 }: {
   search?: string
+  country_code?: string
 } = {}): Promise<ListLeaderboardResponse | ApiError> {
-  const params = new URLSearchParams({ order_by: 'rank' })
+  const params = new URLSearchParams({
+    order_by: 'rank',
+  })
   if (search) {
     params.append('search', search)
+  }
+  if (countryCode) {
+    params.append('country_code', countryCode)
   }
   const res = await fetch(`${API_URL}/users?${params.toString()}`)
   return await res.json()
