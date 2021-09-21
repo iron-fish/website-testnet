@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import clsx from 'clsx'
 import Link from 'next/link'
 
 import { RawButton } from '../Button'
@@ -19,7 +20,19 @@ export const PageBanner: FC<PageBannerProps> = ({
 }) => {
   return (
     <div>
-      <h1 className="text-left md:text-center text-5xl md:text-6xl mt-24 mb-8 font-extended">
+      <h1
+        className={clsx(
+          'text-left',
+          'text-5xl',
+          'ml-3',
+          'mt-24',
+          'mb-8',
+          'font-extended',
+          'md:ml-0',
+          'md:text-6xl',
+          'md:text-center'
+        )}
+      >
         {title}
       </h1>
       <div className="container mx-auto w-3/4">
