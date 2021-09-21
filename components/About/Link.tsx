@@ -12,7 +12,11 @@ export const StyledLink = ({ className, href, children }: BasicLinkProps) => (
   </span>
 )
 
-export const BasicLink = ({ href, children, className }: BasicLinkProps) => (
+export const BasicLink = ({
+  href,
+  children,
+  className = '',
+}: BasicLinkProps) => (
   <StyledLink
     className={`font-extended border-b border-black ${className}`}
     href={href}

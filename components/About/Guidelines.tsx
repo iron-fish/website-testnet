@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Box } from 'components/OffsetBorder/Box'
 
 type GuidelineProps = {
@@ -9,8 +10,16 @@ type GuidelineProps = {
 export const Guideline = ({ content, title, behind }: GuidelineProps) => (
   <div className="mb-3">
     <Box behind={behind} background="bg-iflightorange">
-      <div className="m-4 pb-2">
-        <h3 className="text-left text-xl md:text-2xl mt-3 mb-4 font-extended">
+      <div className="p-12">
+        <h3
+          className={clsx(
+            'font-extended',
+            'mb-4',
+            'mt-3',
+            'text-3xl',
+            'text-left'
+          )}
+        >
           {title}
         </h3>
         {content}
