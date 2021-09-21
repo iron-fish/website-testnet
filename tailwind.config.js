@@ -28,12 +28,6 @@ module.exports = {
         section: '43rem',
         'card-sm': '49rem',
         'card-md': '46rem',
-        'card-lg': '45rem',
-        'card-2lg': '47rem',
-        'card-xl': '45rem',
-        'card-1.5xl': '46rem',
-        'card-2xl': '48rem',
-        'card-3xl': '50rem',
       },
       maxWidth: {
         section: '52.5rem',
@@ -41,9 +35,9 @@ module.exports = {
       },
       minWidth: {
         6: '1.5rem',
-        'card-sm': '66.66%',
-        'card-md': '46%',
-        'card-lg': '26.57%',
+        'card-sm': '24rem',
+        'card-md': '30rem',
+        'card-lg': '40rem',
       },
       padding: {
         13: '3.125rem',

@@ -92,7 +92,7 @@ export default function About() {
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row  mb-16">
             <div className="flex flex-col w-full md:w-1/2 md:mr-2">
               {callsToAction.columnOne.map(renderColumn)}
               <div className="text-center hidden md:flex mx-auto">
@@ -169,7 +169,7 @@ export default function About() {
             Get Incentivized
           </RawButton>
         </div>
-        <div id="guidelines" className="mt-12 mx-3 sm:w-3/4 md:w-2/3">
+        <div id="guidelines" className="mt-24 mx-3 sm:w-3/4 md:w-2/3">
           <AboutHeader className="text-left text-4xl w-1/2">
             Testnet Guidelines
           </AboutHeader>
