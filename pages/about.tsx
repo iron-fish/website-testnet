@@ -190,22 +190,26 @@ export default function About() {
           <ul className="px-4">
             {readingLinks.map(({ text, href }) => (
               <li
-                className="list-style-none w-full m-auto flex justify-between relative h-8 my-6"
+                className="list-style-none w-2/3 flex relative h-8 my-6"
                 key={text}
               >
-                <div className="text-2xl font-extended absolute left-0 bg-iflightorange h-8 z-10 pr-4">
-                  <Link href={href}>{text}</Link>
-                </div>
-                <div className="w-full relative flex justify-between">
-                  <div
-                    className="border-black h-1/2 border-b-2 -mr-4"
-                    style={{ width: 'calc(100% - 2px)' }}
-                  />
-                  <TaillessArrowRight
-                    style={{ marginTop: '3.5px' }}
-                    className="absolute right-0"
-                  />
-                </div>
+                <Link passHref href={href}>
+                  <a className="w-full flex relative h-8 my-6">
+                    <div className="text-2xl font-extended absolute left-0 bg-iflightorange h-8 z-10 pr-4">
+                      {text}
+                    </div>
+                    <div className="w-full relative flex justify-between">
+                      <div
+                        className="border-black h-1/2 border-b-2 -mr-4"
+                        style={{ width: 'calc(100% - 2px)' }}
+                      />
+                      <TaillessArrowRight
+                        style={{ marginTop: '3.5px' }}
+                        className="absolute right-0"
+                      />
+                    </div>
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
