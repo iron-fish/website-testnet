@@ -5,7 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
-import interTubesPic from 'public/intertubes.png'
+import Intertubes from 'components/About/ImageIntertubes'
 
 import { RawButton } from 'components/Button'
 import PageBanner from 'components/PageBanner'
@@ -47,6 +47,7 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
       'items-center',
       'justify-center',
       'm-2',
+      'mt-16',
       'rounded-full',
       'w-12',
       'hover:bg-ifpink'
@@ -91,7 +92,7 @@ export default function About() {
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row  mb-16">
             <div className="flex flex-col w-full md:w-1/2 md:mr-2">
               {callsToAction.columnOne.map(renderColumn)}
               <div className="text-center hidden md:flex mx-auto">
@@ -119,10 +120,10 @@ export default function About() {
           <div className="flex md:ml-24">
             <Img src={leaderboardPic} />
           </div>
-          <AboutHeader className="text-center w-full">
+          <AboutHeader className="text-center w-full mt-48">
             Win a Category, win an NFT!
           </AboutHeader>
-          <p className="text-center max-w-lg m-auto text-justify mb-14">
+          <p className="text-center max-w-lg m-auto text-justify mb-14 text-2xl">
             At the end of the testnet if you’re the leader in any of the
             categories mentioned above, you’ll not only earn extra points as a
             prize, but also an Iron Fish NFT. Filter the leaderboard to see
@@ -134,7 +135,7 @@ export default function About() {
             <NFTCard key={nft.title} {...nft} />
           ))}
         </div>
-        <div className="m-auto flex mt-4">
+        <div className="m-auto flex">
           <ArrowButton onClick={scrollLeft}>
             <ArrowLeft />
           </ArrowButton>
@@ -143,11 +144,9 @@ export default function About() {
           </ArrowButton>
         </div>
         <div className="w-full flex mt-10 border-black border-b">
-          <div className="w-4/5 md:w-2/5 m-auto max-w-4xl">
-            <Img src={interTubesPic} layout="responsive" />
-          </div>
+          <Intertubes />
         </div>
-        <div className="w-full flex mt-10 border-black border-b flex-col">
+        <div className="w-full flex mt-16 border-black border-b flex-col">
           <h3 className="font-extended text-3xl md:text-4xl m-auto text-center">
             What are you waiting for?
             <br />
@@ -157,7 +156,7 @@ export default function About() {
             className={clsx(
               'm-auto',
               'mt-8',
-              'mb-12',
+              'mb-16',
               'max-w-[240px]',
               'text-lg',
               'px-4',
@@ -170,7 +169,7 @@ export default function About() {
             Get Incentivized
           </RawButton>
         </div>
-        <div id="guidelines" className="mt-12 mx-3 sm:w-3/4 md:w-2/3">
+        <div id="guidelines" className="mt-24 mx-3 sm:w-3/4 md:w-2/3">
           <AboutHeader className="text-left text-4xl w-1/2">
             Testnet Guidelines
           </AboutHeader>

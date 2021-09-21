@@ -3,4 +3,5 @@ export type Props = {
   children?: React.ReactNode
   background?: string
   behind?: string
+  className?: string
 }

@@ -26,6 +26,8 @@ module.exports = {
       },
       minHeight: {
         section: '43rem',
+        'card-sm': '49rem',
+        'card-md': '46rem',
       },
       maxWidth: {
         section: '52.5rem',
@@ -33,9 +35,9 @@ module.exports = {
       },
       minWidth: {
         6: '1.5rem',
-        'card-sm': '66.66%',
-        'card-md': '46%',
-        'card-lg': '26.57%',
+        'card-sm': '24rem',
+        'card-md': '30rem',
+        'card-lg': '40rem',
       },
       padding: {
         13: '3.125rem',

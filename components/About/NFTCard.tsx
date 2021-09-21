@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Box } from 'components/OffsetBorder/Box'
 
 type NFTProps = {
@@ -7,17 +8,43 @@ type NFTProps = {
 }
 
 export const NFTCard = ({ title, content, pic }: NFTProps) => (
-  <div className="mx-2 block min-w-card-sm md:min-w-card-md lg:min-w-card-lg max-w-[22rem]">
-    <Box behind="bg-white">
+  <div
+    className={clsx(
+      'mx-4',
+      'flex',
+      'flex-col',
+      'flex-grow',
+      'h-full',
+      'min-w-card-sm',
+      'md:min-w-card-md'
+    )}
+  >
+    <Box
+      behind="bg-white h-full"
+      className="h-full"
+      background="bg-white h-full"
+    >
       <div
-        className="p-2 flex flex-col justify-between content-between"
-        style={{ minHeight: '36rem' }}
+        className={clsx(
+          'pt-14',
+          'flex',
+          'h-full',
+          'flex-col',
+          'flex-grow',
+          'flex-shrink-0',
+          'justify-between',
+          'content-between'
+        )}
       >
-        <strong className="uppercase">NFT Reward</strong>
-        <h4 className="py-3 font-extended text-3xl">{title}</h4>
-        <p className="mt-4 mb-6">{content}</p>
-        {/* eslint-disable-next-line */}
-        <img src={pic} />
+        <div className="px-14 flex flex-col flex-grow">
+          <strong className="uppercase text-lg">NFT Reward</strong>
+          <h4 className="py-3 font-extended text-4xl">{title}</h4>
+          <p className="mt-4 mb-6 text-xl">{content}</p>
+        </div>
+        <div className={clsx('flex', 'flex-shrink', 'self-end')}>
+          {/* eslint-disable-next-line */}
+          <img src={pic} />
+        </div>
       </div>
     </Box>
   </div>
