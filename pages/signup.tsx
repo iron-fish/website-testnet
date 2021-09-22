@@ -34,7 +34,7 @@ const FIELDS = {
   social: {
     id: 'social',
     label: '',
-    placeholder: 'Your proof',
+    placeholder: 'Your username',
     defaultValue: UNSET,
     validation: exists,
     defaultErrorText,
