@@ -17,6 +17,10 @@
   background-image: url(public/arrow_drop_down_black.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: #ffc2eb;
+  background-color: transparent;
   pointer-events: none;
+}
+
+.customSelectWrapper.disabled::after {
+  background-image: url(public/arrow_drop_down_disabled.png);
 }

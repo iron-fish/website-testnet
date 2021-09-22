@@ -4,6 +4,7 @@ import { Field, NameValue } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
 
 interface OptionsProps {
+  disabled?: boolean
   groupName: string
   options: NameValue[]
   choice: string
@@ -11,6 +12,7 @@ interface OptionsProps {
 }
 
 const RadioOptions = ({
+  disabled = false,
   groupName,
   options,
   choice,
@@ -20,22 +22,26 @@ const RadioOptions = ({
     {options.map(({ name, value }, idx) => {
       const checked = value === choice
       const activeClass = checked ? 'active' : 'inactive'
+      const disabledClass = disabled ? styles.disabled : ''
       return (
         <label
           key={value}
-          onClick={() => setChoice(value)}
+          onClick={() => !disabled && setChoice(value)}
           className={`${styles.radioOption} ${activeClass} mr-2`}
         >
           <input
             className={styles.radioInput}
+            disabled={disabled}
             type="radio"
             name={groupName}
             value={value}
             defaultChecked={checked}
             tabIndex={idx}
           />
-          <span className={`${styles.radioFake} ${activeClass}`} />
-          <span className={styles.radioText}>{name}</span>
+          <span
+            className={`${styles.radioFake} ${disabledClass} ${activeClass} bg-ifblue`}
+          />
+          <span>{name}</span>
         </label>
       )
     })}
@@ -55,6 +61,7 @@ export const TextField = ({
   choice,
   setChoice,
   isRadioed,
+  disabled,
 }: Field) => (
   <LabelledRow
     key={id}
@@ -62,9 +69,11 @@ export const TextField = ({
     label={label}
     valid={valid}
     errorText={errorText}
+    disabled={disabled}
   >
     {isRadioed && options.length > 0 && (
       <RadioOptions
+        disabled={disabled}
         groupName={`${id}-group`}
         options={options}
         choice={choice}
@@ -72,7 +81,9 @@ export const TextField = ({
       />
     )}
     <input
+      className={`${disabled ? 'bg-transparent' : ''}`}
       defaultValue={defaultValue}
+      disabled={disabled}
       onBlur={onBlur}
       onChange={onChange}
       id={id}

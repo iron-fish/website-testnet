@@ -9,6 +9,7 @@ interface SelectField extends Field {
 }
 
 export const Select = ({
+  disabled,
   options = [],
   useDefault = false,
   defaultLabel = '',
@@ -22,9 +23,14 @@ export const Select = ({
     ? [{ name: defaultLabel, value: defaultValue }].concat(options)
     : options
   return (
-    <div className={styles.customSelectWrapper}>
+    <div
+      className={`${styles.customSelectWrapper} ${
+        disabled ? styles.disabled : ''
+      }`}
+    >
       <select
         className={`${styles.customSelect} bg-transparent ${className || ''}`}
+        disabled={disabled}
         onChange={e => {
           onChange(e)
           setTouched(true)
@@ -42,10 +48,16 @@ export const Select = ({
 }
 
 export const LabelledSelect = (props: SelectField) => {
-  const { id, label, errorText, valid } = props
+  const { id, label, errorText, valid, disabled } = props
 
   return (
-    <LabelledRow id={id} label={label} valid={valid} errorText={errorText}>
+    <LabelledRow
+      id={id}
+      label={label}
+      valid={valid}
+      errorText={errorText}
+      disabled={disabled}
+    >
       <Select {...props} />
     </LabelledRow>
   )
