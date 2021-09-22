@@ -18,6 +18,7 @@ import { useField } from 'hooks/useForm'
 import * as API from 'apiClient'
 import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
+import Loader from 'components/Loader'
 type Props = {
   users: ReadonlyArray<API.ApiUser>
 }
@@ -63,6 +64,7 @@ export default function Leaderboard({ users = [] }: Props) {
   const [$search, $setSearch] = useState('')
   const $debouncedSearch = useDebounce($search, 300)
   const [$hasSearched, $setHasSearched] = useState(false)
+  const [$searching, $setSearching] = useState(false)
 
   useEffect(() => {
     // Drop the initial value, since results will be preloaded
@@ -72,6 +74,7 @@ export default function Leaderboard({ users = [] }: Props) {
     }
 
     const func = async () => {
+      $setSearching(true)
       const countrySearch =
         $country && $country.value && $country.value !== 'Global'
           ? { country_code: $country.value }
@@ -83,6 +86,7 @@ export default function Leaderboard({ users = [] }: Props) {
       if (!('error' in result)) {
         $setUsers(result.data)
       }
+      $setSearching(false)
     }
     func()
     // Don't re-fire the effect when hasSearched updates
@@ -163,7 +167,9 @@ export default function Leaderboard({ users = [] }: Props) {
               </>
             )}
           </div>
-          {$users.length > 0 ? (
+          {!$hasSearched || $searching ? (
+            <Loader />
+          ) : !$searching && $hasSearched && $users.length > 0 ? (
             $users.map(user => (
               <div className="mb-3" key={user.id}>
                 <Link href={`/users/${user.id}`}>
