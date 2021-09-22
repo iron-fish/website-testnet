@@ -22,7 +22,7 @@ export default function KeepReading({
       <ul className="px-4">
         {readingLinks.map(({ text, href }) => (
           <li
-            className="list-style-none w-2/3 flex relative h-8 my-6"
+            className="list-style-none w-1/2 flex relative h-8 my-6"
             key={text}
           >
             <Link passHref href={href}>
