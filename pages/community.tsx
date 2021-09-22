@@ -41,7 +41,11 @@ export default function Community() {
           />
           <Stories />
         </div>
-        <TubesCTA cta="Join the Testnet" buttonText="Join Now" goTo="/signup" />
+        <TubesCTA
+          cta="Join the Testnet!"
+          buttonText="Join Now"
+          goTo="/signup"
+        />
         <KeepReading background="bg-ifbeige" />
       </main>
       <Footer />
