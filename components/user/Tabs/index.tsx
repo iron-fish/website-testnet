@@ -6,45 +6,45 @@ import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
 import WeeklyContent from './WeeklyContent'
 
-type TabType = 'all' | 'weekly' | 'settings'
+export type TabType = 'all' | 'weekly' | 'settings'
 
 type TabsProps = {
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
-  initialTab?: TabType
   metricsConfig: API.MetricsConfigResponse
-  settingsVisible: boolean
+  userMetadata: API.ApiUserMetadata | null
+  activeTab: TabType
+  onTabChange: (tab: TabType) => unknown
 }
 
 export default function Tabs({
   allTimeMetrics,
   weeklyMetrics,
-  initialTab = 'weekly',
   metricsConfig,
-  settingsVisible,
+  userMetadata,
+  activeTab,
+  onTabChange,
 }: TabsProps) {
-  const [selectedTab, setSelectedTab] = React.useState<TabType>(initialTab)
-
   return (
     <div>
       {/* Tabs */}
       <div className="flex font-favorit gap-x-6">
         <TabHeaderButton
-          selected={selectedTab === 'weekly'}
-          onClick={() => setSelectedTab('weekly')}
+          selected={activeTab === 'weekly'}
+          onClick={() => onTabChange('weekly')}
         >
           Weekly Stats
         </TabHeaderButton>
         <TabHeaderButton
-          selected={selectedTab === 'all'}
-          onClick={() => setSelectedTab('all')}
+          selected={activeTab === 'all'}
+          onClick={() => onTabChange('all')}
         >
           All Time Stats
         </TabHeaderButton>
-        {settingsVisible && (
+        {userMetadata && (
           <TabHeaderButton
-            selected={selectedTab === 'settings'}
-            onClick={() => setSelectedTab('settings')}
+            selected={activeTab === 'settings'}
+            onClick={() => onTabChange('settings')}
           >
             Settings
           </TabHeaderButton>
@@ -52,16 +52,18 @@ export default function Tabs({
       </div>
 
       {/* Tabs Content */}
-      {selectedTab === 'weekly' && (
+      {activeTab === 'weekly' && (
         <WeeklyContent
           weeklyMetrics={weeklyMetrics}
           metricsConfig={metricsConfig}
         />
       )}
-      {selectedTab === 'all' && (
+      {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
-      {selectedTab === 'settings' && <SettingsContent />}
+      {activeTab === 'settings' && userMetadata && (
+        <SettingsContent userMetadata={userMetadata} />
+      )}
     </div>
   )
 }

@@ -8,11 +8,12 @@ import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import EventsPaginationButton from 'components/user/EventsPaginationButton'
 import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
-import Tabs from 'components/user/Tabs'
+import Tabs, { TabType } from 'components/user/Tabs'
 import usePaginatedEvents from 'hooks/usePaginatedEvents'
 
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
+import { LoginContext } from 'contexts/LoginContext'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 7
@@ -88,112 +89,142 @@ export default function User({
   weeklyMetrics,
   metricsConfig,
 }: Props) {
-  const avatarColor = graffitiToColor(user.graffiti)
-  const ordinalRank = numberToOrdinal(user.rank)
-
-  const totalWeeklyLimit = Object.values(metricsConfig.weekly_limits).reduce(
-    (acc, cur) => acc + cur,
-    0
-  )
-
   // Recent Activity hooks
   const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
     usePaginatedEvents(user.id.toString(), EVENTS_LIMIT, events)
 
+  // Tab hooks
+  const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
+  const onTabChange = React.useCallback((tab: TabType) => {
+    $setActiveTab(tab)
+  }, [])
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>{user.graffiti}</title>
-        <meta name="description" content={String(user.graffiti)} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <LoginContext.Consumer>
+      {({ metadata }) => {
+        const avatarColor = graffitiToColor(user.graffiti)
+        const ordinalRank = numberToOrdinal(user.rank)
 
-      <Navbar fill="black" className="bg-ifpink text-black" />
+        const totalWeeklyLimit = Object.values(
+          metricsConfig.weekly_limits
+        ).reduce((acc, cur) => acc + cur, 0)
 
-      <main className="bg-ifpink flex-1 items-center flex flex-col pt-16 pb-32">
-        <OffsetBorderContainer>
-          <div className="px-24 pt-16 pb-12" style={{ maxWidth: 1116 }}>
-            {/* Header */}
-            <div className="flex justify-between mb-8">
-              <div>
-                <h1 className="font-extended text-6xl mt-6 mb-8">
-                  {user.graffiti}
-                </h1>
+        return (
+          <div className="min-h-screen flex flex-col">
+            <Head>
+              <title>{user.graffiti}</title>
+              <meta name="description" content={String(user.graffiti)} />
+              <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-                <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
-                  <div>
-                    <div>All Time Rank</div>
-                    <div className="text-3xl mt-2">{ordinalRank}</div>
+            <Navbar fill="black" className="bg-ifpink text-black" />
+
+            <main className="bg-ifpink flex-1 justify-center flex pt-16 pb-32">
+              <div style={{ flexBasis: 1138 }}>
+                <OffsetBorderContainer>
+                  <div className="px-24 pt-16 pb-12">
+                    {/* Header */}
+                    <div
+                      className="flex justify-between mb-8"
+                      style={{ width: '100%' }}
+                    >
+                      <div>
+                        <h1 className="font-extended text-6xl mt-6 mb-8">
+                          {user.graffiti}
+                        </h1>
+
+                        <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
+                          <div>
+                            <div>All Time Rank</div>
+                            <div className="text-3xl mt-2">{ordinalRank}</div>
+                          </div>
+                          <div>
+                            <div>Total Points</div>
+                            <div className="text-3xl mt-2">
+                              {user.total_points.toLocaleString()}
+                            </div>
+                          </div>
+                          <div>
+                            <div>Weekly Points</div>
+                            <div className="text-3xl mt-2">
+                              {weeklyMetrics.points.toLocaleString()} /{' '}
+                              {totalWeeklyLimit.toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <FishAvatar color={avatarColor} />
+                        <div className="mt-4">
+                          <Flag code={user.country_code} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tabs */}
+                    <Tabs
+                      activeTab={$activeTab}
+                      onTabChange={onTabChange}
+                      userMetadata={metadata}
+                      allTimeMetrics={allTimeMetrics}
+                      weeklyMetrics={weeklyMetrics}
+                      metricsConfig={metricsConfig}
+                    />
+
+                    {/* Recent Activity */}
+                    {$activeTab !== 'settings' && (
+                      <>
+                        <h1 className="font-favorit">Recent Activity</h1>
+
+                        <table className="font-favorit w-full">
+                          <thead>
+                            <tr className="text-xs text-left tracking-widest border-b border-black">
+                              <th className="font-normal py-4">ACTIVITY</th>
+                              <th className="font-normal">DATE</th>
+                              <th className="font-normal">POINTS EARNED</th>
+                            </tr>
+                          </thead>
+                          <tbody className="text-sm">
+                            {$events.map(e => (
+                              <tr key={e.id} className="border-b border-black">
+                                <td className="py-4">
+                                  {displayEventType(e.type)}
+                                </td>
+                                <td>
+                                  {new Date(e.occurred_at).toLocaleString()}
+                                </td>
+                                <td>{e.points}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    )}
                   </div>
-                  <div>
-                    <div>Total Points</div>
-                    <div className="text-3xl mt-2">
-                      {user.total_points.toLocaleString()}
+                </OffsetBorderContainer>
+                {/* Recent Activity Pagination */}
+                {$activeTab !== 'settings' && (
+                  <div className="flex font-favorit justify-center mt-8">
+                    <div className="flex gap-x-1.5">
+                      <EventsPaginationButton
+                        disabled={!$hasPrevious}
+                        onClick={fetchPrevious}
+                      >{`<< Previous`}</EventsPaginationButton>
+                      <div>{`|`}</div>
+                      <EventsPaginationButton
+                        disabled={!$hasNext}
+                        onClick={fetchNext}
+                      >{`Next >>`}</EventsPaginationButton>
                     </div>
                   </div>
-                  <div>
-                    <div>Weekly Points</div>
-                    <div className="text-3xl mt-2">
-                      {weeklyMetrics.points.toLocaleString()} /{' '}
-                      {totalWeeklyLimit.toLocaleString()}
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
-              <div className="flex flex-col items-center">
-                <FishAvatar color={avatarColor} />
-                <div className="mt-4">
-                  <Flag code={user.country_code} />
-                </div>
-              </div>
-            </div>
+            </main>
 
-            {/* Tabs */}
-            <Tabs
-              settingsVisible={false}
-              allTimeMetrics={allTimeMetrics}
-              weeklyMetrics={weeklyMetrics}
-              metricsConfig={metricsConfig}
-            />
-
-            {/* Recent Activity */}
-            <h1 className="font-favorit">Recent Activity</h1>
-
-            <table className="font-favorit w-full">
-              <thead>
-                <tr className="text-xs text-left tracking-widest border-b border-black">
-                  <th className="font-normal py-4">ACTIVITY</th>
-                  <th className="font-normal">DATE</th>
-                  <th className="font-normal">POINTS EARNED</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {$events.map(e => (
-                  <tr key={e.id} className="border-b border-black">
-                    <td className="py-4">{displayEventType(e.type)}</td>
-                    <td>{new Date(e.occurred_at).toLocaleString()}</td>
-                    <td>{e.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <Footer />
           </div>
-        </OffsetBorderContainer>
-        {/* Recent Activity Pagination */}
-        <div className="flex mt-8 font-favorit gap-x-1.5">
-          <EventsPaginationButton
-            disabled={!$hasPrevious}
-            onClick={fetchPrevious}
-          >{`<< Previous`}</EventsPaginationButton>
-          <div>{`|`}</div>
-          <EventsPaginationButton
-            disabled={!$hasNext}
-            onClick={fetchNext}
-          >{`Next >>`}</EventsPaginationButton>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        )
+      }}
+    </LoginContext.Consumer>
   )
 }

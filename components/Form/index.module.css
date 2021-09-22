@@ -59,7 +59,9 @@
   border-radius: 50%;
   background-color: black;
 }
-.radioText {
-  /* position: absolute; */
-  /* right: 0; */
+.radioFake.disabled {
+  @apply border-ifsubtextgray;
+}
+.radioFake.disabled::after {
+  @apply bg-ifsubtextgray;
 }

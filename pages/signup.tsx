@@ -14,7 +14,7 @@ import { useField } from 'hooks/useForm'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
-const FIELDS = {
+export const FIELDS = {
   email: {
     id: 'email',
     label: 'Email',
