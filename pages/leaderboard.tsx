@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -21,20 +20,6 @@ import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 type Props = {
   users: ReadonlyArray<API.ApiUser>
-}
-
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const events = await API.listLeaderboard()
-
-  if ('error' in events) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: { users: events.data },
-  }
 }
 
 const FIELDS = {
@@ -69,7 +54,7 @@ const FIELDS = {
   },
 }
 
-export default function Leaderboard({ users }: Props) {
+export default function Leaderboard({ users = [] }: Props) {
   const $country = useField(FIELDS.country)
   const $view = useField(FIELDS.view)
   const [$users, $setUsers] = useState(users)
