@@ -1,35 +1,25 @@
 import type { ReactNode } from 'react'
 import Head from 'next/head'
 import Img from 'next/image'
-import Link from 'next/link'
 import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
-import Intertubes from 'components/About/ImageIntertubes'
 
-import { RawButton } from 'components/Button'
+import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
+import KeepReading from 'components/KeepReading'
 
 import { BasicLink } from 'components/About/Link'
 import { AboutHeader } from 'components/About/Header'
 import { renderColumn } from 'components/About/CallToAction'
 import { renderGuidelineColumn } from 'components/About/Guidelines'
 import { NFTCard } from 'components/About/NFTCard'
-import {
-  cards,
-  guidelines,
-  callsToAction,
-  readingLinks,
-} from 'components/About/data'
+import { cards, guidelines, callsToAction } from 'components/About/data'
 import { useResponsiveCards } from 'components/About/hooks'
 
-import {
-  TaillessArrowRight,
-  ArrowLeft,
-  ArrowRight,
-} from 'components/icons/Arrows'
+import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
 
 type ArrowButtonProps = {
   children: ReactNode
@@ -143,32 +133,11 @@ export default function About() {
             <ArrowRight />
           </ArrowButton>
         </div>
-        <div className="w-full flex mt-10 border-black border-b">
-          <Intertubes />
-        </div>
-        <div className="w-full flex mt-16 border-black border-b flex-col">
-          <h3 className="font-extended text-3xl md:text-4xl m-auto text-center">
-            What are you waiting for?
-            <br />
-            Start earning points!
-          </h3>
-          <RawButton
-            className={clsx(
-              'm-auto',
-              'mt-8',
-              'mb-16',
-              'max-w-[240px]',
-              'text-lg',
-              'px-4',
-              'py-3',
-              'md:text-xl',
-              'md:py-5',
-              'md:px-4'
-            )}
-          >
-            Get Incentivized
-          </RawButton>
-        </div>
+        <TubesCTA
+          cta="Start earning points!"
+          buttonText="Get Incentivized"
+          goTo="/signup"
+        />
         <div id="guidelines" className="mt-24 mx-3 sm:w-3/4 md:w-2/3">
           <AboutHeader className="text-left text-4xl w-1/2">
             Testnet Guidelines
@@ -182,38 +151,7 @@ export default function About() {
             </div>
           </div>
         </div>
-
-        <div className="mt-12 mx-3 w-full md:w-2/3">
-          <AboutHeader className="text-left text-4xl mx-4">
-            Keep Reading
-          </AboutHeader>
-          <ul className="px-4">
-            {readingLinks.map(({ text, href }) => (
-              <li
-                className="list-style-none w-2/3 flex relative h-8 my-6"
-                key={text}
-              >
-                <Link passHref href={href}>
-                  <a className="w-full flex relative h-8 my-6">
-                    <div className="text-2xl font-extended absolute left-0 bg-iflightorange h-8 z-10 pr-4">
-                      {text}
-                    </div>
-                    <div className="w-full relative flex justify-between">
-                      <div
-                        className="border-black h-1/2 border-b-2 -mr-4"
-                        style={{ width: 'calc(100% - 2px)' }}
-                      />
-                      <TaillessArrowRight
-                        style={{ marginTop: '3.5px' }}
-                        className="absolute right-0"
-                      />
-                    </div>
-                  </a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <KeepReading />
         <div className="mb-24"></div>
       </main>
       <Footer />

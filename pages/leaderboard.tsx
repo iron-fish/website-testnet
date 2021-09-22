@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -115,7 +116,7 @@ export default function Leaderboard({ users }: Props) {
 
       <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
-        <div className="w-2/3">
+        <div className="w-4/5 md:w-2/3">
           <PageBanner
             title="Testnet Leaderboard"
             text="Our incentivized testnet leaderboard shows you who the top point
@@ -123,7 +124,17 @@ export default function Leaderboard({ users }: Props) {
           node hosting, and more! Click someone’s user name to see a breakdown
           of their activity."
             buttonText="Sign Up"
-            buttonClassName="mb-16"
+            buttonClassName={clsx(
+              'm-auto',
+              'mb-32',
+              'w-full',
+              'max-w-[240px]',
+              'text-lg',
+              'p-3',
+              'md:text-xl',
+              'md:py-5',
+              'md:px-4'
+            )}
             buttonLink="/signup"
           />
 
