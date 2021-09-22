@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 
@@ -6,7 +6,7 @@ import { RawButton } from '../Button'
 
 type PageBannerProps = {
   title: string
-  text: string
+  text: ReactNode
   buttonText: string
   buttonClassName?: string
   buttonLink: string
