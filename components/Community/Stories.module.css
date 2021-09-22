@@ -9,8 +9,8 @@
   transform: scale(1.25);
 }
 
-/* aka tailwind md */
-@media (min-width: 768px) {
+/* aka tailwind lg */
+@media (min-width: 1024px) {
   .story {
     width: calc(50% - 1.25rem);
     margin: 0.625rem;
