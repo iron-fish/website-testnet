@@ -98,7 +98,7 @@ export default function Leaderboard({ users = [] }: Props) {
     func()
     // Don't re-fire the effect when hasSearched updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [$debouncedSearch, $country])
+  }, [$debouncedSearch, $country, $eventType])
 
   return (
     <div className="min-h-screen flex flex-col font-favorit">
