@@ -23,6 +23,8 @@ type Props = {
   users: ReadonlyArray<API.ApiUser>
 }
 
+const TOTAL_POINTS = 'Total Points'
+
 const FIELDS = {
   country: {
     id: 'country',
@@ -37,9 +39,9 @@ const FIELDS = {
     defaultValue: 'Global',
     defaultLabel: 'Global',
   },
-  view: {
-    id: 'view',
-    label: 'View',
+  eventType: {
+    id: 'eventType',
+    label: 'eventType',
     options: [
       { name: 'Blocks Mined', value: 'BLOCKS_MINED' },
       { name: 'Bugs Caught', value: 'BUGS_CAUGHT' },
@@ -50,14 +52,14 @@ const FIELDS = {
     validation: () => true,
     defaultErrorText,
     useDefault: true,
-    defaultValue: 'Total Points',
-    defaultLabel: 'Total Points',
+    defaultValue: TOTAL_POINTS,
+    defaultLabel: TOTAL_POINTS,
   },
 }
 
 export default function Leaderboard({ users = [] }: Props) {
   const $country = useField(FIELDS.country)
-  const $view = useField(FIELDS.view)
+  const $eventType = useField(FIELDS.eventType)
   const [$users, $setUsers] = useState(users)
 
   // Search field hooks
@@ -79,9 +81,14 @@ export default function Leaderboard({ users = [] }: Props) {
         $country && $country.value && $country.value !== 'Global'
           ? { country_code: $country.value }
           : {}
+      const eventType =
+        $eventType && $eventType.value && $eventType.value !== TOTAL_POINTS
+          ? { event_type: $eventType.value }
+          : {}
       const result = await API.listLeaderboard({
         search: $debouncedSearch,
         ...countrySearch,
+        ...eventType,
       })
       if (!('error' in result)) {
         $setUsers(result.data)
@@ -151,8 +158,8 @@ export default function Leaderboard({ users = [] }: Props) {
             <div className="h-full flex items-center justify-between w-1/4">
               <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
                 View:
-                {$view && $view.value && (
-                  <Select {...$view} className="text-lg" />
+                {$eventType && $eventType.value && (
+                  <Select {...$eventType} className="text-lg" />
                 )}
               </label>
             </div>

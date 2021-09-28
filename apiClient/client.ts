@@ -49,9 +49,11 @@ export async function createUser(
 export async function listLeaderboard({
   search,
   country_code: countryCode,
+  event_type: eventType,
 }: {
   search?: string
   country_code?: string
+  event_type?: string
 } = {}): Promise<ListLeaderboardResponse | ApiError> {
   const params = new URLSearchParams({
     order_by: 'rank',
@@ -61,6 +63,9 @@ export async function listLeaderboard({
   }
   if (countryCode) {
     params.append('country_code', countryCode)
+  }
+  if (eventType) {
+    params.append('event_type', eventType)
   }
   const res = await fetch(`${API_URL}/users?${params.toString()}`)
   return await res.json()
