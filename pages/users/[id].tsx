@@ -114,7 +114,6 @@ export default function User({
             <Head>
               <title>{user.graffiti}</title>
               <meta name="description" content={String(user.graffiti)} />
-              <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Navbar fill="black" className="bg-ifpink text-black" />

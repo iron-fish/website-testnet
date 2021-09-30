@@ -145,7 +145,6 @@ export default function SignUp() {
       <Head>
         <title>Sign up</title>
         <meta name="description" content="Sign up" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
       <main className="bg-ifpink flex-1 font-extended">

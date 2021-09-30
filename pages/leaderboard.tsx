@@ -98,7 +98,6 @@ export default function Leaderboard({ users = [] }: Props) {
       <Head>
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar fill="black" className="bg-ifpink text-black" />

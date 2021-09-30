@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginContext.Provider value={loginValue}>
         <Component {...pageProps} />
