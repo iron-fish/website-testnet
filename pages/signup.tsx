@@ -114,16 +114,31 @@ export default function SignUp() {
       social,
       country
     )
+
+    $setLoaded(true)
+
     if ('error' in result) {
       const error = '' + result.message
       $setError(error)
     } else {
       $setSignedUp(true)
-      $setLoaded(true)
       scrollUp()
       Router.push(`/login?email=${email}&autoLogin=true`)
     }
   }, [$email, $graffiti, $social, $country, testInvalid])
+
+  // When loading is stopped with an error, the form fields re-render
+  // but are empty, so repopulate them.
+  if ($email) {
+    $email.defaultValue = $email.value || UNSET
+  }
+  if ($graffiti) {
+    $graffiti.defaultValue = $graffiti.value || UNSET
+  }
+  if ($social) {
+    $social.defaultValue = $social.value || UNSET
+  }
+
   const textFields = [$email, $graffiti, $social]
   return (
     <div className="min-h-screen flex flex-col">
