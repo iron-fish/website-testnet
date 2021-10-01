@@ -14,6 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
+        <meta property="og:image" content="/preview_image.png" />
+        <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginContext.Provider value={loginValue}>
