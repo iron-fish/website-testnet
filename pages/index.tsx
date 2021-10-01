@@ -15,7 +15,6 @@ export default function Home() {
                 name="description"
                 content="Iron Fish Incentivized Testnet. Iron Fish is a new layer-1 blockchain and the future universal privacy layer for all things crypto."
               />
-              <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Navbar fill="black" className="bg-iforange text-black" />

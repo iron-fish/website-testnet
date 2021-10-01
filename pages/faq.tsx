@@ -51,7 +51,6 @@ export default function Faq() {
       <Head>
         <title>FAQ</title>
         <meta name="description" content="FAQ" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar fill="black" className="bg-white text-black" />

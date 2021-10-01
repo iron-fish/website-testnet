@@ -15,7 +15,6 @@ export default function Community() {
       <Head>
         <title>Community</title>
         <meta name="description" content="Community" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar fill="black" className="bg-ifbeige text-black" />

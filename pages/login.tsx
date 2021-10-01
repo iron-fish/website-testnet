@@ -99,7 +99,6 @@ export default function Login() {
       <Head>
         <title>Login</title>
         <meta name="description" content="Login" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar fill="black" className="bg-ifpink text-black" />
