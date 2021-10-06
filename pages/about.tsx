@@ -113,9 +113,8 @@ export default function About() {
           </AboutHeader>
           <p className="text-center max-w-lg m-auto text-justify mb-14 text-2xl">
             At the end of the testnet if you’re the leader in any of the
-            categories mentioned above, you’ll not only earn extra points as a
-            prize, but also an Iron Fish NFT. Filter the leaderboard to see
-            category leaders.
+            categories mentioned above you might be eligible to receive an Iron
+            Fish NFT. Filter the leaderboard to see category leaders.
           </p>
         </div>
         <div className="flex flex-row w-full overflow-x-auto" ref={$cards}>
