@@ -54,7 +54,7 @@ export const guidelines = {
     {
       title: 'Rewards',
       content:
-        'The Incentivized Testnet program will distribute up to 210,000 Iron Fish tokens to eligible participants.',
+        'The Incentivized Testnet program will distribute up to 210,000 Iron Fish tokens to eligible participants, proportional to your leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
       behind: 'bg-white',
     },
     {
@@ -66,7 +66,7 @@ export const guidelines = {
     {
       title: 'Unforeseeable',
       content:
-        'In the event that legal or regulatory issues arise, rewards may be restructured, postponed, or even cancelled.',
+        'In the event that legal or regulatory issues arise, rewards may be restructured, postponed, or even canceled.',
       behind: 'bg-white',
     },
   ],
