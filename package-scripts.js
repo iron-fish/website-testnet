@@ -1,3 +1,13 @@
+const FIXTURES = {
+  CYPRESS: {
+    LOCAL: 'cypress/cypress-local.json',
+    PROD: 'cypress/cypress-PROD.json',
+  },
+}
+const e2e = config => cmd => `cypress ${cmd} --config-file ${config}`
+const localE2E = e2e(FIXTURES.CYPRESS.LOCAL)
+const prodE2E = e2e(FIXTURES.CYPRESS.PROD)
+
 module.exports = {
   scripts: {
     dev: 'next dev',
@@ -10,10 +20,10 @@ module.exports = {
     test: {
       integration: {
         dev: {
-          script: `cypress run --config-file cypress/cypress-local.json`,
-          debug: `cypress open --config-file cypress/cypress-local.json`,
+          script: localE2E(`run`),
+          debug: localE2E(`open`),
         },
-        script: `cypress run --config-file cypress/cypress-prod.json`,
+        script: prodE2E(`run`),
       },
     },
   },
