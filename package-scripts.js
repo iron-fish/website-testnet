@@ -13,10 +13,19 @@ module.exports = {
     dev: 'next dev',
     build: 'next build',
     start: 'next start',
-    lint: 'next lint',
+    lint: {
+      script: 'next lint',
+      repetition: 'twly --boring --lines 3',
+    },
     precommit: 'nps care',
     care: 'nps build lint',
-    dry: 'twly --boring --lines 3',
+    meta: {
+      log: `gitparty`,
+      dependencies: {
+        script: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils | dot -T svg > dependency-graph.svg`,
+        interactive: `cat dependency-graph.svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
+      },
+    },
     test: {
       integration: {
         dev: {
