@@ -22,7 +22,7 @@ module.exports = {
     meta: {
       log: `gitparty`,
       dependencies: {
-        script: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils | dot -T svg > dependency-graph.svg`,
+        script: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils --progress -x node_modules definitions | dot -T svg > dependency-graph.svg`,
         interactive: `cat dependency-graph.svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
       },
     },
