@@ -43,11 +43,11 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
-      { name: 'Blocks Mined', value: 'BLOCKS_MINED' },
-      { name: 'Bugs Caught', value: 'BUGS_CAUGHT' },
-      { name: 'Promotions', value: 'PROMOTIONS' },
-      { name: 'PRs Merged', value: 'PRS_MERGED' },
-      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTIONS' },
+      { name: 'Blocks Mined', value: 'BLOCK_MINED' },
+      { name: 'Bugs Caught', value: 'BUG_CAUGHT' },
+      { name: 'Promotions', value: 'SOCIAL_MEDIA_PROMOTION' },
+      { name: 'PRs Merged', value: 'PULL_REQUEST_MERGED' },
+      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTION' },
     ],
     validation: () => true,
     defaultErrorText,
@@ -91,6 +91,8 @@ export default function Leaderboard({ users = [] }: Props) {
         ...eventType,
       })
       if (!('error' in result)) {
+        // eslint-disable-next-line
+        console.log({ result })
         $setUsers(result.data)
       }
       $setSearching(false)
@@ -183,7 +185,7 @@ export default function Leaderboard({ users = [] }: Props) {
                     <LeaderboardRow
                       rank={user.rank}
                       graffiti={user.graffiti}
-                      points={user.total_points}
+                      points={user.total_points || 0}
                     />
                   </a>
                 </Link>

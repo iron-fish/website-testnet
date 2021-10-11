@@ -67,6 +67,7 @@ export async function listLeaderboard({
   if (eventType) {
     params.append('event_type', eventType)
   }
+  console.log({ params: params.toString() })
   const res = await fetch(`${API_URL}/users?${params.toString()}`)
   return await res.json()
 }
