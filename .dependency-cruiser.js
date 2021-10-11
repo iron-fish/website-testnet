@@ -208,7 +208,7 @@ module.exports = {
        for a complete list
     */
     doNotFollow: {
-      path: 'node_modules',
+      // path: 'node_modules',
       dependencyTypes: [
         'npm',
         'npm-dev',
@@ -224,10 +224,10 @@ module.exports = {
        - dynamic: a boolean indicating whether to ignore dynamic (true) or static (false) dependencies.
           leave out if you want to exclude neither (recommended!)
     */
-    // exclude : {
-    //   path: '',
-    //   dynamic: true
-    // },
+    exclude: {
+      path: '^(definitions|node_modules)',
+      // dynamic: false,
+    },
 
     /* pattern specifying which files to include (regular expression)
        dependency-cruiser will skip everything not matching this pattern
