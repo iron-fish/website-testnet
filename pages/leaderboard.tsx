@@ -91,8 +91,6 @@ export default function Leaderboard({ users = [] }: Props) {
         ...eventType,
       })
       if (!('error' in result)) {
-        // eslint-disable-next-line
-        console.log({ result })
         $setUsers(result.data)
       }
       $setSearching(false)
