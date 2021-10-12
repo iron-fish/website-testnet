@@ -8,11 +8,7 @@ export default function Logout() {
     const sayGoodbye = async () => {
       if (!magic) return false
       await magic.user.logout()
-      Router.push(
-        (await magic.user.isLoggedIn())
-          ? new URL('/leaderboard', window.location.origin).href
-          : new URL('/login', window.location.origin).href
-      )
+      Router.push((await magic.user.isLoggedIn()) ? '/leaderboard' : '/login')
     }
     sayGoodbye()
   }, [])
