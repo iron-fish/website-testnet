@@ -11,10 +11,11 @@ export function useProtectedRoute({
 }) {
   const { checkLoggedIn } = useLogin()
   useEffect(() => {
-    if (checkLoggedIn() && onLoggedIn) {
+    const check = checkLoggedIn()
+    if (check && onLoggedIn) {
       Router.push(onLoggedIn)
     }
-    if (!checkLoggedIn() && onLoggedOut) {
+    if (!check && onLoggedOut) {
       Router.push(onLoggedOut)
     }
   }, [checkLoggedIn, onLoggedIn, onLoggedOut])
