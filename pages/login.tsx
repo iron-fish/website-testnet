@@ -11,7 +11,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
-import { useProtectedRoute } from 'hooks/useProtectedRoute'
+import { protectedRoute } from 'utils/protectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
 import { login } from 'apiClient'
@@ -27,8 +27,10 @@ const FIELDS = {
   },
 }
 
+export const getServerSideProps = () =>
+  protectedRoute({ ifLoggedIn: '/leaderboard' })
+
 export default function Login() {
-  useProtectedRoute({ onLoggedIn: '/leaderboard' })
   const $queryEmail = useQuery('email')
   const $queryAutoLogin = useQuery('autoLogin')
   if ($queryEmail) {

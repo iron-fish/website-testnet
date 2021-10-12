@@ -11,7 +11,7 @@ import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
 import { createUser } from 'apiClient'
 import { useField } from 'hooks/useForm'
-import { useProtectedRoute } from 'hooks/useProtectedRoute'
+import { protectedRoute } from 'utils/protectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
@@ -60,6 +60,11 @@ export const FIELDS = {
   },
 }
 
+export const getServerSideProps = () =>
+  protectedRoute({
+    ifLoggedIn: '/leaderboard',
+  })
+
 export default function SignUp() {
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
@@ -68,9 +73,6 @@ export default function SignUp() {
   const $country = useField(FIELDS.country)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
-  useProtectedRoute({
-    onLoggedIn: '/leaderboard',
-  })
   useEffect(() => {
     if ($country?.label) {
       $setLoaded(true)
