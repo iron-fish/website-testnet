@@ -183,7 +183,7 @@ export default function Leaderboard({ users = [] }: Props) {
                     <LeaderboardRow
                       rank={user.rank}
                       graffiti={user.graffiti}
-                      points={user.total_points || 0}
+                      points={user.total_points}
                     />
                   </a>
                 </Link>
