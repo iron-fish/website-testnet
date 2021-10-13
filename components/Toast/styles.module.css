@@ -1,0 +1,7 @@
+.toast {
+  transition: opacity 0.3s ease-out;
+  opacity: 1;
+}
+.disappear {
+  opacity: 0;
+}

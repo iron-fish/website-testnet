@@ -9,7 +9,7 @@ import useToast from 'hooks/useToast'
 function MyApp({ Component, pageProps }: AppProps) {
   const $loginValue = useLogin()
   const $toast = useQuery('toast') || ''
-  const { Toast } = useToast()
+  const { Toast } = useToast({ duration: 10e3 })
   return (
     <>
       <Head>
