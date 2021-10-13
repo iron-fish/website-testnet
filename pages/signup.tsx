@@ -62,7 +62,7 @@ export const FIELDS = {
 
 export const getServerSideProps = () =>
   protectedRoute({
-    ifLoggedIn: '/leaderboard',
+    ifLoggedIn: '/leaderboard?toast=You+are+already+logged+in',
   })
 
 export default function SignUp() {
