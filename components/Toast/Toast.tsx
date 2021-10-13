@@ -8,7 +8,7 @@ export const Toast = ({
   action,
   actionLabel,
 }: ConditionalToastProps) =>
-  visible ? (
+  visible && message !== '' ? (
     <div className={clsx('w-full', 'absolute', 'bottom-0', 'z-50', 'flex')}>
       <div
         className={clsx(
