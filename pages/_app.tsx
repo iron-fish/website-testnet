@@ -3,10 +3,13 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { LoginContext } from 'contexts/LoginContext'
 import useLogin from 'hooks/useLogin'
+import useQuery from 'hooks/useQuery'
+import useToast from 'hooks/useToast'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const loginValue = useLogin()
-
+  const $loginValue = useLogin()
+  const $toast = useQuery('toast') || ''
+  const { Toast } = useToast()
   return (
     <>
       <Head>
@@ -18,7 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LoginContext.Provider value={loginValue}>
+      <Toast message={$toast} />
+      <LoginContext.Provider value={$loginValue}>
         <Component {...pageProps} className="font-favorit" />
       </LoginContext.Provider>
     </>
