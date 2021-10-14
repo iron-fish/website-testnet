@@ -10,7 +10,13 @@ export interface ToastCallProps {
   actionLabel?: string
 }
 
+export enum Alignment {
+  Top,
+  Bottom,
+}
+
 export interface ConditionalToastProps extends ToastCallProps {
+  alignment: Alignment
   visible: boolean
 }
 

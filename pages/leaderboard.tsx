@@ -9,7 +9,7 @@ import Search from 'components/icons/Search'
 import BackToTop from 'components/BackToTop'
 import { Select } from 'components/Form/Select'
 import PageBanner from 'components/PageBanner'
-import Toast from 'components/Toast'
+import { Toast, Alignment } from 'components/Toast'
 
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
@@ -112,7 +112,7 @@ export default function Leaderboard({ users = [] }: Props) {
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
       </Head>
-      <Toast message={$toast} visible={$visible} />
+      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
       <Navbar fill="black" className="bg-ifpink text-black" />
       <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
