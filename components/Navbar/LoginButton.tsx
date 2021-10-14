@@ -6,6 +6,8 @@ export const LoginButton = () => {
   return (
     <LoginContext.Consumer>
       {({ status, checkLoggedIn, error, metadata }) => {
+        // eslint-disable-next-line
+        console.log({ status, metadata, error })
         if (error) {
           // TODO: Find a way to resolve this better, but keep for now
           // eslint-disable-next-line
