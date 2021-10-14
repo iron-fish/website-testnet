@@ -9,11 +9,13 @@ import Search from 'components/icons/Search'
 import BackToTop from 'components/BackToTop'
 import { Select } from 'components/Form/Select'
 import PageBanner from 'components/PageBanner'
+import Toast from 'components/Toast'
 
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
+import { useQueriedToast } from 'hooks/useToast'
 
 import * as API from 'apiClient'
 import NoResults from 'components/leaderboard/ImageNoResults'
@@ -58,6 +60,10 @@ const FIELDS = {
 }
 
 export default function Leaderboard({ users = [] }: Props) {
+  const { visible: $visible, message: $toast } = useQueriedToast({
+    queryString: 'toast',
+    duration: 4e3,
+  })
   const $country = useField(FIELDS.country)
   const $eventType = useField(FIELDS.eventType)
   const [$users, $setUsers] = useState(users)
@@ -106,9 +112,8 @@ export default function Leaderboard({ users = [] }: Props) {
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
       </Head>
-
+      <Toast message={$toast} visible={$visible} />
       <Navbar fill="black" className="bg-ifpink text-black" />
-
       <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
         <div className="w-4/5 md:w-2/3">

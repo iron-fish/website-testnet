@@ -1,7 +1,19 @@
 .toast {
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out, top 0.3s ease-out, bottom 0.3s ease-out;
   opacity: 1;
 }
-.disappear {
+.top {
+  top: 5.5rem;
+}
+.bottom {
+  bottom: 4rem;
+}
+
+.topHidden {
   opacity: 0;
+  top: -8rem;
+}
+.bottomHidden {
+  opacity: 0;
+  bottom: -8rem;
 }

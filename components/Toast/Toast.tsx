@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import styles from './styles.module.css'
 
 import { ConditionalToastProps } from './types'
 
@@ -8,21 +9,31 @@ export const Toast = ({
   action,
   actionLabel,
 }: ConditionalToastProps) => (
-  <div className={clsx('w-full', 'fixed', 'bottom-0', 'z-50', 'flex')}>
+  <div
+    className={clsx(
+      'w-full',
+      'fixed',
+      'z-50',
+      'flex',
+      styles.toast,
+      styles.bottom,
+      'bottom-0',
+      {
+        [styles.bottomHidden]: !visible,
+      }
+    )}
+  >
     <div
       className={clsx(
+        'Toast',
         'max-w-[16rem]',
         'mx-auto',
-        'mb-16',
         'flex',
-        'Toast',
         'bg-black',
         'text-white',
         'text-base',
         'px-6',
-        'py-3.5',
-        'transition-opacity',
-        visible ? 'visible' : 'invisible'
+        'py-3.5'
       )}
     >
       <div className={clsx('Toast__message', 'relative')}>{message}</div>

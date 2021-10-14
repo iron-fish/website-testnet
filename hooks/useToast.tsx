@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
+import useQuery from './useQuery'
 
-import { ToastOptions, ToastCallProps, Toast } from 'components/Toast'
+import { ToastOptions } from 'components/Toast'
+import { QueriedToastOptions } from 'components/Toast/types'
 
 export function useToast(opts: ToastOptions = {}) {
   const { duration = 3e3, persist = false } = opts
@@ -14,18 +16,17 @@ export function useToast(opts: ToastOptions = {}) {
     return () => clearTimeout(timeoutId)
   }
   useEffect(_show, [$setVisible, duration, persist])
-  const Notification = ({ message, action, actionLabel }: ToastCallProps) => (
-    <Toast
-      visible={$visible}
-      message={message}
-      action={action}
-      actionLabel={actionLabel}
-    />
-  )
   return {
     visible: $visible,
-    Toast: Notification,
+    show: useCallback(_show, [$setVisible, duration, persist]),
   }
+}
+
+export function useQueriedToast(opts: QueriedToastOptions = {}) {
+  const { queryString = 'toast' } = opts
+  const $toast = useQuery(queryString) || ''
+  const toasted = useToast(opts)
+  return { message: $toast, visible: toasted.visible, show: toasted.show }
 }
 
 export default useToast
