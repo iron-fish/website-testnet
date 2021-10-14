@@ -22,7 +22,8 @@ export const Toast = ({
         topAligned ? styles.top : styles.bottom,
         topAligned ? 'top-0' : 'bottom-0',
         {
-          [topAligned ? styles.topHidden : styles.bottomHidden]: !visible,
+          [topAligned ? styles.topHidden : styles.bottomHidden]:
+            message === '' || !visible,
         }
       )}
     >
