@@ -62,7 +62,7 @@ const FIELDS = {
 export default function Leaderboard({ users = [] }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
-    duration: 4e3,
+    duration: 8e3,
   })
   const $country = useField(FIELDS.country)
   const $eventType = useField(FIELDS.eventType)

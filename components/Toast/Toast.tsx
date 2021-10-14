@@ -16,7 +16,7 @@ export const Toast = ({
       className={clsx(
         'w-full',
         'fixed',
-        'z-50',
+        'z-30',
         'flex',
         styles.toast,
         topAligned ? styles.top : styles.bottom,
