@@ -27,10 +27,9 @@ const FIELDS = {
   },
 }
 
-export const getServerSideProps = () =>
-  protectedRoute({
-    ifLoggedIn: '/leaderboard?toast=You%27re+already+logged+in.',
-  })
+export const getServerSideProps = protectedRoute({
+  ifLoggedIn: '/leaderboard?toast=You%27re+already+logged+in.',
+})
 
 export default function Login() {
   const $queryEmail = useQuery('email')

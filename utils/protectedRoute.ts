@@ -1,4 +1,4 @@
-// import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextPageContext } from 'next'
 import { Magic } from '@magic-sdk/admin'
 
 // SERVER SIDE
@@ -10,9 +10,16 @@ type TravelPath = {
 }
 
 export function protectedRoute({ ifLoggedIn, ifLoggedOut }: TravelPath) {
-  if (magic?.token) {
-    return { redirect: { destination: ifLoggedIn || ifLoggedOut } }
+  async function _visit(context: NextPageContext) {
+    const auth = (context.req?.headers?.authorization || '').substr(7)
+    // eslint-disable-next-line
+    console.log('✨', magic, auth)
+    if (auth && auth.length > 0) {
+      await magic.token.validate(auth)
+      return { redirect: { destination: ifLoggedIn || ifLoggedOut } }
+    }
+    return { props: {} }
   }
-  return { props: {} }
+  return _visit
 }
 export default protectedRoute
