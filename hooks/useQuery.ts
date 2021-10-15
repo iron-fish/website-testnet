@@ -11,6 +11,8 @@ export function useQuery(key: string): string | null {
     if (typeof window === 'undefined') return
 
     const parsed = new URLSearchParams((window.location.search || '').slice(1))
+    // eslint-disable-next-line
+    console.log(parsed)
 
     const value = parsed.get(key)
 
