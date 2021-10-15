@@ -66,8 +66,6 @@ export function useLogin(redirect?: string) {
     metadata: $metadata,
     status: $status,
   }
-  // eslint-disable-next-line
-  console.log({ loginContext })
   return loginContext
 }
 
