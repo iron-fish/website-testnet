@@ -15,8 +15,7 @@ import { protectedRoute } from 'utils/protectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
-import { useQueriedToast } from 'hooks/useToast'
-import { Toast, Alignment } from 'components/Toast'
+import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 export const FIELDS = {
   email: {
@@ -63,10 +62,10 @@ export const FIELDS = {
   },
 }
 
-export const getServerSideProps = () =>
-  protectedRoute({
-    ifLoggedIn: '/leaderboard?toast=You%27re+already+logged+in.',
-  })
+export const getServerSideProps = protectedRoute({
+  // btoa("You're already logged in.")
+  ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
+})
 
 export default function SignUp() {
   const { visible: $visible, message: $toast } = useQueriedToast({

@@ -34,7 +34,8 @@ const FIELDS = {
 }
 
 export const getServerSideProps = protectedRoute({
-  ifLoggedIn: '/leaderboard?toast=You%27re+already+logged+in.',
+  // btoa("You're already logged in.")
+  ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
 })
 
 export default function Login() {

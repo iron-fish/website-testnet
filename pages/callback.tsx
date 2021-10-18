@@ -13,9 +13,11 @@ const Callback = () => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          Router.push(`/signup?toast=Please+sign+up.`)
+          // btoa('Please sign up.')
+          Router.push(`/signup?toast=UGxlYXNlIHNpZ24gdXAu`)
         } else if ($error === 'user_unconfirmed') {
-          Router.push('/login?toast=Please+log+in.')
+          // btoa('Please log in.')
+          Router.push('/login?toast=UGxlYXNlIGxvZyBpbi4=')
         }
         return
       }
@@ -32,7 +34,9 @@ const Callback = () => {
         console.log({ deets })
         debugger
         Router.push(
-          `/leaderboard?toast=Welcome+back+${Object.keys(deets).join(' ')}`
+          `/leaderboard?toast=V2VsY29tZSBiYWNr${btoa(
+            Object.keys(deets).join(' ')
+          )}`
         )
       }
     }

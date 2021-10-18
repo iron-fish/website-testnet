@@ -29,7 +29,14 @@ export function useQueriedToast(opts: QueriedToastOptions = {}) {
   const { queryString = 'toast' } = opts
   const $toast = useQuery(queryString) || ''
   const toasted = useToast(opts)
-  return { message: $toast, visible: toasted.visible, show: toasted.show }
+  return {
+    message: $toast
+      .split('=')
+      .map((x: string) => atob(x))
+      .join(''),
+    visible: toasted.visible,
+    show: toasted.show,
+  }
 }
 
 /*
