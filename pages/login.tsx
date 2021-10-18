@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
+
 import Navbar from 'components/Navbar'
 import TextField from 'components/Form/TextField'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
@@ -11,10 +12,15 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
+
 import { protectedRoute } from 'utils/protectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
+
 import { login } from 'apiClient'
+
+import { useQueriedToast } from 'hooks/useToast'
+import { Toast, Alignment } from 'components/Toast'
 
 const FIELDS = {
   email: {
@@ -32,6 +38,11 @@ export const getServerSideProps = protectedRoute({
 })
 
 export default function Login() {
+  const { visible: $visible, message: $toast } = useQueriedToast({
+    queryString: 'toast',
+    duration: 8e3,
+  })
+
   const $queryEmail = useQuery('email')
   const $queryAutoLogin = useQuery('autoLogin')
   if ($queryEmail) {
@@ -107,7 +118,7 @@ export default function Login() {
       </Head>
 
       <Navbar fill="black" className="bg-ifpink text-black" />
-
+      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
       <main className="bg-ifpink flex-1 font-extended">
         <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
           <OffsetBorderContainer>

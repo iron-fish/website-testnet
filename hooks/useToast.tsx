@@ -4,6 +4,9 @@ import useQuery from './useQuery'
 import { ToastOptions } from 'components/Toast'
 import { QueriedToastOptions } from 'components/Toast/types'
 
+// for convenience porpoises
+export { Toast, Alignment } from 'components/Toast'
+
 export function useToast(opts: ToastOptions = {}) {
   const { duration = 3e3, persist = false } = opts
   const [$visible, $setVisible] = useState<boolean>(false)
@@ -28,5 +31,21 @@ export function useQueriedToast(opts: QueriedToastOptions = {}) {
   const toasted = useToast(opts)
   return { message: $toast, visible: toasted.visible, show: toasted.show }
 }
+
+/*
+// EXAMPLE USAGE
+
+import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+
+// in your component:
+
+const { visible: $visible, message: $toast } = useQueriedToast({
+  queryString: 'toast',
+  duration: 8e3,
+})
+
+// in your jsx:
+<Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
+*/
 
 export default useToast

@@ -15,6 +15,9 @@ import { protectedRoute } from 'utils/protectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
+import { useQueriedToast } from 'hooks/useToast'
+import { Toast, Alignment } from 'components/Toast'
+
 export const FIELDS = {
   email: {
     id: 'email',
@@ -66,6 +69,11 @@ export const getServerSideProps = () =>
   })
 
 export default function SignUp() {
+  const { visible: $visible, message: $toast } = useQueriedToast({
+    queryString: 'toast',
+    duration: 8e3,
+  })
+
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
@@ -153,6 +161,7 @@ export default function SignUp() {
         <meta name="description" content="Sign up" />
       </Head>
       <Navbar fill="black" className="bg-ifpink text-black" />
+      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
       <main className="bg-ifpink flex-1 font-extended">
         <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
           <OffsetBorderContainer>

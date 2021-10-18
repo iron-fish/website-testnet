@@ -17,25 +17,24 @@ const Callback = () => {
         } else if ($error === 'user_unconfirmed') {
           Router.push('/login?toast=Please+log+in.')
         }
+        return
       }
       if ($token) {
         // eslint-disable-next-line
         console.log({ $token })
-        // Router.push('/leaderboard?toast=Welcome+back+')
         const deets = await getUserDetails($token)
         if ('statusCode' in deets && deets.statusCode !== 200) {
           // eslint-disable-next-line
           console.warn('something not so good?', { deets })
+          return
         }
         // eslint-disable-next-line
         console.log({ deets })
         debugger
-        Router.push('/leaderboard?toast=Welcome+back+')
+        Router.push(
+          `/leaderboard?toast=Welcome+back+${Object.keys(deets).join(' ')}`
+        )
       }
-      // const res = await tokenLogin()
-      // if ('authenticated' in res) {
-      //   Router.push('/')
-      // }
     }
     call()
   }, [$error, $token])
