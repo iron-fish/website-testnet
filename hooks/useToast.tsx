@@ -25,15 +25,15 @@ export function useToast(opts: ToastOptions = {}) {
   }
 }
 
+// window only, we don't care, just like ballmer
+const decode = (x: string) => (typeof window !== 'undefined' ? atob(x) : x)
+
 export function useQueriedToast(opts: QueriedToastOptions = {}) {
   const { queryString = 'toast' } = opts
   const $toast = useQuery(queryString) || ''
   const toasted = useToast(opts)
   return {
-    message: $toast
-      .split('=')
-      .map((x: string) => atob(x))
-      .join(''),
+    message: $toast.split('=').map(decode).join(''),
     visible: toasted.visible,
     show: toasted.show,
   }

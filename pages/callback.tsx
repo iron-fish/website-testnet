@@ -33,11 +33,7 @@ const Callback = () => {
         // eslint-disable-next-line
         console.log({ deets })
         debugger
-        Router.push(
-          `/leaderboard?toast=V2VsY29tZSBiYWNr${btoa(
-            Object.keys(deets).join(' ')
-          )}`
-        )
+        Router.push(`/leaderboard?toast=V2VsY29tZSBiYWNrIQ`)
       }
     }
     call()
