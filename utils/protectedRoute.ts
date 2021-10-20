@@ -20,6 +20,8 @@ export function protectedRoute({ ifLoggedIn, ifLoggedOut }: TravelPath) {
     }
     return { props: {} }
   }
+  // eslint-disable-next-line
+  console.log('the visitor', _visit, { ifLoggedIn, ifLoggedOut })
   return _visit
 }
 export default protectedRoute
