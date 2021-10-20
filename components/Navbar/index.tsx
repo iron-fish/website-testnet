@@ -45,7 +45,7 @@ function Navbar({
     <LoginContext.Consumer>
       {({ status, error, metadata }) => {
         // eslint-disable-next-line
-        console.log({ status, metadata, error, index: true })
+        console.log({ status, error, metadata })
         return (
           <nav
             className={clsx(

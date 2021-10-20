@@ -7,8 +7,6 @@ import { useQuery } from 'hooks/useQuery'
 const Callback = () => {
   const $error = useQuery('error')
   const $token = useQuery('magic_credential')
-  // eslint-disable-next-line
-  console.log({ $error, $token })
   useEffect(() => {
     const call = async () => {
       if ($error) {
@@ -22,17 +20,12 @@ const Callback = () => {
         return
       }
       if ($token) {
-        // eslint-disable-next-line
-        console.log({ $token })
         const deets = await getUserDetails($token)
         if ('statusCode' in deets && deets.statusCode !== 200) {
           // eslint-disable-next-line
           console.warn('something not so good?', { deets })
           return
         }
-        // eslint-disable-next-line
-        console.log({ deets })
-        debugger
         Router.push(`/leaderboard?toast=V2VsY29tZSBiYWNrIQ`)
       }
     }
