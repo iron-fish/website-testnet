@@ -1,8 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
 
-import { LoginContext } from 'contexts/LoginContext'
-
 import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
 import { useNav, NavState } from 'hooks/useNav'
@@ -42,72 +40,61 @@ function Navbar({
     testnetVisible,
   }
   return (
-    <LoginContext.Consumer>
-      {({ status, error, metadata }) => {
-        // eslint-disable-next-line
-        console.log({ status, error, metadata })
-        return (
-          <nav
-            className={clsx(
-              `font-extended`,
-              `relative`,
-              `hover:bg-white`,
-              `hover:shadow-navbar`,
-              `hover:text-black`,
-              $subnavState !== NavState.NONE ? 'bg-white text-black' : className
-            )}
-            onMouseLeave={() => {
-              if (!$flyoutVisible) {
-                hideNav()
-              }
-            }}
-          >
-            <NavbarFlyout
-              flyoutVisible={$flyoutVisible}
-              closeFlyout={() => $setFlyoutVisible(false)}
-              {...navBarLinksProps}
-            />
-            <div
-              className={clsx([
-                'transition-width',
-                'delay-300',
-                'flex',
-                'items-stretch',
-                'justify-between',
-                'm-auto',
-                'max-w-[1700px]',
-                // md - 768px
-                'text-sm',
-                'px-5',
-                // lg - 1024px
-                'lg:text-[18px]',
-                // 2lg - 1152px
-                '2lg:px-10',
-                '2lg:text-xl',
-                // 1440
-                '1.5lg:px-16',
-              ])}
-            >
-              <div className="py-7">
-                <Logo fill={fill} width={190} height={32}></Logo>
-              </div>
-              <div className="hidden md:flex items-center lg:text-xl">
-                <NavbarLinks
-                  className="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
-                  {...navBarLinksProps}
-                />
-              </div>
-              <button
-                className="md:hidden"
-                onClick={() => $setFlyoutVisible(true)}
-              >
-                <Menu />
-              </button>
-            </div>
-          </nav>
-        )
+    <nav
+      className={clsx(
+        `font-extended`,
+        `relative`,
+        `hover:bg-white`,
+        `hover:shadow-navbar`,
+        `hover:text-black`,
+        $subnavState !== NavState.NONE ? 'bg-white text-black' : className
+      )}
+      onMouseLeave={() => {
+        if (!$flyoutVisible) {
+          hideNav()
+        }
       }}
-    </LoginContext.Consumer>
+    >
+      <NavbarFlyout
+        flyoutVisible={$flyoutVisible}
+        closeFlyout={() => $setFlyoutVisible(false)}
+        {...navBarLinksProps}
+      />
+      <div
+        className={clsx([
+          'transition-width',
+          'delay-300',
+          'flex',
+          'items-stretch',
+          'justify-between',
+          'm-auto',
+          'max-w-[1700px]',
+          // md - 768px
+          'text-sm',
+          'px-5',
+          // lg - 1024px
+          'lg:text-[18px]',
+          // 2lg - 1152px
+          '2lg:px-10',
+          '2lg:text-xl',
+          // 1440
+          '1.5lg:px-16',
+        ])}
+      >
+        <div className="py-7">
+          <Logo fill={fill} width={190} height={32}></Logo>
+        </div>
+        <div className="hidden md:flex items-center lg:text-xl">
+          <NavbarLinks
+            className="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
+            {...navBarLinksProps}
+          />
+        </div>
+        <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
+          <Menu />
+        </button>
+      </div>
+    </nav>
   )
 }
 
