@@ -60,7 +60,7 @@ export const guidelines = {
     {
       title: 'Lost Work',
       content:
-        "Points will only be awarded once an account has been created. Points for mining blocks are awarded automatically. Blocks that are mined before an account was created will not be counted. Work will be logged hourly. In the event of a technical problem or reorg some of your work may be lost and will not reflect in your reward. If you sign up after you've mined blocks, points will not be assigned retroactively for those blocks.",
+        "Points will only be awarded once an account has been created. Points for mining blocks are awarded automatically. Blocks that are mined before an account was created will not be counted. Work will be logged hourly. In the event of a technical problem or a chain reorganization, some of your work may be lost and will not reflect in your reward. If you sign up after you've mined blocks, points will not be assigned retroactively for those blocks.",
       behind: 'bg-ifpink',
     },
     {
@@ -80,7 +80,7 @@ export const guidelines = {
     {
       title: 'Weekly Cycles',
       content:
-        'The Monday to Sunday cycles in which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, that category can no longer earn that participant points until the following week when the cycle has reset.',
+        'Weekly cycles run from Monday to Sunday, during which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, a participant can no longer earn points in that category until the next cycle.',
       behind: 'bg-white',
     },
     {
