@@ -7,7 +7,7 @@ describe('/about', () => {
     linksMatch([
       {
         isImage: false,
-        text: "Don't Ever Get Started",
+        text: 'Get Started',
         href: 'https://ironfish.network/docs/onboarding/iron-fish-tutorial',
       },
       {
