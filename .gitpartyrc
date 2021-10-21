@@ -1,0 +1,52 @@
+styles:
+  key: S
+  color: bgRed
+  matches:
+  - \**/*.css
+components:
+  key: R
+  color: bgYellow
+  matches:
+  - \**/*.tsx
+docs:
+  key: D
+  color: white
+  matches:
+  - \**/*.md
+config:
+  key: C
+  color: bgMagenta
+  matches:
+  - package.json
+  - package-scripts.js
+  - prettierrc
+  - \**/*.lock
+  - \**/*.yml
+  - husky/*
+  - eslint*
+binary:
+  key: B
+  color: green
+  matches:
+  - \**/*.png
+  - \**/*.ico
+  - \**/*.ttf
+  - \**/*.woff
+  - \**/*.woff2
+  - \**/*.svg
+tests:
+  key: T
+  color: red
+  matches:
+  - cypress/*
+collapseAuthors: false
+timezone: pst
+aliases:
+  brekk 🍛:
+  - Brekk
+  derek 🚴🏻:
+  - Derek Guenther
+  - dguenther
+  elena 👑:
+  - Elena Nadolinski
+
