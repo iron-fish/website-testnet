@@ -63,7 +63,7 @@ export default function About() {
         <div className="w-4/5 md:w-2/3">
           <PageBanner
             title="About the Incentivized Testnet"
-            text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points, which will be redeemable for $IRON at a later time (see Testnet Guidelines for more details)."
+            text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
             buttonText="Sign Up"
             buttonClassName={clsx(
               'm-auto',
@@ -99,9 +99,8 @@ export default function About() {
           </div>
           <AboutHeader className="md:w-1/2 mt-24">The Leaderboard</AboutHeader>
           <p className="w-full md:w-2/3 text-2xl">
-            Not only does earning points help you climb the Leaderboard, but the
-            more points you have means the more $IRON you redeem at the end of
-            the testnet. Placing in the top 10 also earns you bonus points!
+            Earning points places you on the Leaderboard. See how you progress
+            each week in comparison to others.
           </p>
           <div className="mt-8 mb-4 block text-2xl">
             <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
@@ -114,9 +113,8 @@ export default function About() {
           </AboutHeader>
           <p className="text-center max-w-lg m-auto text-justify mb-14 text-2xl">
             At the end of the testnet if you’re the leader in any of the
-            categories mentioned above, you’ll not only earn extra points as a
-            prize, but also an Iron Fish NFT. Filter the leaderboard to see
-            category leaders.
+            categories mentioned above you might be eligible to receive an Iron
+            Fish NFT. Filter the leaderboard to see category leaders.
           </p>
         </div>
         <div className="flex flex-row w-full overflow-x-auto" ref={$cards}>

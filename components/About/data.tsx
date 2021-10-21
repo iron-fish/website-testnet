@@ -52,9 +52,35 @@ export const cards = [
 export const guidelines = {
   columnOne: [
     {
-      title: 'Mining',
+      title: 'Rewards',
       content:
-        'Miners must enter their private key to be eligible for reward. AML/KYC check may be required depending on reward amount.',
+        'The Incentivized Testnet program will distribute up to 210,000 Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
+      behind: 'bg-white',
+    },
+    {
+      title: 'Lost Work',
+      content:
+        "Points will only be awarded once an account has been created. Points for mining blocks are awarded automatically. Blocks that are mined before an account was created will not be counted. Work will be logged hourly. In the event of a technical problem or a chain reorganization, some of your work may be lost and will not reflect in your reward. If you sign up after you've mined blocks, points will not be assigned retroactively for those blocks.",
+      behind: 'bg-ifpink',
+    },
+    {
+      title: 'Unforeseeable',
+      content:
+        'In the event that legal or regulatory issues arise, rewards may be restructured, postponed, or even canceled.',
+      behind: 'bg-white',
+    },
+  ],
+  columnTwo: [
+    {
+      title: 'Leadership Points',
+      content:
+        'Leaderboard points are used solely to track contribution to the Iron Fish Testnet and have no cash or monetary value. Leaderboard points are not transferable and are not redeemable or exchangeable for any cryptocurrency or digital assets. For eligible users under relevant securities laws, Iron Fish Inc will use commercially reasonable efforts to distribute tokens to eligible testnet participants. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
+      behind: 'bg-ifpink',
+    },
+    {
+      title: 'Weekly Cycles',
+      content:
+        'Weekly cycles run from Monday to Sunday, during which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, a participant can no longer earn points in that category until the next cycle.',
       behind: 'bg-white',
     },
     {
@@ -62,37 +88,6 @@ export const guidelines = {
       content:
         'Iron Fish might restart the chain regularly for development purposes. Your score will be saved before a restart happens.',
       behind: 'bg-ifpink',
-    },
-    {
-      title: 'Unforeseeable',
-      content:
-        'In the unlikely event that legal or regulatory issues arise, rewards may be restructured, postponed, or even cancelled.',
-      behind: 'bg-white',
-    },
-  ],
-  columnTwo: [
-    {
-      title: 'Rewards',
-      content:
-        'Rewards will be encoded into the genesis block and vest linearly over 6 months after mainnet launch.',
-      behind: 'bg-ifpink',
-    },
-    {
-      title: 'Blocks',
-      content:
-        'Scores will be calculated in $ORE. Blocks that are mined but not added to the chain won’t be counted.',
-      behind: 'bg-white',
-    },
-    {
-      title: 'Lost Work',
-      content: `Work will be logged hourly. In the event of a technical problem or reorg some of your work may be lost and will not reflect in your reward. If you sign up after you've mined, points will not be assigned retroactively.`,
-      behind: 'bg-ifpink',
-    },
-    {
-      title: 'Weekly Cycles',
-      content:
-        'The Monday to Sunday cycles in which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, that category can no longer earn that participant points until the following week when the cycle has reset.',
-      behind: 'bg-white',
     },
   ],
 }
