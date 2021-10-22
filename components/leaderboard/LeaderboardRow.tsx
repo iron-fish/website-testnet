@@ -9,7 +9,7 @@ type Props = {
   points: number
 }
 
-function LeaderboardRow({ rank, graffiti, points }: Props) {
+function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
   const avatarColor = graffitiToColor(graffiti)
   const rankStr = numberToOrdinal(rank)
   const pointsStr = points.toLocaleString()
