@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - master
-  deployment_status
 
 jobs:
   run-checks:
@@ -30,20 +29,6 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
-  e2e:
-    name: Integration tests
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
-    # only runs this job on successful deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
-      - name: Checkout 🛎
-        uses: actions/checkout@v1
-      - name: Run Cypress 🌲
+
+      - name: Run E2E Tests with Cypress
         uses: cypress-io/github-action@v2
-        env:
-          CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
