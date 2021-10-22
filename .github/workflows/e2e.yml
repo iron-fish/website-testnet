@@ -21,12 +21,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Cache services/website/node_modules and Cypress
+      - name: Cache Cypress 
         uses: actions/cache@v2
         with:
           path: |
             ~/.cache/Cypress
-          key: services-website-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: cache-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Install Cypress
         run: npm i cypress
@@ -35,4 +35,3 @@ jobs:
         with:
           config: baseUrl=${{ needs.test_setup.outputs.preview_url }}
           install: false # We test a live preview URL, no need to install packages
-          working-directory: services/website
