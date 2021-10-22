@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const { concurrent } = require('nps-utils')
 const FIXTURES = {
   CYPRESS: {
