@@ -95,8 +95,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        favorit: ['favorit-regular', 'helvetica', 'sans-serif'],
-        extended: ['extended-regular', 'helvetica', 'sans-serif'],
+        favorit: ['favorit-regular', 'sans-serif'],
+        extended: ['extended-regular', 'sans-serif'],
       },
     },
   },

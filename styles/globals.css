@@ -53,7 +53,7 @@
   --ifm-container-index-width: 1171px;
   --ifm-global-radius: 0.2rem;
   --ifm-background-color: #fff;
-  --ifm-font-family-base: favorit-regular, 'Helvetica', sans-serif;
+  --ifm-font-family-base: favorit-regular, sans-serif;
   --ifm-font-size-base: 100%;
   --ifm-font-color-base-inverse: #000;
   --ifm-heading-color: #000;
@@ -118,7 +118,7 @@
   --ifm-pagination-nav-color-hover: transparent;
   --ifm-docs-column-margin-right: 55px;
 
-  --ifm-font-header-button: 'extended-regular', 'helvetica', sans-serif;
+  --ifm-font-header-button: 'extended-regular', sans-serif;
   --ifm-large-container-horizontal-padding: 81px;
   --ifm-large-vertical-padding: 128px;
   --ifm-medium-vertical-padding: 64px;
@@ -144,8 +144,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: favorit-regular, sans-serif;
 }
 
 a {

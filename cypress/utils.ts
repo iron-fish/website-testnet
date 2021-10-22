@@ -18,3 +18,25 @@ export const linksMatch = (expected: TestLink[]) => {
     expect(hrefs.get()).to.deep.eq(expected)
   })
 }
+
+const getFont = (el: HTMLElement) =>
+  (document && document.defaultView
+    ? document.defaultView.getComputedStyle(el).getPropertyValue('font-family')
+    : el && el.style && el.style.font
+  )
+    .split(/('.*?'|".*?"|\S+)/g)
+    .map(z => z.replace(/,/g, ''))
+    .filter(z => z.trim().length > 0)
+
+export const fontsInUse = (expected: string[]) => {
+  cy.get('*').should($elements => {
+    const mapped = $elements
+      .map((_, el) => getFont(el))
+      .get()
+      .reduce(
+        (agg: string[], x: string) => (agg.includes(x) ? agg : agg.concat(x)),
+        []
+      )
+    expect(mapped).to.deep.eq(expected)
+  })
+}
