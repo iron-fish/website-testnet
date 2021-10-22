@@ -1,0 +1,1 @@
+{ "ignore": ["cypress/cypress*.json", "node_modules/**/*.*", ".git/**/*.*"] }

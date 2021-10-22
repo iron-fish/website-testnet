@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+const { concurrent } = require('nps-utils')
 const FIXTURES = {
   CYPRESS: {
     LOCAL: 'cypress/cypress-local.json',
@@ -14,16 +16,19 @@ module.exports = {
     build: 'next build',
     start: 'next start',
     lint: {
-      script: 'next lint',
-      repetition: 'twly --boring --lines 3',
+      clean: 'next lint',
+      script: 'nps lint.clean lint.dry',
+      dry: 'twly --boring --lines 3 -t .trc',
     },
     precommit: 'nps care',
-    care: 'nps build lint',
+    care: concurrent.nps('build', 'lint'),
+    dx: concurrent.nps('build', 'lint', 'meta.dependencies'),
     meta: {
       log: `gitparty`,
       dependencies: {
-        script: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils --progress -x node_modules definitions | dot -T svg > dependency-graph.svg`,
+        build: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils --progress -x node_modules definitions | dot -T svg > dependency-graph.svg`,
         interactive: `cat dependency-graph.svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
+        script: 'nps meta.dep.build meta.dep.interactive',
       },
     },
     test: {

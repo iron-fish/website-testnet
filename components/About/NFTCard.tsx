@@ -15,6 +15,7 @@ export const NFTCard = ({ title, content, pic }: NFTProps) => (
       'flex-col',
       'flex-grow',
       'h-full',
+      'min-h-full',
       'min-w-card-sm',
       'md:min-w-card-md'
     )}
@@ -36,12 +37,12 @@ export const NFTCard = ({ title, content, pic }: NFTProps) => (
           'content-between'
         )}
       >
-        <div className="px-14 flex flex-col flex-grow">
+        <div className="px-14 flex flex-col flex-grow min-h-[16rem]">
           <strong className="uppercase text-lg">NFT Reward</strong>
           <h4 className="py-3 font-extended text-4xl">{title}</h4>
           <p className="mt-4 mb-6 text-xl">{content}</p>
         </div>
-        <div className={clsx('flex', 'flex-shrink', 'self-end')}>
+        <div className={clsx('flex', 'flex-shrink', 'self-end', 'min-h-[50%]')}>
           {/* eslint-disable-next-line */}
           <img src={pic} />
         </div>

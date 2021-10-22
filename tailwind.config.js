@@ -26,7 +26,7 @@ module.exports = {
       },
       minHeight: {
         section: '43rem',
-        'card-sm': '49rem',
+        'card-sm': '51rem',
         'card-md': '46rem',
       },
       maxWidth: {

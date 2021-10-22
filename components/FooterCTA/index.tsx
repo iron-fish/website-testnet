@@ -16,7 +16,8 @@ export function TubesCTA({ cta, goTo, buttonText }: TubesCTAProps) {
       </div>
       <div className="w-full flex mt-16 border-black border-b flex-col">
         <h3 className="font-extended text-3xl md:text-4xl m-auto text-center">
-          What are you waiting for?
+          What are you <br className="md:hidden" />
+          waiting for?
           <br />
           {cta}
         </h3>

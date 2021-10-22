@@ -60,7 +60,7 @@ export default function About() {
       <Navbar fill="black" className="bg-iflightorange text-black" />
 
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
+        <div className="mx-3 md:w-2/3">
           <PageBanner
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
@@ -81,7 +81,7 @@ export default function About() {
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
-          <div className="flex flex-col md:flex-row  mb-16">
+          <div className="flex flex-col md:flex-row mb-16">
             <div className="flex flex-col w-full md:w-1/2 md:mr-2">
               {callsToAction.columnOne.map(renderColumn)}
               <div className="text-center hidden md:flex mx-auto">
@@ -98,7 +98,7 @@ export default function About() {
             </div>
           </div>
           <AboutHeader className="md:w-1/2 mt-24">The Leaderboard</AboutHeader>
-          <p className="w-full md:w-2/3 text-2xl">
+          <p className="w-full text-2xl">
             Earning points places you on the Leaderboard. See how you progress
             each week in comparison to others.
           </p>
@@ -111,7 +111,7 @@ export default function About() {
           <AboutHeader className="text-center w-full mt-48">
             Win a Category, win an NFT!
           </AboutHeader>
-          <p className="text-center max-w-lg m-auto text-justify mb-14 text-2xl">
+          <p className="w-full text-2xl">
             At the end of the testnet if you’re the leader in any of the
             categories mentioned above you might be eligible to receive an Iron
             Fish NFT. Filter the leaderboard to see category leaders.
