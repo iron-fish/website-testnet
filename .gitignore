@@ -35,3 +35,4 @@ yarn-error.log*
 .env
 TODO.md
 cypress/videos
+dependency-graph*

@@ -1,3 +1,4 @@
+const { concurrent } = require('nps-utils')
 const FIXTURES = {
   CYPRESS: {
     LOCAL: 'cypress/cypress-local.json',
@@ -14,11 +15,13 @@ module.exports = {
     build: 'next build',
     start: 'next start',
     lint: {
-      script: 'next lint',
-      repetition: 'twly --boring --lines 3',
+      clean: 'next lint',
+      script: 'nps lint.clean lint.dry',
+      dry: 'twly --boring --lines 3 -t .trc',
     },
     precommit: 'nps care',
-    care: 'nps build lint meta.dep',
+    care: concurrent.nps('build', 'lint'),
+    dx: concurrent.nps('build', 'lint', 'meta.dependencies'),
     meta: {
       log: `gitparty`,
       dependencies: {

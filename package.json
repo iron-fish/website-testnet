@@ -32,6 +32,7 @@
     "gitparty": "^1.0.10",
     "husky": "^7.0.1",
     "nps": "^5.10.0",
+    "nps-utils": "^1.7.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",
     "tailwindcss": "^2.2.4",
