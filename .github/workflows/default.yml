@@ -1,4 +1,4 @@
-name: Validate
+name: Standard Checks ✅
 
 on:
   push:
@@ -29,6 +29,3 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
-
-      - name: Run E2E Tests with Cypress
-        uses: cypress-io/github-action@v2
