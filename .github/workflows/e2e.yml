@@ -1,5 +1,7 @@
 name: Integration Tests 🔥
 
+on: [pull_request]
+
 jobs:
   test_setup:
     name: Test setup
