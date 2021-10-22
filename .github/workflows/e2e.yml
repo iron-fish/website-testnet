@@ -28,8 +28,8 @@ jobs:
             ~/.cache/Cypress
           key: cache-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - name: Install Cypress
-        run: npm i cypress
+      - name: Install Node.js dependencies
+        run: yarn
       - name: Run Cypress
         uses: cypress-io/github-action@v2
         with:
