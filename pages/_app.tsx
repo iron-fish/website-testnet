@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginContext.Provider value={loginValue}>
-        <Component {...pageProps} />
+        <Component {...pageProps} className="font-favorit" />
       </LoginContext.Provider>
     </>
   )
