@@ -60,7 +60,7 @@ export default function About() {
       <Navbar fill="black" className="bg-iflightorange text-black" />
 
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
+        <div className="mx-3 md:w-2/3">
           <PageBanner
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
@@ -81,7 +81,7 @@ export default function About() {
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
-          <div className="flex flex-col md:flex-row  mb-16">
+          <div className="flex flex-col md:flex-row mb-16">
             <div className="flex flex-col w-full md:w-1/2 md:mr-2">
               {callsToAction.columnOne.map(renderColumn)}
               <div className="text-center hidden md:flex mx-auto">
