@@ -147,7 +147,7 @@ export default function About() {
               <Img src={leaderboardPic} />
             </div>
           </div>
-          <AboutHeader className="text-center w-full mt-48">
+          <AboutHeader className="text-center w-full mt-32">
             Win a Category, win an NFT!
           </AboutHeader>
           <Para className="text-center m-auto">
