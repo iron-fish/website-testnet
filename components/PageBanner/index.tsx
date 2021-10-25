@@ -39,7 +39,7 @@ export const PageBanner: FC<PageBannerProps> = ({
         <p
           className={clsx(
             `mb-8`,
-            `text-justify`,
+            `text-left`,
             `text-lg`,
             `md:text-center`,
             `md:text-2xl`
