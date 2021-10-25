@@ -111,7 +111,7 @@ export default function About() {
           <AboutHeader className="text-center w-full mt-48">
             Win a Category, win an NFT!
           </AboutHeader>
-          <p className="w-full text-2xl mb-3">
+          <p className="w-full text-2xl mb-12">
             At the end of the testnet if you’re the leader in any of the
             categories mentioned above you might be eligible to receive an Iron
             Fish NFT. Filter the leaderboard to see category leaders.
