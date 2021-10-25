@@ -98,7 +98,7 @@ export default function About() {
             </div>
           </div>
           <AboutHeader className="md:w-1/2 mt-24">The Leaderboard</AboutHeader>
-          <p className="w-full text-2xl">
+          <p className="w-full md:w-2/3 text-2xl">
             Earning points places you on the Leaderboard. See how you progress
             each week in comparison to others.
           </p>
