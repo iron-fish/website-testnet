@@ -50,7 +50,15 @@ export const PageBanner: FC<PageBannerProps> = ({
       </div>
       <Link href={buttonLink} passHref>
         <RawButton
-          className={`m-auto mt-8 text-lg md:text-xl px-7 py-4 ${buttonClassName}`}
+          className={clsx(
+            buttonClassName,
+            `m-auto`,
+            `mt-8`,
+            `text-lg`,
+            `px-7`,
+            `py-4`,
+            `md:text-xl`
+          )}
         >
           {buttonText}
         </RawButton>
