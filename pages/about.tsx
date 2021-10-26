@@ -74,23 +74,25 @@ export default function About() {
       <Navbar fill="black" className="bg-iflightorange text-black" />
 
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
-        <PageBanner
-          title="About the Incentivized Testnet"
-          text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
-          buttonText="Sign Up"
-          buttonClassName={clsx(
-            'm-auto',
-            'mb-32',
-            'w-full',
-            'max-w-[240px]',
-            'text-lg',
-            'p-3',
-            'md:text-xl',
-            'md:py-5',
-            'md:px-4'
-          )}
-          buttonLink="/signup"
-        />
+        <div className="w-full md:w-2/3 m-auto">
+          <PageBanner
+            title="About the Incentivized Testnet"
+            text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
+            buttonText="Sign Up"
+            buttonClassName={clsx(
+              'm-auto',
+              'mb-32',
+              'w-full',
+              'max-w-[240px]',
+              'text-lg',
+              'p-3',
+              'md:text-xl',
+              'md:py-5',
+              'md:px-4'
+            )}
+            buttonLink="/signup"
+          />
+        </div>
         <div className={clsx('mx-3', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className="md:w-1/2">
             Participation Categories
