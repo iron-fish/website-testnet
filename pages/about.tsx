@@ -26,6 +26,20 @@ type ArrowButtonProps = {
   onClick: () => unknown
 }
 
+const Para = ({
+  children,
+  className = '',
+}: {
+  children: ReactNode
+  className?: string
+}) => (
+  <p
+    className={clsx('w-full', 'text-xl', 'md:text-2xl', 'md:w-2/3', className)}
+  >
+    {children}
+  </p>
+)
+
 const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
   <div
     className={clsx(
@@ -60,7 +74,7 @@ export default function About() {
       <Navbar fill="black" className="bg-iflightorange text-black" />
 
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
+        <div className="w-full md:w-2/3 m-auto">
           <PageBanner
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
@@ -78,11 +92,23 @@ export default function About() {
             )}
             buttonLink="/signup"
           />
+        </div>
+        <div className={clsx('mx-3', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
-          <div className="flex flex-col md:flex-row  mb-16">
-            <div className="flex flex-col w-full md:w-1/2 md:mr-2">
+          <div className="flex flex-col md:flex-row mb-16">
+            <div
+              className={clsx(
+                'flex',
+                'flex-col',
+                'w-full',
+                'md:w-1/2',
+                'md:mr-2',
+                'md:ml-4',
+                'lg:ml-0'
+              )}
+            >
               {callsToAction.columnOne.map(renderColumn)}
               <div className="text-center hidden md:flex mx-auto">
                 <BasicLink href="#guidelines">
@@ -90,32 +116,47 @@ export default function About() {
                 </BasicLink>
               </div>
             </div>
-            <div className="flex flex-col w-full md:w-1/2 md:ml-1 md:-mt-32">
+            <div
+              className={clsx(
+                'flex',
+                'flex-col',
+                'w-full',
+                'md:w-1/2',
+                'md:ml-1',
+                'md:-mt-32',
+                'md:mr-4',
+                'lg:mr-0'
+              )}
+            >
               {callsToAction.columnTwo.map(renderColumn)}
             </div>
             <div className="text-center flex md:hidden mx-auto">
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
           </div>
-          <AboutHeader className="md:w-1/2 mt-24">The Leaderboard</AboutHeader>
-          <p className="w-full md:w-2/3 text-2xl">
-            Earning points places you on the Leaderboard. See how you progress
-            each week in comparison to others.
-          </p>
-          <div className="mt-8 mb-4 block text-2xl">
-            <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
+          <div className="hidden md:block">
+            <AboutHeader className="md:w-1/2 mt-24">
+              The Leaderboard
+            </AboutHeader>
+            <Para>
+              Earning points places you on the Leaderboard. See how you progress
+              each week in comparison to others.
+            </Para>
+            <div className="mt-8 mb-4 block text-2xl">
+              <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
+            </div>
+            <div className="flex md:ml-24">
+              <Img src={leaderboardPic} />
+            </div>
           </div>
-          <div className="flex md:ml-24">
-            <Img src={leaderboardPic} />
-          </div>
-          <AboutHeader className="text-center w-full mt-48">
+          <AboutHeader className="text-center w-full mt-32">
             Win a Category, win an NFT!
           </AboutHeader>
-          <p className="text-center max-w-lg m-auto text-justify mb-14 text-2xl">
+          <Para className="text-left md:text-center m-auto">
             At the end of the testnet if you’re the leader in any of the
             categories mentioned above you might be eligible to receive an Iron
             Fish NFT. Filter the leaderboard to see category leaders.
-          </p>
+          </Para>
         </div>
         <div className="flex flex-row w-full overflow-x-auto" ref={$cards}>
           {cards.map(nft => (
@@ -135,7 +176,7 @@ export default function About() {
           buttonText="Get Incentivized"
           goTo="/signup"
         />
-        <div id="guidelines" className="mt-24 mx-3 sm:w-3/4 md:w-2/3">
+        <div id="guidelines" className="mt-24 mx-3 lg:w-2/3">
           <AboutHeader className="text-left text-4xl w-1/2">
             Testnet Guidelines
           </AboutHeader>
