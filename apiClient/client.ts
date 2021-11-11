@@ -147,8 +147,7 @@ export async function login(email: string): Promise<any> {
   try {
     const token = await magic.auth.loginWithMagicLink({
       email,
-      redirectURI: new URL(`${API_URL}/auth/callback`, window.location.origin)
-        .href,
+      redirectURI: new URL(`/callback`, window.location.origin).href,
     })
     const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
