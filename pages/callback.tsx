@@ -1,3 +1,4 @@
+import { magic } from 'utils/magic'
 import { useEffect } from 'react'
 import Router from 'next/router'
 import Loader from 'components/Loader'
@@ -20,7 +21,11 @@ const Callback = () => {
         return
       }
       if ($token) {
-        const deets = await getUserDetails($token)
+        const token = await magic!.auth.loginWithCredential()
+        if (token === null) {
+          throw new Error('Null token')
+        }
+        const deets = await getUserDetails(token)
         if ('statusCode' in deets && deets.statusCode !== 200) {
           // eslint-disable-next-line
           console.warn('something not so good?', { deets })
