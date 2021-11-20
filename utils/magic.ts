@@ -3,9 +3,9 @@ export type { MagicUserMetadata } from '@magic-sdk/types'
 
 const KEY = process.env.NEXT_PUBLIC_MAGIC_SECRET_KEY || ''
 
-const createMagic = (key: string) => {
+const createMagic = (key: string): Magic | undefined => {
   if (typeof window === 'undefined' || !key) {
-    return false
+    return undefined
   }
   return new Magic(key)
 }
