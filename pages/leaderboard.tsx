@@ -78,10 +78,6 @@ export default function Leaderboard({ users = [] }: Props) {
   const [$searching, $setSearching] = useState(false)
 
   useEffect(() => {
-    const loggedIn = checkLoggedIn()
-    if (loggedIn) {
-      $setShowCTA(false)
-    }
     // Drop the initial value, since results will be preloaded
     if (!$hasSearched) {
       $setHasSearched(true)
@@ -89,6 +85,10 @@ export default function Leaderboard({ users = [] }: Props) {
     }
 
     const func = async () => {
+      const loggedIn = await checkLoggedIn()
+      if (loggedIn) {
+        $setShowCTA(false)
+      }
       $setSearching(true)
       const countrySearch =
         $country && $country.value && $country.value !== 'Global'

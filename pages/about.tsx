@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Img from 'next/image'
 import clsx from 'clsx'
@@ -20,6 +21,8 @@ import { cards, guidelines, callsToAction } from 'components/About/data'
 import { useResponsiveCards } from 'components/About/hooks'
 
 import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
+
+import useLogin from 'hooks/useLogin'
 
 type ArrowButtonProps = {
   children: ReactNode
@@ -64,6 +67,17 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
 
 export default function About() {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
+  const { checkLoggedIn } = useLogin()
+  const [$showCTA, $setShowCTA] = useState<boolean>(true)
+  useEffect(() => {
+    const func = async () => {
+      const loggedIn = await checkLoggedIn()
+      if (loggedIn) {
+        $setShowCTA(false)
+      }
+    }
+    func()
+  }, [$setShowCTA, checkLoggedIn])
   return (
     <div className="min-h-screen flex flex-col font-favorit">
       <Head>
@@ -78,7 +92,7 @@ export default function About() {
           <PageBanner
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
-            buttonText="Sign Up"
+            buttonText={$showCTA ? 'Sign Up' : ''}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -90,7 +104,7 @@ export default function About() {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink="/signup"
+            buttonLink={$showCTA ? '/signup' : ''}
           />
         </div>
         <div className={clsx('mx-3', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
