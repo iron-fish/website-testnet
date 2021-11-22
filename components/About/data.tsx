@@ -72,7 +72,7 @@ export const guidelines = {
   ],
   columnTwo: [
     {
-      title: 'Leadership Points',
+      title: 'Leaderboard Points',
       content:
         'Leaderboard points are used solely to track contribution to the Iron Fish Testnet and have no cash or monetary value. Leaderboard points are not transferable and are not redeemable or exchangeable for any cryptocurrency or digital assets. For eligible users under relevant securities laws, Iron Fish Inc will use commercially reasonable efforts to distribute tokens to eligible testnet participants. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
       behind: 'bg-ifpink',
