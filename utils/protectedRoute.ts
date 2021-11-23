@@ -17,7 +17,9 @@ export function protectedRoute({ ifLoggedIn, ifLoggedOut }: TravelPath) {
     // eslint-disable-next-line
     console.log('✨', { magic, auth, headers: context?.req?.headers })
     if (auth && auth.length > 0) {
-      await magic.token.validate(auth)
+      const didValidate = await magic.token.validate(auth)
+      // eslint-disable-next-line
+      console.log({ didValidate })
       return { redirect: { destination: ifLoggedIn || ifLoggedOut } }
     }
     return { props: {} }
