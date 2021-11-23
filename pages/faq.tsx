@@ -9,9 +9,6 @@ import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 
-import { useState, useEffect } from 'react'
-import useLogin from 'hooks/useLogin'
-
 const questions: ReadonlyArray<{ question: string; answer: string }> = [
   {
     question: `A common question about the testnet?`,
@@ -49,17 +46,6 @@ on our `}
 )
 
 export default function Faq() {
-  const { checkLoggedIn } = useLogin()
-  const [$showCTA, $setShowCTA] = useState<boolean>(true)
-  useEffect(() => {
-    const func = async () => {
-      const loggedIn = await checkLoggedIn()
-      if (loggedIn) {
-        $setShowCTA(false)
-      }
-    }
-    func()
-  }, [$setShowCTA, checkLoggedIn])
   return (
     <div className="min-h-screen flex flex-col font-favorit">
       <Head>
@@ -74,7 +60,7 @@ export default function Faq() {
           <PageBanner
             title="Testnet FAQ"
             text={<PageBannerBody />}
-            buttonText={$showCTA ? 'Sign Up' : ''}
+            buttonText={'Sign Up'}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -86,9 +72,8 @@ export default function Faq() {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink={$showCTA ? '/signup' : ''}
+            buttonLink={'/signup'}
           />
-
           <h1
             className={clsx(
               'text-left',
@@ -102,14 +87,12 @@ export default function Faq() {
           >
             Questions
           </h1>
-
           <div className="flex flex-col gap-y-8">
             {questions.map((qa, i) => (
               <QuestionAnswer key={i} index={i} {...qa} />
             ))}
           </div>
         </div>
-
         <TubesCTA
           cta="Join the Testnet!"
           buttonText="Join Now"

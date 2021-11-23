@@ -13,7 +13,6 @@ import { Toast, Alignment } from 'components/Toast'
 
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
-import useLogin from 'hooks/useLogin'
 import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
@@ -61,8 +60,6 @@ const FIELDS = {
 }
 
 export default function Leaderboard({ users = [] }: Props) {
-  const { checkLoggedIn } = useLogin()
-  const [$showCTA, $setShowCTA] = useState<boolean>(true)
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -85,10 +82,6 @@ export default function Leaderboard({ users = [] }: Props) {
     }
 
     const func = async () => {
-      const loggedIn = await checkLoggedIn()
-      if (loggedIn) {
-        $setShowCTA(false)
-      }
       $setSearching(true)
       const countrySearch =
         $country && $country.value && $country.value !== 'Global'
@@ -130,7 +123,7 @@ export default function Leaderboard({ users = [] }: Props) {
           getters are for all-time score, miners, bug catchers, net promoters,
           node hosting, and more! Click someone’s user name to see a breakdown
           of their activity."
-            buttonText={$showCTA ? 'Sign Up' : ''}
+            buttonText={'Sign Up'}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -142,7 +135,7 @@ export default function Leaderboard({ users = [] }: Props) {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink={$showCTA ? '/signup' : ''}
+            buttonLink={'/signup'}
           />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">

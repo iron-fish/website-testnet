@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
@@ -60,7 +60,7 @@ export function useLogin(redirect?: string) {
     if (!$metadata) checkLoggedIn()
   }, [$metadata, $setMetadata, redirect])
   const loginContext = {
-    checkLoggedIn: () => $status === STATUS.LOADED,
+    checkLoggedIn: useCallback(() => $status === STATUS.LOADED, [$status]),
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,
