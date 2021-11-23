@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Magic } from '@magic-sdk/admin'
 
 // SERVER SIDE
-const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_SECRET_KEY || '')
+const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || '')
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   try {

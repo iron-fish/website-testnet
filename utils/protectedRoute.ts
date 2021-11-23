@@ -2,7 +2,7 @@ import { NextPageContext } from 'next'
 import { Magic } from '@magic-sdk/admin'
 
 // SERVER SIDE
-const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_SECRET_KEY || '')
+const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || '')
 
 type TravelPath = {
   ifLoggedIn?: string
