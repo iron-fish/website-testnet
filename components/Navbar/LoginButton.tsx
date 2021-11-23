@@ -27,8 +27,6 @@ export const LoginButton = () => {
         }
 
         const loggedIn = checkLoggedIn()
-        // eslint-disable-next-line
-        console.log({ loggedIn })
         /*
         if (loggedIn && !$loaded) {
           $setLoaded(true)
