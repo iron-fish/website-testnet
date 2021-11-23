@@ -39,7 +39,11 @@ export const getServerSideProps = protectedRoute({
 })
 
 export default function Login() {
-  const { visible: $visible, message: $toast } = useQueriedToast({
+  const {
+    show: $show,
+    visible: $visible,
+    message: $toast,
+  } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
   })
@@ -49,6 +53,7 @@ export default function Login() {
   if ($queryEmail) {
     FIELDS.email.defaultValue = $queryEmail
   }
+  const [$msg, $setMessage] = useState<string>(UNSET)
   const [$error, $setError] = useState<string>(UNSET)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
@@ -92,13 +97,14 @@ export default function Login() {
         $setError('' + result.message)
       } else {
         $setLoaded(true)
-        $setError('Check your email')
-        setTimeout(() => Router.push('/leaderboard'), 2e3)
+        $setMessage('Logged in!')
+        $show()
+        setTimeout(() => Router.push('/leaderboard'), 3e3)
       }
     } catch (e) {
       $setError(e.message)
     }
-  }, [$email, testInvalid])
+  }, [$email, testInvalid, $show])
 
   useEffect(() => {
     if ($email) {
@@ -119,7 +125,11 @@ export default function Login() {
       </Head>
 
       <Navbar fill="black" className="bg-ifpink text-black" />
-      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
+      <Toast
+        message={$msg || $toast}
+        visible={$visible}
+        alignment={Alignment.Top}
+      />
       <main className="bg-ifpink flex-1 font-extended">
         <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
           <OffsetBorderContainer>

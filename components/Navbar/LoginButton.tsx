@@ -2,9 +2,10 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { RawButton } from 'components/Button'
 import { LoginContext } from 'contexts/LoginContext'
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 
 export const LoginButton = () => {
+  /*
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
     const t = setTimeout(() => {
@@ -13,7 +14,8 @@ export const LoginButton = () => {
       }
     }, 3e3)
     return () => clearTimeout(t)
-  })
+    })
+  */
   return (
     <LoginContext.Consumer>
       {({ status, checkLoggedIn, error, metadata }) => {
@@ -25,49 +27,53 @@ export const LoginButton = () => {
         }
 
         const loggedIn = checkLoggedIn()
+        /*
         if (loggedIn && !$loaded) {
           $setLoaded(true)
         }
+        */
         const goto =
           loggedIn && metadata && metadata.id
             ? `/users/${metadata.id}`
             : '/login'
+        /*
+        <div
+          className={clsx(
+            $loaded ? 'opacity-100' : 'opacity-0',
+            'transition-opacity'
+          )}
+        >
+        */
         return (
-          <div
+          <RawButton
             className={clsx(
-              $loaded ? 'opacity-100' : 'opacity-0',
-              'transition-opacity'
+              'text-2xl',
+              'md:text-base',
+              'h-16',
+              'md:h-12',
+              'md:ml-4',
+              'py-3',
+              'px-6',
+              'text-center'
             )}
+            colorClassName="bg-transparent text-black hover:bg-black hover:text-white"
           >
-            <RawButton
-              className={clsx(
-                'text-2xl',
-                'md:text-base',
-                'h-16',
-                'md:h-12',
-                'md:ml-4',
-                'py-3',
-                'px-6',
-                'text-center'
-              )}
-              colorClassName="bg-transparent text-black hover:bg-black hover:text-white"
-            >
-              <Link href={goto}>
-                <a>
-                  {metadata && metadata.graffiti ? (
-                    metadata.graffiti
-                  ) : (
-                    <span>
-                      Login<span className="md:hidden"> to Testnet</span>
-                    </span>
-                  )}
-                </a>
-              </Link>
-            </RawButton>
-          </div>
+            <Link href={goto}>
+              <a>
+                {metadata && metadata.graffiti ? (
+                  metadata.graffiti
+                ) : (
+                  <span>
+                    Login<span className="md:hidden"> to Testnet</span>
+                  </span>
+                )}
+              </a>
+            </Link>
+          </RawButton>
         )
       }}
     </LoginContext.Consumer>
   )
+  // </div>
 }
 export default LoginButton

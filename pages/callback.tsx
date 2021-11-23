@@ -21,6 +21,7 @@ const Callback = () => {
         return
       }
       if ($token) {
+        // eslint-disable-next-line
         const token = await magic!.auth.loginWithCredential()
         if (token === null) {
           throw new Error('Null token')
