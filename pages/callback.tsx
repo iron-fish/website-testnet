@@ -26,10 +26,10 @@ const Callback = () => {
         if (token === null) {
           throw new Error('Null token')
         }
-        const deets = await getUserDetails(token)
-        if ('statusCode' in deets && deets.statusCode !== 200) {
+        const details = await getUserDetails(token)
+        if ('statusCode' in details && details.statusCode !== 200) {
           // eslint-disable-next-line
-          console.warn('something not so good?', { deets })
+          console.warn('something not so good?', { details })
           return
         }
         Router.push(`/leaderboard?toast=V2VsY29tZSBiYWNrIQ`)
