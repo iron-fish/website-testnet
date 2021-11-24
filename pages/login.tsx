@@ -13,7 +13,6 @@ import SignupCTA from 'components/login/SignupCTA'
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
 
-// import { protectedRoute } from 'utils/protectedRoute'
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
