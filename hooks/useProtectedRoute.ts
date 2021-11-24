@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Router from 'next/router'
 import { useLogin } from './useLogin'
+export { STATUS } from './useLogin'
 
 export function useProtectedRoute({
   ifLoggedIn,
@@ -9,15 +10,20 @@ export function useProtectedRoute({
   ifLoggedIn?: string
   ifLoggedOut?: string
 }) {
-  const { checkLoggedIn } = useLogin()
+  const { checkLoggedIn, status } = useLogin()
   useEffect(() => {
-    if (checkLoggedIn() && ifLoggedIn) {
-      Router.push(ifLoggedIn)
+    const check = async () => {
+      const loggedIn = await checkLoggedIn()
+      if (loggedIn && ifLoggedIn) {
+        Router.push(ifLoggedIn)
+      }
+      if (!loggedIn && ifLoggedOut) {
+        Router.push(ifLoggedOut)
+      }
     }
-    if (!checkLoggedIn() && ifLoggedOut) {
-      Router.push(ifLoggedOut)
-    }
+    check()
   }, [checkLoggedIn, ifLoggedIn, ifLoggedOut])
+  return { status }
 }
 
 export default useProtectedRoute

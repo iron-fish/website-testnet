@@ -13,7 +13,8 @@ import SignupCTA from 'components/login/SignupCTA'
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
 
-import { protectedRoute } from 'utils/protectedRoute'
+// import { protectedRoute } from 'utils/protectedRoute'
+import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
 
@@ -32,11 +33,17 @@ const FIELDS = {
     defaultErrorText: `Valid email address required`,
   },
 }
+/*
 export const getServerSideProps = protectedRoute({
   // btoa("You're already logged in.")
   ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
-})
+  })
+ */
 export default function Login() {
+  const { status } = useProtectedRoute({
+    // btoa("You're already logged in.")
+    ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
+  })
   const {
     show: $show,
     visible: $visible,
@@ -121,48 +128,55 @@ export default function Login() {
         <title>Login</title>
         <meta name="description" content="Login" />
       </Head>
-
-      <Navbar fill="black" className="bg-ifpink text-black" />
-      <Toast
-        message={$msg || $toast}
-        visible={$visible}
-        alignment={Alignment.Top}
-      />
-      <main className="bg-ifpink flex-1 font-extended">
-        <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
-          <OffsetBorderContainer>
-            <div className="flex justify-center">
-              <div className="flex flex-col items-center md:px-4 px-5">
-                {$loaded ? (
-                  <>
-                    <h1 className="text-4xl text-center mb-4 mt-16">
-                      Log in to the testnet.
-                    </h1>
-                    {$error !== UNSET && (
-                      <FieldError text={$error} size="text-md" />
+      {status === STATUS.LOADING ? (
+        <Loader />
+      ) : (
+        <>
+          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Toast
+            message={$msg || $toast}
+            visible={$visible}
+            alignment={Alignment.Top}
+          />
+          <main className="bg-ifpink flex-1 font-extended">
+            <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
+              <OffsetBorderContainer>
+                <div className="flex justify-center">
+                  <div className="flex flex-col items-center md:px-4 px-5">
+                    {$loaded ? (
+                      <>
+                        <h1 className="text-4xl text-center mb-4 mt-16">
+                          Log in to the testnet.
+                        </h1>
+                        {$error !== UNSET && (
+                          <FieldError text={$error} size="text-md" />
+                        )}
+                        {textFields.map(
+                          t => t && <TextField key={t.id} {...t} />
+                        )}
+                        <RawButton
+                          className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
+                          onClick={submit}
+                          onKeyPress={(e: KeyboardEvent<HTMLButtonElement>) => {
+                            if (e.key === 'Enter') {
+                              submit()
+                            }
+                          }}
+                        >
+                          Login
+                        </RawButton>
+                      </>
+                    ) : (
+                      <Loader />
                     )}
-                    {textFields.map(t => t && <TextField key={t.id} {...t} />)}
-                    <RawButton
-                      className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
-                      onClick={submit}
-                      onKeyPress={(e: KeyboardEvent<HTMLButtonElement>) => {
-                        if (e.key === 'Enter') {
-                          submit()
-                        }
-                      }}
-                    >
-                      Login
-                    </RawButton>
-                  </>
-                ) : (
-                  <Loader />
-                )}
-                <SignupCTA />
-              </div>
+                    <SignupCTA />
+                  </div>
+                </div>
+              </OffsetBorderContainer>
             </div>
-          </OffsetBorderContainer>
-        </div>
-      </main>
+          </main>
+        </>
+      )}
     </div>
   )
 }
