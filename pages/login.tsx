@@ -34,7 +34,7 @@ const FIELDS = {
 }
 export default function Login() {
   const { status } = useProtectedRoute({
-    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    ifLoggedIn: `/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg==`,
   })
   const {
     show: $show,
