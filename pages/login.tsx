@@ -43,6 +43,7 @@ export default function Login() {
     // btoa("You're already logged in.")
     ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
   })
+  const [$status, $setStatus] = useState<STATUS>(status)
   const {
     show: $show,
     visible: $visible,
@@ -109,7 +110,12 @@ export default function Login() {
       $setError(e.message)
     }
   }, [$email, testInvalid, $show])
-
+  const forceStatus = () => $setStatus(STATUS.FORCED)
+  useEffect(() => {
+    $setStatus(status)
+    const tId = setTimeout(forceStatus, 300)
+    return () => clearTimeout(tId)
+  }, [status])
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
@@ -127,7 +133,7 @@ export default function Login() {
         <title>Login</title>
         <meta name="description" content="Login" />
       </Head>
-      {status === STATUS.LOADING ? (
+      {$status === STATUS.LOADING ? (
         <Loader />
       ) : (
         <>

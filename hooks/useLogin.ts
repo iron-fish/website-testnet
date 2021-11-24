@@ -8,6 +8,7 @@ export enum STATUS {
   LOADING = 'loading',
   FAILED = 'failed',
   LOADED = 'loaded',
+  FORCED = 'forced',
 }
 
 // reusable magic login context
