@@ -12,8 +12,8 @@ export function useProtectedRoute({
 }) {
   const { checkLoggedIn, status } = useLogin()
   useEffect(() => {
-    const check = async () => {
-      const loggedIn = await checkLoggedIn()
+    const check = () => {
+      const loggedIn = checkLoggedIn()
       if (loggedIn && ifLoggedIn) {
         Router.push(ifLoggedIn)
       }

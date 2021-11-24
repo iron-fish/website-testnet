@@ -12,27 +12,25 @@ const Callback = () => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          // btoa('Please sign up.')
-          Router.push(`/signup?toast=UGxlYXNlIHNpZ24gdXAu`)
+          Router.push(`/signup?toast=${btoa('Please sign up.')}`)
         } else if ($error === 'user_unconfirmed') {
-          // btoa('Please log in.')
-          Router.push('/login?toast=UGxlYXNlIGxvZyBpbi4=')
+          Router.push(`/login?toast=${btoa('Please log in.')}`)
         }
         return
       }
       if ($token) {
-        // eslint-disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const token = await magic!.auth.loginWithCredential()
         if (token === null) {
           throw new Error('Null token')
         }
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
-          // eslint-disable-next-line
+          // eslint-disable-next-line no-console
           console.warn('something not so good?', { details })
           return
         }
-        Router.push(`/leaderboard?toast=V2VsY29tZSBiYWNrIQ`)
+        Router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
       }
     }
     call()
