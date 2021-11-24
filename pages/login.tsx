@@ -113,7 +113,7 @@ export default function Login() {
   const forceStatus = () => $setStatus(STATUS.FORCED)
   useEffect(() => {
     $setStatus(status)
-    const tId = setTimeout(forceStatus, 600)
+    const tId = setTimeout(forceStatus, 1200)
     return () => clearTimeout(tId)
   }, [status])
   useEffect(() => {
