@@ -11,7 +11,7 @@ import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
 import { createUser } from 'apiClient'
 import { useField } from 'hooks/useForm'
-import { protectedRoute } from 'utils/protectedRoute'
+import { useProtectedRoute } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
 
@@ -62,12 +62,11 @@ export const FIELDS = {
   },
 }
 
-export const getServerSideProps = protectedRoute({
-  // btoa("You're already logged in.")
-  ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
-})
-
 export default function SignUp() {
+  useProtectedRoute({
+    // btoa("You're already logged in.")
+    ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
+  })
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,

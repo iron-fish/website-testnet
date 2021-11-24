@@ -13,7 +13,7 @@ import SignupCTA from 'components/login/SignupCTA'
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
 
-import { protectedRoute } from 'utils/protectedRoute'
+import useProtectedRoute from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail } from 'utils/forms'
 
@@ -33,12 +33,11 @@ const FIELDS = {
   },
 }
 
-export const getServerSideProps = protectedRoute({
-  // btoa("You're already logged in.")
-  ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
-})
-
 export default function Login() {
+  useProtectedRoute({
+    // btoa("You're already logged in.")
+    ifLoggedIn: '/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg',
+  })
   const {
     show: $show,
     visible: $visible,
