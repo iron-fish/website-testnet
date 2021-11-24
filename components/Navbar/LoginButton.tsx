@@ -21,7 +21,7 @@ export const LoginButton = () => {
       {({ status, checkLoggedIn, error, metadata }) => {
         if (error) {
           // TODO: Find a way to resolve this better, but keep for now
-          // eslint-disable-next-line
+          // eslint-disable-next-line no-console
           console.log({ error, status })
           return null
         }

@@ -36,7 +36,6 @@ export default function Login() {
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
   })
-  const [$status, $setStatus] = useState<STATUS>(status)
   const {
     show: $show,
     visible: $visible,
@@ -104,16 +103,6 @@ export default function Login() {
     }
   }, [$email, testInvalid, $show])
   useEffect(() => {
-    $setStatus(status)
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    const tId = setTimeout(forceStatus, 1200)
-    return () => clearTimeout(tId)
-  }, [status, $status])
-  useEffect(() => {
     if ($email) {
       $setLoaded(true)
       if ($queryEmail) {
@@ -130,7 +119,7 @@ export default function Login() {
         <title>Login</title>
         <meta name="description" content="Login" />
       </Head>
-      {$status === STATUS.LOADING ? (
+      {status === STATUS.LOADING ? (
         <Loader />
       ) : (
         <>

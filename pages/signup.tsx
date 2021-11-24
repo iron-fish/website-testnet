@@ -71,18 +71,6 @@ export default function SignUp() {
     duration: 8e3,
   })
 
-  const [$status, $setStatus] = useState<STATUS>(status)
-
-  useEffect(() => {
-    $setStatus(status)
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    const tId = setTimeout(forceStatus, 1200)
-    return () => clearTimeout(tId)
-  }, [status, $status])
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
@@ -169,7 +157,7 @@ export default function SignUp() {
         <title>Sign up</title>
         <meta name="description" content="Sign up" />
       </Head>
-      {$status === STATUS.LOADING ? (
+      {status === STATUS.LOADING ? (
         <Loader />
       ) : (
         <>

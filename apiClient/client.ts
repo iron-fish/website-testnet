@@ -182,12 +182,8 @@ export async function getUserDetails(
 }
 
 export async function tokenLogin(): Promise<LoginEvent | LocalError> {
-  const noWindow = typeof window === 'undefined'
-  if (noWindow || !magic) {
-    return new LocalError(
-      noWindow ? 'Only runnable in the browser' : 'No Magic key present!',
-      500
-    )
+  if (typeof window === 'undefined' || !magic) {
+    return new LocalError('Only runnable in the browser', 500)
   }
   try {
     const token = await magic.auth.loginWithCredential()

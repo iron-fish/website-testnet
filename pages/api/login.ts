@@ -6,7 +6,6 @@ const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || '')
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   try {
-    // eslint-disable-next-line
     const authString = req?.headers?.authorization || ''
     if (!authString) {
       res.status(500).json({ error: 'No auth token provided' })
