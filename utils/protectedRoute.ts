@@ -12,7 +12,7 @@ type TravelPath = {
 export function protectedRoute({ ifLoggedIn, ifLoggedOut }: TravelPath) {
   async function _visit(context: NextPageContext) {
     // eslint-disable-next-line
-    console.log('visiting?', context)
+    console.log('visiting?', context?.req?.headers, Object.keys(context))
     const auth = (context.req?.headers?.authorization || '').substr(7)
     // eslint-disable-next-line
     console.log('✨', { magic, auth, headers: context?.req?.headers })
