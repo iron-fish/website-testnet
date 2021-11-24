@@ -110,12 +110,16 @@ export default function Login() {
       $setError(e.message)
     }
   }, [$email, testInvalid, $show])
-  const forceStatus = () => $setStatus(STATUS.FORCED)
   useEffect(() => {
     $setStatus(status)
+    const forceStatus = () => {
+      if ($status === STATUS.LOADING) {
+        $setStatus(STATUS.FORCED)
+      }
+    }
     const tId = setTimeout(forceStatus, 1200)
     return () => clearTimeout(tId)
-  }, [status])
+  }, [status, $status])
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
