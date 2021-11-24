@@ -145,14 +145,14 @@ export async function login(email: string): Promise<any> {
     return new LocalError('Only runnable in the browser', 500)
   }
   try {
-    console.log('Sending magic link email')
+    // console.log('Sending magic link email')
     await magic.auth.loginWithMagicLink({
       email,
       redirectURI: new URL(`/callback`, window.location.origin).href,
     })
-    console.log('Fetching DID token')
-    const token = await magic.user.getIdToken();
-    console.log('Logging in')
+    // console.log('Fetching DID token')
+    const token = await magic.user.getIdToken()
+    // console.log('Logging in')
     const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
