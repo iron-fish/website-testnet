@@ -4,6 +4,7 @@ import Router from 'next/router'
 import Loader from 'components/Loader'
 import { getUserDetails } from 'apiClient/client'
 import { useQuery } from 'hooks/useQuery'
+import { encode as btoa } from 'base-64'
 
 const Callback = () => {
   const $error = useQuery('error')
@@ -12,9 +13,9 @@ const Callback = () => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          Router.push(`/signup?toast=UGxlYXNlIHNpZ24gdXAu`)
+          Router.push(`/signup?toast=${btoa('Please sign up.')}`)
         } else if ($error === 'user_unconfirmed') {
-          Router.push(`/login?toast=UGxlYXNlIGxvZyBpbi4=`)
+          Router.push(`/login?toast=${btoa('Please log in.')}`)
         }
         return
       }
@@ -30,7 +31,7 @@ const Callback = () => {
           console.warn('something not so good?', { details })
           return
         }
-        Router.push(`/leaderboard?toast=V2VsY29tZSBiYWNrIQ==`)
+        Router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
       }
     }
     call()

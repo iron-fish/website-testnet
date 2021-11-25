@@ -21,6 +21,7 @@ import { login } from 'apiClient'
 
 import { useQueriedToast } from 'hooks/useToast'
 import { Toast, Alignment } from 'components/Toast'
+import { encode as btoa } from 'base-64'
 
 const FIELDS = {
   email: {
@@ -34,7 +35,7 @@ const FIELDS = {
 }
 export default function Login() {
   const { status } = useProtectedRoute({
-    ifLoggedIn: `/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg==`,
+    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
   })
   const {
     show: $show,

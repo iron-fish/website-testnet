@@ -14,6 +14,7 @@ import { useField } from 'hooks/useForm'
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
+import { encode as btoa } from 'base-64'
 
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
@@ -64,7 +65,7 @@ export const FIELDS = {
 
 export default function SignUp() {
   const { status } = useProtectedRoute({
-    ifLoggedIn: `/leaderboard?toast=WW91J3JlIGFscmVhZHkgbG9nZ2VkIGluLg==`,
+    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
   })
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
