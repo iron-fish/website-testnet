@@ -14,7 +14,10 @@ export function useProtectedRoute({
   redirect = '',
   timeout = -1,
 }: ProtectedProps) {
-  const { checkLoggedIn, status } = useLogin({ redirect, timeout })
+  const { checkLoggedIn, status, metadata, magicMetadata } = useLogin({
+    redirect,
+    timeout,
+  })
   useEffect(() => {
     const check = () => {
       const loggedIn = checkLoggedIn()
@@ -27,7 +30,7 @@ export function useProtectedRoute({
     }
     check()
   }, [checkLoggedIn, ifLoggedIn, ifLoggedOut])
-  return { status }
+  return { status, metadata, magicMetadata }
 }
 
 export default useProtectedRoute
