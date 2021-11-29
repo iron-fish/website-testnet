@@ -31,6 +31,7 @@ export function useLogin(config: LoginProps = {}) {
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
   useEffect(() => {
     const checkLoggedIn = async () => {
+      // eslint-disable-next-line no-console
       console.log('starting check!')
       // this is likely a case where we're working in not-the-browser
       if ($metadata || !magic || !magic.user) return
