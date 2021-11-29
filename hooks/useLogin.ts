@@ -32,23 +32,25 @@ export function useLogin(config: LoginProps = {}) {
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
   useEffect(() => {
     const checkLoggedIn = async () => {
-      // eslint-disable-next-line no-console
-      console.log('starting check!')
-      // this is likely a case where we're working in not-the-browser
-      if ($metadata || !magic || !magic.user) return
-
-      // check if we're logged in and fetch token with one call
-      // magic.user.isLoggedIn makes this same call anyway
-      let token
       try {
-        token = await magic.user.getIdToken()
-      } catch (err) {
         // eslint-disable-next-line no-console
-        console.warn('error getting id', err)
-        throw err
-      }
+        console.log('starting check!')
+        // this is likely a case where we're working in not-the-browser
+        if ($metadata || !magic || !magic.user) {
+          throw new LocalError('Magic instance not available!', 500)
+        }
 
-      if (token) {
+        // check if we're logged in and fetch token with one call
+        // magic.user.isLoggedIn makes this same call anyway
+        const token = await magic.user.getIdToken()
+
+        if (!token && typeof redirect === 'string') {
+          // eslint-disable-next-line no-console
+          console.log('redirecting...')
+          // if redirect string is provided and we're not logged in, cya!
+          Router.push(redirect)
+          return
+        }
         const [magicMd, details] = await Promise.all([
           magic.user.getMetadata(),
           getUserDetails(token),
@@ -61,26 +63,26 @@ export function useLogin(config: LoginProps = {}) {
           console.log('error!', details)
           $setStatus(STATUS.FAILED)
           $setError(details)
-        } else {
-          if (details.statusCode && details.statusCode === 401) {
-            $setStatus(STATUS.FAILED)
-            $setError(new LocalError('No user by that name found.', 401))
-            return
-          }
-          // eslint-disable-next-line no-console
-          console.log('loaded!', details)
-          $setStatus(STATUS.LOADED)
-          $setMetadata(details)
-          $setMagicMetadata(magicMd)
+          return
         }
-      } else if (typeof redirect === 'string') {
+        if (details.statusCode && details.statusCode === 401) {
+          // eslint-disable-next-line no-console
+          console.warn('No user found.')
+          $setStatus(STATUS.FAILED)
+          $setError(new LocalError('No user by that name found.', 401))
+          return
+        }
         // eslint-disable-next-line no-console
-        console.log('redirecting...')
-        // if redirect string is provided and we're not logged in, cya!
-        Router.push(redirect)
+        console.log('loaded!', details)
+        $setStatus(STATUS.LOADED)
+        $setMetadata(details)
+        $setMagicMetadata(magicMd)
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.warn('error getting id', err)
+        throw err
       }
     }
-    // ts is fine with this
     if (!$metadata) {
       try {
         checkLoggedIn()
