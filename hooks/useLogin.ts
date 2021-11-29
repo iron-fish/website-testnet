@@ -41,6 +41,8 @@ export function useLogin(config: LoginProps = {}) {
       try {
         token = await magic.user.getIdToken()
       } catch (err) {
+        // eslint-disable-next-line no-console
+        console.warn('error getting id', err)
         throw err
       }
 
@@ -49,6 +51,8 @@ export function useLogin(config: LoginProps = {}) {
           magic.user.getMetadata(),
           getUserDetails(token),
         ])
+        // eslint-disable-next-line no-console
+        console.log('has token!', token)
 
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
