@@ -69,7 +69,9 @@ export default function SignUp() {
   })
   const [$status, $setStatus] = useState<STATUS>(status)
   useEffect(() => {
-    $setStatus(status)
+    if ($status !== status) {
+      $setStatus(status)
+    }
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
         $setStatus(STATUS.FORCED)

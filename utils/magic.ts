@@ -5,6 +5,9 @@ const KEY = process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || ''
 
 const createMagic = (key: string): Magic | undefined => {
   if (typeof window === 'undefined' || !key) {
+    // eslint-disable-next-line
+    console.log('INVALID KEY OR NO WINDOW?', window, key)
+    debugger
     return undefined
   }
   // eslint-disable-next-line
