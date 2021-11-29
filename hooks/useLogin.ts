@@ -64,7 +64,7 @@ export function useLogin(config: LoginProps = {}) {
         } else {
           if (details.statusCode && details.statusCode === 401) {
             $setStatus(STATUS.FAILED)
-            Router.push(`/signup?toast=${btoa('You need to sign up first!')}`)
+            $setError(new LocalError('No user by that name found.', 401))
             return
           }
           // eslint-disable-next-line no-console
