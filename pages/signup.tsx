@@ -66,6 +66,7 @@ export const FIELDS = {
 export default function SignUp() {
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    timeout: 1500,
   })
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
