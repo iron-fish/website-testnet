@@ -16,6 +16,7 @@ import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
+import { STATUS, useLogin } from 'hooks/useLogin'
 
 import * as API from 'apiClient'
 import NoResults from 'components/leaderboard/ImageNoResults'
@@ -60,6 +61,8 @@ const FIELDS = {
 }
 
 export default function Leaderboard({ users = [] }: Props) {
+  const { status: $status } = useLogin({})
+  const [$showCTA, $setShowCTA] = useState<boolean>(true)
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -105,6 +108,11 @@ export default function Leaderboard({ users = [] }: Props) {
     // Don't re-fire the effect when hasSearched updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [$debouncedSearch, $country, $eventType])
+  useEffect(() => {
+    if ($status === STATUS.LOADED) {
+      $setShowCTA(false)
+    }
+  }, [$status, $showCTA])
 
   return (
     <div className="min-h-screen flex flex-col font-favorit">
@@ -123,7 +131,7 @@ export default function Leaderboard({ users = [] }: Props) {
           getters are for all-time score, miners, bug catchers, net promoters,
           node hosting, and more! Click someone’s user name to see a breakdown
           of their activity."
-            buttonText={'Sign Up'}
+            buttonText={$showCTA ? 'Sign Up' : ''}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -135,7 +143,7 @@ export default function Leaderboard({ users = [] }: Props) {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink={'/signup'}
+            buttonLink={$showCTA ? '/signup' : ''}
           />
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
