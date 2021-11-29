@@ -7,6 +7,8 @@ const createMagic = (key: string): Magic | undefined => {
   if (typeof window === 'undefined' || !key) {
     return undefined
   }
+  // eslint-disable-next-line
+  debugger
   return new Magic(key)
 }
 
