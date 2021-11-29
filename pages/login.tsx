@@ -36,26 +36,8 @@ const FIELDS = {
 export default function Login() {
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    timeout: 1500,
   })
-  const [$status, $setStatus] = useState<STATUS>(status)
-  // eslint-disable-next-line no-console
-  console.log({ status, $status })
-  useEffect(() => {
-    if ($status !== status) {
-      // eslint-disable-next-line no-console
-      console.log('status was ', status, '... changing')
-      $setStatus(status)
-    }
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        // eslint-disable-next-line no-console
-        console.log('setting status to forced!')
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    const tId = setTimeout(forceStatus, 1200)
-    return () => clearTimeout(tId)
-  }, [status, $status, $setStatus])
   const {
     show: $show,
     visible: $visible,
@@ -134,14 +116,14 @@ export default function Login() {
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
   // eslint-disable-next-line no-console
-  console.log({ statusNeverChanges: status, $statusNeverChanges: $status })
+  console.log({ statusNeverChanges: status })
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
         <title>Login</title>
         <meta name="description" content="Login" />
       </Head>
-      {$status === STATUS.LOADING ? (
+      {status === STATUS.LOADING ? (
         <Loader />
       ) : (
         <>

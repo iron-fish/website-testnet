@@ -7,4 +7,5 @@ export const LoginContext = React.createContext<ReturnType<typeof useLogin>>({
   magicMetadata: null,
   metadata: null,
   status: STATUS.LOADING,
+  setStatus: () => false,
 })

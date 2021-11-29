@@ -67,19 +67,6 @@ export default function SignUp() {
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
   })
-  const [$status, $setStatus] = useState<STATUS>(status)
-  useEffect(() => {
-    if ($status !== status) {
-      $setStatus(status)
-    }
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    const tId = setTimeout(forceStatus, 1200)
-    return () => clearTimeout(tId)
-  }, [status, $status])
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -171,7 +158,7 @@ export default function SignUp() {
         <title>Sign up</title>
         <meta name="description" content="Sign up" />
       </Head>
-      {$status === STATUS.LOADING ? (
+      {status === STATUS.LOADING ? (
         <Loader />
       ) : (
         <>
