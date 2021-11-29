@@ -11,8 +11,12 @@ import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
 import { createUser } from 'apiClient'
 import { useField } from 'hooks/useForm'
+import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
+import { encode as btoa } from 'base-64'
+
+import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 export const FIELDS = {
   email: {
@@ -60,6 +64,14 @@ export const FIELDS = {
 }
 
 export default function SignUp() {
+  const { status } = useProtectedRoute({
+    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+  })
+  const { visible: $visible, message: $toast } = useQueriedToast({
+    queryString: 'toast',
+    duration: 8e3,
+  })
+
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
@@ -146,53 +158,64 @@ export default function SignUp() {
         <title>Sign up</title>
         <meta name="description" content="Sign up" />
       </Head>
-      <Navbar fill="black" className="bg-ifpink text-black" />
-      <main className="bg-ifpink flex-1 font-extended">
-        <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
-          <OffsetBorderContainer>
-            <div
-              style={{ minHeight: '43rem', maxWidth: '53.5rem' }}
-              className="flex flex-col m-auto h-auto items-center px-5 pb-2"
-            >
-              {!$loaded ? (
-                <Loader />
-              ) : (
-                <>
-                  <h1 className="text-4xl text-center mb-4 mt-16">
-                    {$signedUp
-                      ? `Thank you for signing up!`
-                      : `Sign up and get incentivized.`}
-                  </h1>
-                  {$error !== UNSET && (
-                    <FieldError text={$error} size="text-md" />
-                  )}
-                  {$signedUp ? (
-                    <>
-                      <Note className="mb-8">
-                        Please check your email to validate your account
-                      </Note>
-                      <p className="p-2 text-center text-sm">
-                        Have any questions for our team?{' '}
-                        <Link href="https://discord.gg/EkQkEcm8DH">
-                          <a className=" text-iflightblue">
-                            Find us on Discord.
-                          </a>
-                        </Link>
-                      </p>
-                    </>
+      {status === STATUS.LOADING ? (
+        <Loader />
+      ) : (
+        <>
+          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Toast
+            message={$toast}
+            visible={$visible}
+            alignment={Alignment.Top}
+          />
+          <main className="bg-ifpink flex-1 font-extended">
+            <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
+              <OffsetBorderContainer>
+                <div
+                  style={{ minHeight: '43rem', maxWidth: '53.5rem' }}
+                  className="flex flex-col m-auto h-auto items-center px-5 pb-2"
+                >
+                  {!$loaded ? (
+                    <Loader />
                   ) : (
-                    <SignUpForm
-                      textFields={textFields}
-                      country={$country}
-                      submit={submit}
-                    />
+                    <>
+                      <h1 className="text-4xl text-center mb-4 mt-16">
+                        {$signedUp
+                          ? `Thank you for signing up!`
+                          : `Sign up and get incentivized.`}
+                      </h1>
+                      {$error !== UNSET && (
+                        <FieldError text={$error} size="text-md" />
+                      )}
+                      {$signedUp ? (
+                        <>
+                          <Note className="mb-8">
+                            Please check your email to validate your account
+                          </Note>
+                          <p className="p-2 text-center text-sm">
+                            Have any questions for our team?{' '}
+                            <Link href="https://discord.gg/EkQkEcm8DH">
+                              <a className=" text-iflightblue">
+                                Find us on Discord.
+                              </a>
+                            </Link>
+                          </p>
+                        </>
+                      ) : (
+                        <SignUpForm
+                          textFields={textFields}
+                          country={$country}
+                          submit={submit}
+                        />
+                      )}
+                    </>
                   )}
-                </>
-              )}
+                </div>
+              </OffsetBorderContainer>
             </div>
-          </OffsetBorderContainer>
-        </div>
-      </main>
+          </main>
+        </>
+      )}
     </div>
   )
 }

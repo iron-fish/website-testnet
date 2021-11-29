@@ -7,17 +7,18 @@ import { RawButton } from '../Button'
 type PageBannerProps = {
   title: string
   text: ReactNode
-  buttonText: string
+  buttonText?: string
   buttonClassName?: string
-  buttonLink: string
+  buttonLink?: string
 }
 export const PageBanner: FC<PageBannerProps> = ({
   title,
   text,
-  buttonText,
+  buttonText = '',
   buttonClassName = '',
-  buttonLink,
+  buttonLink = '',
 }) => {
+  const renderButton = buttonText && buttonLink
   return (
     <div>
       <h1
@@ -48,21 +49,23 @@ export const PageBanner: FC<PageBannerProps> = ({
           {text}
         </p>
       </div>
-      <Link href={buttonLink} passHref>
-        <RawButton
-          className={clsx(
-            buttonClassName,
-            `m-auto`,
-            `mt-8`,
-            `text-lg`,
-            `px-7`,
-            `py-4`,
-            `md:text-xl`
-          )}
-        >
-          {buttonText}
-        </RawButton>
-      </Link>
+      {renderButton && (
+        <Link href={buttonLink} passHref>
+          <RawButton
+            className={clsx(
+              buttonClassName,
+              `m-auto`,
+              `mt-8`,
+              `text-lg`,
+              `px-7`,
+              `py-4`,
+              `md:text-xl`
+            )}
+          >
+            {buttonText}
+          </RawButton>
+        </Link>
+      )}
     </div>
   )
 }

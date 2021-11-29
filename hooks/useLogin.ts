@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
@@ -8,6 +8,7 @@ export enum STATUS {
   LOADING = 'loading',
   FAILED = 'failed',
   LOADED = 'loaded',
+  FORCED = 'forced',
 }
 
 // reusable magic login context
@@ -43,13 +44,13 @@ export function useLogin(redirect?: string) {
           getUserDetails(token),
         ])
 
-        $setMagicMetadata(magicMd)
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
           $setError(details)
         } else {
           $setStatus(STATUS.LOADED)
           $setMetadata(details)
+          $setMagicMetadata(magicMd)
         }
       } else if (typeof redirect === 'string') {
         // if redirect string is provided and we're not logged in, cya!
@@ -59,13 +60,14 @@ export function useLogin(redirect?: string) {
     // ts is fine with this
     if (!$metadata) checkLoggedIn()
   }, [$metadata, $setMetadata, redirect])
-  return {
-    checkLoggedIn: () => $status === STATUS.LOADED,
+  const loginContext = {
+    checkLoggedIn: useCallback(() => $status === STATUS.LOADED, [$status]),
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,
     status: $status,
   }
+  return loginContext
 }
 
 export default useLogin

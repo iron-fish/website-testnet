@@ -5,7 +5,6 @@ import { Magic } from '@magic-sdk/admin'
 const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || '')
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') return res.status(405).end()
   try {
     const authString = req?.headers?.authorization || ''
     if (!authString) {

@@ -1,6 +1,6 @@
 import React from 'react'
-
 import clsx from 'clsx'
+
 import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
 import { useNav, NavState } from 'hooks/useNav'
@@ -41,9 +41,14 @@ function Navbar({
   }
   return (
     <nav
-      className={`font-extended relative hover:bg-white hover:shadow-navbar hover:text-black ${
+      className={clsx(
+        `font-extended`,
+        `relative`,
+        `hover:bg-white`,
+        `hover:shadow-navbar`,
+        `hover:text-black`,
         $subnavState !== NavState.NONE ? 'bg-white text-black' : className
-      }`}
+      )}
       onMouseLeave={() => {
         if (!$flyoutVisible) {
           hideNav()

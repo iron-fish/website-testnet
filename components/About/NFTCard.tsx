@@ -43,8 +43,8 @@ export const NFTCard = ({ title, content, pic }: NFTProps) => (
           <p className="mt-4 mb-6 text-xl">{content}</p>
         </div>
         <div className={clsx('flex', 'flex-shrink', 'self-end', 'min-h-[50%]')}>
-          {/* eslint-disable-next-line */}
-          <img src={pic} />
+          {/* eslint-disable @next/next/no-img-element */}
+          <img src={pic} alt="A nifty NFT" />
         </div>
       </div>
     </Box>

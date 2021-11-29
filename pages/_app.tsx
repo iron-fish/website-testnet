@@ -5,8 +5,7 @@ import { LoginContext } from 'contexts/LoginContext'
 import useLogin from 'hooks/useLogin'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const loginValue = useLogin()
-
+  const $loginValue = useLogin()
   return (
     <>
       <Head>
@@ -18,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LoginContext.Provider value={loginValue}>
+      <LoginContext.Provider value={$loginValue}>
         <Component {...pageProps} className="font-favorit" />
       </LoginContext.Provider>
     </>

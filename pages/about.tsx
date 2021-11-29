@@ -70,15 +70,13 @@ export default function About() {
         <title>About</title>
         <meta name="description" content="About" />
       </Head>
-
       <Navbar fill="black" className="bg-iflightorange text-black" />
-
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
         <div className="w-full md:w-2/3 m-auto">
           <PageBanner
             title="About the Incentivized Testnet"
             text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
-            buttonText="Sign Up"
+            buttonText={'Sign Up'}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -90,7 +88,7 @@ export default function About() {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink="/signup"
+            buttonLink={'/signup'}
           />
         </div>
         <div className={clsx('mx-3', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
