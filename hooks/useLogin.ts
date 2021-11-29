@@ -29,9 +29,9 @@ export function useLogin(config: LoginProps = {}) {
   const [$magicMetadata, $setMagicMetadata] =
     useState<MagicUserMetadata | null>(null)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
-  // ts hates useEffect(async () => {})
   useEffect(() => {
     const checkLoggedIn = async () => {
+      console.log('starting check!')
       // this is likely a case where we're working in not-the-browser
       if ($metadata || !magic || !magic.user) return
 
@@ -55,14 +55,20 @@ export function useLogin(config: LoginProps = {}) {
         console.log('has token!', token)
 
         if ('error' in details || details instanceof LocalError) {
+          // eslint-disable-next-line no-console
+          console.log('error!', details)
           $setStatus(STATUS.FAILED)
           $setError(details)
         } else {
+          // eslint-disable-next-line no-console
+          console.log('loaded!', details)
           $setStatus(STATUS.LOADED)
           $setMetadata(details)
           $setMagicMetadata(magicMd)
         }
       } else if (typeof redirect === 'string') {
+        // eslint-disable-next-line no-console
+        console.log('redirecting...')
         // if redirect string is provided and we're not logged in, cya!
         Router.push(redirect)
       }
@@ -74,7 +80,7 @@ export function useLogin(config: LoginProps = {}) {
       } catch (e) {
         $setStatus(STATUS.LOADED)
         // eslint-disable-next-line no-console
-        console.warn(e)
+        console.warn('general error!', e)
       }
     }
   }, [$metadata, $setMetadata, redirect])
@@ -82,6 +88,7 @@ export function useLogin(config: LoginProps = {}) {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
         // eslint-disable-next-line no-console
+        console.log('FORCING STATUS')
         $setStatus(STATUS.FORCED)
       }
     }
