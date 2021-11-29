@@ -43,7 +43,8 @@ export const LoginButton = () => {
             'transition-opacity'
           )}
         >
-        */
+         */
+        const hasGraffiti = metadata && !!metadata.graffiti
         return (
           <RawButton
             className={clsx(
@@ -60,8 +61,9 @@ export const LoginButton = () => {
           >
             <Link href={goto}>
               <a>
-                {metadata && metadata.graffiti ? (
-                  metadata.graffiti
+                {hasGraffiti ? (
+                  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                  metadata!.graffiti
                 ) : (
                   <span>
                     Login<span className="md:hidden"> to Testnet</span>

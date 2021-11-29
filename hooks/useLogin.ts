@@ -3,6 +3,7 @@ import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
+import { encode as btoa } from 'base-64'
 
 export enum STATUS {
   LOADING = 'loading',
@@ -61,6 +62,11 @@ export function useLogin(config: LoginProps = {}) {
           $setStatus(STATUS.FAILED)
           $setError(details)
         } else {
+          if (details.statusCode && details.statusCode === 401) {
+            $setStatus(STATUS.FAILED)
+            Router.push(`/signup?toast=${btoa('You need to sign up first!')}`)
+            return
+          }
           // eslint-disable-next-line no-console
           console.log('loaded!', details)
           $setStatus(STATUS.LOADED)
@@ -79,7 +85,7 @@ export function useLogin(config: LoginProps = {}) {
       try {
         checkLoggedIn()
       } catch (e) {
-        $setStatus(STATUS.LOADED)
+        $setStatus(STATUS.FAILED)
         // eslint-disable-next-line no-console
         console.warn('general error!', e)
       }

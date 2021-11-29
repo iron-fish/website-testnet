@@ -85,4 +85,6 @@ export type ApiUserMetadata = {
   last_login_at: string
   discord: string
   telegram: string
+  statusCode?: number
+  message?: string
 }
