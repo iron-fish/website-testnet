@@ -5,7 +5,7 @@ import { LoginContext } from 'contexts/LoginContext'
 import useLogin from 'hooks/useLogin'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const $loginValue = useLogin()
+  const $loginValue = useLogin({ timeout: 1500 })
   return (
     <>
       <Head>
