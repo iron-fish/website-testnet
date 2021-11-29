@@ -41,15 +41,21 @@ export default function Login() {
   // eslint-disable-next-line no-console
   console.log({ status, $status })
   useEffect(() => {
-    $setStatus(status)
+    if ($status !== status) {
+      // eslint-disable-next-line no-console
+      console.log('status was ', status, '... changing')
+      $setStatus(status)
+    }
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
+        // eslint-disable-next-line no-console
+        console.log('setting status to forced!')
         $setStatus(STATUS.FORCED)
       }
     }
     const tId = setTimeout(forceStatus, 1200)
     return () => clearTimeout(tId)
-  }, [status, $status])
+  }, [status, $status, $setStatus])
   const {
     show: $show,
     visible: $visible,
@@ -128,7 +134,7 @@ export default function Login() {
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
   // eslint-disable-next-line no-console
-  console.log({ statusNeverChanges: status })
+  console.log({ statusNeverChanges: status, $statusNeverChanges: $status })
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
