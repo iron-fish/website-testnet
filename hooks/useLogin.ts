@@ -41,7 +41,7 @@ export function useLogin(config: LoginProps = {}) {
       try {
         token = await magic.user.getIdToken()
       } catch (err) {
-        return
+        throw err
       }
 
       if (token) {
@@ -64,13 +64,20 @@ export function useLogin(config: LoginProps = {}) {
       }
     }
     // ts is fine with this
-    if (!$metadata) checkLoggedIn()
+    if (!$metadata) {
+      try {
+        checkLoggedIn()
+      } catch (e) {
+        $setStatus(STATUS.LOADED)
+        // eslint-disable-next-line no-console
+        console.warn(e)
+      }
+    }
   }, [$metadata, $setMetadata, redirect])
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
         // eslint-disable-next-line no-console
-        console.log('setting status to forced!')
         $setStatus(STATUS.FORCED)
       }
     }

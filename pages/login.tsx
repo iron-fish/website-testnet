@@ -115,8 +115,6 @@ export default function Login() {
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
-  // eslint-disable-next-line no-console
-  console.log({ statusNeverChanges: status })
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
