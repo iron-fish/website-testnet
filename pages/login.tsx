@@ -36,6 +36,7 @@ const FIELDS = {
 export default function Login() {
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    timeout: 1500,
   })
   const {
     show: $show,

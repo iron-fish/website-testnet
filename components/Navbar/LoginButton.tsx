@@ -23,27 +23,15 @@ export const LoginButton = () => {
           // TODO: Find a way to resolve this better, but keep for now
           // eslint-disable-next-line no-console
           console.log({ error, status })
-          return null
         }
 
         const loggedIn = checkLoggedIn()
-        /*
-        if (loggedIn && !$loaded) {
-          $setLoaded(true)
-        }
-        */
+
         const goto =
           loggedIn && metadata && metadata.id
             ? `/users/${metadata.id}`
             : '/login'
-        /*
-        <div
-          className={clsx(
-            $loaded ? 'opacity-100' : 'opacity-0',
-            'transition-opacity'
-          )}
-        >
-        */
+        const hasGraffiti = metadata && !!metadata.graffiti
         return (
           <RawButton
             className={clsx(
@@ -60,8 +48,9 @@ export const LoginButton = () => {
           >
             <Link href={goto}>
               <a>
-                {metadata && metadata.graffiti ? (
-                  metadata.graffiti
+                {hasGraffiti ? (
+                  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                  metadata!.graffiti
                 ) : (
                   <span>
                     Login<span className="md:hidden"> to Testnet</span>

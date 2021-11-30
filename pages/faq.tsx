@@ -8,6 +8,9 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
+import { LoginContext } from 'contexts/LoginContext'
+import { STATUS } from 'hooks/useLogin'
+import Loader from 'components/Loader'
 
 const questions: ReadonlyArray<{ question: string; answer: string }> = [
   {
@@ -47,61 +50,69 @@ on our `}
 
 export default function Faq() {
   return (
-    <div className="min-h-screen flex flex-col font-favorit">
-      <Head>
-        <title>FAQ</title>
-        <meta name="description" content="FAQ" />
-      </Head>
+    <LoginContext.Consumer>
+      {({ status }: { status: STATUS }) =>
+        status === STATUS.LOADING ? (
+          <Loader />
+        ) : (
+          <div className="min-h-screen flex flex-col font-favorit">
+            <Head>
+              <title>FAQ</title>
+              <meta name="description" content="FAQ" />
+            </Head>
 
-      <Navbar fill="black" className="bg-white text-black" />
+            <Navbar fill="black" className="bg-white text-black" />
 
-      <main className="bg-white flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
-          <PageBanner
-            title="Testnet FAQ"
-            text={<PageBannerBody />}
-            buttonText={'Sign Up'}
-            buttonClassName={clsx(
-              'm-auto',
-              'mb-32',
-              'w-full',
-              'max-w-[240px]',
-              'text-lg',
-              'p-3',
-              'md:text-xl',
-              'md:py-5',
-              'md:px-4'
-            )}
-            buttonLink={'/signup'}
-          />
-          <h1
-            className={clsx(
-              'text-left',
-              'text-5xl',
-              'ml-0',
-              'mt-24',
-              'mb-8',
-              'font-extended',
-              'md:text-6xl'
-            )}
-          >
-            Questions
-          </h1>
-          <div className="flex flex-col gap-y-8">
-            {questions.map((qa, i) => (
-              <QuestionAnswer key={i} index={i} {...qa} />
-            ))}
+            <main className="bg-white flex-1 items-center flex flex-col">
+              <div className="w-4/5 md:w-2/3">
+                <PageBanner
+                  title="Testnet FAQ"
+                  text={<PageBannerBody />}
+                  buttonText={status !== STATUS.LOADED ? 'Sign Up' : ''}
+                  buttonClassName={clsx(
+                    'm-auto',
+                    'mb-32',
+                    'w-full',
+                    'max-w-[240px]',
+                    'text-lg',
+                    'p-3',
+                    'md:text-xl',
+                    'md:py-5',
+                    'md:px-4'
+                  )}
+                  buttonLink={status !== STATUS.LOADED ? '/signup' : ''}
+                />
+                <h1
+                  className={clsx(
+                    'text-left',
+                    'text-5xl',
+                    'ml-0',
+                    'mt-24',
+                    'mb-8',
+                    'font-extended',
+                    'md:text-6xl'
+                  )}
+                >
+                  Questions
+                </h1>
+                <div className="flex flex-col gap-y-8">
+                  {questions.map((qa, i) => (
+                    <QuestionAnswer key={i} index={i} {...qa} />
+                  ))}
+                </div>
+              </div>
+              <TubesCTA
+                cta="Join the Testnet!"
+                buttonText="Join Now"
+                goTo="/signup"
+              />
+              <KeepReading background="bg-white" />
+              <div className="mb-24"></div>
+            </main>
+            <Footer />
           </div>
-        </div>
-        <TubesCTA
-          cta="Join the Testnet!"
-          buttonText="Join Now"
-          goTo="/signup"
-        />
-        <KeepReading background="bg-white" />
-        <div className="mb-24"></div>
-      </main>
-      <Footer />
-    </div>
+        )
+      }
+    </LoginContext.Consumer>
   )
 }

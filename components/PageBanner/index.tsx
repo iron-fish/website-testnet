@@ -49,7 +49,7 @@ export const PageBanner: FC<PageBannerProps> = ({
           {text}
         </p>
       </div>
-      {renderButton && (
+      {renderButton ? (
         <Link href={buttonLink} passHref>
           <RawButton
             className={clsx(
@@ -65,6 +65,8 @@ export const PageBanner: FC<PageBannerProps> = ({
             {buttonText}
           </RawButton>
         </Link>
+      ) : (
+        <div className={clsx('m-auto', 'mt-8', 'text-lg', 'px-7', 'py-4')} />
       )}
     </div>
   )
