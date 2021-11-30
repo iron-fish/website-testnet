@@ -20,6 +20,7 @@ import './commands'
 // require('./commands')
 //
 Cypress.on('uncaught:exception', err => {
+  // eslint-disable-next-line no-console
   console.log(err)
   // returning false here prevents Cypress from
   // failing the test
