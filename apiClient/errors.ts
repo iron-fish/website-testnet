@@ -26,8 +26,10 @@ export const matchEntity = (x: string) =>
 
 export class LocalError extends Error {
   static readonly error = true
-  constructor(message: string, public statusCode: number) {
+  readonly statusCode: number
+  constructor(message: string, statusCode: number) {
     super(message)
     Object.setPrototypeOf(this, LocalError.prototype)
+    this.statusCode = statusCode
   }
 }

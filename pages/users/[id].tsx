@@ -2,6 +2,7 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
+import Debug from 'components/Debug'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
@@ -10,6 +11,7 @@ import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
 import usePaginatedEvents from 'hooks/usePaginatedEvents'
+import { encode as btoa } from 'base-64'
 
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
@@ -20,10 +22,18 @@ const EVENTS_LIMIT = 7
 
 type Props = {
   events: API.ListEventsResponse
-  user: API.ApiUser
+  user?: API.ApiUser
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
   metricsConfig: API.MetricsConfigResponse
+}
+type Redirectable = {
+  destination: string
+  permanent: boolean
+}
+
+type Redirect = {
+  redirect: Redirectable
 }
 
 function displayEventType(type: API.EventType): string {
@@ -43,44 +53,56 @@ function displayEventType(type: API.EventType): string {
   }
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async context => {
-  if (typeof context.query.id !== 'string') {
-    return {
-      notFound: true,
+export const getServerSideProps: GetServerSideProps<Props | Redirect> =
+  async context => {
+    const failure = {
+      redirect: {
+        destination: `/leaderboard?toast=${btoa('Unable to find that user')}`,
+        permanent: false,
+      },
+    }
+    try {
+      if (typeof context.query.id !== 'string') {
+        return failure
+      }
+      const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
+        await Promise.all([
+          API.getUser(context.query.id),
+          API.listEvents({ userId: context.query.id, limit: EVENTS_LIMIT }),
+          API.getUserAllTimeMetrics(context.query.id),
+          API.getUserWeeklyMetrics(context.query.id),
+          API.getMetricsConfig(),
+        ])
+      // eslint-disable-next-line
+      const fUser = user as any
+      if (!fUser || (fUser && !fUser.id)) {
+        return failure
+      }
+      if (
+        'error' in events ||
+        'error' in user ||
+        'error' in allTimeMetrics ||
+        'error' in weeklyMetrics ||
+        'error' in metricsConfig
+      ) {
+        return failure
+      }
+
+      return {
+        props: {
+          events: events,
+          user: user,
+          allTimeMetrics: allTimeMetrics,
+          weeklyMetrics: weeklyMetrics,
+          metricsConfig: metricsConfig,
+        },
+      }
+    } catch (e) {
+      // eslint-disable-next-line
+      console.warn(e)
+      return failure
     }
   }
-
-  const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
-    await Promise.all([
-      API.getUser(context.query.id),
-      API.listEvents({ userId: context.query.id, limit: EVENTS_LIMIT }),
-      API.getUserAllTimeMetrics(context.query.id),
-      API.getUserWeeklyMetrics(context.query.id),
-      API.getMetricsConfig(),
-    ])
-
-  if (
-    'error' in events ||
-    'error' in user ||
-    'error' in allTimeMetrics ||
-    'error' in weeklyMetrics ||
-    'error' in metricsConfig
-  ) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      events: events,
-      user: user,
-      allTimeMetrics: allTimeMetrics,
-      weeklyMetrics: weeklyMetrics,
-      metricsConfig: metricsConfig,
-    },
-  }
-}
 
 export default function User({
   events,
@@ -89,15 +111,24 @@ export default function User({
   weeklyMetrics,
   metricsConfig,
 }: Props) {
+  // eslint-disable-next-line no-console
+  const id = (user && user.id && user.id.toString()) || 'unknown'
   // Recent Activity hooks
   const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
-    usePaginatedEvents(user.id.toString(), EVENTS_LIMIT, events)
+    usePaginatedEvents(id, EVENTS_LIMIT, events)
 
   // Tab hooks
   const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
   const onTabChange = React.useCallback((tab: TabType) => {
     $setActiveTab(tab)
   }, [])
+  if (!user || id === 'unknown') {
+    return (
+      <Debug
+        {...{ events, user, allTimeMetrics, weeklyMetrics, metricsConfig }}
+      />
+    )
+  }
 
   return (
     <LoginContext.Consumer>

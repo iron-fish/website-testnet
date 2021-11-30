@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
-import { encode as btoa } from 'base-64'
+// import { encode as btoa } from 'base-64'
 
 export enum STATUS {
   LOADING = 'loading',
@@ -38,38 +38,53 @@ export function useLogin(config: LoginProps = {}) {
         console.log('starting check!')
         // this is likely a case where we're working in not-the-browser
         if ($metadata || !magic || !magic.user) {
-          throw new LocalError('Magic instance not available!', 500)
-        }
-
-        // check if we're logged in and fetch token with one call
-        // magic.user.isLoggedIn makes this same call anyway
-        const token = await magic.user.getIdToken()
-
-        if (!token && typeof redirect === 'string') {
-          // eslint-disable-next-line no-console
-          console.log('redirecting...')
-          // if redirect string is provided and we're not logged in, cya!
-          Router.push(redirect)
+          Promise.reject(new LocalError('Magic instance not available!', 500))
           return
         }
+        let token
+        try {
+          token = await magic.user.getIdToken()
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.warn('magic.user.getIdToken error:', error)
+        }
+
+        if (!token) {
+          // eslint-disable-next-line no-console
+          console.log('NO TOKEN FOUND')
+          if (redirect && typeof redirect === 'string') {
+            // eslint-disable-next-line no-console
+            console.log('redirecting...')
+            // if redirect string is provided and we're not logged in, cya!
+            Router.push(redirect)
+            return
+          }
+          // this is a visible error but not a breaking error
+          $setStatus(STATUS.NOT_FOUND)
+          $setError(new LocalError('No token available.', 500))
+          return
+        }
+        // eslint-disable-next-line no-console
+        console.log('has token!', token)
         const [magicMd, details] = await Promise.all([
           magic.user.getMetadata(),
           getUserDetails(token),
         ])
-        // eslint-disable-next-line no-console
-        console.log('has token!', token)
 
         if ('error' in details || details instanceof LocalError) {
           // eslint-disable-next-line no-console
           console.log('error!', details)
           $setStatus(STATUS.FAILED)
+          // this is a visible error and a breaking error
           $setError(details)
+          Promise.reject(details)
           return
         }
         if (details.statusCode && details.statusCode === 401) {
           // eslint-disable-next-line no-console
           console.warn('No user found.')
           $setStatus(STATUS.NOT_FOUND)
+          $setError(new LocalError('No user found.', 500))
           return
         }
         // eslint-disable-next-line no-console
@@ -78,6 +93,16 @@ export function useLogin(config: LoginProps = {}) {
         $setMetadata(details)
         $setMagicMetadata(magicMd)
       } catch (err) {
+        // eslint-disable-next-line
+        console.log({
+          CATCHER: true,
+          error: err.toString(),
+          notAValidUser: err.toString().indexOf('-32603') > -1,
+        })
+        if (err.toString().indexOf('-32603') > -1) {
+          $setStatus(STATUS.NOT_FOUND)
+          return
+        }
         // eslint-disable-next-line no-console
         console.warn('error getting id', err)
         throw err
