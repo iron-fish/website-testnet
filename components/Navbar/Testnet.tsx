@@ -65,14 +65,6 @@ function Testnet({ condensed = false }: TestnetProps) {
                   cubeClassName="text-iforange"
                 />
                 <TestnetGridElement
-                  href="/community"
-                  header="Testnet Community"
-                  body="From our supporters"
-                  className={elementClassName}
-                  textClassName={textClassName}
-                  cubeClassName="text-ifbeige"
-                />
-                <TestnetGridElement
                   href="/leaderboard"
                   header="Testnet Leaderboard"
                   body="Earn your way to the top"
