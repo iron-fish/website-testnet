@@ -8,6 +8,7 @@ import { encode as btoa } from 'base-64'
 export enum STATUS {
   LOADING = 'loading',
   FAILED = 'failed',
+  NOT_FOUND = 'not_found',
   LOADED = 'loaded',
   FORCED = 'forced',
 }
@@ -68,8 +69,7 @@ export function useLogin(config: LoginProps = {}) {
         if (details.statusCode && details.statusCode === 401) {
           // eslint-disable-next-line no-console
           console.warn('No user found.')
-          $setStatus(STATUS.FAILED)
-          $setError(new LocalError('No user by that name found.', 401))
+          $setStatus(STATUS.NOT_FOUND)
           return
         }
         // eslint-disable-next-line no-console
