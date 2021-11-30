@@ -87,12 +87,14 @@ export function useLogin(config: LoginProps = {}) {
       try {
         checkLoggedIn()
       } catch (e) {
-        $setStatus(STATUS.FAILED)
+        if ($status === STATUS.LOADING) {
+          $setStatus(STATUS.FAILED)
+        }
         // eslint-disable-next-line no-console
         console.warn('general error!', e)
       }
     }
-  }, [$metadata, $setMetadata, redirect])
+  }, [$metadata, $setMetadata, redirect, $status])
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
@@ -107,8 +109,11 @@ export function useLogin(config: LoginProps = {}) {
     }
   }, [$status, $setStatus, timeout])
 
+  const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
-    checkLoggedIn: useCallback(() => $status === STATUS.LOADED, [$status]),
+    checkLoggedIn: statusRelevantContext(STATUS.LOADED),
+    isLoading: statusRelevantContext(STATUS.LOADING),
+    isFailed: statusRelevantContext(STATUS.FAILED),
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,
