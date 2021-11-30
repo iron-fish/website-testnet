@@ -54,7 +54,7 @@ export const guidelines = {
     {
       title: 'Rewards',
       content:
-        'The Incentivized Testnet program will distribute up to 210,000 Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
+        'The Incentivized Testnet program will distribute up to 420,000 (1% of the initial supply) Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
       behind: 'bg-white',
     },
     {
@@ -105,14 +105,8 @@ export const callsToAction = {
     {
       title: 'Contributing to the Community',
       content:
-        'Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points. Email us at testnet@ironfish.network with a link and your Iron Fish graffiti to submit your contribution.',
-      points: [
-        'Small contribution = 10 points',
-        'Medium contribution = 100 points ',
-        'Large contribution = 1000 points ',
-      ],
-      ctaText: 'Email us',
-      href: 'mailto:testnet@ironfish.network',
+        'Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points.',
+      comingSoon: true,
     },
     {
       title: 'Being an Explorer',
@@ -128,21 +122,15 @@ export const callsToAction = {
       title: `Mining the testnet`,
       content:
         'Once you sign up for the incentivized testnet, actively mining automatically earns you points for blocks that are mined and accepted to the main chain.',
-      points: ['1 block = 10 points'],
+      points: ['1 block = 100 points'],
       ctaText: 'Get started with mining',
       href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
     },
     {
       title: 'Promoting the Testnet',
       content:
-        'Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them.  Email us at testnet@ironfish.network with a link and your Iron Fish graffiti to submit your contribution.',
-      points: [
-        'Small promotion = 10 points',
-        'Medium promotion = 100 points ',
-        'Large promotion = 1000 points ',
-      ],
-      ctaText: 'Email us',
-      href: 'mailto:testnet@ironfish.network',
+        'Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them.',
+      comingSoon: true,
     },
     {
       title: 'Submit a Pull Request',

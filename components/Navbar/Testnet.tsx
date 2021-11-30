@@ -72,14 +72,6 @@ function Testnet({ condensed = false }: TestnetProps) {
                   textClassName={textClassName}
                   cubeClassName="text-ifcubepink"
                 />
-                <TestnetGridElement
-                  href="/faq"
-                  header="Testnet FAQ"
-                  body="Frequently asked questions"
-                  className={elementClassName}
-                  textClassName={textClassName}
-                  cubeClassName="text-iflightblue"
-                />
               </div>
             </div>
           </div>
