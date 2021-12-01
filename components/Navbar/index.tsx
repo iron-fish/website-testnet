@@ -8,6 +8,8 @@ import { useNav, NavState } from 'hooks/useNav'
 import NavbarLinks from './Links'
 import NavbarFlyout from './Flyout'
 
+import Link from 'next/link'
+
 type NavbarProps = {
   className?: string
   fill?: string
@@ -82,7 +84,11 @@ function Navbar({
         ])}
       >
         <div className="py-7">
-          <Logo fill={fill} width={190} height={32}></Logo>
+          <Link href="http://ironfish.network/" passHref>
+            <a>
+              <Logo fill={fill} width={190} height={32}></Logo>
+            </a>
+          </Link>
         </div>
         <div className="hidden md:flex items-center lg:text-xl">
           <NavbarLinks

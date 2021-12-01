@@ -1,9 +1,10 @@
 import { Box } from 'components/OffsetBorder/Box'
+import { ReactNode } from 'react'
 
 type Props = {
   index: number
   question: string
-  answer: string
+  answer: ReactNode
 }
 
 export default function QuestionAnswer({ index, question, answer }: Props) {

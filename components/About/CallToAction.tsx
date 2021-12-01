@@ -13,6 +13,7 @@ type CTAProps = {
   points?: string[]
   ctaText?: string
   href?: string
+  comingSoon?: boolean
 }
 
 export const CallToAction = ({
@@ -23,6 +24,7 @@ export const CallToAction = ({
   earn = 1000,
   href,
   ctaText,
+  comingSoon = false,
 }: CTAProps) => {
   const button = ctaText ? (
     <RawButton
@@ -37,7 +39,12 @@ export const CallToAction = ({
     <div className="mb-3">
       <Box behind="bg-ifpink">
         <div className="p-13">
-          <strong className="uppercase text-lg">{kind}</strong>
+          {comingSoon && (
+            <div className="bg-iflightgray text-ifgray px-4 py-2 inline-block mt-2 text-xs md:text-md mb-2">
+              Coming soon!
+            </div>
+          )}
+          {!comingSoon && <strong className="uppercase text-lg">{kind}</strong>}
           <h3 className="text-left text-4xl mt-3 mb-4 font-extended">
             {title}
           </h3>
@@ -51,7 +58,7 @@ export const CallToAction = ({
               ))}
             </ul>
           )}
-          {earn > 0 && (
+          {earn > 0 && !comingSoon && (
             <div className="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md">
               Earn up to {earn.toLocaleString('en-US')} points a week
             </div>
@@ -69,7 +76,7 @@ export const CallToAction = ({
 
 export const renderColumn = ({ title, content, ...ctaProps }: CTAProps) => (
   <CallToAction title={title} key={title} {...ctaProps}>
-    {content}
+    <div>{content}</div>
   </CallToAction>
 )
 

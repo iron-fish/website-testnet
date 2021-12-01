@@ -19,6 +19,7 @@ describe('/about', () => {
         href: 'https://ironfish.network/docs/whitepaper/1_introduction',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
+      { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
         isImage: false,
         text: 'Get Started',
@@ -42,11 +43,6 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Email us',
-        href: 'mailto:testnet@ironfish.network',
-      },
-      {
-        isImage: false,
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
@@ -54,11 +50,6 @@ describe('/about', () => {
         isImage: false,
         text: 'Get started with mining',
         href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
-      },
-      {
-        isImage: false,
-        text: 'Email us',
-        href: 'mailto:testnet@ironfish.network',
       },
       {
         isImage: false,
