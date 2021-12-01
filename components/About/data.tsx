@@ -101,6 +101,7 @@ export const callsToAction = {
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
       href: 'https://github.com/iron-fish/ironfish/issues',
+      submissionForm: true,
     },
     {
       title: 'Contributing to the Community',
@@ -143,6 +144,7 @@ export const callsToAction = {
       ],
       ctaText: 'Submit a PR',
       href: 'https://github.com/iron-fish/ironfish/pulls',
+      submissionForm: true,
     },
 
     {
