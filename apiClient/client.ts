@@ -22,15 +22,23 @@ const BROWSER_API_KEY = process.env.NEXT_PUBLIC_API_KEY
 const API_URL = SERVER_API_URL || BROWSER_API_URL
 const API_KEY = SERVER_API_KEY || BROWSER_API_KEY
 
-export async function createUser(
-  email: string,
-  graffiti: string,
-  socialChoice: string,
-  social: string,
+type UserDetails = {
+  email: string
+  github: string
+  graffiti: string
+  socialChoice: string
+  social: string
   country_code: string
+}
+
+export async function createUser(
+  userDetails: UserDetails
 ): Promise<ApiUser | ApiError> {
+  const { email, github, graffiti, socialChoice, social, country_code } =
+    userDetails
   const body = JSON.stringify({
     email,
+    github,
     graffiti,
     country_code,
     [socialChoice]: social,

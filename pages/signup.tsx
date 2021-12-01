@@ -35,6 +35,14 @@ export const FIELDS = {
     validation: exists,
     defaultErrorText,
   },
+  github: {
+    id: 'github',
+    label: 'Github',
+    placeholder: 'Your github',
+    defaultValue: UNSET,
+    validation: exists,
+    defaultErrorText,
+  },
   social: {
     id: 'social',
     label: '',
@@ -76,6 +84,7 @@ export default function SignUp() {
   const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
+  const $github = useField(FIELDS.github)
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
@@ -87,17 +96,23 @@ export default function SignUp() {
   }, [$setLoaded, $country])
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
+    const noGithub = !$github?.touched
     const noGraffiti = !$graffiti?.touched
     const noSocial = !$social?.touched
     // for old men
     const noCountry = !$country?.touched
-    const untouched = noEmail || noGraffiti || noSocial || noCountry
+    const untouched = noEmail || noGithub || noGraffiti || noSocial || noCountry
     const invalid =
-      !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
+      !$email?.valid ||
+      !$github?.valid ||
+      !$graffiti?.valid ||
+      !$social?.valid ||
+      !$country?.valid
     if (invalid || untouched) {
       if (untouched) {
         $setError('Please fill out all fields')
         if (noEmail) $email?.setTouched(true)
+        if (noGithub) $github?.setTouched(true)
         if (noGraffiti) $graffiti?.setTouched(true)
         if (noSocial) $social?.setTouched(true)
         if (noCountry) $country?.setTouched(true)
@@ -109,24 +124,26 @@ export default function SignUp() {
       $setError(UNSET)
     }
     return invalid || untouched
-  }, [$country, $email, $graffiti, $social])
+  }, [$country, $email, $github, $graffiti, $social])
   const submit = useCallback(async () => {
     if (!$email || !$graffiti || !$social || !$country) return
     if (testInvalid()) return
     const email = $email?.value
     const graffiti = $graffiti?.value
+    const github = $github?.value
     const social = $social?.value
     const socialChoice = $social?.choice
     const country = $country?.value
     $setLoaded(false)
 
-    const result = await createUser(
+    const result = await createUser({
       email,
+      github,
       graffiti,
       socialChoice,
       social,
-      country
-    )
+      country_code: country,
+    })
 
     $setLoaded(true)
 
@@ -138,12 +155,15 @@ export default function SignUp() {
       scrollUp()
       Router.push(`/login?email=${encodeURIComponent(email)}&autoLogin=true`)
     }
-  }, [$email, $graffiti, $social, $country, testInvalid])
+  }, [$email, $github, $graffiti, $social, $country, testInvalid])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.
   if ($email) {
     $email.defaultValue = $email.value || UNSET
+  }
+  if ($github) {
+    $github.defaultValue = $github.value || UNSET
   }
   if ($graffiti) {
     $graffiti.defaultValue = $graffiti.value || UNSET
@@ -152,7 +172,7 @@ export default function SignUp() {
     $social.defaultValue = $social.value || UNSET
   }
 
-  const textFields = [$email, $graffiti, $social]
+  const textFields = [$email, $graffiti, $github, $social]
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
