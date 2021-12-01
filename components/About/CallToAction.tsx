@@ -14,6 +14,7 @@ type CTAProps = {
   ctaText?: string
   href?: string
   comingSoon?: boolean
+  submissionForm?: boolean
 }
 
 export const CallToAction = ({
@@ -25,6 +26,7 @@ export const CallToAction = ({
   href,
   ctaText,
   comingSoon = false,
+  submissionForm = false,
 }: CTAProps) => {
   const button = ctaText ? (
     <RawButton
@@ -67,6 +69,17 @@ export const CallToAction = ({
             <Link href={href}>{button}</Link>
           ) : (
             button
+          )}
+          {submissionForm && (
+            <Link href="https://forms.gle/yrAtzoyKTwLgLTRZA" passHref>
+              <RawButton
+                border="border"
+                className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
+                colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
+              >
+                {href ? <Link href={href}>Claim Points</Link> : ctaText}
+              </RawButton>
+            </Link>
           )}
         </div>
       </Box>

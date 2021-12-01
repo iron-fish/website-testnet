@@ -38,6 +38,11 @@ describe('/about', () => {
       },
       {
         isImage: false,
+        text: 'Claim Points',
+        href: 'https://github.com/iron-fish/ironfish/issues',
+      },
+      {
+        isImage: false,
         text: 'Email us',
         href: 'mailto:testnet@ironfish.network',
       },
@@ -54,6 +59,11 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Submit a PR',
+        href: 'https://github.com/iron-fish/ironfish/pulls',
+      },
+      {
+        isImage: false,
+        text: 'Claim Points',
         href: 'https://github.com/iron-fish/ironfish/pulls',
       },
       {

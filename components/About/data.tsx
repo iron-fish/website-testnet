@@ -97,10 +97,11 @@ export const callsToAction = {
     {
       title: 'Finding Bugs',
       content:
-        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue.',
+        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
       href: 'https://github.com/iron-fish/ironfish/issues',
+      submissionForm: true,
     },
     {
       title: 'Contributing to the Community',
@@ -135,7 +136,7 @@ export const callsToAction = {
     {
       title: 'Submit a Pull Request',
       content:
-        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged.',
+        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
       points: [
         'Small PR = 250 points',
         'Medium PR = 750 points',
@@ -143,6 +144,7 @@ export const callsToAction = {
       ],
       ctaText: 'Submit a PR',
       href: 'https://github.com/iron-fish/ironfish/pulls',
+      submissionForm: true,
     },
 
     {
