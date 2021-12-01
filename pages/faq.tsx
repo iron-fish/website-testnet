@@ -11,27 +11,70 @@ import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 import { LoginContext } from 'contexts/LoginContext'
 import { STATUS } from 'hooks/useLogin'
 import Loader from 'components/Loader'
+import React from 'react'
 
-const questions: ReadonlyArray<{ question: string; answer: string }> = [
+import type { ReactNode } from 'react'
+
+const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
   {
-    question: `A common question about the testnet?`,
-    answer: `An answer to the question about the testnet.`,
+    question: `How long will the incentivized testnet run for?`,
+    answer: `The testnet will run until the Iron Fish node is stable, feature-complete, and ready for mainnet 🎉`,
   },
   {
-    question: `A common question about the testnet?`,
-    answer: `An answer to the question about the testnet.`,
+    question: `Can I participate in the Incentivized Testnet if I’m in the US?`,
+    answer: (
+      <div>
+        Yes. Please see{' '}
+        <span className="underline">
+          <Link href="/about#guidelines">Testnet Guidelines</Link>
+        </span>{' '}
+        for more details.
+      </div>
+    ),
   },
   {
-    question: `A common question about the testnet?`,
-    answer: `An answer to the question about the testnet.`,
+    question: `How do I get points for mining blocks? `,
+    answer: (
+      <div>
+        First, you must{' '}
+        <span className="underline">
+          {' '}
+          <Link href="/signup"> register</Link>
+        </span>{' '}
+        and confirm your account via email for the incentivized testnet. You
+        must set your graffiti to be what you registered with when mining
+        blocks. To set your graffiti, see the{' '}
+        <span className="underline">
+          <Link href="https://ironfish.network/docs/onboarding/miner-iron-fish#set-block-graffiti-optional">
+            docs section on mining
+          </Link>
+        </span>
+        .
+      </div>
+    ),
   },
   {
-    question: `A common question about the testnet?`,
-    answer: `An answer to the question about the testnet.`,
+    question: `Is there a GPU miner?`,
+    answer: `There is currently no official GPU miner, but there’s nothing stopping you from working on it!`,
   },
   {
-    question: `A common question about the testnet?`,
-    answer: `An answer to the question about the testnet.`,
+    question: `Can points be retroactively applied for blocks mined before I registered and confirmed my account?`,
+    answer: `No.`,
+  },
+  {
+    question: `Can I claim points for blocks under a different graffiti than the one I registered with?`,
+    answer: `No.`,
+  },
+  {
+    question: `What are the minimum hardware requirements for running a node? `,
+    answer: (
+      <div>
+        Recommended minimum requirements from other members in the community
+        are:
+        <li>CPU 4 core</li>
+        <li>RAM 8GB RAM</li>
+      </div>
+    ),
   },
 ]
 
