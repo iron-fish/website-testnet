@@ -9,11 +9,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Create an `.env.local` file. You can copy the existing template (`cp .env.template .env.local`)
 
 ```
-NEXT_PUBLIC_API_URL=https://ironfish-api-staging.herokuapp.com
-API_URL=https://ironfish-api-staging.herokuapp.com
-# NEXT_PUBLIC_API_URL=http://localhost:8003
-# API_URL=http://localhost:8003
-NEXT_PUBLIC_API_KEY=test
+NEXT_PUBLIC_API_URL=https://api.ironfish.network
+API_URL=https://api.ironfish.network
 NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY=test
 ```
 
