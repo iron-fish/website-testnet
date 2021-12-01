@@ -13,7 +13,13 @@ import { createUser } from 'apiClient'
 import { useField } from 'hooks/useForm'
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
-import { UNSET, validateEmail, exists, defaultErrorText } from 'utils/forms'
+import {
+  UNSET,
+  validateEmail,
+  validateGraffiti,
+  exists,
+  defaultErrorText,
+} from 'utils/forms'
 import { encode as btoa } from 'base-64'
 
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
@@ -32,8 +38,8 @@ export const FIELDS = {
     label: 'Graffiti',
     placeholder: 'Your tag',
     defaultValue: UNSET,
-    validation: exists,
-    defaultErrorText,
+    validation: validateGraffiti,
+    defaultErrorText: `Graffiti is too long`,
   },
   social: {
     id: 'social',
@@ -94,6 +100,7 @@ export default function SignUp() {
     const untouched = noEmail || noGraffiti || noSocial || noCountry
     const invalid =
       !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
+
     if (invalid || untouched) {
       if (untouched) {
         $setError('Please fill out all fields')
