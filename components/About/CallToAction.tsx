@@ -44,11 +44,7 @@ export const CallToAction = ({
               Coming soon!
             </div>
           )}
-          <div>
-            {!comingSoon && (
-              <strong className="uppercase text-lg">{kind}</strong>
-            )}
-          </div>
+          {!comingSoon && <strong className="uppercase text-lg">{kind}</strong>}
           <h3 className="text-left text-4xl mt-3 mb-4 font-extended">
             {title}
           </h3>
