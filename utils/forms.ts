@@ -11,6 +11,13 @@ export const validateEmail = (x: string) => {
   return x.indexOf('@') > 0 && dot > 0 && dot !== x.length - 1
 }
 
+// graffitis should be less than 32 bytes in length
+export const validateGraffiti = (x: string) => {
+  const graffitiUint8Array = new TextEncoder().encode(x)
+
+  return graffitiUint8Array.length < 32
+}
+
 // non-zero width strings
 export const exists = (x: string) => x.trim().length > 0
 
