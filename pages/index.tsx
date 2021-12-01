@@ -1,15 +1,19 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
-import Router from 'next/router'
 
 import { LoginContext } from 'contexts/LoginContext'
 
+export const getServerSideProps = () => {
+  return {
+    redirect: {
+      permanent: true,
+      destination: '/about',
+    },
+  }
+}
+
 export default function Home() {
-  useEffect(() => {
-    Router.replace('/about')
-  }, [])
   return (
     <LoginContext.Consumer>
       {({ magicMetadata }) => {
