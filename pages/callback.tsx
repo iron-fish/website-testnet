@@ -27,8 +27,6 @@ const Callback = () => {
         }
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
-          // eslint-disable-next-line no-console
-          console.warn('something not so good?', { details })
           Router.push(`/signup?toast=${btoa('Please sign up.')}`)
           return
         }

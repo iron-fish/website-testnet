@@ -34,8 +34,6 @@ export function useLogin(config: LoginProps = {}) {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        // eslint-disable-next-line no-console
-        console.log('starting check!')
         // this is likely a case where we're working in not-the-browser
         if ($metadata || !magic || !magic.user) {
           Promise.reject(new LocalError('Magic instance not available!', 500))
@@ -44,17 +42,10 @@ export function useLogin(config: LoginProps = {}) {
         let token
         try {
           token = await magic.user.getIdToken()
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.warn('magic.user.getIdToken error:', error)
-        }
+        } catch (error) {}
 
         if (!token) {
-          // eslint-disable-next-line no-console
-          console.log('NO TOKEN FOUND')
           if (redirect && typeof redirect === 'string') {
-            // eslint-disable-next-line no-console
-            console.log('redirecting...')
             // if redirect string is provided and we're not logged in, cya!
             Router.push(redirect)
             return
@@ -64,16 +55,12 @@ export function useLogin(config: LoginProps = {}) {
           $setError(new LocalError('No token available.', 500))
           return
         }
-        // eslint-disable-next-line no-console
-        console.log('has token!', token)
         const [magicMd, details] = await Promise.all([
           magic.user.getMetadata(),
           getUserDetails(token),
         ])
 
         if ('error' in details || details instanceof LocalError) {
-          // eslint-disable-next-line no-console
-          console.log('error!', details)
           $setStatus(STATUS.FAILED)
           // this is a visible error and a breaking error
           $setError(details)
@@ -81,30 +68,18 @@ export function useLogin(config: LoginProps = {}) {
           return
         }
         if (details.statusCode && details.statusCode === 401) {
-          // eslint-disable-next-line no-console
-          console.warn('No user found.')
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No user found.', 500))
           return
         }
-        // eslint-disable-next-line no-console
-        console.log('loaded!', details)
         $setStatus(STATUS.LOADED)
         $setMetadata(details)
         $setMagicMetadata(magicMd)
       } catch (err) {
-        // eslint-disable-next-line
-        console.log({
-          CATCHER: true,
-          error: err.toString(),
-          notAValidUser: err.toString().indexOf('-32603') > -1,
-        })
         if (err.toString().indexOf('-32603') > -1) {
           $setStatus(STATUS.NOT_FOUND)
           return
         }
-        // eslint-disable-next-line no-console
-        console.warn('error getting id', err)
         throw err
       }
     }
@@ -123,8 +98,6 @@ export function useLogin(config: LoginProps = {}) {
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
-        // eslint-disable-next-line no-console
-        console.log('FORCING STATUS')
         $setStatus(STATUS.FORCED)
       }
     }
