@@ -98,8 +98,6 @@ export const getServerSideProps: GetServerSideProps<Props | Redirect> =
         },
       }
     } catch (e) {
-      // eslint-disable-next-line
-      console.warn(e)
       return failure
     }
   }
@@ -111,7 +109,6 @@ export default function User({
   weeklyMetrics,
   metricsConfig,
 }: Props) {
-  // eslint-disable-next-line no-console
   const id = (user && user.id && user.id.toString()) || 'unknown'
   // Recent Activity hooks
   const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
