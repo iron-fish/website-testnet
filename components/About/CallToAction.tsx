@@ -39,15 +39,15 @@ export const CallToAction = ({
     <div className="mb-3">
       <Box behind="bg-ifpink">
         <div className="p-13">
-          {comingSoon ? (
-            <div className="bg-iforange px-4 py-2 inline-block mt-2 text-xs md:text-md mb-4">
+          {comingSoon && (
+            <div className="bg-iflightgray text-ifgray px-4 py-2 inline-block mt-2 text-xs md:text-md mb-2">
               Coming soon!
             </div>
-          ) : (
-            <div></div>
           )}
           <div>
-            <strong className="uppercase text-lg">{kind}</strong>
+            {!comingSoon && (
+              <strong className="uppercase text-lg">{kind}</strong>
+            )}
           </div>
           <h3 className="text-left text-4xl mt-3 mb-4 font-extended">
             {title}
