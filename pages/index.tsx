@@ -8,7 +8,7 @@ import { LoginContext } from 'contexts/LoginContext'
 
 export default function Home() {
   useEffect(() => {
-    Router.push('/about')
+    Router.replace('/about')
   }, [])
   return (
     <LoginContext.Consumer>
