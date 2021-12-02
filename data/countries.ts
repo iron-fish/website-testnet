@@ -1,4 +1,9 @@
-import { records, Alpha3Code, EnglishShortName, findByAlpha3 } from 'iso-3166-1-ts'
+import {
+  records,
+  Alpha3Code,
+  EnglishShortName,
+  findByAlpha3,
+} from 'iso-3166-1-ts'
 
 export type Country = {
   alpha3: Alpha3Code
@@ -11,6 +16,18 @@ export type CountryWithCode = {
 }
 const equals = (x: string) => (name: string) => x === name
 const shortform = (name: string) => {
+  if (name === 'Virgin Islands (British)' || name === 'Virgin Islands (U.S.)') {
+    return name
+  }
+
+  if (name === `Korea (the Democratic People's Republic of)`) {
+    return 'North Korea'
+  }
+
+  if (name === `Korea (the Republic of)`) {
+    return 'South Korea'
+  }
+
   const clean = name
     .toLowerCase()
     .replace(/'/, '')
@@ -18,9 +35,7 @@ const shortform = (name: string) => {
     .trim()
     .replace(/\s+/g, '-')
   const eq = equals(clean)
-  if (name === 'Virgin Islands (British)' || name === 'Virgin Islands (U.S.)') {
-    return name
-  }
+
   if (eq('united-states-of-america')) {
     return 'United States'
   }
