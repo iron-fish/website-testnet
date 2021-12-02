@@ -1,3 +1,7 @@
+.arrowed {
+  width: 100%;
+  margin: 4rem auto 0;
+}
 .arrowed::after,
 .arrowed::before {
   display: none;
@@ -11,19 +15,32 @@
   left: calc(50% - 0.5rem);
 }
 @media screen and (min-width: 768px) {
+  .arrowed {
+    width: 7rem;
+    left: calc(-1rem + 2px);
+    top: -1rem;
+  }
   .arrowed::after,
   .arrowed::before {
     display: inline-block;
   }
 }
+@media screen and (min-width: 1024px) {
+  .arrowed {
+    width: 10rem;
+    left: -0.25rem;
+    top: -1rem;
+  }
+}
 
 .arrowed::before {
   border-bottom: 0.5rem solid white;
+  top: calc(-1rem + 1px);
   z-index: 1;
 }
 .arrowed::after {
   border-bottom: 0.5rem solid black;
-  top: calc(-1rem - 1px);
+  top: -1rem;
   z-index: -1;
 }
 .arrowed:hover::before {
@@ -34,6 +51,7 @@
 }
 
 .buttonRoot {
+  transition: padding 0.3s ease-out, width 0.3s ease-out;
 }
 .buttonRoot svg {
   display: none;

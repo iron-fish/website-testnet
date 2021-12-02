@@ -71,7 +71,10 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
   <div className={clsx(styles.userButton, 'relative', 'flex')}>
     <div
       className={clsx(
-        'md:max-w-[5rem]',
+        'md:pt-[0.1rem]',
+        'md:max-w-[4rem]',
+        'lg:max-w-[8rem]',
+        'xl:max-w-[20rem]',
         'md:overflow-x-hidden',
         'md:overflow-y-visible',
         'md:truncate',
@@ -79,7 +82,9 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       )}
     >
       <Link href={`/users/${id}`} passHref>
-        {graffiti}
+        <div className={clsx('truncate', 'relative', 'max-w-[30rem]')}>
+          {graffiti}
+        </div>
       </Link>
     </div>
     <ChevronDown />
@@ -87,7 +92,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       <a
         className={clsx(
           styles.arrowed,
-          { 'md:hidden': !visible },
+          // { 'md:hidden': !visible },
           'absolute',
           'z-50',
           'px-6',
@@ -99,8 +104,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
           'text-black',
           'md:w-auto',
           'md:mx-0',
-          'md:ml-[-1.25rem]',
-          'md:w-[9rem]',
+          // 'md:w-[7rem]',
           'md:rounded-full',
           'md:hover:bg-black',
           'md:hover:text-white',
@@ -129,7 +133,7 @@ export const LoginButton = () => {
       {({ checkLoggedIn, metadata: rawMetadata }) => {
         const metadata = cheat
           ? {
-              graffiti: 'abcdefghijklmnopqrstuvwxyz',
+              graffiti: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
               id: 420,
               created_at: Date.now(),
               updated_at: Date.now(),
@@ -143,12 +147,15 @@ export const LoginButton = () => {
           <RawButton
             className={clsx(
               'text-2xl',
-              'md:text-base',
+              'md:text-sm',
+              'lg:text-base',
               'h-16',
               'md:h-12',
               'md:ml-4',
               'py-3',
               'px-6',
+              'md:px-3',
+              'lg:px-6',
               'text-center',
               'bg-transparent',
               'text-black',
