@@ -1,7 +1,10 @@
 import React from 'react'
+import clsx from 'clsx'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 
+import { RawButton } from 'components/Button'
 import Debug from 'components/Debug'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -129,7 +132,8 @@ export default function User({
 
   return (
     <LoginContext.Consumer>
-      {({ metadata }) => {
+      {({ checkLoggedIn, metadata }) => {
+        const isLoggedIn = checkLoggedIn()
         const avatarColor = graffitiToColor(user.graffiti)
         const ordinalRank = numberToOrdinal(user.rank)
 
@@ -185,6 +189,22 @@ export default function User({
                         <div className="mt-4">
                           <Flag code={user.country_code} />
                         </div>
+                        {isLoggedIn && (
+                          <Link href="/logout" passHref>
+                            <RawButton
+                              className={clsx(
+                                `m-auto`,
+                                `mt-8`,
+                                `text-lg`,
+                                `px-3`,
+                                `py-2`,
+                                `text-sm`
+                              )}
+                            >
+                              Log Out
+                            </RawButton>
+                          </Link>
+                        )}
                       </div>
                     </div>
 
