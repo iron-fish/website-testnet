@@ -1,6 +1,6 @@
 .arrowed::after,
 .arrowed::before {
-  display: inline-block;
+  display: none;
   position: absolute;
   content: '';
   width: 0;
@@ -9,6 +9,12 @@
   border-bottom: 0.5rem solid black;
   top: -1rem;
   left: calc(50% - 0.5rem);
+}
+@media screen and (min-width: 768px) {
+  .arrowed::after,
+  .arrowed::before {
+    display: inline-block;
+  }
 }
 
 .arrowed::before {
@@ -30,8 +36,15 @@
 .buttonRoot {
 }
 .buttonRoot svg {
+  display: none;
   fill: black;
 }
+@media screen and (min-width: 768px) {
+  .buttonRoot svg {
+    display: inline-block;
+  }
+}
+
 .buttonRoot:hover svg {
   fill: white;
 }

@@ -67,39 +67,45 @@ interface ApiUserMetadataUI extends ApiUserMetadata {
 
 const HitState = () => <div className={styles.hitState} />
 
-const UserButton = ({ graffiti, visible }: ApiUserMetadataUI) => (
+const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
   <div className={clsx(styles.userButton, 'relative', 'flex')}>
     <div
       className={clsx(
-        'max-w-[5rem]',
-        'overflow-x-hidden',
-        'overflow-y-visible',
-        'truncate',
-        'relative'
+        'md:max-w-[5rem]',
+        'md:overflow-x-hidden',
+        'md:overflow-y-visible',
+        'md:truncate',
+        'md:relative'
       )}
     >
-      {graffiti}
+      <Link href={`/users/${id}`} passHref>
+        {graffiti}
+      </Link>
     </div>
     <ChevronDown />
     <Link href="/logout" passHref>
       <a
         className={clsx(
           styles.arrowed,
-          { hidden: !visible },
-          'w-[9rem]',
-          'rounded-full',
+          { 'md:hidden': !visible },
+          'absolute',
+          'z-50',
           'px-6',
           'py-3',
-          'absolute',
           'mt-12',
-          'ml-[-1.25rem]',
+          'w-full',
+          'm-auto',
           'bg-white',
-          'hover:bg-black',
           'text-black',
-          'hover:text-white',
-          'border',
-          'border-black',
-          'z-50'
+          'md:w-auto',
+          'md:mx-0',
+          'md:ml-[-1.25rem]',
+          'md:w-[9rem]',
+          'md:rounded-full',
+          'md:hover:bg-black',
+          'md:hover:text-white',
+          'md:border',
+          'md:border-black'
         )}
       >
         Sign Out
