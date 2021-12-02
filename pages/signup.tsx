@@ -143,7 +143,7 @@ export default function SignUp() {
     } else {
       $setSignedUp(true)
       scrollUp()
-      Router.push(`/login?email=${encodeURIComponent(email)}&autoLogin=true`)
+      Router.push(`/login?email=${encodeURIComponent(email)}`)
     }
   }, [$email, $graffiti, $social, $country, testInvalid])
 
