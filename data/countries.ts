@@ -1,4 +1,9 @@
-import { records, Alpha3Code, EnglishShortName, findByAlpha3 } from 'iso-3166-1-ts'
+import {
+  records,
+  Alpha3Code,
+  EnglishShortName,
+  findByAlpha3,
+} from 'iso-3166-1-ts'
 
 export type Country = {
   alpha3: Alpha3Code
@@ -30,6 +35,12 @@ const shortform = (name: string) => {
   if (eq('united-kingdom-of-great-britain-and-northern-ireland')) {
     return 'United Kingdom'
   }
+  if (eq('korea')) {
+    if (~name.indexOf('Democratic')) {
+      return 'South Korea'
+    }
+    return 'North Korea'
+  }
   return name
     .replace(/\(.*\)/, '')
     .replace(/\s+/g, ' ')
@@ -39,9 +50,10 @@ const shortform = (name: string) => {
 export const countries = records
   .map(({ alpha3, name }: Country) => {
     const comma = name.indexOf(',')
+    const shortName = shortform(~comma ? name.slice(0, comma) : name)
     return {
       code: alpha3,
-      name: shortform(~comma ? name.slice(0, comma) : name),
+      name: shortName,
     }
   })
   .sort((a: CountryWithCode, b: CountryWithCode) => (a.name > b.name ? 1 : -1))
