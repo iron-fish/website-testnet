@@ -1,4 +1,5 @@
 import { FC, MouseEventHandler, KeyboardEvent } from 'react'
+import clsx from 'clsx'
 
 type ButtonProps = {
   colorClassName?: string
@@ -17,19 +18,19 @@ export const RawButton: FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`
-        flex 
-        justify-center
-        items-center
-        font-extended
-        rounded-full
-        whitespace-nowrap
-        transition
-        border-black
-        ${border}
-        ${colorClassName}
-        ${className}
-    `}
+      className={clsx(
+        `flex`,
+        `justify-center`,
+        `items-center`,
+        `font-extended`,
+        `rounded-full`,
+        `whitespace-nowrap`,
+        `transition`,
+        `border-black`,
+        border,
+        colorClassName,
+        className
+      )}
       onClick={onClick}
       onKeyPress={onKeyPress}
     >

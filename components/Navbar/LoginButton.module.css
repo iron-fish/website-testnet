@@ -1,0 +1,48 @@
+.arrowed::after,
+.arrowed::before {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.5em solid transparent;
+  border-bottom: 0.5rem solid black;
+  top: -1rem;
+  left: calc(50% - 0.5rem);
+}
+
+.arrowed::before {
+  border-bottom: 0.5rem solid white;
+  z-index: 1;
+}
+.arrowed::after {
+  border-bottom: 0.5rem solid black;
+  top: calc(-1rem - 1px);
+  z-index: -1;
+}
+.arrowed:hover::before {
+  border-bottom-color: black;
+}
+.arrowed:hover::after {
+  border-bottom-color: black;
+}
+
+.buttonRoot {
+}
+.buttonRoot svg {
+  fill: black;
+}
+.buttonRoot:hover svg {
+  fill: white;
+}
+/* this increases our valid mouse area when hovering */
+.hitState {
+  /* background-color: lime; */
+  width: 100%;
+  height: 3.25rem;
+  display: inline-block;
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: -1.5rem;
+}
