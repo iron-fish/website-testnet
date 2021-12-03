@@ -63,7 +63,7 @@ const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
   },
   {
     question: `Can I claim points for blocks under a different graffiti than the one I registered with?`,
-    answer: `Points can only be earned under the graffiti they were signed up under.`,
+    answer: `Points can only be earned for blocks with the same graffiti as your testnet account.`,
   },
   {
     question: `What are the minimum hardware requirements for running a node? `,
