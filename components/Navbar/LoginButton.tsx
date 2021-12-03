@@ -50,7 +50,7 @@ type StaticProps = {
 }
 
 const StaticButton = ({ href }: StaticProps) => (
-  <Link href={href}>
+  <Link href={href} passHref>
     <a>
       <span>
         Login<span className="md:hidden"> to Testnet</span>
@@ -102,6 +102,8 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       <a
         className={clsx(
           styles.arrowed,
+          'pointer-events-none',
+          'md:pointer-events-auto',
           'md:hidden',
           'md:opacity-0',
           { 'md:opacity-100': visible },
