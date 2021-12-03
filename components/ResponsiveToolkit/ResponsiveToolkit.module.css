@@ -65,10 +65,10 @@
 .ruler {
 }
 .toolkit,
-.debugMode {
+.debugMode,
+.contextual {
   font-family: monospace;
   position: fixed;
-  left: 0;
   background-color: black;
   color: white;
   padding: 0.25rem 0.5rem;
@@ -80,10 +80,16 @@
 }
 .toolkit {
   top: 0;
+  left: 0;
 }
 .debugMode {
   bottom: 0;
+  left: 0;
 }
 .toolkit:hover {
   opacity: 1;
+}
+.contextual {
+  right: 0;
+  transform: rotate(90deg);
 }

@@ -19,7 +19,7 @@ type ButtonProps = {
   onMouseOut?: MouseEventHandler<HTMLButtonElement>
   border?: string
 }
-export const RawButton = ({
+export const HoverButton = ({
   children,
   className = '',
   border = `border-2`,
@@ -69,26 +69,38 @@ interface ApiUserMetadataUI extends ApiUserMetadata {
 const HitState = () => <div className={styles.hitState} />
 
 const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
-  <div className={clsx(styles.userButton, 'relative', 'flex')}>
-    <div
-      className={clsx(
-        'md:pt-[0.1rem]',
-        'md:max-w-[4rem]',
-        'lg:max-w-[8rem]',
-        'xl:max-w-[20rem]',
-        'md:overflow-x-hidden',
-        'md:overflow-y-visible',
-        'md:truncate',
-        'md:relative'
-      )}
-    >
-      <Link href={`/users/${id}`} passHref>
-        <div className={clsx('truncate', 'relative', 'max-w-[30rem]')}>
-          {graffiti}
-        </div>
-      </Link>
+  <div
+    className={clsx(
+      styles.userButton,
+      'absolute',
+      'flex',
+      'flex-col',
+      'top-2.5'
+    )}
+  >
+    <div className="flex flex-row content-around justify-end lg:justify-center">
+      <div
+        className={clsx(
+          styles.userButtonSpan,
+          'md:pt-[0.1rem]',
+          'md:min-w-[5.1rem]',
+          'md:w-[5.1rem]',
+          'lg:w-[7rem]',
+          'xl:max-w-[20rem]',
+          'md:overflow-x-hidden',
+          'md:overflow-y-visible',
+          'md:truncate',
+          'md:relative'
+        )}
+      >
+        <Link href={`/users/${id}`} passHref>
+          <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
+            {graffiti}
+          </div>
+        </Link>
+      </div>
+      <ChevronDown />
     </div>
-    <ChevronDown />
     <Link href="/logout" passHref>
       <a
         className={clsx(
@@ -118,7 +130,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
     </Link>
   </div>
 )
-
+const cool = Math.round(Math.random() * 1) === 1
 export const LoginButton = () => {
   // TODO: disable this before merging!
   const $cheat = useQuery('cheat')
@@ -133,8 +145,10 @@ export const LoginButton = () => {
       {({ checkLoggedIn, metadata: rawMetadata }) => {
         const metadata = cheat
           ? {
-              // graffiti: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
-              graffiti: 'a',
+              graffiti: cool
+                ? 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+                : 'a',
+              // graffiti: 'a',
               id: 420,
               created_at: Date.now(),
               updated_at: Date.now(),
@@ -145,23 +159,26 @@ export const LoginButton = () => {
         const meta = metadata as any
         const hasGraffiti = (metadata && !!metadata.graffiti) || cheat
         return (
-          <RawButton
+          <HoverButton
             className={clsx(
-              'text-2xl',
-              'md:text-sm',
-              'lg:text-base',
+              'bg-transparent',
               'h-16',
+              'hover:bg-black',
+              'hover:text-white',
+              'px-6',
+              'py-3',
+              'relative',
+              'text-2xl',
+              'text-black',
+              'text-center',
+              'md:min-w-[8rem]',
               'md:h-12',
               'md:ml-4',
-              'py-3',
-              'px-6',
               'md:px-3',
+              'md:text-sm',
+              'lg:min-w-[10rem]',
               'lg:px-6',
-              'text-center',
-              'bg-transparent',
-              'text-black',
-              'hover:bg-black',
-              'hover:text-white'
+              'lg:text-base'
             )}
             onMouseOver={on}
             onMouseOut={off}
@@ -171,7 +188,7 @@ export const LoginButton = () => {
             ) : (
               <StaticButton href="/login" />
             )}
-          </RawButton>
+          </HoverButton>
         )
       }}
     </LoginContext.Consumer>

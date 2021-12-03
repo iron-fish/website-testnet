@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ResponsiveToolkit />
+      <ResponsiveToolkit userDetails={$loginValue} />
       <LoginContext.Provider value={$loginValue}>
         <Component {...pageProps} className="font-favorit" />
       </LoginContext.Provider>

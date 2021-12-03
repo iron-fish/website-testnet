@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import useQuery from 'hooks/useQuery'
+import { LoginContext } from 'contexts/LoginContext'
 import styles from './ResponsiveToolkit.module.css'
 import pkg from 'package.json'
 
@@ -40,7 +41,11 @@ const points = [
   '90%',
 ]
 
-const ResponsiveToolkit = () => {
+type ResponsiveToolkitProps = {
+  userDetails: LoginContext
+}
+
+const ResponsiveToolkit = ({ userDetails }: ResponsiveToolkitProps) => {
   const [$active, $setActive] = useState(true)
   const [$width, $setWidth] = useState(-1)
   const [$point, $setPoint] = useState(0)
@@ -79,6 +84,7 @@ const ResponsiveToolkit = () => {
       <div className={styles.debugMode}>
         {pkg.name}@{pkg.version}
       </div>
+      <div className={styles.contextual}></div>
       {$active && horizontal.map(x => <Breakpoint key={x} at={x} />)}
       {$active &&
         vertical.map(x => <Breakpoint key={x} at={x} horizontal={false} />)}
