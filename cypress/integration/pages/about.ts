@@ -91,9 +91,9 @@ describe('/about', () => {
         href: 'https://ironfish.network/docs/onboarding/iron-fish-tutorial',
       },
       { isImage: false, text: '', href: 'https://www.ironfish.network' },
-      { isImage: false, text: 'About Us', href: '/about' },
-      { isImage: false, text: 'Careers', href: '/careers' },
-      { isImage: false, text: 'Blog', href: '/blog' },
+      { isImage: false, text: 'About Us', href: 'https://ironfish.network/about/' },
+      { isImage: false, text: 'Careers', href: 'https://ironfish.network/careers/' },
+      { isImage: false, text: 'Blog', href: 'https://ironfish.network/blog/' },
       {
         isImage: false,
         text: 'Block Explorer',
@@ -102,9 +102,9 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Whitepaper',
-        href: '/docs/whitepaper/1_introduction',
+        href: 'https://ironfish.network/docs/whitepaper/1_introduction/',
       },
-      { isImage: false, text: 'FAQ', href: '/faq' },
+      { isImage: false, text: 'FAQ', href: 'https://ironfish.network/faq/' },
       {
         isImage: false,
         text: 'Drop us a line!',

@@ -44,7 +44,7 @@ function Footer() {
             title="Company"
             links={[
               {
-                link: '/about/',
+                link: 'https://ironfish.network/about/',
                 name: 'About Us',
               },
               {
@@ -73,7 +73,7 @@ function Footer() {
                 name: 'Whitepaper',
               },
               {
-                link: '/faq/',
+                link: 'https://ironfish.network/faq/',
                 name: 'FAQ',
               },
             ]}
