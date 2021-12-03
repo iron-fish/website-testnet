@@ -1,6 +1,6 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
+  "name": "website-testnet",
+  "version": "0.1.7",
   "private": true,
   "scripts": {
     "dev": "nps dev",

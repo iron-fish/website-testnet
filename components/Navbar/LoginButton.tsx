@@ -3,9 +3,10 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { LoginContext } from 'contexts/LoginContext'
 
-import ChevronDown from './ChevronDown'
 // TODO: disable this before merging!
 import useQuery from 'hooks/useQuery'
+
+import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
 import styles from './LoginButton.module.css'
 
@@ -92,8 +93,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       <a
         className={clsx(
           styles.arrowed,
-          // { 'md:hidden': !visible },
-          'absolute',
+          { 'md:hidden': !visible },
           'z-50',
           'px-6',
           'py-3',
@@ -133,7 +133,8 @@ export const LoginButton = () => {
       {({ checkLoggedIn, metadata: rawMetadata }) => {
         const metadata = cheat
           ? {
-              graffiti: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+              // graffiti: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+              graffiti: 'a',
               id: 420,
               created_at: Date.now(),
               updated_at: Date.now(),

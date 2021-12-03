@@ -1,6 +1,10 @@
 .arrowed {
   width: 100%;
+  min-width: 80vw;
   margin: 4rem auto 0;
+  outline: 1px solid cyan;
+  position: absolute;
+  left: -40vw;
 }
 .arrowed::after,
 .arrowed::before {
@@ -68,12 +72,13 @@
 }
 /* this increases our valid mouse area when hovering */
 .hitState {
-  /* background-color: lime; */
-  width: 100%;
-  height: 3.25rem;
-  display: inline-block;
-  position: absolute;
   opacity: 0;
-  left: 0;
+  background-color: lime;
+  width: 100%;
+  min-width: calc(100vw - 3rem);
+  height: 3.25rem;
+  display: flex;
+  position: absolute;
+  left: calc(-50vw + 2rem);
   top: -1.5rem;
 }
