@@ -59,11 +59,11 @@ const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
   },
   {
     question: `Can points be retroactively applied for blocks mined before I registered and confirmed my account?`,
-    answer: `No.`,
+    answer: `Points cannot be retroactively applied for blocks mined prior to the start of the incentivized testnet or prior to your account registration and confirmation.`,
   },
   {
     question: `Can I claim points for blocks under a different graffiti than the one I registered with?`,
-    answer: `No.`,
+    answer: `Points can only be earned under the graffiti they were signed up under.`,
   },
   {
     question: `What are the minimum hardware requirements for running a node? `,
