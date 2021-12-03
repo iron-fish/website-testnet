@@ -1,10 +1,13 @@
 import { useState, ReactNode, MouseEventHandler } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-
-import { ApiUserMetadata } from 'apiClient/types'
 import { LoginContext } from 'contexts/LoginContext'
+
+// TODO: disable this before merging!
+import useQuery from 'hooks/useQuery'
+
 import ChevronDown from './ChevronDown'
+import { ApiUserMetadata } from 'apiClient/types'
 import styles from './LoginButton.module.css'
 
 type ButtonProps = {
@@ -72,10 +75,23 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       'absolute',
       'flex',
       'flex-col',
-      'top-2.5'
+      'top-[0.75rem]',
+      'pointer-events-none',
+      'md:pointer-events-auto',
+      'md:top-[0.6rem]',
+      'lg:top-[0.5rem]'
     )}
   >
-    <div className="flex flex-row content-around justify-center md:justify-end lg:justify-center">
+    <div
+      className={clsx(
+        'flex',
+        'flex-row',
+        'content-around',
+        'justify-center',
+        'md:justify-end',
+        'lg:justify-center'
+      )}
+    >
       <div
         className={clsx(
           styles.userButtonSpan,
@@ -102,8 +118,6 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       <a
         className={clsx(
           styles.arrowed,
-          'pointer-events-none',
-          'md:pointer-events-auto',
           'md:hidden',
           'md:opacity-0',
           { 'md:opacity-100': visible },
@@ -131,18 +145,34 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
     </Link>
   </div>
 )
+const cool = Math.round(Math.random() * 1) === 1
 export const LoginButton = () => {
+  // TODO: disable this before merging!
+  const $cheat = useQuery('cheat')
+  // coerce to boolean
+  const cheat = !!$cheat
   const [$visible, $setVisible] = useState<boolean>(false)
   const set = (x: boolean) => () => $setVisible(x)
   const on = set(true)
   const off = set(false)
   return (
     <LoginContext.Consumer>
-      {({ checkLoggedIn, metadata }) => {
-        const isLoggedIn = checkLoggedIn()
+      {({ checkLoggedIn, metadata: rawMetadata }) => {
+        const metadata = cheat
+          ? {
+              graffiti: cool
+                ? 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+                : 'elena3',
+              // graffiti: 'a',
+              id: 420,
+              created_at: Date.now(),
+              updated_at: Date.now(),
+            }
+          : rawMetadata
+        const isLoggedIn = checkLoggedIn() || cheat
         // eslint-disable-next-line
         const meta = metadata as any
-        const hasGraffiti = metadata && !!metadata.graffiti
+        const hasGraffiti = (metadata && !!metadata.graffiti) || cheat
         return (
           <HoverButton
             className={clsx(

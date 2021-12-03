@@ -43,11 +43,6 @@
   display: none;
   fill: black;
 }
-@media screen and (min-width: 768px) {
-  .buttonRoot svg {
-    display: inline-block;
-  }
-}
 
 .buttonRoot:hover svg {
   fill: white;
@@ -64,6 +59,9 @@
   padding: 0 5%;
 }
 @media screen and (min-width: 768px) {
+  .buttonRoot svg {
+    display: inline-block;
+  }
   .hitState {
     min-width: 2rem;
     top: 2rem;
@@ -87,6 +85,9 @@
     width: 10rem;
     left: -0.25rem;
     top: -1rem;
+  }
+  .buttonRoot svg {
+    margin-top: 0.1rem;
   }
 }
 .userButton {
