@@ -78,7 +78,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       'top-2.5'
     )}
   >
-    <div className="flex flex-row content-around justify-end lg:justify-center">
+    <div className="flex flex-row content-around justify-center md:justify-end lg:justify-center">
       <div
         className={clsx(
           styles.userButtonSpan,
