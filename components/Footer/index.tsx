@@ -48,11 +48,11 @@ function Footer() {
                 name: 'About Us',
               },
               {
-                link: '/careers/',
+                link: 'https://ironfish.network/careers/',
                 name: 'Careers',
               },
               {
-                link: '/blog/',
+                link: 'https://ironfish.network/blog/',
                 name: 'Blog',
               },
             ]}
@@ -69,7 +69,7 @@ function Footer() {
                 name: 'Block Explorer',
               },
               {
-                link: '/docs/whitepaper/1_introduction',
+                link: 'https://ironfish.network/docs/whitepaper/1_introduction/',
                 name: 'Whitepaper',
               },
               {
