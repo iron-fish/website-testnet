@@ -90,6 +90,7 @@
   opacity: 1;
 }
 .contextual {
-  right: 0;
-  transform: rotate(90deg);
+  bottom: 0.5rem;
+  right: -0.5rem;
+  transform: rotate(-90deg);
 }

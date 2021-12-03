@@ -66,6 +66,7 @@
 @media screen and (min-width: 768px) {
   .hitState {
     min-width: 2rem;
+    top: 2rem;
   }
   .arrowed {
     width: 7rem;

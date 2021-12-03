@@ -105,7 +105,9 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
       <a
         className={clsx(
           styles.arrowed,
-          { 'md:hidden': !visible },
+          'md:hidden',
+          'md:opacity-0',
+          { 'md:opacity-100': visible },
           'z-50',
           'px-6',
           'py-3',
