@@ -192,7 +192,8 @@ export default function User({
                     <Tabs
                       activeTab={$activeTab}
                       onTabChange={onTabChange}
-                      userMetadata={metadata}
+                      user={user}
+                      authedUser={metadata}
                       allTimeMetrics={allTimeMetrics}
                       weeklyMetrics={weeklyMetrics}
                       metricsConfig={metricsConfig}

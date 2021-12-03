@@ -12,7 +12,8 @@ type TabsProps = {
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
   metricsConfig: API.MetricsConfigResponse
-  userMetadata: API.ApiUserMetadata | null
+  user: API.ApiUser
+  authedUser: API.ApiUserMetadata | null
   activeTab: TabType
   onTabChange: (tab: TabType) => unknown
 }
@@ -21,7 +22,8 @@ export default function Tabs({
   allTimeMetrics,
   weeklyMetrics,
   metricsConfig,
-  userMetadata,
+  user,
+  authedUser,
   activeTab,
   onTabChange,
 }: TabsProps) {
@@ -41,7 +43,7 @@ export default function Tabs({
         >
           All Time Stats
         </TabHeaderButton>
-        {userMetadata && (
+        {authedUser && user.id === authedUser.id && (
           <TabHeaderButton
             selected={activeTab === 'settings'}
             onClick={() => onTabChange('settings')}
@@ -61,8 +63,8 @@ export default function Tabs({
       {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
-      {activeTab === 'settings' && userMetadata && (
-        <SettingsContent userMetadata={userMetadata} />
+      {activeTab === 'settings' && authedUser && (
+        <SettingsContent authedUser={authedUser} />
       )}
     </div>
   )
