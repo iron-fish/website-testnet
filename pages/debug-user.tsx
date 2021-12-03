@@ -12,15 +12,7 @@ const Test = () => {
       $setElapsed(Math.abs($time - Date.now()))
     }
   }, [deets.status, $elapsed, $time])
-  return (
-    <Debug
-      {...deets}
-      style={{
-        backgroundColor: deets.status === STATUS.LOADED ? 'lime' : 'red',
-      }}
-      elapsed={$elapsed}
-    />
-  )
+  return <Debug {...deets} elapsed={$elapsed} />
 }
 
 export default Test
