@@ -3,9 +3,6 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { LoginContext } from 'contexts/LoginContext'
 
-// TODO: disable this before merging!
-import useQuery from 'hooks/useQuery'
-
 import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
 import styles from './LoginButton.module.css'
@@ -145,34 +142,18 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
     </Link>
   </div>
 )
-const cool = Math.round(Math.random() * 1) === 1
 export const LoginButton = () => {
-  // TODO: disable this before merging!
-  const $cheat = useQuery('cheat')
-  // coerce to boolean
-  const cheat = !!$cheat
   const [$visible, $setVisible] = useState<boolean>(false)
   const set = (x: boolean) => () => $setVisible(x)
   const on = set(true)
   const off = set(false)
   return (
     <LoginContext.Consumer>
-      {({ checkLoggedIn, metadata: rawMetadata }) => {
-        const metadata = cheat
-          ? {
-              graffiti: cool
-                ? 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
-                : 'elena3',
-              // graffiti: 'a',
-              id: 420,
-              created_at: Date.now(),
-              updated_at: Date.now(),
-            }
-          : rawMetadata
-        const isLoggedIn = checkLoggedIn() || cheat
+      {({ checkLoggedIn, metadata }) => {
+        const isLoggedIn = checkLoggedIn()
         // eslint-disable-next-line
         const meta = metadata as any
-        const hasGraffiti = (metadata && !!metadata.graffiti) || cheat
+        const hasGraffiti = metadata && !!metadata.graffiti
         return (
           <HoverButton
             className={clsx(
