@@ -27,10 +27,10 @@ const Breakpoint = ({ at, horizontal = true }: BreakpointProps) => {
 }
 
 const points = [
-  'v20px',
-  'v44px',
-  'v48px',
-  'v68px',
+  // 'v20px',
+  // 'v44px',
+  // 'v48px',
+  // 'v68px',
   `768px`,
   `1024px`,
   `1152px`,
