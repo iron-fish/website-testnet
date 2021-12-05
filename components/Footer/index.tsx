@@ -44,15 +44,15 @@ function Footer() {
             title="Company"
             links={[
               {
-                link: '/about/',
+                link: 'https://ironfish.network/about/',
                 name: 'About Us',
               },
               {
-                link: '/careers/',
+                link: 'https://ironfish.network/careers/',
                 name: 'Careers',
               },
               {
-                link: '/blog/',
+                link: 'https://ironfish.network/blog/',
                 name: 'Blog',
               },
             ]}
@@ -69,11 +69,11 @@ function Footer() {
                 name: 'Block Explorer',
               },
               {
-                link: '/docs/whitepaper/1_introduction',
+                link: 'https://ironfish.network/docs/whitepaper/1_introduction/',
                 name: 'Whitepaper',
               },
               {
-                link: '/faq/',
+                link: 'https://ironfish.network/faq/',
                 name: 'FAQ',
               },
             ]}
