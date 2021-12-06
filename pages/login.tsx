@@ -120,6 +120,8 @@ export default function Login({ loginContext }: LoginProps) {
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
+  // eslint-disable-next-line no-console
+  console.log($toast, 'what what')
   const updatedContext =
     $toast === btoa('You have been logged out.')
       ? {
