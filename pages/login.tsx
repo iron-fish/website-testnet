@@ -120,10 +120,8 @@ export default function Login({ loginContext }: LoginProps) {
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
-  // eslint-disable-next-line no-console
-  console.log($toast, 'what what')
   const updatedContext =
-    $toast === btoa('You have been logged out.')
+    $toast === 'You have been logged out.'
       ? {
           checkLoggedIn: () => false,
           checkLoading: () => false,
@@ -135,6 +133,8 @@ export default function Login({ loginContext }: LoginProps) {
           metadata: null,
         }
       : loginContext
+  // eslint-disable-next-line no-console
+  console.log($toast, 'what what', updatedContext)
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
