@@ -65,8 +65,6 @@ const ResponsiveToolkit = ({ metadata }: ToolkitProps) => {
     const update = () => {
       $setWidth(window.innerWidth)
       const newPoints = activePoints()
-      // eslint-disable-next-line no-console
-      console.log({ points: newPoints, $customPoint })
       $setPoint(newPoints)
     }
     if ($toolkit) {

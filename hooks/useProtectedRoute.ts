@@ -23,9 +23,6 @@ export function useProtectedRoute({
   useEffect(() => {
     const check = () => {
       const loggedIn = checkLoggedIn()
-      // hunch: we're losing context between now and the Router.push
-      // eslint-disable-next-line no-console
-      console.log({ loggedIn, useProtectedRoute: true })
       if (loggedIn && ifLoggedIn) {
         $router.push(ifLoggedIn)
       }

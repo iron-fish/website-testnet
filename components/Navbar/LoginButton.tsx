@@ -154,8 +154,6 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
   const isLoggedIn = checkLoggedIn()
   // eslint-disable-next-line
   const meta = metadata as any
-  // eslint-disable-next-line no-console
-  console.log({ meta, loginButton: true })
   const hasGraffiti = metadata && !!metadata.graffiti
 
   return (
