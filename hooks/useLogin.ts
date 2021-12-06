@@ -15,6 +15,7 @@ export enum STATUS {
   FAILED = 'failed',
   NOT_FOUND = 'not_found',
   LOADED = 'loaded',
+  LOGGED_OUT = 'logged_out',
   FORCED = 'forced',
 }
 

@@ -120,6 +120,19 @@ export default function Login({ loginContext }: LoginProps) {
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
+  const updatedContext =
+    $toast === btoa('You have been logged out.')
+      ? {
+          checkLoggedIn: () => false,
+          checkLoading: () => false,
+          checkFailed: () => false,
+          status: STATUS.LOGGED_OUT,
+          setStatus: () => null,
+          error: null,
+          magicMetadata: null,
+          metadata: null,
+        }
+      : loginContext
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -133,7 +146,7 @@ export default function Login({ loginContext }: LoginProps) {
           <Navbar
             fill="black"
             className="bg-ifpink text-black"
-            loginContext={loginContext}
+            loginContext={updatedContext}
           />
           <Toast
             message={$msg || $toast}
