@@ -203,3 +203,15 @@ export async function tokenLogin(): Promise<LoginEvent | LocalError> {
     return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
 }
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export async function getMetrics(): Promise<any> {
+  try {
+    const serverMetrics = await fetch(`/metrics/config`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  } catch (e) {}
+}
