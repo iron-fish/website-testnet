@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Loader from 'components/Loader'
@@ -70,6 +70,7 @@ export const FIELDS = {
 }
 
 export default function SignUp() {
+  const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
     timeout: 1500,
@@ -143,9 +144,9 @@ export default function SignUp() {
     } else {
       $setSignedUp(true)
       scrollUp()
-      Router.push(`/login?email=${encodeURIComponent(email)}`)
+      $router.push(`/login?email=${encodeURIComponent(email)}`)
     }
-  }, [$email, $graffiti, $social, $country, testInvalid])
+  }, [$router, $email, $graffiti, $social, $country, testInvalid])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.

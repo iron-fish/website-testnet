@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import Navbar from 'components/Navbar'
@@ -34,6 +34,7 @@ const FIELDS = {
   },
 }
 export default function Login() {
+  const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
     timeout: 1500,
@@ -98,12 +99,12 @@ export default function Login() {
         $setLoaded(true)
         $setMessage('Logged in!')
         $show()
-        setTimeout(() => Router.push('/leaderboard'), 3e3)
+        setTimeout(() => $router.push('/leaderboard'), 3e3)
       }
     } catch (e) {
       $setError(e.message)
     }
-  }, [$email, testInvalid, $show])
+  }, [$email, testInvalid, $show, $router])
   useEffect(() => {
     if ($email) {
       $setLoaded(true)

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useLogin, LoginProps } from './useLogin'
 export { STATUS } from './useLogin'
 
@@ -14,6 +14,7 @@ export function useProtectedRoute({
   redirect = '',
   timeout = -1,
 }: ProtectedProps) {
+  const $router = useRouter()
   const loginState = useLogin({
     redirect,
     timeout,
@@ -22,15 +23,18 @@ export function useProtectedRoute({
   useEffect(() => {
     const check = () => {
       const loggedIn = checkLoggedIn()
+      // hunch: we're losing context between now and the Router.push
+      // eslint-disable-next-line no-console
+      console.log({ loggedIn, useProtectedRoute: true })
       if (loggedIn && ifLoggedIn) {
-        Router.push(ifLoggedIn)
+        $router.push(ifLoggedIn)
       }
       if (!loggedIn && ifLoggedOut) {
-        Router.push(ifLoggedOut)
+        $router.push(ifLoggedOut)
       }
     }
     check()
-  }, [checkLoggedIn, ifLoggedIn, ifLoggedOut])
+  }, [$router, checkLoggedIn, ifLoggedIn, ifLoggedOut])
   return loginState
 }
 
