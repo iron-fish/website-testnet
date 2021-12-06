@@ -14,6 +14,7 @@ import { Toast, Alignment } from 'components/Toast'
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
+import { LoginAware } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
 import { LoginContext } from 'contexts/LoginContext'
@@ -23,6 +24,7 @@ import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
 type Props = {
+  loginContext: LoginAware
   users: ReadonlyArray<API.ApiUser>
 }
 
@@ -60,7 +62,7 @@ const FIELDS = {
   },
 }
 
-export default function Leaderboard({ users = [] }: Props) {
+export default function Leaderboard({ users = [], loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -126,7 +128,11 @@ export default function Leaderboard({ users = [] }: Props) {
               visible={$visible}
               alignment={Alignment.Top}
             />
-            <Navbar fill="black" className="bg-ifpink text-black" />
+            <Navbar
+              fill="black"
+              className="bg-ifpink text-black"
+              loginContext={loginContext}
+            />
             <BackToTop />
             <main className="bg-ifpink flex-1 items-center flex flex-col">
               <div className="w-4/5 md:w-2/3">

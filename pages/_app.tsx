@@ -1,12 +1,12 @@
 import 'styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { LoginContext } from 'contexts/LoginContext'
-import useLogin from 'hooks/useLogin'
 import ResponsiveToolkit from 'components/ResponsiveToolkit'
+import { useLogin } from 'hooks/useLogin'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const $loginValue = useLogin({ timeout: 1500 })
+function MyApp({ Component: Page, pageProps }: AppProps) {
+  const $login = useLogin()
+  const { metadata } = $login
   return (
     <>
       <Head>
@@ -18,10 +18,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LoginContext.Provider value={$loginValue}>
-        <ResponsiveToolkit />
-        <Component {...pageProps} className="font-favorit" />
-      </LoginContext.Provider>
+      <ResponsiveToolkit metadata={metadata} />
+      <Page loginContext={$login} {...pageProps} className="font-favorit" />
     </>
   )
 }

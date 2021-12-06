@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
+import { ApiUserMetadata } from 'apiClient/types'
 import clsx from 'clsx'
 import useQuery from 'hooks/useQuery'
-import { LoginContext } from 'contexts/LoginContext'
 import styles from './ResponsiveToolkit.module.css'
 import pkg from 'package.json'
 
@@ -45,7 +45,11 @@ const points = [
   '90%',
 ]
 
-const ResponsiveToolkit = () => {
+type ToolkitProps = {
+  metadata: ApiUserMetadata | null
+}
+
+const ResponsiveToolkit = ({ metadata }: ToolkitProps) => {
   const [$active, $setActive] = useState(true)
   const [$width, $setWidth] = useState(-1)
   const [$point, $setPoint] = useState(0)
@@ -84,13 +88,7 @@ const ResponsiveToolkit = () => {
       <div className={styles.debugMode}>
         {pkg.name}@{pkg.version}
       </div>
-      <LoginContext.Consumer>
-        {({ checkLoggedIn, metadata }) => {
-          const isLoggedIn = checkLoggedIn()
-          const graffiti = isLoggedIn ? metadata?.graffiti : '👻'
-          return <div className={styles.contextual}>{graffiti}</div>
-        }}
-      </LoginContext.Consumer>
+      <div className={styles.contextual}>{metadata?.graffiti || '👻'}</div>
       {$active && horizontal.map(x => <Breakpoint key={x} at={x} />)}
       {$active &&
         vertical.map(x => <Breakpoint key={x} at={x} horizontal={false} />)}

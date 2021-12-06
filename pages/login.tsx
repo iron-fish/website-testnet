@@ -12,6 +12,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
+import { LoginAware } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -33,7 +34,10 @@ const FIELDS = {
     defaultErrorText: `Valid email address required`,
   },
 }
-export default function Login() {
+type LoginProps = {
+  loginContext: LoginAware
+}
+export default function Login({ loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
@@ -126,7 +130,11 @@ export default function Login() {
         <Loader />
       ) : (
         <>
-          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Navbar
+            fill="black"
+            className="bg-ifpink text-black"
+            loginContext={loginContext}
+          />
           <Toast
             message={$msg || $toast}
             visible={$visible}

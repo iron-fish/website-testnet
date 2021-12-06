@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import { LoginAware } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
@@ -69,7 +70,11 @@ export const FIELDS = {
   },
 }
 
-export default function SignUp() {
+interface SignUpProps {
+  loginContext: LoginAware
+}
+
+export default function SignUp({ loginContext }: SignUpProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
@@ -171,7 +176,11 @@ export default function SignUp() {
         <Loader />
       ) : (
         <>
-          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Navbar
+            fill="black"
+            className="bg-ifpink text-black"
+            loginContext={loginContext}
+          />
           <Toast
             message={$toast}
             visible={$visible}

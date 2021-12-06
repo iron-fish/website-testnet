@@ -102,7 +102,7 @@ export function useLogin(config: LoginProps = {}) {
         console.warn('general error!', e)
       }
     }
-  }, [$metadata, $setMetadata, redirect, $status])
+  }, [$router, $metadata, $setMetadata, redirect, $status])
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
@@ -128,5 +128,7 @@ export function useLogin(config: LoginProps = {}) {
   }
   return loginContext
 }
+
+export type LoginAware = ReturnType<typeof useLogin>
 
 export default useLogin

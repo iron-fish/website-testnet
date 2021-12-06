@@ -6,10 +6,14 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
 import TubesCTA from 'components/FooterCTA'
+import { LoginAware } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'
+type CommunityProps = {
+  loginContext: LoginAware
+}
 
-export default function Community() {
+export default function Community({ loginContext }: CommunityProps) {
   return (
     <div className="min-h-screen flex flex-col font-favorit">
       <Head>
@@ -17,7 +21,11 @@ export default function Community() {
         <meta name="description" content="Community" />
       </Head>
 
-      <Navbar fill="black" className="bg-ifbeige text-black" />
+      <Navbar
+        fill="black"
+        className="bg-ifbeige text-black"
+        loginContext={loginContext}
+      />
 
       <main className="bg-ifbeige flex-1 items-center flex flex-col">
         <div className="w-4/5 md:w-2/3">
