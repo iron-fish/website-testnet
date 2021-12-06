@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import leaderboardPic from 'public/leaderboard.png'
 
 import { LoginContext } from 'contexts/LoginContext'
-import { STATUS } from 'hooks/useLogin'
 import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
@@ -68,8 +67,9 @@ export default function About() {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   return (
     <LoginContext.Consumer>
-      {({ checkLoading }) =>
-        checkLoading() ? (
+      {({ checkLoggedIn, checkLoading }) => {
+        const loaded = checkLoggedIn()
+        return checkLoading() ? (
           <Loader />
         ) : (
           <div className="min-h-screen flex flex-col font-favorit">
@@ -83,7 +83,7 @@ export default function About() {
                 <PageBanner
                   title="About the Incentivized Testnet"
                   text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
-                  buttonText={status !== STATUS.LOADED ? 'Sign Up' : ''}
+                  buttonText={!loaded ? 'Sign Up' : ''}
                   buttonClassName={clsx(
                     'm-auto',
                     'mb-32',
@@ -95,7 +95,7 @@ export default function About() {
                     'md:py-5',
                     'md:px-4'
                   )}
-                  buttonLink={status !== STATUS.LOADED ? '/signup' : ''}
+                  buttonLink={!loaded ? '/signup' : ''}
                 />
               </div>
               <div
@@ -209,7 +209,7 @@ export default function About() {
             <Footer />
           </div>
         )
-      }
+      }}
     </LoginContext.Consumer>
   )
 }

@@ -9,7 +9,6 @@ import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 import { LoginContext } from 'contexts/LoginContext'
-import { STATUS } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import React from 'react'
 
@@ -94,8 +93,9 @@ on our `}
 export default function Faq() {
   return (
     <LoginContext.Consumer>
-      {({ checkLoading }: { checkLoading: () => boolean }) =>
-        checkLoading() ? (
+      {({ checkLoading, checkLoggedIn }) => {
+        const isLoaded = checkLoggedIn()
+        return checkLoading() ? (
           <Loader />
         ) : (
           <div className="min-h-screen flex flex-col font-favorit">
@@ -111,7 +111,7 @@ export default function Faq() {
                 <PageBanner
                   title="Testnet FAQ"
                   text={<PageBannerBody />}
-                  buttonText={status !== STATUS.LOADED ? 'Sign Up' : ''}
+                  buttonText={!isLoaded ? 'Sign Up' : ''}
                   buttonClassName={clsx(
                     'm-auto',
                     'mb-32',
@@ -123,7 +123,7 @@ export default function Faq() {
                     'md:py-5',
                     'md:px-4'
                   )}
-                  buttonLink={status !== STATUS.LOADED ? '/signup' : ''}
+                  buttonLink={!isLoaded ? '/signup' : ''}
                 />
                 <h1
                   className={clsx(
@@ -155,7 +155,7 @@ export default function Faq() {
             <Footer />
           </div>
         )
-      }
+      }}
     </LoginContext.Consumer>
   )
 }
