@@ -108,9 +108,11 @@ export default function Leaderboard({ users = [] }: Props) {
   }, [$debouncedSearch, $country, $eventType])
   return (
     <LoginContext.Consumer>
-      {({ checkLoading, checkLoggedIn }) => {
+      {({ metadata, checkLoading, checkLoggedIn }) => {
         const isLoggedIn = checkLoggedIn()
         const isLoading = checkLoading()
+        // eslint-disable-next-line no-console
+        console.log({ metadata, leaderboard: true })
         return isLoading ? (
           <Loader />
         ) : (

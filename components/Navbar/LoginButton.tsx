@@ -153,6 +153,8 @@ export const LoginButton = () => {
         const isLoggedIn = checkLoggedIn()
         // eslint-disable-next-line
         const meta = metadata as any
+        // eslint-disable-next-line no-console
+        console.log({ meta, loginButton: true })
         const hasGraffiti = metadata && !!metadata.graffiti
         return (
           <HoverButton
