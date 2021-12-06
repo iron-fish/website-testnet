@@ -3,6 +3,7 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { LoginContext } from 'contexts/LoginContext'
 import useLogin from 'hooks/useLogin'
+import ResponsiveToolkit from 'components/ResponsiveToolkit'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const $loginValue = useLogin({ timeout: 1500 })
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="twitter:image" content="/preview_image.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ResponsiveToolkit userDetails={$loginValue} />
       <LoginContext.Provider value={$loginValue}>
         <Component {...pageProps} className="font-favorit" />
       </LoginContext.Provider>

@@ -1,0 +1,96 @@
+.arrowed {
+  margin: 1.25rem auto 0;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+.arrowed::after,
+.arrowed::before {
+  display: none;
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.5em solid transparent;
+  border-bottom: 0.5rem solid black;
+  top: -1rem;
+  /* left: calc(50% - 0.5rem); */
+}
+
+.arrowed::before {
+  border-bottom: 0.5rem solid white;
+  top: calc(-1rem + 1px);
+  z-index: 1;
+}
+.arrowed::after {
+  border-bottom: 0.5rem solid black;
+  top: -1rem;
+  z-index: -1;
+}
+.arrowed:hover::before {
+  border-bottom-color: black;
+}
+.arrowed:hover::after {
+  border-bottom-color: black;
+}
+
+.buttonRoot {
+  transition: padding 0.3s ease-out, width 0.3s ease-out;
+}
+.buttonRoot svg {
+  display: none;
+  fill: black;
+}
+
+.buttonRoot:hover svg {
+  fill: white;
+}
+/* this increases our valid mouse area when hovering */
+.hitState {
+  opacity: 0;
+  background-color: lime;
+  height: 3.25rem;
+  display: flex;
+  position: absolute;
+  top: 1.5rem;
+  width: 90%;
+  padding: 0 5%;
+}
+@media screen and (min-width: 768px) {
+  .buttonRoot svg {
+    display: inline-block;
+  }
+  .hitState {
+    min-width: 2rem;
+    top: 2rem;
+  }
+  .arrowed {
+    width: 7rem;
+    left: calc(-1rem + 2px);
+    top: -2rem;
+  }
+  .arrowed::after,
+  .arrowed::before {
+    display: inline-block;
+    top: 1.875rem;
+  }
+  .arrowed::before {
+    top: calc(1.875rem + 1px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .arrowed {
+    width: 10rem;
+    left: -0.25rem;
+    top: -1rem;
+  }
+  .buttonRoot svg {
+    margin-top: 0.1rem;
+  }
+}
+.userButton {
+}
+.userButtonSpan {
+}
