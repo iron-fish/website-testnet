@@ -16,7 +16,6 @@ import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
-import { STATUS } from 'hooks/useLogin'
 import { LoginContext } from 'contexts/LoginContext'
 
 import * as API from 'apiClient'
@@ -109,8 +108,10 @@ export default function Leaderboard({ users = [] }: Props) {
   }, [$debouncedSearch, $country, $eventType])
   return (
     <LoginContext.Consumer>
-      {({ status: $status }) =>
-        $status === STATUS.LOADING ? (
+      {({ checkLoading, checkLoggedIn }) => {
+        const isLoggedIn = checkLoggedIn()
+        const isLoading = checkLoading()
+        return isLoading ? (
           <Loader />
         ) : (
           <div className="min-h-screen flex flex-col font-favorit">
@@ -133,7 +134,7 @@ export default function Leaderboard({ users = [] }: Props) {
           getters are for all-time score, miners, bug catchers, net promoters,
           node hosting, and more! Click someone’s user name to see a breakdown
           of their activity."
-                  buttonText={$status !== STATUS.LOADED ? 'Sign Up' : ''}
+                  buttonText={!isLoggedIn ? 'Sign Up' : ''}
                   buttonClassName={clsx(
                     'm-auto',
                     'mb-32',
@@ -145,7 +146,7 @@ export default function Leaderboard({ users = [] }: Props) {
                     'md:py-5',
                     'md:px-4'
                   )}
-                  buttonLink={$status !== STATUS.LOADED ? '/signup' : ''}
+                  buttonLink={!isLoggedIn ? '/signup' : ''}
                 />
 
                 <div className="h-16 border border-black rounded flex items-center mb-8">
@@ -213,7 +214,7 @@ export default function Leaderboard({ users = [] }: Props) {
             <Footer />
           </div>
         )
-      }
+      }}
     </LoginContext.Consumer>
   )
 }

@@ -110,8 +110,8 @@ export function useLogin(config: LoginProps = {}) {
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
-    isLoading: statusRelevantContext(STATUS.LOADING),
-    isFailed: statusRelevantContext(STATUS.FAILED),
+    checkLoading: statusRelevantContext(STATUS.LOADING),
+    checkFailed: statusRelevantContext(STATUS.FAILED),
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,

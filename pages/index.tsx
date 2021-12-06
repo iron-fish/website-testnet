@@ -17,6 +17,7 @@ export default function Home() {
   return (
     <LoginContext.Consumer>
       {({ magicMetadata }) => {
+        const email = magicMetadata?.email || ''
         return (
           <div className="min-h-screen flex flex-col">
             <Head>
@@ -31,8 +32,8 @@ export default function Home() {
 
             <main className="bg-iforange flex-1">
               <h1 className="text-2xl">
-                {magicMetadata && magicMetadata.email
-                  ? `Welcome to Testnet, ${magicMetadata.email}!`
+                {email
+                  ? `Welcome to Testnet, ${email}!`
                   : `Welcome to Testnet.`}
               </h1>
             </main>

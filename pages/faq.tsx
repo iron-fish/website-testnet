@@ -94,8 +94,8 @@ on our `}
 export default function Faq() {
   return (
     <LoginContext.Consumer>
-      {({ status }: { status: STATUS }) =>
-        status === STATUS.LOADING ? (
+      {({ checkLoading }: { checkLoading: () => boolean }) =>
+        checkLoading() ? (
           <Loader />
         ) : (
           <div className="min-h-screen flex flex-col font-favorit">

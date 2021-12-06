@@ -68,8 +68,8 @@ export default function About() {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   return (
     <LoginContext.Consumer>
-      {({ status }) =>
-        status === STATUS.LOADING ? (
+      {({ checkLoading }) =>
+        checkLoading() ? (
           <Loader />
         ) : (
           <div className="min-h-screen flex flex-col font-favorit">

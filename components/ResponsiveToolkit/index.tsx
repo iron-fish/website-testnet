@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import useQuery from 'hooks/useQuery'
-import { useLogin } from 'hooks/useLogin'
+import { LoginContext } from 'contexts/LoginContext'
 import styles from './ResponsiveToolkit.module.css'
 import pkg from 'package.json'
 
@@ -45,15 +45,10 @@ const points = [
   '90%',
 ]
 
-type ResponsiveToolkitProps = {
-  userDetails: ReturnType<typeof useLogin>
-}
-
-const ResponsiveToolkit = ({ userDetails }: ResponsiveToolkitProps) => {
+const ResponsiveToolkit = () => {
   const [$active, $setActive] = useState(true)
   const [$width, $setWidth] = useState(-1)
   const [$point, $setPoint] = useState(0)
-  const [$graffiti, $setGraffiti] = useState('👻')
   const toggle = () => $setActive(!$active)
   const $toolkit = useQuery('debug')
   const $customPoint = useQuery('point')
@@ -81,16 +76,6 @@ const ResponsiveToolkit = ({ userDetails }: ResponsiveToolkitProps) => {
   const horizontal = pointsPlus.filter(z => !z.startsWith('v'))
   const vertical = pointsPlus.filter(z => z.startsWith('v'))
 
-  useEffect(() => {
-    if (userDetails && userDetails.metadata) {
-      // eslint-disable-next-line
-      const given = userDetails!.metadata.graffiti
-      if ($graffiti !== given) {
-        $setGraffiti(given)
-      }
-    }
-  }, [userDetails, $graffiti])
-
   return $toolkit ? (
     <>
       <div className={styles.toolkit} onClick={toggle}>
@@ -99,7 +84,13 @@ const ResponsiveToolkit = ({ userDetails }: ResponsiveToolkitProps) => {
       <div className={styles.debugMode}>
         {pkg.name}@{pkg.version}
       </div>
-      <div className={styles.contextual}>{$graffiti}</div>
+      <LoginContext.Consumer>
+        {({ checkLoggedIn, metadata }) => {
+          const isLoggedIn = checkLoggedIn()
+          const graffiti = isLoggedIn ? metadata?.graffiti : '👻'
+          return <div className={styles.contextual}>{graffiti}</div>
+        }}
+      </LoginContext.Consumer>
       {$active && horizontal.map(x => <Breakpoint key={x} at={x} />)}
       {$active &&
         vertical.map(x => <Breakpoint key={x} at={x} horizontal={false} />)}
