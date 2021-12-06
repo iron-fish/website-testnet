@@ -3,6 +3,11 @@ import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
+import {
+  NO_MAGIC_INSTANCE,
+  NO_MAGIC_USER,
+  NO_MAGIC_TOKEN,
+} from 'constants/errors'
 // import { encode as btoa } from 'base-64'
 
 export enum STATUS {
@@ -36,7 +41,9 @@ export function useLogin(config: LoginProps = {}) {
       try {
         // this is likely a case where we're working in not-the-browser
         if ($metadata || !magic || !magic.user) {
-          Promise.reject(new LocalError('Magic instance not available!', 500))
+          Promise.reject(
+            new LocalError('Magic instance not available!', NO_MAGIC_INSTANCE)
+          )
           return
         }
         let token
@@ -52,7 +59,7 @@ export function useLogin(config: LoginProps = {}) {
           }
           // this is a visible error but not a breaking error
           $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No token available.', 500))
+          $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
           return
         }
         const [magicMd, details] = await Promise.all([
@@ -69,7 +76,7 @@ export function useLogin(config: LoginProps = {}) {
         }
         if (details.statusCode && details.statusCode === 401) {
           $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No user found.', 500))
+          $setError(new LocalError('No user found.', NO_MAGIC_USER))
           return
         }
         $setStatus(STATUS.LOADED)
