@@ -41,8 +41,10 @@ export function useLogin(config: LoginProps = {}) {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
+        // if we're already loaded, quit
+        if ($status === STATUS.LOADED) return
         // this is likely a case where we're working in not-the-browser
-        if ($metadata || !magic || !magic.user) {
+        if (!magic || !magic.user) {
           Promise.reject(
             new LocalError('Magic instance not available!', NO_MAGIC_INSTANCE)
           )
@@ -104,6 +106,7 @@ export function useLogin(config: LoginProps = {}) {
       }
     }
   }, [$router, $metadata, $setMetadata, redirect, $status])
+  /*
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
@@ -115,6 +118,7 @@ export function useLogin(config: LoginProps = {}) {
       return () => clearTimeout(tId)
     }
   }, [$status, $setStatus, timeout])
+  */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {

@@ -8,13 +8,20 @@ export default function Logout() {
   const $router = useRouter()
   useEffect(() => {
     const sayGoodbye = async () => {
-      if (!magic) return false
-      await magic.user.logout()
-      $router.push(
-        (await magic.user.isLoggedIn())
-          ? `/leaderboard`
-          : `/login?toast=${btoa('You have been logged out.')}`
-      )
+      if (!magic || !magic.user) {
+        return false
+      }
+      magic.user.logout().then(async () => {
+        if (magic && magic.user && magic.user.isLoggedIn) {
+          const loggedIn = await magic.user.isLoggedIn()
+          return $router.push(
+            loggedIn
+              ? `/leaderboard`
+              : `/login?toast=${btoa('You have been logged out.')}`
+          )
+        }
+        return false
+      })
     }
     sayGoodbye()
   }, [$router])
