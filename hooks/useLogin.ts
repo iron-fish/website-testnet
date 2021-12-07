@@ -37,18 +37,19 @@ export function useLogin(config: LoginProps = {}) {
   const [$magicMetadata, $setMagicMetadata] =
     useState<MagicUserMetadata | null>(null)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
+
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
         // if we're already loaded, quit
         if ($status === STATUS.LOADED) return
-        // this is likely a case where we're working in not-the-browser
-        if (!magic || !magic.user) {
-          Promise.reject(
-            new LocalError('Magic instance not available!', NO_MAGIC_INSTANCE)
-          )
+        if (!magic || !magic.user || !magic.user.logout) {
+          // Promise.reject(
+          //   new LocalError('Magic instance not available', NO_MAGIC_INSTANCE)
+          // )
           return
         }
+
         let token
         try {
           token = await magic.user.getIdToken()
@@ -121,6 +122,10 @@ export function useLogin(config: LoginProps = {}) {
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
+    logout:
+      magic && magic.user && magic.user.logout
+        ? magic.user.logout
+        : () => Promise.reject(false),
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
     checkFailed: statusRelevantContext(STATUS.FAILED),

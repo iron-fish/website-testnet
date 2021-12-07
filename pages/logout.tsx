@@ -1,19 +1,20 @@
 import { useEffect } from 'react'
-import { magic } from 'utils/magic'
 import { useRouter } from 'next/router'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
+import { LoginAware } from 'hooks/useLogin'
 
-export default function Logout() {
+type LogoutProps = {
+  loginContext: LoginAware
+}
+
+export default function Logout({ loginContext }: LogoutProps) {
   const $router = useRouter()
   useEffect(() => {
     const sayGoodbye = async () => {
-      if (!magic || !magic.user) {
-        return false
-      }
       // eslint-disable-next-line no-console
       console.log('logging out')
-      magic.user.logout().then(async () => {
+      loginContext.logout().then(async () => {
         // eslint-disable-next-line no-console
         console.log('logged out?')
         // const loggedIn = await magic.user.isLoggedIn()
@@ -22,6 +23,6 @@ export default function Logout() {
       })
     }
     sayGoodbye()
-  }, [$router])
+  }, [$router, loginContext])
   return <Loader />
 }
