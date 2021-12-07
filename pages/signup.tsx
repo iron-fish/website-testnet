@@ -78,7 +78,7 @@ export default function SignUp({ loginContext }: SignUpProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
-    timeout: 1500,
+    loginContext,
   })
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',

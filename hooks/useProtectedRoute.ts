@@ -1,25 +1,21 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useLogin, LoginProps } from './useLogin'
+import { LoginAware } from './useLogin'
 export { STATUS } from './useLogin'
 
-interface ProtectedProps extends LoginProps {
+interface ProtectedProps {
   ifLoggedIn?: string
   ifLoggedOut?: string
+  loginContext: LoginAware
 }
 
 export function useProtectedRoute({
   ifLoggedIn,
   ifLoggedOut,
-  redirect = '',
-  timeout = -1,
+  loginContext,
 }: ProtectedProps) {
   const $router = useRouter()
-  const loginState = useLogin({
-    redirect,
-    timeout,
-  })
-  const { checkLoggedIn } = loginState
+  const { checkLoggedIn } = loginContext
   useEffect(() => {
     const check = () => {
       const loggedIn = checkLoggedIn()
@@ -32,7 +28,7 @@ export function useProtectedRoute({
     }
     check()
   }, [$router, checkLoggedIn, ifLoggedIn, ifLoggedOut])
-  return loginState
+  return loginContext
 }
 
 export default useProtectedRoute

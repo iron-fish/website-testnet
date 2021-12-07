@@ -41,7 +41,7 @@ export default function Login({ loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
-    timeout: 1500,
+    loginContext,
   })
   const {
     show: $show,
@@ -120,21 +120,6 @@ export default function Login({ loginContext }: LoginProps) {
       }
     }
   }, [$email, $setLoaded, $queryEmail, $queryAutoLogin, submit])
-  const updatedContext =
-    $toast === 'You have been logged out.'
-      ? {
-          checkLoggedIn: () => false,
-          checkLoading: () => false,
-          checkFailed: () => false,
-          status: STATUS.LOGGED_OUT,
-          setStatus: () => null,
-          error: null,
-          magicMetadata: null,
-          metadata: null,
-        }
-      : loginContext
-  // eslint-disable-next-line no-console
-  console.log($toast, 'what what', updatedContext)
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -148,7 +133,7 @@ export default function Login({ loginContext }: LoginProps) {
           <Navbar
             fill="black"
             className="bg-ifpink text-black"
-            loginContext={updatedContext}
+            loginContext={loginContext}
           />
           <Toast
             message={$msg || $toast}
