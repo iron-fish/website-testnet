@@ -4,7 +4,7 @@ import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
 import {
-  NO_MAGIC_INSTANCE,
+  // NO_MAGIC_INSTANCE,
   NO_MAGIC_USER,
   NO_MAGIC_TOKEN,
 } from 'constants/errors'
@@ -29,10 +29,10 @@ export enum STATUS {
 export interface LoginProps {
   redirect?: string
 }
+
 export function useLogin(config: LoginProps = {}) {
   const $router = useRouter()
   const { redirect } = config
-  const [$loginContext, $setLoginContext] = useState<LoginAware | null>(null)
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
@@ -119,19 +119,18 @@ export function useLogin(config: LoginProps = {}) {
   */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
-  $setLoginContext({
+  const loginContext = {
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
     checkFailed: statusRelevantContext(STATUS.FAILED),
+    setError: $setError,
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,
     status: $status,
     setStatus: $setStatus,
-    setLoginContext: $setLoginContext,
-  })
-  // return loginContext
-  return $loginContext
+  }
+  return loginContext
 }
 
 export type LoginAware = ReturnType<typeof useLogin>

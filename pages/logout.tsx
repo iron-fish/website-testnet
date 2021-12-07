@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { magic } from 'utils/magic'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginAware, STATUS } from 'hooks/useLogin'
 
 type LogoutProps = {
   loginContext: LoginAware
@@ -19,7 +19,8 @@ export default function Logout({ loginContext }: LogoutProps) {
         return magic.user.logout().then(async result => {
           // eslint-disable-next-line no-console
           console.log('logged out?', result)
-          loginContext.setLoginContext(null)
+          loginContext.setStatus(STATUS.NOT_FOUND)
+          loginContext.setError(null)
           // eslint-disable-next-line
           const loggedIn = await magic!.user!.isLoggedIn()
           // eslint-disable-next-line no-console
