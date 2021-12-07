@@ -14,11 +14,12 @@ export default function Logout() {
       magic.user.logout().then(async () => {
         if (magic && magic.user && magic.user.isLoggedIn) {
           const loggedIn = await magic.user.isLoggedIn()
-          return $router.push(
-            loggedIn
-              ? `/leaderboard`
-              : `/login?toast=${btoa('You have been logged out.')}`
-          )
+          const goto = loggedIn
+            ? `/leaderboard`
+            : `/login?toast=${btoa('You have been logged out.')}`
+          // eslint-disable-next-line no-console
+          console.log({ loggedIn, goto })
+          return $router.push(goto)
         }
         return false
       })

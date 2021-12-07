@@ -28,11 +28,10 @@ export enum STATUS {
 
 export interface LoginProps {
   redirect?: string
-  timeout?: number
 }
 export function useLogin(config: LoginProps = {}) {
   const $router = useRouter()
-  const { redirect, timeout = -1 } = config
+  const { redirect } = config
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
