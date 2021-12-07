@@ -124,7 +124,7 @@ export function useLogin(config: LoginProps = {}) {
   const loginContext = {
     logout:
       magic && magic.user && magic.user.logout
-        ? magic.user.logout
+        ? magic.user.logout.bind(magic.user)
         : () => Promise.reject(false),
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
