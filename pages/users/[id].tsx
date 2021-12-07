@@ -11,6 +11,7 @@ import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
 import usePaginatedEvents from 'hooks/usePaginatedEvents'
+import { MetricsConfigResponse } from 'apiClient/types'
 import { encode as btoa } from 'base-64'
 
 import * as API from 'apiClient'
@@ -104,6 +105,11 @@ export const getServerSideProps: GetServerSideProps<Props | Redirect> =
 interface LoginAwareProps extends Props {
   loginContext: LoginAware
 }
+
+const formatDateRelativeToServer =
+  (metricsConfig: MetricsConfigResponse) => (x: string | number) =>
+    x.toLocaleString()
+
 export default function User({
   loginContext,
   events,
@@ -112,6 +118,7 @@ export default function User({
   weeklyMetrics,
   metricsConfig,
 }: LoginAwareProps) {
+  const format = formatDateRelativeToServer(metricsConfig)
   const id = (user && user.id && user.id.toString()) || 'unknown'
   // Recent Activity hooks
   const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
@@ -172,14 +179,14 @@ export default function User({
                     <div>
                       <div>Total Points</div>
                       <div className="text-3xl mt-2">
-                        {user.total_points.toLocaleString()}
+                        {format(user.total_points)}
                       </div>
                     </div>
                     <div>
                       <div>Weekly Points</div>
                       <div className="text-3xl mt-2">
-                        {weeklyMetrics.points.toLocaleString()} /{' '}
-                        {totalWeeklyLimit.toLocaleString()}
+                        {format(weeklyMetrics.points)} /{' '}
+                        {format(totalWeeklyLimit)}
                       </div>
                     </div>
                   </div>
@@ -220,7 +227,7 @@ export default function User({
                       {$events.map(e => (
                         <tr key={e.id} className="border-b border-black">
                           <td className="py-4">{displayEventType(e.type)}</td>
-                          <td>{new Date(e.occurred_at).toLocaleString()}</td>
+                          <td>{format(e.occurred_at)}</td>
                           <td>{e.points}</td>
                         </tr>
                       ))}
