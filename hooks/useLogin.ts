@@ -44,9 +44,6 @@ export function useLogin(config: LoginProps = {}) {
         // if we're already loaded, quit
         if ($status === STATUS.LOADED) return
         if (!magic || !magic.user || !magic.user.logout) {
-          // Promise.reject(
-          //   new LocalError('Magic instance not available', NO_MAGIC_INSTANCE)
-          // )
           return
         }
 
@@ -121,11 +118,15 @@ export function useLogin(config: LoginProps = {}) {
   */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
+  const hasMagic = magic && magic.user && magic.user.logout
   const loginContext = {
-    logout:
-      magic && magic.user && magic.user.logout
-        ? magic.user.logout.bind(magic.user)
-        : () => Promise.reject(false),
+    // this is a slopmess
+    logout: hasMagic
+      ? () =>
+          magic && magic.user && magic.user.logout
+            ? magic.user.logout()
+            : Promise.reject(false)
+      : () => Promise.reject(false),
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
     checkFailed: statusRelevantContext(STATUS.FAILED),
