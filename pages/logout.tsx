@@ -19,6 +19,7 @@ export default function Logout({ loginContext }: LogoutProps) {
         return magic.user.logout().then(async result => {
           // eslint-disable-next-line no-console
           console.log('logged out?', result)
+          loginContext.setLoginContext(null)
           // eslint-disable-next-line
           const loggedIn = await magic!.user!.isLoggedIn()
           // eslint-disable-next-line no-console

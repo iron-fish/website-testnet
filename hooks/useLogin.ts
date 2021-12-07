@@ -32,6 +32,7 @@ export interface LoginProps {
 export function useLogin(config: LoginProps = {}) {
   const $router = useRouter()
   const { redirect } = config
+  const [$loginContext, $setLoginContext] = useState<LoginAware | null>(null)
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
@@ -118,7 +119,7 @@ export function useLogin(config: LoginProps = {}) {
   */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
-  const loginContext = {
+  $setLoginContext({
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
     checkFailed: statusRelevantContext(STATUS.FAILED),
@@ -127,8 +128,10 @@ export function useLogin(config: LoginProps = {}) {
     metadata: $metadata,
     status: $status,
     setStatus: $setStatus,
-  }
-  return loginContext
+    setLoginContext: $setLoginContext,
+  })
+  // return loginContext
+  return $loginContext
 }
 
 export type LoginAware = ReturnType<typeof useLogin>
