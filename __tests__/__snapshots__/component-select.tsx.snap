@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a Select component 1`] = `
+<div>
+  <div
+    class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-alertred  "
+  >
+    <div
+      class="customSelectWrapper "
+    >
+      <select
+        class="customSelect bg-transparent test"
+      >
+        <option
+          value="a"
+        >
+          a
+        </option>
+        <option
+          value="b"
+        >
+          b
+        </option>
+        <option
+          value="c"
+        >
+          c
+        </option>
+        <option
+          value="d"
+        >
+          d
+        </option>
+        <option
+          value="e"
+        >
+          e
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    class="bg-alertred font-favorit text-white text-xs text-center p-2 w-full mt-2 rounded max-w-md"
+  >
+    This field is required
+  </div>
+</div>
+`;

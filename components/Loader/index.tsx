@@ -17,7 +17,12 @@ export const Loader = () => (
         </clipPath>
       </defs>
     </svg>
-    <div className={styles.fishScale}>
+    <div
+      className={styles.fishScale}
+      role="alert"
+      aria-busy="true"
+      aria-label="Loading"
+    >
       <div className={styles.ironfishLoader} />
     </div>
   </>

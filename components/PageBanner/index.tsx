@@ -54,19 +54,21 @@ export const PageBanner: FC<PageBannerProps> = ({
       {children}
       {renderButton ? (
         <Link href={buttonLink} passHref>
-          <RawButton
-            className={clsx(
-              buttonClassName,
-              `m-auto`,
-              `mt-8`,
-              `text-lg`,
-              `px-7`,
-              `py-4`,
-              `md:text-xl`
-            )}
-          >
-            {buttonText}
-          </RawButton>
+          <>
+            <RawButton
+              className={clsx(
+                buttonClassName,
+                `m-auto`,
+                `mt-8`,
+                `text-lg`,
+                `px-7`,
+                `py-4`,
+                `md:text-xl`
+              )}
+            >
+              {buttonText}
+            </RawButton>
+          </>
         </Link>
       ) : (
         <div className={clsx('m-auto', 'mt-8', 'text-lg', 'px-7', 'py-4')} />

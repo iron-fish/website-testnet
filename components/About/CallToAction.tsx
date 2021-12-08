@@ -67,7 +67,9 @@ export const CallToAction = ({
           )}
           <div className="mb-8" />
           {ctaText && href && button ? (
-            <Link href={href}>{button}</Link>
+            <Link href={href}>
+              <>{button}</>
+            </Link>
           ) : (
             button
           )}
@@ -78,9 +80,7 @@ export const CallToAction = ({
                 className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
                 colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
               >
-                <Link href={'https://forms.gle/yrAtzoyKTwLgLTRZA'}>
-                  Claim Points
-                </Link>
+                Claim Points
               </RawButton>
             </Link>
           )}
