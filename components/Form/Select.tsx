@@ -3,8 +3,6 @@ import styles from './Select.module.css'
 import LabelledRow from './LabelledRow'
 
 interface SelectField extends Field {
-  useDefault?: boolean
-  defaultLabel?: string
   className?: string
 }
 
@@ -32,6 +30,10 @@ export const Select = ({
         className={`${styles.customSelect} bg-transparent ${className || ''}`}
         disabled={disabled}
         onChange={e => {
+          const change = (e.target as HTMLSelectElement).value
+          // temporary log, intent: debug the raw values coming through
+          // eslint-disable-next-line no-console
+          console.log({ change })
           onChange(e)
           setTouched(true)
         }}

@@ -19,12 +19,9 @@ import {
 
 // Environment variables set in Vercel config.
 const SERVER_API_URL = process.env.API_URL
-const SERVER_API_KEY = process.env.API_KEY
 const BROWSER_API_URL = process.env.NEXT_PUBLIC_API_URL
-const BROWSER_API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
-const API_URL = SERVER_API_URL || BROWSER_API_URL
-const API_KEY = SERVER_API_KEY || BROWSER_API_KEY
+export const API_URL = SERVER_API_URL || BROWSER_API_URL
 
 export async function createUser(
   email: string,
@@ -43,10 +40,34 @@ export async function createUser(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
     },
     body,
   })
+  return await res.json()
+}
+
+type ChangeOrder = {
+  email?: string
+  graffiti?: string
+  socialChoice?: string
+  social?: string
+  countryCode?: string
+}
+
+export async function updateUser(id: number, partial: ChangeOrder) {
+  const body = JSON.stringify(partial)
+  const token = await magic?.user.getIdToken()
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  }
+  // eslint-disable-next-line no-console
+  console.log({ body, updateUser: true, options })
+  const res = await fetch(`${API_URL}/users/${id}`, options)
   return await res.json()
 }
 

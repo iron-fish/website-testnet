@@ -16,6 +16,7 @@ import { encode as btoa } from 'base-64'
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
+import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 7
@@ -41,7 +42,16 @@ function displayEventType(type: API.EventType): string {
   }
 }
 
+const validTabValue = (x: string) =>
+  x === 'weekly' || x === 'all' || x === 'settings'
+
 export default function User({ loginContext }: Props) {
+  const $toast = useQueriedToast({
+    queryString: 'toast',
+    duration: 8e3,
+  })
+
+  const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
   const router = useRouter()
 
   const [$user, $setUser] = React.useState<API.ApiUser | undefined>(undefined)
@@ -59,59 +69,69 @@ export default function User({ loginContext }: Props) {
   >(undefined)
 
   useEffect(() => {
-    let isCanceled = false
+    let isCancelled = false
 
     const fetchData = async () => {
-      if (!router.isReady) {
-        return
+      try {
+        if (!router.isReady) {
+          return
+        }
+        const [userId, tab] = router.query?.details as string[]
+
+        if (!userId) {
+          router.push(`/leaderboard?toast=${btoa('Unable to find that user')}`)
+          return
+        }
+        if (validTabValue(tab)) {
+          $setActiveTab(tab as TabType)
+        }
+
+        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
+          await Promise.all([
+            API.getUser(userId),
+            API.listEvents({
+              userId,
+              limit: EVENTS_LIMIT,
+            }),
+            API.getUserAllTimeMetrics(userId),
+            API.getUserWeeklyMetrics(userId),
+            API.getMetricsConfig(),
+          ])
+
+        if (isCancelled) {
+          return
+        }
+
+        if (
+          'error' in user ||
+          'error' in events ||
+          'error' in allTimeMetrics ||
+          'error' in weeklyMetrics ||
+          'error' in metricsConfig
+        ) {
+          router.push(
+            `/leaderboard?toast=${btoa(
+              'An error occurred while fetching user data'
+            )}`
+          )
+          return
+        }
+
+        $setUser(user)
+        $setEvents(events)
+        $setAllTimeMetrics(allTimeMetrics)
+        $setWeeklyMetrics(weeklyMetrics)
+        $setMetricsConfig(metricsConfig)
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn(e)
+        throw e
       }
-
-      if (!router.query.id || Array.isArray(router.query.id)) {
-        router.push(`/leaderboard?toast=${btoa('Unable to find that user')}`)
-        return
-      }
-
-      const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
-        await Promise.all([
-          API.getUser(router.query.id),
-          API.listEvents({
-            userId: router.query.id,
-            limit: EVENTS_LIMIT,
-          }),
-          API.getUserAllTimeMetrics(router.query.id),
-          API.getUserWeeklyMetrics(router.query.id),
-          API.getMetricsConfig(),
-        ])
-
-      if (isCanceled) {
-        return
-      }
-
-      if (
-        'error' in user ||
-        'error' in events ||
-        'error' in allTimeMetrics ||
-        'error' in weeklyMetrics ||
-        'error' in metricsConfig
-      ) {
-        router.push(
-          `/leaderboard?toast=${btoa(
-            'An error occurred while fetching user data'
-          )}`
-        )
-        return
-      }
-
-      $setUser(user)
-      $setEvents(events)
-      $setAllTimeMetrics(allTimeMetrics)
-      $setWeeklyMetrics(weeklyMetrics)
-      $setMetricsConfig(metricsConfig)
     }
 
     fetchData()
     return () => {
-      isCanceled = true
+      isCancelled = true
     }
   }, [router])
 
@@ -121,7 +141,6 @@ export default function User({ loginContext }: Props) {
     usePaginatedEvents(id, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
-  const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
   const onTabChange = React.useCallback((tab: TabType) => {
     $setActiveTab(tab)
   }, [])
@@ -200,6 +219,8 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
+                reloadUser={loginContext.reloadUser}
+                toast={$toast}
                 activeTab={$activeTab}
                 onTabChange={onTabChange}
                 user={$user}
@@ -254,7 +275,11 @@ export default function User({ loginContext }: Props) {
           )}
         </div>
       </main>
-
+      <Toast
+        message={$toast.message}
+        visible={$toast.visible}
+        alignment={Alignment.Top}
+      />
       <Footer />
     </div>
   )

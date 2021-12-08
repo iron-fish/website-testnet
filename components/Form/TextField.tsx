@@ -63,6 +63,7 @@ export const TextField = ({
   setChoice,
   isRadioed,
   disabled,
+  required = true,
   whitespace = WHITESPACE.DEFAULT,
 }: Field) => {
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
@@ -74,6 +75,7 @@ export const TextField = ({
       valid={valid}
       errorText={errorText}
       disabled={disabled}
+      required={required}
     >
       {isRadioed && options.length > 0 && (
         <RadioOptions

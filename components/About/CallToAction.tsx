@@ -66,19 +66,23 @@ export const CallToAction = ({
             </div>
           )}
           {ctaText && href && button ? (
-            <Link href={href}>{button}</Link>
+            <Link href={href}>
+              <>{button}</>
+            </Link>
           ) : (
             button
           )}
           {submissionForm && (
             <Link href="https://forms.gle/yrAtzoyKTwLgLTRZA" passHref>
-              <RawButton
-                border="border"
-                className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
-                colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
-              >
-                {href ? <Link href={href}>Claim Points</Link> : ctaText}
-              </RawButton>
+              <>
+                <RawButton
+                  border="border"
+                  className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
+                  colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
+                >
+                  {href ? <Link href={href}>Claim Points</Link> : ctaText}
+                </RawButton>
+              </>
             </Link>
           )}
         </div>

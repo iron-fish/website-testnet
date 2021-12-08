@@ -30,12 +30,18 @@ const decode = (x: string) => (typeof window !== 'undefined' ? atob(x) : x)
 
 export function useQueriedToast(opts: QueriedToastOptions = {}) {
   const { queryString = 'toast' } = opts
-  const $toast = useQuery(queryString) || ''
+  const $rawToast = useQuery(queryString) || ''
   const toasted = useToast(opts)
+  const { visible, show } = toasted
+  const [$message, $setMessage] = useState('')
+  useEffect(() => {
+    $setMessage($rawToast.split('=').map(decode).join(''))
+  }, [$rawToast])
   return {
-    message: $toast.split('=').map(decode).join(''),
-    visible: toasted.visible,
-    show: toasted.show,
+    setMessage: $setMessage,
+    message: $message,
+    visible,
+    show,
   }
 }
 

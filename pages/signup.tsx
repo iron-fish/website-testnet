@@ -88,11 +88,11 @@ export default function SignUp({ loginContext }: SignUpProps) {
     duration: 8e3,
   })
 
-  const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
+  const [$error, $setError] = useState<string>(UNSET)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {

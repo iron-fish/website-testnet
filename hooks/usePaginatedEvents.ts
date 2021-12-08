@@ -13,10 +13,10 @@ export function usePaginatedEvents(
   fetchNext: () => void
 } {
   const $hasPrevious = useMemo(
-    () => events?.metadata.has_previous ?? false,
+    () => events?.metadata?.has_previous ?? false,
     [events]
   )
-  const $hasNext = useMemo(() => events?.metadata.has_next ?? false, [events])
+  const $hasNext = useMemo(() => events?.metadata?.has_next ?? false, [events])
 
   const fetchEvents = useCallback(
     async (id: number, direction: 'before' | 'after') => {

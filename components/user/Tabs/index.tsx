@@ -5,6 +5,7 @@ import * as API from 'apiClient'
 import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
 import WeeklyContent from './WeeklyContent'
+import { useQueriedToast } from 'hooks/useToast'
 
 export type TabType = 'all' | 'weekly' | 'settings'
 
@@ -16,6 +17,8 @@ type TabsProps = {
   authedUser: API.ApiUserMetadata | null
   activeTab: TabType
   onTabChange: (tab: TabType) => unknown
+  toast: ReturnType<typeof useQueriedToast>
+  reloadUser: () => void
 }
 
 export default function Tabs({
@@ -26,7 +29,11 @@ export default function Tabs({
   authedUser,
   activeTab,
   onTabChange,
+  toast,
+  reloadUser,
 }: TabsProps) {
+  const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
+  const anyBlocksMined = allTimeBlocksMined > 0
   return (
     <div>
       {/* Tabs */}
@@ -43,14 +50,16 @@ export default function Tabs({
         >
           All Time Stats
         </TabHeaderButton>
-        {authedUser && user.id === authedUser.id && (
-          <TabHeaderButton
-            selected={activeTab === 'settings'}
-            onClick={() => onTabChange('settings')}
-          >
-            Settings
-          </TabHeaderButton>
-        )}
+        {authedUser &&
+          user.graffiti === authedUser.graffiti &&
+          user.id === authedUser.id && (
+            <TabHeaderButton
+              selected={activeTab === 'settings'}
+              onClick={() => onTabChange('settings')}
+            >
+              Settings
+            </TabHeaderButton>
+          )}
       </div>
 
       {/* Tabs Content */}
@@ -64,7 +73,12 @@ export default function Tabs({
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
       {activeTab === 'settings' && authedUser && (
-        <SettingsContent authedUser={authedUser} />
+        <SettingsContent
+          anyBlocksMined={anyBlocksMined}
+          authedUser={authedUser}
+          toast={toast}
+          reloadUser={reloadUser}
+        />
       )}
     </div>
   )

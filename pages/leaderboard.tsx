@@ -75,20 +75,18 @@ export default function Leaderboard({ loginContext }: Props) {
   const [$search, $setSearch] = useState('')
   const $debouncedSearch = useDebounce($search, 300)
   const [$searching, $setSearching] = useState(false)
+  const countryValue = $country?.value
+  const eventTypeValue = $eventType?.value
 
   useEffect(() => {
     const func = async () => {
       $setSearching(true)
 
       const countrySearch =
-        $country?.value && $country.value !== 'Global'
-          ? { country_code: $country.value }
-          : {}
+        countryValue !== 'Global' ? { country_code: countryValue } : {}
 
       const eventType =
-        $eventType?.value && $eventType.value !== TOTAL_POINTS
-          ? { event_type: $eventType.value }
-          : {}
+        eventTypeValue !== TOTAL_POINTS ? { event_type: eventTypeValue } : {}
 
       const result = await API.listLeaderboard({
         search: $debouncedSearch,
@@ -103,10 +101,10 @@ export default function Leaderboard({ loginContext }: Props) {
       $setSearching(false)
     }
 
-    if ($country?.value && $eventType?.value) {
+    if (countryValue && eventTypeValue) {
       func()
     }
-  }, [$debouncedSearch, $country?.value, $eventType?.value])
+  }, [$debouncedSearch, countryValue, eventTypeValue])
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
