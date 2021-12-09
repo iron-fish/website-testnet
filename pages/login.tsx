@@ -12,7 +12,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -35,7 +35,7 @@ const FIELDS = {
   },
 }
 type LoginProps = {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 export default function Login({ loginContext }: LoginProps) {
   const $router = useRouter()

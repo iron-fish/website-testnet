@@ -1,7 +1,7 @@
 import { useState, ReactNode, MouseEventHandler } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
@@ -143,7 +143,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
   </div>
 )
 type LoginProps = {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 export const LoginButton = ({ loginContext }: LoginProps) => {
   const [$visible, $setVisible] = useState<boolean>(false)

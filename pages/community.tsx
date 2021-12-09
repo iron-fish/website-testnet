@@ -6,11 +6,11 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
 import TubesCTA from 'components/FooterCTA'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'
 type CommunityProps = {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export default function Community({ loginContext }: CommunityProps) {

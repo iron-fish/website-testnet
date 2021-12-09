@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 import SubnavButton from './SubnavButton'
 import LoginButton from './LoginButton'
@@ -18,7 +18,7 @@ type NavbarLinksProps = {
   testnetClicked?: () => unknown
   testnetHovered?: () => unknown
   testnetVisible?: boolean
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export function NavbarLinks({

@@ -1,6 +1,6 @@
 import Logo from 'components/Logo'
 import Close from 'components/icons/Close'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 import NavbarLinks from './Links'
 
 export type NavbarFlyoutProps = {
@@ -10,7 +10,7 @@ export type NavbarFlyoutProps = {
   testnetClicked: () => unknown
   companyVisible: boolean
   testnetVisible: boolean
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export function NavbarFlyout({

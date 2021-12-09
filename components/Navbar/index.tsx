@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
 import { useNav, NavState } from 'hooks/useNav'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 import NavbarLinks from './Links'
 import NavbarFlyout from './Flyout'
@@ -14,7 +14,7 @@ import Link from 'next/link'
 type NavbarProps = {
   className?: string
   fill?: string
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 function Navbar({

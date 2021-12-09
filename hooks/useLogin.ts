@@ -133,6 +133,6 @@ export function useLogin(config: LoginProps = {}) {
   return loginContext
 }
 
-export type LoginAware = ReturnType<typeof useLogin>
+export type LoginContext = ReturnType<typeof useLogin>
 
 export default useLogin
