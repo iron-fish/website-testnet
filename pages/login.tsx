@@ -144,7 +144,14 @@ export default function Login({ loginContext }: LoginProps) {
             <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
               <OffsetBorderContainer>
                 <div className="flex justify-center">
-                  <div className="flex flex-col items-center md:px-4 px-5">
+                  <div
+                    className="flex flex-col items-center md:px-4 px-5"
+                    onKeyPress={(e: KeyboardEvent<HTMLDivElement>) => {
+                      if (e.key === 'Enter') {
+                        submit()
+                      }
+                    }}
+                  >
                     {$loaded ? (
                       <>
                         <h1 className="text-4xl text-center mb-4 mt-16">
@@ -159,11 +166,6 @@ export default function Login({ loginContext }: LoginProps) {
                         <RawButton
                           className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
                           onClick={submit}
-                          onKeyPress={(e: KeyboardEvent<HTMLButtonElement>) => {
-                            if (e.key === 'Enter') {
-                              submit()
-                            }
-                          }}
                         >
                           Login
                         </RawButton>

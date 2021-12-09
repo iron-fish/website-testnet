@@ -15,8 +15,6 @@ export function useProtectedRoute({
   loginContext,
 }: ProtectedProps) {
   const $router = useRouter()
-  // eslint-disable-next-line
-  console.log({ loginContext })
   const { checkLoggedIn } = loginContext
   useEffect(() => {
     const check = () => {
