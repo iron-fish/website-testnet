@@ -30,12 +30,16 @@ export interface LoginProps {
   redirect?: string
 }
 
+const getMetadata = async (token: string) =>
+  await Promise.all([magic?.user.getMetadata(), getUserDetails(token)])
+
 export function useLogin(config: LoginProps = {}) {
   const { redirect } = config
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
-  const [$magicMetadata, $setMagicMetadata] =
-    useState<MagicUserMetadata | null>(null)
+  const [$magicMetadata, $setMagicMetadata] = useState<
+    MagicUserMetadata | undefined
+  >(undefined)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
   useEffect(() => {
@@ -63,10 +67,7 @@ export function useLogin(config: LoginProps = {}) {
           $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
           return
         }
-        const [magicMd, details] = await Promise.all([
-          magic.user.getMetadata(),
-          getUserDetails(token),
-        ])
+        const [magicMd, details] = await getMetadata(token)
 
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)

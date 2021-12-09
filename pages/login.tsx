@@ -103,12 +103,13 @@ export default function Login({ loginContext }: LoginProps) {
         $setLoaded(true)
         $setMessage('Logged in!')
         $show()
+        loginContext.setStatus(STATUS.LOADING)
         setTimeout(() => $router.push('/leaderboard'), 3e3)
       }
     } catch (e) {
       $setError(e.message)
     }
-  }, [$email, testInvalid, $show, $router])
+  }, [$email, testInvalid, $show, $router, loginContext])
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
