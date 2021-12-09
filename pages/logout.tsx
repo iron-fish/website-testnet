@@ -21,9 +21,7 @@ export default function Logout({ loginContext }: LogoutProps) {
         loginContext.setStatus(STATUS.NOT_FOUND)
         loginContext.setError(null)
         // eslint-disable-next-line
-        const loggedIn = await magic!.user!.isLoggedIn()
-        // eslint-disable-next-line no-console
-        console.log({ loggedIn, result })
+        await magic!.user!.isLoggedIn()
         const goto = `/login?toast=${btoa('You have been logged out.')}`
         return Router.push(goto)
       })
