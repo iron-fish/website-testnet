@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
+import Router from 'next/router'
 import { magic } from 'utils/magic'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
@@ -10,7 +11,6 @@ type LogoutProps = {
 }
 
 export default function Logout({ loginContext }: LogoutProps) {
-  const $router = useRouter()
   useEffect(() => {
     const sayGoodbye = async () => {
       // eslint-disable-next-line no-console
@@ -25,10 +25,10 @@ export default function Logout({ loginContext }: LogoutProps) {
         // eslint-disable-next-line no-console
         console.log({ loggedIn, result })
         const goto = `/login?toast=${btoa('You have been logged out.')}`
-        return $router.push(goto)
+        return Router.push(goto)
       })
     }
     sayGoodbye()
-  }, [$router, loginContext])
+  }, [loginContext])
   return <Loader />
 }
