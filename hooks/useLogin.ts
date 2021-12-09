@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
@@ -19,19 +18,7 @@ export enum STATUS {
   FORCED = 'forced',
 }
 
-// reusable magic login context
-// MagicUserMetadata takes the form of:
-// {issuer, publicAddress, email}
-// https://github.com/magiclabs/magic-js/blob/master/packages/%40magic-sdk/types/src/modules/user-types.ts#L17-L21
-
-// const $metadata = useLogin({redirect: '/go-somewhere-if-it-does-not-work'})
-
-export interface LoginProps {
-  redirect?: string
-}
-
-export function useLogin(config: LoginProps = {}) {
-  const { redirect } = config
+export function useLogin() {
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
@@ -53,11 +40,6 @@ export function useLogin(config: LoginProps = {}) {
         } catch (error) {}
 
         if (!token) {
-          if (redirect && typeof redirect === 'string') {
-            // if redirect string is provided and we're not logged in, cya!
-            Router.push(redirect)
-            return
-          }
           // this is a visible error but not a breaking error
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
@@ -102,20 +84,7 @@ export function useLogin(config: LoginProps = {}) {
         console.warn('general error!', e)
       }
     }
-  }, [$metadata, $setMetadata, redirect, $status])
-  /*
-  useEffect(() => {
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    if (timeout > -1) {
-      const tId = setTimeout(forceStatus, timeout)
-      return () => clearTimeout(tId)
-    }
-  }, [$status, $setStatus, timeout])
-  */
+  }, [$metadata, $setMetadata, $status])
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
