@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
@@ -71,7 +71,7 @@ export const FIELDS = {
 }
 
 interface SignUpProps {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export default function SignUp({ loginContext }: SignUpProps) {

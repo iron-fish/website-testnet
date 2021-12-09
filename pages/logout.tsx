@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { magic } from 'utils/magic'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
-import { LoginAware, STATUS } from 'hooks/useLogin'
+import { LoginContext, STATUS } from 'hooks/useLogin'
 
 type LogoutProps = {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export default function Logout({ loginContext }: LogoutProps) {

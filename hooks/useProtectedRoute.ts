@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { LoginAware } from './useLogin'
+import { LoginContext } from './useLogin'
 export { STATUS } from './useLogin'
 
 interface ProtectedProps {
   ifLoggedIn?: string
   ifLoggedOut?: string
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export function useProtectedRoute({

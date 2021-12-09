@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
-import { LoginAware } from 'hooks/useLogin'
+import { LoginContext } from 'hooks/useLogin'
 
 export const getServerSideProps = () => {
   return {
@@ -13,7 +13,7 @@ export const getServerSideProps = () => {
 }
 
 interface HomeProps {
-  loginContext: LoginAware
+  loginContext: LoginContext
 }
 
 export default function Home({ loginContext }: HomeProps) {
