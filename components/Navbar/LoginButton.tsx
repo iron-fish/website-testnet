@@ -154,8 +154,6 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
   const isLoggedIn = checkLoggedIn()
   // eslint-disable-next-line
   const meta = metadata as any
-  const hasGraffiti = metadata && !!metadata.graffiti
-
   return (
     <HoverButton
       className={clsx(
@@ -181,7 +179,7 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
       onMouseOver={on}
       onMouseOut={off}
     >
-      {isLoggedIn && hasGraffiti ? (
+      {isLoggedIn ? (
         <UserButton {...meta} visible={$visible} />
       ) : (
         <StaticButton href="/login" />
