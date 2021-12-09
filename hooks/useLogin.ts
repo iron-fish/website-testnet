@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
@@ -30,16 +30,13 @@ export interface LoginProps {
   redirect?: string
 }
 
-const getMetadata = async (token: string) =>
-  await Promise.all([magic?.user.getMetadata(), getUserDetails(token)])
-
 export function useLogin(config: LoginProps = {}) {
+  const $router = useRouter()
   const { redirect } = config
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
-  const [$magicMetadata, $setMagicMetadata] = useState<
-    MagicUserMetadata | undefined
-  >(undefined)
+  const [$magicMetadata, $setMagicMetadata] =
+    useState<MagicUserMetadata | null>(null)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
   useEffect(() => {
@@ -59,7 +56,7 @@ export function useLogin(config: LoginProps = {}) {
         if (!token) {
           if (redirect && typeof redirect === 'string') {
             // if redirect string is provided and we're not logged in, cya!
-            Router.push(redirect)
+            $router.push(redirect)
             return
           }
           // this is a visible error but not a breaking error
@@ -67,7 +64,10 @@ export function useLogin(config: LoginProps = {}) {
           $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
           return
         }
-        const [magicMd, details] = await getMetadata(token)
+        const [magicMd, details] = await Promise.all([
+          magic.user.getMetadata(),
+          getUserDetails(token),
+        ])
 
         if ('error' in details || details instanceof LocalError) {
           $setStatus(STATUS.FAILED)
@@ -103,7 +103,20 @@ export function useLogin(config: LoginProps = {}) {
         console.warn('general error!', e)
       }
     }
-  }, [$metadata, $setMetadata, redirect, $status])
+  }, [$router, $metadata, $setMetadata, redirect, $status])
+  /*
+  useEffect(() => {
+    const forceStatus = () => {
+      if ($status === STATUS.LOADING) {
+        $setStatus(STATUS.FORCED)
+      }
+    }
+    if (timeout > -1) {
+      const tId = setTimeout(forceStatus, timeout)
+      return () => clearTimeout(tId)
+    }
+  }, [$status, $setStatus, timeout])
+  */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
