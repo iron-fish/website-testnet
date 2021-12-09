@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
 
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
@@ -63,7 +63,7 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
   </div>
 )
 type AboutProps = {
-  loginContext: LoginContext
+  loginContext: LoginAware
 }
 
 export default function About({ loginContext }: AboutProps) {

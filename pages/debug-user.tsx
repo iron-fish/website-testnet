@@ -1,10 +1,10 @@
 import { useProtectedRoute } from 'hooks/useProtectedRoute'
 import { useState, useEffect } from 'react'
 import Debug from 'components/Debug'
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 
 type UserDebugProps = {
-  loginContext: LoginContext
+  loginContext: LoginAware
 }
 
 const Test = ({ loginContext }: UserDebugProps) => {

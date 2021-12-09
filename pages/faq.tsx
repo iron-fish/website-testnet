@@ -8,7 +8,7 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import React from 'react'
 
@@ -90,7 +90,7 @@ on our `}
   </span>
 )
 type FaqProps = {
-  loginContext: LoginContext
+  loginContext: LoginAware
 }
 
 export default function Faq({ loginContext }: FaqProps) {

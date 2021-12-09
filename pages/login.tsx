@@ -12,7 +12,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -35,7 +35,7 @@ const FIELDS = {
   },
 }
 type LoginProps = {
-  loginContext: LoginContext
+  loginContext: LoginAware
 }
 export default function Login({ loginContext }: LoginProps) {
   const $router = useRouter()
@@ -103,7 +103,6 @@ export default function Login({ loginContext }: LoginProps) {
         $setLoaded(true)
         $setMessage('Logged in!')
         $show()
-        // loginContext.setStatus(STATUS.LOADING)
         setTimeout(() => $router.push('/leaderboard'), 3e3)
       }
     } catch (e) {

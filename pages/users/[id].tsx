@@ -15,7 +15,7 @@ import { encode as btoa } from 'base-64'
 
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 7
@@ -101,8 +101,8 @@ export const getServerSideProps: GetServerSideProps<Props | Redirect> =
       return failure
     }
   }
-interface LoginContextProps extends Props {
-  loginContext: LoginContext
+interface LoginAwareProps extends Props {
+  loginContext: LoginAware
 }
 export default function User({
   loginContext,
@@ -111,7 +111,7 @@ export default function User({
   allTimeMetrics,
   weeklyMetrics,
   metricsConfig,
-}: LoginContextProps) {
+}: LoginAwareProps) {
   const id = (user && user.id && user.id.toString()) || 'unknown'
   // Recent Activity hooks
   const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =

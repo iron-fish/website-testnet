@@ -14,7 +14,7 @@ import { Toast, Alignment } from 'components/Toast'
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
-import { LoginContext } from 'hooks/useLogin'
+import { LoginAware } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
 
@@ -23,7 +23,7 @@ import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
 type Props = {
-  loginContext: LoginContext
+  loginContext: LoginAware
   users: ReadonlyArray<API.ApiUser>
 }
 
