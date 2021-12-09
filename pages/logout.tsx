@@ -13,14 +13,11 @@ type LogoutProps = {
 export default function Logout({ loginContext }: LogoutProps) {
   useEffect(() => {
     const sayGoodbye = async () => {
-      // eslint-disable-next-line no-console
-      console.log('logging out')
       const loggedOut = await magic?.user.logout()
       if (loggedOut) {
         loginContext.setStatus(STATUS.NOT_FOUND)
         loginContext.setError(null)
-        // eslint-disable-next-line
-        await magic!.user!.isLoggedIn()
+        await magic?.user.isLoggedIn()
         const goto = `/login?toast=${btoa('You have been logged out.')}`
         return Router.push(goto)
       }

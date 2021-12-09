@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
@@ -31,7 +31,6 @@ export interface LoginProps {
 }
 
 export function useLogin(config: LoginProps = {}) {
-  const $router = useRouter()
   const { redirect } = config
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
@@ -56,7 +55,7 @@ export function useLogin(config: LoginProps = {}) {
         if (!token) {
           if (redirect && typeof redirect === 'string') {
             // if redirect string is provided and we're not logged in, cya!
-            $router.push(redirect)
+            Router.push(redirect)
             return
           }
           // this is a visible error but not a breaking error
@@ -103,7 +102,7 @@ export function useLogin(config: LoginProps = {}) {
         console.warn('general error!', e)
       }
     }
-  }, [$router, $metadata, $setMetadata, redirect, $status])
+  }, [$metadata, $setMetadata, redirect, $status])
   /*
   useEffect(() => {
     const forceStatus = () => {
