@@ -13,11 +13,10 @@ export default function Logout({ loginContext }: LogoutProps) {
   const $router = useRouter()
   useEffect(() => {
     const sayGoodbye = async () => {
-      magic?.user?.logout().then(async () => {
-        loginContext.setStatus(STATUS.NOT_FOUND)
-        loginContext.setError(null)
-        $router.push(`/login?toast=${btoa('You have been logged out.')}`)
-      })
+      await magic?.user?.logout()
+      loginContext.setStatus(STATUS.NOT_FOUND)
+      loginContext.setError(null)
+      $router.push(`/login?toast=${btoa('You have been logged out.')}`)
     }
     sayGoodbye()
   }, [$router, loginContext])

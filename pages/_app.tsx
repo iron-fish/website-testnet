@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 import ResponsiveToolkit from 'components/ResponsiveToolkit'
 import { useLogin } from 'hooks/useLogin'
 
-function MyApp({ Component: Page, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const $login = useLogin()
   const { metadata } = $login
   return (
@@ -19,7 +19,11 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ResponsiveToolkit metadata={metadata} />
-      <Page loginContext={$login} {...pageProps} className="font-favorit" />
+      <Component
+        loginContext={$login}
+        {...pageProps}
+        className="font-favorit"
+      />
     </>
   )
 }
