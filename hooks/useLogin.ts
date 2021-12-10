@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
 import { getUserDetails } from 'apiClient/client'
+import {
+  // NO_MAGIC_INSTANCE,
+  NO_MAGIC_USER,
+  NO_MAGIC_TOKEN,
+} from 'constants/errors'
 // import { encode as btoa } from 'base-64'
 
 export enum STATUS {
@@ -10,6 +15,7 @@ export enum STATUS {
   FAILED = 'failed',
   NOT_FOUND = 'not_found',
   LOADED = 'loaded',
+  LOGGED_OUT = 'logged_out',
   FORCED = 'forced',
 }
 
@@ -18,27 +24,30 @@ export enum STATUS {
 // {issuer, publicAddress, email}
 // https://github.com/magiclabs/magic-js/blob/master/packages/%40magic-sdk/types/src/modules/user-types.ts#L17-L21
 
-// const $metadata = useLogin('/go-somewhere-if-it-does-not-work')
+// const $metadata = useLogin({redirect: '/go-somewhere-if-it-does-not-work'})
 
 export interface LoginProps {
   redirect?: string
-  timeout?: number
 }
+
 export function useLogin(config: LoginProps = {}) {
-  const { redirect, timeout = -1 } = config
+  const $router = useRouter()
+  const { redirect } = config
   const [$status, $setStatus] = useState<STATUS>(STATUS.LOADING)
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
     useState<MagicUserMetadata | null>(null)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
+
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        // this is likely a case where we're working in not-the-browser
-        if ($metadata || !magic || !magic.user) {
-          Promise.reject(new LocalError('Magic instance not available!', 500))
+        // if we're already loaded, quit
+        if ($status === STATUS.LOADED) return
+        if (!magic || !magic.user || !magic.user.logout) {
           return
         }
+
         let token
         try {
           token = await magic.user.getIdToken()
@@ -47,12 +56,13 @@ export function useLogin(config: LoginProps = {}) {
         if (!token) {
           if (redirect && typeof redirect === 'string') {
             // if redirect string is provided and we're not logged in, cya!
-            Router.push(redirect)
+            // if this is kept as a static Router.push, it _does not_ work
+            $router.push(redirect)
             return
           }
           // this is a visible error but not a breaking error
           $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No token available.', 500))
+          $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
           return
         }
         const [magicMd, details] = await Promise.all([
@@ -69,7 +79,7 @@ export function useLogin(config: LoginProps = {}) {
         }
         if (details.statusCode && details.statusCode === 401) {
           $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No user found.', 500))
+          $setError(new LocalError('No user found.', NO_MAGIC_USER))
           return
         }
         $setStatus(STATUS.LOADED)
@@ -94,7 +104,8 @@ export function useLogin(config: LoginProps = {}) {
         console.warn('general error!', e)
       }
     }
-  }, [$metadata, $setMetadata, redirect, $status])
+  }, [$metadata, $setMetadata, redirect, $status, $router])
+  /*
   useEffect(() => {
     const forceStatus = () => {
       if ($status === STATUS.LOADING) {
@@ -106,12 +117,14 @@ export function useLogin(config: LoginProps = {}) {
       return () => clearTimeout(tId)
     }
   }, [$status, $setStatus, timeout])
+  */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
-    isLoading: statusRelevantContext(STATUS.LOADING),
-    isFailed: statusRelevantContext(STATUS.FAILED),
+    checkLoading: statusRelevantContext(STATUS.LOADING),
+    checkFailed: statusRelevantContext(STATUS.FAILED),
+    setError: $setError,
     error: $error,
     magicMetadata: $magicMetadata,
     metadata: $metadata,
@@ -120,5 +133,7 @@ export function useLogin(config: LoginProps = {}) {
   }
   return loginContext
 }
+
+export type LoginContext = ReturnType<typeof useLogin>
 
 export default useLogin

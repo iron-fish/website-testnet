@@ -12,6 +12,11 @@ import {
   LoginEvent,
 } from './types'
 import { LocalError } from './errors'
+import {
+  UNABLE_TO_LOGIN,
+  ENDPOINT_UNAVAILABLE,
+  NOT_ISOMORPHIC,
+} from 'constants/errors'
 
 // Environment variables set in Vercel config.
 const SERVER_API_URL = process.env.API_URL
@@ -142,7 +147,7 @@ export async function getMetricsConfig(): Promise<
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export async function login(email: string): Promise<any> {
   if (typeof window === 'undefined' || !magic) {
-    return new LocalError('Only runnable in the browser', 500)
+    return new LocalError('Only runnable in the browser', NOT_ISOMORPHIC)
   }
   try {
     await magic.auth.loginWithMagicLink({
@@ -161,7 +166,7 @@ export async function login(email: string): Promise<any> {
       return { statusCode: 200, loaded: true }
     }
   } catch (e) {
-    return new LocalError(e.message, 500)
+    return new LocalError(e.message, UNABLE_TO_LOGIN)
   }
 }
 
@@ -177,13 +182,13 @@ export async function getUserDetails(
     })
     return data.json()
   } catch (e) {
-    return new LocalError(e.message, 500)
+    return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
 }
 
 export async function tokenLogin(): Promise<LoginEvent | LocalError> {
   if (typeof window === 'undefined' || !magic) {
-    return new LocalError('Only runnable in the browser', 500)
+    return new LocalError('Only runnable in the browser', NOT_ISOMORPHIC)
   }
   try {
     const token = await magic.auth.loginWithCredential()
@@ -195,6 +200,6 @@ export async function tokenLogin(): Promise<LoginEvent | LocalError> {
     })
     return res.json()
   } catch (e) {
-    return new LocalError(e.message, 500)
+    return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
 }

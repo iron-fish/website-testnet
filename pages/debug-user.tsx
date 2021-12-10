@@ -1,18 +1,24 @@
-import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
+import { useProtectedRoute } from 'hooks/useProtectedRoute'
 import { useState, useEffect } from 'react'
 import Debug from 'components/Debug'
+import { LoginContext } from 'hooks/useLogin'
 
-const Test = () => {
+type UserDebugProps = {
+  loginContext: LoginContext
+}
+
+const Test = ({ loginContext }: UserDebugProps) => {
   // eslint-disable-next-line
   const [$time, $setTime] = useState<number>(Date.now())
   const [$elapsed, $setElapsed] = useState<number>(0)
-  const deets = useProtectedRoute({})
+  const details = useProtectedRoute({ loginContext })
+  const { checkLoggedIn } = details
   useEffect(() => {
-    if (deets.status === STATUS.LOADED) {
+    if (checkLoggedIn()) {
       $setElapsed(Math.abs($time - Date.now()))
     }
-  }, [deets.status, $elapsed, $time])
-  return <Debug {...deets} elapsed={$elapsed} />
+  }, [checkLoggedIn, $elapsed, $time])
+  return <Debug {...details} elapsed={$elapsed} />
 }
 
 export default Test

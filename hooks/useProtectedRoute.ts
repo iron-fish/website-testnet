@@ -1,36 +1,34 @@
 import { useEffect } from 'react'
-import Router from 'next/router'
-import { useLogin, LoginProps } from './useLogin'
+import { useRouter } from 'next/router'
+import { LoginContext } from './useLogin'
 export { STATUS } from './useLogin'
 
-interface ProtectedProps extends LoginProps {
+interface ProtectedProps {
   ifLoggedIn?: string
   ifLoggedOut?: string
+  loginContext: LoginContext
 }
 
 export function useProtectedRoute({
   ifLoggedIn,
   ifLoggedOut,
-  redirect = '',
-  timeout = -1,
+  loginContext,
 }: ProtectedProps) {
-  const { checkLoggedIn, status, metadata, magicMetadata } = useLogin({
-    redirect,
-    timeout,
-  })
+  const $router = useRouter()
+  const { checkLoggedIn } = loginContext
   useEffect(() => {
     const check = () => {
       const loggedIn = checkLoggedIn()
       if (loggedIn && ifLoggedIn) {
-        Router.push(ifLoggedIn)
+        $router.push(ifLoggedIn)
       }
       if (!loggedIn && ifLoggedOut) {
-        Router.push(ifLoggedOut)
+        $router.push(ifLoggedOut)
       }
     }
     check()
-  }, [checkLoggedIn, ifLoggedIn, ifLoggedOut])
-  return { status, metadata, magicMetadata }
+  }, [$router, checkLoggedIn, ifLoggedIn, ifLoggedOut])
+  return loginContext
 }
 
 export default useProtectedRoute

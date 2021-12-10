@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 
+import { LoginContext } from 'hooks/useLogin'
+
 import SubnavButton from './SubnavButton'
 import LoginButton from './LoginButton'
 import Company from './Company'
@@ -16,6 +18,7 @@ type NavbarLinksProps = {
   testnetClicked?: () => unknown
   testnetHovered?: () => unknown
   testnetVisible?: boolean
+  loginContext: LoginContext
 }
 
 export function NavbarLinks({
@@ -28,6 +31,7 @@ export function NavbarLinks({
   testnetClicked,
   testnetHovered,
   testnetVisible = false,
+  loginContext,
 }: NavbarLinksProps) {
   const itemPadding = [`px-2`, `lg:px-3.5`, `3xl:px-5`]
   const cc = clsx([className, ...itemPadding])
@@ -60,7 +64,7 @@ export function NavbarLinks({
       >
         {testnetVisible && <Testnet condensed={condensed} />}
       </SubnavButton>
-      <LoginButton />
+      <LoginButton loginContext={loginContext} />
     </>
   )
 }

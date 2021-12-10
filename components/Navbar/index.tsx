@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import Logo from 'components/Logo'
 import Menu from 'components/icons/Menu'
 import { useNav, NavState } from 'hooks/useNav'
+import { LoginContext } from 'hooks/useLogin'
 
 import NavbarLinks from './Links'
 import NavbarFlyout from './Flyout'
@@ -13,11 +14,13 @@ import Link from 'next/link'
 type NavbarProps = {
   className?: string
   fill?: string
+  loginContext: LoginContext
 }
 
 function Navbar({
   fill = 'white',
   className = 'bg-black text-white',
+  loginContext,
 }: NavbarProps) {
   const {
     $flyoutVisible,
@@ -40,6 +43,7 @@ function Navbar({
     testnetClicked: toggleNavTestnet,
     testnetHovered: enterNavTestnet,
     testnetVisible,
+    loginContext,
   }
   return (
     <nav

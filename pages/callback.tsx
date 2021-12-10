@@ -1,21 +1,22 @@
 import { magic } from 'utils/magic'
 import { useEffect } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Loader from 'components/Loader'
 import { getUserDetails } from 'apiClient/client'
 import { useQuery } from 'hooks/useQuery'
 import { encode as btoa } from 'base-64'
 
 const Callback = () => {
+  const $router = useRouter()
   const $error = useQuery('error')
   const $token = useQuery('magic_credential')
   useEffect(() => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          Router.push(`/signup?toast=${btoa('Please sign up.')}`)
+          $router.push(`/signup?toast=${btoa('Please sign up.')}`)
         } else if ($error === 'user_unconfirmed') {
-          Router.push(`/login?toast=${btoa('Please log in.')}`)
+          $router.push(`/login?toast=${btoa('Please log in.')}`)
         }
         return
       }
@@ -27,14 +28,14 @@ const Callback = () => {
         }
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
-          Router.push(`/signup?toast=${btoa('Please sign up.')}`)
+          $router.push(`/signup?toast=${btoa('Please sign up.')}`)
           return
         }
-        Router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
+        $router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
       }
     }
     call()
-  }, [$error, $token])
+  }, [$router, $error, $token])
   return <Loader />
 }
 

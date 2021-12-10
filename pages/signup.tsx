@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
@@ -69,10 +70,15 @@ export const FIELDS = {
   },
 }
 
-export default function SignUp() {
+interface SignUpProps {
+  loginContext: LoginContext
+}
+
+export default function SignUp({ loginContext }: SignUpProps) {
+  const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
-    timeout: 1500,
+    loginContext,
   })
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
@@ -143,9 +149,9 @@ export default function SignUp() {
     } else {
       $setSignedUp(true)
       scrollUp()
-      Router.push(`/login?email=${encodeURIComponent(email)}`)
+      $router.push(`/login?email=${encodeURIComponent(email)}`)
     }
-  }, [$email, $graffiti, $social, $country, testInvalid])
+  }, [$router, $email, $graffiti, $social, $country, testInvalid])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.
@@ -170,7 +176,11 @@ export default function SignUp() {
         <Loader />
       ) : (
         <>
-          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Navbar
+            fill="black"
+            className="bg-ifpink text-black"
+            loginContext={loginContext}
+          />
           <Toast
             message={$toast}
             visible={$visible}

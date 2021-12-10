@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import Navbar from 'components/Navbar'
@@ -12,6 +12,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
+import { LoginContext } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -33,10 +34,14 @@ const FIELDS = {
     defaultErrorText: `Valid email address required`,
   },
 }
-export default function Login() {
+type LoginProps = {
+  loginContext: LoginContext
+}
+export default function Login({ loginContext }: LoginProps) {
+  const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
-    timeout: 1500,
+    loginContext,
   })
   const {
     show: $show,
@@ -98,12 +103,12 @@ export default function Login() {
         $setLoaded(true)
         $setMessage('Logged in!')
         $show()
-        setTimeout(() => Router.push('/leaderboard'), 3e3)
+        setTimeout(() => $router.push('/leaderboard'), 3e3)
       }
     } catch (e) {
       $setError(e.message)
     }
-  }, [$email, testInvalid, $show])
+  }, [$email, testInvalid, $show, $router])
   useEffect(() => {
     if ($email) {
       $setLoaded(true)
@@ -125,7 +130,11 @@ export default function Login() {
         <Loader />
       ) : (
         <>
-          <Navbar fill="black" className="bg-ifpink text-black" />
+          <Navbar
+            fill="black"
+            className="bg-ifpink text-black"
+            loginContext={loginContext}
+          />
           <Toast
             message={$msg || $toast}
             visible={$visible}
@@ -135,7 +144,14 @@ export default function Login() {
             <div className="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width">
               <OffsetBorderContainer>
                 <div className="flex justify-center">
-                  <div className="flex flex-col items-center md:px-4 px-5">
+                  <div
+                    className="flex flex-col items-center md:px-4 px-5"
+                    onKeyPress={(e: KeyboardEvent<HTMLDivElement>) => {
+                      if (e.key === 'Enter') {
+                        submit()
+                      }
+                    }}
+                  >
                     {$loaded ? (
                       <>
                         <h1 className="text-4xl text-center mb-4 mt-16">
@@ -150,11 +166,6 @@ export default function Login() {
                         <RawButton
                           className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
                           onClick={submit}
-                          onKeyPress={(e: KeyboardEvent<HTMLButtonElement>) => {
-                            if (e.key === 'Enter') {
-                              submit()
-                            }
-                          }}
                         >
                           Login
                         </RawButton>

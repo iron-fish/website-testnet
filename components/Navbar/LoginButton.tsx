@@ -1,7 +1,7 @@
 import { useState, ReactNode, MouseEventHandler } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { LoginContext } from 'contexts/LoginContext'
+import { LoginContext } from 'hooks/useLogin'
 
 import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
@@ -142,52 +142,49 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
     </Link>
   </div>
 )
-export const LoginButton = () => {
+type LoginProps = {
+  loginContext: LoginContext
+}
+export const LoginButton = ({ loginContext }: LoginProps) => {
   const [$visible, $setVisible] = useState<boolean>(false)
   const set = (x: boolean) => () => $setVisible(x)
   const on = set(true)
   const off = set(false)
+  const { checkLoggedIn, metadata } = loginContext
+  const isLoggedIn = checkLoggedIn()
+  // eslint-disable-next-line
+  const meta = metadata as any
   return (
-    <LoginContext.Consumer>
-      {({ checkLoggedIn, metadata }) => {
-        const isLoggedIn = checkLoggedIn()
-        // eslint-disable-next-line
-        const meta = metadata as any
-        const hasGraffiti = metadata && !!metadata.graffiti
-        return (
-          <HoverButton
-            className={clsx(
-              'bg-transparent',
-              'h-16',
-              'hover:bg-black',
-              'hover:text-white',
-              'px-6',
-              'py-3',
-              'relative',
-              'text-2xl',
-              'text-black',
-              'text-center',
-              'md:min-w-[8rem]',
-              'md:h-12',
-              'md:ml-4',
-              'md:px-3',
-              'md:text-sm',
-              'lg:min-w-[10rem]',
-              'lg:px-6',
-              'lg:text-base'
-            )}
-            onMouseOver={on}
-            onMouseOut={off}
-          >
-            {isLoggedIn && hasGraffiti ? (
-              <UserButton {...meta} visible={$visible} />
-            ) : (
-              <StaticButton href="/login" />
-            )}
-          </HoverButton>
-        )
-      }}
-    </LoginContext.Consumer>
+    <HoverButton
+      className={clsx(
+        'bg-transparent',
+        'h-16',
+        'hover:bg-black',
+        'hover:text-white',
+        'px-6',
+        'py-3',
+        'relative',
+        'text-2xl',
+        'text-black',
+        'text-center',
+        'md:min-w-[8rem]',
+        'md:h-12',
+        'md:ml-4',
+        'md:px-3',
+        'md:text-sm',
+        'lg:min-w-[10rem]',
+        'lg:px-6',
+        'lg:text-base'
+      )}
+      onMouseOver={on}
+      onMouseOut={off}
+    >
+      {isLoggedIn ? (
+        <UserButton {...meta} visible={$visible} />
+      ) : (
+        <StaticButton href="/login" />
+      )}
+    </HoverButton>
   )
 }
 export default LoginButton
