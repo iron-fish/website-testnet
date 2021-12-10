@@ -62,6 +62,7 @@ export const TextField = ({
   setChoice,
   isRadioed,
   disabled,
+  autotrim,
 }: Field) => (
   <LabelledRow
     key={id}
@@ -89,6 +90,7 @@ export const TextField = ({
       id={id}
       type="text"
       placeholder={placeholder}
+      {...(autotrim ? { pattern: '\\S+' } : {})}
     />
   </LabelledRow>
 )
