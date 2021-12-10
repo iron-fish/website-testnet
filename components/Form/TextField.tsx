@@ -64,35 +64,40 @@ export const TextField = ({
   isRadioed,
   disabled,
   autotrim,
-}: Field) => (
-  <LabelledRow
-    key={id}
-    id={id}
-    label={label}
-    valid={valid}
-    errorText={errorText}
-    disabled={disabled}
-  >
-    {isRadioed && options.length > 0 && (
-      <RadioOptions
-        disabled={disabled}
-        groupName={`${id}-group`}
-        options={options}
-        choice={choice}
-        setChoice={setChoice}
-      />
-    )}
-    <input
-      className={`${disabled ? 'bg-transparent' : ''}`}
-      defaultValue={defaultValue}
-      disabled={disabled}
-      onBlur={onBlur}
-      onChange={onChange}
-      {...(autotrim ? { onKeyDown } : {})}
+}: Field) => {
+  const handleTrim = autotrim ? { onKeyDown } : {}
+  // eslint-disable-next-line no-console
+  console.log({ handleTrim, autotrim })
+  return (
+    <LabelledRow
+      key={id}
       id={id}
-      type="text"
-      placeholder={placeholder}
-    />
-  </LabelledRow>
-)
+      label={label}
+      valid={valid}
+      errorText={errorText}
+      disabled={disabled}
+    >
+      {isRadioed && options.length > 0 && (
+        <RadioOptions
+          disabled={disabled}
+          groupName={`${id}-group`}
+          options={options}
+          choice={choice}
+          setChoice={setChoice}
+        />
+      )}
+      <input
+        className={`${disabled ? 'bg-transparent' : ''}`}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        onBlur={onBlur}
+        onChange={onChange}
+        {...handleTrim}
+        id={id}
+        type="text"
+        placeholder={placeholder}
+      />
+    </LabelledRow>
+  )
+}
 export default TextField
