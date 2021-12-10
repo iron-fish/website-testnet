@@ -56,6 +56,7 @@ export const TextField = ({
   defaultValue,
   valid,
   onChange,
+  onKeyDown,
   onBlur,
   options = [],
   choice,
@@ -87,10 +88,10 @@ export const TextField = ({
       disabled={disabled}
       onBlur={onBlur}
       onChange={onChange}
+      {...(autotrim ? { onKeyDown } : {})}
       id={id}
       type="text"
       placeholder={placeholder}
-      {...(autotrim ? { pattern: '\\S+' } : {})}
     />
   </LabelledRow>
 )

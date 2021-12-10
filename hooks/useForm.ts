@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from 'react'
+import { useEffect, useState, ChangeEvent, KeyboardEventHandler } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { setStateOnChange } from 'utils/forms'
 
@@ -25,6 +25,7 @@ export interface Field extends ProvidedField {
   setter: Dispatch<SetStateAction<string>>
   setValid: Dispatch<SetStateAction<boolean>>
   onChange: (e: ChangeEvent) => void
+  onKeyDown: KeyboardEventHandler<HTMLInputElement>
   onBlur: () => void
   valid: boolean
   setTouched: Dispatch<SetStateAction<boolean>>
@@ -65,6 +66,13 @@ export function useField(provided: ProvidedField): Field | null {
       valid,
       setValid: $setValid,
       setter: $setter,
+      onKeyDown: e => {
+        // eslint-disable-next-line
+        console.log({ event: e, key: e.key })
+        if (autotrim && e.key === ' ') {
+          e.preventDefault()
+        }
+      },
       onChange: setStateOnChange($setter, autotrim),
       onBlur: () => {
         $setTouched(true)
