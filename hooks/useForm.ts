@@ -64,6 +64,7 @@ export function useField(provided: ProvidedField): Field | null {
       defaultValue,
       value: $value,
       valid,
+      autotrim,
       setValid: $setValid,
       setter: $setter,
       onKeyDown: e => {
