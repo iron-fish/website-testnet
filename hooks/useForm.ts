@@ -16,6 +16,7 @@ export interface ProvidedField {
   isRadioed?: boolean
   options?: NameValue[]
   defaultErrorText?: string
+  autotrim?: boolean
 }
 export interface Field extends ProvidedField {
   value: string
@@ -42,6 +43,7 @@ export function useField(provided: ProvidedField): Field | null {
     provided.options &&
     provided.options[0] &&
     provided.options[0].value
+  const { autotrim = true } = provided
   const [$choice, $setChoice] = useState<string>(
     provided.isRadioed && radioOption ? radioOption : ''
   )
@@ -63,7 +65,7 @@ export function useField(provided: ProvidedField): Field | null {
       valid,
       setValid: $setValid,
       setter: $setter,
-      onChange: setStateOnChange($setter),
+      onChange: setStateOnChange($setter, autotrim),
       onBlur: () => {
         $setTouched(true)
       },
@@ -85,6 +87,7 @@ export function useField(provided: ProvidedField): Field | null {
     $error,
     $choice,
     $setChoice,
+    autotrim,
   ])
   return $field
 }
