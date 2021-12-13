@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+export { WHITESPACE } from 'hooks/useForm'
 
 // naive validators
 

@@ -10,7 +10,7 @@ import { FieldError } from 'components/Form/FieldStatus'
 import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
 import { createUser } from 'apiClient'
-import { useField } from 'hooks/useForm'
+import { useField, WHITESPACE } from 'hooks/useForm'
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
 import {
@@ -32,6 +32,7 @@ export const FIELDS = {
     defaultValue: UNSET,
     validation: validateEmail,
     defaultErrorText: `Valid email address required`,
+    whitespace: WHITESPACE.BANNED,
   },
   graffiti: {
     id: 'graffiti',
@@ -40,6 +41,7 @@ export const FIELDS = {
     defaultValue: UNSET,
     validation: validateGraffiti,
     defaultErrorText: `Graffiti is too long`,
+    whitespace: WHITESPACE.TRIMMED,
   },
   social: {
     id: 'social',
@@ -49,6 +51,7 @@ export const FIELDS = {
     validation: exists,
     defaultErrorText,
     isRadioed: true,
+    whitespace: WHITESPACE.BANNED,
     options: [
       { name: 'Discord', value: 'discord' },
       { name: 'Telegram', value: 'telegram' },

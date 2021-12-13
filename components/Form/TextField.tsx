@@ -1,6 +1,6 @@
 import styles from './index.module.css'
 import { Dispatch, SetStateAction } from 'react'
-import { Field, NameValue } from 'hooks/useForm'
+import { Field, NameValue, WHITESPACE } from 'hooks/useForm'
 import LabelledRow from './LabelledRow'
 
 interface OptionsProps {
@@ -63,11 +63,11 @@ export const TextField = ({
   setChoice,
   isRadioed,
   disabled,
-  autotrim,
+  whitespace = WHITESPACE.DEFAULT,
 }: Field) => {
-  const handleTrim = autotrim ? { onKeyDown } : {}
+  const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
   // eslint-disable-next-line no-console
-  console.log({ handleTrim, autotrim })
+  console.log({ handleTrim, whitespace })
   return (
     <LabelledRow
       key={id}

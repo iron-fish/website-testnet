@@ -8,6 +8,12 @@ import {
 import type { Dispatch, SetStateAction } from 'react'
 import { setStateOnChange } from 'utils/forms'
 
+export enum WHITESPACE {
+  DEFAULT = 'DEFAULT',
+  BANNED = 'BANNED',
+  TRIMMED = 'TRIMMED',
+}
+
 export interface NameValue {
   name: string
   value: string
@@ -22,7 +28,7 @@ export interface ProvidedField {
   isRadioed?: boolean
   options?: NameValue[]
   defaultErrorText?: string
-  autotrim?: boolean
+  whitespace?: WHITESPACE
 }
 export interface Field extends ProvidedField {
   value: string
@@ -50,7 +56,9 @@ export function useField(provided: ProvidedField): Field | null {
     provided.options &&
     provided.options[0] &&
     provided.options[0].value
-  const { autotrim = true } = provided
+  const { whitespace = WHITESPACE.DEFAULT } = provided
+  const banSpaces = whitespace === WHITESPACE.BANNED
+  const trimSpaces = banSpaces || whitespace === WHITESPACE.TRIMMED
   const [$choice, $setChoice] = useState<string>(
     provided.isRadioed && radioOption ? radioOption : ''
   )
@@ -70,7 +78,7 @@ export function useField(provided: ProvidedField): Field | null {
       defaultValue,
       value: $value,
       valid,
-      autotrim,
+      whitespace,
       setValid: $setValid,
       setter: $setter,
       onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
@@ -83,11 +91,11 @@ export function useField(provided: ProvidedField): Field | null {
           key: e.key,
           // selected,
         })
-        if (autotrim && e.key === ' ') {
+        if (banSpaces && e.key === ' ') {
           e.preventDefault()
         }
       },
-      onChange: setStateOnChange($setter, autotrim),
+      onChange: setStateOnChange($setter, trimSpaces),
       onBlur: () => {
         $setTouched(true)
       },
@@ -109,7 +117,9 @@ export function useField(provided: ProvidedField): Field | null {
     $error,
     $choice,
     $setChoice,
-    autotrim,
+    whitespace,
+    banSpaces,
+    trimSpaces,
   ])
   return $field
 }
