@@ -76,11 +76,12 @@ export function useField(provided: ProvidedField): Field | null {
       onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
         // f ts
         const { value = '' } = e.target as HTMLTextAreaElement
+        const selected = window?.getSelection()?.getRangeAt(0) || 'no idea'
         // eslint-disable-next-line no-console
         console.log({
           value,
           key: e.key,
-          sel: window?.getSelection()?.getRangeAt(0),
+          selected,
         })
         if (autotrim && e.key === ' ') {
           e.preventDefault()

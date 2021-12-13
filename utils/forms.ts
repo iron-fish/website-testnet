@@ -27,13 +27,13 @@ export const defaultErrorText = `This field is required`
 // take a setter and turn it into an event handler which sets
 export function setStateOnChange(
   setter: Dispatch<SetStateAction<string>>,
-  autotrim = false
+  trim = false
 ) {
   return (e: ChangeEvent) => {
     const raw = (e.target as HTMLInputElement).value
-    const toSet = autotrim ? raw.trim() : raw
+    const toSet = trim ? raw.trim() : raw
     // eslint-disable-next-line no-console
-    console.log({ autotrim, toSet })
+    console.log({ trim, toSet })
     setter(toSet)
   }
 }
