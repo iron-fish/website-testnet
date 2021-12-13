@@ -2,10 +2,13 @@ import 'styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import ResponsiveToolkit from 'components/ResponsiveToolkit'
-import { useLogin } from 'hooks/useLogin'
+import { useLogin, useLocalLogin } from 'hooks/useLogin'
+
+const LOCAL_MODE = process.env.NEXT_PUBLIC_LOCAL_USER || false
+const loginHook = LOCAL_MODE ? useLocalLogin : useLogin
 
 function MyApp({ Component: Page, pageProps }: AppProps) {
-  const $login = useLogin()
+  const $login = loginHook()
   const { metadata } = $login
   return (
     <>
