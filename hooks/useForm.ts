@@ -1,4 +1,10 @@
-import { useEffect, useState, ChangeEvent, KeyboardEventHandler } from 'react'
+import {
+  useEffect,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  KeyboardEventHandler,
+} from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { setStateOnChange } from 'utils/forms'
 
@@ -67,14 +73,11 @@ export function useField(provided: ProvidedField): Field | null {
       autotrim,
       setValid: $setValid,
       setter: $setter,
-      onKeyDown: e => {
-        // eslint-disable-next-line
-        console.log({
-          // @ts-ignore
-          value: (e && e.target && e.target.value) || 'nothing set',
-          event: e,
-          key: e.key,
-        })
+      onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
+        // f ts
+        const { value = '' } = e.target as HTMLTextAreaElement
+        // eslint-disable-next-line no-console
+        console.log({ value, key: e.key, sel: window.getSelection() })
         if (autotrim && e.key === ' ') {
           e.preventDefault()
         }
