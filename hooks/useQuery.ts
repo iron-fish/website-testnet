@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-// With a URL like: coolwebsite.com?nice=dope
-// const $nice = useQuery('nice') === 'dope'
-export function useQuery(key: string): string | null {
+type DynamicQuery = {
+  query: string | null
+  setQuery: Dispatch<SetStateAction<string | null>>
+}
+
+export function useRawQuery(key: string): DynamicQuery {
   // our state
   const [$query, $setQuery] = useState<string | null>(null)
 
@@ -18,6 +21,14 @@ export function useQuery(key: string): string | null {
       $setQuery(value)
     }
   }, [$query, $setQuery, key])
-  return $query
+  return { query: $query, setQuery: $setQuery }
 }
+
+// With a URL like: coolwebsite.com?nice=dope
+// const $nice = useQuery('nice') === 'dope'
+export function useQuery(key: string): string | null {
+  const { query } = useRawQuery(key)
+  return query
+}
+
 export default useQuery

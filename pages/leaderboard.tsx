@@ -20,6 +20,7 @@ import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
 import { LoginContext } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
+import { useRawQuery } from 'hooks/useQuery'
 import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
@@ -69,13 +70,29 @@ const FIELDS = {
 const PAGINATION_LIMIT = 25
 
 export default function Leaderboard({ showNotification, loginContext }: Props) {
+  const { query: $queryCountry, setQuery: $setQueryCountry } =
+    useRawQuery('country')
+  const { query: $queryEventType, setQuery: $setQueryEventType } =
+    useRawQuery('event')
+
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
   })
+  const $country = useField(
+    $queryCountry
+      ? { ...FIELDS.country, defaultValue: $queryCountry }
+      : FIELDS.country
+  )
+  const $eventType = useField(
+    $queryEventType
+      ? {
+          ...FIELDS.eventType,
+          defaultValue: $queryEventType,
+        }
+      : FIELDS.eventType
+  )
 
-  const $country = useField(FIELDS.country)
-  const $eventType = useField(FIELDS.eventType)
   const [$userList, $setUserList] = useState<
     API.PaginatedListLeaderboardResponse | undefined
   >()
