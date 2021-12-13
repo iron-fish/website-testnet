@@ -65,6 +65,10 @@ const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
     answer: `Points can only be earned for blocks with the same graffiti as your testnet account.`,
   },
   {
+    question: `Will there be a KYC process for participants in order to claim coins?`,
+    answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
+  },
+  {
     question: `What are the minimum hardware requirements for running a node? `,
     answer: (
       <div>
