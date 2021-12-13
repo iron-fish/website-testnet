@@ -77,7 +77,11 @@ export function useField(provided: ProvidedField): Field | null {
         // f ts
         const { value = '' } = e.target as HTMLTextAreaElement
         // eslint-disable-next-line no-console
-        console.log({ value, key: e.key, sel: window.getSelection() })
+        console.log({
+          value,
+          key: e.key,
+          sel: window?.getSelection()?.getRangeAt(0),
+        })
         if (autotrim && e.key === ' ') {
           e.preventDefault()
         }
