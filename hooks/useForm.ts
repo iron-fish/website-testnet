@@ -69,7 +69,12 @@ export function useField(provided: ProvidedField): Field | null {
       setter: $setter,
       onKeyDown: e => {
         // eslint-disable-next-line
-        console.log({ event: e, key: e.key })
+        console.log({
+          // @ts-ignore
+          value: (e && e.target && e.target.value) || 'nothing set',
+          event: e,
+          key: e.key,
+        })
         if (autotrim && e.key === ' ') {
           e.preventDefault()
         }
