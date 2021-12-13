@@ -10,7 +10,7 @@ import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
 import SignupCTA from 'components/login/SignupCTA'
 
-import { useField } from 'hooks/useForm'
+import { WHITESPACE, useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
@@ -31,6 +31,7 @@ const FIELDS = {
     defaultValue: UNSET,
     validation: validateEmail,
     defaultErrorText: `Valid email address required`,
+    WHITESPACE: WHITESPACE.BANNED,
   },
 }
 export default function Login() {
