@@ -82,15 +82,6 @@ export function useField(provided: ProvidedField): Field | null {
       setValid: $setValid,
       setter: $setter,
       onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
-        // f ts
-        const { value = '' } = e?.target as HTMLTextAreaElement
-        // const selected = window?.getSelection()?.getRangeAt(0) || 'no idea'
-        // eslint-disable-next-line no-console
-        console.log({
-          value,
-          key: e.key,
-          // selected,
-        })
         if (banSpaces && e.key === ' ') {
           e.preventDefault()
         }

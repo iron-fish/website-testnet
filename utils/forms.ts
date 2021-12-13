@@ -33,8 +33,6 @@ export function setStateOnChange(
   return (e: ChangeEvent) => {
     const raw = (e.target as HTMLInputElement).value
     const toSet = trim ? raw.trim() : raw
-    // eslint-disable-next-line no-console
-    console.log({ trim, toSet })
     setter(toSet)
   }
 }
