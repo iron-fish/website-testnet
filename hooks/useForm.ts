@@ -1,6 +1,18 @@
-import { useEffect, useState, ChangeEvent } from 'react'
+import {
+  useEffect,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  KeyboardEventHandler,
+} from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { setStateOnChange } from 'utils/forms'
+
+export enum WHITESPACE {
+  DEFAULT = 'DEFAULT',
+  BANNED = 'BANNED',
+  TRIMMED = 'TRIMMED',
+}
 
 export interface NameValue {
   name: string
@@ -16,6 +28,7 @@ export interface ProvidedField {
   isRadioed?: boolean
   options?: NameValue[]
   defaultErrorText?: string
+  whitespace?: WHITESPACE
 }
 export interface Field extends ProvidedField {
   value: string
@@ -24,6 +37,7 @@ export interface Field extends ProvidedField {
   setter: Dispatch<SetStateAction<string>>
   setValid: Dispatch<SetStateAction<boolean>>
   onChange: (e: ChangeEvent) => void
+  onKeyDown: KeyboardEventHandler<HTMLInputElement>
   onBlur: () => void
   valid: boolean
   setTouched: Dispatch<SetStateAction<boolean>>
@@ -42,6 +56,9 @@ export function useField(provided: ProvidedField): Field | null {
     provided.options &&
     provided.options[0] &&
     provided.options[0].value
+  const { whitespace = WHITESPACE.DEFAULT } = provided
+  const banSpaces = whitespace === WHITESPACE.BANNED
+  const trimSpaces = banSpaces || whitespace === WHITESPACE.TRIMMED
   const [$choice, $setChoice] = useState<string>(
     provided.isRadioed && radioOption ? radioOption : ''
   )
@@ -61,9 +78,15 @@ export function useField(provided: ProvidedField): Field | null {
       defaultValue,
       value: $value,
       valid,
+      whitespace,
       setValid: $setValid,
       setter: $setter,
-      onChange: setStateOnChange($setter),
+      onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
+        if (banSpaces && e.key === ' ') {
+          e.preventDefault()
+        }
+      },
+      onChange: setStateOnChange($setter, trimSpaces),
       onBlur: () => {
         $setTouched(true)
       },
@@ -85,6 +108,9 @@ export function useField(provided: ProvidedField): Field | null {
     $error,
     $choice,
     $setChoice,
+    whitespace,
+    banSpaces,
+    trimSpaces,
   ])
   return $field
 }

@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+export { WHITESPACE } from 'hooks/useForm'
 
 // naive validators
 
@@ -25,8 +26,13 @@ export const exists = (x: string) => x.trim().length > 0
 export const defaultErrorText = `This field is required`
 
 // take a setter and turn it into an event handler which sets
-export function setStateOnChange(setter: Dispatch<SetStateAction<string>>) {
+export function setStateOnChange(
+  setter: Dispatch<SetStateAction<string>>,
+  trim = false
+) {
   return (e: ChangeEvent) => {
-    setter((e.target as HTMLInputElement).value)
+    const raw = (e.target as HTMLInputElement).value
+    const toSet = trim ? raw.trim() : raw
+    setter(toSet)
   }
 }
