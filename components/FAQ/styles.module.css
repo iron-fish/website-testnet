@@ -1,0 +1,9 @@
+.directLink:hover,
+.directLink:focus {
+  opacity: 100%;
+}
+
+.directLink {
+  opacity: 0%;
+  transition: opacity 0.3s ease-out;
+}
