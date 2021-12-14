@@ -94,7 +94,7 @@ const questions: ReadonlyArray<{
   {
     question: `I mined a block, but I'm not getting points for it. Why is that?`,
     id: `mined-blocks-no-points`,
-    answer: `Mining a block does not guarantee that other miners will accept that block in the canonical chain. Only blocks that are part of the canonical chain will earn you points.`,
+    answer: `Even if your miner successfully mined a block, there's a chance that someone else has mined a competing heavier block that the network has chosen over your block. This is the difference of a block being on a fork vs on the main, or canonical, chain. Only blocks in the canonical chain earn you points.`,
   },
 ]
 
