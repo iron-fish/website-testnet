@@ -14,13 +14,19 @@ import React from 'react'
 
 import type { ReactNode } from 'react'
 
-const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
+const questions: ReadonlyArray<{
+  question: string
+  answer: ReactNode
+  id: string
+}> = [
   {
     question: `How long will the incentivized testnet run for?`,
+    id: `testnet-duration`,
     answer: `The testnet will run until the Iron Fish node is stable, feature-complete, and ready for mainnet 🎉`,
   },
   {
     question: `Can I participate in the Incentivized Testnet if I’m in the US?`,
+    id: `us-participants`,
     answer: (
       <div>
         Yes. Please see{' '}
@@ -33,6 +39,7 @@ const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
   },
   {
     question: `How do I get points for mining blocks? `,
+    id: `how-do-i-get-points`,
     answer: (
       <div>
         First, you must{' '}
@@ -54,18 +61,22 @@ const questions: ReadonlyArray<{ question: string; answer: ReactNode }> = [
   },
   {
     question: `Is there a GPU miner?`,
+    id: `gpu-mining`,
     answer: `There is currently no official GPU miner, but there’s nothing stopping you from working on it!`,
   },
   {
     question: `Can points be retroactively applied for blocks mined before I registered and confirmed my account?`,
+    id: `retroactive-points`,
     answer: `Points cannot be retroactively applied for blocks mined prior to the start of the incentivized testnet or prior to your account registration and confirmation.`,
   },
   {
     question: `Can I claim points for blocks under a different graffiti than the one I registered with?`,
+    id: `different-graffiti`,
     answer: `Points can only be earned for blocks with the same graffiti as your testnet account.`,
   },
   {
     question: `What are the minimum hardware requirements for running a node? `,
+    id: `minimum-hardware-requirements`,
     answer: (
       <div>
         Recommended minimum requirements from other members in the community
