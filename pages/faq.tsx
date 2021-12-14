@@ -91,6 +91,11 @@ const questions: ReadonlyArray<{
       </div>
     ),
   },
+  {
+    question: `I mined a block, but I'm not getting points for it. Why is that?`,
+    id: `mined-blocks-no-points`,
+    answer: `Mining a block does not guarantee that other miners will accept that block in the canonical chain. Only blocks that are part of the canonical chain will earn you points.`,
+  },
 ]
 
 const PageBannerBody = () => (
