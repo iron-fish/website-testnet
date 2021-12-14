@@ -76,6 +76,7 @@ const questions: ReadonlyArray<{
   },
   {
     question: `Will there be a KYC process for participants in order to claim coins?`,
+    id: 'kyc-process',
     answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
   },
   {
