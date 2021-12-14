@@ -19,6 +19,11 @@ describe('/about', () => {
         text: 'Whitepaper',
         href: 'https://ironfish.network/docs/whitepaper/1_introduction',
       },
+      {
+        isImage: false,
+        text: 'Roadmap',
+        href: 'https://ironfish.network/roadmap',
+      },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
@@ -30,6 +35,11 @@ describe('/about', () => {
         isImage: false,
         text: 'Whitepaper',
         href: 'https://ironfish.network/docs/whitepaper/1_introduction',
+      },
+      {
+        isImage: false,
+        text: 'Roadmap',
+        href: 'https://ironfish.network/roadmap',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
@@ -91,8 +101,16 @@ describe('/about', () => {
         href: 'https://ironfish.network/docs/onboarding/iron-fish-tutorial',
       },
       { isImage: false, text: '', href: 'https://www.ironfish.network' },
-      { isImage: false, text: 'About Us', href: 'https://ironfish.network/about/' },
-      { isImage: false, text: 'Careers', href: 'https://ironfish.network/careers/' },
+      {
+        isImage: false,
+        text: 'About Us',
+        href: 'https://ironfish.network/about/',
+      },
+      {
+        isImage: false,
+        text: 'Careers',
+        href: 'https://ironfish.network/careers/',
+      },
       { isImage: false, text: 'Blog', href: 'https://ironfish.network/blog/' },
       {
         isImage: false,
