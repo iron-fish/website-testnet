@@ -41,12 +41,14 @@ export const cards = [
       'Earn this NFT by merging the most valuable PR’s. We are looking for quality over quantity.',
     pic: '/reward-pull-requester.png',
   },
+  /*
   {
     title: 'Trader',
     content:
       'Earn this NFT by being active with transactions. Sending 3 a day is an easy way to win!',
     pic: '/reward-transactor.png',
-  },
+    },
+   */
 ]
 
 export const guidelines = {
