@@ -185,21 +185,3 @@ export async function getUserDetails(
     return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
 }
-
-export async function tokenLogin(): Promise<LoginEvent | LocalError> {
-  if (typeof window === 'undefined' || !magic) {
-    return new LocalError('Only runnable in the browser', NOT_ISOMORPHIC)
-  }
-  try {
-    const token = await magic.auth.loginWithCredential()
-    const res = await fetch(`/api/login`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return res.json()
-  } catch (e) {
-    return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
-  }
-}
