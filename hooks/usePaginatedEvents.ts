@@ -1,22 +1,22 @@
-import { useCallback, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import * as API from 'apiClient'
 
 export function usePaginatedEvents(
   userId: string,
   limit: number,
-  initialValue: API.ListEventsResponse
+  events: API.ListEventsResponse | undefined,
+  setEvents: Dispatch<SetStateAction<API.ListEventsResponse | undefined>>
 ): {
-  $events: ReadonlyArray<API.ApiEvent>
   $hasPrevious: boolean
   $hasNext: boolean
   fetchPrevious: () => void
   fetchNext: () => void
 } {
-  const [$events, $setEvents] = useState(initialValue.data)
-  const [$hasPrevious, $setHasPrevious] = useState(
-    initialValue.metadata.has_previous
+  const $hasPrevious = useMemo(
+    () => events?.metadata.has_previous ?? false,
+    [events]
   )
-  const [$hasNext, $setHasNext] = useState(initialValue.metadata.has_next)
+  const $hasNext = useMemo(() => events?.metadata.has_next ?? false, [events])
 
   const fetchEvents = useCallback(
     async (id: number, direction: 'before' | 'after') => {
@@ -28,25 +28,24 @@ export function usePaginatedEvents(
       })
 
       if (!('error' in result)) {
-        $setHasPrevious(result.metadata.has_previous)
-        $setHasNext(result.metadata.has_next)
-        $setEvents(result.data)
+        setEvents(result)
       }
     },
-    [userId, limit]
+    [setEvents, userId, limit]
   )
 
   const fetchNext = useCallback(
-    async () => fetchEvents($events[$events.length - 1].id, 'after'),
-    [fetchEvents, $events]
+    async () =>
+      events && fetchEvents(events.data[events.data.length - 1].id, 'after'),
+    [fetchEvents, events]
   )
 
   const fetchPrevious = useCallback(
-    async () => fetchEvents($events[0].id, 'before'),
-    [fetchEvents, $events]
+    async () => events && fetchEvents(events.data[0].id, 'before'),
+    [fetchEvents, events]
   )
 
-  return { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext }
+  return { $hasPrevious, $hasNext, fetchPrevious, fetchNext }
 }
 
 export default usePaginatedEvents

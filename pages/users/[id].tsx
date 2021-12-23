@@ -1,10 +1,10 @@
-import React from 'react'
-import { GetServerSideProps } from 'next'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import Debug from 'components/Debug'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
+import Loader from 'components/Loader'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import EventsPaginationButton from 'components/user/EventsPaginationButton'
 import FishAvatar from 'components/user/FishAvatar'
@@ -21,19 +21,7 @@ import { LoginContext } from 'hooks/useLogin'
 const EVENTS_LIMIT = 7
 
 interface Props {
-  events: API.ListEventsResponse
-  user?: API.ApiUser
-  allTimeMetrics: API.UserMetricsResponse
-  weeklyMetrics: API.UserMetricsResponse
-  metricsConfig: API.MetricsConfigResponse
-}
-type Redirectable = {
-  destination: string
-  permanent: boolean
-}
-
-type Redirect = {
-  redirect: Redirectable
+  loginContext: LoginContext
 }
 
 function displayEventType(type: API.EventType): string {
@@ -53,86 +41,104 @@ function displayEventType(type: API.EventType): string {
   }
 }
 
-export const getServerSideProps: GetServerSideProps<Props | Redirect> =
-  async context => {
-    const failure = {
-      redirect: {
-        destination: `/leaderboard?toast=${btoa('Unable to find that user')}`,
-        permanent: false,
-      },
-    }
-    try {
-      if (typeof context.query.id !== 'string') {
-        return failure
+export default function User({ loginContext }: Props) {
+  const router = useRouter()
+
+  const [$user, $setUser] = React.useState<API.ApiUser | undefined>(undefined)
+  const [$events, $setEvents] = React.useState<
+    API.ListEventsResponse | undefined
+  >(undefined)
+  const [$allTimeMetrics, $setAllTimeMetrics] = React.useState<
+    API.UserMetricsResponse | undefined
+  >(undefined)
+  const [$weeklyMetrics, $setWeeklyMetrics] = React.useState<
+    API.UserMetricsResponse | undefined
+  >(undefined)
+  const [$metricsConfig, $setMetricsConfig] = React.useState<
+    API.MetricsConfigResponse | undefined
+  >(undefined)
+
+  useEffect(() => {
+    let isCanceled = false
+
+    const fetchData = async () => {
+      if (!router.isReady) {
+        return
       }
+
+      if (!router.query.id || Array.isArray(router.query.id)) {
+        router.push(`/leaderboard?toast=${btoa('Unable to find that user')}`)
+        return
+      }
+
       const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
         await Promise.all([
-          API.getUser(context.query.id),
-          API.listEvents({ userId: context.query.id, limit: EVENTS_LIMIT }),
-          API.getUserAllTimeMetrics(context.query.id),
-          API.getUserWeeklyMetrics(context.query.id),
+          API.getUser(router.query.id),
+          API.listEvents({
+            userId: router.query.id,
+            limit: EVENTS_LIMIT,
+          }),
+          API.getUserAllTimeMetrics(router.query.id),
+          API.getUserWeeklyMetrics(router.query.id),
           API.getMetricsConfig(),
         ])
-      // eslint-disable-next-line
-      const fUser = user as any
-      if (!fUser || (fUser && !fUser.id)) {
-        return failure
+
+      if (isCanceled) {
+        return
       }
+
       if (
-        'error' in events ||
         'error' in user ||
+        'error' in events ||
         'error' in allTimeMetrics ||
         'error' in weeklyMetrics ||
         'error' in metricsConfig
       ) {
-        return failure
+        router.push(
+          `/leaderboard?toast=${btoa(
+            'An error occurred while fetching user data'
+          )}`
+        )
+        return
       }
 
-      return {
-        props: {
-          events: events,
-          user: user,
-          allTimeMetrics: allTimeMetrics,
-          weeklyMetrics: weeklyMetrics,
-          metricsConfig: metricsConfig,
-        },
-      }
-    } catch (e) {
-      return failure
+      $setUser(user)
+      $setEvents(events)
+      $setAllTimeMetrics(allTimeMetrics)
+      $setWeeklyMetrics(weeklyMetrics)
+      $setMetricsConfig(metricsConfig)
     }
-  }
-interface LoginContextProps extends Props {
-  loginContext: LoginContext
-}
-export default function User({
-  loginContext,
-  events,
-  user,
-  allTimeMetrics,
-  weeklyMetrics,
-  metricsConfig,
-}: LoginContextProps) {
-  const id = (user && user.id && user.id.toString()) || 'unknown'
+
+    fetchData()
+    return () => {
+      isCanceled = true
+    }
+  }, [router])
+
+  const id = ($user && $user.id && $user.id.toString()) || 'unknown'
   // Recent Activity hooks
-  const { $events, $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
-    usePaginatedEvents(id, EVENTS_LIMIT, events)
+  const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
+    usePaginatedEvents(id, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
   const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
   const onTabChange = React.useCallback((tab: TabType) => {
     $setActiveTab(tab)
   }, [])
-  if (!user || id === 'unknown') {
-    return (
-      <Debug
-        {...{ events, user, allTimeMetrics, weeklyMetrics, metricsConfig }}
-      />
-    )
+  if (
+    !$user ||
+    !$allTimeMetrics ||
+    !$metricsConfig ||
+    !$weeklyMetrics ||
+    !$events ||
+    id === 'unknown'
+  ) {
+    return <Loader />
   }
-  const avatarColor = graffitiToColor(user.graffiti)
-  const ordinalRank = numberToOrdinal(user.rank)
+  const avatarColor = graffitiToColor($user.graffiti)
+  const ordinalRank = numberToOrdinal($user.rank)
 
-  const totalWeeklyLimit = Object.values(metricsConfig.weekly_limits).reduce(
+  const totalWeeklyLimit = Object.values($metricsConfig.weekly_limits).reduce(
     (acc, cur) => acc + cur,
     0
   )
@@ -140,8 +146,8 @@ export default function User({
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <title>{user.graffiti}</title>
-        <meta name="description" content={String(user.graffiti)} />
+        <title>{$user.graffiti}</title>
+        <meta name="description" content={String($user.graffiti)} />
       </Head>
 
       <Navbar
@@ -161,7 +167,7 @@ export default function User({
               >
                 <div>
                   <h1 className="font-extended text-6xl mt-6 mb-8">
-                    {user.graffiti}
+                    {$user.graffiti}
                   </h1>
 
                   <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
@@ -172,13 +178,13 @@ export default function User({
                     <div>
                       <div>Total Points</div>
                       <div className="text-3xl mt-2">
-                        {user.total_points.toLocaleString()}
+                        {$user.total_points.toLocaleString()}
                       </div>
                     </div>
                     <div>
                       <div>Weekly Points</div>
                       <div className="text-3xl mt-2">
-                        {weeklyMetrics.points.toLocaleString()} /{' '}
+                        {$weeklyMetrics.points.toLocaleString()} /{' '}
                         {totalWeeklyLimit.toLocaleString()}
                       </div>
                     </div>
@@ -187,7 +193,7 @@ export default function User({
                 <div className="flex flex-col items-center">
                   <FishAvatar color={avatarColor} />
                   <div className="mt-4">
-                    <Flag code={user.country_code} />
+                    <Flag code={$user.country_code} />
                   </div>
                 </div>
               </div>
@@ -196,11 +202,11 @@ export default function User({
               <Tabs
                 activeTab={$activeTab}
                 onTabChange={onTabChange}
-                user={user}
+                user={$user}
                 authedUser={loginContext.metadata}
-                allTimeMetrics={allTimeMetrics}
-                weeklyMetrics={weeklyMetrics}
-                metricsConfig={metricsConfig}
+                allTimeMetrics={$allTimeMetrics}
+                weeklyMetrics={$weeklyMetrics}
+                metricsConfig={$metricsConfig}
               />
 
               {/* Recent Activity */}
@@ -217,7 +223,7 @@ export default function User({
                       </tr>
                     </thead>
                     <tbody className="text-sm">
-                      {$events.map(e => (
+                      {$events.data.map(e => (
                         <tr key={e.id} className="border-b border-black">
                           <td className="py-4">{displayEventType(e.type)}</td>
                           <td>{new Date(e.occurred_at).toLocaleString()}</td>
