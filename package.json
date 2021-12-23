@@ -14,7 +14,7 @@
     "clsx": "^1.1.1",
     "iso-3166-1-ts": "^0.2.2",
     "magic-sdk": "^6.2.1",
-    "next": "11.0.1",
+    "next": "^11.1.3",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -30,7 +30,6 @@
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "gitparty": "^1.0.10",
     "husky": "^7.0.1",
     "nps": "^5.10.0",
     "nps-utils": "^1.7.0",
