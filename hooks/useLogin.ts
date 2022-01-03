@@ -140,11 +140,9 @@ export const useLocalLogin = () => ({
   checkLoggedIn: () => true,
   checkLoading: () => false,
   checkFailed: () => false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setError: () => {},
   error: '',
   status: STATUS.LOADED,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setStatus: () => {},
   metadata: {
     id: 111,
