@@ -9,7 +9,6 @@ import {
   ListLeaderboardResponse,
   MetricsConfigResponse,
   UserMetricsResponse,
-  LoginEvent,
 } from './types'
 import { LocalError } from './errors'
 import {
