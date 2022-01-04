@@ -54,12 +54,13 @@ export function useLogin(config: LoginProps = {}) {
         } catch (error) {}
 
         if (!token) {
-          if (redirect && typeof redirect === 'string') {
+          if (redirect) {
             // if redirect string is provided and we're not logged in, cya!
             // if this is kept as a static Router.push, it _does not_ work
             $router.push(redirect)
             return
           }
+
           // this is a visible error but not a breaking error
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
