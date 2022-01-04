@@ -42,9 +42,9 @@ export function useLogin(config: LoginProps = {}) {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        // if we're already loaded, quit
         if ($status === STATUS.LOADED) return
-        if (!magic || !magic.user || !magic.user.logout) {
+
+        if (!magic) {
           return
         }
 
@@ -54,12 +54,13 @@ export function useLogin(config: LoginProps = {}) {
         } catch (error) {}
 
         if (!token) {
-          if (redirect && typeof redirect === 'string') {
+          if (redirect) {
             // if redirect string is provided and we're not logged in, cya!
             // if this is kept as a static Router.push, it _does not_ work
             $router.push(redirect)
             return
           }
+
           // this is a visible error but not a breaking error
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
@@ -71,17 +72,18 @@ export function useLogin(config: LoginProps = {}) {
         ])
 
         if ('error' in details || details instanceof LocalError) {
-          $setStatus(STATUS.FAILED)
           // this is a visible error and a breaking error
+          $setStatus(STATUS.FAILED)
           $setError(details)
-          Promise.reject(details)
           return
         }
+
         if (details.statusCode && details.statusCode === 401) {
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No user found.', NO_MAGIC_USER))
           return
         }
+
         $setStatus(STATUS.LOADED)
         $setMetadata(details)
         $setMagicMetadata(magicMd)
@@ -90,34 +92,22 @@ export function useLogin(config: LoginProps = {}) {
           $setStatus(STATUS.NOT_FOUND)
           return
         }
+
         throw err
       }
     }
+
     if (!$metadata) {
-      try {
-        checkLoggedIn()
-      } catch (e) {
+      checkLoggedIn().catch(e => {
         if ($status === STATUS.LOADING) {
           $setStatus(STATUS.FAILED)
         }
+
         // eslint-disable-next-line no-console
         console.warn('general error!', e)
-      }
+      })
     }
   }, [$metadata, $setMetadata, redirect, $status, $router])
-  /*
-  useEffect(() => {
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    if (timeout > -1) {
-      const tId = setTimeout(forceStatus, timeout)
-      return () => clearTimeout(tId)
-    }
-  }, [$status, $setStatus, timeout])
-  */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
