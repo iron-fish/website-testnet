@@ -99,15 +99,14 @@ export function useLogin(config: LoginProps = {}) {
     }
 
     if (!$metadata) {
-      try {
-        checkLoggedIn()
-      } catch (e) {
+      checkLoggedIn().catch(e => {
         if ($status === STATUS.LOADING) {
           $setStatus(STATUS.FAILED)
         }
+
         // eslint-disable-next-line no-console
         console.warn('general error!', e)
-      }
+      })
     }
   }, [$metadata, $setMetadata, redirect, $status, $router])
   /*
