@@ -71,9 +71,9 @@ export function useLogin(config: LoginProps = {}) {
           getUserDetails(token),
         ])
 
-        if ('error' in details || details instanceof LocalError) {
-          $setStatus(STATUS.FAILED)
+        if (details instanceof LocalError) {
           // this is a visible error and a breaking error
+          $setStatus(STATUS.FAILED)
           $setError(details)
           Promise.reject(details)
           return
