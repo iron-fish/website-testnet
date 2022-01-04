@@ -171,7 +171,7 @@ export async function login(email: string): Promise<any> {
 
 export async function getUserDetails(
   token: string
-): Promise<ApiUserMetadata | ApiError | LocalError> {
+): Promise<ApiUserMetadata | LocalError> {
   try {
     const data = await fetch(`${API_URL}/me`, {
       headers: {
