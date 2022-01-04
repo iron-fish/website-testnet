@@ -77,22 +77,27 @@ export function useLogin(config: LoginProps = {}) {
           $setError(details)
           return
         }
+
         if (details.statusCode && details.statusCode === 401) {
           $setStatus(STATUS.NOT_FOUND)
           $setError(new LocalError('No user found.', NO_MAGIC_USER))
           return
         }
+
         $setStatus(STATUS.LOADED)
         $setMetadata(details)
         $setMagicMetadata(magicMd)
-      } catch (err) {
-        if (err.toString().indexOf('-32603') > -1) {
+      } catch (err: unknown) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((err as any)?.toString()?.indexOf('-32603') > -1) {
           $setStatus(STATUS.NOT_FOUND)
           return
         }
+
         throw err
       }
     }
+
     if (!$metadata) {
       try {
         checkLoggedIn()
