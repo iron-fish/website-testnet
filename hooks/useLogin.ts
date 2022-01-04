@@ -43,7 +43,8 @@ export function useLogin(config: LoginProps = {}) {
     const checkLoggedIn = async () => {
       try {
         if ($status === STATUS.LOADED) return
-        if (!magic || !magic.user || !magic.user.logout) {
+
+        if (!magic) {
           return
         }
 
