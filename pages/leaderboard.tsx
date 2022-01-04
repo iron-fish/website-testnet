@@ -22,9 +22,9 @@ import * as API from 'apiClient'
 import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
+
 type Props = {
   loginContext: LoginContext
-  users: ReadonlyArray<API.ApiUser>
 }
 
 const TOTAL_POINTS = 'Total Points'
@@ -61,7 +61,7 @@ const FIELDS = {
   },
 }
 
-export default function Leaderboard({ users = [], loginContext }: Props) {
+export default function Leaderboard({ loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -69,31 +69,24 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
 
   const $country = useField(FIELDS.country)
   const $eventType = useField(FIELDS.eventType)
-  const [$users, $setUsers] = useState(users)
+  const [$users, $setUsers] = useState<ReadonlyArray<API.ApiUser>>([])
 
   // Search field hooks
   const [$search, $setSearch] = useState('')
   const $debouncedSearch = useDebounce($search, 300)
-  const [$hasSearched, $setHasSearched] = useState(false)
   const [$searching, $setSearching] = useState(false)
 
   useEffect(() => {
-    // Drop the initial value, since results will be preloaded
-    if (!$hasSearched) {
-      $setHasSearched(true)
-      return
-    }
-
     const func = async () => {
       $setSearching(true)
 
       const countrySearch =
-        $country && $country.value && $country.value !== 'Global'
+        $country?.value && $country.value !== 'Global'
           ? { country_code: $country.value }
           : {}
 
       const eventType =
-        $eventType && $eventType.value && $eventType.value !== TOTAL_POINTS
+        $eventType?.value && $eventType.value !== TOTAL_POINTS
           ? { event_type: $eventType.value }
           : {}
 
@@ -109,10 +102,10 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
 
       $setSearching(false)
     }
-    func()
 
-    // Don't re-fire the effect when hasSearched updates
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if ($country?.value && $eventType?.value) {
+      func()
+    }
   }, [$debouncedSearch, $country?.value, $eventType?.value])
 
   const { checkLoggedIn, checkLoading } = loginContext
@@ -197,9 +190,11 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
               </>
             )}
           </div>
-          {!$hasSearched || $searching ? (
+          {$searching ? (
             <Loader />
-          ) : !$searching && $hasSearched && $users.length > 0 ? (
+          ) : $users.length === 0 ? (
+            <NoResults />
+          ) : (
             $users.map(user => (
               <div className="mb-3" key={user.id}>
                 <Link href={`/users/${user.id}`}>
@@ -213,8 +208,6 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
                 </Link>
               </div>
             ))
-          ) : (
-            <NoResults />
           )}
           <div className="mb-24"></div>
         </div>
