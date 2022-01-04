@@ -109,19 +109,6 @@ export function useLogin(config: LoginProps = {}) {
       })
     }
   }, [$metadata, $setMetadata, redirect, $status, $router])
-  /*
-  useEffect(() => {
-    const forceStatus = () => {
-      if ($status === STATUS.LOADING) {
-        $setStatus(STATUS.FORCED)
-      }
-    }
-    if (timeout > -1) {
-      const tId = setTimeout(forceStatus, timeout)
-      return () => clearTimeout(tId)
-    }
-  }, [$status, $setStatus, timeout])
-  */
 
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
