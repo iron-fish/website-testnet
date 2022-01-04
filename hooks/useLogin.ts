@@ -42,7 +42,6 @@ export function useLogin(config: LoginProps = {}) {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        // if we're already loaded, quit
         if ($status === STATUS.LOADED) return
         if (!magic || !magic.user || !magic.user.logout) {
           return
