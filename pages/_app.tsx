@@ -2,7 +2,8 @@ import 'styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import ResponsiveToolkit from 'components/ResponsiveToolkit'
-import { useLogin, useLocalLogin } from 'hooks/useLogin'
+import { useLogin } from 'hooks/useLogin'
+import { useLocalLogin } from 'hooks/useLocalLogin'
 
 const LOCAL_MODE = process.env.NEXT_PUBLIC_LOCAL_USER || false
 const loginHook = LOCAL_MODE ? useLocalLogin : useLogin

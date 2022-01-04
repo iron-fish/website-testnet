@@ -136,39 +136,4 @@ export function useLogin(config: LoginProps = {}) {
 
 export type LoginContext = ReturnType<typeof useLogin>
 
-export const useLocalLogin = () => ({
-  checkLoggedIn: () => true,
-  checkLoading: () => false,
-  checkFailed: () => false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setError: () => {},
-  error: '',
-  status: STATUS.LOADED,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setStatus: () => {},
-  metadata: {
-    id: 111,
-    created_at: '2021-10-30T23:28:59.505Z',
-    updated_at: '2021-10-30T23:43:28.555Z',
-    email: 'cooldev@ironfish.network',
-    graffiti: 'cooldev',
-    total_points: 1100,
-    country_code: 'USA',
-    email_notifications: false,
-    last_login_at: '2021-10-30T23:29:49.101Z',
-    discord: 'coolcooldev',
-    telegram: '',
-    confirmation_token: '01FNSJW53E9J029SKXYA2020KN',
-    confirmed_at: '2021-10-30T23:43:28.554Z',
-    github: '',
-  },
-  magicMetadata: {
-    issuer: 'did:ethr:0xFfcD8602De681449Fa70C304096a84e014Fa123C',
-    publicAddress: '0xFfcD8602De681449Fa70C304096a84e014Fa123C',
-    email: 'cooldev@ironfish.network',
-    isMfaEnabled: false,
-    phoneNumber: null,
-  },
-})
-
 export default useLogin
