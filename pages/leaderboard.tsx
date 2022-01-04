@@ -66,6 +66,7 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
     queryString: 'toast',
     duration: 8e3,
   })
+
   const $country = useField(FIELDS.country)
   const $eventType = useField(FIELDS.eventType)
   const [$users, $setUsers] = useState(users)
@@ -85,28 +86,35 @@ export default function Leaderboard({ users = [], loginContext }: Props) {
 
     const func = async () => {
       $setSearching(true)
+
       const countrySearch =
         $country && $country.value && $country.value !== 'Global'
           ? { country_code: $country.value }
           : {}
+
       const eventType =
         $eventType && $eventType.value && $eventType.value !== TOTAL_POINTS
           ? { event_type: $eventType.value }
           : {}
+
       const result = await API.listLeaderboard({
         search: $debouncedSearch,
         ...countrySearch,
         ...eventType,
       })
+
       if (!('error' in result)) {
         $setUsers(result.data)
       }
+
       $setSearching(false)
     }
     func()
+
     // Don't re-fire the effect when hasSearched updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [$debouncedSearch, $country, $eventType])
+  }, [$debouncedSearch, $country?.value, $eventType?.value])
+
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
   const isLoading = checkLoading()
