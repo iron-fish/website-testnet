@@ -75,7 +75,6 @@ export function useLogin(config: LoginProps = {}) {
           // this is a visible error and a breaking error
           $setStatus(STATUS.FAILED)
           $setError(details)
-          Promise.reject(details)
           return
         }
         if (details.statusCode && details.statusCode === 401) {
