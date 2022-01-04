@@ -192,7 +192,9 @@ export default function Leaderboard({ loginContext }: Props) {
           </div>
           {$searching ? (
             <Loader />
-          ) : $users.length > 0 ? (
+          ) : $users.length === 0 ? (
+            <NoResults />
+          ) : (
             $users.map(user => (
               <div className="mb-3" key={user.id}>
                 <Link href={`/users/${user.id}`}>
@@ -206,8 +208,6 @@ export default function Leaderboard({ loginContext }: Props) {
                 </Link>
               </div>
             ))
-          ) : (
-            <NoResults />
           )}
           <div className="mb-24"></div>
         </div>
