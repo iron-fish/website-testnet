@@ -180,10 +180,7 @@ export async function getUserDetails(
       },
     })
     return data.json()
-  } catch (e: unknown) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const message = String((e as any)?.message || '')
-
-    return new LocalError(message, ENDPOINT_UNAVAILABLE)
+  } catch (e) {
+    return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
 }
