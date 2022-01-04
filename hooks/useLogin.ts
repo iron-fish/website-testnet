@@ -71,7 +71,7 @@ export function useLogin(config: LoginProps = {}) {
           getUserDetails(token),
         ])
 
-        if (details instanceof LocalError) {
+        if ('error' in details || details instanceof LocalError) {
           // this is a visible error and a breaking error
           $setStatus(STATUS.FAILED)
           $setError(details)
@@ -87,9 +87,8 @@ export function useLogin(config: LoginProps = {}) {
         $setStatus(STATUS.LOADED)
         $setMetadata(details)
         $setMagicMetadata(magicMd)
-      } catch (err: unknown) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((err as any)?.toString()?.indexOf('-32603') > -1) {
+      } catch (err) {
+        if (err.toString().indexOf('-32603') > -1) {
           $setStatus(STATUS.NOT_FOUND)
           return
         }
