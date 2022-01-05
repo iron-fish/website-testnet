@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { magic, MagicUserMetadata } from 'utils/magic'
 import { ApiUserMetadata, ApiError, LocalError } from 'apiClient'
@@ -19,13 +19,6 @@ export enum STATUS {
   FORCED = 'forced',
 }
 
-// reusable magic login context
-// MagicUserMetadata takes the form of:
-// {issuer, publicAddress, email}
-// https://github.com/magiclabs/magic-js/blob/master/packages/%40magic-sdk/types/src/modules/user-types.ts#L17-L21
-
-// const $metadata = useLogin({redirect: '/go-somewhere-if-it-does-not-work'})
-
 export interface LoginProps {
   redirect?: string
 }
@@ -39,78 +32,81 @@ export function useLogin(config: LoginProps = {}) {
     useState<MagicUserMetadata | null>(null)
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
-  useEffect(() => {
-    const checkLoggedIn = async () => {
+  const reloadUser = useCallback(async () => {
+    try {
+      if (!magic || !magic.user) {
+        return false
+      }
+
+      let token
       try {
-        if ($status === STATUS.LOADED) return
+        token = await magic.user.getIdToken()
+      } catch (error) {}
 
-        if (!magic) {
-          return
+      if (!token) {
+        if (redirect) {
+          // if redirect string is provided and we're not logged in, cya!
+          // if this is kept as a static Router.push, it _does not_ work
+          $router.push(redirect)
+          return false
         }
 
-        let token
+        // this is a visible error but not a breaking error
+        $setStatus(STATUS.NOT_FOUND)
+        $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
+        return false
+      }
+      const [magicMd, details] = await Promise.all([
+        magic.user.getMetadata(),
+        getUserDetails(token),
+      ])
+
+      if ('error' in details || details instanceof LocalError) {
+        // this is a visible error and a breaking error
+        $setStatus(STATUS.FAILED)
+        $setError(details)
+        Promise.reject(details)
+        return false
+      }
+
+      if (details.statusCode && details.statusCode === 401) {
+        $setStatus(STATUS.NOT_FOUND)
+        $setError(new LocalError('No user found.', NO_MAGIC_USER))
+        return false
+      }
+
+      $setStatus(STATUS.LOADED)
+      $setMetadata(details)
+      $setMagicMetadata(magicMd)
+      return true
+    } catch (err) {
+      if (err.toString().indexOf('-32603') > -1) {
+        $setStatus(STATUS.NOT_FOUND)
+        return
+      }
+
+      throw err
+    }
+  }, [$router, redirect])
+  useEffect(() => {
+    const loadAndCheck = async () => {
+      if (!$metadata) {
         try {
-          token = await magic.user.getIdToken()
-        } catch (error) {}
-
-        if (!token) {
-          if (redirect) {
-            // if redirect string is provided and we're not logged in, cya!
-            // if this is kept as a static Router.push, it _does not_ work
-            $router.push(redirect)
-            return
+          await reloadUser()
+        } catch (e) {
+          if ($status === STATUS.LOADING) {
+            $setStatus(STATUS.FAILED)
           }
-
-          // this is a visible error but not a breaking error
-          $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
-          return
+          // eslint-disable-next-line no-console
+          console.warn('general error!', e)
         }
-        const [magicMd, details] = await Promise.all([
-          magic.user.getMetadata(),
-          getUserDetails(token),
-        ])
-
-        if ('error' in details || details instanceof LocalError) {
-          // this is a visible error and a breaking error
-          $setStatus(STATUS.FAILED)
-          $setError(details)
-          return
-        }
-
-        if (details.statusCode && details.statusCode === 401) {
-          $setStatus(STATUS.NOT_FOUND)
-          $setError(new LocalError('No user found.', NO_MAGIC_USER))
-          return
-        }
-
-        $setStatus(STATUS.LOADED)
-        $setMetadata(details)
-        $setMagicMetadata(magicMd)
-      } catch (err) {
-        if (err.toString().indexOf('-32603') > -1) {
-          $setStatus(STATUS.NOT_FOUND)
-          return
-        }
-
-        throw err
       }
     }
-
-    if (!$metadata) {
-      checkLoggedIn().catch(e => {
-        if ($status === STATUS.LOADING) {
-          $setStatus(STATUS.FAILED)
-        }
-
-        // eslint-disable-next-line no-console
-        console.warn('general error!', e)
-      })
-    }
-  }, [$metadata, $setMetadata, redirect, $status, $router])
-
+    loadAndCheck()
+  }, [$metadata, $status, reloadUser])
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
+    reloadUser,
     checkLoggedIn: statusRelevantContext(STATUS.LOADED),
     checkLoading: statusRelevantContext(STATUS.LOADING),
     checkFailed: statusRelevantContext(STATUS.FAILED),
