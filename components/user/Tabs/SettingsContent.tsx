@@ -102,7 +102,6 @@ export default function SettingsContent({
     return invalid
   }, [$email, $graffiti, $telegram, $discord, $country])
   const update = useCallback(async () => {
-    let timeout: ReturnType<typeof setTimeout>
     /* eslint-disable no-console */
     if (!$email || !$graffiti || !$telegram || !$discord || !$country) {
       console.log('missing field data')
@@ -141,9 +140,10 @@ export default function SettingsContent({
       $graffiti.setTouched(false)
       scrollUp()
       $setUser(result)
-      await reloadUser()
+      const success = await reloadUser()
+      // eslint-disable-next-line no-console
+      console.log({ success })
     }
-    return () => clearTimeout(timeout)
   }, [
     $email,
     $graffiti,
