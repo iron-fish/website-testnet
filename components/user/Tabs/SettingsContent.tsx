@@ -139,7 +139,7 @@ export default function SettingsContent({
       toast.show()
       $graffiti.setTouched(false)
       scrollUp()
-      $setUser(result)
+      // $setUser(result)
       const success = await reloadUser()
       // eslint-disable-next-line no-console
       console.log({ success })
