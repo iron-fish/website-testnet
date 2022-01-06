@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 import Footer from 'components/Footer'
@@ -17,9 +18,41 @@ import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+// const API = {}
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 7
+
+const validTabValue = (x: string) =>
+  x === 'weekly' || x === 'all' || x === 'settings'
+
+export const getServerSideProps: GetServerSideProps =
+  async function getServerSideProps(context) {
+    const { params = {} } = context
+    const { details = [] } = params
+    const [userId, tab] = details as string[]
+    // eslint-disable-next-line no-console
+    console.log({ userId, tab })
+    if (isNaN(parseInt(userId))) {
+      return {
+        redirect: {
+          destination: `/leaderboard?toast=${btoa('Unable to find that user')}`,
+          permanent: true,
+        },
+      }
+    }
+    if (tab && !validTabValue(tab)) {
+      // eslint-disable-next-line no-console
+      console.log(`${tab} ain't valid`)
+      return {
+        redirect: {
+          destination: `/users/${userId}`,
+          permanent: false,
+        },
+      }
+    }
+    return { props: {} }
+  }
 
 interface Props {
   loginContext: LoginContext
@@ -42,8 +75,7 @@ function displayEventType(type: API.EventType): string {
   }
 }
 
-const validTabValue = (x: string) =>
-  x === 'weekly' || x === 'all' || x === 'settings'
+const NO_MATCH = '__NO_MATCH__'
 
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
@@ -51,39 +83,52 @@ export default function User({ loginContext }: Props) {
     duration: 8e3,
   })
 
-  const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
   const router = useRouter()
+  const { query = {}, isReady: routerIsReady } = router
+  const { details: queryDetails = [] } = query
+  const [userId, tab] = queryDetails as string[]
 
-  const [$user, $setUser] = React.useState<API.ApiUser | undefined>(undefined)
-  const [$events, $setEvents] = React.useState<
-    API.ListEventsResponse | undefined
-  >(undefined)
-  const [$allTimeMetrics, $setAllTimeMetrics] = React.useState<
+  const rawTab = !tab ? 'weekly' : (tab as TabType)
+  const [$activeTab, $setActiveTab] = useState<TabType>(rawTab)
+  const [$fetched, $setFetched] = useState<boolean>(false)
+  // eslint-disable-next-line no-console
+  console.log({ tab, rawTab, $activeTab, noTab: !tab })
+
+  const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
+  const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
+    undefined
+  )
+  const [$allTimeMetrics, $setAllTimeMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$weeklyMetrics, $setWeeklyMetrics] = React.useState<
+  const [$weeklyMetrics, $setWeeklyMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$metricsConfig, $setMetricsConfig] = React.useState<
+  const [$metricsConfig, $setMetricsConfig] = useState<
     API.MetricsConfigResponse | undefined
   >(undefined)
+
+  const authedId = loginContext?.metadata?.id ?? '0'
+  const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
+  const userGraffiti = $user?.graffiti ?? `!${NO_MATCH}`
+
+  const testShowSettings = useCallback(() => {
+    // eslint-disable-next-line no-console
+    console.log(
+      `${userGraffiti} === ${authedGraffiti} && ${userId} === ${authedId} ?`
+    )
+    return userGraffiti === authedGraffiti && userId === authedId
+  }, [userId, userGraffiti, authedGraffiti, authedId])
 
   useEffect(() => {
     let isCancelled = false
 
     const fetchData = async () => {
       try {
-        if (!router.isReady) {
+        if (!routerIsReady || $fetched) {
+          // eslint-disable-next-line no-console
+          console.log({ routerIsReady, $fetched })
           return
-        }
-        const [userId, tab] = router.query?.details as string[]
-
-        if (!userId) {
-          router.push(`/leaderboard?toast=${btoa('Unable to find that user')}`)
-          return
-        }
-        if (validTabValue(tab)) {
-          $setActiveTab(tab as TabType)
         }
 
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
@@ -109,19 +154,19 @@ export default function User({ loginContext }: Props) {
           'error' in weeklyMetrics ||
           'error' in metricsConfig
         ) {
-          router.push(
+          Router.push(
             `/leaderboard?toast=${btoa(
               'An error occurred while fetching user data'
             )}`
           )
           return
+        } else {
+          $setUser(user)
+          $setEvents(events)
+          $setAllTimeMetrics(allTimeMetrics)
+          $setWeeklyMetrics(weeklyMetrics)
+          $setMetricsConfig(metricsConfig)
         }
-
-        $setUser(user)
-        $setEvents(events)
-        $setAllTimeMetrics(allTimeMetrics)
-        $setWeeklyMetrics(weeklyMetrics)
-        $setMetricsConfig(metricsConfig)
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn(e)
@@ -132,28 +177,54 @@ export default function User({ loginContext }: Props) {
     fetchData()
     return () => {
       isCancelled = true
+      $setFetched(false)
     }
-  }, [router])
+  }, [
+    routerIsReady,
+    userId,
+    $activeTab,
+    $toast,
+    authedGraffiti,
+    authedId,
+    $fetched,
+  ])
+  useEffect(() => {
+    if (!$user) return
+    $setFetched(true)
+    const allowed = $user.graffiti === authedGraffiti && $user.id === authedId
+    // eslint-disable-next-line no-console
+    console.log({ allowed })
+    if (!allowed && $activeTab === 'settings') {
+      // eslint-disable-next-line no-console
+      console.log('settings, not authed')
+      // if you try to go to /users/x/settings but you're not user x
+      $setActiveTab('weekly')
+      $toast.setMessage('You are not authorized to go there')
+      $toast.show()
+      return
+    }
+  }, [$user, authedGraffiti, authedId, $activeTab, $toast])
 
-  const id = ($user && $user.id && $user.id.toString()) || 'unknown'
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
-    usePaginatedEvents(id, EVENTS_LIMIT, $events, $setEvents)
+    usePaginatedEvents(userId, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
-  const onTabChange = React.useCallback((tab: TabType) => {
-    $setActiveTab(tab)
+  const onTabChange = React.useCallback((t: TabType) => {
+    $setActiveTab(t)
   }, [])
+
   if (
+    !$fetched ||
     !$user ||
     !$allTimeMetrics ||
     !$metricsConfig ||
     !$weeklyMetrics ||
-    !$events ||
-    id === 'unknown'
+    !$events
   ) {
     return <Loader />
   }
+
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
 
@@ -219,11 +290,11 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
+                showSettings={testShowSettings()}
                 reloadUser={loginContext.reloadUser}
                 toast={$toast}
                 activeTab={$activeTab}
                 onTabChange={onTabChange}
-                user={$user}
                 authedUser={loginContext.metadata}
                 allTimeMetrics={$allTimeMetrics}
                 weeklyMetrics={$weeklyMetrics}
