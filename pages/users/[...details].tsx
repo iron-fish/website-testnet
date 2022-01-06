@@ -210,7 +210,7 @@ export default function User({ loginContext }: Props) {
     usePaginatedEvents(userId, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
-  const onTabChange = React.useCallback((t: TabType) => {
+  const onTabChange = useCallback((t: TabType) => {
     $setActiveTab(t)
   }, [])
 
