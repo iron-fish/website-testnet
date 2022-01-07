@@ -116,6 +116,8 @@ export default function User({ loginContext }: Props) {
     const fetchData = async () => {
       try {
         if (!routerIsReady || $fetched) {
+          // eslint-disable-next-line no-console
+          console.log('fetched already or no router yet')
           return
         }
 
