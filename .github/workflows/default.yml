@@ -29,6 +29,3 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
-
-      - name: Run smoke tests
-        run: yarn ci

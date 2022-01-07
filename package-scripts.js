@@ -21,7 +21,7 @@ module.exports = {
       dry: 'twly --boring --lines 3 -t .trc',
     },
     precommit: 'nps care',
-    care: concurrent.nps('build', 'lint', 'test'),
+    care: concurrent.nps('build', 'lint'),
     dx: concurrent.nps('build', 'lint', 'meta.dependencies'),
     meta: {
       dependencies: {
@@ -31,10 +31,6 @@ module.exports = {
       },
     },
     test: {
-      snapshot: 'nps "test -u"',
-      script: 'jest',
-      watch: 'nps "test --watch"',
-      ci: 'nps "test --ci"',
       integration: {
         dev: {
           script: localE2E(`run`),

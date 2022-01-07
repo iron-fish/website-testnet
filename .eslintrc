@@ -1,11 +1,11 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "testing-library"],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "next",
     "next/core-web-vitals",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
   ],
   "rules": {
     "no-shadow": "off",
@@ -21,17 +21,5 @@
       }
     ],
     "no-restricted-imports": ["error", { "patterns": ["\\.\\./.*"] }]
-  },
-  "overrides": [
-    {
-      "files": [
-        "**/__tests__/**/*.[jt]s?(x)",
-        "**/?(*.)+(spec|test).[jt]s?(x)"
-      ],
-      "extends": ["plugin:testing-library/react"],
-      "rules": {
-        "testing-library/render-result-naming-convention": "off"
-      }
-    }
-  ]
+  }
 }
