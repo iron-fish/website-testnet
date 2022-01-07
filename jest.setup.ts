@@ -1,4 +1,5 @@
 import { jest } from '@jest/globals'
+import { ReactType } from 'react'
 import { enableFetchMocks } from 'jest-fetch-mock'
 enableFetchMocks()
 
@@ -8,6 +9,13 @@ jest.mock('next/image', () => ({
     return 'image'
   },
 }))
+
+jest.mock(
+  'next/link',
+  () =>
+    ({ children }: { children: ReactType }) =>
+      children
+)
 
 /*
 jest.mock('next/router', () => ({

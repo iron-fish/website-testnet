@@ -51,19 +51,16 @@ exports[`renders About page 1`] = `
           </div>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -128,7 +125,6 @@ exports[`renders About page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -146,7 +142,6 @@ exports[`renders About page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -163,9 +158,7 @@ exports[`renders About page 1`] = `
         <div
           class="py-7"
         >
-          <a
-            href="http://ironfish.network/"
-          >
+          <a>
             <svg
               fill="none"
               height="32"
@@ -185,19 +178,16 @@ exports[`renders About page 1`] = `
         >
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -259,7 +249,6 @@ exports[`renders About page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -277,7 +266,6 @@ exports[`renders About page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -399,20 +387,12 @@ exports[`renders About page 1`] = `
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://github.com/iron-fish/ironfish/issues"
-                      >
-                        Submit an issue 
-                      </a>
+                      Submit an issue 
                     </button>
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://github.com/iron-fish/ironfish/issues"
-                      >
-                        Claim Points
-                      </a>
+                      Claim Points
                     </button>
                   </div>
                 </div>
@@ -481,11 +461,7 @@ exports[`renders About page 1`] = `
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="mailto:testnet@ironfish.network"
-                      >
-                        Email us
-                      </a>
+                      Email us
                     </button>
                   </div>
                 </div>
@@ -497,11 +473,7 @@ exports[`renders About page 1`] = `
               <span
                 class="font-extended border-b border-black "
               >
-                <a
-                  href="/#guidelines"
-                >
-                  View Testnet Guidelines
-                </a>
+                View Testnet Guidelines
               </span>
             </div>
           </div>
@@ -555,11 +527,7 @@ exports[`renders About page 1`] = `
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://ironfish.network/docs/onboarding/miner-iron-fish"
-                      >
-                        Get started with mining
-                      </a>
+                      Get started with mining
                     </button>
                   </div>
                 </div>
@@ -654,20 +622,12 @@ exports[`renders About page 1`] = `
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://github.com/iron-fish/ironfish/pulls"
-                      >
-                        Submit a PR
-                      </a>
+                      Submit a PR
                     </button>
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://github.com/iron-fish/ironfish/pulls"
-                      >
-                        Claim Points
-                      </a>
+                      Claim Points
                     </button>
                   </div>
                 </div>
@@ -704,11 +664,7 @@ exports[`renders About page 1`] = `
                     <button
                       class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
                     >
-                      <a
-                        href="https://discord.com/invite/EkQkEcm8DH"
-                      >
-                        Reach out on Discord
-                      </a>
+                      Reach out on Discord
                     </button>
                   </div>
                 </div>
@@ -721,11 +677,7 @@ exports[`renders About page 1`] = `
             <span
               class="font-extended border-b border-black "
             >
-              <a
-                href="/#guidelines"
-              >
-                View Testnet Guidelines
-              </a>
+              View Testnet Guidelines
             </span>
           </div>
         </div>
@@ -748,11 +700,7 @@ exports[`renders About page 1`] = `
             <span
               class="font-extended border-b border-black "
             >
-              <a
-                href="/leaderboard"
-              >
-                Show me the leaderboard
-              </a>
+              Show me the leaderboard
             </span>
           </div>
           <div
@@ -1931,7 +1879,6 @@ exports[`renders About page 1`] = `
           >
             <a
               class="w-full flex relative h-8 my-6"
-              href="/leaderboard"
             >
               <div
                 class="text-2xl font-extended absolute left-0 h-8 z-10 pr-4 bg-iflightorange"
@@ -1968,7 +1915,6 @@ exports[`renders About page 1`] = `
           >
             <a
               class="w-full flex relative h-8 my-6"
-              href="/community"
             >
               <div
                 class="text-2xl font-extended absolute left-0 h-8 z-10 pr-4 bg-iflightorange"
@@ -2005,7 +1951,6 @@ exports[`renders About page 1`] = `
           >
             <a
               class="w-full flex relative h-8 my-6"
-              href="/faq"
             >
               <div
                 class="text-2xl font-extended absolute left-0 h-8 z-10 pr-4 bg-iflightorange"
@@ -2042,7 +1987,6 @@ exports[`renders About page 1`] = `
           >
             <a
               class="w-full flex relative h-8 my-6"
-              href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
             >
               <div
                 class="text-2xl font-extended absolute left-0 h-8 z-10 pr-4 bg-iflightorange"
@@ -2126,29 +2070,17 @@ exports[`renders About page 1`] = `
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/about/"
-                >
-                  About Us
-                </a>
+                About Us
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/careers/"
-                >
-                  Careers
-                </a>
+                Careers
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/blog/"
-                >
-                  Blog
-                </a>
+                Blog
               </li>
             </ul>
           </div>
@@ -2164,29 +2096,17 @@ exports[`renders About page 1`] = `
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://explorer.ironfish.network/"
-                >
-                  Block Explorer
-                </a>
+                Block Explorer
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/docs/whitepaper/1_introduction/"
-                >
-                  Whitepaper
-                </a>
+                Whitepaper
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/faq/"
-                >
-                  FAQ
-                </a>
+                FAQ
               </li>
             </ul>
           </div>

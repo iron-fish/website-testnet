@@ -31,8 +31,6 @@ export const getServerSideProps: GetServerSideProps =
     const { params = {} } = context
     const { details = [] } = params
     const [userId, tab] = details as string[]
-    // eslint-disable-next-line no-console
-    console.log({ userId, tab })
     if (isNaN(parseInt(userId))) {
       return {
         redirect: {
@@ -42,8 +40,6 @@ export const getServerSideProps: GetServerSideProps =
       }
     }
     if (tab && !validTabValue(tab)) {
-      // eslint-disable-next-line no-console
-      console.log(`${tab} ain't valid`)
       return {
         redirect: {
           destination: `/users/${userId}`,
@@ -91,8 +87,6 @@ export default function User({ loginContext }: Props) {
   const rawTab = !tab ? 'weekly' : (tab as TabType)
   const [$activeTab, $setActiveTab] = useState<TabType>(rawTab)
   const [$fetched, $setFetched] = useState<boolean>(false)
-  // eslint-disable-next-line no-console
-  console.log({ tab, rawTab, $activeTab, noTab: !tab })
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
@@ -113,10 +107,6 @@ export default function User({ loginContext }: Props) {
   const userGraffiti = $user?.graffiti ?? `!${NO_MATCH}`
 
   const testShowSettings = useCallback(() => {
-    // eslint-disable-next-line no-console
-    console.log(
-      `${userGraffiti} === ${authedGraffiti} && ${userId} === ${authedId} ?`
-    )
     return userGraffiti === authedGraffiti && userId === authedId
   }, [userId, userGraffiti, authedGraffiti, authedId])
 
@@ -126,8 +116,6 @@ export default function User({ loginContext }: Props) {
     const fetchData = async () => {
       try {
         if (!routerIsReady || $fetched) {
-          // eslint-disable-next-line no-console
-          console.log({ routerIsReady, $fetched })
           return
         }
 
@@ -192,8 +180,6 @@ export default function User({ loginContext }: Props) {
     if (!$user) return
     $setFetched(true)
     const allowed = $user.graffiti === authedGraffiti && $user.id === authedId
-    // eslint-disable-next-line no-console
-    console.log({ allowed })
     if (!allowed && $activeTab === 'settings') {
       // eslint-disable-next-line no-console
       console.log('settings, not authed')

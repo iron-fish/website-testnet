@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders User page 1`] = `
+exports[`renders User Weekly page 1`] = `
 <div>
   <div
     class="min-h-screen flex flex-col"
@@ -51,19 +51,16 @@ exports[`renders User page 1`] = `
           </div>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -128,7 +125,6 @@ exports[`renders User page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -146,7 +142,6 @@ exports[`renders User page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -163,9 +158,7 @@ exports[`renders User page 1`] = `
         <div
           class="py-7"
         >
-          <a
-            href="http://ironfish.network/"
-          >
+          <a>
             <svg
               fill="none"
               height="32"
@@ -185,19 +178,16 @@ exports[`renders User page 1`] = `
         >
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -259,7 +249,6 @@ exports[`renders User page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -277,7 +266,6 @@ exports[`renders User page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -338,7 +326,7 @@ exports[`renders User page 1`] = `
                   <h1
                     class="font-extended text-6xl mt-6 mb-8"
                   >
-                    dracula_edit
+                    cooldev
                   </h1>
                   <div
                     class="font-favorit flex flex-wrap gap-x-16 gap-y-2"
@@ -360,7 +348,7 @@ exports[`renders User page 1`] = `
                       <div
                         class="text-3xl mt-2"
                       >
-                        0
+                        1,100
                       </div>
                     </div>
                     <div>
@@ -415,7 +403,7 @@ exports[`renders User page 1`] = `
                       </mask>
                       <path
                         d="M99.5164 64.1951L97.1865 60.1595L89.2817 46.4718L87.5819 43.5298C87.2907 43.0186 86.7439 42.7036 86.1555 42.7036H62.2866C61.6982 42.7036 61.1514 43.0186 60.8602 43.5298L58.9583 46.8224L50.6078 61.2887C50.4473 61.5681 50.0907 61.7107 49.7816 61.6275C49.4607 61.5443 49.2408 61.2531 49.2408 60.9203V54.0437C49.2408 47.7912 44.1532 42.7036 37.9007 42.7036H28.201C27.2917 42.7036 26.5547 43.4406 26.5547 44.3499V54.0437C26.5547 58.5667 29.2471 62.6082 33.4134 64.3437C33.6868 64.4566 33.8651 64.7241 33.8651 65.0153V65.0212C33.8651 65.3184 33.6868 65.5799 33.4134 65.6988C29.2708 67.4224 26.5785 71.4401 26.5547 75.9334C26.5547 75.9393 26.5547 75.9809 26.5547 75.9869V83.0714V85.6985C26.5547 86.6078 27.2917 87.3448 28.201 87.3448H37.8948C44.1473 87.3448 49.2349 82.2572 49.2349 76.0047V69.1281C49.2349 68.7953 49.4607 68.5041 49.7757 68.4209C49.8351 68.403 49.9005 68.3971 49.9659 68.3971C50.2274 68.3971 50.4711 68.5397 50.6018 68.7656L59.4932 84.1591L60.8543 86.5186C61.1455 87.0298 61.6923 87.3448 62.2807 87.3448H86.1496C86.738 87.3448 87.2847 87.0298 87.576 86.5186L90.1019 82.1443L96.0394 71.8562L96.1226 71.7076L98.8507 66.9826L99.5045 65.8474C99.8076 65.3362 99.8076 64.7062 99.5164 64.1951ZM74.3994 73.6868C69.7457 73.6868 65.9537 69.7998 65.9537 65.0212C65.9537 60.2427 69.7397 56.3557 74.3994 56.3557C79.0531 56.3557 82.845 60.2427 82.845 65.0212C82.845 69.7998 79.0531 73.6868 74.3994 73.6868Z"
-                        fill="#FFAFAF"
+                        fill="#7657CE"
                         mask="url(#path-2-inside-1)"
                         stroke="black"
                         stroke-width="2"
@@ -450,12 +438,15 @@ exports[`renders User page 1`] = `
                   class="flex font-favorit gap-x-6"
                 >
                   <button
-                    class="text-ifsubtextgray"
+                    class="text-black"
                   >
                     <div
                       class="relative"
                     >
                       Weekly Stats
+                      <span
+                        class="absolute left-0 right-0 bottom-0 border-b border-black"
+                      />
                     </div>
                   </button>
                   <button
@@ -469,1368 +460,287 @@ exports[`renders User page 1`] = `
                   </button>
                 </div>
                 <div
-                  class="flex"
+                  class="flex gap-3 mt-4 mb-12 flex-wrap"
                 >
                   <div
-                    class="flex-initial"
+                    class="relative mb-2.5  mr-2.5 "
                   >
                     <div
-                      class="font-favorit mt-8"
-                    >
-                      User Settings
-                    </div>
+                      class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"
+                    />
                     <div
-                      class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-ifsubtextgray text-ifsubtextgray "
+                      class="relative border border-black bg-white"
                     >
-                      <label
-                        class="text-xs mb-px3"
-                        for="email"
-                      >
-                        Email
-                        <span
-                          class="text-md text-ifsubtextgray"
-                        >
-                          *
-                        </span>
-                      </label>
-                      <input
-                        class="bg-transparent"
-                        disabled=""
-                        id="email"
-                        type="text"
-                        value="cooldev@ironfish.network"
-                      />
-                    </div>
-                    <div
-                      class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
-                    >
-                      <label
-                        class="text-xs mb-px3"
-                        for="graffiti"
-                      >
-                        Graffiti
-                        <span
-                          class="text-md text-gray-500"
-                        >
-                          *
-                        </span>
-                      </label>
-                      <input
-                        class=""
-                        id="graffiti"
-                        type="text"
-                        value="cooldev"
-                      />
-                    </div>
-                    <div
-                      class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
-                    >
-                      <label
-                        class="text-xs mb-px3"
-                        for="discord"
-                      >
-                        Discord
-                      </label>
-                      <input
-                        class=""
-                        id="discord"
-                        type="text"
-                        value="coolcooldev"
-                      />
-                    </div>
-                    <div
-                      class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
-                    >
-                      <label
-                        class="text-xs mb-px3"
-                        for="telegram"
-                      >
-                        Telegram
-                      </label>
-                      <input
-                        class=""
-                        id="telegram"
-                        type="text"
-                        value=""
-                      />
-                    </div>
-                    <div
-                      class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
-                    >
-                      <label
-                        class="text-xs mb-px3"
-                        for="country"
-                      >
-                        Country
-                        <span
-                          class="text-md text-gray-500"
-                        >
-                          *
-                        </span>
-                      </label>
                       <div
-                        class="customSelectWrapper "
+                        class="font-extended p-8"
+                        style="min-width: 288px; max-width: 288px;"
                       >
-                        <select
-                          class="customSelect bg-transparent "
+                        <div
+                          class=" mb-4 whitespace-nowrap"
                         >
-                          <option
-                            value="AFG"
-                          >
-                            Afghanistan
-                          </option>
-                          <option
-                            value="ALB"
-                          >
-                            Albania
-                          </option>
-                          <option
-                            value="DZA"
-                          >
-                            Algeria
-                          </option>
-                          <option
-                            value="ASM"
-                          >
-                            American Samoa
-                          </option>
-                          <option
-                            value="AND"
-                          >
-                            Andorra
-                          </option>
-                          <option
-                            value="AGO"
-                          >
-                            Angola
-                          </option>
-                          <option
-                            value="AIA"
-                          >
-                            Anguilla
-                          </option>
-                          <option
-                            value="ATA"
-                          >
-                            Antarctica
-                          </option>
-                          <option
-                            value="ATG"
-                          >
-                            Antigua and Barbuda
-                          </option>
-                          <option
-                            value="ARG"
-                          >
-                            Argentina
-                          </option>
-                          <option
-                            value="ARM"
-                          >
-                            Armenia
-                          </option>
-                          <option
-                            value="ABW"
-                          >
-                            Aruba
-                          </option>
-                          <option
-                            value="AUS"
-                          >
-                            Australia
-                          </option>
-                          <option
-                            value="AUT"
-                          >
-                            Austria
-                          </option>
-                          <option
-                            value="AZE"
-                          >
-                            Azerbaijan
-                          </option>
-                          <option
-                            value="BHS"
-                          >
-                            Bahamas
-                          </option>
-                          <option
-                            value="BHR"
-                          >
-                            Bahrain
-                          </option>
-                          <option
-                            value="BGD"
-                          >
-                            Bangladesh
-                          </option>
-                          <option
-                            value="BRB"
-                          >
-                            Barbados
-                          </option>
-                          <option
-                            value="BLR"
-                          >
-                            Belarus
-                          </option>
-                          <option
-                            value="BEL"
-                          >
-                            Belgium
-                          </option>
-                          <option
-                            value="BLZ"
-                          >
-                            Belize
-                          </option>
-                          <option
-                            value="BEN"
-                          >
-                            Benin
-                          </option>
-                          <option
-                            value="BMU"
-                          >
-                            Bermuda
-                          </option>
-                          <option
-                            value="BTN"
-                          >
-                            Bhutan
-                          </option>
-                          <option
-                            value="BOL"
-                          >
-                            Bolivia
-                          </option>
-                          <option
-                            value="BES"
-                          >
-                            Bonaire
-                          </option>
-                          <option
-                            value="BIH"
-                          >
-                            Bosnia and Herzegovina
-                          </option>
-                          <option
-                            value="BWA"
-                          >
-                            Botswana
-                          </option>
-                          <option
-                            value="BVT"
-                          >
-                            Bouvet Island
-                          </option>
-                          <option
-                            value="BRA"
-                          >
-                            Brazil
-                          </option>
-                          <option
-                            value="IOT"
-                          >
-                            British Indian Ocean Territory
-                          </option>
-                          <option
-                            value="BRN"
-                          >
-                            Brunei Darussalam
-                          </option>
-                          <option
-                            value="BGR"
-                          >
-                            Bulgaria
-                          </option>
-                          <option
-                            value="BFA"
-                          >
-                            Burkina Faso
-                          </option>
-                          <option
-                            value="BDI"
-                          >
-                            Burundi
-                          </option>
-                          <option
-                            value="CPV"
-                          >
-                            Cabo Verde
-                          </option>
-                          <option
-                            value="KHM"
-                          >
-                            Cambodia
-                          </option>
-                          <option
-                            value="CMR"
-                          >
-                            Cameroon
-                          </option>
-                          <option
-                            value="CAN"
-                          >
-                            Canada
-                          </option>
-                          <option
-                            value="CYM"
-                          >
-                            Cayman Islands
-                          </option>
-                          <option
-                            value="CAF"
-                          >
-                            Central African Republic
-                          </option>
-                          <option
-                            value="TCD"
-                          >
-                            Chad
-                          </option>
-                          <option
-                            value="CHL"
-                          >
-                            Chile
-                          </option>
-                          <option
-                            value="CHN"
-                          >
-                            China
-                          </option>
-                          <option
-                            value="CXR"
-                          >
-                            Christmas Island
-                          </option>
-                          <option
-                            value="CCK"
-                          >
-                            Cocos
-                          </option>
-                          <option
-                            value="COL"
-                          >
-                            Colombia
-                          </option>
-                          <option
-                            value="COM"
-                          >
-                            Comoros
-                          </option>
-                          <option
-                            value="COG"
-                          >
-                            Congo
-                          </option>
-                          <option
-                            value="COD"
-                          >
-                            Congo
-                          </option>
-                          <option
-                            value="COK"
-                          >
-                            Cook Islands
-                          </option>
-                          <option
-                            value="CRI"
-                          >
-                            Costa Rica
-                          </option>
-                          <option
-                            value="HRV"
-                          >
-                            Croatia
-                          </option>
-                          <option
-                            value="CUB"
-                          >
-                            Cuba
-                          </option>
-                          <option
-                            value="CUW"
-                          >
-                            Curaçao
-                          </option>
-                          <option
-                            value="CYP"
-                          >
-                            Cyprus
-                          </option>
-                          <option
-                            value="CZE"
-                          >
-                            Czechia
-                          </option>
-                          <option
-                            value="CIV"
-                          >
-                            Côte d'Ivoire
-                          </option>
-                          <option
-                            value="DNK"
-                          >
-                            Denmark
-                          </option>
-                          <option
-                            value="DJI"
-                          >
-                            Djibouti
-                          </option>
-                          <option
-                            value="DMA"
-                          >
-                            Dominica
-                          </option>
-                          <option
-                            value="DOM"
-                          >
-                            Dominican Republic
-                          </option>
-                          <option
-                            value="ECU"
-                          >
-                            Ecuador
-                          </option>
-                          <option
-                            value="EGY"
-                          >
-                            Egypt
-                          </option>
-                          <option
-                            value="SLV"
-                          >
-                            El Salvador
-                          </option>
-                          <option
-                            value="GNQ"
-                          >
-                            Equatorial Guinea
-                          </option>
-                          <option
-                            value="ERI"
-                          >
-                            Eritrea
-                          </option>
-                          <option
-                            value="EST"
-                          >
-                            Estonia
-                          </option>
-                          <option
-                            value="SWZ"
-                          >
-                            Eswatini
-                          </option>
-                          <option
-                            value="ETH"
-                          >
-                            Ethiopia
-                          </option>
-                          <option
-                            value="FLK"
-                          >
-                            Falkland Islands [Malvinas]
-                          </option>
-                          <option
-                            value="FRO"
-                          >
-                            Faroe Islands
-                          </option>
-                          <option
-                            value="FJI"
-                          >
-                            Fiji
-                          </option>
-                          <option
-                            value="FIN"
-                          >
-                            Finland
-                          </option>
-                          <option
-                            value="FRA"
-                          >
-                            France
-                          </option>
-                          <option
-                            value="GUF"
-                          >
-                            French Guiana
-                          </option>
-                          <option
-                            value="PYF"
-                          >
-                            French Polynesia
-                          </option>
-                          <option
-                            value="ATF"
-                          >
-                            French Southern Territories
-                          </option>
-                          <option
-                            value="GAB"
-                          >
-                            Gabon
-                          </option>
-                          <option
-                            value="GMB"
-                          >
-                            Gambia
-                          </option>
-                          <option
-                            value="GEO"
-                          >
-                            Georgia
-                          </option>
-                          <option
-                            value="DEU"
-                          >
-                            Germany
-                          </option>
-                          <option
-                            value="GHA"
-                          >
-                            Ghana
-                          </option>
-                          <option
-                            value="GIB"
-                          >
-                            Gibraltar
-                          </option>
-                          <option
-                            value="GRC"
-                          >
-                            Greece
-                          </option>
-                          <option
-                            value="GRL"
-                          >
-                            Greenland
-                          </option>
-                          <option
-                            value="GRD"
-                          >
-                            Grenada
-                          </option>
-                          <option
-                            value="GLP"
-                          >
-                            Guadeloupe
-                          </option>
-                          <option
-                            value="GUM"
-                          >
-                            Guam
-                          </option>
-                          <option
-                            value="GTM"
-                          >
-                            Guatemala
-                          </option>
-                          <option
-                            value="GGY"
-                          >
-                            Guernsey
-                          </option>
-                          <option
-                            value="GIN"
-                          >
-                            Guinea
-                          </option>
-                          <option
-                            value="GNB"
-                          >
-                            Guinea-Bissau
-                          </option>
-                          <option
-                            value="GUY"
-                          >
-                            Guyana
-                          </option>
-                          <option
-                            value="HTI"
-                          >
-                            Haiti
-                          </option>
-                          <option
-                            value="HMD"
-                          >
-                            Heard Island and McDonald Islands
-                          </option>
-                          <option
-                            value="VAT"
-                          >
-                            Holy See
-                          </option>
-                          <option
-                            value="HND"
-                          >
-                            Honduras
-                          </option>
-                          <option
-                            value="HKG"
-                          >
-                            Hong Kong
-                          </option>
-                          <option
-                            value="HUN"
-                          >
-                            Hungary
-                          </option>
-                          <option
-                            value="ISL"
-                          >
-                            Iceland
-                          </option>
-                          <option
-                            value="IND"
-                          >
-                            India
-                          </option>
-                          <option
-                            value="IDN"
-                          >
-                            Indonesia
-                          </option>
-                          <option
-                            value="IRN"
-                          >
-                            Iran
-                          </option>
-                          <option
-                            value="IRQ"
-                          >
-                            Iraq
-                          </option>
-                          <option
-                            value="IRL"
-                          >
-                            Ireland
-                          </option>
-                          <option
-                            value="IMN"
-                          >
-                            Isle of Man
-                          </option>
-                          <option
-                            value="ISR"
-                          >
-                            Israel
-                          </option>
-                          <option
-                            value="ITA"
-                          >
-                            Italy
-                          </option>
-                          <option
-                            value="JAM"
-                          >
-                            Jamaica
-                          </option>
-                          <option
-                            value="JPN"
-                          >
-                            Japan
-                          </option>
-                          <option
-                            value="JEY"
-                          >
-                            Jersey
-                          </option>
-                          <option
-                            value="JOR"
-                          >
-                            Jordan
-                          </option>
-                          <option
-                            value="KAZ"
-                          >
-                            Kazakhstan
-                          </option>
-                          <option
-                            value="KEN"
-                          >
-                            Kenya
-                          </option>
-                          <option
-                            value="KIR"
-                          >
-                            Kiribati
-                          </option>
-                          <option
-                            value="KWT"
-                          >
-                            Kuwait
-                          </option>
-                          <option
-                            value="KGZ"
-                          >
-                            Kyrgyzstan
-                          </option>
-                          <option
-                            value="LAO"
-                          >
-                            Laos
-                          </option>
-                          <option
-                            value="LVA"
-                          >
-                            Latvia
-                          </option>
-                          <option
-                            value="LBN"
-                          >
-                            Lebanon
-                          </option>
-                          <option
-                            value="LSO"
-                          >
-                            Lesotho
-                          </option>
-                          <option
-                            value="LBR"
-                          >
-                            Liberia
-                          </option>
-                          <option
-                            value="LBY"
-                          >
-                            Libya
-                          </option>
-                          <option
-                            value="LIE"
-                          >
-                            Liechtenstein
-                          </option>
-                          <option
-                            value="LTU"
-                          >
-                            Lithuania
-                          </option>
-                          <option
-                            value="LUX"
-                          >
-                            Luxembourg
-                          </option>
-                          <option
-                            value="MAC"
-                          >
-                            Macao
-                          </option>
-                          <option
-                            value="MDG"
-                          >
-                            Madagascar
-                          </option>
-                          <option
-                            value="MWI"
-                          >
-                            Malawi
-                          </option>
-                          <option
-                            value="MYS"
-                          >
-                            Malaysia
-                          </option>
-                          <option
-                            value="MDV"
-                          >
-                            Maldives
-                          </option>
-                          <option
-                            value="MLI"
-                          >
-                            Mali
-                          </option>
-                          <option
-                            value="MLT"
-                          >
-                            Malta
-                          </option>
-                          <option
-                            value="MHL"
-                          >
-                            Marshall Islands
-                          </option>
-                          <option
-                            value="MTQ"
-                          >
-                            Martinique
-                          </option>
-                          <option
-                            value="MRT"
-                          >
-                            Mauritania
-                          </option>
-                          <option
-                            value="MUS"
-                          >
-                            Mauritius
-                          </option>
-                          <option
-                            value="MYT"
-                          >
-                            Mayotte
-                          </option>
-                          <option
-                            value="MEX"
-                          >
-                            Mexico
-                          </option>
-                          <option
-                            value="FSM"
-                          >
-                            Micronesia
-                          </option>
-                          <option
-                            value="MDA"
-                          >
-                            Moldova
-                          </option>
-                          <option
-                            value="MCO"
-                          >
-                            Monaco
-                          </option>
-                          <option
-                            value="MNG"
-                          >
-                            Mongolia
-                          </option>
-                          <option
-                            value="MNE"
-                          >
-                            Montenegro
-                          </option>
-                          <option
-                            value="MSR"
-                          >
-                            Montserrat
-                          </option>
-                          <option
-                            value="MAR"
-                          >
-                            Morocco
-                          </option>
-                          <option
-                            value="MOZ"
-                          >
-                            Mozambique
-                          </option>
-                          <option
-                            value="MMR"
-                          >
-                            Myanmar
-                          </option>
-                          <option
-                            value="NAM"
-                          >
-                            Namibia
-                          </option>
-                          <option
-                            value="NRU"
-                          >
-                            Nauru
-                          </option>
-                          <option
-                            value="NPL"
-                          >
-                            Nepal
-                          </option>
-                          <option
-                            value="NLD"
-                          >
-                            Netherlands
-                          </option>
-                          <option
-                            value="NCL"
-                          >
-                            New Caledonia
-                          </option>
-                          <option
-                            value="NZL"
-                          >
-                            New Zealand
-                          </option>
-                          <option
-                            value="NIC"
-                          >
-                            Nicaragua
-                          </option>
-                          <option
-                            value="NER"
-                          >
-                            Niger
-                          </option>
-                          <option
-                            value="NGA"
-                          >
-                            Nigeria
-                          </option>
-                          <option
-                            value="NIU"
-                          >
-                            Niue
-                          </option>
-                          <option
-                            value="NFK"
-                          >
-                            Norfolk Island
-                          </option>
-                          <option
-                            value="PRK"
-                          >
-                            North Korea
-                          </option>
-                          <option
-                            value="MKD"
-                          >
-                            North Macedonia
-                          </option>
-                          <option
-                            value="MNP"
-                          >
-                            Northern Mariana Islands
-                          </option>
-                          <option
-                            value="NOR"
-                          >
-                            Norway
-                          </option>
-                          <option
-                            value="OMN"
-                          >
-                            Oman
-                          </option>
-                          <option
-                            value="PAK"
-                          >
-                            Pakistan
-                          </option>
-                          <option
-                            value="PLW"
-                          >
-                            Palau
-                          </option>
-                          <option
-                            value="PSE"
-                          >
-                            Palestine
-                          </option>
-                          <option
-                            value="PAN"
-                          >
-                            Panama
-                          </option>
-                          <option
-                            value="PNG"
-                          >
-                            Papua New Guinea
-                          </option>
-                          <option
-                            value="PRY"
-                          >
-                            Paraguay
-                          </option>
-                          <option
-                            value="PER"
-                          >
-                            Peru
-                          </option>
-                          <option
-                            value="PHL"
-                          >
-                            Philippines
-                          </option>
-                          <option
-                            value="PCN"
-                          >
-                            Pitcairn
-                          </option>
-                          <option
-                            value="POL"
-                          >
-                            Poland
-                          </option>
-                          <option
-                            value="PRT"
-                          >
-                            Portugal
-                          </option>
-                          <option
-                            value="PRI"
-                          >
-                            Puerto Rico
-                          </option>
-                          <option
-                            value="QAT"
-                          >
-                            Qatar
-                          </option>
-                          <option
-                            value="ROU"
-                          >
-                            Romania
-                          </option>
-                          <option
-                            value="RUS"
-                          >
-                            Russian Federation
-                          </option>
-                          <option
-                            value="RWA"
-                          >
-                            Rwanda
-                          </option>
-                          <option
-                            value="REU"
-                          >
-                            Réunion
-                          </option>
-                          <option
-                            value="BLM"
-                          >
-                            Saint Barthélemy
-                          </option>
-                          <option
-                            value="SHN"
-                          >
-                            Saint Helena
-                          </option>
-                          <option
-                            value="KNA"
-                          >
-                            Saint Kitts and Nevis
-                          </option>
-                          <option
-                            value="LCA"
-                          >
-                            Saint Lucia
-                          </option>
-                          <option
-                            value="MAF"
-                          >
-                            Saint Martin
-                          </option>
-                          <option
-                            value="SPM"
-                          >
-                            Saint Pierre and Miquelon
-                          </option>
-                          <option
-                            value="VCT"
-                          >
-                            Saint Vincent and the Grenadines
-                          </option>
-                          <option
-                            value="WSM"
-                          >
-                            Samoa
-                          </option>
-                          <option
-                            value="SMR"
-                          >
-                            San Marino
-                          </option>
-                          <option
-                            value="STP"
-                          >
-                            Sao Tome and Principe
-                          </option>
-                          <option
-                            value="SAU"
-                          >
-                            Saudi Arabia
-                          </option>
-                          <option
-                            value="SEN"
-                          >
-                            Senegal
-                          </option>
-                          <option
-                            value="SRB"
-                          >
-                            Serbia
-                          </option>
-                          <option
-                            value="SYC"
-                          >
-                            Seychelles
-                          </option>
-                          <option
-                            value="SLE"
-                          >
-                            Sierra Leone
-                          </option>
-                          <option
-                            value="SGP"
-                          >
-                            Singapore
-                          </option>
-                          <option
-                            value="SXM"
-                          >
-                            Sint Maarten
-                          </option>
-                          <option
-                            value="SVK"
-                          >
-                            Slovakia
-                          </option>
-                          <option
-                            value="SVN"
-                          >
-                            Slovenia
-                          </option>
-                          <option
-                            value="SLB"
-                          >
-                            Solomon Islands
-                          </option>
-                          <option
-                            value="SOM"
-                          >
-                            Somalia
-                          </option>
-                          <option
-                            value="ZAF"
-                          >
-                            South Africa
-                          </option>
-                          <option
-                            value="SGS"
-                          >
-                            South Georgia and the South Sandwich Islands
-                          </option>
-                          <option
-                            value="KOR"
-                          >
-                            South Korea
-                          </option>
-                          <option
-                            value="SSD"
-                          >
-                            South Sudan
-                          </option>
-                          <option
-                            value="ESP"
-                          >
-                            Spain
-                          </option>
-                          <option
-                            value="LKA"
-                          >
-                            Sri Lanka
-                          </option>
-                          <option
-                            value="SDN"
-                          >
-                            Sudan
-                          </option>
-                          <option
-                            value="SUR"
-                          >
-                            Suriname
-                          </option>
-                          <option
-                            value="SJM"
-                          >
-                            Svalbard and Jan Mayen
-                          </option>
-                          <option
-                            value="SWE"
-                          >
-                            Sweden
-                          </option>
-                          <option
-                            value="CHE"
-                          >
-                            Switzerland
-                          </option>
-                          <option
-                            value="SYR"
-                          >
-                            Syrian Arab Republic
-                          </option>
-                          <option
-                            value="TWN"
-                          >
-                            Taiwan
-                          </option>
-                          <option
-                            value="TJK"
-                          >
-                            Tajikistan
-                          </option>
-                          <option
-                            value="TZA"
-                          >
-                            Tanzania
-                          </option>
-                          <option
-                            value="THA"
-                          >
-                            Thailand
-                          </option>
-                          <option
-                            value="TLS"
-                          >
-                            Timor-Leste
-                          </option>
-                          <option
-                            value="TGO"
-                          >
-                            Togo
-                          </option>
-                          <option
-                            value="TKL"
-                          >
-                            Tokelau
-                          </option>
-                          <option
-                            value="TON"
-                          >
-                            Tonga
-                          </option>
-                          <option
-                            value="TTO"
-                          >
-                            Trinidad and Tobago
-                          </option>
-                          <option
-                            value="TUN"
-                          >
-                            Tunisia
-                          </option>
-                          <option
-                            value="TUR"
-                          >
-                            Turkey
-                          </option>
-                          <option
-                            value="TKM"
-                          >
-                            Turkmenistan
-                          </option>
-                          <option
-                            value="TCA"
-                          >
-                            Turks and Caicos Islands
-                          </option>
-                          <option
-                            value="TUV"
-                          >
-                            Tuvalu
-                          </option>
-                          <option
-                            value="UGA"
-                          >
-                            Uganda
-                          </option>
-                          <option
-                            value="UKR"
-                          >
-                            Ukraine
-                          </option>
-                          <option
-                            value="ARE"
-                          >
-                            United Arab Emirates
-                          </option>
-                          <option
-                            value="GBR"
-                          >
-                            United Kingdom
-                          </option>
-                          <option
-                            value="USA"
-                          >
-                            United States
-                          </option>
-                          <option
-                            value="UMI"
-                          >
-                            United States Minor Outlying Islands
-                          </option>
-                          <option
-                            value="URY"
-                          >
-                            Uruguay
-                          </option>
-                          <option
-                            value="UZB"
-                          >
-                            Uzbekistan
-                          </option>
-                          <option
-                            value="VUT"
-                          >
-                            Vanuatu
-                          </option>
-                          <option
-                            value="VEN"
-                          >
-                            Venezuela
-                          </option>
-                          <option
-                            value="VNM"
-                          >
-                            Viet Nam
-                          </option>
-                          <option
-                            value="VGB"
-                          >
-                            Virgin Islands (British)
-                          </option>
-                          <option
-                            value="VIR"
-                          >
-                            Virgin Islands (U.S.)
-                          </option>
-                          <option
-                            value="WLF"
-                          >
-                            Wallis and Futuna
-                          </option>
-                          <option
-                            value="ESH"
-                          >
-                            Western Sahara*
-                          </option>
-                          <option
-                            value="YEM"
-                          >
-                            Yemen
-                          </option>
-                          <option
-                            value="ZMB"
-                          >
-                            Zambia
-                          </option>
-                          <option
-                            value="ZWE"
-                          >
-                            Zimbabwe
-                          </option>
-                          <option
-                            value="ALA"
-                          >
-                            Åland Islands
-                          </option>
-                        </select>
+                          Blocks Mined
+                        </div>
+                        <div
+                          class="flex gap-4"
+                        >
+                          <div
+                            class="text-5xl"
+                          >
+                            0
+                          </div>
+                          <div
+                            class="font-favorit mt-1"
+                          >
+                            <div
+                              class="leading-tight"
+                            >
+                              / 10
+                            </div>
+                            <div
+                              class="text-ifsubtextgray leading-tight whitespace-nowrap "
+                            >
+                              0 points
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border-2 bg-black text-white hover:bg-transparent hover:text-black p-4 h-10 mt-8"
+                  </div>
+                  <div
+                    class="relative mb-2.5  mr-2.5 "
+                  >
+                    <div
+                      class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"
+                    />
+                    <div
+                      class="relative border border-black bg-white"
                     >
-                      Save
-                    </button>
+                      <div
+                        class="font-extended p-8"
+                        style="min-width: 288px; max-width: 288px;"
+                      >
+                        <div
+                          class=" mb-4 whitespace-nowrap"
+                        >
+                          Bugs Caught
+                        </div>
+                        <div
+                          class="flex gap-4"
+                        >
+                          <div
+                            class="text-5xl"
+                          >
+                            0
+                          </div>
+                          <div
+                            class="font-favorit mt-1"
+                          >
+                            <div
+                              class="leading-tight"
+                            >
+                              / 10
+                            </div>
+                            <div
+                              class="text-ifsubtextgray leading-tight whitespace-nowrap "
+                            >
+                              0 points
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="relative mb-2.5  mr-2.5 "
+                  >
+                    <div
+                      class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"
+                    />
+                    <div
+                      class="relative border border-black bg-white"
+                    >
+                      <div
+                        class="font-extended p-8"
+                        style="min-width: 288px; max-width: 288px;"
+                      >
+                        <div
+                          class=" mb-4 whitespace-nowrap"
+                        >
+                          Promotions
+                        </div>
+                        <div
+                          class="flex gap-4"
+                        >
+                          <div
+                            class="text-5xl"
+                          >
+                            0
+                          </div>
+                          <div
+                            class="font-favorit mt-1"
+                          >
+                            <div
+                              class="leading-tight"
+                            >
+                              / 10
+                            </div>
+                            <div
+                              class="text-ifsubtextgray leading-tight whitespace-nowrap "
+                            >
+                              0 points
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="relative mb-2.5  mr-2.5 "
+                  >
+                    <div
+                      class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"
+                    />
+                    <div
+                      class="relative border border-black bg-white"
+                    >
+                      <div
+                        class="font-extended p-8"
+                        style="min-width: 288px; max-width: 288px;"
+                      >
+                        <div
+                          class=" mb-4 whitespace-nowrap"
+                        >
+                          PRs Merged
+                        </div>
+                        <div
+                          class="flex gap-4"
+                        >
+                          <div
+                            class="text-5xl"
+                          >
+                            0
+                          </div>
+                          <div
+                            class="font-favorit mt-1"
+                          >
+                            <div
+                              class="leading-tight"
+                            >
+                              / 10
+                            </div>
+                            <div
+                              class="text-ifsubtextgray leading-tight whitespace-nowrap "
+                            >
+                              0 points
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="relative mb-2.5  mr-2.5 "
+                  >
+                    <div
+                      class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"
+                    />
+                    <div
+                      class="relative border border-black bg-white"
+                    >
+                      <div
+                        class="font-extended p-8"
+                        style="min-width: 288px; max-width: 288px;"
+                      >
+                        <div
+                          class=" mb-4 whitespace-nowrap"
+                        >
+                          Community Contributions
+                        </div>
+                        <div
+                          class="flex gap-4"
+                        >
+                          <div
+                            class="text-5xl"
+                          >
+                            0
+                          </div>
+                          <div
+                            class="font-favorit mt-1"
+                          >
+                            <div
+                              class="leading-tight"
+                            >
+                              / 10
+                            </div>
+                            <div
+                              class="text-ifsubtextgray leading-tight whitespace-nowrap "
+                            >
+                              0 points
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <h1
+                class="font-favorit"
+              >
+                Recent Activity
+              </h1>
+              <table
+                class="font-favorit w-full"
+              >
+                <thead>
+                  <tr
+                    class="text-xs text-left tracking-widest border-b border-black"
+                  >
+                    <th
+                      class="font-normal py-4"
+                    >
+                      ACTIVITY
+                    </th>
+                    <th
+                      class="font-normal"
+                    >
+                      DATE
+                    </th>
+                    <th
+                      class="font-normal"
+                    >
+                      POINTS EARNED
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="text-sm"
+                />
+              </table>
             </div>
+          </div>
+        </div>
+        <div
+          class="flex font-favorit justify-center mt-8"
+        >
+          <div
+            class="flex gap-x-1.5"
+          >
+            <button
+              class="text-ifpink-subtext cursor-default"
+              disabled=""
+            >
+              &lt;&lt; Previous
+            </button>
+            <div>
+              |
+            </div>
+            <button
+              class="text-ifpink-subtext cursor-default"
+              disabled=""
+            >
+              Next &gt;&gt;
+            </button>
           </div>
         </div>
       </div>
@@ -1892,29 +802,17 @@ exports[`renders User page 1`] = `
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/about/"
-                >
-                  About Us
-                </a>
+                About Us
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/careers/"
-                >
-                  Careers
-                </a>
+                Careers
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/blog/"
-                >
-                  Blog
-                </a>
+                Blog
               </li>
             </ul>
           </div>
@@ -1930,29 +828,17 @@ exports[`renders User page 1`] = `
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://explorer.ironfish.network/"
-                >
-                  Block Explorer
-                </a>
+                Block Explorer
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/docs/whitepaper/1_introduction/"
-                >
-                  Whitepaper
-                </a>
+                Whitepaper
               </li>
               <li
                 class="font-extended leading-loose"
               >
-                <a
-                  href="https://ironfish.network/faq/"
-                >
-                  FAQ
-                </a>
+                FAQ
               </li>
             </ul>
           </div>

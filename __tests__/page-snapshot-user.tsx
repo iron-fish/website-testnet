@@ -1,19 +1,11 @@
 import User from 'pages/users/[...details]'
 import { screen, waitForElementToBeRemoved } from '@testing-library/react'
-import { API_URL } from 'apiClient/client'
+import { METADATA } from 'hooks/useLocalLogin'
 import { render } from 'jest.utils'
 import fetch from 'jest-fetch-mock'
 
-beforeEach(() => fetch.resetMocks())
-const FIXTURE = {
-  user: {
-    id: 2,
-    country_code: 'ROU',
-    graffiti: 'dracula_edit',
-    total_points: 0,
-    last_login_at: '2021-12-21T20:29:54.502Z',
-    rank: 3,
-  },
+export const FIXTURE = {
+  user: { ...METADATA, rank: 3 },
   events: {
     object: 'list',
     data: [],
@@ -23,7 +15,7 @@ const FIXTURE = {
     },
   },
   allTimeMetrics: {
-    user_id: 2,
+    user_id: METADATA.id,
     granularity: 'lifetime',
     points: 0,
     metrics: {
@@ -99,22 +91,38 @@ const FIXTURE = {
   },
 }
 
-it('renders User page', async () => {
+const goodResponse = {
+  status: 200,
+  headers: { 'Content-Type': 'application/json' },
+}
+beforeEach(() => {
+  fetch.resetMocks()
+  fetch.mockResponse(async (req: Request) => {
+    const matches = (x: string) => ~req.url.indexOf(x)
+    const endsWith = (x: string) => req.url.endsWith(x)
+    const body = endsWith('/users/111')
+      ? FIXTURE.user
+      : matches('/events?')
+      ? FIXTURE.events
+      : endsWith('granularity=lifetime')
+      ? FIXTURE.allTimeMetrics
+      : matches('/metrics?granularity=total')
+      ? FIXTURE.weeklyMetrics
+      : matches('/metrics/config')
+      ? FIXTURE.metricsConfig
+      : { error: "You haven't implemented this route yet" }
+    // console.log({ url: req.url, body, init: goodResponse })
+    return Promise.resolve({ body: JSON.stringify(body), init: goodResponse })
+  })
+})
+it('renders User Weekly page', async () => {
   try {
-    const good = { status: 200 }
-    fetch.mockResponses(
-      [JSON.stringify(FIXTURE.user), good],
-      [JSON.stringify(FIXTURE.events), good],
-      [JSON.stringify(FIXTURE.allTimeMetrics), good],
-      [JSON.stringify(FIXTURE.weeklyMetrics), good],
-      [JSON.stringify(FIXTURE.metricsConfig), good]
-    )
     const { container } = render(User, {
       router: {
         pathname: '/users/111',
         route: '/users/111',
         asPath: '/users/111',
-        query: { details: ['111', 'settings'] },
+        query: { details: ['111', 'weekly'] },
       },
     })
     await waitForElementToBeRemoved(() =>

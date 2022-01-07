@@ -51,19 +51,16 @@ exports[`renders Login page 1`] = `
           </div>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="leading-relaxed text-4xl px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -128,7 +125,6 @@ exports[`renders Login page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -146,7 +142,6 @@ exports[`renders Login page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -163,9 +158,7 @@ exports[`renders Login page 1`] = `
         <div
           class="py-7"
         >
-          <a
-            href="http://ironfish.network/"
-          >
+          <a>
             <svg
               fill="none"
               height="32"
@@ -185,19 +178,16 @@ exports[`renders Login page 1`] = `
         >
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"
           >
             Get Started
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/docs/whitepaper/1_introduction"
           >
             Whitepaper
           </a>
           <a
             class="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding px-2 lg:px-3.5 3xl:px-5"
-            href="https://ironfish.network/roadmap"
           >
             Roadmap
           </a>
@@ -259,7 +249,6 @@ exports[`renders Login page 1`] = `
                 >
                   <div
                     class="truncate relative max-w-[20rem]"
-                    href="/users/111"
                   >
                     cooldev
                   </div>
@@ -277,7 +266,6 @@ exports[`renders Login page 1`] = `
               </div>
               <a
                 class="arrowed md:hidden md:opacity-0 z-50 px-6 py-3 mt-12 w-full m-auto bg-white text-black md:w-auto md:mx-0 md:rounded-full md:hover:bg-black md:hover:text-white md:border md:border-black"
-                href="/logout"
               >
                 Sign Out
                 <div
@@ -382,7 +370,6 @@ exports[`renders Login page 1`] = `
                    
                   <a
                     class="text-iflightblue"
-                    href="/signup"
                   >
                     Sign Up
                   </a>
