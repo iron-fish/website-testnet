@@ -209,6 +209,7 @@ export default function User({ loginContext }: Props) {
   }, [])
 
   if (
+    !loginContext.checkLoggedIn() ||
     !$fetched ||
     !$user ||
     !$allTimeMetrics ||
