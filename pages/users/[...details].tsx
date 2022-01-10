@@ -105,27 +105,6 @@ export default function User({ loginContext }: Props) {
   const [$canSeeSettings, $setCanSeeSettings] = useState(false)
 
   useEffect(() => {
-    const authedId = loginContext?.metadata?.id ?? '0'
-    const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
-    const userGraffiti = $user?.graffiti
-    const can = userGraffiti === authedGraffiti && parseInt(userId) === authedId
-    // eslint-disable-next-line no-console
-    console.log({
-      canSeeSettings: can,
-      authedId,
-      userId,
-      authedGraffiti,
-      userGraffiti,
-    })
-    $setCanSeeSettings(can)
-  }, [
-    userId,
-    loginContext?.metadata?.id,
-    loginContext?.metadata?.graffiti,
-    $user?.graffiti,
-  ])
-
-  useEffect(() => {
     let isCancelled = false
 
     const fetchData = async () => {
@@ -165,12 +144,37 @@ export default function User({ loginContext }: Props) {
             )}`
           )
           return
-        } else {
-          $setUser(user)
-          $setEvents(events)
-          $setAllTimeMetrics(allTimeMetrics)
-          $setWeeklyMetrics(weeklyMetrics)
-          $setMetricsConfig(metricsConfig)
+        }
+        // eslint-disable-next-line no-console
+        console.log('checking can-see-settings...')
+        const authedId = loginContext?.metadata?.id ?? '0'
+        const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
+        const userGraffiti = user?.graffiti
+        const canSee =
+          userGraffiti === authedGraffiti && parseInt(userId) === authedId
+
+        // eslint-disable-next-line no-console
+        console.log({
+          canSeeSettings: canSee,
+          authedId,
+          userId,
+          authedGraffiti,
+          userGraffiti,
+        })
+        $setCanSeeSettings(canSee)
+        $setUser(user)
+        $setEvents(events)
+        $setAllTimeMetrics(allTimeMetrics)
+        $setWeeklyMetrics(weeklyMetrics)
+        $setMetricsConfig(metricsConfig)
+        if (!canSee && $activeTab === 'settings') {
+          // eslint-disable-next-line no-console
+          console.log('settings, not authed')
+          // if you try to go to /users/x/settings but you're not user x
+          $setActiveTab('weekly')
+          $toast.setMessage('You are not authorized to go there')
+          $toast.show()
+          return
         }
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -184,20 +188,19 @@ export default function User({ loginContext }: Props) {
       isCancelled = true
       $setFetched(false)
     }
-  }, [routerIsReady, userId, $activeTab, $toast, $fetched])
+  }, [
+    routerIsReady,
+    userId,
+    $activeTab,
+    $toast,
+    $fetched,
+    loginContext?.metadata?.id,
+    loginContext?.metadata?.graffiti,
+  ])
   useEffect(() => {
     if (!$user) return
     $setFetched(true)
-    if (!$canSeeSettings && $activeTab === 'settings') {
-      // eslint-disable-next-line no-console
-      console.log('settings, not authed')
-      // if you try to go to /users/x/settings but you're not user x
-      $setActiveTab('weekly')
-      $toast.setMessage('You are not authorized to go there')
-      $toast.show()
-      return
-    }
-  }, [$user, $activeTab, $toast, $canSeeSettings])
+  }, [$user])
 
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
