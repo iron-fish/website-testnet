@@ -111,7 +111,7 @@ export default function User({ loginContext }: Props) {
       try {
         if (!routerIsReady || $fetched) {
           // eslint-disable-next-line no-console
-          console.log('fetched already or no router yet')
+          console.log($fetched ? 'fetched already' : 'no router yet')
           return
         }
 
@@ -147,7 +147,7 @@ export default function User({ loginContext }: Props) {
         }
         // eslint-disable-next-line no-console
         console.log('checking can-see-settings...')
-        const authedId = loginContext?.metadata?.id ?? '0'
+        const authedId = loginContext?.metadata?.id ?? 0
         const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
         const userGraffiti = user?.graffiti
         const canSee =
