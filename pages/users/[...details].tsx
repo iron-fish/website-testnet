@@ -102,13 +102,22 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
 
-  const authedId = loginContext?.metadata?.id ?? '0'
-  const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
-  const userGraffiti = $user?.graffiti ?? `!${NO_MATCH}`
+  const [$canSeeSettings, $setCanSeeSettings] = useState(false)
 
-  const testShowSettings = useCallback(() => {
-    return userGraffiti === authedGraffiti && userId === authedId
-  }, [userId, userGraffiti, authedGraffiti, authedId])
+  useEffect(() => {
+    const authedId = loginContext?.metadata?.id ?? '0'
+    const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
+    const userGraffiti = $user?.graffiti ?? `!${NO_MATCH}`
+    const can = userGraffiti === authedGraffiti && userId === authedId
+    // eslint-disable-next-line no-console
+    console.log({ canSeeSettings: can, authedId, authedGraffiti, userGraffiti })
+    $setCanSeeSettings(can)
+  }, [
+    userId,
+    loginContext?.metadata?.id,
+    loginContext?.metadata?.graffiti,
+    $user?.graffiti,
+  ])
 
   useEffect(() => {
     let isCancelled = false
@@ -169,20 +178,11 @@ export default function User({ loginContext }: Props) {
       isCancelled = true
       $setFetched(false)
     }
-  }, [
-    routerIsReady,
-    userId,
-    $activeTab,
-    $toast,
-    authedGraffiti,
-    authedId,
-    $fetched,
-  ])
+  }, [routerIsReady, userId, $activeTab, $toast, $fetched])
   useEffect(() => {
     if (!$user) return
     $setFetched(true)
-    const allowed = $user.graffiti === authedGraffiti && $user.id === authedId
-    if (!allowed && $activeTab === 'settings') {
+    if (!$canSeeSettings && $activeTab === 'settings') {
       // eslint-disable-next-line no-console
       console.log('settings, not authed')
       // if you try to go to /users/x/settings but you're not user x
@@ -191,7 +191,7 @@ export default function User({ loginContext }: Props) {
       $toast.show()
       return
     }
-  }, [$user, authedGraffiti, authedId, $activeTab, $toast])
+  }, [$user, $activeTab, $toast, $canSeeSettings])
 
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
@@ -278,7 +278,7 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
-                showSettings={testShowSettings()}
+                showSettings={$canSeeSettings}
                 reloadUser={loginContext.reloadUser}
                 toast={$toast}
                 activeTab={$activeTab}
