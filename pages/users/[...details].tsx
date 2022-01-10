@@ -145,37 +145,11 @@ export default function User({ loginContext }: Props) {
           )
           return
         }
-        // eslint-disable-next-line no-console
-        console.log('checking can-see-settings...')
-        const authedId = loginContext?.metadata?.id ?? 0
-        const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
-        const userGraffiti = user?.graffiti
-        const canSee =
-          userGraffiti === authedGraffiti && parseInt(userId) === authedId
-
-        // eslint-disable-next-line no-console
-        console.log({
-          canSeeSettings: canSee,
-          authedId,
-          userId,
-          authedGraffiti,
-          userGraffiti,
-        })
-        $setCanSeeSettings(canSee)
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
         $setWeeklyMetrics(weeklyMetrics)
         $setMetricsConfig(metricsConfig)
-        if (!canSee && $activeTab === 'settings') {
-          // eslint-disable-next-line no-console
-          console.log('settings, not authed')
-          // if you try to go to /users/x/settings but you're not user x
-          $setActiveTab('weekly')
-          $toast.setMessage('You are not authorized to go there')
-          $toast.show()
-          return
-        }
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn(e)
@@ -198,9 +172,47 @@ export default function User({ loginContext }: Props) {
     loginContext?.metadata?.graffiti,
   ])
   useEffect(() => {
-    if (!$user) return
+    if (!routerIsReady || !$user?.graffiti) {
+      // eslint-disable-next-line no-console
+      console.log($user?.graffiti ? 'no graffiti yet' : 'no router yet')
+      return
+    }
     $setFetched(true)
-  }, [$user])
+    // eslint-disable-next-line no-console
+    console.log('checking can-see-settings...')
+    const authedId = loginContext?.metadata?.id ?? 0
+    const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
+    const userGraffiti = $user?.graffiti
+    const canSee =
+      userGraffiti === authedGraffiti && parseInt(userId) === authedId
+
+    // eslint-disable-next-line no-console
+    console.log({
+      canSeeSettings: canSee,
+      authedId,
+      userId,
+      authedGraffiti,
+      userGraffiti,
+    })
+    $setCanSeeSettings(canSee)
+    if (!canSee && $activeTab === 'settings') {
+      // eslint-disable-next-line no-console
+      console.log('settings, not authed')
+      // if you try to go to /users/x/settings but you're not user x
+      $setActiveTab('weekly')
+      $toast.setMessage('You are not authorized to go there')
+      $toast.show()
+      return
+    }
+  }, [
+    $activeTab,
+    $toast,
+    routerIsReady,
+    loginContext?.metadata?.graffiti,
+    loginContext?.metadata?.id,
+    $user?.graffiti,
+    userId,
+  ])
 
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
@@ -212,7 +224,6 @@ export default function User({ loginContext }: Props) {
   }, [])
 
   if (
-    !loginContext.checkLoggedIn() ||
     !$fetched ||
     !$user ||
     !$allTimeMetrics ||
