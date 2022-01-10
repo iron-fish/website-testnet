@@ -5,6 +5,7 @@ import { FieldError } from 'components/Form/FieldStatus'
 import Select from 'components/Form/Select'
 import TextField from 'components/Form/TextField'
 import Button from 'components/Button'
+import Loader from 'components/Loader'
 
 import { useField } from 'hooks/useForm'
 import { FIELDS } from 'pages/signup'
@@ -14,12 +15,15 @@ import { UNSET } from 'utils/forms'
 import { useQueriedToast } from 'hooks/useToast'
 
 import * as API from 'apiClient'
+import { TabType } from './index'
 
 type Props = {
   anyBlocksMined: boolean
-  authedUser: API.ApiUserMetadata
+  user: API.ApiUser | null
+  authedUser: API.ApiUserMetadata | null
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => void
+  onTabChange: (tab: TabType) => unknown
 }
 
 const EDITABLE_FIELDS = {
@@ -47,43 +51,69 @@ const EDITABLE_FIELDS = {
 
 export default function SettingsContent({
   anyBlocksMined,
+  user,
   authedUser,
   toast,
   reloadUser,
+  onTabChange,
 }: Props) {
   const [$error, $setError] = useState<string>(UNSET)
-  const [$user, $setUser] = useState<API.ApiUserMetadata>(authedUser)
+  const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
+    authedUser
+  )
+  const [$canSee, $setCanSee] = useState(false)
   useEffect(() => {
+    if (!authedUser || !user) return
     // local cache
     // eslint-disable-next-line
     console.log('updating authedUser...')
-    $setUser(authedUser)
-  }, [authedUser])
+    $setUserData(authedUser)
+    const canSee =
+      user.graffiti === authedUser.graffiti && user.id === authedUser.id
+    $setCanSee(canSee)
+    // eslint-disable-next-line no-console
+    if (!canSee) {
+      // eslint-disable-next-line no-console
+      console.log('settings, not authed')
+      // if you try to go to /users/x/settings but you're not user x
+      onTabChange('weekly')
+      toast.setMessage('You are not authorized to go there')
+      toast.show()
+      return
+    }
+  }, [authedUser, user, onTabChange, toast])
 
+  const {
+    graffiti: _graffiti = UNSET,
+    email: _email = UNSET,
+    discord: _discord = UNSET,
+    telegram: _telegram = UNSET,
+    country_code: _cc = UNSET,
+  } = $userData || {}
   const $graffiti = useField({
     ...FIELDS.graffiti,
-    defaultValue: $user.graffiti,
+    defaultValue: _graffiti,
   })
 
   const $email = useField({
     ...FIELDS.email,
-    defaultValue: $user.email,
+    defaultValue: _email,
     touched: true,
   })
   const $discord = useField({
     ...EDITABLE_FIELDS.discord,
-    defaultValue: $user.discord,
-    touched: !!$user.discord,
+    defaultValue: _discord,
+    touched: !!_discord,
   })
   const $telegram = useField({
     ...EDITABLE_FIELDS.telegram,
-    defaultValue: $user.telegram,
-    touched: !!$user.telegram,
+    defaultValue: _telegram,
+    touched: !!_telegram,
   })
 
   const $country = useField({
     ...FIELDS.country,
-    defaultValue: $user.country_code,
+    defaultValue: _cc,
     useDefault: false,
   })
   const testInvalid = useCallback(() => {
@@ -103,7 +133,14 @@ export default function SettingsContent({
   }, [$email, $graffiti, $telegram, $discord, $country])
   const update = useCallback(async () => {
     /* eslint-disable no-console */
-    if (!$email || !$graffiti || !$telegram || !$discord || !$country) {
+    if (
+      !$email ||
+      !$graffiti ||
+      !$telegram ||
+      !$discord ||
+      !$country ||
+      !authedUser
+    ) {
       console.log('missing field data')
       return
     }
@@ -173,26 +210,30 @@ export default function SettingsContent({
   //*
   return (
     <div className="flex">
-      <div className="flex-initial">
-        <div className="font-favorit mt-8">User Settings</div>
-        {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-        {$email && <TextField {...$email} disabled />}
-        {$graffiti && <TextField {...$graffiti} disabled={anyBlocksMined} />}
-        {anyBlocksMined && (
-          <Note>
-            <>
-              This graffiti has already mined blocks, so it{' '}
-              <strong>cannot be changed.</strong>
-            </>
-          </Note>
-        )}
-        {$discord && <TextField {...$discord} />}
-        {$telegram && <TextField {...$telegram} />}
-        {$country && <Select {...$country} />}
-        <Button className="mt-8" onClick={update}>
-          Save
-        </Button>
-      </div>
+      {!$canSee ? (
+        <Loader />
+      ) : (
+        <div className="flex-initial">
+          <div className="font-favorit mt-8">User Settings</div>
+          {$error !== UNSET && <FieldError text={$error} size="text-md" />}
+          {$email && <TextField {...$email} disabled />}
+          {$graffiti && <TextField {...$graffiti} disabled={anyBlocksMined} />}
+          {anyBlocksMined && (
+            <Note>
+              <>
+                This graffiti has already mined blocks, so it{' '}
+                <strong>cannot be changed.</strong>
+              </>
+            </Note>
+          )}
+          {$discord && <TextField {...$discord} />}
+          {$telegram && <TextField {...$telegram} />}
+          {$country && <Select {...$country} />}
+          <Button className="mt-8" onClick={update}>
+            Save
+          </Button>
+        </div>
+      )}
     </div>
   )
   // */

@@ -86,7 +86,6 @@ export default function User({ loginContext }: Props) {
 
   const rawTab = !tab ? 'weekly' : (tab as TabType)
   const [$activeTab, $setActiveTab] = useState<TabType>(rawTab)
-  const [$fetched, $setFetched] = useState<boolean>(false)
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
@@ -102,19 +101,19 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
 
-  const [$canSeeSettings, $setCanSeeSettings] = useState(false)
-
   useEffect(() => {
     let isCancelled = false
 
     const fetchData = async () => {
       try {
-        if (!routerIsReady || $fetched) {
+        if (!routerIsReady) {
+          // console.log($fetched ? 'fetched already' : 'no router yet')
           // eslint-disable-next-line no-console
-          console.log($fetched ? 'fetched already' : 'no router yet')
+          console.log('no router yet')
           return
         }
-
+        // eslint-disable-next-line no-console
+        console.log('requesting data')
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
           await Promise.all([
             API.getUser(userId),
@@ -145,6 +144,8 @@ export default function User({ loginContext }: Props) {
           )
           return
         }
+        // eslint-disable-next-line no-console
+        console.log('no errors!')
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
@@ -153,6 +154,7 @@ export default function User({ loginContext }: Props) {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn(e)
+
         throw e
       }
     }
@@ -160,58 +162,14 @@ export default function User({ loginContext }: Props) {
     fetchData()
     return () => {
       isCancelled = true
-      $setFetched(false)
     }
   }, [
     routerIsReady,
     userId,
     $activeTab,
     $toast,
-    $fetched,
     loginContext?.metadata?.id,
     loginContext?.metadata?.graffiti,
-  ])
-  useEffect(() => {
-    if (!routerIsReady || !$user?.graffiti) {
-      // eslint-disable-next-line no-console
-      console.log($user?.graffiti ? 'no graffiti yet' : 'no router yet')
-      return
-    }
-    $setFetched(true)
-    // eslint-disable-next-line no-console
-    console.log('checking can-see-settings...')
-    const authedId = loginContext?.metadata?.id ?? 0
-    const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
-    const userGraffiti = $user?.graffiti
-    const canSee =
-      userGraffiti === authedGraffiti && parseInt(userId) === authedId
-
-    // eslint-disable-next-line no-console
-    console.log({
-      canSeeSettings: canSee,
-      authedId,
-      userId,
-      authedGraffiti,
-      userGraffiti,
-    })
-    $setCanSeeSettings(canSee)
-    if (!canSee && $activeTab === 'settings') {
-      // eslint-disable-next-line no-console
-      console.log('settings, not authed')
-      // if you try to go to /users/x/settings but you're not user x
-      $setActiveTab('weekly')
-      $toast.setMessage('You are not authorized to go there')
-      $toast.show()
-      return
-    }
-  }, [
-    $activeTab,
-    $toast,
-    routerIsReady,
-    loginContext?.metadata?.graffiti,
-    loginContext?.metadata?.id,
-    $user?.graffiti,
-    userId,
   ])
 
   // Recent Activity hooks
@@ -224,7 +182,6 @@ export default function User({ loginContext }: Props) {
   }, [])
 
   if (
-    !$fetched ||
     !$user ||
     !$allTimeMetrics ||
     !$metricsConfig ||
@@ -299,11 +256,11 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
-                showSettings={$canSeeSettings}
                 reloadUser={loginContext.reloadUser}
                 toast={$toast}
                 activeTab={$activeTab}
                 onTabChange={onTabChange}
+                user={$user}
                 authedUser={loginContext.metadata}
                 allTimeMetrics={$allTimeMetrics}
                 weeklyMetrics={$weeklyMetrics}

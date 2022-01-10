@@ -13,7 +13,7 @@ type TabsProps = {
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
   metricsConfig: API.MetricsConfigResponse
-  showSettings: boolean
+  user: API.ApiUser | null
   authedUser: API.ApiUserMetadata | null
   activeTab: TabType
   onTabChange: (tab: TabType) => unknown
@@ -25,7 +25,7 @@ export default function Tabs({
   allTimeMetrics,
   weeklyMetrics,
   metricsConfig,
-  showSettings,
+  user,
   authedUser,
   activeTab,
   onTabChange,
@@ -51,14 +51,17 @@ export default function Tabs({
         >
           All Time Stats
         </TabHeaderButton>
-        {showSettings && (
-          <TabHeaderButton
-            selected={activeTab === 'settings'}
-            onClick={() => onTabChange('settings')}
-          >
-            Settings
-          </TabHeaderButton>
-        )}
+        {user &&
+          authedUser &&
+          authedUser.graffiti == user.graffiti &&
+          authedUser.id === user.id && (
+            <TabHeaderButton
+              selected={activeTab === 'settings'}
+              onClick={() => onTabChange('settings')}
+            >
+              Settings
+            </TabHeaderButton>
+          )}
       </div>
 
       {/* Tabs Content */}
@@ -71,9 +74,11 @@ export default function Tabs({
       {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
-      {activeTab === 'settings' && authedUser && (
+      {activeTab === 'settings' && (
         <SettingsContent
           anyBlocksMined={anyBlocksMined}
+          onTabChange={onTabChange}
+          user={user}
           authedUser={authedUser}
           toast={toast}
           reloadUser={reloadUser}
