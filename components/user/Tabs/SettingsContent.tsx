@@ -5,7 +5,6 @@ import { FieldError } from 'components/Form/FieldStatus'
 import Select from 'components/Form/Select'
 import TextField from 'components/Form/TextField'
 import Button from 'components/Button'
-import Loader from 'components/Loader'
 
 import { useField } from 'hooks/useForm'
 import { FIELDS } from 'pages/signup'
@@ -17,7 +16,6 @@ import { useQueriedToast } from 'hooks/useToast'
 import * as API from 'apiClient'
 
 type Props = {
-  showSettings: boolean
   anyBlocksMined: boolean
   authedUser: API.ApiUserMetadata
   toast: ReturnType<typeof useQueriedToast>
@@ -48,7 +46,6 @@ const EDITABLE_FIELDS = {
 }
 
 export default function SettingsContent({
-  showSettings,
   anyBlocksMined,
   authedUser,
   toast,
@@ -174,7 +171,6 @@ export default function SettingsContent({
     )
   */
   //*
-  if (!showSettings) return <Loader />
   return (
     <div className="flex">
       <div className="flex-initial">
