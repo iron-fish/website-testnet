@@ -107,10 +107,16 @@ export default function User({ loginContext }: Props) {
   useEffect(() => {
     const authedId = loginContext?.metadata?.id ?? '0'
     const authedGraffiti = loginContext?.metadata?.graffiti ?? NO_MATCH
-    const userGraffiti = $user?.graffiti ?? `!${NO_MATCH}`
+    const userGraffiti = $user?.graffiti
     const can = userGraffiti === authedGraffiti && userId === authedId
     // eslint-disable-next-line no-console
-    console.log({ canSeeSettings: can, authedId, authedGraffiti, userGraffiti })
+    console.log({
+      canSeeSettings: can,
+      authedId,
+      userId,
+      authedGraffiti,
+      userGraffiti,
+    })
     $setCanSeeSettings(can)
   }, [
     userId,
