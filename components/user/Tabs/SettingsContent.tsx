@@ -95,6 +95,7 @@ export default function SettingsContent({
   const $email = useField({
     ...FIELDS.email,
     defaultValue: _email,
+    validation: () => true,
     touched: true,
   })
   const $discord = useField({
