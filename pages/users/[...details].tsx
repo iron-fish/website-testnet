@@ -98,13 +98,14 @@ export default function User({ loginContext }: Props) {
   const [$metricsConfig, $setMetricsConfig] = useState<
     API.MetricsConfigResponse | undefined
   >(undefined)
+  const [$fetched, $setFetched] = useState(false)
 
   useEffect(() => {
     let isCancelled = false
 
     const fetchData = async () => {
       try {
-        if (!routerIsReady) {
+        if (!routerIsReady || $fetched) {
           // console.log($fetched ? 'fetched already' : 'no router yet')
           // eslint-disable-next-line no-console
           console.log('no router yet')
@@ -142,6 +143,7 @@ export default function User({ loginContext }: Props) {
           )
           return
         }
+
         // eslint-disable-next-line no-console
         console.log('no errors!')
         $setUser(user)
@@ -164,11 +166,15 @@ export default function User({ loginContext }: Props) {
   }, [
     routerIsReady,
     userId,
-    $activeTab,
     $toast,
     loginContext?.metadata?.id,
     loginContext?.metadata?.graffiti,
+    $fetched,
   ])
+  useEffect(() => {
+    if (!$user) return
+    $setFetched(true)
+  }, [$user])
 
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
