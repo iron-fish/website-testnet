@@ -6,6 +6,7 @@ import Select from 'components/Form/Select'
 import TextField from 'components/Form/TextField'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
+// import Debug from 'components/Debug'
 
 import { useField } from 'hooks/useForm'
 import { FIELDS } from 'pages/signup'
@@ -27,6 +28,9 @@ type Props = {
 }
 
 const EDITABLE_FIELDS = {
+  email: { ...FIELDS.email, validation: () => true, touched: true },
+  graffiti: { ...FIELDS.graffiti },
+  country: { ...FIELDS.country, useDefault: false },
   discord: {
     ...FIELDS.social,
     required: false,
@@ -61,25 +65,7 @@ export default function SettingsContent({
   const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
     authedUser
   )
-  useEffect(() => {
-    if (!authedUser || !user) return
-    // local cache
-    // eslint-disable-next-line
-    console.log('updating authedUser...')
-    $setUserData(authedUser)
-    const canSee =
-      user.graffiti === authedUser.graffiti && user.id === authedUser.id
-    // eslint-disable-next-line no-console
-    if (!canSee) {
-      // eslint-disable-next-line no-console
-      console.log('settings, not authed')
-      // if you try to go to /users/x/settings but you're not user x
-      onTabChange('weekly')
-      toast.setMessage('You are not authorized to go there')
-      toast.show()
-      return
-    }
-  }, [authedUser, user, onTabChange, toast])
+
   const {
     email: _email = UNSET,
     graffiti: _graffiti = UNSET,
@@ -88,15 +74,13 @@ export default function SettingsContent({
     country_code: _cc = UNSET,
   } = $userData || {}
   const $graffiti = useField({
-    ...FIELDS.graffiti,
+    ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
   })
 
   const $email = useField({
-    ...FIELDS.email,
+    ...EDITABLE_FIELDS.email,
     defaultValue: _email,
-    validation: () => true,
-    touched: true,
   })
   const $discord = useField({
     ...EDITABLE_FIELDS.discord,
@@ -110,9 +94,8 @@ export default function SettingsContent({
   })
 
   const $country = useField({
-    ...FIELDS.country,
+    ...EDITABLE_FIELDS.country,
     defaultValue: _cc,
-    useDefault: false,
   })
   const testInvalid = useCallback(() => {
     const invalid =
@@ -190,6 +173,35 @@ export default function SettingsContent({
     toast,
     reloadUser,
   ])
+  useEffect(() => {
+    // local cache
+    // eslint-disable-next-line
+    console.log('updating authedUser...')
+    $setUserData(authedUser)
+    const canSee =
+      authedUser &&
+      user &&
+      user.graffiti === authedUser.graffiti &&
+      user.id === authedUser.id
+    // eslint-disable-next-line no-console
+    if (!canSee) {
+      // eslint-disable-next-line no-console
+      console.log('settings, not authed')
+      // if you try to go to /users/x/settings but you're not user x
+      onTabChange('weekly')
+      toast.setMessage('You are not authorized to go there')
+      toast.show()
+    }
+  }, [
+    authedUser,
+    authedUser?.id,
+    authedUser?.graffiti,
+    user,
+    user?.graffiti,
+    user?.id,
+    onTabChange,
+    toast,
+  ])
   /*
   return (
     <Debug
@@ -203,9 +215,9 @@ export default function SettingsContent({
         $country,
       }}
     />
-    )
-  */
-  //*
+  )
+  // */
+  // /*
   return (
     <div className="flex">
       <div className="flex-initial">

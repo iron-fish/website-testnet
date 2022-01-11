@@ -99,6 +99,16 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
   const [$fetched, $setFetched] = useState(false)
+  // eslint-disable-next-line no-console
+  console.log({
+    $activeTab,
+    userId,
+    tab,
+    $user,
+    $events,
+    $fetched,
+    loginContext,
+  })
 
   useEffect(() => {
     let isCancelled = false
@@ -107,8 +117,6 @@ export default function User({ loginContext }: Props) {
       try {
         if (!routerIsReady || $fetched) {
           // console.log($fetched ? 'fetched already' : 'no router yet')
-          // eslint-disable-next-line no-console
-          console.log('no router yet')
           return
         }
         // eslint-disable-next-line no-console
@@ -173,6 +181,8 @@ export default function User({ loginContext }: Props) {
   ])
   useEffect(() => {
     if (!$user) return
+    // eslint-disable-next-line no-console
+    console.log('fetched!')
     $setFetched(true)
   }, [$user])
 
