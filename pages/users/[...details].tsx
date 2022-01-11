@@ -71,8 +71,6 @@ function displayEventType(type: API.EventType): string {
   }
 }
 
-const NO_MATCH = '__NO_MATCH__'
-
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',

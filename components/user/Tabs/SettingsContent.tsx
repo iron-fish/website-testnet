@@ -61,7 +61,6 @@ export default function SettingsContent({
   const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
     authedUser
   )
-  const [$canSee, $setCanSee] = useState(false)
   useEffect(() => {
     if (!authedUser || !user) return
     // local cache
@@ -70,7 +69,6 @@ export default function SettingsContent({
     $setUserData(authedUser)
     const canSee =
       user.graffiti === authedUser.graffiti && user.id === authedUser.id
-    $setCanSee(canSee)
     // eslint-disable-next-line no-console
     if (!canSee) {
       // eslint-disable-next-line no-console
@@ -82,10 +80,9 @@ export default function SettingsContent({
       return
     }
   }, [authedUser, user, onTabChange, toast])
-
   const {
-    graffiti: _graffiti = UNSET,
     email: _email = UNSET,
+    graffiti: _graffiti = UNSET,
     discord: _discord = UNSET,
     telegram: _telegram = UNSET,
     country_code: _cc = UNSET,
@@ -210,31 +207,34 @@ export default function SettingsContent({
   //*
   return (
     <div className="flex">
-      {!$canSee ? (
-        <Loader />
-      ) : (
-        <div className="flex-initial">
-          <div className="font-favorit mt-8">User Settings</div>
-          {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-          {$email && <TextField {...$email} disabled />}
-          {$graffiti && <TextField {...$graffiti} disabled={anyBlocksMined} />}
-          {anyBlocksMined && (
-            <Note>
-              <>
-                This graffiti has already mined blocks, so it{' '}
-                <strong>cannot be changed.</strong>
-              </>
-            </Note>
-          )}
-          {$discord && <TextField {...$discord} />}
-          {$telegram && <TextField {...$telegram} />}
-          {$country && <Select {...$country} />}
-          <Button className="mt-8" onClick={update}>
-            Save
-          </Button>
-        </div>
-      )}
+      <div className="flex-initial">
+        {!$userData ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="font-favorit mt-8">User Settings</div>
+            {$error !== UNSET && <FieldError text={$error} size="text-md" />}
+            {$email && <TextField {...$email} disabled />}
+            {$graffiti && (
+              <TextField {...$graffiti} disabled={anyBlocksMined} />
+            )}
+            {anyBlocksMined && (
+              <Note>
+                <>
+                  This graffiti has already mined blocks, so it{' '}
+                  <strong>cannot be changed.</strong>
+                </>
+              </Note>
+            )}
+            {$discord && <TextField {...$discord} />}
+            {$telegram && <TextField {...$telegram} />}
+            {$country && <Select {...$country} />}
+            <Button className="mt-8" onClick={update}>
+              Save
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   )
-  // */
 }
