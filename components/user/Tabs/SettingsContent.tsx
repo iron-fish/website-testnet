@@ -113,24 +113,17 @@ export default function SettingsContent({
     return invalid
   }, [$email, $graffiti, $telegram, $discord, $country])
   const update = useCallback(async () => {
-    /* eslint-disable no-console */
     if (
       !$email ||
       !$graffiti ||
       !$telegram ||
       !$discord ||
       !$country ||
-      !authedUser
+      !authedUser ||
+      testInvalid()
     ) {
-      console.log('missing field data')
       return
     }
-    if (testInvalid()) {
-      console.log('invalid data')
-      console.log({ $email, $graffiti, $telegram, $discord, $country })
-      return
-    }
-    /* eslint-enable no-console */
     const email = $email?.value
     const graffiti = $graffiti?.value
     const telegram = $telegram?.value
@@ -144,8 +137,6 @@ export default function SettingsContent({
       discord,
       country_code: country,
     }
-    // eslint-disable-next-line no-console
-    console.log({ updates })
 
     const result = await API.updateUser(authedUser.id, updates)
 
@@ -158,9 +149,7 @@ export default function SettingsContent({
       $graffiti.setTouched(false)
       scrollUp()
       // $setUser(result)
-      const success = await reloadUser()
-      // eslint-disable-next-line no-console
-      console.log({ success })
+      await reloadUser()
     }
   }, [
     $email,
@@ -176,8 +165,6 @@ export default function SettingsContent({
   useEffect(() => {
     if (!authedUser) return
     // local cache
-    // eslint-disable-next-line
-    console.log('updating authedUser...')
     $setUserData(authedUser)
     const canSee =
       authedUser &&
@@ -186,8 +173,6 @@ export default function SettingsContent({
       user.id === authedUser.id
     // eslint-disable-next-line no-console
     if (!canSee) {
-      // eslint-disable-next-line no-console
-      console.log('settings, not authed')
       // if you try to go to /users/x/settings but you're not user x
       onTabChange('weekly')
       toast.setMessage('You are not authorized to go there')

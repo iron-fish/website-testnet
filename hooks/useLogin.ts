@@ -97,8 +97,6 @@ export function useLogin(config: LoginProps = {}) {
           if ($status === STATUS.LOADING) {
             $setStatus(STATUS.FAILED)
           }
-          // eslint-disable-next-line no-console
-          console.warn('general error!', e)
         }
       }
     }

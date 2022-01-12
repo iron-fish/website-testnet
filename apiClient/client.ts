@@ -65,8 +65,6 @@ export async function updateUser(id: number, partial: ChangeOrder) {
     },
     body,
   }
-  // eslint-disable-next-line no-console
-  console.log({ body, updateUser: true, options })
   const res = await fetch(`${API_URL}/users/${id}`, options)
   return await res.json()
 }

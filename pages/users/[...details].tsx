@@ -99,16 +99,6 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
   const [$fetched, $setFetched] = useState(false)
-  // eslint-disable-next-line no-console
-  console.log({
-    $activeTab,
-    userId,
-    tab,
-    $user,
-    $events,
-    $fetched,
-    loginContext,
-  })
 
   useEffect(() => {
     let isCancelled = false
@@ -116,11 +106,8 @@ export default function User({ loginContext }: Props) {
     const fetchData = async () => {
       try {
         if (!routerIsReady || $fetched) {
-          // console.log($fetched ? 'fetched already' : 'no router yet')
           return
         }
-        // eslint-disable-next-line no-console
-        console.log('requesting data')
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
           await Promise.all([
             API.getUser(userId),
@@ -152,8 +139,6 @@ export default function User({ loginContext }: Props) {
           return
         }
 
-        // eslint-disable-next-line no-console
-        console.log('no errors!')
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
@@ -181,8 +166,6 @@ export default function User({ loginContext }: Props) {
   ])
   useEffect(() => {
     if (!$user) return
-    // eslint-disable-next-line no-console
-    console.log('fetched!')
     $setFetched(true)
   }, [$user])
 
