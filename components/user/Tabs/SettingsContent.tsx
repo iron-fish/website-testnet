@@ -174,7 +174,7 @@ export default function SettingsContent({
     reloadUser,
   ])
   useEffect(() => {
-    if (!user) return
+    if (!authedUser) return
     // local cache
     // eslint-disable-next-line
     console.log('updating authedUser...')
