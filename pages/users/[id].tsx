@@ -18,7 +18,7 @@ import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
 
 // The number of events to display in the Recent Activity list.
-const EVENTS_LIMIT = 7
+const EVENTS_LIMIT = 25
 
 interface Props {
   loginContext: LoginContext
