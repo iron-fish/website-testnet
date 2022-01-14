@@ -12,42 +12,44 @@ export default function WeeklyContent({
   weeklyMetrics,
   metricsConfig,
 }: WeeklyContentProps) {
+  const {
+    [API.EventType.BLOCK_MINED]: blockMinedLimit,
+    [API.EventType.BUG_CAUGHT]: bugsCaughtWeeklyLimit,
+    [API.EventType.SOCIAL_MEDIA_PROMOTION]: promotionLimit,
+    [API.EventType.PULL_REQUEST_MERGED]: prLimit,
+    [API.EventType.COMMUNITY_CONTRIBUTION]: contributionLimit,
+  } = metricsConfig.weekly_limits
+
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
       <WeeklyMetricCard
         title="Blocks Mined"
         metric={weeklyMetrics.metrics.blocks_mined}
-        metricValueMax={metricsConfig.weekly_limits[API.EventType.BLOCK_MINED]}
+        metricValueMax={blockMinedLimit}
         unit="blocks"
       />
       <WeeklyMetricCard
         title="Bugs Caught"
         metric={weeklyMetrics.metrics.bugs_caught}
-        metricValueMax={metricsConfig.weekly_limits[API.EventType.BUG_CAUGHT]}
+        metricValueMax={bugsCaughtWeeklyLimit}
         unit="bugs"
       />
       <WeeklyMetricCard
         title="Promotions"
         metric={weeklyMetrics.metrics.social_media_contributions}
-        metricValueMax={
-          metricsConfig.weekly_limits[API.EventType.SOCIAL_MEDIA_PROMOTION]
-        }
+        metricValueMax={promotionLimit}
         unit="promotions"
       />
       <WeeklyMetricCard
         title="PRs Merged"
         metric={weeklyMetrics.metrics.pull_requests_merged}
-        metricValueMax={
-          metricsConfig.weekly_limits[API.EventType.PULL_REQUEST_MERGED]
-        }
+        metricValueMax={prLimit}
         unit="PRs"
       />
       <WeeklyMetricCard
         title="Community Contributions"
         metric={weeklyMetrics.metrics.community_contributions}
-        metricValueMax={
-          metricsConfig.weekly_limits[API.EventType.COMMUNITY_CONTRIBUTION]
-        }
+        metricValueMax={contributionLimit}
         unit="contributions"
       />
     </div>
