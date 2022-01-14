@@ -1,3 +1,17 @@
+export type ApiEventMetadata = {
+  difficulty: number
+  graffiti: string
+  hash: string
+  id: number
+  main: boolean
+  object: string
+  previous_block_hash: string
+  sequence: number
+  size: number
+  time_since_last_block_ms: number
+  transactions_count: number
+}
+
 export type ApiEvent = {
   id: number
   created_at: string
@@ -6,6 +20,7 @@ export type ApiEvent = {
   occurred_at: string
   points: number
   user_id: number
+  metadata?: ApiEventMetadata
 }
 export type LoginEvent = {
   authenticated: boolean
