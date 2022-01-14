@@ -7,19 +7,21 @@ type WeeklyMetricCardProps = {
   title: string
   metric: API.UserMetric
   metricValueMax: number
+  unit: string
 }
 
 export default function WeeklyMetricCard({
   title,
   metric,
   metricValueMax,
+  unit,
 }: WeeklyMetricCardProps) {
   return (
     <MetricCard
       title={title}
-      value={metric.count.toLocaleString()}
+      value={metric.points.toLocaleString()}
       subValueTop={`/ ${metricValueMax.toLocaleString()}`}
-      subValueBottom={`${metric.points.toLocaleString()} points`}
+      subValueBottom={`${metric.count.toLocaleString()} ${unit}`}
     />
   )
 }
