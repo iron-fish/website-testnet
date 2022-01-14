@@ -139,6 +139,7 @@ export const callsToAction = {
       title: 'Submit a Pull Request',
       content:
         'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
+      earn: 5000,
       points: [
         'Small PR = 250 points',
         'Medium PR = 750 points',

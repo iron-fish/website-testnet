@@ -8,63 +8,49 @@ type WeeklyContentProps = {
   metricsConfig: API.MetricsConfigResponse
 }
 
-// Given a metrics config response, computes the maximum number of
-// events for a given metric that can be scored per-week.
-function getWeeklyMetricMax(
-  key: API.EventType,
-  metricsConfig: API.MetricsConfigResponse
-) {
-  return (
-    metricsConfig.weekly_limits[key] /
-    metricsConfig.points_per_category.BLOCK_MINED
-  )
-}
-
 export default function WeeklyContent({
   weeklyMetrics,
   metricsConfig,
 }: WeeklyContentProps) {
+  const {
+    [API.EventType.BLOCK_MINED]: blockMinedLimit,
+    [API.EventType.BUG_CAUGHT]: bugsCaughtWeeklyLimit,
+    [API.EventType.SOCIAL_MEDIA_PROMOTION]: promotionLimit,
+    [API.EventType.PULL_REQUEST_MERGED]: prLimit,
+    [API.EventType.COMMUNITY_CONTRIBUTION]: contributionLimit,
+  } = metricsConfig.weekly_limits
+
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
       <WeeklyMetricCard
         title="Blocks Mined"
         metric={weeklyMetrics.metrics.blocks_mined}
-        metricValueMax={getWeeklyMetricMax(
-          API.EventType.BLOCK_MINED,
-          metricsConfig
-        )}
+        metricValueMax={blockMinedLimit}
+        unit="blocks"
       />
       <WeeklyMetricCard
         title="Bugs Caught"
         metric={weeklyMetrics.metrics.bugs_caught}
-        metricValueMax={getWeeklyMetricMax(
-          API.EventType.BUG_CAUGHT,
-          metricsConfig
-        )}
+        metricValueMax={bugsCaughtWeeklyLimit}
+        unit="bugs"
       />
       <WeeklyMetricCard
         title="Promotions"
         metric={weeklyMetrics.metrics.social_media_contributions}
-        metricValueMax={getWeeklyMetricMax(
-          API.EventType.SOCIAL_MEDIA_PROMOTION,
-          metricsConfig
-        )}
+        metricValueMax={promotionLimit}
+        unit="promotions"
       />
       <WeeklyMetricCard
         title="PRs Merged"
         metric={weeklyMetrics.metrics.pull_requests_merged}
-        metricValueMax={getWeeklyMetricMax(
-          API.EventType.PULL_REQUEST_MERGED,
-          metricsConfig
-        )}
+        metricValueMax={prLimit}
+        unit="PRs"
       />
       <WeeklyMetricCard
         title="Community Contributions"
         metric={weeklyMetrics.metrics.community_contributions}
-        metricValueMax={getWeeklyMetricMax(
-          API.EventType.COMMUNITY_CONTRIBUTION,
-          metricsConfig
-        )}
+        metricValueMax={contributionLimit}
+        unit="contributions"
       />
     </div>
   )
