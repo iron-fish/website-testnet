@@ -71,6 +71,9 @@ module.exports = {
         ifblue: {
           DEFAULT: '#1D0070',
         },
+        ifotherblue: {
+          DEFAULT: '#2C72FF',
+        },
         ifsubtextgray: {
           DEFAULT: '#AFAFAF',
         },
