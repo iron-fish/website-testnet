@@ -66,6 +66,8 @@ export const TextField = ({
   required = true,
   whitespace = WHITESPACE.DEFAULT,
 }: Field) => {
+  // eslint-disable-next-line
+  console.log({ placeholder })
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
   return (
     <LabelledRow

@@ -19,7 +19,7 @@ import { TabType } from './index'
 
 type Props = {
   anyBlocksMined: boolean
-  user: API.ApiUser | null
+  user: API.ApiUser
   authedUser: API.ApiUserMetadata | null
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => void
@@ -195,27 +195,32 @@ export default function SettingsContent({
         ) : (
           <>
             <div className="font-favorit mt-8">User Settings</div>
-            {$loading && <Loader />}
-            {$error !== UNSET && <FieldError text={$error} size="text-md" />}
-            {$email && <TextField {...$email} disabled />}
-            {$graffiti && (
-              <TextField {...$graffiti} disabled={anyBlocksMined} />
-            )}
-            {anyBlocksMined && (
-              <Note>
-                <>
-                  This graffiti has already mined blocks, so it{' '}
-                  <strong>cannot be changed.</strong>
-                </>
-              </Note>
-            )}
-            {$discord && <TextField {...$discord} />}
-            {$telegram && <TextField {...$telegram} />}
-            {$country && <Select {...$country} />}
-            {!$loading && (
-              <Button className="mt-8" onClick={update}>
-                Save
-              </Button>
+            {$loading ? (
+              <Loader />
+            ) : (
+              <>
+                {$error !== UNSET && (
+                  <FieldError text={$error} size="text-md" />
+                )}
+                {$email && <TextField {...$email} disabled />}
+                {$graffiti && (
+                  <TextField {...$graffiti} disabled={anyBlocksMined} />
+                )}
+                {anyBlocksMined && (
+                  <Note>
+                    <>
+                      This graffiti has already mined blocks, so it{' '}
+                      <strong>cannot be changed.</strong>
+                    </>
+                  </Note>
+                )}
+                {$discord && <TextField {...$discord} />}
+                {$telegram && <TextField {...$telegram} />}
+                {$country && <Select {...$country} />}
+                <Button className="mt-8" onClick={update}>
+                  Save
+                </Button>
+              </>
             )}
           </>
         )}
