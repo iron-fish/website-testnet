@@ -104,6 +104,8 @@ export default function User({ loginContext }: Props) {
     const fetchData = async () => {
       try {
         if (!routerIsReady || $fetched) {
+          // eslint-disable-next-line
+          console.log(!routerIsReady ? 'Waiting for router' : 'Already fetched')
           return
         }
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
@@ -162,8 +164,15 @@ export default function User({ loginContext }: Props) {
     loginContext?.metadata?.graffiti,
     $fetched,
   ])
+
   useEffect(() => {
-    if (!$user) return
+    if (!$user) {
+      // eslint-disable-next-line
+      console.log('no user yet')
+      return
+    }
+    // eslint-disable-next-line
+    console.log('setting fetched to true')
     $setFetched(true)
   }, [$user])
 
