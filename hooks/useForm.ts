@@ -67,6 +67,8 @@ export function useField(provided: ProvidedField): Field | null {
     touched = false,
     validation,
     whitespace = WHITESPACE.DEFAULT,
+    placeholder,
+    useDefault,
   } = provided
   const [$value, $setter] = useState<string>(defaultValue)
   // TODO: tried writing this with nullish coalescing but it yelled and I got tired
@@ -98,6 +100,8 @@ export function useField(provided: ProvidedField): Field | null {
       valid,
       validation,
       whitespace,
+      placeholder,
+      useDefault,
       // dynamic values
       choice: $choice,
       disabled: $disabled,
@@ -141,6 +145,8 @@ export function useField(provided: ProvidedField): Field | null {
     $touched,
     $error,
     $choice,
+    placeholder,
+    useDefault,
   ])
   return $field
 }

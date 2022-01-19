@@ -165,11 +165,14 @@ export default function SettingsContent({
     testInvalid,
     toast,
     reloadUser,
+    $setError,
   ])
+
   useEffect(() => {
     if (!authedUser) return
     // local cache
     $setUserData(authedUser)
+    $setLoading(false)
     const canSee = authedUser && user && user.id === authedUser.id
     if (!canSee) {
       // if you try to go to /users/x/settings but you're not user x
