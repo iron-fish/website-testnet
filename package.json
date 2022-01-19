@@ -7,8 +7,7 @@
     "build": "nps build",
     "start": "nps start",
     "lint": "nps lint",
-    "prepare": "husky install",
-    "ci": "nps test.ci"
+    "prepare": "husky install"
   },
   "dependencies": {
     "base-64": "^1.0.0",

@@ -18,7 +18,6 @@ import {
   UNSET,
   validateEmail,
   validateGraffiti,
-  exists,
   defaultErrorText,
 } from 'utils/forms'
 import { encode as btoa } from 'base-64'
@@ -49,7 +48,8 @@ export const FIELDS = {
     label: '',
     placeholder: 'Your username',
     defaultValue: UNSET,
-    validation: exists,
+    required: false,
+    validation: () => true,
     defaultErrorText,
     isRadioed: true,
     whitespace: WHITESPACE.BANNED,

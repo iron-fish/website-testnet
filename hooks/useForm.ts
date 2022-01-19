@@ -52,23 +52,6 @@ export interface Field extends ProvidedField {
   choice: string
   setChoice: Dispatch<SetStateAction<string>>
 }
-/*
-// eslint-disable-next-line
-type Predicate = (x: any) => boolean
-
-const sometimes = (limit: number, predicate: Predicate) => {
-  let x = 0
-  // eslint-disable-next-line
-  function inner(whatever: any) {
-    x += 1
-    if (x < limit && predicate(whatever)) {
-      // eslint-disable-next-line
-      console.log(JSON.stringify(whatever, null, 2))
-    }
-  }
-  return inner
-}
-*/
 
 export function useField(provided: ProvidedField): Field | null {
   const {

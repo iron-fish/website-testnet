@@ -18,7 +18,6 @@ import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
-// const API = {}
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 7
@@ -78,10 +77,9 @@ export default function User({ loginContext }: Props) {
   })
 
   const router = useRouter()
-  const { query = {}, isReady: routerIsReady } = router
-  const { details: queryDetails = [] } = query
+  const { isReady: routerIsReady } = router
+  const queryDetails = router.query.details ?? []
   const [userId, tab] = queryDetails as string[]
-
   const rawTab = !tab ? 'weekly' : (tab as TabType)
   const [$activeTab, $setActiveTab] = useState<TabType>(rawTab)
 
@@ -101,7 +99,7 @@ export default function User({ loginContext }: Props) {
   const [$fetched, $setFetched] = useState(false)
 
   useEffect(() => {
-    let isCancelled = false
+    let isCanceled = false
 
     const fetchData = async () => {
       try {
@@ -120,7 +118,7 @@ export default function User({ loginContext }: Props) {
             API.getMetricsConfig(),
           ])
 
-        if (isCancelled) {
+        if (isCanceled) {
           return
         }
 
@@ -154,7 +152,7 @@ export default function User({ loginContext }: Props) {
 
     fetchData()
     return () => {
-      isCancelled = true
+      isCanceled = true
     }
   }, [
     routerIsReady,

@@ -82,7 +82,7 @@ export function useLogin(config: LoginProps = {}) {
     } catch (err) {
       if (err.toString().indexOf('-32603') > -1) {
         $setStatus(STATUS.NOT_FOUND)
-        return
+        return false
       }
 
       throw err

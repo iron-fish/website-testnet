@@ -46,7 +46,7 @@ export async function createUser(
   return await res.json()
 }
 
-type ChangeOrder = {
+type PartialUser = {
   email?: string
   graffiti?: string
   socialChoice?: string
@@ -54,7 +54,7 @@ type ChangeOrder = {
   countryCode?: string
 }
 
-export async function updateUser(id: number, partial: ChangeOrder) {
+export async function updateUser(id: number, partial: PartialUser) {
   const body = JSON.stringify(partial)
   const token = await magic?.user.getIdToken()
   const options = {

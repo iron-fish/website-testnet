@@ -6,7 +6,6 @@ import Select from 'components/Form/Select'
 import TextField from 'components/Form/TextField'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
-// import Debug from 'components/Debug'
 
 import { useField } from 'hooks/useForm'
 import { FIELDS } from 'pages/signup'
@@ -62,6 +61,7 @@ export default function SettingsContent({
   onTabChange,
 }: Props) {
   const [$error, $setError] = useState<string>(UNSET)
+  const [$loading, $setLoading] = useState(true)
   const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
     authedUser
   )
@@ -71,7 +71,7 @@ export default function SettingsContent({
     graffiti: _graffiti = UNSET,
     discord: _discord = UNSET,
     telegram: _telegram = UNSET,
-    country_code: _cc = UNSET,
+    country_code: _country_code = UNSET,
   } = $userData || {}
   const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
@@ -95,7 +95,7 @@ export default function SettingsContent({
 
   const $country = useField({
     ...EDITABLE_FIELDS.country,
-    defaultValue: _cc,
+    defaultValue: _country_code,
   })
   const testInvalid = useCallback(() => {
     const invalid =
@@ -112,6 +112,8 @@ export default function SettingsContent({
     }
     return invalid
   }, [$email, $graffiti, $telegram, $discord, $country])
+
+  // on save
   const update = useCallback(async () => {
     if (
       !$email ||
@@ -124,6 +126,7 @@ export default function SettingsContent({
     ) {
       return
     }
+    $setLoading(true)
     const email = $email?.value
     const graffiti = $graffiti?.value
     const telegram = $telegram?.value
@@ -144,11 +147,12 @@ export default function SettingsContent({
       const error = '' + result.message
       $setError(error)
     } else {
+      $setLoading(false)
       toast.setMessage('User settings updated')
       toast.show()
+      // this is to prevent the graffiti from popping an error on save
       $graffiti.setTouched(false)
       scrollUp()
-      // $setUser(result)
       await reloadUser()
     }
   }, [
@@ -166,12 +170,7 @@ export default function SettingsContent({
     if (!authedUser) return
     // local cache
     $setUserData(authedUser)
-    const canSee =
-      authedUser &&
-      user &&
-      user.graffiti === authedUser.graffiti &&
-      user.id === authedUser.id
-    // eslint-disable-next-line no-console
+    const canSee = authedUser && user && user.id === authedUser.id
     if (!canSee) {
       // if you try to go to /users/x/settings but you're not user x
       onTabChange('weekly')
@@ -188,22 +187,6 @@ export default function SettingsContent({
     onTabChange,
     toast,
   ])
-  /*
-  return (
-    <Debug
-      {...{
-        anyBlocksMined,
-        $error,
-        $email,
-        $graffiti,
-        $discord,
-        $telegram,
-        $country,
-      }}
-    />
-  )
-  // */
-  // /*
   return (
     <div className="flex">
       <div className="flex-initial">
@@ -212,6 +195,7 @@ export default function SettingsContent({
         ) : (
           <>
             <div className="font-favorit mt-8">User Settings</div>
+            {$loading && <Loader />}
             {$error !== UNSET && <FieldError text={$error} size="text-md" />}
             {$email && <TextField {...$email} disabled />}
             {$graffiti && (
@@ -228,9 +212,11 @@ export default function SettingsContent({
             {$discord && <TextField {...$discord} />}
             {$telegram && <TextField {...$telegram} />}
             {$country && <Select {...$country} />}
-            <Button className="mt-8" onClick={update}>
-              Save
-            </Button>
+            {!$loading && (
+              <Button className="mt-8" onClick={update}>
+                Save
+              </Button>
+            )}
           </>
         )}
       </div>

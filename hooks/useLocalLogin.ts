@@ -19,12 +19,14 @@ export const useLocalLogin = (): LoginContext => ({
   checkLoggedIn: () => true,
   checkLoading: () => false,
   checkFailed: () => false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setError: () => {},
+  setError: () => {
+    // non-empty-function body
+  },
   error: null,
   status: STATUS.LOADED,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setStatus: () => {},
+  setStatus: () => {
+    // non-empty-function body
+  },
   metadata: METADATA,
   magicMetadata: {
     issuer: 'did:ethr:0xFfcD8602De681449Fa70C304096a84e014Fa123C',

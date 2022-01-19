@@ -13,12 +13,12 @@ type TabsProps = {
   allTimeMetrics: API.UserMetricsResponse
   weeklyMetrics: API.UserMetricsResponse
   metricsConfig: API.MetricsConfigResponse
-  user: API.ApiUser | null
+  user: API.ApiUser
   authedUser: API.ApiUserMetadata | null
   activeTab: TabType
   onTabChange: (tab: TabType) => unknown
   toast: ReturnType<typeof useQueriedToast>
-  reloadUser: () => void
+  reloadUser: () => Promise<boolean>
 }
 
 export default function Tabs({
