@@ -22,7 +22,7 @@ type Props = {
   user: API.ApiUser
   authedUser: API.ApiUserMetadata | null
   toast: ReturnType<typeof useQueriedToast>
-  reloadUser: () => void
+  reloadUser: () => Promise<boolean>
   onTabChange: (tab: TabType) => unknown
 }
 
@@ -153,7 +153,9 @@ export default function SettingsContent({
       // this is to prevent the graffiti from popping an error on save
       $graffiti.setTouched(false)
       scrollUp()
-      await reloadUser()
+      const reloaded = await reloadUser()
+      // eslint-disable-next-line
+      console.log({ reloaded })
     }
   }, [
     $email,

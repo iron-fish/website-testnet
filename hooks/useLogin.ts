@@ -33,29 +33,29 @@ export function useLogin(config: LoginProps = {}) {
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
   const reloadUser = useCallback(async () => {
+    if (!magic || !magic.user) {
+      return false
+    }
+
+    let token
     try {
-      if (!magic || !magic.user) {
+      token = await magic.user.getIdToken()
+    } catch (error) {}
+
+    if (!token) {
+      if (redirect) {
+        // if redirect string is provided and we're not logged in, cya!
+        // if this is kept as a static Router.push, it _does not_ work
+        $router.push(redirect)
         return false
       }
 
-      let token
-      try {
-        token = await magic.user.getIdToken()
-      } catch (error) {}
-
-      if (!token) {
-        if (redirect) {
-          // if redirect string is provided and we're not logged in, cya!
-          // if this is kept as a static Router.push, it _does not_ work
-          $router.push(redirect)
-          return false
-        }
-
-        // this is a visible error but not a breaking error
-        $setStatus(STATUS.NOT_FOUND)
-        $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
-        return false
-      }
+      // this is a visible error but not a breaking error
+      $setStatus(STATUS.NOT_FOUND)
+      $setError(new LocalError('No token available.', NO_MAGIC_TOKEN))
+      return false
+    }
+    try {
       const [magicMd, details] = await Promise.all([
         magic.user.getMetadata(),
         getUserDetails(token),
