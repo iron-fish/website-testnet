@@ -144,7 +144,7 @@ export default function User({ loginContext }: Props) {
   )
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen inline-flex flex-col">
       <Head>
         <title>{$user.graffiti}</title>
         <meta name="description" content={String($user.graffiti)} />
@@ -159,44 +159,47 @@ export default function User({ loginContext }: Props) {
       <main className="bg-ifpink flex-1 justify-center flex pt-16 pb-32">
         <div style={{ flexBasis: 1138 }}>
           <OffsetBorderContainer>
-            <div className="px-24 pt-16 pb-12">
+            <div className="px-7 pt-7 md:px-20 pt-16 pb-12">
               {/* Header */}
               <div
                 className="flex justify-between mb-8"
                 style={{ width: '100%' }}
               >
                 <div>
-                  <h1 className="font-extended text-6xl mt-6 mb-8">
+                  <h1 className="font-extended text-4xl md:text-6xl mt-6 mb-8 break-all">
                     {$user.graffiti}
                   </h1>
+                </div>
 
-                  <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
+                <div className="inline-flex flex-col items-center pl-2 pt-2 justify-end">
+                  <svg viewBox="0 0 128 128" class="w-16 md:w-32">
+                    <FishAvatar color={avatarColor}/>
+                  </svg>
+                   <div className="mt-4">
+                    <Flag code={$user.country_code} />
+                   </div>
+                </div>
+              </div>
+
+              <div className="font-favorit flex flex-wrap gap-x-10 sm:gap-x-16 gap-y-2 mb-6">
                     <div>
-                      <div>All Time Rank</div>
-                      <div className="text-3xl mt-2">{ordinalRank}</div>
+                      <div className="text-sm sm:text-lg">Rank</div>
+                      <div className="text-md sm:text-3xl mt-0">{ordinalRank}</div>
                     </div>
                     <div>
-                      <div>Total Points</div>
-                      <div className="text-3xl mt-2">
+                      <div className="text-sm sm:text-lg">Total Points</div>
+                      <div className="text-md sm:text-3xl mt-0">
                         {$user.total_points.toLocaleString()}
                       </div>
                     </div>
                     <div>
-                      <div>Weekly Points</div>
-                      <div className="text-3xl mt-2">
+                      <div className="text-sm sm:text-lg">Weekly Points</div>
+                      <div className="text-md sm:text-3xl mt-0">
                         {$weeklyMetrics.points.toLocaleString()} /{' '}
                         {totalWeeklyLimit.toLocaleString()}
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <FishAvatar color={avatarColor} />
-                  <div className="mt-4">
-                    <Flag code={$user.country_code} />
-                  </div>
-                </div>
-              </div>
 
               {/* Tabs */}
               <Tabs

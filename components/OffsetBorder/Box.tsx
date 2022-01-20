@@ -11,7 +11,7 @@ export function Box({
     <div
       className={`relative mb-2.5 ${
         container ? `ml-2.5` : ``
-      } mr-2.5 ${className}`}
+      } mr-5 ${className}`}
     >
       <div
         className={`absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 ${behind}`}
