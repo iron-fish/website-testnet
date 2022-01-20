@@ -159,7 +159,6 @@ export default function User({ loginContext }: Props) {
   }, [
     routerIsReady,
     userId,
-    $toast,
     loginContext?.metadata?.id,
     loginContext?.metadata?.graffiti,
     $fetched,
