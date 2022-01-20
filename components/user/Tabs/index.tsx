@@ -51,17 +51,14 @@ export default function Tabs({
         >
           All Time Stats
         </TabHeaderButton>
-        {user &&
-          authedUser &&
-          authedUser.graffiti == user.graffiti &&
-          authedUser.id === user.id && (
-            <TabHeaderButton
-              selected={activeTab === 'settings'}
-              onClick={() => onTabChange('settings')}
-            >
-              Settings
-            </TabHeaderButton>
-          )}
+        {user && authedUser && authedUser.id === user.id && (
+          <TabHeaderButton
+            selected={activeTab === 'settings'}
+            onClick={() => onTabChange('settings')}
+          >
+            Settings
+          </TabHeaderButton>
+        )}
       </div>
 
       {/* Tabs Content */}

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import useQuery from 'hooks/useQuery'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -24,30 +24,6 @@ const EVENTS_LIMIT = 7
 
 const validTabValue = (x: string) =>
   x === 'weekly' || x === 'all' || x === 'settings'
-
-export const getServerSideProps: GetServerSideProps =
-  async function getServerSideProps(context) {
-    const { params = {} } = context
-    const { details = [] } = params
-    const [userId, tab] = details as string[]
-    if (isNaN(parseInt(userId))) {
-      return {
-        redirect: {
-          destination: `/leaderboard?toast=${btoa('Unable to find that user')}`,
-          permanent: true,
-        },
-      }
-    }
-    if (tab && !validTabValue(tab)) {
-      return {
-        redirect: {
-          destination: `/users/${userId}`,
-          permanent: false,
-        },
-      }
-    }
-    return { props: {} }
-  }
 
 interface Props {
   loginContext: LoginContext
@@ -78,10 +54,11 @@ export default function User({ loginContext }: Props) {
 
   const router = useRouter()
   const { isReady: routerIsReady } = router
-  const queryDetails = router.query.details ?? []
-  const [userId, tab] = queryDetails as string[]
-  const rawTab = !tab ? 'weekly' : (tab as TabType)
-  const [$activeTab, $setActiveTab] = useState<TabType>(rawTab)
+  const userId = (router?.query?.id || '') as string
+  const rawTab = useQuery('tab')
+  const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
+  // eslint-disable-next-line
+  console.log({ rawTab, $activeTab })
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
@@ -97,6 +74,11 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
   const [$fetched, $setFetched] = useState(false)
+  useEffect(() => {
+    if (rawTab && validTabValue(rawTab)) {
+      $setActiveTab(rawTab as TabType)
+    }
+  }, [rawTab])
 
   useEffect(() => {
     let isCanceled = false
