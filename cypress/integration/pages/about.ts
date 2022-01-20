@@ -50,7 +50,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Claim Points',
-        href: 'https://github.com/iron-fish/ironfish/issues',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
@@ -75,7 +75,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Claim Points',
-        href: 'https://github.com/iron-fish/ironfish/pulls',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
