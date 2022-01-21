@@ -57,10 +57,13 @@ export default function User({ loginContext }: Props) {
   const userId = (router?.query?.id || '') as string
   const rawTab = useQuery('tab')
   const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
-  // eslint-disable-next-line
-  console.log({ rawTab, $activeTab })
 
-  const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
+  const [$user, _setUser] = useState<API.ApiUser | undefined>(undefined)
+  const $setUser = (x: API.ApiUser) => {
+    // eslint-disable-next-line
+    console.log('setting user to', x)
+    return _setUser(x)
+  }
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
     undefined
   )
