@@ -159,7 +159,10 @@ export default function SettingsContent({
       scrollUp()
       const reloaded = await reloadUser()
       if (reloaded) {
-        setUser({ ...user, ...updates })
+        const updated = { ...user, ...updates }
+        // eslint-disable-next-line
+        console.log({ originalUser: user, newUser: updated })
+        setUser(updated)
         setFetched(false)
       }
     }
