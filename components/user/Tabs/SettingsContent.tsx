@@ -160,7 +160,7 @@ export default function SettingsContent({
       const reloaded = await reloadUser()
       if (reloaded) {
         setUser({ ...user, ...updates })
-        // setFetched(false)
+        setFetched(false)
       }
     }
   }, [
