@@ -166,6 +166,7 @@ export default function SettingsContent({
         setUser(updated)
         $setUserData(userData)
         setFetched(false)
+        onTabChange('settings')
       }
     }
   }, [
@@ -182,6 +183,7 @@ export default function SettingsContent({
     setFetched,
     setUser,
     user,
+    onTabChange,
   ])
 
   useEffect(() => {
