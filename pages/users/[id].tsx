@@ -250,6 +250,7 @@ export default function User({ loginContext }: Props) {
                 allTimeMetrics={$allTimeMetrics}
                 weeklyMetrics={$weeklyMetrics}
                 metricsConfig={$metricsConfig}
+                setFetched={$setFetched}
               />
 
               {/* Recent Activity */}

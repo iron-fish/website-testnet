@@ -24,6 +24,7 @@ type Props = {
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => Promise<boolean>
   onTabChange: (tab: TabType) => unknown
+  setFetched: (x: boolean) => unknown
 }
 
 const EDITABLE_FIELDS = {
@@ -59,6 +60,7 @@ export default function SettingsContent({
   toast,
   reloadUser,
   onTabChange,
+  setFetched,
 }: Props) {
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(true)
@@ -154,8 +156,9 @@ export default function SettingsContent({
       $graffiti.setTouched(false)
       scrollUp()
       const reloaded = await reloadUser()
-      // eslint-disable-next-line
-      console.log({ reloaded })
+      if (reloaded) {
+        setFetched(false)
+      }
     }
   }, [
     $email,
@@ -168,6 +171,7 @@ export default function SettingsContent({
     toast,
     reloadUser,
     $setError,
+    setFetched,
   ])
 
   useEffect(() => {
