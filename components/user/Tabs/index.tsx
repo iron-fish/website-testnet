@@ -20,6 +20,7 @@ type TabsProps = {
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => Promise<boolean>
   setFetched: (x: boolean) => unknown
+  setUser: (x: API.ApiUser) => unknown
 }
 
 export default function Tabs({
@@ -33,6 +34,7 @@ export default function Tabs({
   toast,
   reloadUser,
   setFetched,
+  setUser,
 }: TabsProps) {
   const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
   const anyBlocksMined = allTimeBlocksMined > 0
@@ -82,6 +84,7 @@ export default function Tabs({
           toast={toast}
           reloadUser={reloadUser}
           setFetched={setFetched}
+          setUser={setUser}
         />
       )}
     </div>

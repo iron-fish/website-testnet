@@ -251,6 +251,7 @@ export default function User({ loginContext }: Props) {
                 weeklyMetrics={$weeklyMetrics}
                 metricsConfig={$metricsConfig}
                 setFetched={$setFetched}
+                setUser={$setUser}
               />
 
               {/* Recent Activity */}

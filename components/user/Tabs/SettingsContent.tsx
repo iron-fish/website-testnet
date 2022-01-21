@@ -25,6 +25,7 @@ type Props = {
   reloadUser: () => Promise<boolean>
   onTabChange: (tab: TabType) => unknown
   setFetched: (x: boolean) => unknown
+  setUser: (x: API.ApiUser) => unknown
 }
 
 const EDITABLE_FIELDS = {
@@ -61,6 +62,7 @@ export default function SettingsContent({
   reloadUser,
   onTabChange,
   setFetched,
+  setUser,
 }: Props) {
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(true)
@@ -157,7 +159,8 @@ export default function SettingsContent({
       scrollUp()
       const reloaded = await reloadUser()
       if (reloaded) {
-        setFetched(false)
+        setUser({ ...user, ...updates })
+        // setFetched(false)
       }
     }
   }, [
@@ -172,6 +175,8 @@ export default function SettingsContent({
     reloadUser,
     $setError,
     setFetched,
+    setUser,
+    user,
   ])
 
   useEffect(() => {
