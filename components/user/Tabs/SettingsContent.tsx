@@ -160,9 +160,11 @@ export default function SettingsContent({
       const reloaded = await reloadUser()
       if (reloaded) {
         const updated = { ...user, ...updates }
+        const userData = { ...authedUser, ...updates }
         // eslint-disable-next-line
-        console.log({ originalUser: user, newUser: updated })
+        console.log({ originalUser: user, newUser: updated, userData })
         setUser(updated)
+        $setUserData(userData)
         setFetched(false)
       }
     }
