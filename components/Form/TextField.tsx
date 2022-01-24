@@ -48,6 +48,10 @@ const RadioOptions = ({
   </div>
 )
 
+export interface ControlledField extends Field {
+  controlled?: boolean
+}
+
 export const TextField = ({
   id,
   label,
@@ -65,8 +69,23 @@ export const TextField = ({
   disabled,
   required = true,
   whitespace = WHITESPACE.DEFAULT,
-}: Field) => {
+  value,
+  controlled = false,
+}: ControlledField) => {
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
+  const controller = controlled ? { value: value } : {}
+  const inputProps = {
+    ...handleTrim,
+    ...controller,
+    className: `${disabled ? 'bg-transparent' : ''}`,
+    defaultValue,
+    disabled,
+    onBlur,
+    onChange,
+    id,
+    type: 'text',
+    placeholder,
+  }
   return (
     <LabelledRow
       key={id}
@@ -86,17 +105,7 @@ export const TextField = ({
           setChoice={setChoice}
         />
       )}
-      <input
-        className={`${disabled ? 'bg-transparent' : ''}`}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        onBlur={onBlur}
-        onChange={onChange}
-        {...handleTrim}
-        id={id}
-        type="text"
-        placeholder={placeholder}
-      />
+      <input {...inputProps} />
     </LabelledRow>
   )
 }

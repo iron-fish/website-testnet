@@ -90,18 +90,14 @@ export function useLogin(config: LoginProps = {}) {
   }, [$router, redirect])
   useEffect(() => {
     const loadAndCheck = async () => {
-      if (!$metadata) {
-        try {
-          await reloadUser()
-        } catch (e) {
-          if ($status === STATUS.LOADING) {
-            $setStatus(STATUS.FAILED)
-          }
-        }
+      try {
+        await reloadUser()
+      } catch (e) {
+        $setStatus(STATUS.FAILED)
       }
     }
     loadAndCheck()
-  }, [$metadata, $status, reloadUser])
+  }, [reloadUser])
   const statusRelevantContext = (x: STATUS) => () => $status === x
   const loginContext = {
     reloadUser,

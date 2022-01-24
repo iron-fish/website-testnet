@@ -29,9 +29,14 @@ type Props = {
 }
 
 const EDITABLE_FIELDS = {
-  email: { ...FIELDS.email, validation: () => true, touched: true },
-  graffiti: { ...FIELDS.graffiti },
-  country: { ...FIELDS.country, useDefault: false },
+  email: {
+    ...FIELDS.email,
+    validation: () => true,
+    touched: true,
+    controlled: true,
+  },
+  graffiti: { ...FIELDS.graffiti, controlled: true },
+  country: { ...FIELDS.country, useDefault: false, controlled: true },
   discord: {
     ...FIELDS.social,
     required: false,
@@ -41,6 +46,7 @@ const EDITABLE_FIELDS = {
     placeholder: 'Your Discord username',
     isRadioed: false,
     validation: () => true,
+    controlled: true,
   },
   telegram: {
     ...FIELDS.social,
@@ -51,6 +57,7 @@ const EDITABLE_FIELDS = {
     placeholder: 'Your Telegram username',
     isRadioed: false,
     validation: () => true,
+    controlled: true,
   },
 }
 
