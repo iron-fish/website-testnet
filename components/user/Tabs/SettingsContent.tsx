@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/router'
 
 import Note from 'components/Form/Note'
 import { FieldError } from 'components/Form/FieldStatus'
@@ -71,6 +72,7 @@ export default function SettingsContent({
   setFetched,
   setUser,
 }: Props) {
+  const router = useRouter()
   // eslint-disable-next-line
   console.log('redrawing SettingsContent')
   const [$error, $setError] = useState<string>(UNSET)
@@ -162,8 +164,19 @@ export default function SettingsContent({
       discord,
       country_code: country,
     }
-
-    const result = await API.updateUser(authedUser.id, updates)
+    let result
+    try {
+      result = await API.updateUser(authedUser.id, updates)
+    } catch (e) {
+      /*
+      Unhandled Runtime Error
+      Error: Magic RPC Error: [-32603] Internal error: User denied account access.
+      */
+      if (e.message.indexOf('-32603') > -1) {
+        router.push(`/login?toast=${btoa('Please log in again.')}`)
+        return
+      }
+    }
 
     if ('error' in result) {
       const error = '' + result.message
@@ -200,6 +213,7 @@ export default function SettingsContent({
     setFetched,
     setUser,
     user,
+    router,
   ])
 
   useEffect(() => {
