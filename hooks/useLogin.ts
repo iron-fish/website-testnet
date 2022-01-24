@@ -36,6 +36,7 @@ export function useLogin(config: LoginProps = {}) {
     if (!magic || !magic.user) {
       return false
     }
+    $setStatus(STATUS.LOADING)
 
     let token
     try {

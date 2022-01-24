@@ -90,6 +90,8 @@ export default function SettingsContent({
   } = $userData || {}
   // eslint-disable-next-line
   console.log({
+    authedUser,
+    user,
     $userData,
     _email,
     _graffiti,
@@ -100,26 +102,31 @@ export default function SettingsContent({
   const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
+    value: _graffiti,
   })
 
   const $email = useField({
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
+    value: _email,
   })
   const $discord = useField({
     ...EDITABLE_FIELDS.discord,
     defaultValue: _discord,
+    value: _discord,
     touched: !!_discord,
   })
   const $telegram = useField({
     ...EDITABLE_FIELDS.telegram,
     defaultValue: _telegram,
+    value: _telegram,
     touched: !!_telegram,
   })
 
   const $country = useField({
     ...EDITABLE_FIELDS.country,
     defaultValue: _country_code,
+    value: _country_code,
   })
   const testInvalid = useCallback(() => {
     const invalid =
@@ -273,6 +280,21 @@ export default function SettingsContent({
                 </Button>
               </>
             )}
+            <strong>Test</strong>
+            <button
+              onClick={e => {
+                e.preventDefault()
+                const graffiti = 'really cool'
+                // eslint-disable-next-line
+                console.log('a type of antidepressant')
+                $graffiti && $graffiti.setter(graffiti)
+                $setUserData({ ...$userData, graffiti })
+                setUser({ ...user, graffiti })
+                // reloadUser()
+              }}
+            >
+              Set Graffiti Programmatically
+            </button>
           </>
         )}
       </div>

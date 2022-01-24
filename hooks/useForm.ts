@@ -20,6 +20,7 @@ export interface NameValue {
 }
 
 export interface ProvidedField {
+  controlled?: boolean
   defaultErrorText?: string
   useDefault?: boolean
   defaultLabel?: string
@@ -34,6 +35,7 @@ export interface ProvidedField {
   touched?: boolean
   validation: (v: string) => boolean
   whitespace?: WHITESPACE
+  value?: string
 }
 export interface Field extends ProvidedField {
   value: string
