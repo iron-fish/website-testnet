@@ -36,6 +36,8 @@ export default function Tabs({
   setFetched,
   setUser,
 }: TabsProps) {
+  // eslint-disable-next-line
+  console.log('redrawing Tabs')
   const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
   const anyBlocksMined = allTimeBlocksMined > 0
 

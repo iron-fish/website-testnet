@@ -64,6 +64,8 @@ export default function SettingsContent({
   setFetched,
   setUser,
 }: Props) {
+  // eslint-disable-next-line
+  console.log('redrawing SettingsContent')
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(true)
   const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
@@ -77,6 +79,15 @@ export default function SettingsContent({
     telegram: _telegram = UNSET,
     country_code: _country_code = UNSET,
   } = $userData || {}
+  // eslint-disable-next-line
+  console.log({
+    $userData,
+    _email,
+    _graffiti,
+    _discord,
+    _telegram,
+    _country_code,
+  })
   const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
