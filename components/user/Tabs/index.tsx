@@ -1,6 +1,7 @@
 import React from 'react'
 
 import * as API from 'apiClient'
+import { STATUS } from 'hooks/useLogin'
 
 import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
@@ -21,6 +22,7 @@ type TabsProps = {
   reloadUser: () => Promise<boolean>
   setFetched: (x: boolean) => unknown
   setUser: (x: API.ApiUser) => unknown
+  setUserStatus: (x: STATUS) => unknown
 }
 
 export default function Tabs({
@@ -35,9 +37,9 @@ export default function Tabs({
   reloadUser,
   setFetched,
   setUser,
+  setUserStatus,
 }: TabsProps) {
   // eslint-disable-next-line
-  console.log('redrawing Tabs')
   const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
   const anyBlocksMined = allTimeBlocksMined > 0
 
@@ -79,6 +81,7 @@ export default function Tabs({
       )}
       {activeTab === 'settings' && (
         <SettingsContent
+          setUserStatus={setUserStatus}
           anyBlocksMined={anyBlocksMined}
           onTabChange={onTabChange}
           user={user}

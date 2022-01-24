@@ -244,6 +244,7 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
+                setUserStatus={loginContext.setStatus}
                 reloadUser={loginContext.reloadUser}
                 toast={$toast}
                 activeTab={$activeTab}

@@ -211,6 +211,7 @@ export default function SettingsContent({
       }
     }
   }, [
+    setUserStatus,
     $email,
     $graffiti,
     $telegram,
