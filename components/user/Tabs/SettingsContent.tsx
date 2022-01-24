@@ -253,6 +253,12 @@ export default function SettingsContent({
     onTabChange,
     toast,
   ])
+
+  // eslint-disable-next-line
+  console.log(
+    'page/[id]/tabs/settingscontent metadata.graffiti',
+    authedUser?.graffiti ?? 'unknown'
+  )
   return (
     <div className="flex">
       <div className="flex-initial">
