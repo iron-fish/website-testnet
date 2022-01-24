@@ -14,6 +14,7 @@ import { FIELDS } from 'pages/signup'
 import { scrollUp } from 'utils/scroll'
 import { UNSET } from 'utils/forms'
 import { useQueriedToast } from 'hooks/useToast'
+import { STATUS } from 'hooks/useLogin'
 
 import * as API from 'apiClient'
 import { TabType } from './index'
@@ -24,6 +25,7 @@ type Props = {
   authedUser: API.ApiUserMetadata | null
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => Promise<boolean>
+  setUserStatus: (x: STATUS) => unknown
   onTabChange: (tab: TabType) => unknown
   setFetched: (x: boolean) => unknown
   setUser: (x: API.ApiUser) => unknown
@@ -71,6 +73,7 @@ export default function SettingsContent({
   onTabChange,
   setFetched,
   setUser,
+  setUserStatus,
 }: Props) {
   const router = useRouter()
   // eslint-disable-next-line
@@ -190,6 +193,7 @@ export default function SettingsContent({
       $setError(error)
     } else {
       $setLoading(false)
+      setUserStatus(STATUS.LOADING)
       toast.setMessage('User settings updated')
       toast.show()
       // this is to prevent the graffiti from popping an error on save
@@ -289,6 +293,7 @@ export default function SettingsContent({
                 console.log('a type of antidepressant')
                 $graffiti && $graffiti.setter(graffiti)
                 $setUserData({ ...$userData, graffiti })
+
                 setUser({ ...user, graffiti })
                 // reloadUser()
               }}
