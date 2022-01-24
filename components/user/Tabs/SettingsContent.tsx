@@ -157,16 +157,15 @@ export default function SettingsContent({
       // this is to prevent the graffiti from popping an error on save
       $graffiti.setTouched(false)
       scrollUp()
+      const updated = { ...user, ...updates }
+      const userData = { ...authedUser, ...updates }
+      // eslint-disable-next-line
+      console.log({ originalUser: user, newUser: updated, userData })
+      setUser(updated)
+      $setUserData(userData)
       const reloaded = await reloadUser()
       if (reloaded) {
-        const updated = { ...user, ...updates }
-        const userData = { ...authedUser, ...updates }
-        // eslint-disable-next-line
-        console.log({ originalUser: user, newUser: updated, userData })
-        setUser(updated)
-        $setUserData(userData)
         setFetched(false)
-        onTabChange('settings')
       }
     }
   }, [
@@ -183,7 +182,6 @@ export default function SettingsContent({
     setFetched,
     setUser,
     user,
-    onTabChange,
   ])
 
   useEffect(() => {
