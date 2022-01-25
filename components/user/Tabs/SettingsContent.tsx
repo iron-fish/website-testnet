@@ -209,6 +209,8 @@ export default function SettingsContent({
       scrollUp()
       const updated = { ...user, ...updates }
       const userData = { ...authedUser, ...updates }
+      // eslint-disable-next-line
+      console.log({ updated, userData })
       setUser(updated)
       // $setUserData(userData)
       setFetched(false)

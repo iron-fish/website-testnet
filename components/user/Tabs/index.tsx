@@ -45,8 +45,6 @@ export default function Tabs({
   const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
   const anyBlocksMined = allTimeBlocksMined > 0
 
-  // eslint-disable-next-line
-  console.log('tabs/index metadata.graffiti', authedUser?.graffiti ?? 'unknown')
   return (
     <div>
       {/* Tabs */}

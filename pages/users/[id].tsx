@@ -179,11 +179,6 @@ export default function User({ loginContext }: Props) {
     (acc, cur) => acc + cur,
     0
   )
-  // eslint-disable-next-line
-  console.log(
-    'page/[id] metadata.graffiti',
-    loginContext?.metadata?.graffiti ?? 'unknown'
-  )
 
   return (
     <div className="min-h-screen flex flex-col">
