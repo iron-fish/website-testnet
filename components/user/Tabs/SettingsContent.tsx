@@ -202,7 +202,7 @@ export default function SettingsContent({
       $setLoading(false)
     } else {
       // eslint-disable-next-line
-      console.log('you can not see this')
+      console.log('setting user data')
       $setLoading(false)
       setUserStatus(STATUS.LOADING)
       toast.setMessage('User settings updated')
