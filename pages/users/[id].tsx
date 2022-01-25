@@ -63,7 +63,8 @@ export default function User({ loginContext }: Props) {
     // eslint-disable-next-line
     console.log(
       '%cSETTING THE USER',
-      'background-color: red; font-size: 2rem; color: white;'
+      'background-color: red; font-size: 2rem; color: white;',
+      JSON.stringify(x, null, 2)
     )
     _setUser(x)
   }
