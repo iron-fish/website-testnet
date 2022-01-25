@@ -178,7 +178,12 @@ export default function SettingsContent({
       }
     }
     // eslint-disable-next-line
-    console.log('test visibility...')
+    console.log(
+      'test visibility...',
+      !!authedUser,
+      !!user,
+      user.id === authedUser.id
+    )
     const canSee = authedUser && user && user.id === authedUser.id
     if (!canSee) {
       // eslint-disable-next-line
