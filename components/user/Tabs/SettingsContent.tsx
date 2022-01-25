@@ -82,9 +82,6 @@ export default function SettingsContent({
   console.log('redrawing SettingsContent')
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(true)
-  const [$userData, $setUserData] = useState<API.ApiUserMetadata | null>(
-    authedUser
-  )
 
   const {
     email: _email = UNSET,
@@ -92,12 +89,11 @@ export default function SettingsContent({
     discord: _discord = UNSET,
     telegram: _telegram = UNSET,
     country_code: _country_code = UNSET,
-  } = $userData || {}
+  } = authedUser || {}
   // eslint-disable-next-line
   console.log({
     authedUser,
     user,
-    $userData,
     _email,
     _graffiti,
     _discord,
@@ -204,14 +200,14 @@ export default function SettingsContent({
       const updated = { ...user, ...updates }
       const userData = { ...authedUser, ...updates }
       setUser(updated)
-      $setUserData(userData)
+      // $setUserData(userData)
       setFetched(false)
       setRawMetadata(userData)
       // eslint-disable-next-line
       console.log({
         originalUser: user,
         newUser: updated,
-        userData,
+        // userData,
         fetched: false,
       })
       return await reloadUser()
@@ -238,7 +234,7 @@ export default function SettingsContent({
   useEffect(() => {
     if (!authedUser) return
     // local cache
-    $setUserData(authedUser)
+    // $setUserData(authedUser)
     $setLoading(false)
     const canSee = authedUser && user && user.id === authedUser.id
     if (!canSee) {
@@ -247,16 +243,7 @@ export default function SettingsContent({
       toast.setMessage('You are not authorized to go there')
       toast.show()
     }
-  }, [
-    authedUser,
-    authedUser?.id,
-    authedUser?.graffiti,
-    user,
-    user?.graffiti,
-    user?.id,
-    onTabChange,
-    toast,
-  ])
+  }, [authedUser, authedUser?.id, user, user?.id, onTabChange, toast])
 
   // eslint-disable-next-line
   console.log(
@@ -266,7 +253,7 @@ export default function SettingsContent({
   return (
     <div className="flex">
       <div className="flex-initial">
-        {!$userData ? (
+        {!authedUser?.graffiti ? (
           <Loader />
         ) : (
           <>
@@ -306,7 +293,7 @@ export default function SettingsContent({
                 // eslint-disable-next-line
                 console.log('a type of antidepressant')
                 $graffiti && $graffiti.setter(graffiti)
-                $setUserData({ ...$userData, graffiti })
+                // $setUserData({ ...$userData, graffiti })
                 if (authedUser) {
                   setRawMetadata({
                     ...authedUser,
