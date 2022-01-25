@@ -206,6 +206,7 @@ export default function SettingsContent({
       setUser(updated)
       $setUserData(userData)
       setFetched(false)
+      setRawMetadata(userData)
       // eslint-disable-next-line
       console.log({
         originalUser: user,
@@ -216,6 +217,7 @@ export default function SettingsContent({
       return await reloadUser()
     }
   }, [
+    setRawMetadata,
     setUserStatus,
     $email,
     $graffiti,
