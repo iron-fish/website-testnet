@@ -87,6 +87,8 @@ export default function User({ loginContext }: Props) {
         if (!routerIsReady || $fetched) {
           return
         }
+        // eslint-disable-next-line
+        console.log('fetching...')
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
           await Promise.all([
             API.getUser(userId),
