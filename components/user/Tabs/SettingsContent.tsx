@@ -88,8 +88,6 @@ export default function SettingsContent({
     telegram: _telegram = UNSET,
     country_code: _country_code = UNSET,
   } = authedUser || {}
-  // eslint-disable-next-line
-  console.log('tabs/settingscontent graffiti', _graffiti)
   const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
@@ -237,12 +235,6 @@ export default function SettingsContent({
     router,
   ])
 
-  // eslint-disable-next-line
-  console.log(
-    'page/[id]/tabs/settingscontent metadata.graffiti',
-    _graffiti,
-    authedUser?.graffiti ?? 'unknown'
-  )
   return (
     <div className="flex">
       <div className="flex-initial">
