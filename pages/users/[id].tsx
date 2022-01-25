@@ -58,12 +58,8 @@ export default function User({ loginContext }: Props) {
   const rawTab = useQuery('tab')
   const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
 
-  const [$user, _setUser] = useState<API.ApiUser | undefined>(undefined)
-  const $setUser = (x: API.ApiUser) => {
-    // eslint-disable-next-line
-    console.log('setting user to', x)
-    return _setUser(x)
-  }
+  const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
+
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
     undefined
   )
@@ -89,8 +85,6 @@ export default function User({ loginContext }: Props) {
     const fetchData = async () => {
       try {
         if (!routerIsReady || $fetched) {
-          // eslint-disable-next-line
-          console.log(!routerIsReady ? 'Waiting for router' : 'Already fetched')
           return
         }
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
@@ -123,7 +117,8 @@ export default function User({ loginContext }: Props) {
           )
           return
         }
-
+        // eslint-disable-next-line
+        console.log('setting user from server', user)
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
@@ -151,12 +146,8 @@ export default function User({ loginContext }: Props) {
 
   useEffect(() => {
     if (!$user) {
-      // eslint-disable-next-line
-      console.log('no user yet')
       return
     }
-    // eslint-disable-next-line
-    console.log('setting fetched to true')
     $setFetched(true)
   }, [$user])
 

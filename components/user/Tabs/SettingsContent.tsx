@@ -78,8 +78,6 @@ export default function SettingsContent({
   setRawMetadata,
 }: Props) {
   const router = useRouter()
-  // eslint-disable-next-line
-  console.log('redrawing SettingsContent')
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(true)
 
@@ -91,15 +89,7 @@ export default function SettingsContent({
     country_code: _country_code = UNSET,
   } = authedUser || {}
   // eslint-disable-next-line
-  console.log({
-    authedUser,
-    user,
-    _email,
-    _graffiti,
-    _discord,
-    _telegram,
-    _country_code,
-  })
+  console.log('tabs/settingscontent graffiti', _graffiti)
   const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
@@ -203,13 +193,6 @@ export default function SettingsContent({
       // $setUserData(userData)
       setFetched(false)
       setRawMetadata(userData)
-      // eslint-disable-next-line
-      console.log({
-        originalUser: user,
-        newUser: updated,
-        // userData,
-        fetched: false,
-      })
       return await reloadUser()
     }
   }, [
@@ -248,6 +231,7 @@ export default function SettingsContent({
   // eslint-disable-next-line
   console.log(
     'page/[id]/tabs/settingscontent metadata.graffiti',
+    _graffiti,
     authedUser?.graffiti ?? 'unknown'
   )
   return (
@@ -285,28 +269,6 @@ export default function SettingsContent({
                 </Button>
               </>
             )}
-            <strong>Test</strong>
-            <button
-              onClick={e => {
-                e.preventDefault()
-                const graffiti = 'really cool'
-                // eslint-disable-next-line
-                console.log('a type of antidepressant')
-                $graffiti && $graffiti.setter(graffiti)
-                // $setUserData({ ...$userData, graffiti })
-                if (authedUser) {
-                  setRawMetadata({
-                    ...authedUser,
-                    id: authedUser?.id ?? -1,
-                    graffiti,
-                  })
-                }
-                setUser({ ...user, graffiti })
-                // reloadUser()
-              }}
-            >
-              Set Graffiti Programmatically
-            </button>
           </>
         )}
       </div>
