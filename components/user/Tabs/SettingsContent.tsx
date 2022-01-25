@@ -26,6 +26,7 @@ type Props = {
   toast: ReturnType<typeof useQueriedToast>
   reloadUser: () => Promise<boolean>
   setUserStatus: (x: STATUS) => unknown
+  setRawMetadata: (x: API.ApiUserMetadata) => unknown
   onTabChange: (tab: TabType) => unknown
   setFetched: (x: boolean) => unknown
   setUser: (x: API.ApiUser) => unknown
@@ -74,6 +75,7 @@ export default function SettingsContent({
   setFetched,
   setUser,
   setUserStatus,
+  setRawMetadata,
 }: Props) {
   const router = useRouter()
   // eslint-disable-next-line
@@ -303,7 +305,13 @@ export default function SettingsContent({
                 console.log('a type of antidepressant')
                 $graffiti && $graffiti.setter(graffiti)
                 $setUserData({ ...$userData, graffiti })
-
+                if (authedUser) {
+                  setRawMetadata({
+                    ...authedUser,
+                    id: authedUser?.id ?? -1,
+                    graffiti,
+                  })
+                }
                 setUser({ ...user, graffiti })
                 // reloadUser()
               }}

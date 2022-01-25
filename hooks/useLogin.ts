@@ -111,6 +111,7 @@ export function useLogin(config: LoginProps = {}) {
     metadata: $metadata,
     status: $status,
     setStatus: $setStatus,
+    setRawMetadata: $setMetadata,
   }
   return loginContext
 }

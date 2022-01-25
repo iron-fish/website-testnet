@@ -23,6 +23,7 @@ type TabsProps = {
   setFetched: (x: boolean) => unknown
   setUser: (x: API.ApiUser) => unknown
   setUserStatus: (x: STATUS) => unknown
+  setRawMetadata: (x: API.ApiUserMetadata) => unknown
 }
 
 export default function Tabs({
@@ -38,6 +39,7 @@ export default function Tabs({
   setFetched,
   setUser,
   setUserStatus,
+  setRawMetadata,
 }: TabsProps) {
   // eslint-disable-next-line
   const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
@@ -95,6 +97,7 @@ export default function Tabs({
           reloadUser={reloadUser}
           setFetched={setFetched}
           setUser={setUser}
+          setRawMetadata={setRawMetadata}
         />
       )}
     </div>
