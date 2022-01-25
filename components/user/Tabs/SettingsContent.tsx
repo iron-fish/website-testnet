@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useRouter } from 'next/router'
 
 import Note from 'components/Form/Note'
@@ -79,7 +79,7 @@ export default function SettingsContent({
 }: Props) {
   const router = useRouter()
   const [$error, $setError] = useState<string>(UNSET)
-  const [$loading, $setLoading] = useState(true)
+  const [$loading, $setLoading] = useState(false)
 
   const {
     email: _email = UNSET,
@@ -146,6 +146,8 @@ export default function SettingsContent({
       !authedUser ||
       testInvalid()
     ) {
+      // eslint-disable-next-line
+      console.log('early-return')
       return
     }
     $setLoading(true)
@@ -164,6 +166,8 @@ export default function SettingsContent({
     }
     let result
     try {
+      // eslint-disable-next-line
+      console.log('updating...')
       result = await API.updateUser(authedUser.id, updates)
     } catch (e) {
       /*
@@ -175,11 +179,27 @@ export default function SettingsContent({
         return
       }
     }
-
+    // eslint-disable-next-line
+    console.log('test visibility...')
+    const canSee = authedUser && user && user.id === authedUser.id
+    if (!canSee) {
+      // eslint-disable-next-line
+      console.log('you can not see this')
+      // if you try to go to /users/x/settings but you're not user x
+      onTabChange('weekly')
+      toast.setMessage('You are not authorized to go there')
+      toast.show()
+      return
+    }
     if ('error' in result) {
+      // eslint-disable-next-line
+      console.log('error when updating')
       const error = '' + result.message
       $setError(error)
+      $setLoading(false)
     } else {
+      // eslint-disable-next-line
+      console.log('you can not see this')
       $setLoading(false)
       setUserStatus(STATUS.LOADING)
       toast.setMessage('User settings updated')
@@ -196,6 +216,7 @@ export default function SettingsContent({
       return await reloadUser()
     }
   }, [
+    onTabChange,
     setRawMetadata,
     setUserStatus,
     $email,
@@ -213,20 +234,6 @@ export default function SettingsContent({
     user,
     router,
   ])
-
-  useEffect(() => {
-    if (!authedUser) return
-    // local cache
-    // $setUserData(authedUser)
-    $setLoading(false)
-    const canSee = authedUser && user && user.id === authedUser.id
-    if (!canSee) {
-      // if you try to go to /users/x/settings but you're not user x
-      onTabChange('weekly')
-      toast.setMessage('You are not authorized to go there')
-      toast.show()
-    }
-  }, [authedUser, authedUser?.id, user, user?.id, onTabChange, toast])
 
   // eslint-disable-next-line
   console.log(
