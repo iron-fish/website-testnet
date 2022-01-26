@@ -87,29 +87,35 @@ export default function SettingsContent({
     telegram: _telegram = UNSET,
     country_code: _country_code = UNSET,
   } = authedUser || {}
-  const $graffiti = useField({
+
+  const __graffiti = {
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
     value: _graffiti,
-  })
-
-  const $email = useField({
+  }
+  const $graffiti = useField(__graffiti)
+  const __email = {
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
     value: _email,
-  })
-  const $discord = useField({
+  }
+  const $email = useField(__email)
+  const __telegram = {
     ...EDITABLE_FIELDS.discord,
     defaultValue: _discord,
     value: _discord,
     touched: !!_discord,
-  })
-  const $telegram = useField({
+  }
+  const __discord = {
     ...EDITABLE_FIELDS.telegram,
     defaultValue: _telegram,
     value: _telegram,
     touched: !!_telegram,
-  })
+  }
+  const $discord = useField(__discord)
+  const $telegram = useField(__telegram)
+  // eslint-disable-next-line
+  console.log({ __graffiti, __email, __telegram, __discord })
 
   const $country = useField({
     ...EDITABLE_FIELDS.country,
