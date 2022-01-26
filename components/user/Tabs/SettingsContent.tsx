@@ -80,7 +80,6 @@ export default function SettingsContent({
   const router = useRouter()
   const [$error, $setError] = useState<string>(UNSET)
   const [$loading, $setLoading] = useState(false)
-
   const {
     email: _email = UNSET,
     graffiti: _graffiti = UNSET,
