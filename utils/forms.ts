@@ -33,6 +33,13 @@ export function setStateOnChange(
   return (e: ChangeEvent) => {
     const raw = (e.target as HTMLInputElement).value
     const toSet = trim ? raw.trim() : raw
+    // eslint-disable-next-line
+    console.log(
+      '%cFUNFUNFUN',
+      'color: cyan; background-color: yellow; font-size: 3rem;',
+      raw,
+      toSet
+    )
     setter(toSet)
   }
 }
