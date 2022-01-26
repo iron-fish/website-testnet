@@ -88,34 +88,24 @@ export default function SettingsContent({
     country_code: _country_code = UNSET,
   } = authedUser || {}
 
-  const __graffiti = {
+  const $graffiti = useField({
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
-    // value: _graffiti,
-  }
-  const $graffiti = useField(__graffiti)
-  const __email = {
+  })
+  const $email = useField({
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
-    // value: _email,
-  }
-  const $email = useField(__email)
-  const __telegram = {
-    ...EDITABLE_FIELDS.discord,
-    defaultValue: _discord,
-    // value: _discord,
-    touched: !!_discord,
-  }
-  const __discord = {
+  })
+  const $discord = useField({
     ...EDITABLE_FIELDS.telegram,
     defaultValue: _telegram,
-    // value: _telegram,
     touched: !!_telegram,
-  }
-  const $discord = useField(__discord)
-  const $telegram = useField(__telegram)
-  // eslint-disable-next-line
-  console.log({ __graffiti, __email, __telegram, __discord })
+  })
+  const $telegram = useField({
+    ...EDITABLE_FIELDS.discord,
+    defaultValue: _discord,
+    touched: !!_discord,
+  })
 
   const $country = useField({
     ...EDITABLE_FIELDS.country,
@@ -149,8 +139,6 @@ export default function SettingsContent({
       !authedUser ||
       testInvalid()
     ) {
-      // eslint-disable-next-line
-      console.log('early-return')
       return
     }
     $setLoading(true)
@@ -169,8 +157,6 @@ export default function SettingsContent({
     }
     let result
     try {
-      // eslint-disable-next-line
-      console.log('updating...')
       result = await API.updateUser(authedUser.id, updates)
     } catch (e) {
       /*
@@ -182,17 +168,9 @@ export default function SettingsContent({
         return
       }
     }
-    // eslint-disable-next-line
-    console.log(
-      'test visibility...',
-      !!authedUser,
-      !!user,
-      user.id === authedUser.id
-    )
+
     const canSee = authedUser && user && user.id === authedUser.id
     if (!canSee) {
-      // eslint-disable-next-line
-      console.log('you can not see this')
       // if you try to go to /users/x/settings but you're not user x
       onTabChange('weekly')
       toast.setMessage('You are not authorized to go there')
@@ -200,14 +178,10 @@ export default function SettingsContent({
       return
     }
     if ('error' in result) {
-      // eslint-disable-next-line
-      console.log('error when updating')
       const error = '' + result.message
       $setError(error)
       $setLoading(false)
     } else {
-      // eslint-disable-next-line
-      console.log('setting user data')
       $setLoading(false)
       setUserStatus(STATUS.LOADING)
       toast.setMessage('User settings updated')
@@ -217,8 +191,6 @@ export default function SettingsContent({
       scrollUp()
       const updated = { ...user, ...updates }
       const userData = { ...authedUser, ...updates }
-      // eslint-disable-next-line
-      console.log({ updated, userData })
       setUser(updated)
       // $setUserData(userData)
       setFetched(false)

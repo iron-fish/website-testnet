@@ -30,16 +30,7 @@ export function useLogin(config: LoginProps = {}) {
   const [$error, $setError] = useState<ApiError | LocalError | null>(null)
   const [$magicMetadata, $setMagicMetadata] =
     useState<MagicUserMetadata | null>(null)
-  const [$metadata, _setMetadata] = useState<ApiUserMetadata | null>(null)
-  const $setMetadata = (x: ApiUserMetadata) => {
-    // eslint-disable-next-line
-    console.log(
-      '%csetting user metadata',
-      'color: red; background-color: yellow; font-size: 1.2rem;',
-      JSON.stringify(x, null, 2)
-    )
-    return _setMetadata(x)
-  }
+  const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
   const reloadUser = useCallback(async () => {
     if (!magic || !magic.user) {

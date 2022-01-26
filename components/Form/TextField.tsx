@@ -86,13 +86,6 @@ export const TextField = ({
     type: 'text',
     placeholder,
   }
-  // eslint-disable-next-line
-  console.log(
-    `%c${id} + ${label}`,
-    'background-color: white; color: blue; font-size: 1rem;',
-    inputProps,
-    controlled
-  )
   return (
     <LabelledRow
       key={id}

@@ -58,16 +58,7 @@ export default function User({ loginContext }: Props) {
   const rawTab = useQuery('tab')
   const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
 
-  const [$user, _setUser] = useState<API.ApiUser | undefined>(undefined)
-  const $setUser = (x: API.ApiUser) => {
-    // eslint-disable-next-line
-    console.log(
-      '%cSETTING THE USER',
-      'background-color: red; font-size: 2rem; color: white;',
-      JSON.stringify(x, null, 2)
-    )
-    _setUser(x)
-  }
+  const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
 
   const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
     undefined
@@ -96,8 +87,6 @@ export default function User({ loginContext }: Props) {
         if (!routerIsReady || $fetched) {
           return
         }
-        // eslint-disable-next-line
-        console.log('fetching...')
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
           await Promise.all([
             API.getUser(userId),
@@ -128,8 +117,6 @@ export default function User({ loginContext }: Props) {
           )
           return
         }
-        // eslint-disable-next-line
-        console.log('setting user from server', user)
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
