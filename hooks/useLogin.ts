@@ -35,7 +35,8 @@ export function useLogin(config: LoginProps = {}) {
     // eslint-disable-next-line
     console.log(
       '%csetting user metadata',
-      'color: red; background-color: yellow; font-size: 1.2rem;'
+      'color: red; background-color: yellow; font-size: 1.2rem;',
+      JSON.stringify(x, null, 2)
     )
     return _setMetadata(x)
   }
