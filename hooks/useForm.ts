@@ -71,6 +71,7 @@ export function useField(provided: ProvidedField): Field | null {
     whitespace = WHITESPACE.DEFAULT,
     placeholder,
     useDefault,
+    controlled,
   } = provided
   const [$value, $setter] = useState<string>(defaultValue)
   // TODO: tried writing this with nullish coalescing but it yelled and I got tired
@@ -127,6 +128,7 @@ export function useField(provided: ProvidedField): Field | null {
       onBlur: () => {
         $setTouched(true)
       },
+      controlled,
     })
   }, [
     defaultLabel,
@@ -149,6 +151,7 @@ export function useField(provided: ProvidedField): Field | null {
     $choice,
     placeholder,
     useDefault,
+    controlled,
   ])
   return $field
 }

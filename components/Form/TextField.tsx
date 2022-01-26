@@ -90,7 +90,8 @@ export const TextField = ({
   console.log(
     `%c${id} + ${label}`,
     'background-color: white; color: blue; font-size: 1rem;',
-    inputProps
+    inputProps,
+    controlled
   )
   return (
     <LabelledRow
