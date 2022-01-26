@@ -248,7 +248,7 @@ export default function SettingsContent({
   return (
     <div className="flex">
       <strong>
-        {_graffiti} vs. {$graffiti}
+        {_graffiti} vs. {$graffiti && $graffiti.value}
       </strong>
       <div className="flex-initial">
         {!authedUser?.graffiti ? (
