@@ -86,6 +86,11 @@ export const TextField = ({
     type: 'text',
     placeholder,
   }
+  console.log(
+    `%c${id} + ${label}`,
+    'background-color: white; color: blue; font-size: 1rem;',
+    inputProps
+  )
   return (
     <LabelledRow
       key={id}
