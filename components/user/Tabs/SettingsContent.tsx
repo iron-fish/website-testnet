@@ -91,25 +91,25 @@ export default function SettingsContent({
   const __graffiti = {
     ...EDITABLE_FIELDS.graffiti,
     defaultValue: _graffiti,
-    value: _graffiti,
+    // value: _graffiti,
   }
   const $graffiti = useField(__graffiti)
   const __email = {
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
-    value: _email,
+    // value: _email,
   }
   const $email = useField(__email)
   const __telegram = {
     ...EDITABLE_FIELDS.discord,
     defaultValue: _discord,
-    value: _discord,
+    // value: _discord,
     touched: !!_discord,
   }
   const __discord = {
     ...EDITABLE_FIELDS.telegram,
     defaultValue: _telegram,
-    value: _telegram,
+    // value: _telegram,
     touched: !!_telegram,
   }
   const $discord = useField(__discord)
