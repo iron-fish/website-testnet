@@ -159,7 +159,6 @@ export default function SettingsContent({
     try {
       result = await API.updateUser(authedUser.id, updates)
       // eslint-disable-next-line no-console
-      console.log({ result })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn(e)
@@ -181,7 +180,7 @@ export default function SettingsContent({
       toast.show()
       return
     }
-    if ('error' in result) {
+    if ('error' in result || 'code' in result) {
       const error = '' + result.message
       $setError(error)
       $setLoading(false)
