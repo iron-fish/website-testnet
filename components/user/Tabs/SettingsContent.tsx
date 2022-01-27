@@ -159,6 +159,8 @@ export default function SettingsContent({
     try {
       result = await API.updateUser(authedUser.id, updates)
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(e)
       /*
       Unhandled Runtime Error
       Error: Magic RPC Error: [-32603] Internal error: User denied account access.
