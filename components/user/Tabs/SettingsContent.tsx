@@ -158,7 +158,6 @@ export default function SettingsContent({
     let result
     try {
       result = await API.updateUser(authedUser.id, updates)
-      // eslint-disable-next-line no-console
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn(e)
