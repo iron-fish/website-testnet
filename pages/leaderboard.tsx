@@ -115,7 +115,7 @@ export default function Leaderboard({ loginContext }: Props) {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="min-h-screen flex flex-col font-favorit">
+    <div className="min-h-screen inline-flex flex-col font-favorit">
       <Head>
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
@@ -128,7 +128,7 @@ export default function Leaderboard({ loginContext }: Props) {
       />
       <BackToTop />
       <main className="bg-ifpink flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
+        <div className="w-11/12 md:w-2/3">
           <PageBanner
             title="Testnet Leaderboard"
             text="Our incentivized testnet leaderboard shows you who the top point
@@ -181,7 +181,7 @@ export default function Leaderboard({ loginContext }: Props) {
               </label>
             </div>
           </div>
-          <div className="font-extended flex px-10 mb-4">
+          <div className="hidden font-extended md:flex px-10 mb-4">
             {$users.length > 0 && (
               <>
                 <div className="w-24">RANK</div>
