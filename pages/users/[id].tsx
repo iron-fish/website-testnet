@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
+import useQuery from 'hooks/useQuery'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -16,9 +17,13 @@ import { encode as btoa } from 'base-64'
 import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
+import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 25
+
+const validTabValue = (x: string) =>
+  x === 'weekly' || x === 'all' || x === 'settings'
 
 interface Props {
   loginContext: LoginContext
@@ -42,99 +47,127 @@ function displayEventType(type: API.EventType): string {
 }
 
 export default function User({ loginContext }: Props) {
-  const router = useRouter()
+  const $toast = useQueriedToast({
+    queryString: 'toast',
+    duration: 8e3,
+  })
 
-  const [$user, $setUser] = React.useState<API.ApiUser | undefined>(undefined)
-  const [$events, $setEvents] = React.useState<
-    API.ListEventsResponse | undefined
-  >(undefined)
-  const [$allTimeMetrics, $setAllTimeMetrics] = React.useState<
+  const router = useRouter()
+  const { isReady: routerIsReady } = router
+  const userId = (router?.query?.id || '') as string
+  const rawTab = useQuery('tab')
+  const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
+
+  const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
+
+  const [$events, $setEvents] = useState<API.ListEventsResponse | undefined>(
+    undefined
+  )
+  const [$allTimeMetrics, $setAllTimeMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$weeklyMetrics, $setWeeklyMetrics] = React.useState<
+  const [$weeklyMetrics, $setWeeklyMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$metricsConfig, $setMetricsConfig] = React.useState<
+  const [$metricsConfig, $setMetricsConfig] = useState<
     API.MetricsConfigResponse | undefined
   >(undefined)
+  const [$fetched, $setFetched] = useState(false)
+  useEffect(() => {
+    if (rawTab && validTabValue(rawTab)) {
+      $setActiveTab(rawTab as TabType)
+    }
+  }, [rawTab])
 
   useEffect(() => {
     let isCanceled = false
 
     const fetchData = async () => {
-      if (!router.isReady) {
-        return
+      try {
+        if (!routerIsReady || $fetched) {
+          return
+        }
+        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
+          await Promise.all([
+            API.getUser(userId),
+            API.listEvents({
+              userId,
+              limit: EVENTS_LIMIT,
+            }),
+            API.getUserAllTimeMetrics(userId),
+            API.getUserWeeklyMetrics(userId),
+            API.getMetricsConfig(),
+          ])
+
+        if (isCanceled) {
+          return
+        }
+
+        if (
+          'error' in user ||
+          'error' in events ||
+          'error' in allTimeMetrics ||
+          'error' in weeklyMetrics ||
+          'error' in metricsConfig
+        ) {
+          Router.push(
+            `/leaderboard?toast=${btoa(
+              'An error occurred while fetching user data'
+            )}`
+          )
+          return
+        }
+        $setUser(user)
+        $setEvents(events)
+        $setAllTimeMetrics(allTimeMetrics)
+        $setWeeklyMetrics(weeklyMetrics)
+        $setMetricsConfig(metricsConfig)
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn(e)
+
+        throw e
       }
-
-      if (!router.query.id || Array.isArray(router.query.id)) {
-        router.push(`/leaderboard?toast=${btoa('Unable to find that user')}`)
-        return
-      }
-
-      const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
-        await Promise.all([
-          API.getUser(router.query.id),
-          API.listEvents({
-            userId: router.query.id,
-            limit: EVENTS_LIMIT,
-          }),
-          API.getUserAllTimeMetrics(router.query.id),
-          API.getUserWeeklyMetrics(router.query.id),
-          API.getMetricsConfig(),
-        ])
-
-      if (isCanceled) {
-        return
-      }
-
-      if (
-        'error' in user ||
-        'error' in events ||
-        'error' in allTimeMetrics ||
-        'error' in weeklyMetrics ||
-        'error' in metricsConfig
-      ) {
-        router.push(
-          `/leaderboard?toast=${btoa(
-            'An error occurred while fetching user data'
-          )}`
-        )
-        return
-      }
-
-      $setUser(user)
-      $setEvents(events)
-      $setAllTimeMetrics(allTimeMetrics)
-      $setWeeklyMetrics(weeklyMetrics)
-      $setMetricsConfig(metricsConfig)
     }
 
     fetchData()
     return () => {
       isCanceled = true
     }
-  }, [router])
+  }, [
+    routerIsReady,
+    userId,
+    loginContext?.metadata?.id,
+    loginContext?.metadata?.graffiti,
+    $fetched,
+  ])
 
-  const id = ($user && $user.id && $user.id.toString()) || 'unknown'
+  useEffect(() => {
+    if (!$user) {
+      return
+    }
+    $setFetched(true)
+  }, [$user])
+
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
-    usePaginatedEvents(id, EVENTS_LIMIT, $events, $setEvents)
+    usePaginatedEvents(userId, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
-  const [$activeTab, $setActiveTab] = React.useState<TabType>('weekly')
-  const onTabChange = React.useCallback((tab: TabType) => {
-    $setActiveTab(tab)
+  const onTabChange = useCallback((t: TabType) => {
+    $setActiveTab(t)
   }, [])
+
   if (
     !$user ||
     !$allTimeMetrics ||
     !$metricsConfig ||
     !$weeklyMetrics ||
-    !$events ||
-    id === 'unknown'
+    !$events
   ) {
     return <Loader />
   }
+
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
 
@@ -200,6 +233,10 @@ export default function User({ loginContext }: Props) {
 
               {/* Tabs */}
               <Tabs
+                setRawMetadata={loginContext.setRawMetadata}
+                setUserStatus={loginContext.setStatus}
+                reloadUser={loginContext.reloadUser}
+                toast={$toast}
                 activeTab={$activeTab}
                 onTabChange={onTabChange}
                 user={$user}
@@ -207,6 +244,8 @@ export default function User({ loginContext }: Props) {
                 allTimeMetrics={$allTimeMetrics}
                 weeklyMetrics={$weeklyMetrics}
                 metricsConfig={$metricsConfig}
+                setFetched={$setFetched}
+                setUser={$setUser}
               />
 
               {/* Recent Activity */}
@@ -254,7 +293,11 @@ export default function User({ loginContext }: Props) {
           )}
         </div>
       </main>
-
+      <Toast
+        message={$toast.message}
+        visible={$toast.visible}
+        alignment={Alignment.Top}
+      />
       <Footer />
     </div>
   )

@@ -6,10 +6,10 @@ import { useLogin } from 'hooks/useLogin'
 import { useLocalLogin } from 'hooks/useLocalLogin'
 
 const LOCAL_MODE = process.env.NEXT_PUBLIC_LOCAL_USER || false
-const loginHook = LOCAL_MODE ? useLocalLogin : useLogin
+const useLoginHook = LOCAL_MODE ? useLocalLogin : useLogin
 
 function MyApp({ Component: Page, pageProps }: AppProps) {
-  const $login = loginHook()
+  const $login = useLoginHook()
   const { metadata } = $login
   return (
     <>
