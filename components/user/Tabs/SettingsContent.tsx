@@ -96,12 +96,12 @@ export default function SettingsContent({
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
   })
-  const $discord = useField({
+  const $telegram = useField({
     ...EDITABLE_FIELDS.telegram,
     defaultValue: _telegram,
     touched: !!_telegram,
   })
-  const $telegram = useField({
+  const $discord = useField({
     ...EDITABLE_FIELDS.discord,
     defaultValue: _discord,
     touched: !!_discord,
@@ -179,6 +179,7 @@ export default function SettingsContent({
       toast.show()
       return
     }
+    scrollUp()
     if ('error' in result || 'code' in result) {
       const error = '' + result.message
       $setError(error)
@@ -190,7 +191,6 @@ export default function SettingsContent({
       toast.show()
       // this is to prevent the graffiti from popping an error on save
       $graffiti.setTouched(false)
-      scrollUp()
       const updated = { ...user, ...updates }
       const userData = { ...authedUser, ...updates }
       setUser(updated)
