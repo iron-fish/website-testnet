@@ -105,7 +105,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
         setTimeout(() => $setHover(CopyState.RESETTING), 2e3)
       }}
       onMouseOver={() => {
-        if ($hover === CopyState.COPIED) {
+        if ($hover === CopyState.COPIED || $hover === CopyState.RESETTING) {
           return
         }
         $setHover(CopyState.OVER)
@@ -125,9 +125,9 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
           ? styles.resetting
           : $hover === CopyState.COPIED
           ? styles.copied
-          : $hover === CopyState.IDLE
-          ? ''
-          : styles.active
+          : $hover === CopyState.OVER
+          ? styles.active
+          : ''
       )}
     >
       <>
