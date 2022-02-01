@@ -1,6 +1,5 @@
 import { Fragment, ReactElement, useState } from 'react'
 import clsx from 'clsx'
-
 import useClipboard from 'react-use-clipboard'
 import {
   format,
@@ -25,14 +24,15 @@ import {
   ApiEventMetadata,
   ApiEventMetadataBlockMined,
   ApiEventMetadataWithLink,
-} from 'apiClient/index'
+} from 'apiClient'
 
 import styles from './EventRow.module.css'
 
 interface IconText {
-  icon: ReactElement
+  icon: ReactElement | string
   text: string
 }
+const NEEDS_ICON = '🤨'
 export function displayEventType(type: EventType): IconText {
   const text =
     type === 'BLOCK_MINED'
@@ -58,7 +58,7 @@ export function displayEventType(type: EventType): IconText {
     ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
       <ActivitySocial />
     ) : (
-      type
+      NEEDS_ICON
     )
   return { icon, text }
 }
@@ -232,8 +232,6 @@ const WeekRow = ({ date, week }: WeekRowProps) => {
 const weeksBetween = (start: Date, end: Date) =>
   eachWeekOfInterval({ start, end })
 
-// type Predicate<T> = (x: T) => boolean
-
 const eventsBetween = (
   start: Date,
   end: Date,
@@ -263,10 +261,10 @@ type WeeklyData = {
 
 export const renderEvents = (start: Date, rawEvents: ApiEvent[]) => {
   const now = new Date()
-  const weeksThisYear = weeksBetween(start, now)
+  const weeks = weeksBetween(start, now)
   const counter = makeCounter()
   return (
-    weeksThisYear
+    weeks
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .reduce((agg: any, date: Date) => {
         const prev = agg[agg.length - 1]
