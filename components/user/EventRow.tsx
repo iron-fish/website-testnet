@@ -257,7 +257,7 @@ const sortEventsByDate = (xs: ApiEvent[]) =>
 type WeeklyData = {
   week: number
   date: Date
-  former: Date
+  prior: Date
   events: ApiEvent[]
 }
 
@@ -270,22 +270,21 @@ export const renderEvents = (start: Date, rawEvents: ApiEvent[]) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .reduce((agg: any, date: Date) => {
         const prev = agg[agg.length - 1]
-        const events = sortEventsByDate(
-          eventsBetween(prev ? prev.date : start, date, rawEvents)
-        )
+        const prior = prev ? prev.date : start
+        const events = sortEventsByDate(eventsBetween(prior, date, rawEvents))
         const week = counter()
         return agg.concat({
-          former: prev ? prev.date : start,
+          prior,
           date,
           events,
           week,
         })
       }, [])
       .map(
-        ({ date, week, events, former }: WeeklyData) =>
+        ({ date, week, events, prior }: WeeklyData) =>
           events.length > 0 && (
             <Fragment key={date.toTimeString() + week}>
-              <WeekRow week={week} date={former || date} />
+              <WeekRow week={week} date={prior || date} />
               {events.map((e: ApiEvent) => (
                 <EventRow {...e} key={e.id} />
               ))}
