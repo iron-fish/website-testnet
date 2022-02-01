@@ -109,7 +109,14 @@ export const callsToAction = {
       title: 'Contributing to the Community',
       content:
         'Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points.',
-      comingSoon: true,
+      submissionForm: true,
+      points: [
+        'XSmall = 10 points',
+        'Small = 100 points',
+        'Medium = 500 points',
+        'Large = 750 points',
+        'XLarge = 1000 points',
+      ],
     },
     {
       title: 'Being an Explorer',
@@ -133,7 +140,14 @@ export const callsToAction = {
       title: 'Promoting the Testnet',
       content:
         'Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them.',
-      comingSoon: true,
+      submissionForm: true,
+      points: [
+        'XSmall = 10 points',
+        'Small = 100 points',
+        'Medium = 500 points',
+        'Large = 750 points',
+        'XLarge = 1000 points',
+      ],
     },
     {
       title: 'Submit a Pull Request',
@@ -141,9 +155,9 @@ export const callsToAction = {
         'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
       earn: 5000,
       points: [
-        'Small PR = 250 points',
-        'Medium PR = 750 points',
-        'Large PR = 1000 points',
+        'Small = 250 points',
+        'Medium = 750 points',
+        'Large = 1000 points',
       ],
       ctaText: 'Submit a PR',
       href: 'https://github.com/iron-fish/ironfish/pulls',
