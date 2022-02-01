@@ -354,6 +354,7 @@ exports[`renders Login page 1`] = `
                   <input
                     class=""
                     id="email"
+                    placeholder="Your email"
                     type="text"
                     value=""
                   />

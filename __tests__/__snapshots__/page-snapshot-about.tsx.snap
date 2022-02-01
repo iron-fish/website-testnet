@@ -616,7 +616,7 @@ exports[`renders About page 1`] = `
                       class="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md"
                     >
                       Earn up to 
-                      1,000
+                      5,000
                        points a week
                     </div>
                     <button

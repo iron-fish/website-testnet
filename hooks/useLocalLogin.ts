@@ -6,7 +6,7 @@ export const METADATA = {
   updated_at: '2021-10-30T23:43:28.555Z',
   email: 'cooldev@ironfish.network',
   github: 'smipplejipple',
-  graffiti: 'smipplejipple',
+  graffiti: 'cooldev',
   total_points: 1100,
   country_code: 'USA',
   email_notifications: false,
@@ -36,6 +36,23 @@ export const useLocalLogin = (): LoginContext => ({
     email: 'cooldev@ironfish.network',
     phoneNumber: null,
   },
+})
+export const useNoUser = (): LoginContext => ({
+  reloadUser: () => Promise.resolve(true),
+  setRawMetadata: () => Promise.resolve(true),
+  checkLoggedIn: () => true,
+  checkLoading: () => false,
+  checkFailed: () => false,
+  setError: () => {
+    // non-empty-function body
+  },
+  error: null,
+  status: STATUS.LOADED,
+  setStatus: () => {
+    // non-empty-function body
+  },
+  metadata: null,
+  magicMetadata: null,
 })
 
 export default useLocalLogin

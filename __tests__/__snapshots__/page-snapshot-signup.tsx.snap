@@ -352,6 +352,7 @@ exports[`renders Signup page 1`] = `
                 <input
                   class=""
                   id="email"
+                  placeholder="Your email"
                   type="text"
                   value=""
                 />
@@ -373,6 +374,7 @@ exports[`renders Signup page 1`] = `
                 <input
                   class=""
                   id="graffiti"
+                  placeholder="Your tag"
                   type="text"
                   value=""
                 />
@@ -422,6 +424,7 @@ exports[`renders Signup page 1`] = `
                 <input
                   class=""
                   id="social"
+                  placeholder="Your username"
                   type="text"
                   value=""
                 />
@@ -446,6 +449,11 @@ exports[`renders Signup page 1`] = `
                   <select
                     class="customSelect bg-transparent "
                   >
+                    <option
+                      value=""
+                    >
+                      Select a country
+                    </option>
                     <option
                       value="AFG"
                     >

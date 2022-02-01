@@ -1,4 +1,4 @@
-import User from 'pages/users/[...details]'
+import User from 'pages/users/[id]'
 import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { useNoUser } from 'hooks/useLocalLogin'
 import { renderWithRouter } from 'jest.utils'
@@ -29,6 +29,7 @@ it.skip('renders User Settings page with no loginContext', async () => {
     )
     expect(container).toMatchSnapshot()
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.warn('cool', e)
   }
 })
