@@ -60,6 +60,7 @@ const FIELDS = {
     defaultLabel: TOTAL_POINTS,
   },
 }
+const CTA = `Our incentivized testnet leaderboard shows you who the top point getters are for all-time score, miners, bug catchers, net promoters, node hosting, and more! Click someone’s user name to see a breakdown of their activity. Points are earned during weekly cycles which begin Monday, 12:00am UTC and end Sunday 11:59pm UTC.`
 
 export default function Leaderboard({ loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
@@ -129,10 +130,7 @@ export default function Leaderboard({ loginContext }: Props) {
         <div className="w-4/5 md:w-2/3">
           <PageBanner
             title="Testnet Leaderboard"
-            text="Our incentivized testnet leaderboard shows you who the top point
-          getters are for all-time score, miners, bug catchers, net promoters,
-          node hosting, and more! Click someone’s user name to see a breakdown
-          of their activity."
+            text={CTA}
             buttonText={!isLoggedIn ? 'Sign Up' : ''}
             buttonClassName={clsx(
               'm-auto',
