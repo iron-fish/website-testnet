@@ -1,1 +1,1 @@
-{ "ignore": ["cypress/cypress*.json", "node_modules/**/*.*", ".git/**/*.*"] }
+{ "ignore": ["cypress/cypress*.json", "__tests__/__snapshots__/*.*", "node_modules/**/*.*", ".git/**/*.*", "coverage/*.*", "coverage/**/*.*"] }
