@@ -172,7 +172,7 @@ export default function User({ loginContext }: Props) {
                 </div>
 
                 <div className="inline-flex flex-col items-center pl-2 pt-2 justify-end">
-                  <svg viewBox="0 0 128 128" class="w-16 md:w-32">
+                  <svg viewBox="0 0 128 128" className="w-16 md:w-32">
                     <FishAvatar color={avatarColor}/>
                   </svg>
                    <div className="mt-4">
