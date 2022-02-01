@@ -24,7 +24,7 @@ describe('/about', () => {
         text: 'Roadmap',
         href: 'https://ironfish.network/roadmap',
       },
-      { isImage: false, text: 'Login to Testnet', href: '/login' },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
         isImage: false,
@@ -41,11 +41,16 @@ describe('/about', () => {
         text: 'Roadmap',
         href: 'https://ironfish.network/roadmap',
       },
-      { isImage: false, text: 'Login to Testnet', href: '/login' },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
       {
         isImage: false,
         text: 'Submit an issue ',
         href: 'https://github.com/iron-fish/ironfish/issues',
+      },
+      {
+        isImage: false,
+        text: 'Claim Points',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
@@ -69,6 +74,11 @@ describe('/about', () => {
       },
       {
         isImage: false,
+        text: 'Claim Points',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
+      },
+      {
+        isImage: false,
         text: 'Submit a PR',
         href: 'https://github.com/iron-fish/ironfish/pulls',
       },
@@ -87,11 +97,7 @@ describe('/about', () => {
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
-      {
-        isImage: false,
-        text: 'Show me the leaderboard',
-        href: '/leaderboard',
-      },
+      { isImage: false, text: 'Show me the leaderboard', href: '/leaderboard' },
       { isImage: false, text: 'Testnet Leaderboard', href: '/leaderboard' },
       { isImage: false, text: 'Testnet Community', href: '/community' },
       { isImage: false, text: 'Testnet FAQ', href: '/faq' },
@@ -140,11 +146,7 @@ describe('/about', () => {
         text: 'Twitter',
         href: 'https://twitter.com/ironfishcrypto',
       },
-      {
-        isImage: true,
-        text: 'Discord',
-        href: 'https://discord.gg/EkQkEcm8DH',
-      },
+      { isImage: true, text: 'Discord', href: 'https://discord.gg/EkQkEcm8DH' },
     ])
   })
 })
