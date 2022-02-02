@@ -41,7 +41,7 @@ describe('/about', () => {
         text: 'Roadmap',
         href: 'https://ironfish.network/roadmap',
       },
-      { isImage: false, text: 'Sign Out', href: '/logout' },
+      { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
         text: 'Submit an issue ',
