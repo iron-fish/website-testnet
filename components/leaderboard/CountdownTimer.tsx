@@ -15,7 +15,7 @@ const CountdownTimer = () => {
     set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 })
   )
   useEffect(() => {
-    const i = setInterval(() => $setTime(new Date()), 1e3)
+    const i = setInterval(() => $setTime(new Date()), 1000)
     return () => clearInterval(i)
   }, [])
   const ii = intervalToDuration({ start: $time, end })
