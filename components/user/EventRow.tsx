@@ -167,7 +167,7 @@ const summarizeEvent = (
 }
 
 const formatEventDate = (d: Date) =>
-  format(d, `do MMM. Y - kk':'mm':'ss`, {
+  format(d, `y'-'MM'-'d HH':'mm':'ss`, {
     locale: enUS,
   })
 
