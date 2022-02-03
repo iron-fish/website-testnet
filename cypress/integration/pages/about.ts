@@ -54,6 +54,11 @@ describe('/about', () => {
       },
       {
         isImage: false,
+        text: 'Claim Points',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
+      },
+      {
+        isImage: false,
         text: 'Email us',
         href: 'mailto:testnet@ironfish.network',
       },
@@ -66,6 +71,11 @@ describe('/about', () => {
         isImage: false,
         text: 'Get started with mining',
         href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
+      },
+      {
+        isImage: false,
+        text: 'Claim Points',
+        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
@@ -87,11 +97,7 @@ describe('/about', () => {
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
-      {
-        isImage: false,
-        text: 'Show me the leaderboard',
-        href: '/leaderboard',
-      },
+      { isImage: false, text: 'Show me the leaderboard', href: '/leaderboard' },
       { isImage: false, text: 'Testnet Leaderboard', href: '/leaderboard' },
       { isImage: false, text: 'Testnet Community', href: '/community' },
       { isImage: false, text: 'Testnet FAQ', href: '/faq' },
@@ -140,11 +146,7 @@ describe('/about', () => {
         text: 'Twitter',
         href: 'https://twitter.com/ironfishcrypto',
       },
-      {
-        isImage: true,
-        text: 'Discord',
-        href: 'https://discord.gg/EkQkEcm8DH',
-      },
+      { isImage: true, text: 'Discord', href: 'https://discord.gg/EkQkEcm8DH' },
     ])
   })
 })
