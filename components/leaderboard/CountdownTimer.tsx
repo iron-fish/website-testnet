@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box } from 'components/OffsetBorder/Box'
+import { CustomBox } from 'components/OffsetBorder'
 import { intervalToDuration, nextMonday, set } from 'date-fns'
 import type { Duration } from 'date-fns'
 
@@ -15,13 +15,19 @@ const CountdownTimer = () => {
     set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 })
   )
   useEffect(() => {
-    const i = setInterval(() => $setTime(new Date()), 3e3)
+    const i = setInterval(() => $setTime(new Date()), 1e3)
     return () => clearInterval(i)
   }, [])
   const ii = intervalToDuration({ start: $time, end })
   return (
     <div className="w-full flex flex-col justify-center items-center text-center">
-      <Box className="w-[18.25rem]" background="bg-ifpink">
+      <CustomBox
+        behind="bg-white"
+        rounded
+        size="2"
+        className="w-[18.25rem]"
+        background="bg-ifpink"
+      >
         <div className="w-[18.25rem] px-4 py-2 m-auto">
           <div className="flex flex-col justify-center items-center">
             <span className="text-lg">{customFormatDuration(ii)}</span>
@@ -30,7 +36,7 @@ const CountdownTimer = () => {
             </span>
           </div>
         </div>
-      </Box>
+      </CustomBox>
     </div>
   )
 }
