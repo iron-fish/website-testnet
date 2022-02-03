@@ -249,7 +249,7 @@ export default function User({ loginContext }: Props) {
                       </tr>
                     </thead>
                     <tbody className="text-sm">
-                      {renderEvents(signupDate, $events.data as API.ApiEvent[])}
+                      {renderEvents(signupDate, $events.data)}
                     </tbody>
                   </table>
                 </>

@@ -249,7 +249,7 @@ const makeCounter = () => {
 
 const sortEventsByDate = (xs: ApiEvent[]) =>
   xs.sort((a: ApiEvent, b: ApiEvent): number =>
-    a.occurred_at > b.occurred_at ? 1 : -1
+    a.occurred_at > b.occurred_at ? -1 : 1
   )
 
 type WeeklyData = {
@@ -259,7 +259,7 @@ type WeeklyData = {
   events: ApiEvent[]
 }
 
-export const renderEvents = (start: Date, rawEvents: ApiEvent[]) => {
+export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
   const now = new Date()
   const weeks = weeksBetween(start, now)
   const counter = makeCounter()
@@ -269,7 +269,9 @@ export const renderEvents = (start: Date, rawEvents: ApiEvent[]) => {
       .reduce((agg: any, date: Date) => {
         const prev = agg[agg.length - 1]
         const prior = prev ? prev.date : start
-        const events = sortEventsByDate(eventsBetween(prior, date, rawEvents))
+        const events = sortEventsByDate(
+          eventsBetween(prior, date, rawEvents as ApiEvent[])
+        )
         const week = counter()
         return agg.concat({
           prior,
@@ -278,6 +280,7 @@ export const renderEvents = (start: Date, rawEvents: ApiEvent[]) => {
           week,
         })
       }, [])
+      .reverse()
       .map(
         ({ date, week, events, prior }: WeeklyData) =>
           events.length > 0 && (
