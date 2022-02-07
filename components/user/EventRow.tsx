@@ -207,16 +207,20 @@ export const EventRow = ({
 }
 
 type WeekRowProps = {
-  date: Date
   week: number
+  start: Date
+  end: Date
 }
 
-const WeekRow = ({ date, week }: WeekRowProps) => {
-  const when = `Week ${week} - Started ${format(date, 'MMMM do, Y')}`
+const WeekRow = ({ week, start, end }: WeekRowProps) => {
+  const when = `Week ${week}: Started ${format(
+    start,
+    'MMMM do, Y'
+  )} - Ended ${format(end, 'MMMM do, Y')}`
   return (
     <tr
       className="bg-black text-white"
-      data-date={date}
+      data-date={start}
       aria-label={when}
       title={when}
     >
@@ -244,7 +248,7 @@ const eventsBetween = (
 
 const makeCounter = () => {
   let x = 0
-  return () => ++x
+  return () => x++
 }
 
 const sortEventsByDate = (xs: ApiEvent[]) =>
@@ -285,7 +289,7 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
         ({ date, week, events, prior }: WeeklyData) =>
           events.length > 0 && (
             <Fragment key={date.toTimeString() + week}>
-              <WeekRow week={week} date={prior || date} />
+              <WeekRow week={week} start={prior || date} end={date} />
               {events.map((e: ApiEvent) => (
                 <EventRow {...e} key={e.id} />
               ))}
