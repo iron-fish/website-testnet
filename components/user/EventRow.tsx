@@ -1,14 +1,9 @@
 import { Fragment, ReactElement, useState } from 'react'
 import clsx from 'clsx'
 import useClipboard from 'react-use-clipboard'
-import {
-  format,
-  isBefore,
-  isAfter,
-  parseISO,
-  eachWeekOfInterval,
-} from 'date-fns'
+import { isBefore, isAfter, parseISO, eachWeekOfInterval } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
+import { format, utcToZonedTime } from 'date-fns-tz'
 
 import ActivityBlockMined from 'components/icons/ActivityBlockMined'
 import ActivityBugReported from 'components/icons/ActivityBugReport'
@@ -169,6 +164,7 @@ const summarizeEvent = (
 const formatEventDate = (d: Date) =>
   format(d, `y'-'MM'-'dd HH':'mm':'ss`, {
     locale: enUS,
+    timeZone: 'UTC',
   })
 
 export const EventRow = ({
@@ -213,10 +209,9 @@ type WeekRowProps = {
 }
 
 const WeekRow = ({ week, start, end }: WeekRowProps) => {
-  const when = `Week ${week}: Started ${format(
-    start,
-    'MMMM do, Y'
-  )} - Ended ${format(end, 'MMMM do, Y')}`
+  const when = `Week ${week}: Started ${formatEventDate(
+    start
+  )} - Ended ${formatEventDate(end)}`
   return (
     <tr
       className="bg-black text-white"
@@ -236,14 +231,18 @@ const WeekRow = ({ week, start, end }: WeekRowProps) => {
 const weeksBetween = (start: Date, end: Date) =>
   eachWeekOfInterval({ start, end }, { weekStartsOn: 1 })
 
+const asUTC = (x: Date) => utcToZonedTime(x, 'UTC')
+
 const eventsBetween = (
   start: Date,
   end: Date,
   events: ApiEvent[]
 ): ApiEvent[] =>
   events.filter(e => {
-    const time = parseISO(e.occurred_at)
-    return isAfter(time, start) && isBefore(time, end)
+    const time = asUTC(parseISO(e.occurred_at))
+    const a = asUTC(start)
+    const z = asUTC(end)
+    return isAfter(time, a) && isBefore(time, z)
   })
 
 const makeCounter = () => {
