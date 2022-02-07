@@ -234,7 +234,7 @@ const WeekRow = ({ week, start, end }: WeekRowProps) => {
   )
 }
 const weeksBetween = (start: Date, end: Date) =>
-  eachWeekOfInterval({ start, end })
+  eachWeekOfInterval({ start, end }, { weekStartsOn: 1 })
 
 const eventsBetween = (
   start: Date,
