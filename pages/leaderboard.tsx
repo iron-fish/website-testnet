@@ -23,6 +23,8 @@ import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
 
+import CountdownTimer from 'components/leaderboard/CountdownTimer'
+
 type Props = {
   loginContext: LoginContext
 }
@@ -131,7 +133,8 @@ export default function Leaderboard({ loginContext }: Props) {
           <PageBanner
             title="Testnet Leaderboard"
             text={CTA}
-            buttonText={!isLoggedIn ? 'Sign Up' : ''}
+            buttonText={!isLoggedIn ? 'Sign Up' : undefined}
+            buttonLink={!isLoggedIn ? '/signup' : undefined}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -143,8 +146,9 @@ export default function Leaderboard({ loginContext }: Props) {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink={!isLoggedIn ? '/signup' : ''}
-          />
+          >
+            {isLoggedIn && <CountdownTimer />}
+          </PageBanner>
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
             <div className="border-r border-black flex h-full items-center w-1/2">

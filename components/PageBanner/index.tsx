@@ -10,6 +10,7 @@ type PageBannerProps = {
   buttonText?: string
   buttonClassName?: string
   buttonLink?: string
+  children?: ReactNode
 }
 export const PageBanner: FC<PageBannerProps> = ({
   title,
@@ -17,6 +18,7 @@ export const PageBanner: FC<PageBannerProps> = ({
   buttonText = '',
   buttonClassName = '',
   buttonLink = '',
+  children,
 }) => {
   const renderButton = buttonText && buttonLink
   return (
@@ -49,6 +51,7 @@ export const PageBanner: FC<PageBannerProps> = ({
           {text}
         </p>
       </div>
+      {children}
       {renderButton ? (
         <Link href={buttonLink} passHref>
           <RawButton

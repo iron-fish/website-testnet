@@ -4,7 +4,7 @@ import { toDate, format, utcToZonedTime } from 'date-fns-tz'
 import { ApiEvent } from 'apiClient'
 
 // modified version of https://github.com/date-fns/date-fns/issues/1401#issuecomment-621897094
-const makeRelativeConverter = () => {
+export const makeRelativeConverter = () => {
   const now = new Date()
   const offset = now.getTimezoneOffset()
   if (offset === 0) return (x: Date) => x
