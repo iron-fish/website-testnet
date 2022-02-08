@@ -19,6 +19,7 @@ import * as API from 'apiClient'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+import { nextMonday } from 'date-fns'
 
 const FIXTURE2 = {
   object: 'list',
@@ -1226,6 +1227,7 @@ export default function User({ loginContext }: Props) {
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
   const startDate = new Date(2021, 11, 1)
+  const endDate = nextMonday(new Date())
 
   const totalWeeklyLimit = Object.values($metricsConfig.weekly_limits).reduce(
     (acc, cur) => acc + cur,
@@ -1321,7 +1323,7 @@ export default function User({ loginContext }: Props) {
                       </tr>
                     </thead>
                     <tbody className="text-sm">
-                      {renderEvents(startDate, $events.data)}
+                      {renderEvents(startDate, endDate, $events.data)}
                     </tbody>
                   </table>
                 </>

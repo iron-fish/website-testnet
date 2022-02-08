@@ -266,10 +266,20 @@ type WeeklyData = {
   prior: Date
   events: ApiEvent[]
 }
-
-export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
-  const now = new Date()
-  const weeks = weeksBetween(start, now)
+function uniqueById(x: readonly ApiEvent[]) {
+  return x.reduce((agg: ApiEvent[], i: ApiEvent) => {
+    if (!agg.map(({ id }) => id).includes(i.id)) {
+      return agg.concat(i)
+    }
+    return agg
+  }, [])
+}
+export const renderEvents = (
+  start: Date,
+  end: Date,
+  rawEvents: readonly ApiEvent[]
+) => {
+  const weeks = weeksBetween(start, end)
   const counter = makeCounter()
 
   const convertedWeeks = weeks
@@ -287,15 +297,6 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
       })
     }, [])
     .reverse()
-  function uniqueById(x: readonly ApiEvent[]) {
-    return x.reduce((agg: ApiEvent[], i: ApiEvent) => {
-      if (!agg.map(({ id }) => id).includes(i.id)) {
-        return agg.concat(i)
-      }
-      return agg
-    }, [])
-  }
-
   const onlyMatched = convertedWeeks.reduce((agg: any, { events }) => {
     return agg.concat(
       rawEvents.filter(({ id }) =>
@@ -310,7 +311,7 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
     return agg.concat(x)
   }, [])
   const retest = convertedWeeks.reduce(
-    (agg: any, { prior: a, date: z }: { start: Date; end: Date }) => {
+    (agg: any, { prior: a, date: z }: { prior: Date; date: Date }) => {
       return agg.concat(
         missing.filter((ev: ApiEvent) => withinBounds(true)(a, z)(ev))
       )
