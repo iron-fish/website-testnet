@@ -252,7 +252,8 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
   const counter = makeCounter()
   // eslint-disable-next-line no-console
   console.log({
-    weeks: weeks.map((x: Date) => format(x, 'MMMM do, Y HH:MM:SS xxxxx')),
+    weeks,
+    formatted: weeks.map((x: Date) => format(x, 'MMMM do, Y HH:MM:SS xxxxx')),
     utc: weeks.map((x: Date) => formatUTC(x, 'MMMM do, Y HH:MM:SS xxxxx')),
   })
 
