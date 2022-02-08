@@ -88,7 +88,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     successDuration: 1000,
   })
   const [$hover, $setHover] = useState<CopyState>(CopyState.IDLE)
-  const abbrevHash = hash.slice(45, Infinity)
+  const abbrevHash = hash.slice(45)
   return (
     <div
       title={hash}
