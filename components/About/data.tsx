@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from './Link'
 
 export const cards = [
   {
@@ -119,7 +119,7 @@ export const callsToAction = {
               'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
             }
           >
-            👉 examples 👈
+            examples.
           </Link>
         </>
       ),
@@ -161,7 +161,7 @@ export const callsToAction = {
               'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
             }
           >
-            👉 examples 👈
+            examples.
           </Link>
         </>
       ),
