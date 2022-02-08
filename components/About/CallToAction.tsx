@@ -6,7 +6,7 @@ import { RawButton } from 'components/Button'
 
 type CTAProps = {
   title: string
-  content?: string
+  content?: ReactNode
   children?: ReactNode
   kind?: string
   earn?: number
@@ -31,7 +31,7 @@ export const CallToAction = ({
   const button = ctaText ? (
     <RawButton
       border="border"
-      className="m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+      className="m-auto w-full max-w-md mb-2 text-md p-2"
       colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
     >
       {href ? <Link href={href}>{ctaText}</Link> : ctaText}
@@ -65,6 +65,7 @@ export const CallToAction = ({
               Earn up to {earn.toLocaleString('en-US')} points a week
             </div>
           )}
+          <div className="mb-8" />
           {ctaText && href && button ? (
             <Link href={href}>{button}</Link>
           ) : (
