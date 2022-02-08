@@ -18,14 +18,7 @@ import {
   ApiEventMetadataWithLink,
 } from 'apiClient'
 
-import { format } from 'date-fns-tz'
-
-import {
-  formatUTC,
-  weeksBetween,
-  eventsBetween,
-  formatEventDate,
-} from 'utils/date'
+import { weeksBetween, eventsBetween, formatEventDate } from 'utils/date'
 
 import styles from './EventRow.module.css'
 
@@ -250,12 +243,6 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
   const now = new Date()
   const weeks = weeksBetween(start, now)
   const counter = makeCounter()
-  // eslint-disable-next-line no-console
-  console.log({
-    weeks,
-    formatted: weeks.map((x: Date) => format(x, 'MMMM do, Y HH:MM:SS xxxxx')),
-    utc: weeks.map((x: Date) => formatUTC(x, 'MMMM do, Y HH:MM:SS xxxxx')),
-  })
 
   return weeks
     .reduce((agg: WeeklyData[], date: Date) => {
