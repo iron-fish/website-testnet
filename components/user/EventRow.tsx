@@ -1,9 +1,6 @@
 import { Fragment, ReactElement, useState } from 'react'
 import clsx from 'clsx'
 import useClipboard from 'react-use-clipboard'
-import { isBefore, isAfter, parseISO, eachWeekOfInterval } from 'date-fns'
-import enUS from 'date-fns/locale/en-US'
-import { format, utcToZonedTime } from 'date-fns-tz'
 
 import ActivityBlockMined from 'components/icons/ActivityBlockMined'
 import ActivityBugReported from 'components/icons/ActivityBugReport'
@@ -20,6 +17,15 @@ import {
   ApiEventMetadataBlockMined,
   ApiEventMetadataWithLink,
 } from 'apiClient'
+
+import { format } from 'date-fns-tz'
+
+import {
+  formatUTC,
+  weeksBetween,
+  eventsBetween,
+  formatEventDate,
+} from 'utils/date'
 
 import styles from './EventRow.module.css'
 
@@ -161,12 +167,6 @@ const summarizeEvent = (
   return <>UNHANDLED: {type}</>
 }
 
-const formatEventDate = (d: Date) =>
-  format(d, `y'-'MM'-'dd HH':'mm':'ss`, {
-    locale: enUS,
-    timeZone: 'UTC',
-  })
-
 export const EventRow = ({
   type,
   occurred_at: occurredAt,
@@ -228,22 +228,6 @@ const WeekRow = ({ week, start, end }: WeekRowProps) => {
     </tr>
   )
 }
-const weeksBetween = (start: Date, end: Date) =>
-  eachWeekOfInterval({ start, end }, { weekStartsOn: 1 })
-
-const asUTC = (x: Date) => utcToZonedTime(x, 'UTC')
-
-const eventsBetween = (
-  start: Date,
-  end: Date,
-  events: ApiEvent[]
-): ApiEvent[] =>
-  events.filter(e => {
-    const time = asUTC(parseISO(e.occurred_at))
-    const a = asUTC(start)
-    const z = asUTC(end)
-    return isAfter(time, a) && isBefore(time, z)
-  })
 
 const makeCounter = () => {
   let x = 0
@@ -266,35 +250,37 @@ export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
   const now = new Date()
   const weeks = weeksBetween(start, now)
   const counter = makeCounter()
-  return (
-    weeks
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .reduce((agg: any, date: Date) => {
-        const prev = agg[agg.length - 1]
-        const prior = prev ? prev.date : start
-        const events = sortEventsByDate(
-          eventsBetween(prior, date, rawEvents as ApiEvent[])
-        )
-        const week = counter()
-        return agg.concat({
-          prior,
-          date,
-          events,
-          week,
-        })
-      }, [])
-      .reverse()
-      .map(
-        ({ date, week, events, prior }: WeeklyData) =>
-          events.length > 0 && (
-            <Fragment key={date.toTimeString() + week}>
-              <WeekRow week={week} start={prior || date} end={date} />
-              {events.map((e: ApiEvent) => (
-                <EventRow {...e} key={e.id} />
-              ))}
-            </Fragment>
-          )
+  // eslint-disable-next-line no-console
+  console.log({
+    weeks: weeks.map((x: Date) => format(x, 'MMMM do, Y HH:MM:SS xxxxx')),
+    utc: weeks.map((x: Date) => formatUTC(x, 'MMMM do, Y HH:MM:SS xxxxx')),
+  })
+
+  return weeks
+    .reduce((agg: WeeklyData[], date: Date) => {
+      const prev = agg[agg.length - 1]
+      const prior = prev ? prev.date : start
+      const events = sortEventsByDate(
+        eventsBetween(prior, date, rawEvents as ApiEvent[])
       )
-  )
+      return agg.concat({
+        prior,
+        date,
+        events,
+        week: counter(),
+      })
+    }, [])
+    .reverse()
+    .map(
+      ({ date, week, events, prior }: WeeklyData) =>
+        events.length > 0 && (
+          <Fragment key={date.toTimeString() + week}>
+            <WeekRow week={week} start={prior || date} end={date} />
+            {events.map((e: ApiEvent) => (
+              <EventRow {...e} key={e.id} />
+            ))}
+          </Fragment>
+        )
+    )
 }
 export default renderEvents
