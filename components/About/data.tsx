@@ -1,3 +1,5 @@
+import Link from './Link'
+
 export const cards = [
   {
     title: 'Big Winner',
@@ -107,8 +109,20 @@ export const callsToAction = {
     },
     {
       title: 'Contributing to the Community',
-      content:
-        'Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points.',
+      content: (
+        <>
+          Help us make Iron Fish more accessible to a wider audience! Published
+          tutorials, articles, forum posts, videos, scripts, and translations
+          are examples of contributions that can earn you points. See{' '}
+          <Link
+            href={
+              'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
+            }
+          >
+            examples.
+          </Link>
+        </>
+      ),
       submissionForm: true,
       points: [
         'XSmall = 10 points',
@@ -138,8 +152,20 @@ export const callsToAction = {
     },
     {
       title: 'Promoting the Testnet',
-      content:
-        'Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them.',
+      content: (
+        <>
+          Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it;
+          you might earn points for them. See{' '}
+          <Link
+            href={
+              'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
+            }
+          >
+            examples.
+          </Link>
+        </>
+      ),
+
       submissionForm: true,
       points: [
         'XSmall = 10 points',
