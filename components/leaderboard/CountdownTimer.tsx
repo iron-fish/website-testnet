@@ -3,6 +3,8 @@ import { CustomBox } from 'components/OffsetBorder'
 import { intervalToDuration, nextMonday, set } from 'date-fns'
 import type { Duration } from 'date-fns'
 
+import { makeRelativeConverter, formatEventDate } from 'utils/date'
+
 const customFormatDuration = (x: Duration) =>
   `${x.days ? x.days + 'd : ' : ''}${x.hours ? x.hours + 'hr : ' : ''}${
     x.minutes ? x.minutes + 'min : ' : ''
@@ -11,8 +13,9 @@ const customFormatDuration = (x: Duration) =>
 const CountdownTimer = () => {
   const now = new Date()
   const [$time, $setTime] = useState(now)
-  const end = nextMonday(
-    set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 })
+  const convert = makeRelativeConverter()
+  const end = convert(
+    nextMonday(set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }))
   )
   useEffect(() => {
     const i = setInterval(() => $setTime(new Date()), 1000)
@@ -20,7 +23,10 @@ const CountdownTimer = () => {
   }, [])
   const ii = intervalToDuration({ start: $time, end })
   return (
-    <div className="w-full flex flex-col justify-center items-center text-center">
+    <div
+      className="w-full flex flex-col justify-center items-center text-center"
+      title={`Next week starts: ${formatEventDate(end)}`}
+    >
       <CustomBox
         behind="bg-white"
         rounded
