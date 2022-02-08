@@ -11,6 +11,7 @@ import EventsPaginationButton from 'components/user/EventsPaginationButton'
 import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
+import renderEvents from 'components/user/EventRow'
 import usePaginatedEvents from 'hooks/usePaginatedEvents'
 import { encode as btoa } from 'base-64'
 
@@ -28,24 +29,6 @@ const validTabValue = (x: string) =>
 interface Props {
   loginContext: LoginContext
 }
-
-function displayEventType(type: API.EventType): string {
-  switch (type) {
-    case 'BLOCK_MINED':
-      return 'Mined a block'
-    case 'BUG_CAUGHT':
-      return 'Reported a bug'
-    case 'COMMUNITY_CONTRIBUTION':
-      return 'Contributed to the community'
-    case 'PULL_REQUEST_MERGED':
-      return 'Merged a pull request'
-    case 'SOCIAL_MEDIA_PROMOTION':
-      return 'Promoted testnet'
-    default:
-      return type
-  }
-}
-
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
@@ -170,6 +153,7 @@ export default function User({ loginContext }: Props) {
 
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
+  const startDate = new Date(2021, 11, 1)
 
   const totalWeeklyLimit = Object.values($metricsConfig.weekly_limits).reduce(
     (acc, cur) => acc + cur,
@@ -251,24 +235,21 @@ export default function User({ loginContext }: Props) {
               {/* Recent Activity */}
               {$activeTab !== 'settings' && (
                 <>
-                  <h1 className="font-favorit">Recent Activity</h1>
+                  <h1 className="font-favorit" id="recent-activity">
+                    Recent Activity
+                  </h1>
 
                   <table className="font-favorit w-full">
                     <thead>
                       <tr className="text-xs text-left tracking-widest border-b border-black">
                         <th className="font-normal py-4">ACTIVITY</th>
                         <th className="font-normal">DATE</th>
-                        <th className="font-normal">POINTS EARNED</th>
+                        <th className="font-normal">POINTS</th>
+                        <th className="font-normal max-w-[13rem]">DETAILS</th>
                       </tr>
                     </thead>
                     <tbody className="text-sm">
-                      {$events.data.map(e => (
-                        <tr key={e.id} className="border-b border-black">
-                          <td className="py-4">{displayEventType(e.type)}</td>
-                          <td>{new Date(e.occurred_at).toLocaleString()}</td>
-                          <td>{e.points}</td>
-                        </tr>
-                      ))}
+                      {renderEvents(startDate, $events.data)}
                     </tbody>
                   </table>
                 </>
