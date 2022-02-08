@@ -18,37 +18,9 @@ import {
   ApiEventMetadataWithLink,
 } from 'apiClient'
 
-import {
-  weeksBetween,
-  eventsBetween,
-  formatEventDate,
-  withinBounds,
-} from 'utils/date'
+import { weeksBetween, eventsBetween, formatEventDate } from 'utils/date'
 
 import styles from './EventRow.module.css'
-
-const RAW = {
-  object: 'event',
-  id: 101983,
-  type: 'COMMUNITY_CONTRIBUTION',
-  occurred_at: '2022-02-08T20:25:13.000Z',
-  points: 500,
-  user_id: 16450,
-  metadata: {
-    url: 'https://twitter.com/ironfishcrypto/status/1488894441054097410?s=20&t=0nTIoED5Pw0_YS4WfCUoNg ',
-  },
-}
-const RAW2 = {
-  object: 'event',
-  id: 101900,
-  type: 'COMMUNITY_CONTRIBUTION',
-  occurred_at: '2022-02-08T20:25:13.000Z',
-  points: 500,
-  user_id: 16450,
-  metadata: {
-    url: 'https://twitter.com/ironfishcrypto/status/1488894441054097410?s=20&t=0nTIoED5Pw0_YS4WfCUoNg ',
-  },
-}
 
 interface IconText {
   icon: ReactElement | string
@@ -266,14 +238,7 @@ type WeeklyData = {
   prior: Date
   events: ApiEvent[]
 }
-function uniqueById(x: readonly ApiEvent[]) {
-  return x.reduce((agg: ApiEvent[], i: ApiEvent) => {
-    if (!agg.map(({ id }) => id).includes(i.id)) {
-      return agg.concat(i)
-    }
-    return agg
-  }, [])
-}
+
 export const renderEvents = (
   start: Date,
   end: Date,
@@ -282,7 +247,7 @@ export const renderEvents = (
   const weeks = weeksBetween(start, end)
   const counter = makeCounter()
 
-  const convertedWeeks = weeks
+  return weeks
     .reduce((agg: WeeklyData[], date: Date) => {
       const prev = agg[agg.length - 1]
       const prior = prev ? prev.date : start
@@ -297,38 +262,16 @@ export const renderEvents = (
       })
     }, [])
     .reverse()
-  const onlyMatched = convertedWeeks.reduce((agg: any, { events }) => {
-    return agg.concat(
-      rawEvents.filter(({ id }) =>
-        events.map(({ id: id2 }) => id2).includes(id)
-      )
+    .map(
+      ({ date, week, events, prior }: WeeklyData) =>
+        events.length > 0 && (
+          <Fragment key={date.toTimeString() + week}>
+            <WeekRow week={week} start={prior || date} end={date} />
+            {events.map((e: ApiEvent) => (
+              <EventRow {...e} key={e.id} />
+            ))}
+          </Fragment>
+        )
     )
-  }, [])
-  const missing = rawEvents.reduce((agg: any, x) => {
-    if (onlyMatched.map(({ id }: { id: number }) => id).includes(x.id)) {
-      return agg
-    }
-    return agg.concat(x)
-  }, [])
-  const retest = convertedWeeks.reduce(
-    (agg: any, { prior: a, date: z }: { prior: Date; date: Date }) => {
-      return agg.concat(
-        missing.filter((ev: ApiEvent) => withinBounds(true)(a, z)(ev))
-      )
-    },
-    []
-  )
-  console.log({ missing, retest, weeks })
-  return convertedWeeks.map(
-    ({ date, week, events, prior }: WeeklyData) =>
-      events.length > 0 && (
-        <Fragment key={date.toTimeString() + week}>
-          <WeekRow week={week} start={prior || date} end={date} />
-          {events.map((e: ApiEvent) => (
-            <EventRow {...e} key={e.id} />
-          ))}
-        </Fragment>
-      )
-  )
 }
 export default renderEvents

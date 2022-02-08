@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { CustomBox } from 'components/OffsetBorder'
-import { intervalToDuration, nextMonday, set } from 'date-fns'
+import { intervalToDuration } from 'date-fns'
 import type { Duration } from 'date-fns'
 
-import { makeRelativeConverter, formatEventDate } from 'utils/date'
+import { formatEventDate, nextMondayFrom } from 'utils/date'
 
 const customFormatDuration = (x: Duration) =>
   `${x.days ? x.days + 'd : ' : ''}${x.hours ? x.hours + 'hr : ' : ''}${
@@ -13,10 +13,7 @@ const customFormatDuration = (x: Duration) =>
 const CountdownTimer = () => {
   const now = new Date()
   const [$time, $setTime] = useState(now)
-  const convert = makeRelativeConverter()
-  const end = convert(
-    nextMonday(set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }))
-  )
+  const end = nextMondayFrom(now)
   useEffect(() => {
     const i = setInterval(() => $setTime(new Date()), 1000)
     return () => clearInterval(i)
