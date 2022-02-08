@@ -17,15 +17,21 @@ export const weeksBetween = (start: Date, end: Date) => {
   return raw.map(convert)
 }
 
+export const withinBounds =
+  (log: boolean) => (start: Date, end: Date) => (e: ApiEvent) => {
+    const time = toDate(e.occurred_at)
+    const match = isAfter(time, start) && isBefore(time, end)
+    if (e.id === 101983) {
+      console.log('hey', e.id, e.occurred_at, '---', time, '=>', start, end)
+    }
+    return match
+  }
+
 export const eventsBetween = (
   start: Date,
   end: Date,
   events: ApiEvent[]
-): ApiEvent[] =>
-  events.filter(e => {
-    const time = toDate(e.occurred_at)
-    return isAfter(time, start) && isBefore(time, end)
-  })
+): ApiEvent[] => events.filter(withinBounds(false)(start, end))
 
 export const formatInTimeZone =
   (timeZone: string) => (date: Date, formatString: string) =>

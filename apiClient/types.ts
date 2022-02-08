@@ -22,8 +22,8 @@ export type ApiEventMetadata =
 
 export type ApiEvent = {
   id: number
-  created_at: string
-  updated_at: string
+  created_at?: string
+  updated_at?: string
   type: EventType
   occurred_at: string
   points: number
