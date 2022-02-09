@@ -18,12 +18,7 @@ import {
   ApiEventMetadataWithLink,
 } from 'apiClient'
 
-import {
-  weeksBetween,
-  eventsBetween,
-  withinBounds,
-  formatEventDate,
-} from 'utils/date'
+import { weeksBetween, eventsBetween, formatEventDate } from 'utils/date'
 
 import styles from './EventRow.module.css'
 
@@ -252,7 +247,7 @@ export const renderEvents = (
   const weeks = weeksBetween(start, end)
   const counter = makeCounter()
 
-  const convertedWeeks = weeks
+  return weeks
     .reduce((agg: WeeklyData[], date: Date) => {
       const prev = agg[agg.length - 1]
       const prior = prev ? prev.date : start
@@ -267,41 +262,16 @@ export const renderEvents = (
       })
     }, [])
     .reverse()
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const onlyMatched = convertedWeeks.reduce((agg: any, { events }) => {
-    return agg.concat(
-      rawEvents.filter(({ id }) =>
-        events.map(({ id: id2 }) => id2).includes(id)
-      )
+    .map(
+      ({ date, week, events, prior }: WeeklyData) =>
+        events.length > 0 && (
+          <Fragment key={date.toTimeString() + week}>
+            <WeekRow week={week} start={prior || date} end={date} />
+            {events.map((e: ApiEvent) => (
+              <EventRow {...e} key={e.id} />
+            ))}
+          </Fragment>
+        )
     )
-  }, [])
-  const missing = rawEvents.reduce((agg: any, x) => {
-    if (onlyMatched.map(({ id }: { id: number }) => id).includes(x.id)) {
-      return agg
-    }
-    return agg.concat(x)
-  }, [])
-  const retest = convertedWeeks.reduce(
-    (agg: any, { prior: a, date: z }: { prior: Date; date: Date }) => {
-      return agg.concat(
-        missing.filter((ev: ApiEvent) => withinBounds(a, z)(ev))
-      )
-    },
-    []
-  )
-  // eslint-disable-next-line no-console
-  console.log({ missing, retest, weeks })
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-  return convertedWeeks.map(
-    ({ date, week, events, prior }: WeeklyData) =>
-      events.length > 0 && (
-        <Fragment key={date.toTimeString() + week}>
-          <WeekRow week={week} start={prior || date} end={date} />
-          {events.map((e: ApiEvent) => (
-            <EventRow {...e} key={e.id} />
-          ))}
-        </Fragment>
-      )
-  )
 }
 export default renderEvents
