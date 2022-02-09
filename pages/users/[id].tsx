@@ -32,6 +32,8 @@ const validTabValue = (x: string) =>
 interface Props {
   loginContext: LoginContext
 }
+const sumValues = (x: Record<string, number>) =>
+  Object.values(x).reduce((a, b) => a + b, 0)
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
@@ -159,10 +161,12 @@ export default function User({ loginContext }: Props) {
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
 
-  const totalWeeklyLimit = Object.values($metricsConfig.weekly_limits).reduce(
-    (acc, cur) => acc + cur,
-    0
-  )
+  const totalWeeklyLimit = sumValues(
+    $metricsConfig.weekly_limits
+  ).toLocaleString()
+  const weeklyPoints = sumValues(
+    $metricsConfig.points_per_category
+  ).toLocaleString()
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -205,8 +209,7 @@ export default function User({ loginContext }: Props) {
                     <div>
                       <div>Weekly Points</div>
                       <div className="text-3xl mt-2">
-                        {$weeklyMetrics.points.toLocaleString()} /{' '}
-                        {totalWeeklyLimit.toLocaleString()}
+                        {weeklyPoints} / {totalWeeklyLimit}
                       </div>
                     </div>
                   </div>
