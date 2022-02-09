@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
-import useQuery from 'hooks/useQuery'
+import { encode as btoa } from 'base-64'
+import { nextMonday } from 'date-fns'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -12,13 +13,14 @@ import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
 import renderEvents from 'components/user/EventRow'
-import usePaginatedEvents from 'hooks/usePaginatedEvents'
-import { encode as btoa } from 'base-64'
 
 import * as API from 'apiClient'
-import { graffitiToColor, numberToOrdinal } from 'utils'
+import useQuery from 'hooks/useQuery'
+import usePaginatedEvents from 'hooks/usePaginatedEvents'
 import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+
+import { graffitiToColor, numberToOrdinal } from 'utils'
 import { nextMondayFrom } from 'utils/date'
 
 // The number of events to display in the Recent Activity list.
@@ -155,8 +157,7 @@ export default function User({ loginContext }: Props) {
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
   const startDate = new Date(2021, 11, 1)
-  const now = new Date()
-  const endDate = nextMondayFrom(now)
+  const endDate = nextMondayFrom(nextMonday(new Date()))
 
   const totalWeeklyLimit = Object.values($metricsConfig.weekly_limits).reduce(
     (acc, cur) => acc + cur,
