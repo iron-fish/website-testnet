@@ -104,9 +104,9 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
         )}
       >
         <Link href={`/users/${id}`} passHref>
-          <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
+          <a className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
             {graffiti}
-          </div>
+          </a>
         </Link>
       </div>
       <ChevronDown />

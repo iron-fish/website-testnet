@@ -79,6 +79,8 @@ export function useLogin(config: LoginProps = {}) {
       $setStatus(STATUS.LOADED)
       $setMetadata(details)
       $setMagicMetadata(magicMd)
+      // eslint-disable-next-line no-console
+      console.log({ details, magicMd })
       return true
     } catch (err) {
       if (err.toString().indexOf('-32603') > -1) {
