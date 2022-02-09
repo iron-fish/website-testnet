@@ -239,9 +239,12 @@ type WeeklyData = {
   events: ApiEvent[]
 }
 
-export const renderEvents = (start: Date, rawEvents: readonly ApiEvent[]) => {
-  const now = new Date()
-  const weeks = weeksBetween(start, now)
+export const renderEvents = (
+  start: Date,
+  end: Date,
+  rawEvents: readonly ApiEvent[]
+) => {
+  const weeks = weeksBetween(start, end)
   const counter = makeCounter()
 
   return weeks

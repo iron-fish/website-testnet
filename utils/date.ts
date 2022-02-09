@@ -1,4 +1,11 @@
-import { isBefore, isAfter, eachWeekOfInterval, addMinutes } from 'date-fns'
+import {
+  set,
+  nextMonday,
+  isBefore,
+  isAfter,
+  eachWeekOfInterval,
+  addMinutes,
+} from 'date-fns'
 import { toDate, format, utcToZonedTime } from 'date-fns-tz'
 
 import { ApiEvent } from 'apiClient'
@@ -17,15 +24,16 @@ export const weeksBetween = (start: Date, end: Date) => {
   return raw.map(convert)
 }
 
+export const withinBounds = (start: Date, end: Date) => (e: ApiEvent) => {
+  const time = toDate(e.occurred_at)
+  return isAfter(time, start) && isBefore(time, end)
+}
+
 export const eventsBetween = (
   start: Date,
   end: Date,
   events: ApiEvent[]
-): ApiEvent[] =>
-  events.filter(e => {
-    const time = toDate(e.occurred_at)
-    return isAfter(time, start) && isBefore(time, end)
-  })
+): ApiEvent[] => events.filter(withinBounds(start, end))
 
 export const formatInTimeZone =
   (timeZone: string) => (date: Date, formatString: string) =>
@@ -33,3 +41,10 @@ export const formatInTimeZone =
 export const formatUTC = formatInTimeZone('UTC')
 export const formatEventDate = (d: Date) =>
   formatUTC(d, `y'-'MM'-'dd HH':'mm':'ss`)
+
+export const nextMondayFrom = (when: Date) => {
+  const convert = makeRelativeConverter()
+  return convert(
+    nextMonday(set(when, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }))
+  )
+}
