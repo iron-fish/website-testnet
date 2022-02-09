@@ -164,9 +164,7 @@ export default function User({ loginContext }: Props) {
   const totalWeeklyLimit = sumValues(
     $metricsConfig.weekly_limits
   ).toLocaleString()
-  const weeklyPoints = sumValues(
-    $metricsConfig.points_per_category
-  ).toLocaleString()
+  const weeklyPoints = $weeklyMetrics.points.toLocaleString()
 
   return (
     <div className="min-h-screen flex flex-col">
