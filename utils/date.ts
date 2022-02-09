@@ -42,9 +42,9 @@ export const formatUTC = formatInTimeZone('UTC')
 export const formatEventDate = (d: Date) =>
   formatUTC(d, `y'-'MM'-'dd HH':'mm':'ss`)
 
-export const nextMondayFrom = (now: Date) => {
+export const nextMondayFrom = (when: Date) => {
   const convert = makeRelativeConverter()
   return convert(
-    nextMonday(set(now, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }))
+    nextMonday(set(when, { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }))
   )
 }
