@@ -53,7 +53,7 @@ const FIELDS = {
       { name: 'Bugs Caught', value: 'BUG_CAUGHT' },
       { name: 'Promotions', value: 'SOCIAL_MEDIA_PROMOTION' },
       { name: 'PRs Merged', value: 'PULL_REQUEST_MERGED' },
-      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTION' },
+      { name: 'Community Changes', value: 'COMMUNITY_CONTRIBUTION' },
     ],
     validation: () => true,
     defaultErrorText,
