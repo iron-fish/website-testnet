@@ -33,6 +33,8 @@ export function useLogin(config: LoginProps = {}) {
   const [$metadata, $setMetadata] = useState<ApiUserMetadata | null>(null)
 
   const reloadUser = useCallback(async () => {
+    // eslint-disable-next-line no-console
+    console.log('RELOADING USER')
     if (!magic || !magic.user) {
       return false
     }
@@ -50,6 +52,8 @@ export function useLogin(config: LoginProps = {}) {
         $router.push(redirect)
         return false
       }
+      // eslint-disable-next-line no-console
+      console.log('NO TOKEN')
 
       // this is a visible error but not a breaking error
       $setStatus(STATUS.NOT_FOUND)
@@ -63,6 +67,8 @@ export function useLogin(config: LoginProps = {}) {
       ])
 
       if ('error' in details || details instanceof LocalError) {
+        // eslint-disable-next-line no-console
+        console.log('ERROR IN RESPONSE')
         // this is a visible error and a breaking error
         $setStatus(STATUS.FAILED)
         $setError(details)
@@ -71,11 +77,15 @@ export function useLogin(config: LoginProps = {}) {
       }
 
       if (details.statusCode && details.statusCode === 401) {
+        // eslint-disable-next-line no-console
+        console.log('NO USER FOUND')
         $setStatus(STATUS.NOT_FOUND)
         $setError(new LocalError('No user found.', NO_MAGIC_USER))
         return false
       }
 
+      // eslint-disable-next-line no-console
+      console.log('SETTING VALUES')
       $setStatus(STATUS.LOADED)
       $setMetadata(details)
       $setMagicMetadata(magicMd)
