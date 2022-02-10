@@ -45,6 +45,8 @@ function Navbar({
     testnetVisible,
     loginContext,
   }
+  // eslint-disable-next-line no-console
+  console.log('RERENDER NAVBAR')
   return (
     <nav
       className={clsx(

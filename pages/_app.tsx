@@ -11,6 +11,8 @@ const useLoginHook = LOCAL_MODE ? useLocalLogin : useLogin
 function MyApp({ Component: Page, pageProps }: AppProps) {
   const $login = useLoginHook()
   const { metadata } = $login
+  // eslint-disable-next-line no-console
+  console.log({ $login })
   return (
     <>
       <Head>
