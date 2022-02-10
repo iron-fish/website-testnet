@@ -71,6 +71,9 @@ module.exports = {
         ifblue: {
           DEFAULT: '#1D0070',
         },
+        ifotherblue: {
+          DEFAULT: '#2C72FF',
+        },
         ifsubtextgray: {
           DEFAULT: '#AFAFAF',
         },
@@ -89,6 +92,9 @@ module.exports = {
         ifpink: {
           DEFAULT: '#FFC2EB',
           subtext: '#D089B9',
+        },
+        ifmauve: {
+          DEFAULT: '#9B6288',
         },
         ifcubepink: {
           DEFAULT: '#FF94DB',

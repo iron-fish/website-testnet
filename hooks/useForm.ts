@@ -20,15 +20,22 @@ export interface NameValue {
 }
 
 export interface ProvidedField {
-  id: string
-  label: string
-  defaultValue: string
-  validation: (v: string) => boolean
-  placeholder?: string
-  isRadioed?: boolean
-  options?: NameValue[]
+  controlled?: boolean
   defaultErrorText?: string
+  useDefault?: boolean
+  defaultLabel?: string
+  defaultValue: string
+  id: string
+  isRadioed?: boolean
+  label: string
+  options?: NameValue[]
+  placeholder?: string
+  radioOption?: string
+  required?: boolean
+  touched?: boolean
+  validation: (v: string) => boolean
   whitespace?: WHITESPACE
+  value?: string
 }
 export interface Field extends ProvidedField {
   value: string
@@ -49,68 +56,102 @@ export interface Field extends ProvidedField {
 }
 
 export function useField(provided: ProvidedField): Field | null {
-  const [$value, $setter] = useState<string>(provided.defaultValue)
+  const {
+    defaultErrorText = '',
+    defaultLabel = '',
+    defaultValue,
+    id,
+    isRadioed,
+    label,
+    options,
+    radioOption: defaultRadioOption,
+    required = true,
+    touched = false,
+    validation,
+    whitespace = WHITESPACE.DEFAULT,
+    placeholder,
+    useDefault,
+    controlled,
+  } = provided
+  const [$value, $setter] = useState<string>(defaultValue)
   // TODO: tried writing this with nullish coalescing but it yelled and I got tired
   const radioOption =
-    provided &&
-    provided.options &&
-    provided.options[0] &&
-    provided.options[0].value
-  const { whitespace = WHITESPACE.DEFAULT } = provided
+    defaultRadioOption || (options && options[0] && options[0].value)
   const banSpaces = whitespace === WHITESPACE.BANNED
   const trimSpaces = banSpaces || whitespace === WHITESPACE.TRIMMED
   const [$choice, $setChoice] = useState<string>(
-    provided.isRadioed && radioOption ? radioOption : ''
+    isRadioed && radioOption ? radioOption : ''
   )
   const [$disabled, $setDisabled] = useState<boolean>(false)
-  const [$valid, $setValid] = useState<boolean>(false)
-  const [$touched, $setTouched] = useState<boolean>(false)
+  const [, $setValid] = useState<boolean>(false)
+  const [$touched, $setTouched] = useState<boolean>(touched)
   const [$field, $setField] = useState<Field | null>(null)
-  const [$error, $setError] = useState<string>(provided.defaultErrorText || '')
+  const [$error, $setError] = useState<string>(defaultErrorText)
   useEffect(() => {
-    const { validation, defaultValue } = provided
     const valid = !$touched || ($touched && validation($value))
     $setValid(valid)
     $setField({
-      ...provided,
-      disabled: $disabled,
-      setDisabled: $setDisabled,
+      // raw values from upstream
+      defaultErrorText,
       defaultValue,
-      value: $value,
+      defaultLabel,
+      id,
+      isRadioed,
+      label,
+      radioOption: defaultRadioOption,
+      options,
       valid,
+      validation,
       whitespace,
+      placeholder,
+      useDefault,
+      // dynamic values
+      choice: $choice,
+      disabled: $disabled,
+      errorText: valid ? undefined : $error,
+      onChange: setStateOnChange($setter, trimSpaces),
+      setChoice: $setChoice,
+      setDisabled: $setDisabled,
+      setError: $setError,
+      setTouched: $setTouched,
       setValid: $setValid,
       setter: $setter,
+      touched: $touched,
+      value: $value,
+      required,
+      // callback functions
       onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
         if (banSpaces && e.key === ' ') {
           e.preventDefault()
         }
       },
-      onChange: setStateOnChange($setter, trimSpaces),
       onBlur: () => {
         $setTouched(true)
       },
-      setTouched: $setTouched,
-      touched: $touched,
-      errorText: valid ? undefined : $error,
-      setError: $setError,
-      choice: $choice,
-      setChoice: $setChoice,
+      controlled,
     })
   }, [
-    $disabled,
-    $setDisabled,
-    provided,
-    $value,
-    $touched,
-    $valid,
-    $setValid,
-    $error,
-    $choice,
-    $setChoice,
+    defaultLabel,
+    defaultErrorText,
+    defaultRadioOption,
+    isRadioed,
+    options,
+    id,
+    label,
+    validation,
+    required,
+    defaultValue,
     whitespace,
     banSpaces,
     trimSpaces,
+    $disabled,
+    $value,
+    $touched,
+    $error,
+    $choice,
+    placeholder,
+    useDefault,
+    controlled,
   ])
   return $field
 }

@@ -18,7 +18,6 @@ import {
   UNSET,
   validateEmail,
   validateGraffiti,
-  exists,
   defaultErrorText,
 } from 'utils/forms'
 import { encode as btoa } from 'base-64'
@@ -49,7 +48,8 @@ export const FIELDS = {
     label: '',
     placeholder: 'Your username',
     defaultValue: UNSET,
-    validation: exists,
+    required: false,
+    validation: () => true,
     defaultErrorText,
     isRadioed: true,
     whitespace: WHITESPACE.BANNED,
@@ -88,11 +88,11 @@ export default function SignUp({ loginContext }: SignUpProps) {
     duration: 8e3,
   })
 
-  const [$error, $setError] = useState<string>(UNSET)
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
   const $graffiti = useField(FIELDS.graffiti)
   const $country = useField(FIELDS.country)
+  const [$error, $setError] = useState<string>(UNSET)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {

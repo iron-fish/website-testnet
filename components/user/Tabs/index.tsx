@@ -1,10 +1,12 @@
 import React from 'react'
 
 import * as API from 'apiClient'
+import { STATUS } from 'hooks/useLogin'
 
 import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
 import WeeklyContent from './WeeklyContent'
+import { useQueriedToast } from 'hooks/useToast'
 
 export type TabType = 'all' | 'weekly' | 'settings'
 
@@ -16,6 +18,12 @@ type TabsProps = {
   authedUser: API.ApiUserMetadata | null
   activeTab: TabType
   onTabChange: (tab: TabType) => unknown
+  toast: ReturnType<typeof useQueriedToast>
+  reloadUser: () => Promise<boolean>
+  setFetched: (x: boolean) => unknown
+  setUser: (x: API.ApiUser) => unknown
+  setUserStatus: (x: STATUS) => unknown
+  setRawMetadata: (x: API.ApiUserMetadata) => unknown
 }
 
 export default function Tabs({
@@ -26,7 +34,17 @@ export default function Tabs({
   authedUser,
   activeTab,
   onTabChange,
+  toast,
+  reloadUser,
+  setFetched,
+  setUser,
+  setUserStatus,
+  setRawMetadata,
 }: TabsProps) {
+  // eslint-disable-next-line
+  const allTimeBlocksMined = allTimeMetrics?.metrics?.blocks_mined?.points ?? 0
+  const anyBlocksMined = allTimeBlocksMined > 0
+
   return (
     <div>
       {/* Tabs */}
@@ -43,7 +61,7 @@ export default function Tabs({
         >
           All Time Stats
         </TabHeaderButton>
-        {authedUser && user.id === authedUser.id && (
+        {user && authedUser && authedUser.id === user.id && (
           <TabHeaderButton
             selected={activeTab === 'settings'}
             onClick={() => onTabChange('settings')}
@@ -63,8 +81,19 @@ export default function Tabs({
       {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
-      {activeTab === 'settings' && authedUser && (
-        <SettingsContent authedUser={authedUser} />
+      {activeTab === 'settings' && (
+        <SettingsContent
+          setUserStatus={setUserStatus}
+          anyBlocksMined={anyBlocksMined}
+          onTabChange={onTabChange}
+          user={user}
+          authedUser={authedUser}
+          toast={toast}
+          reloadUser={reloadUser}
+          setFetched={setFetched}
+          setUser={setUser}
+          setRawMetadata={setRawMetadata}
+        />
       )}
     </div>
   )

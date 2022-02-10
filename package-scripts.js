@@ -25,7 +25,7 @@ module.exports = {
     dx: concurrent.nps('build', 'lint', 'meta.dependencies'),
     meta: {
       dependencies: {
-        build: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient contexts data definitions hooks public styles utils --progress -x node_modules definitions | dot -T svg > dependency-graph.svg`,
+        build: `depcruise -c .dependency-cruiser.js -T dot components pages apiClient data definitions hooks public styles utils --progress -x node_modules definitions | dot -T svg > dependency-graph.svg`,
         interactive: `cat dependency-graph.svg | depcruise-wrap-stream-in-html > dependency-graph.html`,
         script: 'nps meta.dep.build meta.dep.interactive',
       },

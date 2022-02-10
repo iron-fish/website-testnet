@@ -23,6 +23,8 @@ import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
 
+import CountdownTimer from 'components/leaderboard/CountdownTimer'
+
 type Props = {
   loginContext: LoginContext
 }
@@ -60,6 +62,7 @@ const FIELDS = {
     defaultLabel: TOTAL_POINTS,
   },
 }
+const CTA = `Our incentivized testnet leaderboard shows you who the top point getters are for all-time score, miners, bug catchers, net promoters, node hosting, and more! Click someone’s user name to see a breakdown of their activity. Points are earned during weekly cycles which begin Monday, 12:00am UTC and end Sunday 11:59pm UTC.`
 
 export default function Leaderboard({ loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
@@ -75,20 +78,18 @@ export default function Leaderboard({ loginContext }: Props) {
   const [$search, $setSearch] = useState('')
   const $debouncedSearch = useDebounce($search, 300)
   const [$searching, $setSearching] = useState(false)
+  const countryValue = $country?.value
+  const eventTypeValue = $eventType?.value
 
   useEffect(() => {
     const func = async () => {
       $setSearching(true)
 
       const countrySearch =
-        $country?.value && $country.value !== 'Global'
-          ? { country_code: $country.value }
-          : {}
+        countryValue !== 'Global' ? { country_code: countryValue } : {}
 
       const eventType =
-        $eventType?.value && $eventType.value !== TOTAL_POINTS
-          ? { event_type: $eventType.value }
-          : {}
+        eventTypeValue !== TOTAL_POINTS ? { event_type: eventTypeValue } : {}
 
       const result = await API.listLeaderboard({
         search: $debouncedSearch,
@@ -103,10 +104,10 @@ export default function Leaderboard({ loginContext }: Props) {
       $setSearching(false)
     }
 
-    if ($country?.value && $eventType?.value) {
+    if (countryValue && eventTypeValue) {
       func()
     }
-  }, [$debouncedSearch, $country?.value, $eventType?.value])
+  }, [$debouncedSearch, countryValue, eventTypeValue])
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
@@ -131,11 +132,9 @@ export default function Leaderboard({ loginContext }: Props) {
         <div className="w-4/5 md:w-2/3">
           <PageBanner
             title="Testnet Leaderboard"
-            text="Our incentivized testnet leaderboard shows you who the top point
-          getters are for all-time score, miners, bug catchers, net promoters,
-          node hosting, and more! Click someone’s user name to see a breakdown
-          of their activity."
-            buttonText={!isLoggedIn ? 'Sign Up' : ''}
+            text={CTA}
+            buttonText={!isLoggedIn ? 'Sign Up' : undefined}
+            buttonLink={!isLoggedIn ? '/signup' : undefined}
             buttonClassName={clsx(
               'm-auto',
               'mb-32',
@@ -147,8 +146,9 @@ export default function Leaderboard({ loginContext }: Props) {
               'md:py-5',
               'md:px-4'
             )}
-            buttonLink={!isLoggedIn ? '/signup' : ''}
-          />
+          >
+            {isLoggedIn && <CountdownTimer />}
+          </PageBanner>
 
           <div className="h-16 border border-black rounded flex items-center mb-8">
             <div className="border-r border-black flex h-full items-center w-1/2">
