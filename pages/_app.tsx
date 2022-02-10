@@ -12,7 +12,7 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
   const $login = useLoginHook()
   const { metadata } = $login
   // eslint-disable-next-line no-console
-  console.log({ $login })
+  console.log(JSON.stringify($login, null, 2))
   return (
     <>
       <Head>

@@ -13,7 +13,7 @@ const prodE2E = e2e(FIXTURES.CYPRESS.PROD)
 module.exports = {
   scripts: {
     dev: 'next dev',
-    build: 'next build',
+    build: 'next build --profile',
     start: 'next start',
     lint: {
       clean: 'next lint',
