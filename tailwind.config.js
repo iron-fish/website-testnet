@@ -105,9 +105,6 @@ module.exports = {
         extended: ['extended-regular', 'sans-serif'],
       },
     },
-    fontSize: {
-      '5xl': ['2.5rem', '1'],
-    },
   },
   variants: {
     extend: {
