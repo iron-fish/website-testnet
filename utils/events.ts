@@ -46,18 +46,6 @@ export const findMissingEvents = (
     return agg.concat(x)
   }, [])
 
-/*
-const retest = (allEvents: ApiEvent[], weeklyData: WeeklyData[]) =>
-  weeklyData.reduce(
-    (agg: ApiEvent[], { prior: a, date: z }: { prior: Date; date: Date }) => {
-      const missing = findMissingEvents(allEvents, weeklyData)
-      return agg.concat(
-        missing.filter((ev: ApiEvent) => withinBounds(a, z)(ev))
-      )
-    },
-    []
-  )
-*/
 const sortEventsByDate = (xs: ApiEvent[]) =>
   xs.sort((a: ApiEvent, b: ApiEvent): number =>
     a.occurred_at > b.occurred_at ? -1 : 1
