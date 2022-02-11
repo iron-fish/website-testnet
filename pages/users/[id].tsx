@@ -196,32 +196,32 @@ export default function User({ loginContext }: Props) {
 
                 <div className="inline-flex flex-col items-center pl-2 pt-2 justify-end">
                   <svg viewBox="0 0 128 128" className="w-16 md:w-32">
-                    <FishAvatar color={avatarColor}/>
+                    <FishAvatar color={avatarColor} />
                   </svg>
-                   <div className="mt-4">
+                  <div className="mt-4">
                     <Flag code={$user.country_code} />
-                   </div>
+                  </div>
                 </div>
               </div>
 
               <div className="font-favorit flex flex-wrap gap-x-10 sm:gap-x-16 gap-y-2 mb-6">
-                    <div>
-                      <div className="text-sm sm:text-lg">Rank</div>
-                      <div className="text-md sm:text-3xl mt-0">{ordinalRank}</div>
-                    </div>
-                    <div>
-                      <div className="text-sm sm:text-lg">Total Points</div>
-                      <div className="text-md sm:text-3xl mt-0">
-                        {$user.total_points.toLocaleString()}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm sm:text-lg">Weekly Points</div>
-                      <div className="text-md sm:text-3xl mt-0">
-                        {weeklyPoints} / {totalWeeklyLimit}
-                      </div>
-                    </div>
+                <div>
+                  <div className="text-sm sm:text-lg">Rank</div>
+                  <div className="text-md sm:text-3xl mt-0">{ordinalRank}</div>
+                </div>
+                <div>
+                  <div className="text-sm sm:text-lg">Total Points</div>
+                  <div className="text-md sm:text-3xl mt-0">
+                    {$user.total_points.toLocaleString()}
                   </div>
+                </div>
+                <div>
+                  <div className="text-sm sm:text-lg">Weekly Points</div>
+                  <div className="text-md sm:text-3xl mt-0">
+                    {weeklyPoints} / {totalWeeklyLimit}
+                  </div>
+                </div>
+              </div>
 
               {/* Tabs */}
               <Tabs
