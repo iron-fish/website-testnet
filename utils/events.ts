@@ -98,7 +98,7 @@ export const bucketEventsAndAccountForMissingOnes = (
   const weeklyData = bucketEvents(start, end, rawEvents)
   const missingEvents = findMissingEvents(rawEvents, weeklyData)
   const eventsPriorToStart = missingEvents.filter(({ occurred_at: time }) =>
-    isBefore(start, toDate(time))
+    isBefore(toDate(time), start)
   )
   if (eventsPriorToStart.length > 0) {
     return weeklyData.concat({
