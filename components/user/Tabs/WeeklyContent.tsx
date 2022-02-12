@@ -47,7 +47,7 @@ export default function WeeklyContent({
         unit="PRs"
       />
       <WeeklyMetricCard
-        title="Community Changes"
+        title="Community Contributions"
         metric={weeklyMetrics.metrics.community_contributions}
         metricValueMax={contributionLimit}
         unit="contributions"
