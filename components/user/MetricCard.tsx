@@ -23,9 +23,9 @@ export default function MetricCard({
         <div className=" mb-4 whitespace-nowrap">{title}</div>
         <div className="flex gap-4">
           <div className="text-5xl">{value}</div>
-          <div className="font-favorit mt-1">
+          <div className="font-favorit mt-1 overflow-hidden">
             <div className="leading-tight">{subValueTop}</div>
-            <div className="text-ifsubtextgray leading-tight whitespace-nowrap	">
+            <div className="text-ifsubtextgray leading-tight truncate">
               {subValueBottom}
             </div>
           </div>
