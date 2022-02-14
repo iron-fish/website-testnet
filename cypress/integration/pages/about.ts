@@ -54,8 +54,8 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
+        text: 'examples.',
+        href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
       },
       {
         isImage: false,
