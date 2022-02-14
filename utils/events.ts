@@ -20,31 +20,25 @@ export const eventsBetween = (
   events: ApiEvent[]
 ): ApiEvent[] => events.filter(withinBounds(start, end))
 
-export function uniqueById(x: readonly ApiEvent[]) {
-  return x.reduce((agg: ApiEvent[], i: ApiEvent) => {
-    if (!agg.map(({ id }) => id).includes(i.id)) {
-      return agg.concat(i)
-    }
-    return agg
-  }, [])
+export const getAllVisibleEvents = (weeklyData: WeeklyData[]) => {
+  const m = new Map()
+  const allEvents = weeklyData.flatMap(({ events }) => events)
+  allEvents.forEach(e => m.set(e.id, e))
+  return m
 }
-
-export const getAllVisibleEvents = (weeklyData: WeeklyData[]) =>
-  weeklyData.reduce((agg: ApiEvent[], { events }) => {
-    return agg.concat(events)
-  }, [])
 
 export const findMissingEvents = (
   allEvents: readonly ApiEvent[],
   weeklyData: WeeklyData[]
-) =>
-  allEvents.reduce((agg: ApiEvent[], x: ApiEvent) => {
-    const onlyMatched = getAllVisibleEvents(weeklyData)
-    if (onlyMatched.map(({ id }: { id: number }) => id).includes(x.id)) {
+) => {
+  const onlyMatched = getAllVisibleEvents(weeklyData)
+  return allEvents.reduce((agg: ApiEvent[], x: ApiEvent) => {
+    if (onlyMatched.has(x.id)) {
       return agg
     }
     return agg.concat(x)
   }, [])
+}
 
 const sortEventsByDate = (xs: ApiEvent[]) =>
   xs.sort((a: ApiEvent, b: ApiEvent): number =>
