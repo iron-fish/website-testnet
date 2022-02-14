@@ -34,7 +34,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Whitepaper',
-        href: 'https://ironfish.network/docs/whitepaper/1_introduction',
+        href: 'https://ironfish.nework/docs/whitepaper/1_introduction',
       },
       {
         isImage: false,
@@ -49,18 +49,8 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
-      {
-        isImage: false,
         text: 'examples.',
         href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
@@ -84,18 +74,8 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
-      {
-        isImage: false,
         text: 'Submit a PR',
         href: 'https://github.com/iron-fish/ironfish/pulls',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
       },
       {
         isImage: false,
