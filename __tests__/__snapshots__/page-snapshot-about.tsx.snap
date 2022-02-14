@@ -344,7 +344,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -384,8 +384,11 @@ exports[`renders About page 1`] = `
                       1,000
                        points a week
                     </div>
+                    <div
+                      class="mb-8"
+                    />
                     <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full max-w-md mb-2 text-md p-2"
                     >
                       Submit an issue 
                     </button>
@@ -402,7 +405,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -413,19 +416,69 @@ exports[`renders About page 1`] = `
                   <div
                     class="p-13"
                   >
-                    <div
-                      class="bg-iflightgray text-ifgray px-4 py-2 inline-block mt-2 text-xs md:text-md mb-2"
+                    <strong
+                      class="uppercase text-lg"
                     >
-                      Coming soon!
-                    </div>
+                      Earn Points By
+                    </strong>
                     <h3
                       class="text-left text-4xl mt-3 mb-4 font-extended"
                     >
                       Contributing to the Community
                     </h3>
                     <div>
-                      Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points.
+                      Help us make Iron Fish more accessible to a wider audience! Published tutorials, articles, forum posts, videos, scripts, and translations are examples of contributions that can earn you points. See
+                       
+                      <span
+                        class="font-extended border-b border-black "
+                      >
+                        examples.
+                      </span>
                     </div>
+                    <ul
+                      class="pl-3 ml-3"
+                    >
+                      <li
+                        class="list-disc my-3"
+                      >
+                        XSmall = 10 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Small = 100 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Medium = 500 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Large = 750 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        XLarge = 1000 points
+                      </li>
+                    </ul>
+                    <div
+                      class="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md"
+                    >
+                      Earn up to 
+                      1,000
+                       points a week
+                    </div>
+                    <div
+                      class="mb-8"
+                    />
+                    <button
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
+                    >
+                      Claim Points
+                    </button>
                   </div>
                 </div>
               </div>
@@ -434,7 +487,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -458,8 +511,11 @@ exports[`renders About page 1`] = `
                     <div>
                       Sometimes the community does something amazing that doesn’t fall under any of these categories. Email us at testnet@ironfish.network with your Iron Fish graffiti and let us know about it!
                     </div>
+                    <div
+                      class="mb-8"
+                    />
                     <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full max-w-md mb-2 text-md p-2"
                     >
                       Email us
                     </button>
@@ -484,7 +540,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -524,8 +580,11 @@ exports[`renders About page 1`] = `
                       1,000
                        points a week
                     </div>
+                    <div
+                      class="mb-8"
+                    />
                     <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full max-w-md mb-2 text-md p-2"
                     >
                       Get started with mining
                     </button>
@@ -537,7 +596,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -548,19 +607,69 @@ exports[`renders About page 1`] = `
                   <div
                     class="p-13"
                   >
-                    <div
-                      class="bg-iflightgray text-ifgray px-4 py-2 inline-block mt-2 text-xs md:text-md mb-2"
+                    <strong
+                      class="uppercase text-lg"
                     >
-                      Coming soon!
-                    </div>
+                      Earn Points By
+                    </strong>
                     <h3
                       class="text-left text-4xl mt-3 mb-4 font-extended"
                     >
                       Promoting the Testnet
                     </h3>
                     <div>
-                      Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them.
+                      Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it; you might earn points for them. See
+                       
+                      <span
+                        class="font-extended border-b border-black "
+                      >
+                        examples.
+                      </span>
                     </div>
+                    <ul
+                      class="pl-3 ml-3"
+                    >
+                      <li
+                        class="list-disc my-3"
+                      >
+                        XSmall = 10 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Small = 100 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Medium = 500 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        Large = 750 points
+                      </li>
+                      <li
+                        class="list-disc my-3"
+                      >
+                        XLarge = 1000 points
+                      </li>
+                    </ul>
+                    <div
+                      class="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md"
+                    >
+                      Earn up to 
+                      1,000
+                       points a week
+                    </div>
+                    <div
+                      class="mb-8"
+                    />
+                    <button
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
+                    >
+                      Claim Points
+                    </button>
                   </div>
                 </div>
               </div>
@@ -569,7 +678,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -599,17 +708,17 @@ exports[`renders About page 1`] = `
                       <li
                         class="list-disc my-3"
                       >
-                        Small PR = 250 points
+                        Small = 250 points
                       </li>
                       <li
                         class="list-disc my-3"
                       >
-                        Medium PR = 750 points
+                        Medium = 750 points
                       </li>
                       <li
                         class="list-disc my-3"
                       >
-                        Large PR = 1000 points
+                        Large = 1000 points
                       </li>
                     </ul>
                     <div
@@ -619,8 +728,11 @@ exports[`renders About page 1`] = `
                       5,000
                        points a week
                     </div>
+                    <div
+                      class="mb-8"
+                    />
                     <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full max-w-md mb-2 text-md p-2"
                     >
                       Submit a PR
                     </button>
@@ -637,7 +749,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -661,8 +773,11 @@ exports[`renders About page 1`] = `
                     <div>
                       Let us know if you have suggestions for other categories we should add!
                     </div>
+                    <div
+                      class="mb-8"
+                    />
                     <button
-                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full mt-8 max-w-md mb-2 text-md p-2"
+                      class="flex justify-center items-center font-extended rounded-full whitespace-nowrap transition border-black border text-black bg-transparent hover:bg-black hover:text-white m-auto w-full max-w-md mb-2 text-md p-2"
                     >
                       Reach out on Discord
                     </button>
@@ -727,7 +842,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -773,7 +888,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -819,7 +934,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -865,7 +980,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -911,7 +1026,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -957,7 +1072,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -1003,7 +1118,7 @@ exports[`renders About page 1`] = `
           class="mx-4 flex flex-col flex-grow h-full min-h-full min-w-card-sm md:min-w-card-md"
         >
           <div
-            class="relative mb-2.5  mr-2.5 h-full"
+            class="relative mb-2.5 mr-2.5 h-full"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white h-full"
@@ -1710,7 +1825,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white"
@@ -1735,7 +1850,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -1760,7 +1875,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white"
@@ -1789,7 +1904,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -1814,7 +1929,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-white"
@@ -1839,7 +1954,7 @@ exports[`renders About page 1`] = `
               class="mb-3"
             >
               <div
-                class="relative mb-2.5  mr-2.5 "
+                class="relative mb-2.5 mr-2.5"
               >
                 <div
                   class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"

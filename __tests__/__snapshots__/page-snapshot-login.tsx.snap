@@ -318,7 +318,7 @@ exports[`renders Login page 1`] = `
         class="md:w-4/5 w-full my-6 max-w-section mx-auto transition-width"
       >
         <div
-          class="relative mb-2.5 ml-2.5 mr-2.5 "
+          class="relative mb-2.5 ml-2.5 mr-2.5"
         >
           <div
             class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-transparent"

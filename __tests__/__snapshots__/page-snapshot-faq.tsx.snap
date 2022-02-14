@@ -345,7 +345,7 @@ on our
           class="flex flex-col gap-y-8"
         >
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -381,7 +381,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-iflightorange"
@@ -427,7 +427,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -481,7 +481,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-iflightorange"
@@ -517,7 +517,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -553,7 +553,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-iflightorange"
@@ -589,7 +589,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
@@ -625,7 +625,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-iflightorange"
@@ -669,7 +669,7 @@ on our
             </div>
           </div>
           <div
-            class="relative mb-2.5  mr-2.5 "
+            class="relative mb-2.5 mr-2.5"
           >
             <div
               class="absolute border border-black top-2.5 -bottom-2.5 left-2.5 -right-2.5 bg-ifpink"
