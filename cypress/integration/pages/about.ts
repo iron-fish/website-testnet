@@ -34,7 +34,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Whitepaper',
-        href: 'https://ironfish.nework/docs/whitepaper/1_introduction',
+        href: 'https://ironfish.network/docs/whitepaper/1_introduction',
       },
       {
         isImage: false,
