@@ -45,6 +45,7 @@ function Navbar({
     testnetVisible,
     loginContext,
   }
+  const { checkLoading, checkFailed } = loginContext
   // eslint-disable-next-line no-console
   console.log('RERENDER NAVBAR')
   return (
@@ -102,9 +103,11 @@ function Navbar({
             {...navBarLinksProps}
           />
         </div>
-        <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
-          <Menu />
-        </button>
+        {!checkFailed() && !checkLoading() && (
+          <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
+            <Menu />
+          </button>
+        )}
       </div>
     </nav>
   )
