@@ -25,6 +25,7 @@ export const HoverButton = ({
 }: ButtonProps) => {
   return (
     <button
+      onClick={e => e.preventDefault()}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       className={clsx(
