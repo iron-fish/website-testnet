@@ -151,7 +151,7 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
   const on = set(true)
   const off = set(false)
   const { checkLoggedIn, metadata } = loginContext
-  const isLoaded = checkLoggedIn()
+  const isLoggedIn = checkLoggedIn()
   // eslint-disable-next-line
   const meta = metadata as any
   return (
@@ -179,7 +179,7 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
       onMouseOver={on}
       onMouseOut={off}
     >
-      {isLoaded ? (
+      {isLoggedIn ? (
         <UserButton {...meta} visible={$visible} />
       ) : (
         <StaticButton href="/login" />
