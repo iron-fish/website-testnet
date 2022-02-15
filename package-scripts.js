@@ -33,6 +33,7 @@ module.exports = {
     test: {
       snapshot: 'nps "test -u"',
       script: 'jest',
+      loud: `nps "test --silent false --verbose"`,
       watch: 'nps "test --watch"',
       ci: 'nps "test --ci"',
       integration: {

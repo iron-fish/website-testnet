@@ -9,14 +9,14 @@ beforeEach(() => {
   fetch.mockResponse(mockUserPage)
 })
 
-it.skip('renders User Settings page', async () => {
+it('renders User Settings page', async () => {
   try {
     const { container } = render(User, {
       router: {
         pathname: '/users/111/settings',
         route: '/users/111/settings',
         asPath: '/users/111/settings',
-        query: { details: ['111', 'settings'] },
+        query: { id: '111' },
       },
     })
     await waitForElementToBeRemoved(() =>

@@ -10,7 +10,7 @@ beforeEach(() => {
   fetch.mockResponse(mockUserPage)
 })
 
-it.skip('renders User Settings page with no loginContext', async () => {
+it('renders User Settings page with no loginContext', async () => {
   try {
     const WrappedUser = () => {
       const loginContext = useNoUser()
@@ -21,7 +21,7 @@ it.skip('renders User Settings page with no loginContext', async () => {
         pathname: '/users/111/settings',
         route: '/users/111/settings',
         asPath: '/users/111/settings',
-        query: { details: ['111', 'settings'] },
+        query: { id: '111' },
       },
     })
     await waitForElementToBeRemoved(() =>
