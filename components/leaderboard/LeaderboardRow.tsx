@@ -20,7 +20,7 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
       style={{ boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.19)' }}
     >
       <div className="absolute inset-0 rounded border hover:border-2 border-black" />
-      <div className="font-extended text-2xl w-24">{rankStr}</div>
+      <div className="font-extended text-2xl w-16 sm:w-24">{rankStr}</div>
       <div className="flex flex-1 items-center font-extended text-2xl overflow-hidden">
         <div className="py-3 mr-5">
           <FishAvatar color={avatarColor} />

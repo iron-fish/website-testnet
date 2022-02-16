@@ -184,7 +184,7 @@ export default function Leaderboard({ loginContext }: Props) {
           <div className="font-extended flex px-4 sm:px-10 mb-4">
             {$users.length > 0 && (
               <>
-                <div className="w-24">RANK</div>
+                <div className="w-16 sm:w-24">RANK</div>
                 <div className="flex-1">USERNAME</div>
                 <div className="ml-2">TOTAL POINTS</div>
               </>
