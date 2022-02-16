@@ -25,7 +25,6 @@ export const HoverButton = ({
 }: ButtonProps) => {
   return (
     <button
-      onClick={e => e.preventDefault()}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       className={clsx(
@@ -151,8 +150,9 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
   const set = (x: boolean) => () => $setVisible(x)
   const on = set(true)
   const off = set(false)
-  const { checkLoggedIn, metadata } = loginContext
+  const { checkLoading, checkLoggedIn, metadata } = loginContext
   const isLoggedIn = checkLoggedIn()
+  const isLoading = checkLoading()
   // eslint-disable-next-line
   const meta = metadata as any
   return (
@@ -180,7 +180,7 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
       onMouseOver={on}
       onMouseOut={off}
     >
-      {isLoggedIn ? (
+      {isLoggedIn && !isLoading ? (
         <UserButton {...meta} visible={$visible} />
       ) : (
         <StaticButton href="/login" />
