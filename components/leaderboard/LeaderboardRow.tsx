@@ -16,18 +16,18 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
 
   return (
     <div
-      className="relative bg-white rounded flex items-center px-10"
+      className="relative bg-white rounded flex items-center px-4 sm:px-10"
       style={{ boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.19)' }}
     >
       <div className="absolute inset-0 rounded border hover:border-2 border-black" />
       <div className="font-extended text-2xl w-24">{rankStr}</div>
-      <div className="flex flex-1 items-center font-extended text-2xl">
+      <div className="flex flex-1 items-center font-extended text-2xl overflow-hidden">
         <div className="py-3 mr-5">
           <FishAvatar color={avatarColor} />
         </div>
-        <div>{graffiti}</div>
+        <div className="truncate">{graffiti}</div>
       </div>
-      <div className="font-extended text-2xl">{pointsStr}</div>
+      <div className="font-extended text-2xl ml-2">{pointsStr}</div>
     </div>
   )
 }
