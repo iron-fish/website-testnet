@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import styles from './index.module.css'
 
 const FishPath = () => (
@@ -8,7 +9,11 @@ const FishPath = () => (
   />
 )
 
-export const Loader = () => (
+type LoaderProps = {
+  className?: string
+}
+
+export const Loader = ({ className = '' }: LoaderProps) => (
   <>
     <svg className="h-0 w-0">
       <defs>
@@ -18,7 +23,7 @@ export const Loader = () => (
       </defs>
     </svg>
     <div className={styles.fishScale}>
-      <div className={styles.ironfishLoader} />
+      <div className={clsx(styles.ironfishLoader, className)} />
     </div>
   </>
 )

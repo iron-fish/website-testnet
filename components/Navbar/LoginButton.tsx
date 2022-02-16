@@ -3,6 +3,9 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { LoginContext } from 'hooks/useLogin'
 
+import Loader from 'components/Loader'
+import loadStyles from 'components/Loader/index.module.css'
+
 import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
 import styles from './LoginButton.module.css'
@@ -150,9 +153,10 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
   const set = (x: boolean) => () => $setVisible(x)
   const on = set(true)
   const off = set(false)
-  const { checkLoading, checkLoggedIn, metadata } = loginContext
+  const { checkFailed, checkLoading, checkLoggedIn, metadata } = loginContext
   const isLoggedIn = checkLoggedIn()
   const isLoading = checkLoading()
+  const isFailed = checkFailed()
   // eslint-disable-next-line
   const meta = metadata as any
   return (
@@ -180,7 +184,9 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
       onMouseOver={on}
       onMouseOut={off}
     >
-      {isLoggedIn && !isLoading ? (
+      {isLoading && !isFailed && !isLoggedIn ? (
+        <Loader className={loadStyles.blackWhite} />
+      ) : !isFailed && isLoggedIn ? (
         <UserButton {...meta} visible={$visible} />
       ) : (
         <StaticButton href="/login" />
