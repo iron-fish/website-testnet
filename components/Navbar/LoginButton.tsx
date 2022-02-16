@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { LoginContext } from 'hooks/useLogin'
 
 import Loader from 'components/Loader'
-import loadStyles from 'components/Loader/index.module.css'
+// import loadStyles from 'components/Loader/index.module.css'
 
 import ChevronDown from './ChevronDown'
 import { ApiUserMetadata } from 'apiClient/types'
@@ -185,7 +185,7 @@ export const LoginButton = ({ loginContext }: LoginProps) => {
       onMouseOut={off}
     >
       {isLoading && !isFailed && !isLoggedIn ? (
-        <Loader className={loadStyles.blackWhite} />
+        <Loader className="max-h-[2rem]" />
       ) : !isFailed && isLoggedIn ? (
         <UserButton {...meta} visible={$visible} />
       ) : (
