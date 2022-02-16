@@ -156,7 +156,7 @@ export default function Leaderboard({ loginContext }: Props) {
                 <Search />
               </div>
               <input
-                className="text-lg pl-2 md:pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
+                className="text-lg pl-2 md:pl-5 h-full w-full font-favorit bg-transparent placeholder-black focus:outline-none"
                 placeholder="Search"
                 onChange={e => {
                   $setSearch(e.target.value)
