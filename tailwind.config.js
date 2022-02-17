@@ -99,6 +99,9 @@ module.exports = {
         ifcubepink: {
           DEFAULT: '#FF94DB',
         },
+        iflightbeige: {
+          DEFAULT: '#FFEFD7',
+        },
       },
       fontFamily: {
         favorit: ['favorit-regular', 'sans-serif'],

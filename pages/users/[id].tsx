@@ -21,7 +21,7 @@ import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 import { graffitiToColor, numberToOrdinal } from 'utils'
-import { nextMondayFrom } from 'utils/date'
+import { formatUTC, nextMondayFrom } from 'utils/date'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 25
@@ -160,6 +160,7 @@ export default function User({ loginContext }: Props) {
   const ordinalRank = numberToOrdinal($user.rank)
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
+  const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
   const totalWeeklyLimit = sumValues(
     $metricsConfig.weekly_limits
@@ -192,7 +193,9 @@ export default function User({ loginContext }: Props) {
                   <h1 className="font-extended text-6xl mt-6 mb-8">
                     {$user.graffiti}
                   </h1>
-
+                  <div className="font-favorite mx-1.5 my-2 bg-iflightbeige">
+                    {joinedOn}
+                  </div>
                   <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
                     <div>
                       <div>All Time Rank</div>

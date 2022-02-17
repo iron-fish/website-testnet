@@ -84,6 +84,7 @@ export default function About({ loginContext }: AboutProps) {
         loginContext={loginContext}
       />
       <main className="bg-iflightorange flex-1 items-center flex flex-col">
+        <Loader />
         <div className="w-full md:w-2/3 m-auto">
           <PageBanner
             title="About the Incentivized Testnet"
