@@ -22,8 +22,12 @@ export const validateGraffiti = (x: string) => {
 
 const alphaNumericHyphensOnly = /[A-z\d-]+/g
 // via: https://github.com/shinnn/github-username-regex rules
-export const validateGithub = (x: string) =>
-  x.length < 40 && alphaNumericHyphensOnly.test(x)
+export const validateGithub = (x: string) => {
+  const length = new TextEncoder().encode(x.trim()).length
+  // eslint-disable-next-line no-console
+  console.log({ length, x, test: alphaNumericHyphensOnly.test(x) })
+  return length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
+}
 
 // non-zero width strings
 export const exists = (x: string) => x.trim().length > 0
