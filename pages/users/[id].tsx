@@ -193,7 +193,7 @@ export default function User({ loginContext }: Props) {
                   <h1 className="font-extended text-6xl mt-6 mb-8">
                     {$user.graffiti}
                   </h1>
-                  <div className="font-favorite mx-1.5 my-2 bg-iflightbeige">
+                  <div className="font-favorite px-1.5 py-2 bg-iflightbeige flex justify-between">
                     {joinedOn}
                   </div>
                   <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
