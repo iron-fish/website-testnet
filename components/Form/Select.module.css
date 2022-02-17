@@ -1,6 +1,7 @@
 .customSelectWrapper {
   width: 100%;
   position: relative;
+  padding-right: 1rem;
 }
 .customSelect {
   appearance: none;
@@ -12,7 +13,7 @@
   position: absolute;
   right: 0;
   width: 1rem;
-  height: 2rem;
+  height: 1.5rem;
   text-align: center;
   background-image: url(/arrow_drop_down_black.png);
   background-repeat: no-repeat;
