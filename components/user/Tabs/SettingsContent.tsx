@@ -246,6 +246,7 @@ export default function SettingsContent({
                   <FieldError text={$error} size="text-md" />
                 )}
                 {$email && <TextField {...$email} disabled />}
+                {$github && <TextField {...$github} />}
                 {$graffiti && (
                   <TextField {...$graffiti} disabled={anyBlocksMined} />
                 )}
