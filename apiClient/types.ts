@@ -101,6 +101,7 @@ export type ApiUserMetadata = {
   updated_at: string
   email: string
   graffiti: string
+  github: string
   total_points: number
   country_code: string
   email_notifications: boolean
