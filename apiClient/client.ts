@@ -50,6 +50,7 @@ export async function createUser(
 
 type PartialUser = {
   email?: string
+  github?: string
   graffiti?: string
   socialChoice?: string
   social?: string
