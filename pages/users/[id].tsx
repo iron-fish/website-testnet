@@ -182,7 +182,7 @@ export default function User({ loginContext }: Props) {
       <main className="bg-ifpink flex-1 justify-center flex pt-16 pb-32">
         <div style={{ flexBasis: 1138 }}>
           <OffsetBorderContainer>
-            <div className="px-7 pt-7 md:px-20 pt-16 pb-12">
+            <div className="px-7 pt-7 md:px-24 md:pt-16 pb-12">
               {/* Header */}
               <div
                 className="flex justify-between mb-8"
