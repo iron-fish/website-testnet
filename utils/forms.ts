@@ -24,9 +24,10 @@ const alphaNumericHyphensOnly = /[A-z\d-]+/g
 // via: https://github.com/shinnn/github-username-regex rules
 export const validateGithub = (x: string) => {
   const length = new TextEncoder().encode(x.trim()).length
+  const valid = length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
   // eslint-disable-next-line no-console
-  console.log({ length, x, test: alphaNumericHyphensOnly.test(x) })
-  return length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
+  console.log({ length, x, test: alphaNumericHyphensOnly.test(x), valid })
+  return valid
 }
 
 // non-zero width strings

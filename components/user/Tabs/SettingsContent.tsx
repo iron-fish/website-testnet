@@ -101,6 +101,7 @@ export default function SettingsContent({
   const $github = useField({
     ...EDITABLE_FIELDS.github,
     defaultValue: _github,
+    touched: !!_github,
   })
   const $telegram = useField({
     ...EDITABLE_FIELDS.telegram,
