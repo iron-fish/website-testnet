@@ -18,7 +18,7 @@ export default function MetricCard({
     <OffsetBorderBox>
       <div
         className="font-extended p-8"
-        style={{ minWidth: 282, maxWidth: 288 }}
+        style={{ minWidth: 288, maxWidth: 288 }}
       >
         <div className=" mb-4 whitespace-nowrap">{title}</div>
         <div className="flex gap-4">

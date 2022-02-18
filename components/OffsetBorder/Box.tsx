@@ -14,7 +14,7 @@ export function Box({
         `relative`,
         `mb-2.5`,
         container ? `ml-2.5` : ``,
-        `mr-5`,
+        `mr-2.5`,
         className
       )}
     >

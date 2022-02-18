@@ -170,7 +170,7 @@ export const EventRow = ({
 
   const eType = (
     <div className="flex items-center justify-start">
-      <span className="mr-2">{icon}</span>
+      <span className="hidden md:flex mr-2">{icon}</span>
       {text}
     </div>
   )
@@ -180,14 +180,17 @@ export const EventRow = ({
       <td className="py-4 w-1/3">{eType}</td>
       <td>{formatEventDate(new Date(occurredAt))}</td>
       <td>{points}</td>
-      <td className="max-w-[11rem]">
+      <td className="max-w-[13rem]">
         <a
           href={makeLinkForEvent(type, metadata)}
           className="text-ifotherblue align-left flex items-end justify-between"
           target="_blank"
           rel="noreferrer"
         >
-          <div>{metadata && summarizeEvent(type, metadata)}</div>
+          <div className="hidden md:flex">
+            {metadata && summarizeEvent(type, metadata)}
+          </div>
+          <div className="md:hidden">View</div>
           <ChevronRight />
         </a>
       </td>

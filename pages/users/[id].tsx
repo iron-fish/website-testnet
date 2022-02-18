@@ -167,7 +167,7 @@ export default function User({ loginContext }: Props) {
   const weeklyPoints = $weeklyMetrics.points.toLocaleString()
 
   return (
-    <div className="min-h-screen inline-flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <Head>
         <title>{$user.graffiti}</title>
         <meta name="description" content={String($user.graffiti)} />
@@ -189,12 +189,33 @@ export default function User({ loginContext }: Props) {
                 style={{ width: '100%' }}
               >
                 <div>
-                  <h1 className="font-extended text-4xl md:text-6xl mt-6 mb-8 break-all">
+                  <h1 className="font-extended text-4xl md:text-6xl mt-2 md:mt-6 mb-8 break-all">
                     {$user.graffiti}
                   </h1>
+
+                  <div className="font-favorit flex flex-wrap gap-x-10 sm:gap-x-16 gap-y-2">
+                    <div>
+                      <div className="text-sm sm:text-lg">Rank</div>
+                      <div className="text-md sm:text-3xl mt-0">
+                        {ordinalRank}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm sm:text-lg">Total Points</div>
+                      <div className="text-md sm:text-3xl mt-0">
+                        {$user.total_points.toLocaleString()}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm sm:text-lg">Weekly Points</div>
+                      <div className="text-md sm:text-3xl mt-0">
+                        {weeklyPoints} / {totalWeeklyLimit}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="inline-flex flex-col items-center pl-2 pt-2 justify-end">
+                <div className="flex flex-col items-center pl-2">
                   <svg viewBox="0 0 128 128" className="w-16 md:w-32">
                     <FishAvatar color={avatarColor} />
                   </svg>
@@ -203,26 +224,6 @@ export default function User({ loginContext }: Props) {
                   </div>
                 </div>
               </div>
-
-              <div className="font-favorit flex flex-wrap gap-x-10 sm:gap-x-16 gap-y-2 mb-6">
-                <div>
-                  <div className="text-sm sm:text-lg">Rank</div>
-                  <div className="text-md sm:text-3xl mt-0">{ordinalRank}</div>
-                </div>
-                <div>
-                  <div className="text-sm sm:text-lg">Total Points</div>
-                  <div className="text-md sm:text-3xl mt-0">
-                    {$user.total_points.toLocaleString()}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm sm:text-lg">Weekly Points</div>
-                  <div className="text-md sm:text-3xl mt-0">
-                    {weeklyPoints} / {totalWeeklyLimit}
-                  </div>
-                </div>
-              </div>
-
               {/* Tabs */}
               <Tabs
                 setRawMetadata={loginContext.setRawMetadata}
@@ -252,7 +253,7 @@ export default function User({ loginContext }: Props) {
                       <tr className="text-xs text-left tracking-widest border-b border-black">
                         <th className="font-normal py-4">ACTIVITY</th>
                         <th className="font-normal">DATE</th>
-                        <th className="font-normal">POINTS</th>
+                        <th className="font-normal pr-2">POINTS</th>
                         <th className="font-normal max-w-[13rem]">DETAILS</th>
                       </tr>
                     </thead>
