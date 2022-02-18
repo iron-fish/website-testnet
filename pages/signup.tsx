@@ -48,6 +48,7 @@ export const FIELDS = {
   github: {
     id: 'github',
     label: 'Github',
+    required: false,
     placeholder: 'Your github username',
     defaultValue: UNSET,
     validation: validateGithub,

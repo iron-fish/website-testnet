@@ -133,7 +133,7 @@ export default function SettingsContent({
       $setError(UNSET)
     }
     return invalid
-  }, [$email, $graffiti, $telegram, $discord, $country])
+  }, [$email, $github, $graffiti, $telegram, $discord, $country])
 
   // on save
   const update = useCallback(async () => {
