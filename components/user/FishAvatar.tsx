@@ -1,23 +1,25 @@
 import React from 'react'
+import clsx from 'clsx'
+// import styles from './FishAvatar.module.css'
 
-type Props = { color: string }
+type Props = { color: string; className?: string }
 
-function FishAvatar({ color }: Props) {
+function FishAvatar({ color, className }: Props) {
   return (
     <svg
-      width="128"
-      height="128"
+      className={clsx(
+        'max-w-[3.125rem]',
+        'flex',
+        'bg-transparent'
+        // 'absolute',
+        // 'mt-2',
+        // 'mr-2'
+      )}
       viewBox="0 0 128 128"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g clipPath="url(#clip0)">
-        <rect
-          width="1700"
-          height="1980"
-          transform="translate(-1504 -249)"
-          fill="#FFC2EB"
-        />
+        <rect width="1700" height="1980" fill="none" />
         <rect
           x="0.5"
           y="0.5"

@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import { encode as btoa } from 'base-64'
 import { nextMonday } from 'date-fns'
+import clsx from 'clsx'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -34,6 +35,19 @@ interface Props {
 }
 const sumValues = (x: Record<string, number>) =>
   Object.values(x).reduce((a, b) => a + b, 0)
+
+type LabeledProps = {
+  value: string
+  label: string
+}
+
+export const LabeledStat = ({ value, label }: LabeledProps) => (
+  <div className={clsx('w-1/3', 'flex', 'flex-col')}>
+    <h3 className={clsx('text-sm', 'md:text-md')}>{label}</h3>
+    <div className={clsx('text-xl', 'md:text-3xl', 'mt-2')}>{value}</div>
+  </div>
+)
+
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
@@ -168,7 +182,7 @@ export default function User({ loginContext }: Props) {
   const weeklyPoints = $weeklyMetrics.points.toLocaleString()
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
       <Head>
         <title>{$user.graffiti}</title>
         <meta name="description" content={String($user.graffiti)} />
@@ -177,49 +191,83 @@ export default function User({ loginContext }: Props) {
       <Navbar
         loginContext={loginContext}
         fill="black"
-        className="bg-ifpink text-black"
+        className={clsx('bg-ifpink', 'text-black')}
       />
 
-      <main className="bg-ifpink flex-1 justify-center flex pt-16 pb-32">
+      <main
+        className={clsx(
+          'bg-ifpink',
+          'flex-1',
+          'justify-center',
+          'flex',
+          'pt-16',
+          'pb-32'
+        )}
+      >
         <div style={{ flexBasis: 1138 }}>
           <OffsetBorderContainer>
-            <div className="px-24 pt-16 pb-12">
+            <div
+              className={clsx('px-5', 'md:px-24', 'pt-5', 'md:pt-16', 'pb-12')}
+            >
               {/* Header */}
               <div
-                className="flex justify-between mb-8"
+                className={clsx('flex', 'justify-between', 'md:mb-8')}
                 style={{ width: '100%' }}
               >
-                <div>
-                  <h1 className="font-extended text-6xl mt-6 mb-4">
+                <div className={clsx('flex', 'flex-col')}>
+                  <h1
+                    className={clsx(
+                      'font-extended',
+                      'text-3xl',
+                      'md:text-6xl',
+                      'mt-2',
+                      'md:mt-6',
+                      'mb-4'
+                    )}
+                  >
                     {$user.graffiti}
                   </h1>
-                  <div className="font-favorite px-2 py-2 bg-iflightbeige inline-block mb-12">
+                  <div
+                    className={clsx(
+                      'text-sm',
+                      'md:text-md',
+                      'px-2',
+                      'py-2',
+                      'bg-iflightbeige',
+                      'inline-block',
+                      'md:mb-12'
+                    )}
+                  >
                     {joinedOn}
                   </div>
-                  <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
-                    <div>
-                      <div>All Time Rank</div>
-                      <div className="text-3xl mt-2">{ordinalRank}</div>
-                    </div>
-                    <div>
-                      <div>Total Points</div>
-                      <div className="text-3xl mt-2">
-                        {$user.total_points.toLocaleString()}
-                      </div>
-                    </div>
-                    <div>
-                      <div>Weekly Points</div>
-                      <div className="text-3xl mt-2">
-                        {weeklyPoints} / {totalWeeklyLimit}
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className={clsx('flex', 'flex-col', 'items-center')}>
                   <FishAvatar color={avatarColor} />
-                  <div className="mt-4">
+                  <div className={'mt-4'}>
                     <Flag code={$user.country_code} />
                   </div>
+                </div>
+              </div>
+              <div
+                className={clsx('flex', 'flex-col', 'w-full', 'mt-6', 'mb-6')}
+              >
+                <div
+                  className={clsx(
+                    'w-full',
+                    'flex',
+                    'content-between',
+                    'justify-between'
+                  )}
+                >
+                  <LabeledStat label="All Time Rank" value={ordinalRank} />
+                  <LabeledStat
+                    label="Total Points"
+                    value={$user.total_points.toLocaleString()}
+                  />
+                  <LabeledStat
+                    label="Weekly Points"
+                    value={`${weeklyPoints} / ${totalWeeklyLimit}`}
+                  />
                 </div>
               </div>
 
@@ -247,13 +295,22 @@ export default function User({ loginContext }: Props) {
                     Recent Activity
                   </h1>
 
-                  <table className="font-favorit w-full">
+                  <table className={clsx('font-favorit', 'w-full')}>
                     <thead>
-                      <tr className="text-xs text-left tracking-widest border-b border-black">
-                        <th className="font-normal py-4">ACTIVITY</th>
-                        <th className="font-normal">DATE</th>
-                        <th className="font-normal">POINTS</th>
-                        <th className="font-normal max-w-[13rem]">DETAILS</th>
+                      <tr
+                        className={clsx(
+                          'text-xs',
+                          'text-left',
+                          'tracking-widest',
+                          'border-b',
+                          'border-black',
+                          'font-normal'
+                        )}
+                      >
+                        <th className={'py-4'}>ACTIVITY</th>
+                        <th>DATE</th>
+                        <th>POINTS</th>
+                        <th className={'max-w-[13rem]'}>DETAILS</th>
                       </tr>
                     </thead>
                     <tbody className="text-sm">
@@ -266,8 +323,10 @@ export default function User({ loginContext }: Props) {
           </OffsetBorderContainer>
           {/* Recent Activity Pagination */}
           {$activeTab !== 'settings' && (
-            <div className="flex font-favorit justify-center mt-8">
-              <div className="flex gap-x-1.5">
+            <div
+              className={clsx('flex', 'font-favorit', 'justify-center', 'mt-8')}
+            >
+              <div className={clsx('flex', 'gap-x-1.5')}>
                 <EventsPaginationButton
                   disabled={!$hasPrevious}
                   onClick={fetchPrevious}
