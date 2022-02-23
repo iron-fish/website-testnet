@@ -60,8 +60,6 @@ type PartialUser = {
 export async function updateUser(id: number, partial: PartialUser) {
   const body = JSON.stringify(partial)
   const token = await magic?.user.getIdToken()
-  // eslint-disable-next-line no-console
-  console.log({ body })
   const options = {
     method: 'PUT',
     headers: {

@@ -24,8 +24,6 @@ const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+', 'g')
 export const validateGithub = (x: string) => {
   const length = new TextEncoder().encode(x.trim()).length
   const valid = length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
-  // eslint-disable-next-line no-console
-  console.log({ length, x, test: alphaNumericHyphensOnly.test(x), valid })
   return valid
 }
 
