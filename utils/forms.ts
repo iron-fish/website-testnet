@@ -20,7 +20,8 @@ export const validateGraffiti = (x: string) => {
   return graffitiUint8Array.length < 32
 }
 
-const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+', 'g')
+// https://stackoverflow.com/questions/209732/why-am-i-seeing-inconsistent-javascript-logic-behavior-looping-with-an-alert-v
+const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+')
 export const validateGithub = (x: string) => {
   const length = new TextEncoder().encode(x.trim()).length
   const valid = length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
