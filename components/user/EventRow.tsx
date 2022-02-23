@@ -207,11 +207,11 @@ export const EventRow = ({
   const formattedDate = formatEventDate(new Date(occurredAt))
   return (
     <tr className={clsx('border-b', 'border-black')}>
-      <td className={clsx('py-4', 'w-1/2', 'pr-2')}>
+      <td className={clsx('py-4', 'w-1/2', 'pr-2', 'md:pr-0', 'md:w-1/3')}>
         {eType}
         <SmallOnly className="text-xs md:text-md">{formattedDate}</SmallOnly>
       </td>
-      <td className="w-1/4 hidden md:block">{formattedDate}</td>
+      <td className="hidden md:block">{formattedDate}</td>
       <td>{points}</td>
       <td className="md:max-w-[11rem]">
         <a
