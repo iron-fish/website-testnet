@@ -48,18 +48,18 @@ export default function Tabs({
   return (
     <div>
       {/* Tabs */}
-      <div className="flex font-favorit gap-x-6">
+      <div className="flex font-favorit gap-x-6 mb-8 md:mb-0">
         <TabHeaderButton
           selected={activeTab === 'weekly'}
           onClick={() => onTabChange('weekly')}
         >
-          Weekly Stats
+          Weekly <span className="hidden md:inline">Stats</span>
         </TabHeaderButton>
         <TabHeaderButton
           selected={activeTab === 'all'}
           onClick={() => onTabChange('all')}
         >
-          All Time Stats
+          All Time <span className="hidden md:inline">Stats</span>
         </TabHeaderButton>
         {user && authedUser && authedUser.id === user.id && (
           <TabHeaderButton

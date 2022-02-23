@@ -201,7 +201,9 @@ export default function User({ loginContext }: Props) {
           'justify-center',
           'flex',
           'pt-16',
-          'pb-32'
+          'pb-32',
+          'w-full',
+          'overflow-hidden'
         )}
       >
         <div style={{ flexBasis: 1138 }}>
@@ -308,9 +310,13 @@ export default function User({ loginContext }: Props) {
                         )}
                       >
                         <th className={'py-4'}>ACTIVITY</th>
-                        <th>DATE</th>
-                        <th>POINTS</th>
-                        <th className={'max-w-[13rem]'}>DETAILS</th>
+                        <th className="hidden md:inline-block">DATE</th>
+                        <th>
+                          <div className="block w-1/2">POINTS</div>
+                        </th>
+                        <th className="hidden md:inline-block md:max-w-[13rem] ">
+                          DETAILS
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="text-sm">

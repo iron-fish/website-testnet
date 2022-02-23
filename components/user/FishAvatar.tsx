@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 type Props = { color: string; className?: string }
 
-function FishAvatar({ color, className }: Props) {
+function FishAvatar({ color }: Props) {
   return (
     <svg
       className={clsx(
