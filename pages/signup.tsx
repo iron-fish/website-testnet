@@ -18,7 +18,9 @@ import {
   UNSET,
   validateEmail,
   validateGraffiti,
+  validateGithub,
   defaultErrorText,
+  resetTextField,
 } from 'utils/forms'
 import { encode as btoa } from 'base-64'
 
@@ -42,6 +44,16 @@ export const FIELDS = {
     validation: validateGraffiti,
     defaultErrorText: `Graffiti is too long`,
     whitespace: WHITESPACE.TRIMMED,
+  },
+  github: {
+    id: 'github',
+    label: 'Github',
+    required: false,
+    placeholder: 'Your github username',
+    defaultValue: UNSET,
+    validation: validateGithub,
+    defaultErrorText: 'Github username is invalid',
+    whitespace: WHITESPACE.BANNED,
   },
   social: {
     id: 'social',
@@ -91,6 +103,7 @@ export default function SignUp({ loginContext }: SignUpProps) {
   const $email = useField(FIELDS.email)
   const $social = useField(FIELDS.social)
   const $graffiti = useField(FIELDS.graffiti)
+  const $github = useField(FIELDS.github)
   const $country = useField(FIELDS.country)
   const [$error, $setError] = useState<string>(UNSET)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
@@ -103,6 +116,7 @@ export default function SignUp({ loginContext }: SignUpProps) {
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
+    const noGithub = !$github?.touched
     const noSocial = !$social?.touched
     // for old men
     const noCountry = !$country?.touched
@@ -115,6 +129,7 @@ export default function SignUp({ loginContext }: SignUpProps) {
         $setError('Please fill out all fields')
         if (noEmail) $email?.setTouched(true)
         if (noGraffiti) $graffiti?.setTouched(true)
+        if (noGithub) $github?.setTouched(true)
         if (noSocial) $social?.setTouched(true)
         if (noCountry) $country?.setTouched(true)
       } else {
@@ -125,12 +140,13 @@ export default function SignUp({ loginContext }: SignUpProps) {
       $setError(UNSET)
     }
     return invalid || untouched
-  }, [$country, $email, $graffiti, $social])
+  }, [$country, $email, $graffiti, $github, $social])
   const submit = useCallback(async () => {
-    if (!$email || !$graffiti || !$social || !$country) return
+    if (!$email || !$github || !$graffiti || !$social || !$country) return
     if (testInvalid()) return
     const email = $email?.value
     const graffiti = $graffiti?.value
+    const github = $github?.value
     const social = $social?.value
     const socialChoice = $social?.choice
     const country = $country?.value
@@ -141,7 +157,8 @@ export default function SignUp({ loginContext }: SignUpProps) {
       graffiti,
       socialChoice,
       social,
-      country
+      country,
+      github
     )
 
     $setLoaded(true)
@@ -154,21 +171,24 @@ export default function SignUp({ loginContext }: SignUpProps) {
       scrollUp()
       $router.push(`/login?email=${encodeURIComponent(email)}`)
     }
-  }, [$router, $email, $graffiti, $social, $country, testInvalid])
+  }, [$router, $email, $graffiti, $github, $social, $country, testInvalid])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.
   if ($email) {
-    $email.defaultValue = $email.value || UNSET
+    resetTextField($email)
   }
   if ($graffiti) {
-    $graffiti.defaultValue = $graffiti.value || UNSET
+    resetTextField($graffiti)
+  }
+  if ($github) {
+    resetTextField($github)
   }
   if ($social) {
-    $social.defaultValue = $social.value || UNSET
+    resetTextField($social)
   }
 
-  const textFields = [$email, $graffiti, $social]
+  const textFields = [$email, $graffiti, $github, $social]
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
