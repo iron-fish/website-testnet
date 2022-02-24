@@ -15,16 +15,10 @@ export default function MetricCard({
   subValueBottom,
 }: MetricCardProp) {
   return (
-    <OffsetBorderBox className={clsx('w-full', 'md:w-max-[18rem]')}>
+    <OffsetBorderBox className={clsx('w-full', 'md:max-w-[18rem]')}>
       <div className={clsx('font-extended', 'p-8')}>
         <div
-          className={clsx(
-            'text-md',
-            'md:text-lg',
-            'md:text-md',
-            'mb-4',
-            'whitespace-nowrap'
-          )}
+          className={clsx('text-md', 'md:text-lg', 'mb-4', 'whitespace-nowrap')}
         >
           {title}
         </div>

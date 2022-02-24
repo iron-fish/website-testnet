@@ -310,11 +310,20 @@ export default function User({ loginContext }: Props) {
                         )}
                       >
                         <th className={'py-4'}>ACTIVITY</th>
-                        <th className="hidden md:inline-block">DATE</th>
-                        <th>
-                          <div className="block w-1/2">POINTS</div>
+                        <th className={clsx('hidden', 'md:table-cell')}>
+                          DATE
                         </th>
-                        <th className="hidden md:inline-block md:max-w-[13rem] ">
+                        <th>
+                          <div className={clsx('block', 'w-1/2')}>POINTS</div>
+                        </th>
+                        <th
+                          className={clsx(
+                            'hidden',
+                            'md:table-cell',
+                            'md:max-w-[13rem]',
+                            'text-right'
+                          )}
+                        >
                           DETAILS
                         </th>
                       </tr>

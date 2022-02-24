@@ -40,7 +40,10 @@ export function displayEventType(type: EventType): IconText {
       ) : type === 'BUG_CAUGHT' ? (
         <>Reported a bug</>
       ) : type === 'COMMUNITY_CONTRIBUTION' ? (
-        <>Contributed to the community</>
+        <>
+          <SmallOnly>Community contribution</SmallOnly>
+          <Verbose>Contributed to the community</Verbose>
+        </>
       ) : type === 'PULL_REQUEST_MERGED' ? (
         <>
           Submitted a <SmallOnly>PR</SmallOnly>
@@ -138,8 +141,11 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
       )}
     >
       <>
-        Block &hellip; {abbrevHash}
-        <ActivityCopy className="ml-4" />
+        <Verbose>
+          Block &hellip; {abbrevHash}
+          <ActivityCopy className="ml-4" />
+        </Verbose>
+        <SmallOnly>View</SmallOnly>
       </>
     </div>
   )
@@ -163,20 +169,20 @@ const summarizeEvent = (
     // https://github.com/iron-fish/ironfish-api/pull/595
     return (
       <>
-        View<Verbose> pull request #{id}</Verbose>
+        View<Verbose className="ml-1">pull request #{id}</Verbose>
       </>
     )
   } else if (type === EventType.BUG_CAUGHT) {
     // https://github.com/iron-fish/ironfish/issues/930
     return (
       <>
-        View<Verbose> issue #{id}</Verbose>
+        View<Verbose className="ml-1">issue #{id}</Verbose>
       </>
     )
   } else if (type === EventType.COMMUNITY_CONTRIBUTION) {
     return (
       <>
-        View<Verbose> contribution</Verbose>
+        View<Verbose className="ml-1">contribution</Verbose>
       </>
     )
   } else if (type === EventType.SOCIAL_MEDIA_PROMOTION) {
@@ -201,19 +207,29 @@ export const EventRow = ({
   const eType = (
     <div className={clsx('flex', 'items-center', 'justify-start')}>
       <Verbose className="mr-2">{icon}</Verbose>
-      <div className="text-xs md:text-md">{text}</div>
+      <div className={clsx('text-xs', 'md:text-sm')}>{text}</div>
     </div>
   )
   const formattedDate = formatEventDate(new Date(occurredAt))
   return (
     <tr className={clsx('border-b', 'border-black')}>
-      <td className={clsx('py-4', 'w-1/2', 'pr-2', 'md:pr-0', 'md:w-1/3')}>
+      <td
+        className={clsx(
+          'py-4',
+          'w-1/2',
+          'min-w-[8rem]',
+          'pr-2',
+          'md:pr-0',
+          'md:w-1/3',
+          'md:min-w-[0]'
+        )}
+      >
         {eType}
-        <SmallOnly className="text-xs md:text-md">{formattedDate}</SmallOnly>
+        <SmallOnly className="text-xs">{formattedDate}</SmallOnly>
       </td>
-      <td className="hidden md:block">{formattedDate}</td>
+      <td className={clsx('hidden', 'md:table-cell')}>{formattedDate}</td>
       <td>{points}</td>
-      <td className="md:max-w-[11rem]">
+      <td className={clsx('max-w-[3rem]', 'md:max-w-[11rem]')}>
         <a
           href={makeLinkForEvent(type, metadata)}
           className={clsx(
@@ -221,8 +237,7 @@ export const EventRow = ({
             'align-left',
             'flex',
             'items-end',
-            'justify-end',
-            'md:justify-between'
+            'justify-end'
           )}
           target="_blank"
           rel="noreferrer"
