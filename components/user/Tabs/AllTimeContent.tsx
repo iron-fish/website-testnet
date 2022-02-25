@@ -29,7 +29,7 @@ export default function AllTimeContent({
         metric={allTimeMetrics.metrics.pull_requests_merged}
       />
       <AllTimeMetricCard
-        title="Community Contributions"
+        title="Community"
         metric={allTimeMetrics.metrics.community_contributions}
       />
     </div>
