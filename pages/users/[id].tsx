@@ -14,6 +14,7 @@ import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
 import renderEvents from 'components/user/EventRow'
+import Twitter from 'components/icons/Twitter'
 
 import * as API from 'apiClient'
 import useQuery from 'hooks/useQuery'
@@ -224,7 +225,11 @@ export default function User({ loginContext }: Props) {
                       'md:text-6xl',
                       'mt-2',
                       'md:mt-6',
-                      'mb-4'
+                      'mb-4',
+                      'max-w-[14rem]',
+                      'md:max-w-[48rem]',
+                      'max-h-[4rem]',
+                      'overflow-hidden'
                     )}
                   >
                     {$user.graffiti}
@@ -237,16 +242,35 @@ export default function User({ loginContext }: Props) {
                       'py-2',
                       'bg-iflightbeige',
                       'inline-block',
-                      'md:mb-12'
+                      'md:mb-12',
+                      'rounded'
                     )}
                   >
                     {joinedOn}
                   </div>
                 </div>
-                <div className={clsx('flex', 'flex-col', 'items-center')}>
+                <div
+                  className={clsx(
+                    'flex',
+                    'flex-col',
+                    'items-center',
+                    'justify-center'
+                  )}
+                >
                   <FishAvatar color={avatarColor} />
-                  <div className={'mt-4'}>
+                  <div
+                    className={clsx(
+                      'mt-4',
+                      'flex',
+                      'flex-row',
+                      'items-center',
+                      'justify-center',
+                      'h-6',
+                      'w-full'
+                    )}
+                  >
                     <Flag code={$user.country_code} />
+                    <Twitter className="ml-2" />
                   </div>
                 </div>
               </div>

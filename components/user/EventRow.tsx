@@ -104,7 +104,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     successDuration: 1000,
   })
   const [$hover, $setHover] = useState<CopyState>(CopyState.IDLE)
-  const abbrevHash = hash.slice(45)
+  const abbrevHash = hash.slice(50)
   return (
     <div
       title={hash}
@@ -141,7 +141,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
       )}
     >
       <>
-        <Verbose>
+        <Verbose defaultClassName="md:flex" className="items-center">
           Block &hellip; {abbrevHash}
           <ActivityCopy className="ml-4" />
         </Verbose>

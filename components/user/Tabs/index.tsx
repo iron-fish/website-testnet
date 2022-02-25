@@ -7,7 +7,6 @@ import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
 import WeeklyContent from './WeeklyContent'
 import { useQueriedToast } from 'hooks/useToast'
-import { Verbose } from 'components/Responsive'
 
 export type TabType = 'all' | 'weekly' | 'settings'
 
@@ -54,13 +53,13 @@ export default function Tabs({
           selected={activeTab === 'weekly'}
           onClick={() => onTabChange('weekly')}
         >
-          Weekly<Verbose> Stats</Verbose>
+          Weekly Stats
         </TabHeaderButton>
         <TabHeaderButton
           selected={activeTab === 'all'}
           onClick={() => onTabChange('all')}
         >
-          All Time<Verbose> Stats</Verbose>
+          All Time Stats
         </TabHeaderButton>
         {user && authedUser && authedUser.id === user.id && (
           <TabHeaderButton
