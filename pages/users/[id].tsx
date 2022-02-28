@@ -54,7 +54,7 @@ export default function User({ loginContext }: Props) {
     queryString: 'toast',
     duration: 8e3,
   })
-
+  const [$domain, $setDomain] = useState('https://testnet.ironfish.network')
   const router = useRouter()
   const { isReady: routerIsReady } = router
   const userId = (router?.query?.id || '') as string
@@ -76,6 +76,11 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
   const [$fetched, $setFetched] = useState(false)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      $setDomain(`https://` + window.location.hostname)
+    }
+  }, [])
   useEffect(() => {
     if (rawTab && validTabValue(rawTab)) {
       $setActiveTab(rawTab as TabType)
@@ -184,7 +189,7 @@ export default function User({ loginContext }: Props) {
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
-  } - ${$user.total_points.toLocaleString()} total points! #ironfish #ironfishtestnet #incentivized`
+  } - ${$user.total_points.toLocaleString()} total points! #ironfish #ironfishtestnet #incentivized ${$domain}/users/${userId}`
 
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
