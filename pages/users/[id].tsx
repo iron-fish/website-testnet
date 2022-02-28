@@ -182,6 +182,10 @@ export default function User({ loginContext }: Props) {
   ).toLocaleString()
   const weeklyPoints = $weeklyMetrics.points.toLocaleString()
 
+  const tweetText = `Iron Fish Incentivized Testnet: ${
+    $user.graffiti
+  } - ${$user.total_points.toLocaleString()} total points! #ironfish #ironfishtestnet #incentivized`
+
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
       <Head>
@@ -280,7 +284,14 @@ export default function User({ loginContext }: Props) {
                     )}
                   >
                     <Flag code={$user.country_code} />
-                    <Twitter className="ml-2" />
+                    <a
+                      className="twitter-share-button"
+                      rel="noreferrer"
+                      target="_blank"
+                      href={`https://twitter.com/intent/tweet?text=${tweetText}`}
+                    >
+                      <Twitter className="ml-2" />
+                    </a>
                   </div>
                 </div>
               </div>
