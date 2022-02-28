@@ -104,7 +104,6 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     successDuration: 1000,
   })
   const [$hover, $setHover] = useState<CopyState>(CopyState.IDLE)
-  // const abbrevHash = hash.slice(50)
   return (
     <div
       aria-label={`Hash: ${hash}`}

@@ -91,9 +91,24 @@ function Navbar({
             </a>
           </Link>
         </div>
-        <div className="hidden tablet:flex items-center 2lg:text-lg">
+        <div
+          className={clsx(
+            'hidden',
+            'tablet:flex',
+            'items-center',
+            '2lg:text-lg'
+          )}
+        >
           <NavbarLinks
-            className="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
+            className={clsx(
+              'h-full',
+              'flex',
+              'items-center',
+              'whitespace-nowrap',
+              'transition-font',
+              'transition-fast',
+              'transition-padding'
+            )}
             {...navBarLinksProps}
           />
         </div>

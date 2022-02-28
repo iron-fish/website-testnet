@@ -13,9 +13,6 @@ function FishAvatar({ color }: Props) {
         'bg-transparent',
         'md:max-w-[8rem]',
         'md:w-[8rem]'
-        // 'absolute',
-        // 'mt-2',
-        // 'mr-2'
       )}
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
