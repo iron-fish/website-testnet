@@ -293,7 +293,9 @@ export default function User({ loginContext }: Props) {
                       className="twitter-share-button"
                       rel="noreferrer"
                       target="_blank"
-                      href={`https://twitter.com/intent/tweet?text=${tweetText}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                        tweetText
+                      )}`}
                     >
                       <Twitter className="ml-2" />
                     </a>
