@@ -210,7 +210,15 @@ export default function User({ loginContext }: Props) {
         <div style={{ flexBasis: 1138 }}>
           <OffsetBorderContainer>
             <div
-              className={clsx('px-5', 'md:px-24', 'pt-5', 'md:pt-16', 'pb-12')}
+              className={clsx(
+                'px-5',
+                'md:px-8',
+                'tablet:px-24',
+                'pt-5',
+                'md:pt-8',
+                'tablet:pt-16',
+                'pb-12'
+              )}
             >
               {/* Header */}
               <div
@@ -234,19 +242,21 @@ export default function User({ loginContext }: Props) {
                   >
                     {$user.graffiti}
                   </h1>
-                  <div
-                    className={clsx(
-                      'text-sm',
-                      'md:text-md',
-                      'px-2',
-                      'py-2',
-                      'bg-iflightbeige',
-                      'inline-block',
-                      'md:mb-12',
-                      'rounded'
-                    )}
-                  >
-                    {joinedOn}
+                  <div>
+                    <div
+                      className={clsx(
+                        'text-sm',
+                        'md:text-md',
+                        'px-2',
+                        'py-2',
+                        'bg-iflightbeige',
+                        'inline-block',
+                        'md:mb-12',
+                        'rounded'
+                      )}
+                    >
+                      {joinedOn}
+                    </div>
                   </div>
                 </div>
                 <div
@@ -280,6 +290,8 @@ export default function User({ loginContext }: Props) {
                 <div
                   className={clsx(
                     'w-full',
+                    'md:w-2/3',
+                    'lg:w-1/2',
                     'flex',
                     'content-between',
                     'justify-between'

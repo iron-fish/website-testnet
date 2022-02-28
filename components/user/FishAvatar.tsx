@@ -10,7 +10,9 @@ function FishAvatar({ color }: Props) {
       className={clsx(
         'max-w-[3.125rem]',
         'flex',
-        'bg-transparent'
+        'bg-transparent',
+        'md:max-w-[8rem]',
+        'md:w-[8rem]'
         // 'absolute',
         // 'mt-2',
         // 'mr-2'

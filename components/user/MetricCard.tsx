@@ -1,5 +1,6 @@
 import { Box as OffsetBorderBox } from 'components/OffsetBorder'
 import clsx from 'clsx'
+import styles from './MetricCard.module.css'
 
 type MetricCardProp = {
   title: string
@@ -15,8 +16,8 @@ export default function MetricCard({
   subValueBottom,
 }: MetricCardProp) {
   return (
-    <OffsetBorderBox className={clsx('w-full', 'md:max-w-[18rem]')}>
-      <div className={clsx('font-extended', 'p-8')}>
+    <OffsetBorderBox className={clsx('w-full', styles.metricCard)}>
+      <div className={clsx('font-extended', 'p-8', 'md:p-6')}>
         <div
           className={clsx('text-md', 'md:text-lg', 'mb-4', 'whitespace-nowrap')}
         >
