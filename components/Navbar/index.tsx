@@ -74,17 +74,14 @@ function Navbar({
           'items-stretch',
           'justify-between',
           'm-auto',
-          'max-w-[1700px]',
-          // md - 768px
+          'max-w-[72rem]',
           'text-sm',
           'px-5',
-          // lg - 1024px
-          'lg:text-[18px]',
           // 2lg - 1152px
-          '2lg:px-10',
-          '2lg:text-xl',
+          // '2lg:px-10',
+          // '2lg:text-md',
           // 1440
-          '1.5lg:px-16',
+          // '1.5xl:px-16',
         ])}
       >
         <div className="py-7">
@@ -94,13 +91,16 @@ function Navbar({
             </a>
           </Link>
         </div>
-        <div className="hidden md:flex items-center lg:text-xl">
+        <div className="hidden tablet:flex items-center 2lg:text-lg">
           <NavbarLinks
             className="h-full flex items-center whitespace-nowrap transition-font transition-fast transition-padding"
             {...navBarLinksProps}
           />
         </div>
-        <button className="md:hidden" onClick={() => $setFlyoutVisible(true)}>
+        <button
+          className="tablet:hidden"
+          onClick={() => $setFlyoutVisible(true)}
+        >
           <Menu />
         </button>
       </div>

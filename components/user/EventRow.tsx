@@ -107,6 +107,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
   // const abbrevHash = hash.slice(50)
   return (
     <div
+      aria-label={`Hash: ${hash}`}
       title={hash}
       onClick={e => {
         e.preventDefault()
