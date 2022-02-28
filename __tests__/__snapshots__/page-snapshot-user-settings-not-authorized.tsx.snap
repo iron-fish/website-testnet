@@ -320,10 +320,15 @@ exports[`renders User Settings page with no loginContext 1`] = `
               >
                 <div>
                   <h1
-                    class="font-extended text-6xl mt-6 mb-8"
+                    class="font-extended text-6xl mt-6 mb-4"
                   >
                     cooldev
                   </h1>
+                  <div
+                    class="font-favorite px-2 py-2 bg-iflightbeige inline-block mb-12"
+                  >
+                    Joined October 30th, 2021
+                  </div>
                   <div
                     class="font-favorit flex flex-wrap gap-x-16 gap-y-2"
                   >
@@ -1230,10 +1235,15 @@ exports[`renders User Weekly page 1`] = `
               >
                 <div>
                   <h1
-                    class="font-extended text-6xl mt-6 mb-8"
+                    class="font-extended text-6xl mt-6 mb-4"
                   >
                     cooldev
                   </h1>
+                  <div
+                    class="font-favorite px-2 py-2 bg-iflightbeige inline-block mb-12"
+                  >
+                    Joined October 30th, 2021
+                  </div>
                   <div
                     class="font-favorit flex flex-wrap gap-x-16 gap-y-2"
                   >

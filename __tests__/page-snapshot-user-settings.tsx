@@ -10,21 +10,16 @@ beforeEach(() => {
 })
 
 it('renders User Settings page', async () => {
-  try {
-    const { container } = render(User, {
-      router: {
-        pathname: '/users/111/settings',
-        route: '/users/111/settings',
-        asPath: '/users/111/settings',
-        query: { id: '111' },
-      },
-    })
-    await waitForElementToBeRemoved(() =>
-      screen.queryByRole('alert', { name: 'Loading' })
-    )
-    expect(container).toMatchSnapshot()
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('cool', e)
-  }
+  const { container } = render(User, {
+    router: {
+      pathname: '/users/111/settings',
+      route: '/users/111/settings',
+      asPath: '/users/111/settings',
+      query: { id: '111' },
+    },
+  })
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole('alert', { name: 'Loading' })
+  )
+  expect(container).toMatchSnapshot()
 })

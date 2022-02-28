@@ -11,25 +11,20 @@ beforeEach(() => {
 })
 
 it('renders User Settings page with no loginContext', async () => {
-  try {
-    const WrappedUser = () => {
-      const loginContext = useNoUser()
-      return <User loginContext={loginContext} />
-    }
-    const { container } = renderWithRouter(<WrappedUser />, {
-      router: {
-        pathname: '/users/111/settings',
-        route: '/users/111/settings',
-        asPath: '/users/111/settings',
-        query: { id: '111' },
-      },
-    })
-    await waitForElementToBeRemoved(() =>
-      screen.queryByRole('alert', { name: 'Loading' })
-    )
-    expect(container).toMatchSnapshot()
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('cool', e)
+  const WrappedUser = () => {
+    const loginContext = useNoUser()
+    return <User loginContext={loginContext} />
   }
+  const { container } = renderWithRouter(<WrappedUser />, {
+    router: {
+      pathname: '/users/111/settings',
+      route: '/users/111/settings',
+      asPath: '/users/111/settings',
+      query: { id: '111' },
+    },
+  })
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole('alert', { name: 'Loading' })
+  )
+  expect(container).toMatchSnapshot()
 })

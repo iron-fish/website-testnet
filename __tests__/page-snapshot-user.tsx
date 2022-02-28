@@ -109,7 +109,6 @@ export const mockUserPage = async (req: Request) => {
     : matches('/metrics/config')
     ? FIXTURE.metricsConfig
     : { error: "You haven't implemented this route yet" }
-  // console.log({ url: req.url, body, init: goodResponse })
   return Promise.resolve({ body: JSON.stringify(body), init: goodResponse })
 }
 beforeEach(() => {
@@ -118,21 +117,16 @@ beforeEach(() => {
 })
 
 it('renders User Weekly page', async () => {
-  try {
-    const { container } = render(User, {
-      router: {
-        pathname: '/users/111',
-        route: '/users/111',
-        asPath: '/users/111',
-        query: { id: '111' },
-      },
-    })
-    await waitForElementToBeRemoved(() =>
-      screen.queryByRole('alert', { name: 'Loading' })
-    )
-    expect(container).toMatchSnapshot()
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('cool', e)
-  }
+  const { container } = render(User, {
+    router: {
+      pathname: '/users/111',
+      route: '/users/111',
+      asPath: '/users/111',
+      query: { id: '111' },
+    },
+  })
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole('alert', { name: 'Loading' })
+  )
+  expect(container).toMatchSnapshot()
 })

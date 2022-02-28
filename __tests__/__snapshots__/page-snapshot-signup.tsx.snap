@@ -382,6 +382,23 @@ exports[`renders Signup page 1`] = `
               <div
                 class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
               >
+                <label
+                  class="text-xs mb-px3"
+                  for="github"
+                >
+                  Github
+                </label>
+                <input
+                  class=""
+                  id="github"
+                  placeholder="Your github username"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                class="font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md border-black  "
+              >
                 <div
                   class="flex radioGroup text-xs"
                 >
