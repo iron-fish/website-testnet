@@ -77,11 +77,6 @@ function Navbar({
           'max-w-[72rem]',
           'text-sm',
           'px-5',
-          // 2lg - 1152px
-          // '2lg:px-10',
-          // '2lg:text-md',
-          // 1440
-          // '1.5xl:px-16',
         ])}
       >
         <div className="py-7">
