@@ -48,7 +48,7 @@ export default function Tabs({
   return (
     <div>
       {/* Tabs */}
-      <div className="flex font-favorit gap-x-6 mb-8 md:mb-0">
+      <div className="flex font-favorit gap-x-6 mb-8">
         <TabHeaderButton
           selected={activeTab === 'weekly'}
           onClick={() => onTabChange('weekly')}
