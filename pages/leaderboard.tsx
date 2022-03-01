@@ -149,36 +149,39 @@ export default function Leaderboard({ loginContext }: Props) {
           >
             {isLoggedIn && <CountdownTimer />}
           </PageBanner>
-
-          <div className="h-16 border border-black rounded flex items-center mb-8">
-            <div className="border-r border-black flex h-full items-center w-1/2">
-              <div className="pl-4 md:pl-10">
-                <Search />
+          <div className="flex flex-col flex-wrap md:flex-row">
+            <div className="h-16 border-black rounded-r rounded-l md:rounded-l border-r border-b border-t border-l md:border-r-0 flex items-center mb-8 md:w-1/2">
+              <div className="border-black flex h-full items-center w-full">
+                <div className="pl-4 md:pl-10">
+                  <Search />
+                </div>
+                <input
+                  className="text-lg pl-2 md:pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
+                  placeholder="Search"
+                  onChange={e => {
+                    $setSearch(e.target.value)
+                  }}
+                  value={$search}
+                />
               </div>
-              <input
-                className="text-lg pl-2 md:pl-5 h-full font-favorit bg-transparent placeholder-black focus:outline-none"
-                placeholder="Search"
-                onChange={e => {
-                  $setSearch(e.target.value)
-                }}
-                value={$search}
-              />
             </div>
-            <div className="border-r border-black flex h-full items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
-                Region:
-                {$country && $country.value && (
-                  <Select {...$country} className="text-lg" />
-                )}
-              </label>
-            </div>
-            <div className="h-full flex items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
-                View:
-                {$eventType && $eventType.value && (
-                  <Select {...$eventType} className="text-lg" />
-                )}
-              </label>
+            <div className="h-16 border border-black rounded-l rounded-r md:rounded-r flex items-center mb-8 md:w-1/2">
+              <div className="border-r border-black flex h-full items-center justify-between w-1/2">
+                <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
+                  Region:
+                  {$country && $country.value && (
+                    <Select {...$country} className="text-lg" />
+                  )}
+                </label>
+              </div>
+              <div className="h-full flex items-center justify-between w-1/2">
+                <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
+                  View:
+                  {$eventType && $eventType.value && (
+                    <Select {...$eventType} className="text-lg" />
+                  )}
+                </label>
+              </div>
             </div>
           </div>
           <div className="font-extended flex px-4 sm:px-10 mb-4">
