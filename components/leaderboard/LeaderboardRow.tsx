@@ -3,7 +3,7 @@ import CSS from 'csstype'
 import { ReactType } from 'react'
 import clsx from 'clsx'
 
-import FishAvatar from 'components/user/FishAvatar'
+import { RawFishAvatar } from 'components/user/FishAvatar'
 import { graffitiToColor, numberToOrdinal } from 'utils'
 import { SmallOnly } from 'components/Responsive'
 
@@ -70,21 +70,33 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
         'min-h-[9rem]',
         'md:min-h-[3rem]',
         'border',
-        'border-black'
+        'border-black',
+        'md:items-center'
       )}
       style={{ boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.19)' }}
     >
+      {/* Mobile */}
       <LabeledText
         style={{ minWidth: 'calc(100% - 5.125rem)' }}
         label="USERNAME"
       >
         {graffiti}
       </LabeledText>
-      <FishAvatar
+      <RawFishAvatar
         color={avatarColor}
-        className="min-w-[3.125rem] max-h-[3.125rem] m-2 flex-none md:hidden"
+        classes={[
+          'max-w-[3.125rem]',
+          'flex',
+          'bg-transparent',
+          'border',
+          'border-black',
+          'min-w-[3.125rem]',
+          'm-2',
+          'flex-none',
+          'md:hidden',
+        ]}
       />
-      <div className="flex justify-between w-full md:hidden">
+      <div className={clsx('flex', 'justify-between', 'w-full', 'md:hidden')}>
         <LabeledText label="RANK">{rankStr}</LabeledText>
         <LabeledText label="TOTAL POINTS" childClassName="text-right">
           {pointsStr}
@@ -103,6 +115,7 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
       >
         {rankStr}
       </div>
+
       <div
         className={clsx(
           'flex',
@@ -113,7 +126,24 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
           'overflow-hidden'
         )}
       >
-        <div className="hidden md:inline truncate">{graffiti}</div>
+        <div className={clsx('py-3', 'mr-5', 'hidden', 'md:inline')}>
+          <RawFishAvatar
+            color={avatarColor}
+            classes={[
+              'max-w-[3.125rem]',
+              'flex',
+              'bg-transparent',
+              'border',
+              'border-black',
+              'md:min-w-[3.125rem]',
+              'md:max-w-[3.125rem]',
+              'md:max-h-[3.125rem]',
+            ]}
+          />
+        </div>
+        <div className={clsx('hidden', 'md:inline', 'truncate')}>
+          {graffiti}
+        </div>
       </div>
       <div
         className={clsx(
