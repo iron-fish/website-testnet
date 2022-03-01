@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 type Props = { color: string; className?: string }
 
-function FishAvatar({ color }: Props) {
+function FishAvatar({ color, className }: Props) {
   return (
     <svg
       className={clsx(
@@ -13,7 +13,8 @@ function FishAvatar({ color }: Props) {
         'md:max-w-[8rem]',
         'md:w-[8rem]',
         'border',
-        'border-black'
+        'border-black',
+        className
       )}
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
