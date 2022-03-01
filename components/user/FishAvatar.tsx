@@ -1,6 +1,5 @@
 import React from 'react'
 import clsx from 'clsx'
-// import styles from './FishAvatar.module.css'
 
 type Props = { color: string; className?: string }
 
