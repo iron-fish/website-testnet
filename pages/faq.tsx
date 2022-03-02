@@ -133,24 +133,24 @@ export default function Faq({ loginContext }: FaqProps) {
       />
 
       <main className="bg-white flex-1 items-center flex flex-col">
+        <PageBanner
+          title="Testnet FAQ"
+          text={<PageBannerBody />}
+          buttonText={!isLoaded ? 'Sign Up' : ''}
+          buttonClassName={clsx(
+            'm-auto',
+            'mb-32',
+            'w-full',
+            'max-w-[240px]',
+            'text-lg',
+            'p-3',
+            'md:text-xl',
+            'md:py-5',
+            'md:px-4'
+          )}
+          buttonLink={!isLoaded ? '/signup' : ''}
+        />
         <div className="w-4/5 md:w-2/3">
-          <PageBanner
-            title="Testnet FAQ"
-            text={<PageBannerBody />}
-            buttonText={!isLoaded ? 'Sign Up' : ''}
-            buttonClassName={clsx(
-              'm-auto',
-              'mb-32',
-              'w-full',
-              'max-w-[240px]',
-              'text-lg',
-              'p-3',
-              'md:text-xl',
-              'md:py-5',
-              'md:px-4'
-            )}
-            buttonLink={!isLoaded ? '/signup' : ''}
-          />
           <h1
             className={clsx(
               'text-left',
@@ -169,14 +169,15 @@ export default function Faq({ loginContext }: FaqProps) {
               <QuestionAnswer key={i} index={i} {...qa} />
             ))}
           </div>
+
+          <TubesCTA
+            cta="Join the Testnet!"
+            buttonText="Join Now"
+            goTo="/signup"
+          />
+          <KeepReading background="bg-white" />
+          <div className="mb-24"></div>
         </div>
-        <TubesCTA
-          cta="Join the Testnet!"
-          buttonText="Join Now"
-          goTo="/signup"
-        />
-        <KeepReading background="bg-white" />
-        <div className="mb-24"></div>
       </main>
       <Footer />
     </div>
