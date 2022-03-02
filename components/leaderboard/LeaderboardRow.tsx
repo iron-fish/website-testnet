@@ -86,6 +86,7 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
         color={avatarColor}
         classes={[
           'max-w-[3.125rem]',
+          'max-h-[3.125rem]',
           'flex',
           'bg-transparent',
           'border',
