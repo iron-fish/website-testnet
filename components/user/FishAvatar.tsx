@@ -1,20 +1,12 @@
 import React from 'react'
 import clsx from 'clsx'
 
-type Props = { color: string; className?: string }
+type Props = { color: string; classes?: string[] }
 
-function FishAvatar({ color }: Props) {
+export function RawFishAvatar({ color, classes }: Props) {
   return (
     <svg
-      className={clsx(
-        'max-w-[3.125rem]',
-        'flex',
-        'bg-transparent',
-        'md:max-w-[8rem]',
-        'md:w-[8rem]',
-        'border',
-        'border-black'
-      )}
+      className={clsx(classes)}
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -27,5 +19,20 @@ function FishAvatar({ color }: Props) {
     </svg>
   )
 }
+
+export const FishAvatar = ({ color }: Props) => (
+  <RawFishAvatar
+    classes={[
+      'max-w-[3.125rem]',
+      'flex',
+      'bg-transparent',
+      'md:max-w-[8rem]',
+      'md:w-[8rem]',
+      'border',
+      'border-black',
+    ]}
+    color={color}
+  />
+)
 
 export default FishAvatar
