@@ -157,21 +157,6 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
         {pointsStr}
       </div>
     </div>
-    /*
-    <div
-      className={clsx("relative", "bg-white", "rounded", "flex", "items-center", "px-4", "sm:px-10")}
-      style={{ boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.19)' }}
-    >
-      <div className={clsx("absolute", "inset-0", "rounded", "border", "hover:border-2", "border-black")} />
-      <div className={clsx("font-extended", "text-2xl", "w-16", "sm:w-24")}>{rankStr}</div>
-      <div className={clsx("flex", "flex-1", "items-center", "font-extended", "text-2xl", "overflow-hidden")}>
-        <div className={clsx("py-3", "mr-5")}>
-        </div>
-        <div className="truncate">{graffiti}</div>
-      </div>
-      <div className={clsx("font-extended", "text-2xl", "ml-2")}>{pointsStr}</div>
-    </div>
-       */
   )
 }
 
