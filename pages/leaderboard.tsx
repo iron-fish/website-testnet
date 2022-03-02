@@ -218,6 +218,7 @@ export default function Leaderboard({ loginContext }: Props) {
                 'flex',
                 'items-center',
                 'mb-4',
+                'md:mb-8',
                 'md:w-1/2'
               )}
             >
