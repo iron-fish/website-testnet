@@ -154,7 +154,7 @@ export default function About({ loginContext }: AboutProps) {
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
           </div>
-          <div className={clsx('hidden', 'md:block')}>
+          <div className={clsx('md:block')}>
             <AboutHeader className={clsx('md:w-1/2', 'mt-24')}>
               The Leaderboard
             </AboutHeader>
