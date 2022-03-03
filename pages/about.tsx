@@ -109,7 +109,7 @@ export default function About({ loginContext }: AboutProps) {
           )}
           buttonLink={!loaded ? '/signup' : ''}
         />
-        <div className={clsx('mx-3', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
+        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className="md:w-1/2">
             Participation Categories
           </AboutHeader>
@@ -153,8 +153,6 @@ export default function About({ loginContext }: AboutProps) {
             >
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
-          </div>
-          <div className={clsx('md:block')}>
             <AboutHeader className={clsx('md:w-1/2', 'mt-24')}>
               The Leaderboard
             </AboutHeader>
@@ -169,10 +167,27 @@ export default function About({ loginContext }: AboutProps) {
               <Img src={leaderboardPic} />
             </div>
           </div>
-          <AboutHeader className={clsx('text-center', 'w-full', 'mt-32')}>
+          <AboutHeader
+            className={clsx(
+              'text-left',
+              'w-full',
+              'mt-32',
+              'mx-1.5',
+              'md:mx-0',
+              'md:text-center'
+            )}
+          >
             Win a Category, win an NFT!
           </AboutHeader>
-          <Para className={clsx('text-left', 'md:text-center', 'm-auto')}>
+          <Para
+            className={clsx(
+              'text-left',
+              'md:text-center',
+              'm-auto',
+              'mx-1.5',
+              'mb-6'
+            )}
+          >
             At the end of the testnet if you’re the leader in any of the
             categories mentioned above you might be eligible to receive an Iron
             Fish NFT. Filter the leaderboard to see category leaders.
