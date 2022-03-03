@@ -154,12 +154,12 @@ export default function Faq({ loginContext }: FaqProps) {
           <h1
             className={clsx(
               'text-left',
-              'text-5xl',
+              'text-3xl',
               'ml-0',
               'mt-24',
               'mb-8',
               'font-extended',
-              'md:text-6xl'
+              'md:text-4xl'
             )}
           >
             Questions

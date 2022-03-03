@@ -153,6 +153,8 @@ export default function About({ loginContext }: AboutProps) {
             >
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
+          </div>
+          <div>
             <AboutHeader className={clsx('md:w-1/2', 'mt-24')}>
               The Leaderboard
             </AboutHeader>
