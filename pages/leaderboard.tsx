@@ -116,7 +116,7 @@ export default function Leaderboard({ loginContext }: Props) {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="min-h-screen flex flex-col font-favorit">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
@@ -124,12 +124,20 @@ export default function Leaderboard({ loginContext }: Props) {
       <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
       <Navbar
         fill="black"
-        className="bg-ifpink text-black"
+        className={clsx('bg-ifpink', 'text-black')}
         loginContext={loginContext}
       />
       <BackToTop />
-      <main className="bg-ifpink flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
+      <main
+        className={clsx(
+          'bg-ifpink',
+          'flex-1',
+          'items-center',
+          'flex',
+          'flex-col'
+        )}
+      >
+        <div className={clsx('w-4/5', 'md:w-2/3')}>
           <PageBanner
             title="Testnet Leaderboard"
             text={CTA}
@@ -149,44 +157,146 @@ export default function Leaderboard({ loginContext }: Props) {
           >
             {isLoggedIn && <CountdownTimer />}
           </PageBanner>
-
-          <div className="h-16 border border-black rounded flex items-center mb-8">
-            <div className="border-r border-black flex h-full items-center w-1/2">
-              <div className="pl-4 md:pl-10">
-                <Search />
+          <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>
+            <div
+              className={clsx(
+                'h-16',
+                'border-black',
+                'rounded-r',
+                'rounded-l',
+                'md:rounded-r-none',
+                'border-r',
+                'border-b',
+                'border-t',
+                'border-l',
+                'md:border-r-0',
+                'flex',
+                'items-center',
+                'mb-4',
+                'md:w-1/2'
+              )}
+            >
+              <div
+                className={clsx(
+                  'border-black',
+                  'flex',
+                  'h-full',
+                  'items-center',
+                  'w-full'
+                )}
+              >
+                <div className={clsx('pl-4', 'md:pl-10')}>
+                  <Search />
+                </div>
+                <input
+                  className={clsx(
+                    'text-lg',
+                    'pl-2',
+                    'md:pl-5',
+                    'h-full',
+                    'font-favorit',
+                    'bg-transparent',
+                    'placeholder-black',
+                    'focus:outline-none',
+                    'w-full'
+                  )}
+                  placeholder="Search"
+                  onChange={e => {
+                    $setSearch(e.target.value)
+                  }}
+                  value={$search}
+                />
               </div>
-              <input
-                className="text-lg pl-2 md:pl-5 h-full w-full font-favorit bg-transparent placeholder-black focus:outline-none"
-                placeholder="Search"
-                onChange={e => {
-                  $setSearch(e.target.value)
-                }}
-                value={$search}
-              />
             </div>
-            <div className="border-r border-black flex h-full items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
-                Region:
-                {$country && $country.value && (
-                  <Select {...$country} className="text-lg" />
+            <div
+              className={clsx(
+                'h-16',
+                'border',
+                'border-black',
+                'rounded-l',
+                'rounded-r',
+                'md:rounded-l-none',
+                'flex',
+                'items-center',
+                'mb-4',
+                'md:mb-8',
+                'md:w-1/2'
+              )}
+            >
+              <div
+                className={clsx(
+                  'border-r',
+                  'border-black',
+                  'flex',
+                  'h-full',
+                  'items-center',
+                  'justify-between',
+                  'w-1/2'
                 )}
-              </label>
-            </div>
-            <div className="h-full flex items-center justify-between w-1/4">
-              <label className="flex flex-col font-favorit text-xs px-2.5 w-full">
-                View:
-                {$eventType && $eventType.value && (
-                  <Select {...$eventType} className="text-lg" />
+              >
+                <label
+                  className={clsx(
+                    'flex',
+                    'flex-col',
+                    'font-favorit',
+                    'text-xs',
+                    'px-2.5',
+                    'w-full'
+                  )}
+                >
+                  Region:
+                  {$country && $country.value && (
+                    <Select {...$country} className="text-lg" />
+                  )}
+                </label>
+              </div>
+              <div
+                className={clsx(
+                  'h-full',
+                  'flex',
+                  'items-center',
+                  'justify-between',
+                  'w-1/2'
                 )}
-              </label>
+              >
+                <label
+                  className={clsx(
+                    'flex',
+                    'flex-col',
+                    'font-favorit',
+                    'text-xs',
+                    'px-2.5',
+                    'w-full'
+                  )}
+                >
+                  View:
+                  {$eventType && $eventType.value && (
+                    <Select {...$eventType} className="text-lg" />
+                  )}
+                </label>
+              </div>
             </div>
           </div>
-          <div className="font-extended flex px-4 sm:px-10 mb-4">
+          <div
+            className={clsx(
+              'font-extended',
+              'flex',
+              'px-4',
+              'sm:px-10',
+              'mb-4'
+            )}
+          >
             {$users.length > 0 && (
               <>
-                <div className="w-16 sm:w-24 hidden md:inline">RANK</div>
-                <div className="flex-1 hidden md:inline">USERNAME</div>
-                <div className="ml-2  hidden md:inline">TOTAL POINTS</div>
+                <div className={clsx('w-16', 'sm:w-24', 'hidden', 'md:inline')}>
+                  RANK
+                </div>
+                <div className={clsx('flex-1', 'hidden', 'md:inline')}>
+                  USERNAME
+                </div>
+                <div className={clsx('ml-2', 'hidden', 'md:inline')}>
+                  TOTAL POINTS
+                </div>
               </>
             )}
           </div>
