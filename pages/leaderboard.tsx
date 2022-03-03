@@ -293,7 +293,7 @@ export default function Leaderboard({ loginContext }: Props) {
                 <div className={clsx('flex-1', 'hidden', 'md:inline')}>
                   USERNAME
                 </div>
-                <div className={clsx('ml-2', '', 'hidden', 'md:inline')}>
+                <div className={clsx('ml-2', 'hidden', 'md:inline')}>
                   TOTAL POINTS
                 </div>
               </>
