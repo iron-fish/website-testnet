@@ -23,7 +23,7 @@ export const validateGraffiti = (x: string) => {
 // https://stackoverflow.com/questions/209732/why-am-i-seeing-inconsistent-javascript-logic-behavior-looping-with-an-alert-v
 const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+')
 export const validateGithub = (x: string) => {
-  const length = x.trim().length
+  const length = x && x.trim().length
   const valid = length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
   return x === UNSET || valid
 }
