@@ -5,7 +5,7 @@ export const METADATA = {
   created_at: '2021-10-30T23:28:59.505Z',
   updated_at: '2021-10-30T23:43:28.555Z',
   email: 'cooldev@ironfish.network',
-  github: 'smipplejipple',
+  github: '',
   graffiti: 'smipplejipple',
   total_points: 1100,
   country_code: 'USA',
