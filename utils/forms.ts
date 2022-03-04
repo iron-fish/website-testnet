@@ -24,8 +24,8 @@ export const validateGraffiti = (x: string) => {
 const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+')
 export const validateGithub = (x: string) => {
   const length = x && x.trim().length
-  const valid = length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
-  return x === UNSET || valid
+  if (x === UNSET || length === 0) return true
+  return length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
 }
 
 // non-zero width strings
