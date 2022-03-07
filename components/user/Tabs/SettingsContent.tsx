@@ -40,6 +40,7 @@ const EDITABLE_FIELDS = {
     controlled: true,
   },
   graffiti: { ...FIELDS.graffiti, controlled: true },
+  github: { ...FIELDS.github, controlled: true },
   country: { ...FIELDS.country, useDefault: false, controlled: true },
   discord: {
     ...FIELDS.social,
@@ -82,6 +83,7 @@ export default function SettingsContent({
   const [$loading, $setLoading] = useState(false)
   const {
     email: _email = UNSET,
+    github: _github = UNSET,
     graffiti: _graffiti = UNSET,
     discord: _discord = UNSET,
     telegram: _telegram = UNSET,
@@ -95,6 +97,11 @@ export default function SettingsContent({
   const $email = useField({
     ...EDITABLE_FIELDS.email,
     defaultValue: _email,
+  })
+  const $github = useField({
+    ...EDITABLE_FIELDS.github,
+    defaultValue: _github,
+    touched: !!_github,
   })
   const $telegram = useField({
     ...EDITABLE_FIELDS.telegram,
@@ -115,6 +122,7 @@ export default function SettingsContent({
   const testInvalid = useCallback(() => {
     const invalid =
       !$email?.valid ||
+      !$github?.valid ||
       !$graffiti?.valid ||
       !$discord?.valid ||
       !$telegram?.valid ||
@@ -126,13 +134,14 @@ export default function SettingsContent({
       $setError(UNSET)
     }
     return invalid
-  }, [$email, $graffiti, $telegram, $discord, $country])
+  }, [$email, $github, $graffiti, $telegram, $discord, $country])
 
   // on save
   const update = useCallback(async () => {
     if (
       !$email ||
       !$graffiti ||
+      !$github ||
       !$telegram ||
       !$discord ||
       !$country ||
@@ -144,6 +153,7 @@ export default function SettingsContent({
     $setLoading(true)
     const email = $email?.value
     const graffiti = $graffiti?.value
+    const github = $github?.value
     const telegram = $telegram?.value
     const discord = $discord?.value
     const country = $country?.value
@@ -151,6 +161,7 @@ export default function SettingsContent({
     const updates = {
       email,
       graffiti,
+      github,
       telegram,
       discord,
       country_code: country,
@@ -204,6 +215,7 @@ export default function SettingsContent({
     setRawMetadata,
     setUserStatus,
     $email,
+    $github,
     $graffiti,
     $telegram,
     $discord,
@@ -235,6 +247,7 @@ export default function SettingsContent({
                   <FieldError text={$error} size="text-md" />
                 )}
                 {$email && <TextField {...$email} disabled />}
+                {$github && <TextField {...$github} />}
                 {$graffiti && (
                   <TextField {...$graffiti} disabled={anyBlocksMined} />
                 )}

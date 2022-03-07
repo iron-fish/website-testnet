@@ -15,7 +15,7 @@ type CommunityProps = {
 
 export default function Community({ loginContext }: CommunityProps) {
   return (
-    <div className="min-h-screen flex flex-col font-favorit">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>Community</title>
         <meta name="description" content="Community" />
@@ -23,29 +23,37 @@ export default function Community({ loginContext }: CommunityProps) {
 
       <Navbar
         fill="black"
-        className="bg-ifbeige text-black"
+        className={clsx('bg-ifbeige', 'text-black')}
         loginContext={loginContext}
       />
 
-      <main className="bg-ifbeige flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
-          <PageBanner
-            title="From the Community"
-            text="Submitting to our community page helps us make our testnet more accessible. Send us an email on how you’d like to grow our community, we’d love to talk!"
-            buttonText="Submit Contribution Proposal"
-            buttonClassName={clsx(
-              'm-auto',
-              'mb-32',
-              'w-full',
-              'max-w-[364px]',
-              'text-lg',
-              'p-3',
-              'md:text-xl',
-              'md:py-5',
-              'md:px-4'
-            )}
-            buttonLink="mailto:testnet@ironfish.network"
-          />
+      <main
+        className={clsx(
+          'bg-ifbeige',
+          'flex-1',
+          'items-center',
+          'flex',
+          'flex-col'
+        )}
+      >
+        <PageBanner
+          title="From the Community"
+          text="Submitting to our community page helps us make our testnet more accessible. Send us an email on how you’d like to grow our community, we’d love to talk!"
+          buttonText="Submit Contribution Proposal"
+          buttonClassName={clsx(
+            'm-auto',
+            'mb-32',
+            'w-full',
+            'max-w-[364px]',
+            'text-lg',
+            'p-3',
+            'md:text-xl',
+            'md:py-5',
+            'md:px-4'
+          )}
+          buttonLink="mailto:testnet@ironfish.network"
+        />
+        <div className={clsx('w-4/5', 'md:w-2/3')}>
           <Stories />
         </div>
         <TubesCTA

@@ -4,7 +4,7 @@ function ChevronRight() {
       width="16"
       height="20"
       viewBox="0 0 16 16"
-      className="ml-2"
+      className="ml-2 min-w-[1rem]"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

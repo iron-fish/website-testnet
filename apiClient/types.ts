@@ -36,6 +36,7 @@ export type ApiUser = {
   country_code: string
   graffiti: string
   id: number
+  created_at: Date
   last_login_at: null | number
   rank: number
   total_points: number
@@ -100,6 +101,7 @@ export type ApiUserMetadata = {
   updated_at: string
   email: string
   graffiti: string
+  github: string
   total_points: number
   country_code: string
   email_notifications: boolean

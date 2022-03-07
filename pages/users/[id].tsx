@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import { encode as btoa } from 'base-64'
 import { nextMonday } from 'date-fns'
+import clsx from 'clsx'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -13,6 +14,7 @@ import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
 import renderEvents from 'components/user/EventRow'
+import Twitter from 'components/icons/Twitter'
 
 import * as API from 'apiClient'
 import useQuery from 'hooks/useQuery'
@@ -21,7 +23,7 @@ import { LoginContext } from 'hooks/useLogin'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
 
 import { graffitiToColor, numberToOrdinal } from 'utils'
-import { nextMondayFrom } from 'utils/date'
+import { formatUTC, nextMondayFrom } from 'utils/date'
 
 // The number of events to display in the Recent Activity list.
 const EVENTS_LIMIT = 25
@@ -34,12 +36,24 @@ interface Props {
 }
 const sumValues = (x: Record<string, number>) =>
   Object.values(x).reduce((a, b) => a + b, 0)
+
+type LabeledProps = {
+  value: string
+  label: string
+}
+
+export const LabeledStat = ({ value, label }: LabeledProps) => (
+  <div className={clsx('w-1/3', 'flex', 'flex-col')}>
+    <h3 className={clsx('text-sm', 'md:text-md')}>{label}</h3>
+    <div className={clsx('text-xl', 'md:text-3xl', 'mt-2')}>{value}</div>
+  </div>
+)
+
 export default function User({ loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
   })
-
   const router = useRouter()
   const { isReady: routerIsReady } = router
   const userId = (router?.query?.id || '') as string
@@ -61,6 +75,7 @@ export default function User({ loginContext }: Props) {
     API.MetricsConfigResponse | undefined
   >(undefined)
   const [$fetched, $setFetched] = useState(false)
+
   useEffect(() => {
     if (rawTab && validTabValue(rawTab)) {
       $setActiveTab(rawTab as TabType)
@@ -160,14 +175,19 @@ export default function User({ loginContext }: Props) {
   const ordinalRank = numberToOrdinal($user.rank)
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
+  const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
   const totalWeeklyLimit = sumValues(
     $metricsConfig.weekly_limits
   ).toLocaleString()
   const weeklyPoints = $weeklyMetrics.points.toLocaleString()
 
+  const tweetText = `Iron Fish Incentivized Testnet: ${
+    $user.graffiti
+  } - ${$user.total_points.toLocaleString()} total points! #ironfish https://testnet.ironfish.network/users/${userId}`
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
       <Head>
         <title>{$user.graffiti}</title>
         <meta name="description" content={String($user.graffiti)} />
@@ -176,47 +196,130 @@ export default function User({ loginContext }: Props) {
       <Navbar
         loginContext={loginContext}
         fill="black"
-        className="bg-ifpink text-black"
+        className={clsx('bg-ifpink', 'text-black')}
       />
 
-      <main className="bg-ifpink flex-1 justify-center flex pt-16 pb-32">
+      <main
+        className={clsx(
+          'bg-ifpink',
+          'flex-1',
+          'justify-center',
+          'flex',
+          'pt-16',
+          'pb-32',
+          'w-full',
+          'overflow-hidden'
+        )}
+      >
         <div style={{ flexBasis: 1138 }}>
           <OffsetBorderContainer>
-            <div className="px-24 pt-16 pb-12">
+            <div
+              className={clsx(
+                'px-5',
+                'md:px-8',
+                'tablet:px-24',
+                'pt-5',
+                'md:pt-8',
+                'tablet:pt-16',
+                'pb-12'
+              )}
+            >
               {/* Header */}
               <div
-                className="flex justify-between mb-8"
+                className={clsx('flex', 'justify-between', 'md:mb-8')}
                 style={{ width: '100%' }}
               >
-                <div>
-                  <h1 className="font-extended text-6xl mt-6 mb-8">
+                <div className={clsx('flex', 'flex-col')}>
+                  <h1
+                    className={clsx(
+                      'font-extended',
+                      'text-3xl',
+                      'md:text-6xl',
+                      'mt-2',
+                      'md:mt-6',
+                      'mb-4',
+                      'max-w-[32rem]',
+                      'md:max-w-[48rem]',
+                      'max-h-[4rem]',
+                      'overflow-hidden',
+                      'truncate'
+                    )}
+                  >
                     {$user.graffiti}
                   </h1>
-
-                  <div className="font-favorit flex flex-wrap gap-x-16 gap-y-2">
-                    <div>
-                      <div>All Time Rank</div>
-                      <div className="text-3xl mt-2">{ordinalRank}</div>
-                    </div>
-                    <div>
-                      <div>Total Points</div>
-                      <div className="text-3xl mt-2">
-                        {$user.total_points.toLocaleString()}
-                      </div>
-                    </div>
-                    <div>
-                      <div>Weekly Points</div>
-                      <div className="text-3xl mt-2">
-                        {weeklyPoints} / {totalWeeklyLimit}
-                      </div>
+                  <div>
+                    <div
+                      className={clsx(
+                        'text-sm',
+                        'md:text-md',
+                        'px-2',
+                        'py-2',
+                        'bg-iflightbeige',
+                        'inline-block',
+                        'md:mb-12',
+                        'rounded'
+                      )}
+                    >
+                      {joinedOn}
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col items-center">
+                <div
+                  className={clsx(
+                    'flex',
+                    'flex-col',
+                    'items-center',
+                    'justify-center'
+                  )}
+                >
                   <FishAvatar color={avatarColor} />
-                  <div className="mt-4">
+                  <div
+                    className={clsx(
+                      'mt-4',
+                      'flex',
+                      'flex-row',
+                      'items-center',
+                      'justify-center',
+                      'h-6',
+                      'w-full'
+                    )}
+                  >
                     <Flag code={$user.country_code} />
+                    <a
+                      className="twitter-share-button"
+                      rel="noreferrer"
+                      target="_blank"
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                        tweetText
+                      )}`}
+                    >
+                      <Twitter className="ml-2" />
+                    </a>
                   </div>
+                </div>
+              </div>
+              <div
+                className={clsx('flex', 'flex-col', 'w-full', 'mt-6', 'mb-6')}
+              >
+                <div
+                  className={clsx(
+                    'w-full',
+                    'md:w-2/3',
+                    'lg:w-1/2',
+                    'flex',
+                    'content-between',
+                    'justify-between'
+                  )}
+                >
+                  <LabeledStat label="All Time Rank" value={ordinalRank} />
+                  <LabeledStat
+                    label="Total Points"
+                    value={$user.total_points.toLocaleString()}
+                  />
+                  <LabeledStat
+                    label="Weekly Points"
+                    value={`${weeklyPoints} / ${totalWeeklyLimit}`}
+                  />
                 </div>
               </div>
 
@@ -244,13 +347,35 @@ export default function User({ loginContext }: Props) {
                     Recent Activity
                   </h1>
 
-                  <table className="font-favorit w-full">
+                  <table className={clsx('font-favorit', 'w-full')}>
                     <thead>
-                      <tr className="text-xs text-left tracking-widest border-b border-black">
-                        <th className="font-normal py-4">ACTIVITY</th>
-                        <th className="font-normal">DATE</th>
-                        <th className="font-normal">POINTS</th>
-                        <th className="font-normal max-w-[13rem]">DETAILS</th>
+                      <tr
+                        className={clsx(
+                          'text-xs',
+                          'text-left',
+                          'tracking-widest',
+                          'border-b',
+                          'border-black',
+                          'font-normal'
+                        )}
+                      >
+                        <th className={'py-4'}>ACTIVITY</th>
+                        <th className={clsx('hidden', 'md:table-cell')}>
+                          DATE
+                        </th>
+                        <th>
+                          <div className={clsx('block', 'w-1/2')}>POINTS</div>
+                        </th>
+                        <th
+                          className={clsx(
+                            'hidden',
+                            'md:table-cell',
+                            'md:max-w-[13rem]',
+                            'text-right'
+                          )}
+                        >
+                          DETAILS
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="text-sm">
@@ -263,8 +388,10 @@ export default function User({ loginContext }: Props) {
           </OffsetBorderContainer>
           {/* Recent Activity Pagination */}
           {$activeTab !== 'settings' && (
-            <div className="flex font-favorit justify-center mt-8">
-              <div className="flex gap-x-1.5">
+            <div
+              className={clsx('flex', 'font-favorit', 'justify-center', 'mt-8')}
+            >
+              <div className={clsx('flex', 'gap-x-1.5')}>
                 <EventsPaginationButton
                   disabled={!$hasPrevious}
                   onClick={fetchPrevious}

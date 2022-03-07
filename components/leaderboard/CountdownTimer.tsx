@@ -3,7 +3,8 @@ import { CustomBox } from 'components/OffsetBorder'
 import { intervalToDuration } from 'date-fns'
 import type { Duration } from 'date-fns'
 
-import { formatEventDate, nextMondayFrom } from 'utils/date'
+import { nextMondayFrom } from 'utils/date'
+import { formatEventDate } from 'utils/events'
 
 const customFormatDuration = (x: Duration) =>
   `${x.days ? x.days + 'd : ' : ''}${x.hours ? x.hours + 'hr : ' : ''}${

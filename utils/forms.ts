@@ -1,5 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 export { WHITESPACE } from 'hooks/useForm'
+import { Field } from 'hooks/useForm'
 
 // naive validators
 
@@ -19,6 +20,18 @@ export const validateGraffiti = (x: string) => {
   return graffitiUint8Array.length < 32
 }
 
+// https://stackoverflow.com/questions/209732/why-am-i-seeing-inconsistent-javascript-logic-behavior-looping-with-an-alert-v
+const alphaNumericHyphensOnly = new RegExp('[A-Za-z\\d-]+')
+export const validateGithub = (x: string) => {
+  // if unset / falsy
+  if (!x) return true
+  const length = (x || UNSET).trim().length
+  // or no content yet
+  if (length === 0) return true
+  // otherwise verify it matches the expected
+  return length > 0 && length < 40 && alphaNumericHyphensOnly.test(x)
+}
+
 // non-zero width strings
 export const exists = (x: string) => x.trim().length > 0
 
@@ -35,4 +48,9 @@ export function setStateOnChange(
     const toSet = trim ? raw.trim() : raw
     setter(toSet)
   }
+}
+
+export function resetTextField($field: Field) {
+  $field.defaultValue = $field.value || UNSET
+  return $field
 }

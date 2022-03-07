@@ -28,11 +28,13 @@ export async function createUser(
   graffiti: string,
   socialChoice: string,
   social: string,
-  country_code: string
+  country_code: string,
+  github: string
 ): Promise<ApiUser | ApiError> {
   const body = JSON.stringify({
     email,
     graffiti,
+    github,
     country_code,
     [socialChoice]: social,
   })
@@ -48,6 +50,7 @@ export async function createUser(
 
 type PartialUser = {
   email?: string
+  github?: string
   graffiti?: string
   socialChoice?: string
   social?: string

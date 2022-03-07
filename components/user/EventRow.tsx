@@ -9,6 +9,7 @@ import ActivityCopy from 'components/icons/ActivityCopy'
 import ActivityCommunityContribution from 'components/icons/ActivityCommunityContribution'
 import ActivitySocial from 'components/icons/ActivitySocial'
 import ChevronRight from 'components/icons/ChevronRight'
+import { Verbose, SmallOnly } from 'components/Responsive'
 
 import {
   EventType,
@@ -18,28 +19,43 @@ import {
   ApiEventMetadataWithLink,
 } from 'apiClient'
 
-import { weeksBetween, eventsBetween, formatEventDate } from 'utils/date'
+import {
+  formatEventDate,
+  bucketEventsAndAccountForMissingOnes,
+  WeeklyData,
+} from 'utils/events'
 
 import styles from './EventRow.module.css'
 
 interface IconText {
   icon: ReactElement | string
-  text: string
+  text: ReactElement | string
 }
 const NEEDS_ICON = '🤨'
 export function displayEventType(type: EventType): IconText {
-  const text =
-    type === 'BLOCK_MINED'
-      ? 'Mined a block'
-      : type === 'BUG_CAUGHT'
-      ? 'Reported a bug'
-      : type === 'COMMUNITY_CONTRIBUTION'
-      ? 'Contributed to the community'
-      : type === 'PULL_REQUEST_MERGED'
-      ? 'Submitted a Pull Request'
-      : type === 'SOCIAL_MEDIA_PROMOTION'
-      ? 'Promoted testnet'
-      : type
+  const text = (
+    <div>
+      {type === 'BLOCK_MINED' ? (
+        <>Mined a block</>
+      ) : type === 'BUG_CAUGHT' ? (
+        <>Reported a bug</>
+      ) : type === 'COMMUNITY_CONTRIBUTION' ? (
+        <>
+          <SmallOnly>Community contribution</SmallOnly>
+          <Verbose>Contributed to the community</Verbose>
+        </>
+      ) : type === 'PULL_REQUEST_MERGED' ? (
+        <>
+          Submitted a <SmallOnly>PR</SmallOnly>
+          <Verbose>Pull Request</Verbose>
+        </>
+      ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
+        <>Promoted testnet</>
+      ) : (
+        type
+      )}
+    </div>
+  )
   const icon =
     type === 'BLOCK_MINED' ? (
       <ActivityBlockMined />
@@ -88,9 +104,9 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     successDuration: 1000,
   })
   const [$hover, $setHover] = useState<CopyState>(CopyState.IDLE)
-  const abbrevHash = hash.slice(45)
   return (
     <div
+      aria-label={`Hash: ${hash}`}
       title={hash}
       onClick={e => {
         e.preventDefault()
@@ -125,8 +141,12 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
       )}
     >
       <>
-        Block &hellip; {abbrevHash}
-        <ActivityCopy className="ml-4" />
+        <Verbose defaultClassName="md:flex" className={clsx('items-center')}>
+          Block{' '}
+          <span className={clsx('ml-2', styles.truncatedHash)}>{hash}</span>
+          <ActivityCopy className="ml-4" />
+        </Verbose>
+        <SmallOnly>View</SmallOnly>
       </>
     </div>
   )
@@ -148,14 +168,31 @@ const summarizeEvent = (
   const id = parts.slice(-1)[0]
   if (type === EventType.PULL_REQUEST_MERGED) {
     // https://github.com/iron-fish/ironfish-api/pull/595
-    return <>View pull request #{id}</>
+    return (
+      <>
+        View<Verbose className="ml-1">pull request #{id}</Verbose>
+      </>
+    )
   } else if (type === EventType.BUG_CAUGHT) {
     // https://github.com/iron-fish/ironfish/issues/930
-    return <>View issue #{id}</>
+    return (
+      <>
+        View<Verbose className="ml-1">issue #{id}</Verbose>
+      </>
+    )
   } else if (type === EventType.COMMUNITY_CONTRIBUTION) {
-    return <>View contribution</>
+    return (
+      <>
+        View<Verbose className="ml-1">contribution</Verbose>
+      </>
+    )
   } else if (type === EventType.SOCIAL_MEDIA_PROMOTION) {
-    return <>Promoted on {hostname}</>
+    return (
+      <>
+        <SmallOnly>View</SmallOnly>
+        <Verbose>Promoted on {hostname}</Verbose>
+      </>
+    )
   }
   return <>UNHANDLED: {type}</>
 }
@@ -169,26 +206,47 @@ export const EventRow = ({
   const { text, icon } = displayEventType(type)
 
   const eType = (
-    <div className="flex items-center justify-start">
-      <span className="mr-2">{icon}</span>
-      {text}
+    <div className={clsx('flex', 'items-center', 'justify-start')}>
+      <Verbose className="mr-2">{icon}</Verbose>
+      <div className={clsx('text-xs', 'md:text-sm')}>{text}</div>
     </div>
   )
-
+  const formattedDate = formatEventDate(new Date(occurredAt))
   return (
-    <tr className="border-b border-black">
-      <td className="py-4 w-1/3">{eType}</td>
-      <td>{formatEventDate(new Date(occurredAt))}</td>
+    <tr className={clsx('border-b', 'border-black')}>
+      <td
+        className={clsx(
+          'py-4',
+          'w-1/2',
+          'min-w-[8rem]',
+          'pr-2',
+          'md:pr-0',
+          'md:w-1/3',
+          'md:min-w-[0]'
+        )}
+      >
+        {eType}
+        <SmallOnly className="text-xs">{formattedDate}</SmallOnly>
+      </td>
+      <td className={clsx('hidden', 'md:table-cell')}>{formattedDate}</td>
       <td>{points}</td>
-      <td className="max-w-[11rem]">
+      <td className={clsx('max-w-[3rem]', 'md:max-w-[11rem]')}>
         <a
           href={makeLinkForEvent(type, metadata)}
-          className="text-ifotherblue align-left flex items-end justify-between"
+          className={clsx(
+            'text-ifotherblue',
+            'align-left',
+            'flex',
+            'items-end',
+            'justify-end'
+          )}
           target="_blank"
           rel="noreferrer"
         >
-          <div>{metadata && summarizeEvent(type, metadata)}</div>
-          <ChevronRight />
+          <>
+            {metadata && summarizeEvent(type, metadata)}
+            <ChevronRight />
+          </>
         </a>
       </td>
     </tr>
@@ -202,41 +260,34 @@ type WeekRowProps = {
 }
 
 const WeekRow = ({ week, start, end }: WeekRowProps) => {
-  const when = `Week ${week}: Started ${formatEventDate(
-    start
-  )} - Ended ${formatEventDate(end)}`
+  const regular = week > 0
+  const when = regular
+    ? `Week ${week}: Started ${formatEventDate(
+        start
+      )} - Ended ${formatEventDate(end)}`
+    : `Events from before the testnet started`
+  const headerText = regular ? `Week ${week}` : `Pre-Testnet`
   return (
     <tr
-      className="bg-black text-white"
+      className={clsx('bg-black', 'text-white')}
       data-date={start}
       aria-label={when}
       title={when}
     >
       <td
         colSpan={4}
-        className="text-center uppercase text-xs tracking-widest h-8"
+        className={clsx(
+          'text-center',
+          'uppercase',
+          'text-xs',
+          'tracking-widest',
+          'h-8'
+        )}
       >
-        Week {week}
+        {headerText}
       </td>
     </tr>
   )
-}
-
-const makeCounter = () => {
-  let x = 0
-  return () => x++
-}
-
-const sortEventsByDate = (xs: ApiEvent[]) =>
-  xs.sort((a: ApiEvent, b: ApiEvent): number =>
-    a.occurred_at > b.occurred_at ? -1 : 1
-  )
-
-type WeeklyData = {
-  week: number
-  date: Date
-  prior: Date
-  events: ApiEvent[]
 }
 
 export const renderEvents = (
@@ -244,34 +295,16 @@ export const renderEvents = (
   end: Date,
   rawEvents: readonly ApiEvent[]
 ) => {
-  const weeks = weeksBetween(start, end)
-  const counter = makeCounter()
-
-  return weeks
-    .reduce((agg: WeeklyData[], date: Date) => {
-      const prev = agg[agg.length - 1]
-      const prior = prev ? prev.date : start
-      const events = sortEventsByDate(
-        eventsBetween(prior, date, rawEvents as ApiEvent[])
+  return bucketEventsAndAccountForMissingOnes(start, end, rawEvents).map(
+    ({ date, week, events, prior }: WeeklyData) =>
+      events.length > 0 && (
+        <Fragment key={date.toTimeString() + week}>
+          <WeekRow week={week} start={prior || date} end={date} />
+          {events.map((e: ApiEvent) => (
+            <EventRow {...e} key={e.id} />
+          ))}
+        </Fragment>
       )
-      return agg.concat({
-        prior,
-        date,
-        events,
-        week: counter(),
-      })
-    }, [])
-    .reverse()
-    .map(
-      ({ date, week, events, prior }: WeeklyData) =>
-        events.length > 0 && (
-          <Fragment key={date.toTimeString() + week}>
-            <WeekRow week={week} start={prior || date} end={date} />
-            {events.map((e: ApiEvent) => (
-              <EventRow {...e} key={e.id} />
-            ))}
-          </Fragment>
-        )
-    )
+  )
 }
 export default renderEvents

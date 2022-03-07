@@ -120,7 +120,7 @@ export default function Faq({ loginContext }: FaqProps) {
   return checkLoading() ? (
     <Loader />
   ) : (
-    <div className="min-h-screen flex flex-col font-favorit">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>FAQ</title>
         <meta name="description" content="FAQ" />
@@ -128,48 +128,57 @@ export default function Faq({ loginContext }: FaqProps) {
 
       <Navbar
         fill="black"
-        className="bg-white text-black"
+        className={clsx('bg-white', 'text-black')}
         loginContext={loginContext}
       />
 
-      <main className="bg-white flex-1 items-center flex flex-col">
-        <div className="w-4/5 md:w-2/3">
-          <PageBanner
-            title="Testnet FAQ"
-            text={<PageBannerBody />}
-            buttonText={!isLoaded ? 'Sign Up' : ''}
-            buttonClassName={clsx(
-              'm-auto',
-              'mb-32',
-              'w-full',
-              'max-w-[240px]',
-              'text-lg',
-              'p-3',
-              'md:text-xl',
-              'md:py-5',
-              'md:px-4'
-            )}
-            buttonLink={!isLoaded ? '/signup' : ''}
-          />
+      <main
+        className={clsx(
+          'bg-white',
+          'flex-1',
+          'items-center',
+          'flex',
+          'flex-col'
+        )}
+      >
+        <PageBanner
+          title="Testnet FAQ"
+          text={<PageBannerBody />}
+          buttonText={!isLoaded ? 'Sign Up' : ''}
+          buttonClassName={clsx(
+            'm-auto',
+            'mb-32',
+            'w-full',
+            'max-w-[240px]',
+            'text-lg',
+            'p-3',
+            'md:text-xl',
+            'md:py-5',
+            'md:px-4'
+          )}
+          buttonLink={!isLoaded ? '/signup' : ''}
+        />
+        <div className={clsx('w-4/5', 'md:w-2/3')}>
           <h1
             className={clsx(
               'text-left',
-              'text-5xl',
+              'text-3xl',
               'ml-0',
               'mt-24',
               'mb-8',
               'font-extended',
-              'md:text-6xl'
+              'md:text-4xl'
             )}
           >
             Questions
           </h1>
-          <div className="flex flex-col gap-y-8">
+          <div className={clsx('flex', 'flex-col', 'gap-y-8')}>
             {questions.map((qa, i) => (
               <QuestionAnswer key={i} index={i} {...qa} />
             ))}
           </div>
         </div>
+
         <TubesCTA
           cta="Join the Testnet!"
           buttonText="Join Now"
