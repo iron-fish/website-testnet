@@ -120,7 +120,7 @@ export default function Faq({ loginContext }: FaqProps) {
   return checkLoading() ? (
     <Loader />
   ) : (
-    <div className="min-h-screen flex flex-col font-favorit">
+    <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>FAQ</title>
         <meta name="description" content="FAQ" />
@@ -128,11 +128,19 @@ export default function Faq({ loginContext }: FaqProps) {
 
       <Navbar
         fill="black"
-        className="bg-white text-black"
+        className={clsx('bg-white', 'text-black')}
         loginContext={loginContext}
       />
 
-      <main className="bg-white flex-1 items-center flex flex-col">
+      <main
+        className={clsx(
+          'bg-white',
+          'flex-1',
+          'items-center',
+          'flex',
+          'flex-col'
+        )}
+      >
         <PageBanner
           title="Testnet FAQ"
           text={<PageBannerBody />}
@@ -150,7 +158,7 @@ export default function Faq({ loginContext }: FaqProps) {
           )}
           buttonLink={!isLoaded ? '/signup' : ''}
         />
-        <div className="w-4/5 md:w-2/3">
+        <div className={clsx('w-4/5', 'md:w-2/3')}>
           <h1
             className={clsx(
               'text-left',
@@ -164,12 +172,14 @@ export default function Faq({ loginContext }: FaqProps) {
           >
             Questions
           </h1>
-          <div className="flex flex-col gap-y-8">
+          <div className={clsx('flex', 'flex-col', 'gap-y-8')}>
             {questions.map((qa, i) => (
               <QuestionAnswer key={i} index={i} {...qa} />
             ))}
           </div>
+        </div>
 
+        <div className="w-full">
           <TubesCTA
             cta="Join the Testnet!"
             buttonText="Join Now"
