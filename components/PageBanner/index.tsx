@@ -22,7 +22,7 @@ export const PageBanner: FC<PageBannerProps> = ({
 }) => {
   const renderButton = buttonText && buttonLink
   return (
-    <div className={clsx('w-full', 'md:w-fit')}>
+    <div className={clsx('w-full', 'md:w-fit', 'md:w-max-[74rem]')}>
       <h1
         className={clsx(
           'text-left',
