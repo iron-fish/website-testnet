@@ -179,15 +179,13 @@ export default function Faq({ loginContext }: FaqProps) {
           </div>
         </div>
 
-        <div className="w-full">
-          <TubesCTA
-            cta="Join the Testnet!"
-            buttonText="Join Now"
-            goTo="/signup"
-          />
-          <KeepReading background="bg-white" />
-          <div className="mb-24"></div>
-        </div>
+        <TubesCTA
+          cta="Join the Testnet!"
+          buttonText="Join Now"
+          goTo="/signup"
+        />
+        <KeepReading background="bg-white" />
+        <div className="mb-24"></div>
       </main>
       <Footer />
     </div>
