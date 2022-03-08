@@ -27,6 +27,7 @@ export function Me({ loginContext }: Props) {
             // eslint-disable-next-line no-console
             console.log('I AM LOGGED IN', id)
             $setId(id.toString())
+            clearInterval(checkId)
           } else {
             // eslint-disable-next-line no-console
             console.log('I AM NOT LOGGED IN')
