@@ -20,6 +20,11 @@ export function Me({ loginContext }: Props) {
       $setId(id.toString())
     }
   }, [$router, $router?.isReady, loginContext?.metadata?.id])
+  // eslint-disable-next-line no-console
+  console.log({
+    loginContext,
+    $id,
+  })
   return $id === NOT_YET_SET ? (
     <Loader />
   ) : (
