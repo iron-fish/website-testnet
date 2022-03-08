@@ -212,7 +212,13 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
             'md:py-5',
             'md:px-4'
           )}
+<<<<<<< HEAD
         />
+=======
+        >
+          {isLoggedIn && <CountdownTimer />}
+        </PageBanner>
+>>>>>>> 7afcd80 (IRO-1529 - search / filter redux)
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>
             <div
@@ -252,7 +258,10 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
                     'pl-2',
                     'md:pl-5',
                     'h-full',
+<<<<<<< HEAD
                     'w-full',
+=======
+>>>>>>> 7afcd80 (IRO-1529 - search / filter redux)
                     'font-favorit',
                     'bg-transparent',
                     'placeholder-black',
