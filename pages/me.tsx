@@ -16,9 +16,13 @@ export function Me({ loginContext }: Props) {
       if (checkLoggedIn()) {
         const id = loginContext?.metadata?.id
         if (id) {
+          // eslint-disable-next-line no-console
+          console.log('I AM LOGGED IN', id)
           $setId(id.toString())
         }
       } else {
+        // eslint-disable-next-line no-console
+        console.log('I AM NOT LOGGED IN')
         $router.push(
           `/login?toast=${btoa('You must be logged in to see that page.')}`
         )
