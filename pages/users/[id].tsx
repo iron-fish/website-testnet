@@ -31,8 +31,9 @@ const EVENTS_LIMIT = 25
 const validTabValue = (x: string) =>
   x === 'weekly' || x === 'all' || x === 'settings'
 
-interface Props {
+export interface Props {
   loginContext: LoginContext
+  startTab?: TabType
 }
 const sumValues = (x: Record<string, number>) =>
   Object.values(x).reduce((a, b) => a + b, 0)
@@ -49,7 +50,7 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
-export default function User({ loginContext }: Props) {
+export function User({ loginContext, startTab = 'weekly' }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -58,7 +59,7 @@ export default function User({ loginContext }: Props) {
   const { isReady: routerIsReady } = router
   const userId = (router?.query?.id || '') as string
   const rawTab = useQuery('tab')
-  const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
+  const [$activeTab, $setActiveTab] = useState<TabType>(startTab)
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
 
@@ -415,3 +416,5 @@ export default function User({ loginContext }: Props) {
     </div>
   )
 }
+
+export default User
