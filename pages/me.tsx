@@ -13,8 +13,20 @@ export function Me({ loginContext }: Props) {
   console.log(JSON.stringify(loginContext, null, 2))
   const [$id, $setId] = useState(NOT_YET_SET)
   useEffect(() => {
+    let count = 0
+    // eslint-disable-next-line
+    let checkId: NodeJS.Timeout
     if (!$router.isReady) return
     const check = () => {
+      if (count >= 10) {
+        clearInterval(checkId)
+        $router.push(
+          `/login?toast=${btoa('You must be logged in to see that page.')}`
+        )
+        return
+      } else {
+        count += 1
+      }
       const loggedIn = checkLoggedIn()
       const loading = checkLoading()
       const failed = checkFailed()
@@ -38,7 +50,7 @@ export function Me({ loginContext }: Props) {
         }
       }
     }
-    const checkId = setInterval(check, 100)
+    checkId = setInterval(check, 100)
     return () => clearInterval(checkId)
   }, [
     $router,
