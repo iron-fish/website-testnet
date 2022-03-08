@@ -8,18 +8,24 @@ const NOT_YET_SET = '-1'
 
 export function Me({ loginContext }: Props) {
   const $router = useRouter()
+  const { checkLoggedIn } = loginContext
   const [$id, $setId] = useState(NOT_YET_SET)
   useEffect(() => {
     if (!$router.isReady) return
-    const id = loginContext?.metadata?.id
-    if (!id) {
-      $router.push(
-        `/login?toast=${btoa('You must be logged in to see that page.')}`
-      )
-    } else {
-      $setId(id.toString())
+    const check = () => {
+      if (checkLoggedIn()) {
+        const id = loginContext?.metadata?.id
+        if (id) {
+          $setId(id.toString())
+        }
+      } else {
+        $router.push(
+          `/login?toast=${btoa('You must be logged in to see that page.')}`
+        )
+      }
     }
-  }, [$router, $router?.isReady, loginContext?.metadata?.id])
+    check()
+  }, [$router, $router?.isReady, loginContext?.metadata?.id, checkLoggedIn])
   // eslint-disable-next-line no-console
   console.log({
     loginContext,
