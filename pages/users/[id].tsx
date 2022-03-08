@@ -32,6 +32,7 @@ const validTabValue = (x: string) =>
   x === 'weekly' || x === 'all' || x === 'settings'
 
 export interface Props {
+  id?: string
   loginContext: LoginContext
   startTab?: TabType
 }
@@ -50,14 +51,14 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
-export function User({ loginContext, startTab = 'weekly' }: Props) {
+export function User({ id, loginContext, startTab = 'weekly' }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
   })
   const router = useRouter()
   const { isReady: routerIsReady } = router
-  const userId = (router?.query?.id || '') as string
+  const userId = id || ((router?.query?.id || '') as string)
   const rawTab = useQuery('tab')
   const [$activeTab, $setActiveTab] = useState<TabType>(startTab)
 
