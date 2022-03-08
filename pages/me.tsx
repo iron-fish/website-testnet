@@ -9,6 +9,8 @@ const NOT_YET_SET = '-1'
 export function Me({ loginContext }: Props) {
   const $router = useRouter()
   const { checkLoggedIn, checkLoading } = loginContext
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(loginContext, null, 2))
   const [$id, $setId] = useState(NOT_YET_SET)
   useEffect(() => {
     if (!$router.isReady) return
