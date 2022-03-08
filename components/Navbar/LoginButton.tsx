@@ -103,7 +103,7 @@ const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
           'md:relative'
         )}
       >
-        <Link href={`/users/${id}`} passHref>
+        <Link href={`/me`} passHref>
           <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
             {graffiti}
           </div>
