@@ -55,16 +55,23 @@ export type ApiError = {
   error: string
 }
 
-export type ListEventsResponse = {
-  data: ReadonlyArray<ApiEvent>
-  metadata: {
-    has_next: boolean
-    has_previous: boolean
-  }
+export interface Pagination {
+  has_next: boolean
+  has_previous: boolean
 }
 
-export type ListLeaderboardResponse = {
+export type ListEventsResponse = {
+  data: ReadonlyArray<ApiEvent>
+  metadata: Pagination
+}
+
+export interface ListLeaderboardResponse {
   data: ReadonlyArray<ApiUser>
+}
+
+export interface PaginatedListLeaderboardResponse
+  extends ListLeaderboardResponse {
+  metadata: Pagination
 }
 
 export type UserMetric = {

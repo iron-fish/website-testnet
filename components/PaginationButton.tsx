@@ -7,11 +7,7 @@ type Props = {
   children?: React.ReactNode
 }
 
-function EventsPaginationButton({
-  children,
-  disabled = false,
-  onClick,
-}: Props) {
+function PaginationButton({ children, disabled = false, onClick }: Props) {
   return (
     <button
       className={clsx({
@@ -26,4 +22,4 @@ function EventsPaginationButton({
   )
 }
 
-export default EventsPaginationButton
+export default PaginationButton
