@@ -65,7 +65,7 @@ export function useField(provided: ProvidedField): Field | null {
     label,
     options,
     radioOption: defaultRadioOption,
-    required = true,
+    required = false,
     touched = false,
     validation,
     whitespace = WHITESPACE.DEFAULT,
