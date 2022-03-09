@@ -29,12 +29,13 @@ export async function createUser(
   socialChoice: string,
   social: string,
   country_code: string,
-  github: string
+  github?: string
 ): Promise<ApiUser | ApiError> {
+  const hub = github ? { github } : {}
   const body = JSON.stringify({
+    ...hub,
     email,
     graffiti,
-    github,
     country_code,
     [socialChoice]: social,
   })
