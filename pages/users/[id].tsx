@@ -240,7 +240,7 @@ export default function User({ loginContext }: Props) {
                       'mb-4',
                       'max-w-[32rem]',
                       'md:max-w-[48rem]',
-                      'max-h-[4rem]',
+                      'md:h-[4rem]',
                       'overflow-hidden',
                       'truncate'
                     )}
@@ -305,7 +305,6 @@ export default function User({ loginContext }: Props) {
                   className={clsx(
                     'w-full',
                     'md:w-2/3',
-                    'lg:w-1/2',
                     'flex',
                     'content-between',
                     'justify-between'
