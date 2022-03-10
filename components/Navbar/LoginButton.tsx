@@ -66,81 +66,101 @@ interface ApiUserMetadataUI extends ApiUserMetadata {
 const HitState = () => <div className={styles.hitState} />
 
 const UserButton = ({ id, graffiti, visible }: ApiUserMetadataUI) => (
-  <div
-    className={clsx(
-      styles.userButton,
-      'absolute',
-      'flex',
-      'flex-col',
-      'top-[0.75rem]',
-      'pointer-events-none',
-      'md:pointer-events-auto',
-      'md:top-[0.6rem]',
-      'lg:top-[0.5rem]'
-    )}
-  >
+  <>
     <div
       className={clsx(
+        styles.userButton,
+        'absolute',
         'flex',
-        'flex-row',
-        'content-around',
-        'justify-center',
-        'md:justify-end',
-        'lg:justify-center'
+        'flex-col',
+        'top-[0.75rem]',
+        'pointer-events-none',
+        'md:pointer-events-auto',
+        'md:top-[0.6rem]',
+        'lg:top-[0.5rem]'
       )}
     >
       <div
         className={clsx(
-          styles.userButtonSpan,
-          'md:pt-[0.1rem]',
-          'md:min-w-[5.1rem]',
-          'md:w-[5.1rem]',
-          'lg:w-[7rem]',
-          'xl:max-w-[20rem]',
-          'md:overflow-x-hidden',
-          'md:overflow-y-visible',
-          'md:truncate',
-          'md:relative'
+          'flex',
+          'flex-row',
+          'content-around',
+          'justify-center',
+          'md:justify-end',
+          'lg:justify-center'
         )}
       >
-        <Link href={`/users/${id}`} passHref>
-          <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
-            {graffiti}
-          </div>
-        </Link>
+        <div
+          className={clsx(
+            styles.userButtonSpan,
+            'md:pt-[0.1rem]',
+            'md:min-w-[5.1rem]',
+            'md:w-[5.1rem]',
+            'lg:w-[7rem]',
+            'xl:max-w-[20rem]',
+            'md:overflow-x-hidden',
+            'md:overflow-y-visible',
+            'md:truncate',
+            'md:relative'
+          )}
+        >
+          <Link href={`/users/${id}`} passHref>
+            <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
+              {graffiti}
+            </div>
+          </Link>
+        </div>
+        <ChevronDown />
       </div>
-      <ChevronDown />
+      <Link href="/logout" passHref>
+        <a
+          className={clsx(
+            'hidden',
+            styles.arrowed,
+            'md:inline-block',
+            'md:opacity-0',
+            { 'md:opacity-100': visible },
+            'z-50',
+            'px-6',
+            'py-3',
+            'mt-12',
+            'w-full',
+            'm-auto',
+            'bg-white',
+            'text-black',
+            'md:w-auto',
+            'md:mx-0',
+            // 'md:w-[7rem]',
+            'md:rounded-full',
+            'md:hover:bg-black',
+            'md:hover:text-white',
+            'md:border',
+            'md:border-black'
+          )}
+        >
+          Sign Out
+          <HitState />
+        </a>
+      </Link>
     </div>
     <Link href="/logout" passHref>
       <a
         className={clsx(
-          styles.arrowed,
-          'md:hidden',
-          'md:opacity-0',
-          { 'md:opacity-100': visible },
           'z-50',
           'px-6',
           'py-3',
-          'mt-12',
+          'mt-14',
           'w-full',
           'm-auto',
           'bg-white',
           'text-black',
-          'md:w-auto',
-          'md:mx-0',
-          // 'md:w-[7rem]',
-          'md:rounded-full',
-          'md:hover:bg-black',
-          'md:hover:text-white',
-          'md:border',
-          'md:border-black'
+          'md:hidden'
         )}
       >
         Sign Out
-        <HitState />
       </a>
     </Link>
-  </div>
+  </>
 )
 type LoginProps = {
   loginContext: LoginContext
