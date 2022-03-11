@@ -235,7 +235,7 @@ export default function SignUp({ loginContext }: SignUpProps) {
                           </Note>
                           <p className="p-2 text-center text-sm">
                             Have any questions for our team?{' '}
-                            <Link href="https://discord.gg/EkQkEcm8DH">
+                            <Link href="https://discord.gg/ironfish">
                               <a className=" text-iflightblue">
                                 Find us on Discord.
                               </a>

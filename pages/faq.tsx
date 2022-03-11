@@ -105,7 +105,7 @@ testnet. If you're looking for more detailed answers, or you
 don't see the question that you'd like to ask, please reach out
 on our `}
     <span className="underline">
-      <Link href="https://discord.com/invite/EkQkEcm8DH">Discord server</Link>
+      <Link href="https://discord.gg/ironfish">Discord server</Link>
     </span>
     .
   </span>
