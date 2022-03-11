@@ -195,7 +195,7 @@ export const callsToAction = {
       content:
         'Let us know if you have suggestions for other categories we should add!',
       ctaText: 'Reach out on Discord',
-      href: 'https://discord.com/invite/EkQkEcm8DH',
+      href: 'https://discord.gg/ironfish',
       earn: 0,
       kind: 'coming soon',
     },
