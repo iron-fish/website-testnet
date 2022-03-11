@@ -100,7 +100,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Reach out on Discord',
-        href: 'https://discord.com/invite/EkQkEcm8DH',
+        href: 'https://discord.gg/ironfish',
       },
       {
         isImage: false,
