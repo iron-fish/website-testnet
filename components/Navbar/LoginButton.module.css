@@ -1,6 +1,6 @@
 .arrowed {
   margin: 1.25rem auto 0;
-  display: flex;
+  display: none;
   flex-direction: row;
   align-content: center;
   justify-content: center;
@@ -67,6 +67,7 @@
     top: 2rem;
   }
   .arrowed {
+    display: flex;
     width: 7rem;
     left: calc(-1rem + 2px);
     top: -2rem;
