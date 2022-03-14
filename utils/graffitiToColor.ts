@@ -11,11 +11,13 @@ const fishAvatarColors = [
   '#F1CB00',
 ]
 
-export function graffitiToColor(graffiti = ''): string {
+export function graffitiToColor(graffiti: string): string {
   // djb2 (xor)
   let hash = 5381
 
-  for (let i = 0; i < graffiti.length; i++) {
+  const length = (graffiti && graffiti.length) || 0
+
+  for (let i = 0; i < length; i++) {
     hash = (hash * 33) ^ graffiti.charCodeAt(i)
   }
 
