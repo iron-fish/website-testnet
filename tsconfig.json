@@ -13,9 +13,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "incremental": true,
     "jsx": "preserve",
-    "types": ["cypress"]
+    "types": ["@types/testing-library__jest-dom"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types.d.ts",
+    "jest.setup.ts",
+    "jest.utils.tsx"
+  ],
+  "exclude": ["node_modules", "cypress"]
 }
