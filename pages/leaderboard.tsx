@@ -65,7 +65,7 @@ const FIELDS = {
 }
 const CTA = `Our incentivized testnet leaderboard shows you who the top point getters are for all-time score, miners, bug catchers, net promoters, node hosting, and more! Click someone’s user name to see a breakdown of their activity. Points are earned during weekly cycles which begin Monday, 12:00am UTC and end Sunday 11:59pm UTC.`
 
-const PAGINATION_LIMIT = 3
+const PAGINATION_LIMIT = 25
 
 export default function Leaderboard({ loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
