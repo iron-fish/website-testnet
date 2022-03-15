@@ -111,3 +111,7 @@ export type ApiUserMetadata = {
   statusCode?: number
   message?: string
 }
+
+export type GenericApiError = {
+  statusCode?: number
+}
