@@ -209,7 +209,9 @@ export async function getUserDetails(
   }
 }
 
-export const isGenericError = (x: GenericApiError) => {
+export const isGenericError = (
+  x: Record<string, unknown>
+): x is GenericApiError => {
   const { statusCode } = x
-  return statusCode && statusCode > 400
+  return typeof statusCode === 'number' && statusCode > 400
 }

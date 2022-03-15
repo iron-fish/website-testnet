@@ -108,15 +108,15 @@ export default function User({ loginContext }: Props) {
 
         if (
           'error' in user ||
-          API.isGenericError(user as API.GenericApiError) ||
+          API.isGenericError(user) ||
           'error' in events ||
-          API.isGenericError(events as API.GenericApiError) ||
+          API.isGenericError(events) ||
           'error' in allTimeMetrics ||
-          API.isGenericError(allTimeMetrics as API.GenericApiError) ||
+          API.isGenericError(allTimeMetrics) ||
           'error' in weeklyMetrics ||
-          API.isGenericError(weeklyMetrics as API.GenericApiError) ||
+          API.isGenericError(weeklyMetrics) ||
           'error' in metricsConfig ||
-          API.isGenericError(metricsConfig as API.GenericApiError)
+          API.isGenericError(metricsConfig)
         ) {
           Router.push(
             `/leaderboard?toast=${btoa(
@@ -159,12 +159,7 @@ export default function User({ loginContext }: Props) {
 
   // Recent Activity hooks
   const { $hasPrevious, $hasNext, fetchPrevious, fetchNext } =
-    usePaginatedEvents(
-      userId,
-      EVENTS_LIMIT,
-      $events as API.ListEventsResponse,
-      $setEvents
-    )
+    usePaginatedEvents(userId, EVENTS_LIMIT, $events, $setEvents)
 
   // Tab hooks
   const onTabChange = useCallback((t: TabType) => {
