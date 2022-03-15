@@ -5,6 +5,7 @@ import {
   ApiUserMetadata,
   ApiError,
   ApiUser,
+  GenericApiError,
   ListEventsResponse,
   ListLeaderboardResponse,
   MetricsConfigResponse,
@@ -206,4 +207,9 @@ export async function getUserDetails(
   } catch (e) {
     return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
   }
+}
+
+export const isGenericError = (x: GenericApiError) => {
+  const { statusCode } = x
+  return statusCode && statusCode > 400
 }
