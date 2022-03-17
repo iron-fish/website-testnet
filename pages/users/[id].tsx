@@ -108,10 +108,15 @@ export default function User({ loginContext }: Props) {
 
         if (
           'error' in user ||
+          API.isGenericError(user) ||
           'error' in events ||
+          API.isGenericError(events) ||
           'error' in allTimeMetrics ||
+          API.isGenericError(allTimeMetrics) ||
           'error' in weeklyMetrics ||
-          'error' in metricsConfig
+          API.isGenericError(weeklyMetrics) ||
+          'error' in metricsConfig ||
+          API.isGenericError(metricsConfig)
         ) {
           Router.push(
             `/leaderboard?toast=${btoa(
