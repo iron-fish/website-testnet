@@ -212,6 +212,7 @@ export default function Leaderboard({ loginContext }: Props) {
                     'pl-2',
                     'md:pl-5',
                     'h-full',
+                    'w-full',
                     'font-favorit',
                     'bg-transparent',
                     'placeholder-black',
