@@ -9,7 +9,7 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Loader from 'components/Loader'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
-import EventsPaginationButton from 'components/user/EventsPaginationButton'
+import PaginationButton from 'components/PaginationButton'
 import FishAvatar from 'components/user/FishAvatar'
 import Flag from 'components/user/Flag'
 import Tabs, { TabType } from 'components/user/Tabs'
@@ -396,15 +396,15 @@ export default function User({ loginContext }: Props) {
               className={clsx('flex', 'font-favorit', 'justify-center', 'mt-8')}
             >
               <div className={clsx('flex', 'gap-x-1.5')}>
-                <EventsPaginationButton
+                <PaginationButton
                   disabled={!$hasPrevious}
                   onClick={fetchPrevious}
-                >{`<< Previous`}</EventsPaginationButton>
+                >{`<< Previous`}</PaginationButton>
                 <div>{`|`}</div>
-                <EventsPaginationButton
+                <PaginationButton
                   disabled={!$hasNext}
                   onClick={fetchNext}
-                >{`Next >>`}</EventsPaginationButton>
+                >{`Next >>`}</PaginationButton>
               </div>
             </div>
           )}

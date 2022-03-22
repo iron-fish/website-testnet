@@ -7,7 +7,7 @@ import {
   ApiUser,
   GenericApiError,
   ListEventsResponse,
-  ListLeaderboardResponse,
+  PaginatedListLeaderboardResponse,
   MetricsConfigResponse,
   UserMetricsResponse,
 } from './types'
@@ -74,15 +74,21 @@ export async function updateUser(id: number, partial: PartialUser) {
   return await res.json()
 }
 
-export async function listLeaderboard({
+export async function listUsers({
   search,
   country_code: countryCode,
   event_type: eventType,
+  limit,
+  after,
+  before,
 }: {
   search?: string
   country_code?: string
   event_type?: string
-} = {}): Promise<ListLeaderboardResponse | ApiError> {
+  limit?: number
+  after?: number
+  before?: number
+}): Promise<PaginatedListLeaderboardResponse | ApiError> {
   const params = new URLSearchParams({
     order_by: 'rank',
   })
@@ -95,6 +101,16 @@ export async function listLeaderboard({
   if (eventType) {
     params.append('event_type', eventType)
   }
+  if (after) {
+    params.append('after', after.toString())
+  }
+  if (before) {
+    params.append('before', before.toString())
+  }
+  if (limit) {
+    params.append('limit', limit.toString())
+  }
+
   const res = await fetch(`${API_URL}/users?${params.toString()}`)
   return await res.json()
 }

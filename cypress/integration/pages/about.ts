@@ -100,7 +100,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Reach out on Discord',
-        href: 'https://discord.com/invite/EkQkEcm8DH',
+        href: 'https://discord.gg/ironfish',
       },
       {
         isImage: false,
@@ -156,7 +156,7 @@ describe('/about', () => {
         text: 'Twitter',
         href: 'https://twitter.com/ironfishcrypto',
       },
-      { isImage: true, text: 'Discord', href: 'https://discord.gg/EkQkEcm8DH' },
+      { isImage: true, text: 'Discord', href: 'https://discord.gg/ironfish' },
     ])
   })
 })
