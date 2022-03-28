@@ -117,6 +117,7 @@ export default function Leaderboard({ loginContext }: Props) {
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
+  const ended = true
   const isLoading = checkLoading()
 
   const { fetchPrevious, fetchNext, $hasPrevious, $hasNext } =
@@ -171,7 +172,7 @@ export default function Leaderboard({ loginContext }: Props) {
             'md:px-4'
           )}
         >
-          {isLoggedIn && <CountdownTimer />}
+          {isLoggedIn && !ended && <CountdownTimer />}
         </PageBanner>
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>
