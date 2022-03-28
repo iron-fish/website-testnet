@@ -94,7 +94,7 @@ export default function About({ loginContext }: AboutProps) {
       >
         <PageBanner
           title="About the Incentivized Testnet"
-          text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
+          text="Phase 1 of the Incentivized Testnet has now ended. Sign up below for Phase 2 (starting date is TBD)."
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
