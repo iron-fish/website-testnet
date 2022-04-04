@@ -1,4 +1,4 @@
-import Link from './Link'
+import { Status } from './types'
 
 export const cards = [
   {
@@ -99,105 +99,89 @@ export const guidelines = {
 export const callsToAction = {
   columnOne: [
     {
-      title: 'Finding Bugs',
+      title: 'Hosting a node',
       content:
-        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
-      points: ['1 bug = 100 points'],
-      ctaText: 'Submit an issue ',
-      href: 'https://github.com/iron-fish/ironfish/issues',
-      submissionForm: true,
-    },
-    {
-      title: 'Contributing to the Community',
-      content: (
-        <>
-          Help us make Iron Fish more accessible to a wider audience! Published
-          tutorials, articles, forum posts, videos, scripts, and translations
-          are examples of contributions that can earn you points. See{' '}
-          <Link
-            href={
-              'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
-            }
-          >
-            examples.
-          </Link>
-        </>
-      ),
-      submissionForm: true,
-      points: [
-        'XSmall = 10 points',
-        'Small = 100 points',
-        'Medium = 500 points',
-        'Large = 750 points',
-        'XLarge = 1000 points',
-      ],
-    },
-    {
-      title: 'Being an Explorer',
-      content:
-        'Sometimes the community does something amazing that doesn’t fall under any of these categories. Email us at testnet@ironfish.network with your Iron Fish graffiti and let us know about it!',
+        'Hosting a node using your graffiti automatically earns you points. You will only be rewarded points for hosting one node.',
+      points: ['12 hours = 100 points'],
+      status: Status.New,
       earn: 0,
-      ctaText: 'Email us',
-      href: 'mailto:testnet@ironfish.network',
-    },
-  ],
-  columnTwo: [
-    {
-      title: `Mining the testnet`,
-      content:
-        'Once you sign up for the incentivized testnet, actively mining automatically earns you points for blocks that are mined and accepted to the main chain.',
-      points: ['1 block = 100 points'],
-      ctaText: 'Get started with mining',
-      href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
-    },
-    {
-      title: 'Promoting the Testnet',
-      content: (
-        <>
-          Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it;
-          you might earn points for them. See{' '}
-          <Link
-            href={
-              'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s'
-            }
-          >
-            examples.
-          </Link>
-        </>
-      ),
-
-      submissionForm: true,
-      points: [
-        'XSmall = 10 points',
-        'Small = 100 points',
-        'Medium = 500 points',
-        'Large = 750 points',
-        'XLarge = 1000 points',
-      ],
+      disabled: true,
     },
     {
       title: 'Submit a Pull Request',
       content:
         'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
-      earn: 5000,
+      earn: 0,
       points: [
         'Small = 250 points',
-        'Medium = 750 points',
+        'Medium = 500 points',
         'Large = 1000 points',
       ],
       ctaText: 'Submit a PR',
-      href: 'https://github.com/iron-fish/ironfish/pulls',
-      submissionForm: true,
+      // href: 'https://github.com/iron-fish/ironfish/pulls',
+      submissionForm: false,
+      status: Status.Active,
+      disabled: true,
     },
-
+  ],
+  columnTwo: [
     {
-      title: 'More Categories',
-      content:
-        'Let us know if you have suggestions for other categories we should add!',
-      ctaText: 'Reach out on Discord',
-      href: 'https://discord.gg/ironfish',
+      title: `Sending a transaction`,
+      content: (
+        <>
+          Sending transactions automatically earns you points. Use the command:{' '}
+          <pre className="bg-iflightgray inline p-1 text-[0.8rem]">
+            send_transaction
+          </pre>
+        </>
+      ),
+      points: ['1 block = 100 points'],
+      ctaText: 'Get started with mining',
+      // href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
+      status: Status.New,
       earn: 0,
-      kind: 'coming soon',
+      disabled: true,
+    },
+    {
+      title: 'Finding Bugs',
+      content:
+        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
+      points: ['1 bug = 100 points'],
+      ctaText: 'Submit an issue ',
+      // href: 'https://github.com/iron-fish/ironfish/issues',
+      submissionForm: false,
+      status: Status.Active,
+      earn: 0,
+      disabled: true,
     },
   ],
 }
+
+export const phases = [
+  {
+    status: Status.Over,
+    summary: `Ran from Dec 1, 2021 - March 11, 2022.`,
+    pools: [
+      {
+        size: 42e4,
+        categories: [
+          'Mining Blocks',
+          'Finding Bugs',
+          'Submitting Pull Requests',
+          'Community Contributions',
+        ],
+      },
+    ],
+  },
+  {
+    status: Status.Soon,
+    summary: 'Coming soon!',
+    pools: [
+      {
+        size: 21e4,
+        categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
+      },
+      { size: 105e3, categories: ['Submitting Pull Requests'] },
+    ],
+  },
+]

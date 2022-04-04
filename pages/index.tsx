@@ -13,10 +13,11 @@ export const getServerSideProps = () => {
 }
 
 interface HomeProps {
+  showNotification: boolean
   loginContext: LoginContext
 }
 
-export default function Home({ loginContext }: HomeProps) {
+export default function Home({ showNotification, loginContext }: HomeProps) {
   const { magicMetadata } = loginContext
   const email = magicMetadata?.email || ''
   return (
@@ -30,6 +31,7 @@ export default function Home({ loginContext }: HomeProps) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className="bg-iforange text-black"
         loginContext={loginContext}

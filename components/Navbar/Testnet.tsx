@@ -1,18 +1,28 @@
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 
 type TestnetProps = {
   condensed?: boolean
+  showNotification?: boolean
 }
 
-function Testnet({ condensed = false }: TestnetProps) {
-  const elementClassName = `py-4 ${condensed ? 'px-2' : 'px-6'}`
+function Testnet({ condensed = false, showNotification }: TestnetProps) {
+  const elementClassName = clsx('py-4', condensed ? 'px-2' : 'px-6')
   const textClassName = `ml-4`
   const className = condensed
-    ? 'bg-white z-40 w-full'
-    : 'absolute bg-white left-0 right-0 shadow-navbar z-40 top-5.5'
+    ? clsx('bg-white', 'z-40', 'w-full')
+    : clsx(
+        'absolute',
+        'bg-white',
+        'left-0',
+        'right-0',
+        'shadow-navbar',
+        'z-40',
+        showNotification ? 'top-[9.5rem]' : 'top-5.5'
+      )
   return (
     <div className="flex">
       <div
@@ -20,14 +30,17 @@ function Testnet({ condensed = false }: TestnetProps) {
         style={{ clipPath: !condensed ? 'inset(0 0 -100% 0)' : undefined }}
       >
         <div
-          className={`flex justify-center ${
+          className={clsx(
+            'flex',
+            'justify-center',
             condensed ? 'flex-col' : 'border-b border-t flex-row'
-          }`}
+          )}
         >
           <div
-            className={`flex ${
+            className={clsx(
+              'flex',
               condensed ? `justify-start p-4` : `justify-end border-r p-8 pb-10`
-            }`}
+            )}
           >
             <div style={{ maxWidth: condensed ? undefined : '14rem' }}>
               <SectionHeader>IRON FISH CLI</SectionHeader>

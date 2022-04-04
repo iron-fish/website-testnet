@@ -11,6 +11,7 @@ const useLoginHook = LOCAL_MODE ? useLocalLogin : useLogin
 function MyApp({ Component: Page, pageProps }: AppProps) {
   const $login = useLoginHook()
   const { metadata } = $login
+  const showNotification = true
   return (
     <>
       <Head>
@@ -23,7 +24,12 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ResponsiveToolkit metadata={metadata} />
-      <Page loginContext={$login} {...pageProps} className="font-favorit" />
+      <Page
+        loginContext={$login}
+        showNotification={showNotification}
+        {...pageProps}
+        className="font-favorit"
+      />
     </>
   )
 }

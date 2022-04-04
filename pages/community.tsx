@@ -10,10 +10,14 @@ import { LoginContext } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'
 type CommunityProps = {
+  showNotification: boolean
   loginContext: LoginContext
 }
 
-export default function Community({ loginContext }: CommunityProps) {
+export default function Community({
+  showNotification,
+  loginContext,
+}: CommunityProps) {
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
@@ -22,6 +26,7 @@ export default function Community({ loginContext }: CommunityProps) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className={clsx('bg-ifbeige', 'text-black')}
         loginContext={loginContext}
