@@ -130,7 +130,7 @@ export const callsToAction = {
       content: (
         <>
           Sending transactions automatically earns you points. Use the command:{' '}
-          <pre className="bg-iflightgray inline p-1 text-[0.8rem]">
+          <pre className="bg-iflightgray inline p-1 text-[0.8rem] font-favorit">
             send_transaction
           </pre>
         </>
