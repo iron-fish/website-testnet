@@ -214,8 +214,12 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           >
             Win a Category, win an NFT!
           </AboutHeader>
-          <Para
+          <div
             className={clsx(
+              'w-full',
+              'text-xl',
+              'md:text-2xl',
+              'md:w-2/3',
               'text-left',
               'm-auto',
               'mx-1.5',
@@ -229,7 +233,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               categories mentioned above you might be eligible to receive an
               Iron Fish NFT. Filter the leaderboard to see category leaders.
             </p>
-          </Para>
+          </div>
         </div>
         <div
           className={clsx('flex', 'flex-row', 'w-full', 'overflow-x-auto')}

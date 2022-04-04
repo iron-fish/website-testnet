@@ -2,7 +2,6 @@ import { ReactType, ReactElement } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import OffsetBox from 'components/OffsetBorder/Box'
-import Button from 'components/Button'
 import CheckIcon from 'components/icons/Check'
 
 import { Status } from './types'
@@ -62,11 +61,15 @@ export const PhaseComponent = ({
           total coins
         </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
-        <Link href={isComplete ? '#' : '/signup'} passHref>
-          <Button
-            border="rounded-3xl"
-            colorClassName={isComplete ? 'bg-[#d7eacf]' : 'bg-black'}
-            className={clsx('w-full', 'mt-4')}
+        <Link passHref href="/signup">
+          <a
+            className={clsx(
+              'rounded-3xl',
+              isComplete ? 'bg-[#d7eacf]' : 'bg-black',
+              isComplete ? 'cursor-not-allowed' : 'cursor-pointer',
+              'w-full',
+              'mt-4'
+            )}
           >
             {isComplete ? (
               <>
@@ -83,7 +86,7 @@ export const PhaseComponent = ({
             ) : (
               <span className="text-white">Sign Up Now</span>
             )}
-          </Button>
+          </a>
         </Link>
         {pools.map(({ size, categories }: Pool) => (
           <div
