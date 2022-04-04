@@ -166,9 +166,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         </div>
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className="md:w-1/2">Phase Overview</AboutHeader>
-          <div
-            className={clsx('flex', 'flex-col', 'mr-2', 'md:flex-row', 'mb-32')}
-          >
+          <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-32')}>
             {phases.map((p: Omit<Phase, 'index'>, index: number) => (
               <div
                 className={clsx(
@@ -176,8 +174,8 @@ export default function About({ showNotification, loginContext }: AboutProps) {
                   'flex-col',
                   'w-full',
                   'md:w-1/2',
-                  'md:mr-3',
-                  'md:ml-3'
+                  index === 0 ? 'md:ml-0' : 'md:ml-3',
+                  'md:mr-3'
                 )}
                 key={index}
               >
