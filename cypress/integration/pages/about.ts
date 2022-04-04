@@ -25,7 +25,6 @@ describe('/about', () => {
         href: 'https://ironfish.network/roadmap',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
-      { isImage: false, text: 'Sign Out', href: '/logout' },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
         isImage: false,
@@ -43,7 +42,6 @@ describe('/about', () => {
         href: 'https://ironfish.network/roadmap',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
-      { isImage: false, text: 'Sign Out', href: '/logout' },
       {
         isImage: false,
         text: 'View Testnet Guidelines',
