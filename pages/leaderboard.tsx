@@ -19,16 +19,13 @@ import PaginationButton from 'components/PaginationButton'
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
-import { LoginContext } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
-import * as API from 'apiClient'
+import { PageProps } from 'components/page-types'
 
-type Props = {
-  loginContext: LoginContext
-}
+import * as API from 'apiClient'
 
 const TOTAL_POINTS = 'Total Points'
 
@@ -67,7 +64,7 @@ const CTA = `Our incentivized testnet leaderboard shows you who the top point ge
 
 const PAGINATION_LIMIT = 25
 
-export default function Leaderboard({ loginContext }: Props) {
+export default function Leaderboard({ loginContext }: PageProps) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,

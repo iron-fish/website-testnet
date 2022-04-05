@@ -12,7 +12,6 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { WHITESPACE, useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
-import { LoginContext } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -23,6 +22,7 @@ import { login } from 'apiClient'
 import { useQueriedToast } from 'hooks/useToast'
 import { Toast, Alignment } from 'components/Toast'
 import { encode as btoa } from 'base-64'
+import { PageProps } from 'components/page-types'
 
 const FIELDS = {
   email: {
@@ -35,10 +35,8 @@ const FIELDS = {
     WHITESPACE: WHITESPACE.BANNED,
   },
 }
-type LoginProps = {
-  loginContext: LoginContext
-}
-export default function Login({ loginContext }: LoginProps) {
+
+export default function Login({ loginContext }: PageProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,

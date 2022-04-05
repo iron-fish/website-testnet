@@ -80,20 +80,18 @@ export const CallToAction = ({
               <Link href={href}>{button}</Link>
             ) : (
               button
-            )) &&
-            submissionForm && (
-              <Link href="https://forms.gle/yrAtzoyKTwLgLTRZA" passHref>
-                <RawButton
-                  border="border"
-                  className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
-                  colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
-                >
-                  <Link href={'https://forms.gle/yrAtzoyKTwLgLTRZA'}>
-                    Claim Points
-                  </Link>
-                </RawButton>
-              </Link>
-            )}
+            ))}
+          {!ended && submissionForm && (
+            <Link href="https://forms.gle/yrAtzoyKTwLgLTRZA" passHref>
+              <RawButton
+                border="border"
+                className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
+                colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
+              >
+                Claim Points
+              </RawButton>
+            </Link>
+          )}
         </div>
       </Box>
     </div>

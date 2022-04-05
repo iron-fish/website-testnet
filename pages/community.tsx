@@ -6,14 +6,11 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
 import TubesCTA from 'components/FooterCTA'
-import { LoginContext } from 'hooks/useLogin'
+import { PageProps } from 'components/page-types'
 
 import Stories from 'components/Community/Stories'
-type CommunityProps = {
-  loginContext: LoginContext
-}
 
-export default function Community({ loginContext }: CommunityProps) {
+export default function Community({ loginContext }: PageProps) {
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>

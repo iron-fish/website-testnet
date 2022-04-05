@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
 
-import { LoginContext } from 'hooks/useLogin'
+import { PageProps } from 'components/page-types'
 import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
@@ -62,11 +62,8 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
     {children}
   </div>
 )
-type AboutProps = {
-  loginContext: LoginContext
-}
 
-export default function About({ loginContext }: AboutProps) {
+export default function About({ loginContext }: PageProps) {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   const { checkLoggedIn, checkLoading } = loginContext
   const loaded = checkLoggedIn()

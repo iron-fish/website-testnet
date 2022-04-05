@@ -8,9 +8,9 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
-import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import React from 'react'
+import { PageProps } from 'components/page-types'
 
 import type { ReactNode } from 'react'
 
@@ -110,11 +110,8 @@ on our `}
     .
   </span>
 )
-type FaqProps = {
-  loginContext: LoginContext
-}
 
-export default function Faq({ loginContext }: FaqProps) {
+export default function Faq({ loginContext }: PageProps) {
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoaded = checkLoggedIn()
   return checkLoading() ? (
