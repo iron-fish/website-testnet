@@ -160,7 +160,7 @@ export const callsToAction = {
 export const phases = [
   {
     status: Status.Over,
-    summary: `Ran from Dec 1, 2021 - March 11, 2022.`,
+    summary: `Dec 1, 2021 - March 11, 2022.`,
     pools: [
       {
         size: 42e4,
