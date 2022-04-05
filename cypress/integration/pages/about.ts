@@ -24,7 +24,8 @@ describe('/about', () => {
         text: 'Roadmap',
         href: 'https://ironfish.network/roadmap',
       },
-      { isImage: false, text: 'Login to Testnet', href: '/login' },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
         isImage: false,
@@ -41,31 +42,12 @@ describe('/about', () => {
         text: 'Roadmap',
         href: 'https://ironfish.network/roadmap',
       },
-      { isImage: false, text: 'Login to Testnet', href: '/login' },
-      {
-        isImage: false,
-        text: 'Submit an issue ',
-        href: 'https://github.com/iron-fish/ironfish/issues',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
+      { isImage: false, text: 'Sign Out', href: '/logout' },
       {
         isImage: false,
         text: 'examples.',
         href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
-      {
-        isImage: false,
-        text: 'Email us',
-        href: 'mailto:testnet@ironfish.network',
       },
       {
         isImage: false,
@@ -74,40 +56,19 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Get started with mining',
-        href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
-      },
-      {
-        isImage: false,
         text: 'examples.',
         href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
-      {
-        isImage: false,
-        text: 'Submit a PR',
-        href: 'https://github.com/iron-fish/ironfish/pulls',
-      },
-      {
-        isImage: false,
-        text: 'Claim Points',
-        href: 'https://forms.gle/yrAtzoyKTwLgLTRZA',
-      },
-      {
-        isImage: false,
-        text: 'Reach out on Discord',
-        href: 'https://discord.gg/ironfish',
       },
       {
         isImage: false,
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
-      { isImage: false, text: 'Show me the leaderboard', href: '/leaderboard' },
+      {
+        isImage: false,
+        text: 'Show me the leaderboard',
+        href: '/leaderboard',
+      },
       { isImage: false, text: 'Testnet Leaderboard', href: '/leaderboard' },
       { isImage: false, text: 'Testnet Community', href: '/community' },
       { isImage: false, text: 'Testnet FAQ', href: '/faq' },
@@ -127,7 +88,11 @@ describe('/about', () => {
         text: 'Careers',
         href: 'https://ironfish.network/careers/',
       },
-      { isImage: false, text: 'Blog', href: 'https://ironfish.network/blog/' },
+      {
+        isImage: false,
+        text: 'Blog',
+        href: 'https://ironfish.network/blog/',
+      },
       {
         isImage: false,
         text: 'Block Explorer',
