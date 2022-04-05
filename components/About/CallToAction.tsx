@@ -14,6 +14,7 @@ type CTAProps = {
   ctaText?: string
   href?: string
   comingSoon?: boolean
+  ended?: boolean
   submissionForm?: boolean
 }
 
@@ -26,6 +27,7 @@ export const CallToAction = ({
   href,
   ctaText,
   comingSoon = false,
+  ended = false,
   submissionForm = false,
 }: CTAProps) => {
   const button = ctaText ? (
@@ -46,7 +48,14 @@ export const CallToAction = ({
               Coming soon!
             </div>
           )}
-          {!comingSoon && <strong className="uppercase text-lg">{kind}</strong>}
+          {ended && (
+            <div className="bg-iflightgray text-ifgray px-4 py-2 inline-block mt-2 text-xs md:text-md mb-2">
+              Phase 1 Ended
+            </div>
+          )}
+          {!comingSoon && !ended && (
+            <strong className="uppercase text-lg">{kind}</strong>
+          )}
           <h3 className="text-left text-4xl mt-3 mb-4 font-extended">
             {title}
           </h3>
@@ -60,27 +69,26 @@ export const CallToAction = ({
               ))}
             </ul>
           )}
-          {earn > 0 && !comingSoon && (
+          {earn > 0 && !comingSoon && !ended && (
             <div className="bg-ifpink px-4 py-2 inline-block mt-2 text-xs md:text-md">
               Earn up to {earn.toLocaleString('en-US')} points a week
             </div>
           )}
           <div className="mb-8" />
-          {ctaText && href && button ? (
-            <Link href={href}>{button}</Link>
-          ) : (
-            button
-          )}
-          {submissionForm && (
+          {!ended &&
+            (ctaText && href && button ? (
+              <Link href={href}>{button}</Link>
+            ) : (
+              button
+            ))}
+          {!ended && submissionForm && (
             <Link href="https://forms.gle/yrAtzoyKTwLgLTRZA" passHref>
               <RawButton
                 border="border"
                 className="m-auto w-full mt-2 max-w-md mb-2 text-md p-2"
                 colorClassName="text-black bg-transparent hover:bg-black hover:text-white"
               >
-                <Link href={'https://forms.gle/yrAtzoyKTwLgLTRZA'}>
-                  Claim Points
-                </Link>
+                Claim Points
               </RawButton>
             </Link>
           )}

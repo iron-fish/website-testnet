@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import leaderboardPic from 'public/leaderboard.png'
 
-import { LoginContext } from 'hooks/useLogin'
+import { PageProps } from 'components/page-types'
 import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
@@ -62,11 +62,8 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
     {children}
   </div>
 )
-type AboutProps = {
-  loginContext: LoginContext
-}
 
-export default function About({ loginContext }: AboutProps) {
+export default function About({ loginContext }: PageProps) {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   const { checkLoggedIn, checkLoading } = loginContext
   const loaded = checkLoggedIn()
@@ -94,7 +91,7 @@ export default function About({ loginContext }: AboutProps) {
       >
         <PageBanner
           title="About the Incentivized Testnet"
-          text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
+          text="Phase 1 of the Incentivized Testnet has now ended. Sign up below for Phase 2 (starting date is TBD)."
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',

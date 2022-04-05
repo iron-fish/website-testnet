@@ -4,13 +4,11 @@ import Router from 'next/router'
 import { magic } from 'utils/magic'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
-import { LoginContext, STATUS } from 'hooks/useLogin'
+import { STATUS } from 'hooks/useLogin'
 
-type LogoutProps = {
-  loginContext: LoginContext
-}
+import { PageProps } from 'components/page-types'
 
-export default function Logout({ loginContext }: LogoutProps) {
+export default function Logout({ loginContext }: PageProps) {
   useEffect(() => {
     const sayGoodbye = async () => {
       const loggedOut = await magic?.user.logout()

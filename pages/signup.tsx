@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
 import Note from 'components/Form/Note'
@@ -25,6 +24,7 @@ import {
 import { encode as btoa } from 'base-64'
 
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+import { PageProps } from 'components/page-types'
 
 export const FIELDS = {
   email: {
@@ -85,11 +85,7 @@ export const FIELDS = {
   },
 }
 
-interface SignUpProps {
-  loginContext: LoginContext
-}
-
-export default function SignUp({ loginContext }: SignUpProps) {
+export default function SignUp({ loginContext }: PageProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,

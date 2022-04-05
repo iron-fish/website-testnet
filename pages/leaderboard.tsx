@@ -19,16 +19,13 @@ import PaginationButton from 'components/PaginationButton'
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
-import { LoginContext } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
-import * as API from 'apiClient'
+import { PageProps } from 'components/page-types'
 
-type Props = {
-  loginContext: LoginContext
-}
+import * as API from 'apiClient'
 
 const TOTAL_POINTS = 'Total Points'
 
@@ -67,7 +64,7 @@ const CTA = `Our incentivized testnet leaderboard shows you who the top point ge
 
 const PAGINATION_LIMIT = 25
 
-export default function Leaderboard({ loginContext }: Props) {
+export default function Leaderboard({ loginContext, phase }: PageProps) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -117,6 +114,7 @@ export default function Leaderboard({ loginContext }: Props) {
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
+  const ended = phase === 1
   const isLoading = checkLoading()
 
   const { fetchPrevious, fetchNext, $hasPrevious, $hasNext } =
@@ -171,7 +169,7 @@ export default function Leaderboard({ loginContext }: Props) {
             'md:px-4'
           )}
         >
-          {isLoggedIn && <CountdownTimer />}
+          {isLoggedIn && !ended && <CountdownTimer />}
         </PageBanner>
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>

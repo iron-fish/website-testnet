@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
-import { LoginContext } from 'hooks/useLogin'
+import { PageProps } from 'components/page-types'
 
 export const getServerSideProps = () => {
   return {
@@ -12,11 +12,7 @@ export const getServerSideProps = () => {
   }
 }
 
-interface HomeProps {
-  loginContext: LoginContext
-}
-
-export default function Home({ loginContext }: HomeProps) {
+export default function Home({ loginContext }: PageProps) {
   const { magicMetadata } = loginContext
   const email = magicMetadata?.email || ''
   return (

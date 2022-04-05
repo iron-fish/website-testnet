@@ -104,11 +104,13 @@ export const callsToAction = {
         'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
+      ended: true,
       href: 'https://github.com/iron-fish/ironfish/issues',
       submissionForm: true,
     },
     {
       title: 'Contributing to the Community',
+      ended: true,
       content: (
         <>
           Help us make Iron Fish more accessible to a wider audience! Published
@@ -138,6 +140,7 @@ export const callsToAction = {
         'Sometimes the community does something amazing that doesn’t fall under any of these categories. Email us at testnet@ironfish.network with your Iron Fish graffiti and let us know about it!',
       earn: 0,
       ctaText: 'Email us',
+      ended: true,
       href: 'mailto:testnet@ironfish.network',
     },
   ],
@@ -148,10 +151,12 @@ export const callsToAction = {
         'Once you sign up for the incentivized testnet, actively mining automatically earns you points for blocks that are mined and accepted to the main chain.',
       points: ['1 block = 100 points'],
       ctaText: 'Get started with mining',
+      ended: true,
       href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
     },
     {
       title: 'Promoting the Testnet',
+      ended: true,
       content: (
         <>
           Quality tweets, videos, podcasts, vlogs, poems, TikToks, you name it;
@@ -186,6 +191,7 @@ export const callsToAction = {
         'Large = 1000 points',
       ],
       ctaText: 'Submit a PR',
+      ended: true,
       href: 'https://github.com/iron-fish/ironfish/pulls',
       submissionForm: true,
     },
@@ -195,6 +201,7 @@ export const callsToAction = {
       content:
         'Let us know if you have suggestions for other categories we should add!',
       ctaText: 'Reach out on Discord',
+      ended: true,
       href: 'https://discord.gg/ironfish',
       earn: 0,
       kind: 'coming soon',
