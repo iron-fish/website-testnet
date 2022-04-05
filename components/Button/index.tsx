@@ -18,8 +18,6 @@ export const RawButton: FC<ButtonProps> = ({
   border = `border-2`,
   colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
 }) => {
-  // eslint-disable-next-line no-console
-  console.log({ disabled })
   return (
     <button
       className={clsx(

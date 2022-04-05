@@ -29,7 +29,8 @@ export const PhaseComponent = ({
     <OffsetBox behind="bg-ifpink" className={clsx('mt-3', 'md:mr-6', 'w-full')}>
       <div
         className={clsx(
-          'h-[34rem]',
+          'h-[32rem]',
+          'lg:h-[36rem]',
           'font-favorit',
           'flex',
           'flex-col',
