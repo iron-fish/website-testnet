@@ -129,13 +129,15 @@ export const callsToAction = {
       title: `Sending a transaction`,
       content: (
         <>
-          Sending transactions automatically earns you points. Use the command:{' '}
-          <pre className="bg-iflightgray inline p-1 text-[0.8rem] font-favorit">
+          Sending your mined $IRON earns you points. Use command{' '}
+          <pre className="bg-iflightgray inline p-1 font-favorit">
             send_transaction
           </pre>
+          . You get 1 point for each iron you send, as long as you send at least
+          1 iron.
         </>
       ),
-      points: ['1 block = 100 points'],
+      points: ['1 $IRON sent = 1 point (minimum 1 $IRON)'],
       ctaText: 'Get started with mining',
       // href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
       status: Status.New,

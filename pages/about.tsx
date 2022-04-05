@@ -97,8 +97,14 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <PageBanner
-          title="About the Incentivized Testnet"
-          text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
+          title={
+            <>
+              Incentivized Testnet
+              <br />
+              Welcome to Phase 2.
+            </>
+          }
+          text="Get ready to claim your share of 315,000 $IRON! To make Phase 2 fair, we’ve removed weekly limits on point earnings. We’re also introducing a new leaderboard; but don’t worry, all accumulated Phase 1 points will still count to your overall score. You can earn $IRON in a few different ways:"
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
