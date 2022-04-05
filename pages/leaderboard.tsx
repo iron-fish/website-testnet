@@ -64,7 +64,7 @@ const CTA = `Our incentivized testnet leaderboard shows you who the top point ge
 
 const PAGINATION_LIMIT = 25
 
-export default function Leaderboard({ loginContext }: PageProps) {
+export default function Leaderboard({ loginContext, phase }: PageProps) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -114,7 +114,7 @@ export default function Leaderboard({ loginContext }: PageProps) {
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
-  const ended = true
+  const ended = phase === 1
   const isLoading = checkLoading()
 
   const { fetchPrevious, fetchNext, $hasPrevious, $hasNext } =
