@@ -114,12 +114,12 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           buttonLink={!loaded ? '/signup' : ''}
         />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
-          <AboutHeader className="md:w-1/2">
+          <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>
             Phase 2
-            <span className="ml-2 md:hidden" />
-            <br className="hidden md:inline" />
-            <span className="hidden md:inline">Participation</span>
-            <br className="hidden md:inline" />
+            <span className={clsx('ml-2', 'md:hidden')} />
+            <br className={clsx('hidden', 'md:inline')} />
+            <span className={clsx('hidden', 'md:inline')}>Participation</span>
+            <br className={clsx('hidden', 'md:inline')} />
             Categories
           </AboutHeader>
           <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-32')}>
@@ -226,7 +226,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               'md:w-full'
             )}
           >
-            <p className="md:max-w-[50rem] m-auto">
+            <p className={clsx('md:max-w-[50rem]', 'm-auto')}>
               At the end of the testnet if you’re the leader in any of the
               categories mentioned above you might be eligible to receive an
               Iron Fish NFT. Filter the leaderboard to see category leaders.
