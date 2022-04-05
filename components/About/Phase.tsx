@@ -40,7 +40,7 @@ export const PhaseComponent = ({
       >
         <h4
           className={clsx(
-            'text-3xl',
+            'text-4xl',
             'font-extended',
             'mb-2',
             'w-full',
