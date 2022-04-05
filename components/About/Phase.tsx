@@ -11,20 +11,23 @@ export type Pool = {
   categories: string[]
 }
 
-export type Phase = {
+export type PhaseProps = {
   index: number
   summary: ReactType | ReactElement | string
   pools: Pool[]
   status?: Status
 }
 
-export const PhaseComponent = ({
+export const cumulativePoolSize = (pools: Pool[]) =>
+  pools.reduce((sum, { size }) => sum + size, 0).toLocaleString()
+
+export const Phase = ({
   index,
   summary,
   pools,
   status = Status.Active,
-}: Phase) => {
-  const isComplete = status === Status.Over
+}: PhaseProps) => {
+  const isComplete = status === Status.Ended
   return (
     <OffsetBox behind="bg-ifpink" className={clsx('mt-3', 'md:mr-6', 'w-full')}>
       <div
@@ -50,9 +53,7 @@ export const PhaseComponent = ({
           Phase {index}
         </h4>
         <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}>
-          Prize pool of{' '}
-          {pools.reduce((sum, { size }) => sum + size, 0).toLocaleString()}{' '}
-          total coins
+          Prize pool of {cumulativePoolSize(pools)} total coins
         </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
         <Link href={isComplete ? '#' : '/signup'} passHref>
@@ -110,4 +111,4 @@ export const PhaseComponent = ({
   )
 }
 
-export default PhaseComponent
+export default Phase

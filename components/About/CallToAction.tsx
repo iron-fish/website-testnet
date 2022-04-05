@@ -34,8 +34,8 @@ export const CallToAction = ({
   disabled = false,
   submissionForm = false,
 }: CTAProps) => {
-  const comingSoon = status === Status.Soon
-  const ended = status === Status.Over
+  const comingSoon = status === Status.ComingSoon
+  const ended = status === Status.Ended
   const isNew = status === Status.New
   const button = ctaText ? (
     <RawButton

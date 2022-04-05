@@ -161,7 +161,7 @@ export const callsToAction = {
 
 export const phases = [
   {
-    status: Status.Over,
+    status: Status.Ended,
     summary: `Dec 1, 2021 - March 11, 2022.`,
     pools: [
       {
@@ -176,7 +176,7 @@ export const phases = [
     ],
   },
   {
-    status: Status.Soon,
+    status: Status.ComingSoon,
     summary: 'Coming soon!',
     pools: [
       {

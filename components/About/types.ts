@@ -1,6 +1,6 @@
 export enum Status {
-  Over,
+  Ended,
   Active,
   New,
-  Soon,
+  ComingSoon,
 }

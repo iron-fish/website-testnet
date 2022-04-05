@@ -16,7 +16,7 @@ import { AboutHeader } from 'components/About/Header'
 import { renderColumn } from 'components/About/CallToAction'
 import { renderGuidelineColumn } from 'components/About/Guidelines'
 import { NFTCard } from 'components/About/NFTCard'
-import { PhaseComponent, Phase } from 'components/About/Phase'
+import { Phase, PhaseProps, cumulativePoolSize } from 'components/About/Phase'
 import { cards, guidelines, callsToAction, phases } from 'components/About/data'
 import { useResponsiveCards } from 'components/About/hooks'
 
@@ -104,7 +104,9 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               Welcome to Phase 2.
             </>
           }
-          text="Get ready to claim your share of 315,000 $IRON! To make Phase 2 fair, we’ve removed weekly limits on point earnings. We’re also introducing a new leaderboard; but don’t worry, all accumulated Phase 1 points will still count to your overall score. You can earn $IRON in a few different ways:"
+          text={`Get ready to claim your share of ${cumulativePoolSize(
+            phases[1].pools
+          )} $IRON! To make Phase 2 fair, we’ve removed weekly limits on point earnings. We’re also introducing a new leaderboard; but don’t worry, all accumulated Phase 1 points will still count to your overall score. You can earn $IRON in a few different ways:`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
@@ -182,7 +184,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               'mb-12'
             )}
           >
-            {phases.map((p: Omit<Phase, 'index'>, index: number) => (
+            {phases.map((p: Omit<PhaseProps, 'index'>, index: number) => (
               <div
                 className={clsx(
                   'flex',
@@ -194,7 +196,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
                 )}
                 key={index}
               >
-                <PhaseComponent {...p} index={index + 1} />
+                <Phase {...p} index={index + 1} />
               </div>
             ))}
           </div>
