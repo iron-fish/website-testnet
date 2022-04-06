@@ -9,6 +9,7 @@ export const Toast = ({
   message,
   action,
   actionLabel,
+  showNotification,
 }: ConditionalToastProps) => {
   const topAligned = alignment === Alignment.Top
   return (
@@ -19,7 +20,11 @@ export const Toast = ({
         'z-30',
         'flex',
         styles.toast,
-        topAligned ? styles.top : styles.bottom,
+        topAligned
+          ? showNotification
+            ? styles.topWithNotification
+            : styles.top
+          : styles.bottom,
         topAligned ? 'top-0' : 'bottom-0',
         {
           [topAligned ? styles.topHidden : styles.bottomHidden]:

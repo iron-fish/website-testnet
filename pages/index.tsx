@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
-import { PageProps } from 'components/page-types'
+import { LoginContext } from 'hooks/useLogin'
 
 export const getServerSideProps = () => {
   return {
@@ -12,7 +12,12 @@ export const getServerSideProps = () => {
   }
 }
 
-export default function Home({ loginContext }: PageProps) {
+interface HomeProps {
+  showNotification: boolean
+  loginContext: LoginContext
+}
+
+export default function Home({ showNotification, loginContext }: HomeProps) {
   const { magicMetadata } = loginContext
   const email = magicMetadata?.email || ''
   return (
@@ -26,6 +31,7 @@ export default function Home({ loginContext }: PageProps) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className="bg-iforange text-black"
         loginContext={loginContext}

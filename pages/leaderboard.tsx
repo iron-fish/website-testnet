@@ -19,13 +19,17 @@ import PaginationButton from 'components/PaginationButton'
 import { countries, CountryWithCode } from 'data/countries'
 import { defaultErrorText } from 'utils/forms'
 import useDebounce from 'hooks/useDebounce'
+import { LoginContext } from 'hooks/useLogin'
 import { useField } from 'hooks/useForm'
 import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
-import { PageProps } from 'components/page-types'
-
 import * as API from 'apiClient'
+
+type Props = {
+  showNotification: boolean
+  loginContext: LoginContext
+}
 
 const TOTAL_POINTS = 'Total Points'
 
@@ -47,11 +51,10 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
-      { name: 'Blocks Mined', value: 'BLOCK_MINED' },
-      { name: 'Bugs Caught', value: 'BUG_CAUGHT' },
-      { name: 'Promotions', value: 'SOCIAL_MEDIA_PROMOTION' },
-      { name: 'PRs Merged', value: 'PULL_REQUEST_MERGED' },
-      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTION' },
+      { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
+      { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
+      { name: 'Transactions Sent', value: API.EventType.TRANSACTION_SENT },
+      { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
     ],
     validation: () => true,
     defaultErrorText,
@@ -60,11 +63,10 @@ const FIELDS = {
     defaultLabel: TOTAL_POINTS,
   },
 }
-const CTA = `Our incentivized testnet leaderboard shows you who the top point getters are for all-time score, miners, bug catchers, net promoters, node hosting, and more! Click someone’s user name to see a breakdown of their activity. Points are earned during weekly cycles which begin Monday, 12:00am UTC and end Sunday 11:59pm UTC.`
 
 const PAGINATION_LIMIT = 25
 
-export default function Leaderboard({ loginContext, phase }: PageProps) {
+export default function Leaderboard({ showNotification, loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -114,7 +116,6 @@ export default function Leaderboard({ loginContext, phase }: PageProps) {
 
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoggedIn = checkLoggedIn()
-  const ended = phase === 1
   const isLoading = checkLoading()
 
   const { fetchPrevious, fetchNext, $hasPrevious, $hasNext } =
@@ -136,8 +137,14 @@ export default function Leaderboard({ loginContext, phase }: PageProps) {
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
       </Head>
-      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
+      <Toast
+        showNotification={showNotification}
+        message={$toast}
+        visible={$visible}
+        alignment={Alignment.Top}
+      />
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className={clsx('bg-ifpink', 'text-black')}
         loginContext={loginContext}
@@ -153,8 +160,26 @@ export default function Leaderboard({ loginContext, phase }: PageProps) {
         )}
       >
         <PageBanner
-          title="Testnet Leaderboard"
-          text={CTA}
+          title={
+            <>
+              Testnet Leaderboard
+              <br />
+              Phase 2.
+            </>
+          }
+          text={
+            <p>
+              Our incentivized testnet leaderboard shows you who the top point
+              getters are for all-time score, miners, bug catchers, net
+              promoters, node hosting and more! Click a user name to see a
+              breakdown of their activity.{' '}
+              <Link href="phase1.testnet.ironfish.network" passHref>
+                <a className="border-b border-black">
+                  View Phase 1 leaderboard
+                </a>
+              </Link>
+            </p>
+          }
           buttonText={!isLoggedIn ? 'Sign Up' : undefined}
           buttonLink={!isLoggedIn ? '/signup' : undefined}
           buttonClassName={clsx(
@@ -169,7 +194,7 @@ export default function Leaderboard({ loginContext, phase }: PageProps) {
             'md:px-4'
           )}
         >
-          {isLoggedIn && !ended && <CountdownTimer />}
+          {isLoggedIn && <CountdownTimer />}
         </PageBanner>
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>

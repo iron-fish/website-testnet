@@ -16,6 +16,7 @@ export enum Alignment {
 }
 
 export interface ConditionalToastProps extends ToastCallProps {
+  showNotification: boolean
   alignment: Alignment
   visible: boolean
 }

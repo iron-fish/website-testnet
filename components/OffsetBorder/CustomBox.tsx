@@ -2,8 +2,15 @@ import clsx from 'clsx'
 import { Props } from './types'
 
 interface CustomProps extends Props {
-  size: string
+  size?: string
   rounded?: boolean
+  cb?: string
+  cr?: string
+  cl?: string
+  mt?: string
+  mb?: string
+  ml?: string
+  mr?: string
 }
 
 export function CustomBox({
@@ -14,14 +21,23 @@ export function CustomBox({
   background = 'bg-white',
   behind = 'bg-transparent',
   rounded = false,
+  // container,
+  cb = '',
+  cr = '',
+  cl = '',
+  // margin
+  mt = '',
+  mb = '',
+  ml = '',
+  mr = '',
 }: CustomProps) {
   return (
     <div
       className={clsx(
         `relative`,
-        `mb-${size}`,
-        container ? `ml-${size}` : ``,
-        `mr-${size}`,
+        cb ? cb : `mb-${size}`,
+        container ? (cl ? cl : `ml-${size}`) : ``,
+        cr ? cr : `mr-${size}`,
         className
       )}
     >
@@ -30,10 +46,10 @@ export function CustomBox({
           'absolute',
           'border',
           'border-black',
-          `top-${size}`,
-          `-bottom-${size}`,
-          `left-${size}`,
-          `-right-${size}`,
+          mt ? mt : `top-${size}`,
+          mb ? mb : `-bottom-${size}`,
+          ml ? ml : `left-${size}`,
+          mr ? mr : `-right-${size}`,
           rounded ? 'rounded' : '',
           behind
         )}

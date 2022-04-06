@@ -32,10 +32,11 @@ const validTabValue = (x: string) =>
   x === 'weekly' || x === 'all' || x === 'settings'
 
 interface Props {
+  showNotification: boolean
   loginContext: LoginContext
 }
-const sumValues = (x: Record<string, number>) =>
-  Object.values(x).reduce((a, b) => a + b, 0)
+// const sumValues = (x: Record<string, number>) =>
+//   Object.values(x).reduce((a, b) => a + b, 0)
 
 type LabeledProps = {
   value: string
@@ -49,7 +50,7 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
-export default function User({ loginContext }: Props) {
+export default function User({ showNotification, loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -58,7 +59,7 @@ export default function User({ loginContext }: Props) {
   const { isReady: routerIsReady } = router
   const userId = (router?.query?.id || '') as string
   const rawTab = useQuery('tab')
-  const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
+  const [$activeTab, $setActiveTab] = useState<TabType>('all')
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
 
@@ -90,18 +91,17 @@ export default function User({ loginContext }: Props) {
         if (!routerIsReady || $fetched) {
           return
         }
-        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
-          await Promise.all([
-            API.getUser(userId),
-            API.listEvents({
-              userId,
-              limit: EVENTS_LIMIT,
-            }),
-            API.getUserAllTimeMetrics(userId),
-            API.getUserWeeklyMetrics(userId),
-            API.getMetricsConfig(),
-          ])
-
+        const raw = await Promise.all([
+          API.getUser(userId),
+          API.listEvents({
+            userId,
+            limit: EVENTS_LIMIT,
+          }),
+          API.getUserAllTimeMetrics(userId),
+          API.getUserWeeklyMetrics(userId),
+          API.getMetricsConfig(),
+        ])
+        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
         if (isCanceled) {
           return
         }
@@ -182,10 +182,9 @@ export default function User({ loginContext }: Props) {
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
-  const totalWeeklyLimit = sumValues(
-    $metricsConfig.weekly_limits
-  ).toLocaleString()
-  const weeklyPoints = $weeklyMetrics.points.toLocaleString()
+  const phase2Points =
+    $allTimeMetrics.metrics.node_uptime.points +
+    $allTimeMetrics.metrics.send_transaction.points
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
@@ -199,6 +198,7 @@ export default function User({ loginContext }: Props) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         loginContext={loginContext}
         fill="black"
         className={clsx('bg-ifpink', 'text-black')}
@@ -289,6 +289,19 @@ export default function User({ loginContext }: Props) {
                       'w-full'
                     )}
                   >
+                    Phase 2
+                  </div>
+                  <div
+                    className={clsx(
+                      'mt-4',
+                      'flex',
+                      'flex-row',
+                      'items-center',
+                      'justify-center',
+                      'h-6',
+                      'w-full'
+                    )}
+                  >
                     <Flag code={$user.country_code} />
                     <a
                       className="twitter-share-button"
@@ -304,7 +317,7 @@ export default function User({ loginContext }: Props) {
                 </div>
               </div>
               <div
-                className={clsx('flex', 'flex-col', 'w-full', 'mt-6', 'mb-6')}
+                className={clsx('flex', 'flex-col', 'w-1/2', 'mt-6', 'mb-6')}
               >
                 <div
                   className={clsx(
@@ -315,14 +328,10 @@ export default function User({ loginContext }: Props) {
                     'justify-between'
                   )}
                 >
-                  <LabeledStat label="All Time Rank" value={ordinalRank} />
+                  <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
                   <LabeledStat
-                    label="Total Points"
-                    value={$user.total_points.toLocaleString()}
-                  />
-                  <LabeledStat
-                    label="Weekly Points"
-                    value={`${weeklyPoints} / ${totalWeeklyLimit}`}
+                    label="Phase 2 Points"
+                    value={phase2Points.toLocaleString()}
                   />
                 </div>
               </div>
@@ -411,6 +420,7 @@ export default function User({ loginContext }: Props) {
         </div>
       </main>
       <Toast
+        showNotification={showNotification}
         message={$toast.message}
         visible={$toast.visible}
         alignment={Alignment.Top}
