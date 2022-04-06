@@ -107,18 +107,19 @@ export default function User({ showNotification, loginContext }: Props) {
         if (!routerIsReady || $fetched) {
           return
         }
-        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] =
-          await Promise.all([
-            API.getUser(userId),
-            API.listEvents({
-              userId,
-              limit: EVENTS_LIMIT,
-            }),
-            API.getUserAllTimeMetrics(userId),
-            API.getUserWeeklyMetrics(userId),
-            API.getMetricsConfig(),
-          ])
-
+        const raw = await Promise.all([
+          API.getUser(userId),
+          API.listEvents({
+            userId,
+            limit: EVENTS_LIMIT,
+          }),
+          API.getUserAllTimeMetrics(userId),
+          API.getUserWeeklyMetrics(userId),
+          API.getMetricsConfig(),
+        ])
+        // eslint-disable-next-line no-console
+        console.log({ raw })
+        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
         if (isCanceled) {
           return
         }
@@ -145,34 +146,35 @@ export default function User({ showNotification, loginContext }: Props) {
         $setUser(user)
         // eslint-disable-next-line no-console
         console.log({ events })
+        // this jams some new events at the top of every activity feed for debugging porpoises
         // TODO: REMOVE THIS BEFORE MERGING
-        once(
-          () =>
-            // eslint-disable-next-line
-            // @ts-ignore
-            (events.data = events.data.concat([
-              {
-                id: Math.floor(Math.random() * 200),
-                metadata: {
-                  url: 'https://cool.biz',
-                },
-                occurred_at: '2022-01-30T05:08:45.728Z',
-                points: 100,
-                type: API.EventType.NODE_HOSTED,
-                user_id: user.id,
+        once(() => {
+          const lastDate = events.data[0].occurred_at
+          // eslint-disable-next-line
+          // @ts-ignore
+          events.data = events.data.concat([
+            {
+              id: Math.floor(Math.random() * 200),
+              metadata: {
+                url: 'https://cool.biz',
               },
-              {
-                id: Math.floor(Math.random() * 200),
-                metadata: {
-                  url: 'https://dope.cool',
-                },
-                occurred_at: '2022-01-30T12:21:32.718Z',
-                points: 100,
-                type: API.EventType.TRANSACTION_SENT,
-                user_id: user.id,
+              occurred_at: lastDate,
+              points: 100,
+              type: API.EventType.NODE_HOSTED,
+              user_id: user.id,
+            },
+            {
+              id: Math.floor(Math.random() * 200),
+              metadata: {
+                url: 'https://dope.cool',
               },
-            ]))
-        )()
+              occurred_at: lastDate,
+              points: 100,
+              type: API.EventType.TRANSACTION_SENT,
+              user_id: user.id,
+            },
+          ])
+        })()
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
         $setWeeklyMetrics(weeklyMetrics)
