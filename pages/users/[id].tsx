@@ -147,8 +147,17 @@ export default function User({ showNotification, loginContext }: Props) {
         // eslint-disable-next-line no-console
         console.log({ events })
         // this jams some new events at the top of every activity feed for debugging porpoises
+        // and fudges some data for the metrics
         // TODO: REMOVE THIS BEFORE MERGING
         once(() => {
+          const shrug = (Math.round(Math.random() * 100) + 1) / 10
+          const online = {
+            count: Math.round(Math.random() * 10),
+            points: shrug,
+            // rank: Math.round(Math.random() * 10),
+          }
+          allTimeMetrics.metrics.node_online_hours = online
+          weeklyMetrics.metrics.node_online_hours = online
           const lastDate = events.data[0].occurred_at
           // eslint-disable-next-line
           // @ts-ignore

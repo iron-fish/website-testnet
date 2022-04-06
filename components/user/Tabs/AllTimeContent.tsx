@@ -13,6 +13,13 @@ export default function AllTimeContent({
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
       <AllTimeMetricCard
+        title="Hosted Node"
+        metric={allTimeMetrics.metrics.node_online_hours}
+        ranked={false}
+        topUnit="hours"
+        bottomUnit="points"
+      />
+      <AllTimeMetricCard
         title="Blocks Mined"
         metric={allTimeMetrics.metrics.blocks_mined}
       />

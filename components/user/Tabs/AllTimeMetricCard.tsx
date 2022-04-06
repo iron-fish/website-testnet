@@ -7,21 +7,33 @@ import { numberToOrdinal } from 'utils'
 type AllTimeMetricCardProps = {
   title: string
   metric: API.UserMetric
+  ranked?: boolean
+  topUnit?: string
+  bottomUnit?: string
 }
 
 export default function AllTimeMetricCard({
   title,
   metric,
+  ranked = true,
+  topUnit = 'points',
+  bottomUnit = 'place',
 }: AllTimeMetricCardProps) {
-  const rankString =
-    metric.rank != null ? `${numberToOrdinal(metric.rank)} place` : ''
-
+  let top, bottom
+  if (ranked) {
+    bottom =
+      metric.rank != null ? `${numberToOrdinal(metric.rank)} ${bottomUnit}` : ''
+    top = `${metric.points.toLocaleString()} ${topUnit}`
+  } else {
+    bottom = `${metric.points} ${bottomUnit}`
+    top = metric.count > 1 ? `Hours` : `Hour`
+  }
   return (
     <MetricCard
       title={title}
       value={metric.count.toLocaleString()}
-      subValueTop={`${metric.points.toLocaleString()} points`}
-      subValueBottom={rankString}
+      subValueTop={top}
+      subValueBottom={bottom}
     />
   )
 }
