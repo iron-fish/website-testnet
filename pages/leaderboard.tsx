@@ -27,6 +27,7 @@ import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 import * as API from 'apiClient'
 
 type Props = {
+  showNotification: boolean
   loginContext: LoginContext
 }
 
@@ -67,7 +68,7 @@ const CTA = `Our incentivized testnet leaderboard shows you who the top point ge
 
 const PAGINATION_LIMIT = 25
 
-export default function Leaderboard({ loginContext }: Props) {
+export default function Leaderboard({ showNotification, loginContext }: Props) {
   const { visible: $visible, message: $toast } = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -138,8 +139,14 @@ export default function Leaderboard({ loginContext }: Props) {
         <title>Leaderboard</title>
         <meta name="description" content="Leaderboard" />
       </Head>
-      <Toast message={$toast} visible={$visible} alignment={Alignment.Top} />
+      <Toast
+        showNotification={showNotification}
+        message={$toast}
+        visible={$visible}
+        alignment={Alignment.Top}
+      />
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className={clsx('bg-ifpink', 'text-black')}
         loginContext={loginContext}

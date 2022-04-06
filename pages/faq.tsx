@@ -111,10 +111,11 @@ on our `}
   </span>
 )
 type FaqProps = {
+  showNotification: boolean
   loginContext: LoginContext
 }
 
-export default function Faq({ loginContext }: FaqProps) {
+export default function Faq({ showNotification, loginContext }: FaqProps) {
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoaded = checkLoggedIn()
   return checkLoading() ? (
@@ -127,6 +128,7 @@ export default function Faq({ loginContext }: FaqProps) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className={clsx('bg-white', 'text-black')}
         loginContext={loginContext}

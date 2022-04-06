@@ -32,6 +32,7 @@ const validTabValue = (x: string) =>
   x === 'weekly' || x === 'all' || x === 'settings'
 
 interface Props {
+  showNotification: boolean
   loginContext: LoginContext
 }
 const sumValues = (x: Record<string, number>) =>
@@ -49,7 +50,7 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
-export default function User({ loginContext }: Props) {
+export default function User({ showNotification, loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
     duration: 8e3,
@@ -199,6 +200,7 @@ export default function User({ loginContext }: Props) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         loginContext={loginContext}
         fill="black"
         className={clsx('bg-ifpink', 'text-black')}
@@ -411,6 +413,7 @@ export default function User({ loginContext }: Props) {
         </div>
       </main>
       <Toast
+        showNotification={showNotification}
         message={$toast.message}
         visible={$toast.visible}
         alignment={Alignment.Top}

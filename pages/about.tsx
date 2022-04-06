@@ -16,8 +16,10 @@ import { AboutHeader } from 'components/About/Header'
 import { renderColumn } from 'components/About/CallToAction'
 import { renderGuidelineColumn } from 'components/About/Guidelines'
 import { NFTCard } from 'components/About/NFTCard'
-import { cards, guidelines, callsToAction } from 'components/About/data'
+import { Phase, PhaseProps, cumulativePoolSize } from 'components/About/Phase'
+import { cards, guidelines, callsToAction, phases } from 'components/About/data'
 import { useResponsiveCards } from 'components/About/hooks'
+
 import Loader from 'components/Loader'
 
 import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
@@ -63,10 +65,11 @@ const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
   </div>
 )
 type AboutProps = {
+  showNotification: boolean
   loginContext: LoginContext
 }
 
-export default function About({ loginContext }: AboutProps) {
+export default function About({ showNotification, loginContext }: AboutProps) {
   const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   const { checkLoggedIn, checkLoading } = loginContext
   const loaded = checkLoggedIn()
@@ -79,13 +82,14 @@ export default function About({ loginContext }: AboutProps) {
         <meta name="description" content="About" />
       </Head>
       <Navbar
+        showNotification={showNotification}
         fill="black"
-        className={clsx('bg-iflightorange', 'text-black')}
+        className={clsx('bg-ifbeige', 'text-black')}
         loginContext={loginContext}
       />
       <main
         className={clsx(
-          'bg-iflightorange',
+          'bg-ifbeige',
           'flex-1',
           'items-center',
           'flex',
@@ -93,8 +97,16 @@ export default function About({ loginContext }: AboutProps) {
         )}
       >
         <PageBanner
-          title="About the Incentivized Testnet"
-          text="Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details)."
+          title={
+            <>
+              Incentivized Testnet
+              <br />
+              Welcome to Phase 2.
+            </>
+          }
+          text={`Get ready to claim your share of ${cumulativePoolSize(
+            phases[1].pools
+          )} $IRON! To make Phase 2 fair, we’ve removed weekly limits on point earnings. We’re also introducing a new leaderboard; but don’t worry, all accumulated Phase 1 points will still count to your overall score. You can earn $IRON in a few different ways:`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
@@ -110,10 +122,15 @@ export default function About({ loginContext }: AboutProps) {
           buttonLink={!loaded ? '/signup' : ''}
         />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
-          <AboutHeader className="md:w-1/2">
-            Participation Categories
+          <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>
+            Phase 2
+            <span className={clsx('ml-2', 'md:hidden')} />
+            <br className={clsx('hidden', 'md:inline')} />
+            <span className={clsx('hidden', 'md:inline')}>Participation</span>
+            <br className={clsx('hidden', 'md:inline')} />
+            Categories
           </AboutHeader>
-          <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-16')}>
+          <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-32')}>
             <div
               className={clsx(
                 'flex',
@@ -154,21 +171,52 @@ export default function About({ loginContext }: AboutProps) {
               <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
             </div>
           </div>
-          <div>
-            <AboutHeader className={clsx('md:w-1/2', 'mt-24')}>
-              The Leaderboard
-            </AboutHeader>
-            <Para>
-              Earning points places you on the Leaderboard. See how you progress
-              each week in comparison to others.
-            </Para>
-            <div className={clsx('mt-8', 'mb-4', 'block', 'text-2xl')}>
-              <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
-            </div>
-            <div className={clsx('flex', 'md:ml-24')}>
-              <Img src={leaderboardPic} />
-            </div>
+        </div>
+        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
+          <AboutHeader className="md:w-1/2">Phase Overview</AboutHeader>
+          <div
+            className={clsx(
+              'flex',
+              'flex-col',
+              'mr-2',
+              'md:mr-0',
+              'md:flex-row',
+              'mb-12'
+            )}
+          >
+            {phases.map((p: Omit<PhaseProps, 'index'>, index: number) => (
+              <div
+                className={clsx(
+                  'flex',
+                  'flex-col',
+                  'w-full',
+                  'md:w-1/2',
+                  index === 0 ? 'md:ml-0' : 'md:ml-3',
+                  'md:mr-3'
+                )}
+                key={index}
+              >
+                <Phase {...p} index={index + 1} />
+              </div>
+            ))}
           </div>
+        </div>
+        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
+          <AboutHeader className={clsx('md:w-1/2', 'mt-32')}>
+            The Leaderboard
+          </AboutHeader>
+          <Para>
+            Earning points places you on the Leaderboard. See how you progress
+            each week in comparison to others.
+          </Para>
+          <div className={clsx('mt-8', 'mb-4', 'block', 'text-2xl')}>
+            <BasicLink href="/leaderboard">Show me the leaderboard</BasicLink>
+          </div>
+          <div className={clsx('flex', 'md:ml-24')}>
+            <Img src={leaderboardPic} />
+          </div>
+        </div>
+        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader
             className={clsx(
               'text-left',
@@ -181,19 +229,26 @@ export default function About({ loginContext }: AboutProps) {
           >
             Win a Category, win an NFT!
           </AboutHeader>
-          <Para
+          <div
             className={clsx(
+              'w-full',
+              'text-xl',
+              'md:text-2xl',
+              'md:w-2/3',
               'text-left',
-              'md:text-center',
               'm-auto',
               'mx-1.5',
-              'mb-6'
+              'mb-6',
+              'md:text-center',
+              'md:w-full'
             )}
           >
-            At the end of the testnet if you’re the leader in any of the
-            categories mentioned above you might be eligible to receive an Iron
-            Fish NFT. Filter the leaderboard to see category leaders.
-          </Para>
+            <p className={clsx('md:max-w-[50rem]', 'm-auto')}>
+              At the end of the testnet if you’re the leader in any of the
+              categories mentioned above you might be eligible to receive an
+              Iron Fish NFT. Filter the leaderboard to see category leaders.
+            </p>
+          </div>
         </div>
         <div
           className={clsx('flex', 'flex-row', 'w-full', 'overflow-x-auto')}
@@ -216,7 +271,7 @@ export default function About({ loginContext }: AboutProps) {
           buttonText="Get Incentivized"
           goTo="/signup"
         />
-        <div id="guidelines" className={clsx('mt-24', 'mx-3', 'lg:w-2/3')}>
+        <div id="guidelines" className={clsx('mt-32', 'mx-3', 'lg:w-2/3')}>
           <AboutHeader className={clsx('text-left', 'text-4xl', 'w-1/2')}>
             Testnet Guidelines
           </AboutHeader>
@@ -239,7 +294,7 @@ export default function About({ loginContext }: AboutProps) {
                 'w-full',
                 'md:w-1/2',
                 'md:ml-1',
-                'md:-mt-32'
+                'md:-mt-24'
               )}
             >
               {guidelines.columnTwo.map(renderGuidelineColumn)}

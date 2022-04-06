@@ -36,9 +36,10 @@ const FIELDS = {
   },
 }
 type LoginProps = {
+  showNotification: boolean
   loginContext: LoginContext
 }
-export default function Login({ loginContext }: LoginProps) {
+export default function Login({ showNotification, loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
@@ -132,11 +133,13 @@ export default function Login({ loginContext }: LoginProps) {
       ) : (
         <>
           <Navbar
+            showNotification={showNotification}
             fill="black"
             className="bg-ifpink text-black"
             loginContext={loginContext}
           />
           <Toast
+            showNotification={showNotification}
             message={$msg || $toast}
             visible={$visible}
             alignment={Alignment.Top}

@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactType, ReactElement } from 'react'
 import clsx from 'clsx'
 
 import Logo from 'components/Logo'
@@ -15,13 +15,24 @@ type NavbarProps = {
   className?: string
   fill?: string
   loginContext: LoginContext
+  showNotification: boolean
+  notification?: ReactElement | ReactType
 }
 
 function Navbar({
   fill = 'white',
   className = 'bg-black text-white',
   loginContext,
+  showNotification,
 }: NavbarProps) {
+  const notification = showNotification ? (
+    <>
+      Phase 1 of our Incentivized Testnet is now complete.
+      <br className="md:hidden" />
+      <span className="hidden md:inline"> </span>
+      Stay tuned for Phase 2!
+    </>
+  ) : null
   const {
     $flyoutVisible,
     $setFlyoutVisible,
@@ -37,6 +48,7 @@ function Navbar({
   const companyVisible = isCompanyVisible()
   const testnetVisible = isTestnetVisible()
   const navBarLinksProps = {
+    showNotification,
     companyClicked: toggleNavCompany,
     companyHovered: enterNavCompany,
     companyVisible,
@@ -61,6 +73,23 @@ function Navbar({
         }
       }}
     >
+      {notification && (
+        <div
+          className={clsx(
+            'bg-black',
+            'text-white',
+            'block',
+            'h-[4rem]',
+            'font-favorit',
+            'text-center',
+            'text-xs',
+            'md:text-sm',
+            'pt-5'
+          )}
+        >
+          {notification}
+        </div>
+      )}
       <NavbarFlyout
         flyoutVisible={$flyoutVisible}
         closeFlyout={() => $setFlyoutVisible(false)}
