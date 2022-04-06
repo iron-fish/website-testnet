@@ -50,6 +50,22 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
+// eslint-disable-next-line
+const once = (fn: any) => {
+  // eslint-disable-next-line
+  // @ts-ignore
+  let y
+  // eslint-disable-next-line
+  // @ts-ignore
+  const c = (...args) => {
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (y) return y
+    y = fn(...args)
+  }
+  return c
+}
+
 export default function User({ showNotification, loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
@@ -127,6 +143,36 @@ export default function User({ showNotification, loginContext }: Props) {
           return
         }
         $setUser(user)
+        // eslint-disable-next-line no-console
+        console.log({ events })
+        // TODO: REMOVE THIS BEFORE MERGING
+        once(
+          () =>
+            // eslint-disable-next-line
+            // @ts-ignore
+            (events.data = events.data.concat([
+              {
+                id: Math.floor(Math.random() * 200),
+                metadata: {
+                  url: 'https://cool.biz',
+                },
+                occurred_at: '2022-01-30T05:08:45.728Z',
+                points: 100,
+                type: API.EventType.NODE_HOSTED,
+                user_id: user.id,
+              },
+              {
+                id: Math.floor(Math.random() * 200),
+                metadata: {
+                  url: 'https://dope.cool',
+                },
+                occurred_at: '2022-01-30T12:21:32.718Z',
+                points: 100,
+                type: API.EventType.TRANSACTION_SENT,
+                user_id: user.id,
+              },
+            ]))
+        )()
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
         $setWeeklyMetrics(weeklyMetrics)
