@@ -1,4 +1,5 @@
 import { Box as OffsetBorderBox } from 'components/OffsetBorder'
+import Info from 'components/icons/Info'
 import clsx from 'clsx'
 import styles from './MetricCard.module.css'
 
@@ -36,6 +37,9 @@ export default function MetricCard({
             >
               {subValueBottom}
             </div>
+          </div>
+          <div className="absolute top-2 right-2">
+            <Info />
           </div>
         </div>
       </div>
