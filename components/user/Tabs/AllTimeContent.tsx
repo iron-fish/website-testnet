@@ -16,20 +16,16 @@ export default function AllTimeContent({
         title="Hosted Node"
         metric={allTimeMetrics.metrics.node_online_hours}
         ranked={false}
-        topUnit="hours"
+        topUnit="hour"
         bottomUnit="points"
       />
       <AllTimeMetricCard
-        title="Blocks Mined"
-        metric={allTimeMetrics.metrics.blocks_mined}
+        title="Transactions Sent"
+        metric={allTimeMetrics.metrics.transactions_sent}
       />
       <AllTimeMetricCard
         title="Bugs Caught"
         metric={allTimeMetrics.metrics.bugs_caught}
-      />
-      <AllTimeMetricCard
-        title="Promotions"
-        metric={allTimeMetrics.metrics.social_media_contributions}
       />
       <AllTimeMetricCard
         title="PRs Merged"

@@ -16,9 +16,14 @@ export type ApiEventMetadataWithLink = {
   url: string
 }
 
+export type ApiEventMetadataTransactionSent = {
+  hash: string
+}
+
 export type ApiEventMetadata =
   | ApiEventMetadataWithLink
   | ApiEventMetadataBlockMined
+  | ApiEventMetadataTransactionSent
 
 export type ApiEvent = {
   id: number
@@ -93,6 +98,7 @@ export type UserMetricsResponse = {
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
     node_online_hours: UserMetric
+    transactions_sent: UserMetric
   }
 }
 

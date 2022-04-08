@@ -26,7 +26,7 @@ export default function AllTimeMetricCard({
     top = `${metric.points.toLocaleString()} ${topUnit}`
   } else {
     bottom = `${metric.points} ${bottomUnit}`
-    top = metric.count > 1 ? `hours` : `hour`
+    top = metric.count > 1 && topUnit ? topUnit + 's' : topUnit
   }
   return (
     <MetricCard

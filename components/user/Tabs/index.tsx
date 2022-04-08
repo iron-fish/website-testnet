@@ -5,7 +5,7 @@ import { STATUS } from 'hooks/useLogin'
 
 import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
-import WeeklyContent from './WeeklyContent'
+// import WeeklyContent from './WeeklyContent'
 import { useQueriedToast } from 'hooks/useToast'
 
 export type TabType = 'all' | 'weekly' | 'settings'
@@ -28,8 +28,8 @@ type TabsProps = {
 
 export default function Tabs({
   allTimeMetrics,
-  weeklyMetrics,
-  metricsConfig,
+  // weeklyMetrics,
+  // metricsConfig,
   user,
   authedUser,
   activeTab,
@@ -49,12 +49,12 @@ export default function Tabs({
     <div>
       {/* Tabs */}
       <div className="flex font-favorit gap-x-6 mb-8">
-        <TabHeaderButton
+        {/*<TabHeaderButton
           selected={activeTab === 'weekly'}
           onClick={() => onTabChange('weekly')}
         >
           Weekly Stats
-        </TabHeaderButton>
+        </TabHeaderButton> */}
         <TabHeaderButton
           selected={activeTab === 'all'}
           onClick={() => onTabChange('all')}
@@ -72,12 +72,12 @@ export default function Tabs({
       </div>
 
       {/* Tabs Content */}
-      {activeTab === 'weekly' && (
+      {/*activeTab === 'weekly' && (
         <WeeklyContent
           weeklyMetrics={weeklyMetrics}
           metricsConfig={metricsConfig}
         />
-      )}
+      )*/}
       {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}

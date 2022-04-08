@@ -19,6 +19,7 @@ import {
   ApiEventMetadata,
   ApiEventMetadataBlockMined,
   ApiEventMetadataWithLink,
+  ApiEventMetadataTransactionSent,
 } from 'apiClient'
 
 import {
@@ -116,6 +117,7 @@ const makeLinkForEvent = (type: EventType, metadata?: ApiEventMetadata) => {
 
 type CopyableHashProps = {
   hash: string
+  unit?: string
 }
 
 enum CopyState {
@@ -125,7 +127,7 @@ enum CopyState {
   RESETTING = 'copy_resetting',
 }
 
-const CopyableHash = ({ hash }: CopyableHashProps) => {
+const CopyableHash = ({ hash, unit = 'Block' }: CopyableHashProps) => {
   const [, $setCopied] = useClipboard(hash, {
     successDuration: 1000,
   })
@@ -168,7 +170,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     >
       <>
         <Verbose defaultClassName="md:flex" className={clsx('items-center')}>
-          Block{' '}
+          {unit}{' '}
           <span className={clsx('ml-2', styles.truncatedHash)}>{hash}</span>
           <ActivityCopy className="ml-4" />
         </Verbose>
@@ -186,6 +188,10 @@ const summarizeEvent = (
     // return 'View in the explorer'
     const { hash } = metadata as ApiEventMetadataBlockMined
     return <CopyableHash hash={hash} />
+  }
+  if (type === EventType.TRANSACTION_SENT) {
+    const { hash } = metadata as ApiEventMetadataTransactionSent
+    return <CopyableHash hash={hash} unit="Txn" />
   }
   const { url } = metadata as ApiEventMetadataWithLink
   const link = new URL(url)

@@ -50,6 +50,8 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
+const rand = (x: number) => Math.round(Math.random() * x)
+
 // eslint-disable-next-line
 const once = (fn: any) => {
   // eslint-disable-next-line
@@ -75,7 +77,7 @@ export default function User({ showNotification, loginContext }: Props) {
   const { isReady: routerIsReady } = router
   const userId = (router?.query?.id || '') as string
   const rawTab = useQuery('tab')
-  const [$activeTab, $setActiveTab] = useState<TabType>('weekly')
+  const [$activeTab, $setActiveTab] = useState<TabType>('all')
 
   const [$user, $setUser] = useState<API.ApiUser | undefined>(undefined)
 
@@ -150,32 +152,32 @@ export default function User({ showNotification, loginContext }: Props) {
         // and fudges some data for the metrics
         // TODO: REMOVE THIS BEFORE MERGING
         once(() => {
-          const shrug = (Math.round(Math.random() * 100) + 1) / 10
           const online = {
-            count: Math.round(Math.random() * 10),
-            points: shrug,
+            count: rand(10),
+            points: 100,
             // rank: Math.round(Math.random() * 10),
           }
           allTimeMetrics.metrics.node_online_hours = online
           weeklyMetrics.metrics.node_online_hours = online
+          allTimeMetrics.metrics.transactions_sent = {
+            count: rand(10),
+            points: rand(100),
+          }
           const lastDate = events.data[0].occurred_at
           // eslint-disable-next-line
           // @ts-ignore
           events.data = events.data.concat([
             {
-              id: Math.floor(Math.random() * 200),
-              metadata: {
-                url: 'https://cool.biz',
-              },
+              id: rand(200),
               occurred_at: lastDate,
               points: 100,
               type: API.EventType.NODE_HOSTED,
               user_id: user.id,
             },
             {
-              id: Math.floor(Math.random() * 200),
+              id: rand(200),
               metadata: {
-                url: 'https://dope.cool',
+                hash: '00000000000a15c8d3d49f4f2316d3a590de6e20cc196fd68b658ee8d5ef22a7',
               },
               occurred_at: lastDate,
               points: 100,
