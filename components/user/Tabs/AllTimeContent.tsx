@@ -25,7 +25,9 @@ export default function AllTimeContent({
       <AllTimeMetricCard
         title="Hosted Node"
         metric={allTimeMetrics.metrics.node_online_hours}
-        top="hour"
+        top={
+          allTimeMetrics.metrics.node_online_hours.count > 1 ? 'hours' : 'hour'
+        }
         bottomUnit="points"
       />
       <AllTimeMetricCard
@@ -39,10 +41,6 @@ export default function AllTimeContent({
       <AllTimeMetricCard
         title="PRs Merged"
         metric={allTimeMetrics.metrics.pull_requests_merged}
-      />
-      <AllTimeMetricCard
-        title="Community"
-        metric={allTimeMetrics.metrics.community_contributions}
       />
       <AllTimeMetricCard
         title="Pool 1 Rank"
