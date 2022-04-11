@@ -59,7 +59,7 @@ export default function Tabs({
           selected={activeTab === 'all'}
           onClick={() => onTabChange('all')}
         >
-          All Time Stats
+          Phase 2 Stats
         </TabHeaderButton>
         {user && authedUser && authedUser.id === user.id && (
           <TabHeaderButton
