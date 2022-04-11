@@ -159,6 +159,11 @@ export const callsToAction = {
   ],
 }
 
+export type Pool = {
+  size: number
+  categories: string[]
+}
+
 export const phases = [
   {
     status: Status.Ended,

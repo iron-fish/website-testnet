@@ -1,18 +1,19 @@
 .copyable::before {
-  display: block;
+  display: inline-block;
   opacity: 0;
+  white-space: pre-wrap;
   content: attr(data-info);
   position: absolute;
-  margin-top: -4.5rem;
+  margin-top: -5.8rem;
   right: 0;
-  margin-right: -3.125rem;
-  width: 7.25rem;
+  margin-right: -5.25rem;
+  width: 11rem;
   padding: 0.375rem 0.5rem;
   background-color: black;
   font-size: 0.75rem;
   color: white;
   transition: opacity 0.3s ease-out;
-  text-align: center;
+  text-align: left;
 }
 
 .copyable::after {
@@ -22,8 +23,8 @@
   position: absolute;
   width: 0;
   height: 0;
-  right: -0.25rem;
-  margin-top: -40px;
+  margin-left: -2px;
+  margin-top: -2.5rem;
   border: 10px solid transparent;
   transition: opacity 0.3s ease-out, margin 0.3s ease-out, border 0.3s ease-out;
 }
@@ -36,7 +37,7 @@
   opacity: 1;
 }
 .copyable:hover::after {
-  margin-top: -21px;
+  margin-top: -26px;
   border-top-color: black;
 }
 .copied::before {
@@ -46,4 +47,10 @@
 .resetting::after {
   opacity: 0 !important;
   display: none !important;
+}
+
+@media screen and (min-width: 768px) {
+  .metricCard {
+    width: calc(33.333333% - 1.2rem);
+  }
 }

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import * as API from 'apiClient'
 import styles from './GenericMetricCard.module.css'
 import { Box as OffsetBorderBox } from 'components/OffsetBorder'
@@ -11,7 +13,8 @@ type GenericMetricCardProps = {
   bottom?: string
   bottomUnit?: string
   showInfo?: boolean
-  info: string
+  info?: string
+  verticalOffset?: string
 }
 
 export function GenericMetricCard({
@@ -19,53 +22,73 @@ export function GenericMetricCard({
   metric,
   top,
   bottom,
-  bottomUnit,
+  bottomUnit = 'points',
   showInfo = false,
   info,
+  verticalOffset = '',
 }: GenericMetricCardProps) {
+  const [$over, $setOver] = useState(false)
   const value = metric.count.toLocaleString()
   const bottomContent = bottom
     ? bottom
     : metric.points.toLocaleString() + ' ' + bottomUnit
+  const styleData = verticalOffset ? (
+    <style>{`
+  .customOffset::before {
+    margin-top: ${verticalOffset}
+  }
+`}</style>
+  ) : null
   return (
-    <OffsetBorderBox className={clsx('w-full', styles.metricCard)}>
-      <div className={clsx('font-extended', 'p-8', 'md:p-6')}>
-        <div
-          className={clsx('text-md', 'md:text-lg', 'mb-4', 'whitespace-nowrap')}
-        >
-          {title}
-        </div>
-        <div className={clsx('flex', 'gap-4')}>
-          <div className="text-5xl">{value}</div>
-          <div className={clsx('font-favorit', 'mt-1', 'overflow-hidden')}>
-            <div className="leading-tight">{top}</div>
-            <div
-              className={clsx(
-                'text-ifsubtextgray',
-                'leading-tight',
-                'truncate'
-              )}
-            >
-              {bottomContent}
-            </div>
+    <>
+      {styleData}
+      <OffsetBorderBox className={clsx('w-full', styles.metricCard)}>
+        <div className={clsx('font-extended', 'p-8', 'md:p-6')}>
+          <div
+            className={clsx(
+              'text-md',
+              'md:text-lg',
+              'mb-4',
+              'whitespace-nowrap'
+            )}
+          >
+            {title}
           </div>
-          {showInfo && (
-            <div
-              className={clsx(
-                'absolute',
-                'top-2',
-                'right-2',
-                styles.copyable,
-                styles.active
-              )}
-              data-info={info}
-            >
-              <Info />
+          <div className={clsx('flex', 'gap-4')}>
+            <div className="text-5xl">{value}</div>
+            <div className={clsx('font-favorit', 'mt-1', 'overflow-hidden')}>
+              <div className="leading-tight">{top}</div>
+              <div
+                className={clsx(
+                  'text-ifsubtextgray',
+                  'leading-tight',
+                  'truncate'
+                )}
+              >
+                {bottomContent}
+              </div>
             </div>
-          )}
+            {showInfo && (
+              <div
+                onMouseOver={() => $setOver(true)}
+                onMouseOut={() => $setOver(false)}
+                className={clsx(
+                  'absolute',
+                  'top-2',
+                  'right-2',
+                  verticalOffset ? 'customOffset' : '',
+                  styles.copyable,
+                  $over ? styles.active : ''
+                )}
+                data-info={info}
+              >
+                <Info />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </OffsetBorderBox>
+      </OffsetBorderBox>
+    </>
   )
 }
 
