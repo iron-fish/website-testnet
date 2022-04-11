@@ -6,7 +6,7 @@
   position: absolute;
   margin-top: -5.8rem;
   right: 0;
-  margin-right: -5.25rem;
+  margin-right: -2rem;
   width: 11rem;
   padding: 0.375rem 0.5rem;
   background-color: black;
@@ -50,6 +50,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  .copyable::before {
+    margin-right: -5.25rem;
+  }
   .metricCard {
     width: calc(33.333333% - 1.2rem);
   }
