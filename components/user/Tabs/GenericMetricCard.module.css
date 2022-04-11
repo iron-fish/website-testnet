@@ -51,9 +51,14 @@
 
 @media screen and (min-width: 768px) {
   .copyable::before {
-    margin-right: -5.25rem;
+    margin-right: -3rem;
   }
   .metricCard {
     width: calc(33.333333% - 1.2rem);
+  }
+}
+@media screen and (min-width: 832px) {
+  .copyable::before {
+    margin-right: -5.25rem;
   }
 }
