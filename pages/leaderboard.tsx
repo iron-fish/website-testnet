@@ -51,11 +51,10 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
-      { name: 'Blocks Mined', value: 'BLOCK_MINED' },
-      { name: 'Bugs Caught', value: 'BUG_CAUGHT' },
-      { name: 'Promotions', value: 'SOCIAL_MEDIA_PROMOTION' },
-      { name: 'PRs Merged', value: 'PULL_REQUEST_MERGED' },
-      { name: 'Community Contributions', value: 'COMMUNITY_CONTRIBUTION' },
+      { name: 'Hosting a Node', value: 'NODE_HOSTED' },
+      { name: 'Bugs Found', value: 'BUG_CAUGHT' },
+      { name: 'Transactions Sent', value: 'TRANSACTION_SENT' },
+      { name: 'Pull Requests', value: 'PULL_REQUEST_MERGED' },
     ],
     validation: () => true,
     defaultErrorText,
@@ -64,7 +63,6 @@ const FIELDS = {
     defaultLabel: TOTAL_POINTS,
   },
 }
-const CTA = `Our incentivized testnet leaderboard shows you who the top point getters are for all-time score, miners, bug catchers, net promoters, node hosting, and more! Click someone’s user name to see a breakdown of their activity. Points are earned during weekly cycles which begin Monday, 12:00am UTC and end Sunday 11:59pm UTC.`
 
 const PAGINATION_LIMIT = 25
 
@@ -162,8 +160,26 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
         )}
       >
         <PageBanner
-          title="Testnet Leaderboard"
-          text={CTA}
+          title={
+            <>
+              Testnet Leaderboard
+              <br />
+              Phase 2.
+            </>
+          }
+          text={
+            <p>
+              Our incentivized testnet leaderboard shows you who the top point
+              getters are for all-time score, miners, bug catchers, net
+              promoters, node hosting and more! Click a user name to see a
+              breakdown of their activity.{' '}
+              <Link href="phase1.testnet.ironfish.network" passHref>
+                <a className="border-b border-black">
+                  View Phase 1 leaderboard
+                </a>
+              </Link>
+            </p>
+          }
           buttonText={!isLoggedIn ? 'Sign Up' : undefined}
           buttonLink={!isLoggedIn ? '/signup' : undefined}
           buttonClassName={clsx(
