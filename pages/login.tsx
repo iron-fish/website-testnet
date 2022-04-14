@@ -65,6 +65,11 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
   const [$error, $setError] = useState<string>(UNSET)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
+  useEffect(() => {
+    if ($queryEmail && FIELDS.email.validation($queryEmail) && $email) {
+      $email.setTouched(true)
+    }
+  }, [$queryEmail, $email])
   const textFields = [$email]
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
