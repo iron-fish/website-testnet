@@ -33,7 +33,6 @@ const FIELDS = {
     validation: validateEmail,
     defaultErrorText: `Valid email address required`,
     WHITESPACE: WHITESPACE.BANNED,
-    touched: false,
   },
 }
 type LoginProps = {
@@ -59,7 +58,6 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
   const $queryAutoLogin = useQuery('autoLogin')
   if ($queryEmail) {
     FIELDS.email.defaultValue = $queryEmail
-    FIELDS.email.touched = true
   }
   const [$msg, $setMessage] = useState<string>(UNSET)
   const [$error, $setError] = useState<string>(UNSET)
