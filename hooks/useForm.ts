@@ -74,8 +74,9 @@ export function useField(provided: ProvidedField): Field | null {
     touched: _touched = false,
   } = provided
   const touched = defaultValue ? true : _touched
-
   const initiallyValid = defaultValue ? validation(defaultValue) : false
+  // eslint-disable-next-line no-console
+  console.log({ defaultValue, touched, _touched, initiallyValid }, 'YO')
   const [$value, $setter] = useState<string>(defaultValue)
   const radioOption =
     defaultRadioOption || (options && options[0] && options[0].value)
@@ -88,7 +89,10 @@ export function useField(provided: ProvidedField): Field | null {
   const [, $setValid] = useState<boolean>(initiallyValid)
   const [$touched, $setTouched] = useState<boolean>(touched)
   // eslint-disable-next-line no-console
-  console.log({ defaultValue, touched, _touched, $touched, initiallyValid })
+  console.log(
+    { defaultValue, touched, _touched, $touched, initiallyValid },
+    'YO YO'
+  )
   const [$field, $setField] = useState<Field | null>(null)
   const [$error, $setError] = useState<string>(defaultErrorText)
   useEffect(() => {
