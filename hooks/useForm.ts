@@ -66,15 +66,15 @@ export function useField(provided: ProvidedField): Field | null {
     options,
     radioOption: defaultRadioOption,
     required = true,
-    touched = false,
     validation,
     whitespace = WHITESPACE.DEFAULT,
     placeholder,
     useDefault,
     controlled,
+    touched: _touched = false,
   } = provided
+  const touched = defaultValue ? true : _touched
   const [$value, $setter] = useState<string>(defaultValue)
-  // TODO: tried writing this with nullish coalescing but it yelled and I got tired
   const radioOption =
     defaultRadioOption || (options && options[0] && options[0].value)
   const banSpaces = whitespace === WHITESPACE.BANNED
@@ -83,7 +83,9 @@ export function useField(provided: ProvidedField): Field | null {
     isRadioed && radioOption ? radioOption : ''
   )
   const [$disabled, $setDisabled] = useState<boolean>(false)
-  const [, $setValid] = useState<boolean>(false)
+  const [, $setValid] = useState<boolean>(
+    defaultValue ? validation(defaultValue) : false
+  )
   const [$touched, $setTouched] = useState<boolean>(touched)
   const [$field, $setField] = useState<Field | null>(null)
   const [$error, $setError] = useState<string>(defaultErrorText)
