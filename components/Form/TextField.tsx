@@ -72,8 +72,6 @@ export const TextField = ({
   value,
   controlled = false,
 }: ControlledField) => {
-  // eslint-disable-next-line no-console
-  console.log({ valid, textField: 'text valid valid ?' })
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
   const controller = controlled ? { value: value } : {}
   const inputProps = {

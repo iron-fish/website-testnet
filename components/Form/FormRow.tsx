@@ -22,8 +22,6 @@ export const FormRow = ({
   disabled,
   children,
 }: FormRowProps) => {
-  // eslint-disable-next-line no-console
-  console.log({ formRow: 'formy form form', valid })
   const borderColor = getBorderColor(valid, disabled)
   const textColor = disabled ? 'text-ifsubtextgray' : ''
   return (
