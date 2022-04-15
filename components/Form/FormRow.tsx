@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 interface FormRowProps {
   className?: string
   valid: boolean
@@ -20,11 +22,30 @@ export const FormRow = ({
   disabled,
   children,
 }: FormRowProps) => {
+  // eslint-disable-next-line no-console
+  console.log({ formRow: 'formy form form', valid })
   const borderColor = getBorderColor(valid, disabled)
   const textColor = disabled ? 'text-ifsubtextgray' : ''
   return (
     <div
-      className={`font-favorit flex flex-col px-4 py-3 mt-4 w-full border rounded-plus border-solid h-16 max-h-16 max-w-md ${borderColor} ${textColor} ${className}`}
+      className={clsx(
+        'font-favorit',
+        'flex',
+        'flex-col',
+        'px-4',
+        'py-3',
+        'mt-4',
+        'w-full',
+        'border',
+        'rounded-plus',
+        'border-solid',
+        'h-16',
+        'max-h-16',
+        'max-w-md',
+        borderColor,
+        textColor,
+        className
+      )}
     >
       {children}
     </div>
