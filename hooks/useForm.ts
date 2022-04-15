@@ -86,7 +86,7 @@ export function useField(provided: ProvidedField): Field | null {
     isRadioed && radioOption ? radioOption : ''
   )
   const [$disabled, $setDisabled] = useState<boolean>(false)
-  const [, $setValid] = useState<boolean>(initiallyValid)
+  const [$valid, $setValid] = useState<boolean>(initiallyValid)
   const [$touched, $setTouched] = useState<boolean>(touched)
   // eslint-disable-next-line no-console
   console.log(
@@ -96,8 +96,15 @@ export function useField(provided: ProvidedField): Field | null {
   const [$field, $setField] = useState<Field | null>(null)
   const [$error, $setError] = useState<string>(defaultErrorText)
   useEffect(() => {
-    const valid = !$touched || ($touched && validation($value))
-    $setValid(valid)
+    if (defaultValue) {
+      $setTouched(true)
+      $setValid(validation(defaultValue))
+    } else {
+      const valid = !$touched || ($touched && validation($value))
+      $setValid(valid)
+    }
+  }, [$touched, defaultValue, validation, $value])
+  useEffect(() => {
     $setField({
       // raw values from upstream
       defaultErrorText,
@@ -108,7 +115,7 @@ export function useField(provided: ProvidedField): Field | null {
       label,
       radioOption: defaultRadioOption,
       options,
-      valid,
+      valid: $valid,
       validation,
       whitespace,
       placeholder,
@@ -116,7 +123,7 @@ export function useField(provided: ProvidedField): Field | null {
       // dynamic values
       choice: $choice,
       disabled: $disabled,
-      errorText: valid ? undefined : $error,
+      errorText: $valid ? undefined : $error,
       onChange: setStateOnChange($setter, trimSpaces),
       setChoice: $setChoice,
       setDisabled: $setDisabled,
@@ -139,6 +146,7 @@ export function useField(provided: ProvidedField): Field | null {
       controlled,
     })
   }, [
+    $valid,
     defaultLabel,
     defaultErrorText,
     defaultRadioOption,
