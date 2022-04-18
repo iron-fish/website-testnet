@@ -147,7 +147,7 @@ export default function User({ showNotification, loginContext }: Props) {
         }
         $setUser(user)
         // eslint-disable-next-line no-console
-        console.log({ events })
+        console.log({ events, allTimeMetrics, metricsConfig, weeklyMetrics })
         // this jams some new events at the top of every activity feed for debugging porpoises
         // and fudges some data for the metrics
         // TODO: REMOVE THIS BEFORE MERGING
