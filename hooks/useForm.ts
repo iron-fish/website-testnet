@@ -89,14 +89,9 @@ export function useField(provided: ProvidedField): Field | null {
   const [$field, $setField] = useState<Field | null>(null)
   const [$error, $setError] = useState<string>(defaultErrorText)
   useEffect(() => {
-    if (defaultValue) {
-      $setTouched(true)
-      $setValid(validation(defaultValue))
-    } else {
-      const valid = !$touched || ($touched && validation($value))
-      $setValid(valid)
-    }
-  }, [$touched, defaultValue, validation, $value])
+    const valid = !$touched || ($touched && validation($value))
+    $setValid(valid)
+  }, [$touched, validation, $value])
   useEffect(() => {
     $setField({
       // raw values from upstream
