@@ -27,7 +27,7 @@ export const CallToAction = ({
   title,
   points = [],
   kind = 'Earn Points By',
-  earn = 1000,
+  earn = 0,
   href,
   ctaText,
   status = Status.Active,
