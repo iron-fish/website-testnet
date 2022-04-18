@@ -153,7 +153,6 @@ export default function User({ showNotification, loginContext }: Props) {
             points: 100,
           }
           allTimeMetrics.metrics.transactions_sent = online
-          allTimeMetrics.metrics.node_online_hours = online
           const lastDate = events.data[0].occurred_at
           // eslint-disable-next-line
           // @ts-ignore

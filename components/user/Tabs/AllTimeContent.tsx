@@ -25,10 +25,8 @@ export default function AllTimeContent({
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
       <AllTimeMetricCard
         title="Hosted Node"
-        metric={allTimeMetrics.metrics.node_online_hours}
-        top={
-          allTimeMetrics.metrics.node_online_hours.count > 1 ? 'hours' : 'hour'
-        }
+        metric={allTimeMetrics.metrics.node_uptime}
+        top={allTimeMetrics.metrics.node_uptime.count > 1 ? 'hours' : 'hour'}
         bottomUnit="points"
       />
       <AllTimeMetricCard

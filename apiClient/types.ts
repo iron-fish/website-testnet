@@ -97,7 +97,7 @@ export type UserMetricsResponse = {
     community_contributions: UserMetric
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
-    node_online_hours: UserMetric
+    node_uptime: UserMetric
     transactions_sent: UserMetric
   }
   pools: {
