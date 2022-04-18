@@ -27,6 +27,8 @@ export function GenericMetricCard({
   info,
   verticalOffset = '',
 }: GenericMetricCardProps) {
+  // eslint-disable-next-line no-console
+  console.log({ metric })
   const [$over, $setOver] = useState(false)
   const value = metric.count.toLocaleString()
   const bottomContent = bottom
