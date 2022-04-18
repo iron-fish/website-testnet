@@ -30,8 +30,6 @@ export function GenericMetricCard(props: GenericMetricCardProps) {
     info,
     verticalOffset = '',
   } = props
-  // eslint-disable-next-line no-console
-  console.log({ metric, props })
   const [$over, $setOver] = useState(false)
   const value = useRank
     ? (metric.rank || 0).toLocaleString()
