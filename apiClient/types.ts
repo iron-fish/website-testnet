@@ -99,8 +99,10 @@ export type UserMetricsResponse = {
     social_media_contributions: UserMetric
     node_online_hours: UserMetric
     transactions_sent: UserMetric
-    pool_1_rank: UserMetric
-    pool_2_rank: UserMetric
+  }
+  pools: {
+    main: UserMetric
+    code: UserMetric
   }
 }
 

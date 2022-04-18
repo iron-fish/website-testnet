@@ -19,6 +19,7 @@ const summarizePhase = ({ pools }: { pools: Pool[] }) =>
 export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
+  const { code, main } = allTimeMetrics.pools
   const [pool1Info, pool2Info] = summarizePhase(phases[1])
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
@@ -44,16 +45,18 @@ export default function AllTimeContent({
       />
       <AllTimeMetricCard
         title="Pool 1 Rank"
-        metric={allTimeMetrics.metrics.pool_1_rank}
+        metric={main}
         showInfo
         info={pool1Info}
+        useRank
       />
       <AllTimeMetricCard
         title="Pool 2 Rank"
-        metric={allTimeMetrics.metrics.pool_2_rank}
+        metric={code}
         showInfo
         verticalOffset="-4.75rem"
         info={pool2Info}
+        useRank
       />
     </div>
   )

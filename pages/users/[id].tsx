@@ -119,8 +119,6 @@ export default function User({ showNotification, loginContext }: Props) {
           API.getUserWeeklyMetrics(userId),
           API.getMetricsConfig(),
         ])
-        // eslint-disable-next-line no-console
-        console.log({ raw })
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
         if (isCanceled) {
           return
@@ -146,8 +144,6 @@ export default function User({ showNotification, loginContext }: Props) {
           return
         }
         $setUser(user)
-        // eslint-disable-next-line no-console
-        console.log({ events, allTimeMetrics, metricsConfig, weeklyMetrics })
         // this jams some new events at the top of every activity feed for debugging porpoises
         // and fudges some data for the metrics
         // TODO: REMOVE THIS BEFORE MERGING
@@ -155,8 +151,8 @@ export default function User({ showNotification, loginContext }: Props) {
           const online = {
             count: rand(10),
             points: 100,
-            // rank: Math.round(Math.random() * 10),
           }
+          allTimeMetrics.metrics.transactions_sent = online
           allTimeMetrics.metrics.node_online_hours = online
           const lastDate = events.data[0].occurred_at
           // eslint-disable-next-line

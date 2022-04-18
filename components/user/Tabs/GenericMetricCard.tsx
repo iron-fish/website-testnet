@@ -15,22 +15,27 @@ type GenericMetricCardProps = {
   showInfo?: boolean
   info?: string
   verticalOffset?: string
+  useRank?: boolean
 }
 
-export function GenericMetricCard({
-  title,
-  metric,
-  top,
-  bottom,
-  bottomUnit = 'points',
-  showInfo = false,
-  info,
-  verticalOffset = '',
-}: GenericMetricCardProps) {
+export function GenericMetricCard(props: GenericMetricCardProps) {
+  const {
+    title,
+    metric,
+    top,
+    bottom,
+    useRank = false,
+    bottomUnit = 'points',
+    showInfo = false,
+    info,
+    verticalOffset = '',
+  } = props
   // eslint-disable-next-line no-console
-  console.log({ metric })
+  console.log({ metric, props })
   const [$over, $setOver] = useState(false)
-  const value = metric.count.toLocaleString()
+  const value = useRank
+    ? (metric.rank || 0).toLocaleString()
+    : (metric.count || 0).toLocaleString()
   const bottomContent = bottom
     ? bottom
     : metric.points.toLocaleString() + ' ' + bottomUnit
