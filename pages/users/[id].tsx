@@ -377,7 +377,7 @@ export default function User({ showNotification, loginContext }: Props) {
                 </div>
               </div>
               <div
-                className={clsx('flex', 'flex-col', 'w-full', 'mt-6', 'mb-6')}
+                className={clsx('flex', 'flex-col', 'w-1/2', 'mt-6', 'mb-6')}
               >
                 <div
                   className={clsx(
