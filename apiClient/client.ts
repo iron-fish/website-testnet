@@ -201,6 +201,8 @@ export async function login(email: string): Promise<any> {
         Authorization: `Bearer ${token}`,
       },
     })
+    // eslint-disable-next-line no-console
+    console.log({ token, auth })
     if (auth) {
       return { statusCode: 200, loaded: true }
     }
