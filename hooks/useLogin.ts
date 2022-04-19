@@ -61,6 +61,8 @@ export function useLogin(config: LoginProps = {}) {
         magic.user.getMetadata(),
         getUserDetails(token),
       ])
+      // eslint-disable-next-line no-console
+      console.log({ magicMd, details })
 
       if ('error' in details || details instanceof LocalError) {
         // this is a visible error and a breaking error
