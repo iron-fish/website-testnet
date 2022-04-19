@@ -156,11 +156,6 @@ export default function User({ showNotification, loginContext }: Props) {
         // and fudges some data for the metrics
         // TODO: REMOVE THIS BEFORE MERGING
         once(() => {
-          const online = {
-            count: rand(10),
-            points: 100,
-          }
-          allTimeMetrics.metrics.transactions_sent = online
           const lastDate = events.data[0].occurred_at
           // eslint-disable-next-line
           // @ts-ignore
