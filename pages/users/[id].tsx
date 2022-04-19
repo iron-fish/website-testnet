@@ -120,6 +120,14 @@ export default function User({ showNotification, loginContext }: Props) {
           API.getMetricsConfig(),
         ])
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
+        // eslint-disable-next-line no-console
+        console.log({
+          user,
+          events,
+          allTimeMetrics,
+          weeklyMetrics,
+          metricsConfig,
+        })
         if (isCanceled) {
           return
         }
