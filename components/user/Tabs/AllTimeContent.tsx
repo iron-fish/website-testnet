@@ -28,6 +28,11 @@ export default function AllTimeContent({
         metric={allTimeMetrics.metrics.node_uptime}
         top={allTimeMetrics.metrics.node_uptime.count > 1 ? 'hours' : 'hour'}
         bottomUnit="points"
+        subline={
+          <div className="text-xs text-iflightblue">
+            4 hours until next reward
+          </div>
+        }
       />
       <AllTimeMetricCard
         title="Transactions Sent"

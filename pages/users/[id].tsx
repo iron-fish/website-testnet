@@ -348,6 +348,19 @@ export default function User({ showNotification, loginContext }: Props) {
                       'w-full'
                     )}
                   >
+                    Phase 2
+                  </div>
+                  <div
+                    className={clsx(
+                      'mt-4',
+                      'flex',
+                      'flex-row',
+                      'items-center',
+                      'justify-center',
+                      'h-6',
+                      'w-full'
+                    )}
+                  >
                     <Flag code={$user.country_code} />
                     <a
                       className="twitter-share-button"

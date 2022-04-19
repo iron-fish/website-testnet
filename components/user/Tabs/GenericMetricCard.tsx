@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 
 import * as API from 'apiClient'
 import styles from './GenericMetricCard.module.css'
@@ -16,6 +16,7 @@ type GenericMetricCardProps = {
   info?: string
   verticalOffset?: string
   useRank?: boolean
+  subline?: ReactNode
 }
 
 export function GenericMetricCard(props: GenericMetricCardProps) {
@@ -29,6 +30,7 @@ export function GenericMetricCard(props: GenericMetricCardProps) {
     showInfo = false,
     info,
     verticalOffset = '',
+    subline = <div className="mb-4" />,
   } = props
   const [$over, $setOver] = useState(false)
   if (!metric) {
@@ -94,6 +96,7 @@ export function GenericMetricCard(props: GenericMetricCardProps) {
               </div>
             )}
           </div>
+          {subline}
         </div>
       </OffsetBorderBox>
     </>
