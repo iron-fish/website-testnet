@@ -31,6 +31,9 @@ export function GenericMetricCard(props: GenericMetricCardProps) {
     verticalOffset = '',
   } = props
   const [$over, $setOver] = useState(false)
+  if (!metric) {
+    return <>{title} - Data Missing</>
+  }
   const value = useRank
     ? (metric.rank || 0).toLocaleString()
     : (metric.count || 0).toLocaleString()
