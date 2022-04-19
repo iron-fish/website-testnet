@@ -35,8 +35,8 @@ interface Props {
   showNotification: boolean
   loginContext: LoginContext
 }
-const sumValues = (x: Record<string, number>) =>
-  Object.values(x).reduce((a, b) => a + b, 0)
+// const sumValues = (x: Record<string, number>) =>
+//   Object.values(x).reduce((a, b) => a + b, 0)
 
 type LabeledProps = {
   value: string
@@ -239,11 +239,12 @@ export default function User({ showNotification, loginContext }: Props) {
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
-
+  /*
   const totalWeeklyLimit = sumValues(
     $metricsConfig.weekly_limits
   ).toLocaleString()
   const weeklyPoints = $weeklyMetrics.points.toLocaleString()
+   */
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
@@ -387,14 +388,10 @@ export default function User({ showNotification, loginContext }: Props) {
                     'justify-between'
                   )}
                 >
-                  <LabeledStat label="All Time Rank" value={ordinalRank} />
+                  <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
                   <LabeledStat
-                    label="Total Points"
+                    label="Phase 2 Points"
                     value={$user.total_points.toLocaleString()}
-                  />
-                  <LabeledStat
-                    label="Weekly Points"
-                    value={`${weeklyPoints} / ${totalWeeklyLimit}`}
                   />
                 </div>
               </div>
