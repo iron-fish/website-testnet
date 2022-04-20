@@ -1,47 +1,33 @@
-import { useState, ReactNode } from 'react'
+import { useState } from 'react'
 
 import * as API from 'apiClient'
 import styles from './GenericMetricCard.module.css'
 import { Box as OffsetBorderBox } from 'components/OffsetBorder'
 import Info from 'components/icons/Info'
 import clsx from 'clsx'
+import GenericCardProps from './types'
 
-type GenericMetricCardProps = {
-  metric: API.UserMetric
-  title: string
-  top?: string
-  bottom?: string
-  bottomUnit?: string
-  showInfo?: boolean
-  info?: string
-  verticalOffset?: string
-  useRank?: boolean
-  subline?: ReactNode
+interface GenericUptimeCardProps extends Omit<GenericCardProps, 'bottom'> {
+  timeData: API.TimeData
 }
 
-export function GenericMetricCard(props: GenericMetricCardProps) {
-  const {
-    title,
-    metric,
-    top,
-    bottom,
-    useRank = false,
-    bottomUnit = 'points',
-    showInfo = false,
-    info,
-    verticalOffset = '',
-    subline = <div className="mb-4" />,
-  } = props
+export function GenericUptimeCard({
+  title,
+  top,
+  bottomUnit = 'points',
+  showInfo = false,
+  info,
+  verticalOffset = '',
+  subline = <div className="mb-4" />,
+  timeData,
+}: GenericUptimeCardProps) {
   const [$over, $setOver] = useState(false)
-  if (!metric) {
+  if (!timeData) {
     return <>{title} - Data Missing</>
   }
-  const value = useRank
-    ? (metric.rank || 0).toLocaleString()
-    : (metric.count || 0).toLocaleString()
-  const bottomContent = bottom
-    ? bottom
-    : metric.points.toLocaleString() + ' ' + bottomUnit
+  const totalHours = (timeData.total_hours || 0) * 12
+  const bottomContent = totalHours + ' ' + bottomUnit
+  const value = totalHours.toLocaleString()
   const styleData = verticalOffset ? (
     <style>{`
   .customOffset::before {
@@ -103,4 +89,4 @@ export function GenericMetricCard(props: GenericMetricCardProps) {
   )
 }
 
-export default GenericMetricCard
+export default GenericUptimeCard

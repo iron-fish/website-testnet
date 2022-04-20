@@ -1,7 +1,8 @@
 import React from 'react'
 
 import * as API from 'apiClient'
-import AllTimeMetricCard from './GenericMetricCard'
+import AllTimeMetricCard from '../GenericMetricCard'
+import TimeCard from '../TimeCard'
 import { phases, Pool } from 'components/About/data'
 
 type AllTimeContentProps = {
@@ -16,21 +17,27 @@ const summarizePhase = ({ pools }: { pools: Pool[] }) =>
     (pool, i) => `Pool ${i + 1} categories include:\n- ${summarizePool(pool)}`
   )
 
+const plural = (x: string) => (n: number) => n > 1 ? x + 's' : x
+
 export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
   const { code, main } = allTimeMetrics.pools
   const [pool1Info, pool2Info] = summarizePhase(phases[1])
+  const totalHours = allTimeMetrics.node_uptime.total_hours
+  const timeUntilReward = 12 - totalHours
+  const pluralHours = plural('hour')
+  const rewardUnits = pluralHours(timeUntilReward)
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
-      <AllTimeMetricCard
+      <TimeCard
         title="Hosted Node"
-        metric={allTimeMetrics.metrics.node_uptime}
-        top={allTimeMetrics.metrics.node_uptime.count > 1 ? 'hours' : 'hour'}
+        timeData={allTimeMetrics.node_uptime}
+        top={pluralHours(totalHours)}
         bottomUnit="points"
         subline={
           <div className="text-xs text-iflightblue">
-            4 hours until next reward
+            {`${timeUntilReward} ${rewardUnits} until next reward`}
           </div>
         }
       />

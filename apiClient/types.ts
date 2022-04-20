@@ -87,6 +87,11 @@ export type UserMetric = {
   rank?: number
 }
 
+export type TimeData = {
+  last_checked_in?: number
+  total_hours: number
+}
+
 export type UserMetricsResponse = {
   user_id: number
   granularity: 'lifetime' | 'total'
@@ -97,9 +102,9 @@ export type UserMetricsResponse = {
     community_contributions: UserMetric
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
-    node_uptime: UserMetric
     send_transaction: UserMetric
   }
+  node_uptime: TimeData
   pools: {
     main: UserMetric
     code: UserMetric
