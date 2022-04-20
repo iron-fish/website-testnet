@@ -36,7 +36,7 @@ export default function AllTimeContent({
       />
       <AllTimeMetricCard
         title="Transactions Sent"
-        metric={allTimeMetrics.metrics.transactions_sent}
+        metric={allTimeMetrics.metrics.send_transaction}
       />
       <AllTimeMetricCard
         title="Bugs Caught"
