@@ -102,15 +102,15 @@ export const callsToAction = {
       title: 'Hosting a node',
       content:
         'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
-      points: ['12 hours of continuous uptime = 100 points'],
+      points: ['12 hours of continuous uptime = 10 points'],
       status: Status.New,
       ctaText: 'Set up instructions',
-      href: 'https://coda.io/d/_dngSKECR9gO/Phase-2-FAQ_suBOW',
+      href: '[FAQ LINK]',
     },
     {
       title: 'Submit a Pull Request',
       content:
-        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
+        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged.',
       points: [
         'Small = 250 points',
         'Medium = 500 points',
@@ -136,7 +136,7 @@ export const callsToAction = {
       ),
       points: ['10 points for a transaction over 0.1 coins'],
       ctaText: 'Learn more',
-      href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
+      href: '[FAQ LINK]',
       status: Status.New,
     },
     {

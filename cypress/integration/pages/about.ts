@@ -45,7 +45,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Set up instructions',
-        href: 'https://coda.io/d/_dngSKECR9gO/Phase-2-FAQ_suBOW',
+        href: '[FAQ LINK]',
       },
       {
         isImage: false,
