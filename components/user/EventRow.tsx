@@ -54,25 +54,25 @@ const NEEDS_ICON = '🤨'
 export function displayEventType(type: EventType): IconText {
   const text = (
     <div>
-      {type === 'BLOCK_MINED' ? (
+      {type === EventType.BLOCK_MINED ? (
         <>Mined a block</>
-      ) : type === 'BUG_CAUGHT' ? (
+      ) : type === EventType.BUG_CAUGHT ? (
         <>Reported a bug</>
-      ) : type === 'COMMUNITY_CONTRIBUTION' ? (
+      ) : type === EventType.COMMUNITY_CONTRIBUTION ? (
         <>
           <SmallOnly>Community contribution</SmallOnly>
           <Verbose>Contributed to the community</Verbose>
         </>
-      ) : type === 'PULL_REQUEST_MERGED' ? (
+      ) : type === EventType.PULL_REQUEST_MERGED ? (
         <>
           Submitted a <SmallOnly>PR</SmallOnly>
           <Verbose>Pull Request</Verbose>
         </>
-      ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
+      ) : type === EventType.SOCIAL_MEDIA_PROMOTION ? (
         <>Promoted testnet</>
-      ) : type === 'NODE_HOSTED' ? (
+      ) : type === EventType.NODE_HOSTED ? (
         <>Hosted a node</>
-      ) : type === 'TRANSACTION_SENT' ? (
+      ) : type === EventType.TRANSACTION_SENT ? (
         <>Transaction Sent</>
       ) : (
         type
@@ -80,19 +80,19 @@ export function displayEventType(type: EventType): IconText {
     </div>
   )
   const icon =
-    type === 'BLOCK_MINED' ? (
+    type === EventType.BLOCK_MINED ? (
       <ActivityBlockMined />
-    ) : type === 'BUG_CAUGHT' ? (
+    ) : type === EventType.BUG_CAUGHT ? (
       <ActivityBugReported />
-    ) : type === 'COMMUNITY_CONTRIBUTION' ? (
+    ) : type === EventType.COMMUNITY_CONTRIBUTION ? (
       <ActivityCommunityContribution />
-    ) : type === 'PULL_REQUEST_MERGED' ? (
+    ) : type === EventType.PULL_REQUEST_MERGED ? (
       <ActivityPullRequest />
-    ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
+    ) : type === EventType.SOCIAL_MEDIA_PROMOTION ? (
       <ActivitySocial />
-    ) : type === 'NODE_HOSTED' ? (
+    ) : type === EventType.NODE_HOSTED ? (
       <ActivityNodeHosted />
-    ) : type === 'TRANSACTION_SENT' ? (
+    ) : type === EventType.TRANSACTION_SENT ? (
       <ActivityTransactionSent />
     ) : (
       NEEDS_ICON
@@ -184,6 +184,9 @@ const summarizeEvent = (
   type: EventType,
   metadata: ApiEventMetadata
 ): ReactElement | boolean => {
+  if (type === EventType.NODE_HOSTED) {
+    return false
+  }
   if (type === EventType.BLOCK_MINED) {
     // return 'View in the explorer'
     const { hash } = metadata as ApiEventMetadataBlockMined
@@ -225,8 +228,6 @@ const summarizeEvent = (
         <Verbose>Promoted on {hostname}</Verbose>
       </>
     )
-  } else if (type === EventType.NODE_HOSTED) {
-    return false
   } else if (type === EventType.TRANSACTION_SENT) {
     return (
       <>
