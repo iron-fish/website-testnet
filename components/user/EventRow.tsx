@@ -8,6 +8,8 @@ import ActivityPullRequest from 'components/icons/ActivityPullRequest'
 import ActivityCopy from 'components/icons/ActivityCopy'
 import ActivityCommunityContribution from 'components/icons/ActivityCommunityContribution'
 import ActivitySocial from 'components/icons/ActivitySocial'
+import ActivityTransactionSent from 'components/icons/ActivityTransactionSent'
+import ActivityNodeHosted from 'components/icons/ActivityNodeHosted'
 import ChevronRight from 'components/icons/ChevronRight'
 import { Verbose, SmallOnly } from 'components/Responsive'
 
@@ -17,6 +19,7 @@ import {
   ApiEventMetadata,
   ApiEventMetadataBlockMined,
   ApiEventMetadataWithLink,
+  ApiEventMetadataTransactionSent,
 } from 'apiClient'
 
 import {
@@ -27,6 +30,22 @@ import {
 
 import styles from './EventRow.module.css'
 
+// eslint-disable-next-line
+const once = (fn: any) => {
+  // eslint-disable-next-line
+  // @ts-ignore
+  let y
+  // eslint-disable-next-line
+  // @ts-ignore
+  const c = (...args) => {
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (y) return y
+    y = fn(...args)
+  }
+  return c
+}
+
 interface IconText {
   icon: ReactElement | string
   text: ReactElement | string
@@ -35,38 +54,46 @@ const NEEDS_ICON = '🤨'
 export function displayEventType(type: EventType): IconText {
   const text = (
     <div>
-      {type === 'BLOCK_MINED' ? (
+      {type === EventType.BLOCK_MINED ? (
         <>Mined a block</>
-      ) : type === 'BUG_CAUGHT' ? (
+      ) : type === EventType.BUG_CAUGHT ? (
         <>Reported a bug</>
-      ) : type === 'COMMUNITY_CONTRIBUTION' ? (
+      ) : type === EventType.COMMUNITY_CONTRIBUTION ? (
         <>
           <SmallOnly>Community contribution</SmallOnly>
           <Verbose>Contributed to the community</Verbose>
         </>
-      ) : type === 'PULL_REQUEST_MERGED' ? (
+      ) : type === EventType.PULL_REQUEST_MERGED ? (
         <>
           Submitted a <SmallOnly>PR</SmallOnly>
           <Verbose>Pull Request</Verbose>
         </>
-      ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
+      ) : type === EventType.SOCIAL_MEDIA_PROMOTION ? (
         <>Promoted testnet</>
+      ) : type === EventType.NODE_HOSTED ? (
+        <>Hosted a node</>
+      ) : type === EventType.TRANSACTION_SENT ? (
+        <>Transaction Sent</>
       ) : (
         type
       )}
     </div>
   )
   const icon =
-    type === 'BLOCK_MINED' ? (
+    type === EventType.BLOCK_MINED ? (
       <ActivityBlockMined />
-    ) : type === 'BUG_CAUGHT' ? (
+    ) : type === EventType.BUG_CAUGHT ? (
       <ActivityBugReported />
-    ) : type === 'COMMUNITY_CONTRIBUTION' ? (
+    ) : type === EventType.COMMUNITY_CONTRIBUTION ? (
       <ActivityCommunityContribution />
-    ) : type === 'PULL_REQUEST_MERGED' ? (
+    ) : type === EventType.PULL_REQUEST_MERGED ? (
       <ActivityPullRequest />
-    ) : type === 'SOCIAL_MEDIA_PROMOTION' ? (
+    ) : type === EventType.SOCIAL_MEDIA_PROMOTION ? (
       <ActivitySocial />
+    ) : type === EventType.NODE_HOSTED ? (
+      <ActivityNodeHosted />
+    ) : type === EventType.TRANSACTION_SENT ? (
+      <ActivityTransactionSent />
     ) : (
       NEEDS_ICON
     )
@@ -90,6 +117,7 @@ const makeLinkForEvent = (type: EventType, metadata?: ApiEventMetadata) => {
 
 type CopyableHashProps = {
   hash: string
+  unit?: string
 }
 
 enum CopyState {
@@ -99,7 +127,7 @@ enum CopyState {
   RESETTING = 'copy_resetting',
 }
 
-const CopyableHash = ({ hash }: CopyableHashProps) => {
+const CopyableHash = ({ hash, unit = 'Block' }: CopyableHashProps) => {
   const [, $setCopied] = useClipboard(hash, {
     successDuration: 1000,
   })
@@ -142,7 +170,7 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
     >
       <>
         <Verbose defaultClassName="md:flex" className={clsx('items-center')}>
-          Block{' '}
+          {unit}{' '}
           <span className={clsx('ml-2', styles.truncatedHash)}>{hash}</span>
           <ActivityCopy className="ml-4" />
         </Verbose>
@@ -155,11 +183,18 @@ const CopyableHash = ({ hash }: CopyableHashProps) => {
 const summarizeEvent = (
   type: EventType,
   metadata: ApiEventMetadata
-): ReactElement => {
+): ReactElement | boolean => {
+  if (type === EventType.NODE_HOSTED) {
+    return false
+  }
   if (type === EventType.BLOCK_MINED) {
     // return 'View in the explorer'
     const { hash } = metadata as ApiEventMetadataBlockMined
     return <CopyableHash hash={hash} />
+  }
+  if (type === EventType.TRANSACTION_SENT) {
+    const { hash } = metadata as ApiEventMetadataTransactionSent
+    return <CopyableHash hash={hash} unit="Txn" />
   }
   const { url } = metadata as ApiEventMetadataWithLink
   const link = new URL(url)
@@ -193,6 +228,12 @@ const summarizeEvent = (
         <Verbose>Promoted on {hostname}</Verbose>
       </>
     )
+  } else if (type === EventType.TRANSACTION_SENT) {
+    return (
+      <>
+        View<Verbose className="ml-1">transaction</Verbose>
+      </>
+    )
   }
   return <>UNHANDLED: {type}</>
 }
@@ -212,6 +253,7 @@ export const EventRow = ({
     </div>
   )
   const formattedDate = formatEventDate(new Date(occurredAt))
+  const eventSummary = metadata && summarizeEvent(type, metadata)
   return (
     <tr className={clsx('border-b', 'border-black')}>
       <td
@@ -244,8 +286,8 @@ export const EventRow = ({
           rel="noreferrer"
         >
           <>
-            {metadata && summarizeEvent(type, metadata)}
-            <ChevronRight />
+            {eventSummary}
+            {eventSummary && <ChevronRight />}
           </>
         </a>
       </td>
