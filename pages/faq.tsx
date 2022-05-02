@@ -34,19 +34,22 @@ const questions: ReadonlyArray<{
           <span className="underline">
             {' '}
             <Link href="/about"> for different actions</Link>
-          </span>{' '} - you get points for hosting a node and making transactions,
-          and you no longer get points directly for mining tokens. The other categories for points remain the same.
+          </span>{' '}
+          - you get points for hosting a node and making transactions, and you
+          no longer get points directly for mining tokens. The other categories
+          for points remain the same.
         </li>
         <li>
-          Additionally, we have added a number of commands to the CLI to make participating in the testnet simpler - these
-          will help you set up your graffiti and telemetry. Run <code>ironfish testnet</code> to set up your node to be ready for testnet.
-          Check out our {' '}
+          Additionally, we have added a number of commands to the CLI to make
+          participating in the testnet simpler - these will help you set up your
+          graffiti and telemetry. Run <code>ironfish testnet</code> to set up
+          your node to be ready for testnet. Check out our{' '}
           <span className="underline">
             <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
               getting started
             </Link>
-          </span> {' '}
-           for more details!
+          </span>{' '}
+          for more details!
         </li>
       </div>
     ),
@@ -57,13 +60,16 @@ const questions: ReadonlyArray<{
     answer: (
       <div>
         <li>
-          De-incentivizing direct mining gives you the opportunity to join a mining pool and earn proportional
-          shares of blocks mined by a group of miners. No more need for a crazy mining rig - just join up with a
-          number of other miners and get a proportional share of the new tokens mined!
+          De-incentivizing direct mining gives you the opportunity to join a
+          mining pool and earn proportional shares of blocks mined by a group of
+          miners. No more need for a crazy mining rig - just join up with a
+          number of other miners and get a proportional share of the new tokens
+          mined!
         </li>
         <li>
-          And if you do have that amazing mining rig, don’t worry - you will still be able to earn lots of
-          points by making large transactions with the Iron Bank.
+          And if you do have that amazing mining rig, don’t worry - you will
+          still be able to earn lots of points by making large transactions with
+          the Iron Bank.
         </li>
       </div>
     ),
@@ -77,7 +83,8 @@ const questions: ReadonlyArray<{
         <span className="underline">
           {' '}
           <Link href="/about">Phase 2 info page here</Link>
-        </span>{'.'}
+        </span>
+        {'.'}
       </div>
     ),
   },
@@ -113,21 +120,29 @@ const questions: ReadonlyArray<{
         You can see our point structure by viewing the{' '}
         <span className="underline">
           {' '}
-          <Link href="https://phase1.testnet.ironfish.network/leaderboard">found here</Link>
-        </span>{'.'}
+          <Link href="https://phase1.testnet.ironfish.network/leaderboard">
+            found here
+          </Link>
+        </span>
+        {'.'}
       </div>
-    )
+    ),
   },
   {
     question: `What is graffiti? How do I set it up?`,
     id: `graffiti-set-up`,
     answer: (
       <div>
-        Graffiti is your personal identifier. You need to set it up to get credited for your participation in the testnet. We suggest using our new testnet CLI commands to ensure everything is properly set <code>ironfish testnet</code>. See the {' '}
+        Graffiti is your personal identifier. You need to set it up to get
+        credited for your participation in the testnet. We suggest using our new
+        testnet CLI commands to ensure everything is properly set{' '}
+        <code>ironfish testnet</code>. See the{' '}
         <span className="underline">
-          {' '}
-          <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">getting started </Link>
-        </span>{' '}for more details.
+          <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
+            getting started
+          </Link>
+        </span>{' '}
+        for more details.
       </div>
     ),
   },
@@ -136,11 +151,13 @@ const questions: ReadonlyArray<{
     id: `different graffiti`,
     answer: (
       <div>
-        Points can only be earned for blocks with the same graffiti as your testnet account. You must  {' '}
+        Points can only be earned for blocks with the same graffiti as your
+        testnet account. You must{' '}
         <span className="underline">
           {' '}
           <Link href="/signup">register </Link>
-        </span>{' '}with your graffiti before you can start earning points.
+        </span>{' '}
+        with your graffiti before you can start earning points.
       </div>
     ),
   },
