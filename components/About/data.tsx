@@ -105,7 +105,7 @@ export const callsToAction = {
       points: ['12 hours of continuous uptime = 10 points'],
       status: Status.New,
       ctaText: 'Set up instructions',
-      href: '[FAQ LINK]',
+      href: '/faq',
     },
     {
       title: 'Submit a Pull Request',
@@ -136,7 +136,7 @@ export const callsToAction = {
       ),
       points: ['10 points for a transaction over 0.1 coins'],
       ctaText: 'Learn more',
-      href: '[FAQ LINK]',
+      href: '/faq',
       status: Status.New,
     },
     {
@@ -145,7 +145,7 @@ export const callsToAction = {
         'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
-      // href: 'https://github.com/iron-fish/ironfish/issues',
+      href: 'https://github.com/iron-fish/ironfish/issues',
       submissionForm: false,
       status: Status.Active,
     },
