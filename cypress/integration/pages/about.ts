@@ -44,8 +44,23 @@ describe('/about', () => {
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
+        text: 'Set up instructions',
+        href: '[FAQ LINK]',
+      },
+      {
+        isImage: false,
+        text: 'Submit a PR',
+        href: 'https://github.com/iron-fish/ironfish/pulls',
+      },
+      {
+        isImage: false,
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
+      },
+      {
+        isImage: false,
+        text: 'Learn more',
+        href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
       },
       {
         isImage: false,
