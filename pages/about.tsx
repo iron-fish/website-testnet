@@ -101,12 +101,10 @@ export default function About({ showNotification, loginContext }: AboutProps) {
             <>
               Incentivized Testnet
               <br />
-              Welcome to Phase 2.
+              Introducing Phase 2.
             </>
           }
-          text={`Get ready to claim your share of ${cumulativePoolSize(
-            phases[1].pools
-          )} $IRON! To make Phase 2 fair, we’ve removed weekly limits on point earnings. We’re also introducing a new leaderboard; but don’t worry, all accumulated Phase 1 points will still count to your overall score. You can earn $IRON in a few different ways:`}
+          text={`Learn more about Phase 2 of the incentivized testnet! Sign up now to help make Iron Fish great 💖. To participate & earn testnet points, view guidelines below for more details.`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
