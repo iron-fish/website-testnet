@@ -105,7 +105,7 @@ export const callsToAction = {
       points: ['12 hours of continuous uptime = 10 points'],
       status: Status.New,
       ctaText: 'Set up instructions',
-      href: '/faq',
+      href: '/faq#node-points',
     },
     {
       title: 'Submit a Pull Request',
@@ -136,7 +136,7 @@ export const callsToAction = {
       ),
       points: ['10 points for a transaction over 0.1 coins'],
       ctaText: 'Learn more',
-      href: '/faq',
+      href: '/faq#transaction-points',
       status: Status.New,
     },
     {
