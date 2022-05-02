@@ -96,6 +96,46 @@ const questions: ReadonlyArray<{
       mainnet launch of $IRON.`,
   },
   {
+    question: `How do I host a node in a way that earns me points?`,
+    id: `node-points`,
+    answer: (
+      <div>
+        <li>
+          First, run <code>ironfish testnet</code> to configure your node with
+          proper graffiti and telemetry settings.
+        </li>
+        <li>
+          Then, run <code>ironfish start</code> and leave that process running.
+        </li>
+        <li>That’s it - you will gain points every 12 hours.</li>
+      </div>
+    ),
+  },
+  {
+    question: `How do I send a transaction to earn points?`,
+    id: `transaction-points`,
+    answer: (
+      <div>
+        <li>
+          First, mine some $IRON. You can do this by running either your own
+          miner or joining a mining pool. You can view the{' '}
+          <span className="underline">
+            {' '}
+            <Link href="https://ironfish.network/docs/onboarding/miner-iron-fish#set-block-graffiti-optional">
+              options here
+            </Link>
+          </span>
+          {'.'}
+        </li>
+        <li>
+          Then, you may send the $IRON to our Iron Bank transaction processing
+          node by running <code>ironfish deposit</code>.
+        </li>
+        <li>You recieve points for every transaction of 0.1 $IRON.</li>
+      </div>
+    ),
+  },
+  {
     question: `Will there be a KYC process for participants in order to claim coins?`,
     id: 'kyc-process',
     answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
@@ -168,7 +208,7 @@ const questions: ReadonlyArray<{
   },
   {
     question: `Will there be weekly limits on earning points?`,
-    id: 'account-transfer',
+    id: 'weekly-limits',
     answer: `No - we have removed weekly point limits in Phase 2.`,
   },
   {
