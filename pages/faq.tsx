@@ -76,7 +76,7 @@ const questions: ReadonlyArray<{
   },
   {
     question: `How are you rewarding points?`,
-    id: `how-points`,
+    id: `how-do-i-get-points`,
     answer: (
       <div>
         You can see our point structure by viewing the{' '}
@@ -188,7 +188,7 @@ const questions: ReadonlyArray<{
   },
   {
     question: `Can I claim points for blocks under a different graffiti than the one I registered with? `,
-    id: `different graffiti`,
+    id: `different-graffiti`,
     answer: (
       <div>
         Points can only be earned for blocks with the same graffiti as your
