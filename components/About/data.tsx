@@ -101,27 +101,24 @@ export const callsToAction = {
     {
       title: 'Hosting a node',
       content:
-        'Hosting a node using your graffiti automatically earns you points. You will only be rewarded points for hosting one node.',
-      points: ['12 hours = 100 points'],
+        'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
+      points: ['12 hours of continuous uptime = 10 points'],
       status: Status.New,
-      earn: 0,
-      disabled: true,
+      ctaText: 'Set up instructions',
+      href: '/faq#node-points',
     },
     {
       title: 'Submit a Pull Request',
       content:
-        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged. Fill out the form to claim your points after your PR is merged.',
-      earn: 0,
+        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged.',
       points: [
         'Small = 250 points',
         'Medium = 500 points',
         'Large = 1000 points',
       ],
       ctaText: 'Submit a PR',
-      // href: 'https://github.com/iron-fish/ironfish/pulls',
-      submissionForm: false,
+      href: 'https://github.com/iron-fish/ironfish/pulls',
       status: Status.Active,
-      disabled: true,
     },
   ],
   columnTwo: [
@@ -129,20 +126,18 @@ export const callsToAction = {
       title: `Sending a transaction`,
       content: (
         <>
-          Sending your mined $IRON earns you points. Use command{' '}
+          For every transaction you send to the Iron Bank of over 0.1 coins, you
+          get 10 points. To make this easier, we made a command that
+          automatically sends this transaction for you:
           <pre className="bg-iflightgray inline p-1 font-favorit">
-            send_transaction
+            ironfish deposit
           </pre>
-          . You get 1 point for each iron you send, as long as you send at least
-          1 iron.
         </>
       ),
-      points: ['1 $IRON sent = 1 point (minimum 1 $IRON)'],
-      ctaText: 'Get started with mining',
-      // href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
+      points: ['10 points for a transaction over 0.1 coins'],
+      ctaText: 'Learn more',
+      href: '/faq#transaction-points',
       status: Status.New,
-      earn: 0,
-      disabled: true,
     },
     {
       title: 'Finding Bugs',
@@ -150,11 +145,9 @@ export const callsToAction = {
         'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue ',
-      // href: 'https://github.com/iron-fish/ironfish/issues',
+      href: 'https://github.com/iron-fish/ironfish/issues',
       submissionForm: false,
       status: Status.Active,
-      earn: 0,
-      disabled: true,
     },
   ],
 }
