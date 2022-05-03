@@ -1,9 +1,13 @@
 import { useProtectedRoute } from 'hooks/useProtectedRoute'
 import { useState, useEffect } from 'react'
 import Debug from 'components/Debug'
-import { PageProps } from 'components/page-types'
+import { LoginContext } from 'hooks/useLogin'
 
-const Test = ({ loginContext }: PageProps) => {
+type UserDebugProps = {
+  loginContext: LoginContext
+}
+
+const Test = ({ loginContext }: UserDebugProps) => {
   // eslint-disable-next-line
   const [$time, $setTime] = useState<number>(Date.now())
   const [$elapsed, $setElapsed] = useState<number>(0)

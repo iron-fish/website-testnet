@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { RawButton } from '../Button'
 
 type PageBannerProps = {
-  title: string
+  title: ReactNode
   text: ReactNode
   buttonText?: string
   buttonClassName?: string

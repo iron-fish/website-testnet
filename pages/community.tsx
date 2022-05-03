@@ -6,11 +6,18 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
 import TubesCTA from 'components/FooterCTA'
-import { PageProps } from 'components/page-types'
+import { LoginContext } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'
+type CommunityProps = {
+  showNotification: boolean
+  loginContext: LoginContext
+}
 
-export default function Community({ loginContext }: PageProps) {
+export default function Community({
+  showNotification,
+  loginContext,
+}: CommunityProps) {
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
@@ -19,6 +26,7 @@ export default function Community({ loginContext }: PageProps) {
       </Head>
 
       <Navbar
+        showNotification={showNotification}
         fill="black"
         className={clsx('bg-ifbeige', 'text-black')}
         loginContext={loginContext}

@@ -1,18 +1,33 @@
 import React from 'react'
+import clsx from 'clsx'
 
 import TestnetGridElement from './TestnetGridElement'
 import SectionHeader from './SectionHeader'
 
 type CompanyProps = {
   condensed?: boolean
+  showNotification?: boolean
 }
 
-function Company({ condensed = false }: CompanyProps) {
-  const elementClassName = `p-2 lg:p-4 lg:mr-4 ${condensed ? '' : 'mr-2'}`
-  const textClassName = `lg:ml-4 ${condensed ? 'ml-4' : 'ml-2'}`
+function Company({ showNotification, condensed = false }: CompanyProps) {
+  const elementClassName = clsx(
+    'p-2',
+    'lg:p-4',
+    'lg:mr-4',
+    condensed ? '' : 'mr-2'
+  )
+  const textClassName = clsx('lg:ml-4', condensed ? 'ml-4' : 'ml-2')
   const className = condensed
-    ? 'bg-white z-40 w-full'
-    : 'absolute bg-white left-0 right-0 shadow-navbar z-40 top-5.5'
+    ? clsx('bg-white', 'z-40', 'w-full')
+    : clsx(
+        'absolute',
+        'bg-white',
+        'left-0',
+        'right-0',
+        'shadow-navbar',
+        'z-40',
+        showNotification ? 'top-[9.5rem]' : 'top-5.5'
+      )
   return (
     <div className="flex">
       <div

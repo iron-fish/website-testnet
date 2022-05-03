@@ -9,6 +9,7 @@ import Company from './Company'
 import Testnet from './Testnet'
 
 type NavbarLinksProps = {
+  showNotification?: boolean
   className?: string
   companyClicked?: () => unknown
   companyHovered?: () => unknown
@@ -32,6 +33,7 @@ export function NavbarLinks({
   testnetHovered,
   testnetVisible = false,
   loginContext,
+  showNotification = false,
 }: NavbarLinksProps) {
   const itemPadding = [`px-2`, `lg:px-3.5`, `3xl:px-5`]
   const cc = clsx([className, ...itemPadding])
@@ -55,7 +57,9 @@ export function NavbarLinks({
         enter={companyHovered}
         condensed={condensed}
       >
-        {companyVisible && <Company condensed={condensed} />}
+        {companyVisible && (
+          <Company showNotification={showNotification} condensed={condensed} />
+        )}
       </SubnavButton>
       <SubnavButton
         label="Testnet"
@@ -65,7 +69,9 @@ export function NavbarLinks({
         enter={testnetHovered}
         condensed={condensed}
       >
-        {testnetVisible && <Testnet condensed={condensed} />}
+        {testnetVisible && (
+          <Testnet showNotification={showNotification} condensed={condensed} />
+        )}
       </SubnavButton>
       <LoginButton loginContext={loginContext} />
     </>

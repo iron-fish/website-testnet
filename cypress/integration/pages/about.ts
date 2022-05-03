@@ -44,8 +44,13 @@ describe('/about', () => {
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
-        text: 'examples.',
-        href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
+        text: 'Set up instructions',
+        href: '/faq#node-points',
+      },
+      {
+        isImage: false,
+        text: 'Submit a PR',
+        href: 'https://github.com/iron-fish/ironfish/pulls',
       },
       {
         isImage: false,
@@ -54,14 +59,21 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'examples.',
-        href: 'https://coda.io/d/_dVdKS2S-D2Q/How-points-for-non-mining-activity-are-awarded-Community-Contrib_su51s',
+        text: 'Learn more',
+        href: '/faq#transaction-points',
+      },
+      {
+        isImage: false,
+        text: 'Submit an issue',
+        href: 'https://github.com/iron-fish/ironfish/issues',
       },
       {
         isImage: false,
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
+      { isImage: false, text: 'Phase Complete', href: '/about#' },
+      { isImage: false, text: 'Sign Up Now', href: '/signup' },
       {
         isImage: false,
         text: 'Show me the leaderboard',

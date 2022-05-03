@@ -18,11 +18,7 @@ import {
   NOT_ISOMORPHIC,
 } from 'constants/errors'
 
-// Environment variables set in Vercel config.
-const SERVER_API_URL = process.env.API_URL
-const BROWSER_API_URL = process.env.NEXT_PUBLIC_API_URL
-
-export const API_URL = SERVER_API_URL || BROWSER_API_URL
+export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export async function createUser(
   email: string,
@@ -205,7 +201,7 @@ export async function login(email: string): Promise<any> {
       return { statusCode: 200, loaded: true }
     }
   } catch (e) {
-    return new LocalError(e.message, UNABLE_TO_LOGIN)
+    return new LocalError((e as Error).message, UNABLE_TO_LOGIN)
   }
 }
 
@@ -221,7 +217,7 @@ export async function getUserDetails(
     })
     return data.json()
   } catch (e) {
-    return new LocalError(e.message, ENDPOINT_UNAVAILABLE)
+    return new LocalError((e as Error).message, ENDPOINT_UNAVAILABLE)
   }
 }
 

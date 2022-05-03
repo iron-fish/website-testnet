@@ -16,9 +16,14 @@ export type ApiEventMetadataWithLink = {
   url: string
 }
 
+export type ApiEventMetadataTransactionSent = {
+  hash: string
+}
+
 export type ApiEventMetadata =
   | ApiEventMetadataWithLink
   | ApiEventMetadataBlockMined
+  | ApiEventMetadataTransactionSent
 
 export type ApiEvent = {
   id: number
@@ -47,6 +52,8 @@ export enum EventType {
   COMMUNITY_CONTRIBUTION = 'COMMUNITY_CONTRIBUTION',
   PULL_REQUEST_MERGED = 'PULL_REQUEST_MERGED',
   SOCIAL_MEDIA_PROMOTION = 'SOCIAL_MEDIA_PROMOTION',
+  NODE_HOSTED = 'NODE_UPTIME',
+  TRANSACTION_SENT = 'SEND_TRANSACTION',
 }
 
 export type ApiError = {
@@ -80,6 +87,11 @@ export type UserMetric = {
   rank?: number
 }
 
+export type TimeData = {
+  last_checked_in?: number
+  total_hours: number
+}
+
 export type UserMetricsResponse = {
   user_id: number
   granularity: 'lifetime' | 'total'
@@ -90,6 +102,13 @@ export type UserMetricsResponse = {
     community_contributions: UserMetric
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
+    send_transaction: UserMetric
+    node_uptime: UserMetric
+  }
+  node_uptime: TimeData
+  pools: {
+    main: UserMetric
+    code: UserMetric
   }
 }
 
