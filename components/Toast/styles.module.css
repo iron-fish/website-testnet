@@ -5,6 +5,9 @@
 .top {
   top: 5.5rem;
 }
+.topWithNotification {
+  top: 9.5rem;
+}
 .bottom {
   bottom: 4rem;
 }

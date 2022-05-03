@@ -5,13 +5,15 @@ import ResponsiveToolkit from 'components/ResponsiveToolkit'
 import { useLogin } from 'hooks/useLogin'
 import { useLocalLogin } from 'hooks/useLocalLogin'
 
-const LOCAL_MODE = process.env.NEXT_PUBLIC_LOCAL_USER || false
+const LOCAL_MODE =
+  (process.env.NEXT_PUBLIC_LOCAL_USER || '').toLowerCase() === 'true' || false
+
 const useLoginHook = LOCAL_MODE ? useLocalLogin : useLogin
 
 function MyApp({ Component: Page, pageProps }: AppProps) {
   const $login = useLoginHook()
   const { metadata } = $login
-  const phase = 1
+  const showNotification = true
   return (
     <>
       <Head>
@@ -26,9 +28,9 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
       <ResponsiveToolkit metadata={metadata} />
       <Page
         loginContext={$login}
+        showNotification={showNotification}
         {...pageProps}
         className="font-favorit"
-        phase={phase}
       />
     </>
   )

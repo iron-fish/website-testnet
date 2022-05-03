@@ -12,6 +12,7 @@ import SignupCTA from 'components/login/SignupCTA'
 
 import { WHITESPACE, useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
+import { LoginContext } from 'hooks/useLogin'
 
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
 import { scrollUp } from 'utils/scroll'
@@ -22,7 +23,6 @@ import { login } from 'apiClient'
 import { useQueriedToast } from 'hooks/useToast'
 import { Toast, Alignment } from 'components/Toast'
 import { encode as btoa } from 'base-64'
-import { PageProps } from 'components/page-types'
 
 const FIELDS = {
   email: {
@@ -35,8 +35,11 @@ const FIELDS = {
     WHITESPACE: WHITESPACE.BANNED,
   },
 }
-
-export default function Login({ loginContext }: PageProps) {
+type LoginProps = {
+  showNotification: boolean
+  loginContext: LoginContext
+}
+export default function Login({ showNotification, loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
@@ -60,6 +63,11 @@ export default function Login({ loginContext }: PageProps) {
   const [$error, $setError] = useState<string>(UNSET)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   const $email = useField(FIELDS.email)
+  useEffect(() => {
+    if ($queryEmail && FIELDS.email.validation($queryEmail) && $email) {
+      $email.setTouched(true)
+    }
+  }, [$queryEmail, $email])
   const textFields = [$email]
   const testInvalid = useCallback(() => {
     const noEmail = !$email?.touched
@@ -130,11 +138,13 @@ export default function Login({ loginContext }: PageProps) {
       ) : (
         <>
           <Navbar
+            showNotification={showNotification}
             fill="black"
             className="bg-ifpink text-black"
             loginContext={loginContext}
           />
           <Toast
+            showNotification={showNotification}
             message={$msg || $toast}
             visible={$visible}
             alignment={Alignment.Top}
