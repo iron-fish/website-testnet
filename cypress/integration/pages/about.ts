@@ -45,7 +45,7 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Set up instructions',
-        href: '[FAQ LINK]',
+        href: '/faq#node-points',
       },
       {
         isImage: false,
@@ -60,7 +60,12 @@ describe('/about', () => {
       {
         isImage: false,
         text: 'Learn more',
-        href: 'https://ironfish.network/docs/onboarding/miner-iron-fish',
+        href: '/faq#transaction-points',
+      },
+      {
+        isImage: false,
+        text: 'Submit an issue',
+        href: 'https://github.com/iron-fish/ironfish/issues',
       },
       {
         isImage: false,
