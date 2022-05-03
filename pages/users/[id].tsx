@@ -189,12 +189,10 @@ export default function User({ showNotification, loginContext }: Props) {
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
-  /*
-  const totalWeeklyLimit = sumValues(
-    $metricsConfig.weekly_limits
-  ).toLocaleString()
-  const weeklyPoints = $weeklyMetrics.points.toLocaleString()
-   */
+
+  const phase2Points =
+    $allTimeMetrics.metrics.node_uptime.points +
+    $allTimeMetrics.metrics.send_transaction.points
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
@@ -341,7 +339,7 @@ export default function User({ showNotification, loginContext }: Props) {
                   <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
                   <LabeledStat
                     label="Phase 2 Points"
-                    value={$user.total_points.toLocaleString()}
+                    value={phase2Points.toLocaleString()}
                   />
                 </div>
               </div>
