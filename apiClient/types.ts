@@ -52,8 +52,8 @@ export enum EventType {
   COMMUNITY_CONTRIBUTION = 'COMMUNITY_CONTRIBUTION',
   PULL_REQUEST_MERGED = 'PULL_REQUEST_MERGED',
   SOCIAL_MEDIA_PROMOTION = 'SOCIAL_MEDIA_PROMOTION',
-  NODE_HOSTED = 'NODE_HOSTED',
-  TRANSACTION_SENT = 'TRANSACTION_SENT',
+  NODE_HOSTED = 'NODE_UPTIME',
+  TRANSACTION_SENT = 'SEND_TRANSACTION',
 }
 
 export type ApiError = {
@@ -103,6 +103,7 @@ export type UserMetricsResponse = {
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
     send_transaction: UserMetric
+    node_uptime: UserMetric
   }
   node_uptime: TimeData
   pools: {

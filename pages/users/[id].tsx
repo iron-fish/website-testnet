@@ -50,24 +50,6 @@ export const LabeledStat = ({ value, label }: LabeledProps) => (
   </div>
 )
 
-const rand = (x: number) => Math.round(Math.random() * x)
-
-// eslint-disable-next-line
-const once = (fn: any) => {
-  // eslint-disable-next-line
-  // @ts-ignore
-  let y
-  // eslint-disable-next-line
-  // @ts-ignore
-  const c = (...args) => {
-    // eslint-disable-next-line
-    // @ts-ignore
-    if (y) return y
-    y = fn(...args)
-  }
-  return c
-}
-
 export default function User({ showNotification, loginContext }: Props) {
   const $toast = useQueriedToast({
     queryString: 'toast',
@@ -120,14 +102,6 @@ export default function User({ showNotification, loginContext }: Props) {
           API.getMetricsConfig(),
         ])
         const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
-        // eslint-disable-next-line no-console
-        console.log({
-          user,
-          events,
-          allTimeMetrics,
-          weeklyMetrics,
-          metricsConfig,
-        })
         if (isCanceled) {
           return
         }
@@ -152,33 +126,6 @@ export default function User({ showNotification, loginContext }: Props) {
           return
         }
         $setUser(user)
-        // this jams some new events at the top of every activity feed for debugging porpoises
-        // and fudges some data for the metrics
-        // TODO: REMOVE THIS BEFORE MERGING
-        once(() => {
-          const lastDate = events.data[0].occurred_at
-          // eslint-disable-next-line
-          // @ts-ignore
-          events.data = events.data.concat([
-            {
-              id: rand(200),
-              occurred_at: lastDate,
-              points: 100,
-              type: API.EventType.NODE_HOSTED,
-              user_id: user.id,
-            },
-            {
-              id: rand(200),
-              metadata: {
-                hash: '00000000000a15c8d3d49f4f2316d3a590de6e20cc196fd68b658ee8d5ef22a7',
-              },
-              occurred_at: lastDate,
-              points: 100,
-              type: API.EventType.TRANSACTION_SENT,
-              user_id: user.id,
-            },
-          ])
-        })()
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
         $setWeeklyMetrics(weeklyMetrics)
@@ -234,12 +181,10 @@ export default function User({ showNotification, loginContext }: Props) {
   const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
-  /*
-  const totalWeeklyLimit = sumValues(
-    $metricsConfig.weekly_limits
-  ).toLocaleString()
-  const weeklyPoints = $weeklyMetrics.points.toLocaleString()
-   */
+
+  const phase2Points =
+    $allTimeMetrics.metrics.node_uptime.points +
+    $allTimeMetrics.metrics.send_transaction.points
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
@@ -386,7 +331,7 @@ export default function User({ showNotification, loginContext }: Props) {
                   <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
                   <LabeledStat
                     label="Phase 2 Points"
-                    value={$user.total_points.toLocaleString()}
+                    value={phase2Points.toLocaleString()}
                   />
                 </div>
               </div>

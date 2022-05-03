@@ -34,6 +34,7 @@ export default function AllTimeContent({
         title="Hosted Node"
         timeData={allTimeMetrics.node_uptime}
         top={pluralHours(totalHours)}
+        metric={allTimeMetrics.metrics.node_uptime}
         bottomUnit="points"
         subline={
           <div className="text-xs text-iflightblue">

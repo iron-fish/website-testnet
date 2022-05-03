@@ -30,22 +30,6 @@ import {
 
 import styles from './EventRow.module.css'
 
-// eslint-disable-next-line
-const once = (fn: any) => {
-  // eslint-disable-next-line
-  // @ts-ignore
-  let y
-  // eslint-disable-next-line
-  // @ts-ignore
-  const c = (...args) => {
-    // eslint-disable-next-line
-    // @ts-ignore
-    if (y) return y
-    y = fn(...args)
-  }
-  return c
-}
-
 interface IconText {
   icon: ReactElement | string
   text: ReactElement | string
