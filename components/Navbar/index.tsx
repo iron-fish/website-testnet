@@ -27,10 +27,10 @@ function Navbar({
 }: NavbarProps) {
   const notification = showNotification ? (
     <>
-      Phase 1 of our Incentivized Testnet is now complete.
+      Phase 2 Incentivized Testnet starts May 10th!
       <br className="md:hidden" />
       <span className="hidden md:inline"> </span>
-      Stay tuned for Phase 2!
+      See the Testnet tab for more details.
     </>
   ) : null
   const {
