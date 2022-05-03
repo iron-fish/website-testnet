@@ -5,4 +5,4 @@ export const scrollUp = () =>
   })
 
 export const scrollTo = (el: HTMLElement) =>
-  window.scrollTo({ top: el.getBoundingClientRect().top, behavior: 'smooth' })
+  window.scrollTo({ top: el.getBoundingClientRect().top, behavior: 'auto' })
