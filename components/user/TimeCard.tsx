@@ -12,6 +12,8 @@ interface GenericUptimeCardProps extends Omit<GenericCardProps, 'bottom'> {
   metric: API.UserMetric
 }
 
+const toPoints = (x: number) => x * (12 / 10)
+
 export function GenericUptimeCard({
   title,
   top,
@@ -27,7 +29,8 @@ export function GenericUptimeCard({
   if (!timeData) {
     return <>{title} - Data Missing</>
   }
-  const totalHours = (timeData.total_hours || 0) * 12
+
+  const totalHours = toPoints(metric.points || 0)
   const bottomContent = metric.points + ' ' + bottomUnit
   const value = totalHours.toLocaleString()
   const styleData = verticalOffset ? (
