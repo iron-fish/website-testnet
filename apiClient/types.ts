@@ -103,6 +103,7 @@ export type UserMetricsResponse = {
     pull_requests_merged: UserMetric
     social_media_contributions: UserMetric
     send_transaction: UserMetric
+    node_uptime: UserMetric
   }
   node_uptime: TimeData
   pools: {
