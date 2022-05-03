@@ -82,10 +82,9 @@ const questions: ReadonlyArray<{
       <div>
         You can see our point structure by viewing the{' '}
         <span className="underline">
-          {' '}
           <Link href="/about">Phase 2 info page here</Link>
         </span>
-        {'.'}
+        .
       </div>
     ),
   },
@@ -121,12 +120,11 @@ const questions: ReadonlyArray<{
           First, mine some $IRON. You can do this by running either your own
           miner or joining a mining pool. You can view the{' '}
           <span className="underline">
-            {' '}
             <Link href="https://ironfish.network/docs/onboarding/miner-iron-fish#set-block-graffiti-optional">
               options here
             </Link>
           </span>
-          {'.'}
+          .
         </li>
         <li>
           Then, you may send the $IRON to our Iron Bank transaction processing
@@ -158,14 +156,13 @@ const questions: ReadonlyArray<{
     id: `phase-1-points`,
     answer: (
       <div>
-        You can see our point structure by viewing the{' '}
+        We have frozen the Phase 1 leaderboard, and it can be{' '}
         <span className="underline">
-          {' '}
           <Link href="https://phase1.testnet.ironfish.network/leaderboard">
             found here
           </Link>
         </span>
-        {'.'}
+        .
       </div>
     ),
   },
@@ -195,8 +192,7 @@ const questions: ReadonlyArray<{
         Points can only be earned for blocks with the same graffiti as your
         testnet account. You must{' '}
         <span className="underline">
-          {' '}
-          <Link href="/signup">register </Link>
+          <Link href="/signup">register</Link>
         </span>{' '}
         with your graffiti before you can start earning points.
       </div>
