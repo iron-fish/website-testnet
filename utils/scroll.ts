@@ -3,3 +3,6 @@ export const scrollUp = () =>
     top: 0,
     behavior: 'smooth',
   })
+
+export const scrollTo = (el: HTMLElement) =>
+  window.scrollTo({ top: el.getBoundingClientRect().top, behavior: 'smooth' })
