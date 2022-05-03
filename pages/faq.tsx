@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import type { ReactNode } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import clsx from 'clsx'
 
@@ -8,11 +11,9 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import QuestionAnswer from 'components/FAQ/QuestionAnswer'
-import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
-import React from 'react'
-
-import type { ReactNode } from 'react'
+import { scrollTo } from 'utils/scroll'
+import { LoginContext } from 'hooks/useLogin'
 
 const questions: ReadonlyArray<{
   question: string
@@ -243,7 +244,19 @@ type FaqProps = {
 export default function Faq({ showNotification, loginContext }: FaqProps) {
   const { checkLoggedIn, checkLoading } = loginContext
   const isLoaded = checkLoggedIn()
-  return checkLoading() ? (
+  const isLoading = checkLoading()
+  const $router = useRouter()
+  const { asPath: rawPath } = $router
+  useEffect(() => {
+    if (isLoaded || !isLoading) {
+      const hash = rawPath.slice(rawPath.indexOf('#') + 1)
+      const el = document.getElementById(hash)
+      if (el) {
+        scrollTo(el)
+      }
+    }
+  }, [rawPath, isLoaded, isLoading])
+  return isLoading ? (
     <Loader />
   ) : (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
