@@ -28,6 +28,8 @@ export default function AllTimeContent({
   const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
   const rewardUnits = pluralHours(timeUntilReward)
+  // eslint-disable-next-line no-console
+  console.log({ raw: allTimeMetrics.node_uptime })
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
       <TimeCard
