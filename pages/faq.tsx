@@ -158,7 +158,7 @@ const questions: ReadonlyArray<{
     id: `phase-1-points`,
     answer: (
       <div>
-        You can see our point structure by viewing the{' '}
+        We have frozen the Phase 1 leaderboard, and it can be{' '}
         <span className="underline">
           {' '}
           <Link href="https://phase1.testnet.ironfish.network/leaderboard">
