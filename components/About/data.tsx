@@ -144,7 +144,7 @@ export const callsToAction = {
       content:
         'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
       points: ['1 bug = 100 points'],
-      ctaText: 'Submit an issue ',
+      ctaText: 'Submit an issue',
       href: 'https://github.com/iron-fish/ironfish/issues',
       submissionForm: false,
       status: Status.Active,
