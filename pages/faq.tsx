@@ -204,7 +204,7 @@ const questions: ReadonlyArray<{
   {
     question: `Will my accounts transfer?`,
     id: 'account-transfer',
-    answer: `Yes - accounts with identical graffiti will carry over from Phase 1. If you already created an account with your graffiti for Phase 1, you do not have to register again for Phase 2. .`,
+    answer: `Yes - accounts with identical graffiti will carry over from Phase 1. If you already created an account with your graffiti for Phase 1, you do not have to register again for Phase 2.`,
   },
   {
     question: `Will there be weekly limits on earning points?`,
