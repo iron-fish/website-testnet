@@ -173,7 +173,10 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
               getters are for all-time score, miners, bug catchers, net
               promoters, node hosting and more! Click a user name to see a
               breakdown of their activity.{' '}
-              <Link href="phase1.testnet.ironfish.network" passHref>
+              <Link
+                href="https:/phase1.testnet.ironfish.network/leaderboard"
+                passHref
+              >
                 <a className="border-b border-black">
                   View Phase 1 leaderboard
                 </a>
