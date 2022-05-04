@@ -66,15 +66,16 @@ export function useField(provided: ProvidedField): Field | null {
     options,
     radioOption: defaultRadioOption,
     required = true,
-    touched = false,
     validation,
     whitespace = WHITESPACE.DEFAULT,
     placeholder,
     useDefault,
     controlled,
+    touched: _touched = false,
   } = provided
+  const touched = defaultValue ? true : _touched
+  const initiallyValid = defaultValue ? validation(defaultValue) : false
   const [$value, $setter] = useState<string>(defaultValue)
-  // TODO: tried writing this with nullish coalescing but it yelled and I got tired
   const radioOption =
     defaultRadioOption || (options && options[0] && options[0].value)
   const banSpaces = whitespace === WHITESPACE.BANNED
@@ -83,13 +84,20 @@ export function useField(provided: ProvidedField): Field | null {
     isRadioed && radioOption ? radioOption : ''
   )
   const [$disabled, $setDisabled] = useState<boolean>(false)
-  const [, $setValid] = useState<boolean>(false)
+  const [$valid, $setValid] = useState<boolean>(initiallyValid)
   const [$touched, $setTouched] = useState<boolean>(touched)
   const [$field, $setField] = useState<Field | null>(null)
   const [$error, $setError] = useState<string>(defaultErrorText)
   useEffect(() => {
+    if (defaultValue) {
+      $setTouched(true)
+    }
+  }, [defaultValue])
+  useEffect(() => {
     const valid = !$touched || ($touched && validation($value))
     $setValid(valid)
+  }, [$touched, validation, $value])
+  useEffect(() => {
     $setField({
       // raw values from upstream
       defaultErrorText,
@@ -100,7 +108,7 @@ export function useField(provided: ProvidedField): Field | null {
       label,
       radioOption: defaultRadioOption,
       options,
-      valid,
+      valid: $valid,
       validation,
       whitespace,
       placeholder,
@@ -108,7 +116,7 @@ export function useField(provided: ProvidedField): Field | null {
       // dynamic values
       choice: $choice,
       disabled: $disabled,
-      errorText: valid ? undefined : $error,
+      errorText: $valid ? undefined : $error,
       onChange: setStateOnChange($setter, trimSpaces),
       setChoice: $setChoice,
       setDisabled: $setDisabled,
@@ -131,6 +139,7 @@ export function useField(provided: ProvidedField): Field | null {
       controlled,
     })
   }, [
+    $valid,
     defaultLabel,
     defaultErrorText,
     defaultRadioOption,
