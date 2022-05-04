@@ -130,7 +130,7 @@ const questions: ReadonlyArray<{
           Then, you may send the $IRON to our Iron Bank transaction processing
           node by running <code>ironfish deposit</code>.
         </li>
-        <li>You recieve points for every transaction of 0.1 $IRON.</li>
+        <li>You receive points for every transaction of 0.1 $IRON.</li>
       </div>
     ),
   },
