@@ -84,7 +84,7 @@ const questions: ReadonlyArray<{
         <span className="underline">
           <Link href="/about">Phase 2 info page here</Link>
         </span>
-        .
+        {'.'}
       </div>
     ),
   },
