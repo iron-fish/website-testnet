@@ -18,9 +18,6 @@ const summarizePhase = ({ pools }: { pools: Pool[] }) =>
   )
 
 const plural = (x: string) => (n: number) => n > 1 ? x + 's' : x
-//TODO: IRO-1387
-//remove this
-const dummyMetric: API.UserMetric = { count: 0, points: 0, rank: 1 }
 
 export default function AllTimeContent({
   allTimeMetrics,
@@ -51,15 +48,11 @@ export default function AllTimeContent({
       />
       <AllTimeMetricCard
         title="Bugs Caught"
-        //TODO: IRO-1387
-        // metric={allTimeMetrics.metrics.bugs_caught}
-        metric={dummyMetric}
+        metric={allTimeMetrics.metrics.bugs_caught}
       />
       <AllTimeMetricCard
         title="PRs Merged"
-        //TODO: IRO-1387
-        // metric={allTimeMetrics.metrics.pull_requests_merged}
-        metric={dummyMetric}
+        metric={allTimeMetrics.metrics.pull_requests_merged}
       />
       <AllTimeMetricCard
         title="Pool 1 Rank"
