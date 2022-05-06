@@ -98,7 +98,7 @@ const makeLinkForEvent = (type: EventType, metadata?: ApiEventMetadata) => {
     'block_hash' in metadata &&
     type === EventType.TRANSACTION_SENT
   ) {
-    return `https://explorer.ironfish.network/${metadata.transaction_hash}/${metadata.block_hash}`
+    return `https://explorer.ironfish.network/transaction/${metadata.transaction_hash}/${metadata.block_hash}`
   }
   if ('hash' in metadata && type === EventType.BLOCK_MINED) {
     return `https://explorer.ironfish.network/blocks/${metadata.hash}`
