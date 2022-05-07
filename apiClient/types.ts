@@ -17,7 +17,8 @@ export type ApiEventMetadataWithLink = {
 }
 
 export type ApiEventMetadataTransactionSent = {
-  hash: string
+  transaction_hash: string
+  block_hash: string
 }
 
 export type ApiEventMetadata =

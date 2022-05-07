@@ -350,9 +350,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
                     <LeaderboardRow
                       rank={user.rank}
                       graffiti={user.graffiti}
-                      //TODO: IRO-1387
-                      // points={user.total_points}
-                      points={0}
+                      points={user.total_points}
                     />
                   </a>
                 </Link>

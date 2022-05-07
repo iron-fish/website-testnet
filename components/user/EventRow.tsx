@@ -93,6 +93,13 @@ export type EventRowProps = {
 
 const makeLinkForEvent = (type: EventType, metadata?: ApiEventMetadata) => {
   if (!metadata) return ''
+  if (
+    'transaction_hash' in metadata &&
+    'block_hash' in metadata &&
+    type === EventType.TRANSACTION_SENT
+  ) {
+    return `https://explorer.ironfish.network/transaction/${metadata.transaction_hash}/${metadata.block_hash}`
+  }
   if ('hash' in metadata && type === EventType.BLOCK_MINED) {
     return `https://explorer.ironfish.network/blocks/${metadata.hash}`
   }
@@ -177,8 +184,8 @@ const summarizeEvent = (
     return <CopyableHash hash={hash} />
   }
   if (type === EventType.TRANSACTION_SENT) {
-    const { hash } = metadata as ApiEventMetadataTransactionSent
-    return <CopyableHash hash={hash} unit="Txn" />
+    const { transaction_hash } = metadata as ApiEventMetadataTransactionSent
+    return <CopyableHash hash={transaction_hash} unit="Txn" />
   }
   const { url } = metadata as ApiEventMetadataWithLink
   const link = new URL(url)
