@@ -45,7 +45,7 @@ export const FIELDS = {
     defaultErrorText: `Graffiti is too long`,
     whitespace: WHITESPACE.TRIMMED,
     explanation:
-      'Graffiti tags are your Iron Fish username. They are case-sensitive.',
+      'A graffiti tag is your Iron Fish username. It is case-sensitive.',
   },
   github: {
     id: 'github',
