@@ -71,6 +71,7 @@ export const TextField = ({
   whitespace = WHITESPACE.DEFAULT,
   value,
   controlled = false,
+  explanation = '',
 }: ControlledField) => {
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
   const controller = controlled ? { value: value } : {}
@@ -106,6 +107,7 @@ export const TextField = ({
         />
       )}
       <input {...inputProps} />
+      {explanation && <span className="text-sm">{explanation}</span>}
     </LabelledRow>
   )
 }

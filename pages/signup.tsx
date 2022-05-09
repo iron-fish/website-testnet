@@ -44,6 +44,8 @@ export const FIELDS = {
     validation: validateGraffiti,
     defaultErrorText: `Graffiti is too long`,
     whitespace: WHITESPACE.TRIMMED,
+    explanation:
+      'Graffiti tags are your Iron Fish username. They are case-sensitive.',
   },
   github: {
     id: 'github',
