@@ -1,6 +1,8 @@
-import styles from './index.module.css'
+import clsx from 'clsx'
 import { Dispatch, SetStateAction } from 'react'
 import { Field, NameValue, WHITESPACE } from 'hooks/useForm'
+
+import styles from './index.module.css'
 import LabelledRow from './LabelledRow'
 
 interface OptionsProps {
@@ -88,27 +90,42 @@ export const TextField = ({
     placeholder,
   }
   return (
-    <LabelledRow
-      key={id}
-      id={id}
-      label={label}
-      valid={valid}
-      errorText={errorText}
-      disabled={disabled}
-      required={required}
-    >
-      {isRadioed && options.length > 0 && (
-        <RadioOptions
-          disabled={disabled}
-          groupName={`${id}-group`}
-          options={options}
-          choice={choice}
-          setChoice={setChoice}
-        />
+    <>
+      <LabelledRow
+        key={id}
+        id={id}
+        label={label}
+        valid={valid}
+        errorText={errorText}
+        disabled={disabled}
+        required={required}
+      >
+        {isRadioed && options.length > 0 && (
+          <RadioOptions
+            disabled={disabled}
+            groupName={`${id}-group`}
+            options={options}
+            choice={choice}
+            setChoice={setChoice}
+          />
+        )}
+        <input {...inputProps} />
+      </LabelledRow>
+      {explanation && (
+        <div
+          className={clsx(
+            'text-xs',
+            'font-favorit',
+            'text-left',
+            'max-w-md',
+            'w-full',
+            'mt-1'
+          )}
+        >
+          {explanation}
+        </div>
       )}
-      <input {...inputProps} />
-      {explanation && <span className="text-sm">{explanation}</span>}
-    </LabelledRow>
+    </>
   )
 }
 export default TextField
