@@ -23,7 +23,7 @@ const questions: ReadonlyArray<{
   {
     question: `How long will the Phase 2 incentivized testnet run for?`,
     id: `testnet-duration`,
-    answer: `The testnet will run from May 10, 2022 until the Iron Fish node is stable, feature-complete, and ready for mainnet 🎉`,
+    answer: `The testnet will run from May 10, 2022 @ 12:00 PDT until the Iron Fish node is stable, feature-complete, and ready for mainnet 🎉`,
   },
   {
     question: `I participated in Phase 1. What’s different?`,

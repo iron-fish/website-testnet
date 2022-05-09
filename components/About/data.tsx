@@ -134,7 +134,7 @@ export const callsToAction = {
           </pre>
         </>
       ),
-      points: ['10 points for a transaction over 0.1 coins'],
+      points: ['1 points for a transaction 0.1 coins or more'],
       ctaText: 'Learn more',
       href: '/faq#transaction-points',
       status: Status.New,
@@ -175,7 +175,7 @@ export const phases = [
   },
   {
     status: Status.ComingSoon,
-    summary: 'Coming soon!',
+    summary: 'Starts May 10 @ 12:00 PDT',
     pools: [
       {
         size: 21e4,
