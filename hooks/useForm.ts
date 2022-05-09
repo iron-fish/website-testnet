@@ -36,6 +36,7 @@ export interface ProvidedField {
   validation: (v: string) => boolean
   whitespace?: WHITESPACE
   value?: string
+  explanation?: string
 }
 export interface Field extends ProvidedField {
   value: string
@@ -72,6 +73,7 @@ export function useField(provided: ProvidedField): Field | null {
     useDefault,
     controlled,
     touched: _touched = false,
+    explanation,
   } = provided
   const touched = defaultValue ? true : _touched
   const initiallyValid = defaultValue ? validation(defaultValue) : false
@@ -103,6 +105,7 @@ export function useField(provided: ProvidedField): Field | null {
       defaultErrorText,
       defaultValue,
       defaultLabel,
+      explanation,
       id,
       isRadioed,
       label,
@@ -161,6 +164,7 @@ export function useField(provided: ProvidedField): Field | null {
     placeholder,
     useDefault,
     controlled,
+    explanation,
   ])
   return $field
 }
