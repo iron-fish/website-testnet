@@ -119,7 +119,7 @@ export const TextField = ({
             'text-left',
             'max-w-md',
             'w-full',
-            'mt-1'
+            'mt-2'
           )}
         >
           {explanation}
