@@ -128,14 +128,14 @@ export const callsToAction = {
       content: (
         <>
           For every transaction you send to the Iron Bank of over 0.1 coins, you
-          get 10 points. To make this easier, we made a command that
-          automatically sends this transaction for you:
+          get 1 point. To make this easier, we made a command that automatically
+          sends this transaction for you:
           <pre className="bg-iflightgray inline p-1 font-favorit">
             ironfish deposit
           </pre>
         </>
       ),
-      points: ['1 points for a transaction of 0.1 coins or more'],
+      points: ['1 point for a transaction of 0.1 coins or more'],
       ctaText: 'Learn more',
       href: '/faq#transaction-points',
       status: Status.New,
