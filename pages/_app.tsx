@@ -13,7 +13,7 @@ const useLoginHook = LOCAL_MODE ? useLocalLogin : useLogin
 function MyApp({ Component: Page, pageProps }: AppProps) {
   const $login = useLoginHook()
   const { metadata } = $login
-  const showNotification = true
+  const showNotification = false
   return (
     <>
       <Head>
