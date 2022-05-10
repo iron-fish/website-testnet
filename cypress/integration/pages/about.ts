@@ -49,6 +49,11 @@ describe('/about', () => {
       },
       {
         isImage: false,
+        text: 'Submit a Pull Request (PR) to the Iron Fish repo!',
+        href: 'https://github.com/iron-fish/ironfish',
+      },
+      {
+        isImage: false,
         text: 'Request points for a PR',
         href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
