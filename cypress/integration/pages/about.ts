@@ -69,7 +69,7 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Request points',
+        text: 'Request points for a bug',
         href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
       {
