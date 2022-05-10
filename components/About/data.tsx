@@ -1,3 +1,4 @@
+import Link from './Link'
 import { Status } from './types'
 
 export const cards = [
@@ -127,25 +128,36 @@ export const callsToAction = {
       content: (
         <>
           For every transaction you send to the Iron Bank of over 0.1 coins, you
-          get 10 points. To make this easier, we made a command that
-          automatically sends this transaction for you:
+          get 1 point. To make this easier, we made a command that automatically
+          sends this transaction for you:
           <pre className="bg-iflightgray inline p-1 font-favorit">
             ironfish deposit
           </pre>
         </>
       ),
-      points: ['1 points for a transaction 0.1 coins or more'],
+      points: ['1 point for a transaction of 0.1 coins or more'],
       ctaText: 'Learn more',
       href: '/faq#transaction-points',
       status: Status.New,
     },
     {
       title: 'Finding Bugs',
-      content:
-        'If you found a bug in the Iron Fish full node implementation, please submit it as an issue. Issues are reviewed by the core development team on a rolling basis and awarded by the end of the week. The issue will be accepted if it’s a legitimate bug and not a duplicate of an existing issue. Fill out the form to claim your points after submitting an issue.',
+      content: (
+        <>
+          If you found a bug in the Iron Fish full node implementation,{' '}
+          <Link href="https://github.com/iron-fish/ironfish/issues">
+            please submit it as an issue
+          </Link>
+          . Issues are reviewed by the core development team on a rolling basis
+          and awarded by the end of the week. The issue will be accepted if it’s
+          a legitimate bug and not a duplicate of an existing issue. Fill out
+          the form to claim your points after submitting an issue.
+        </>
+      ),
+
       points: ['1 bug = 100 points'],
       ctaText: 'Submit an issue',
-      href: 'https://github.com/iron-fish/ironfish/issues',
+      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       submissionForm: false,
       status: Status.Active,
     },

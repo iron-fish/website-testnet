@@ -64,8 +64,13 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Submit an issue',
+        text: 'please submit it as an issue',
         href: 'https://github.com/iron-fish/ironfish/issues',
+      },
+      {
+        isImage: false,
+        text: 'Submit an issue',
+        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
       {
         isImage: false,
