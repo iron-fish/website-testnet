@@ -49,8 +49,13 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Submit a PR',
-        href: 'https://github.com/iron-fish/ironfish/pulls',
+        text: 'Submit a Pull Request (PR) to the Iron Fish repo!',
+        href: 'https://github.com/iron-fish/ironfish',
+      },
+      {
+        isImage: false,
+        text: 'Request points for a PR',
+        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
       {
         isImage: false,
@@ -69,7 +74,7 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Submit an issue',
+        text: 'Request points for a bug',
         href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
       {

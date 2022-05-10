@@ -110,15 +110,22 @@ export const callsToAction = {
     },
     {
       title: 'Submit a Pull Request',
-      content:
-        'Submit a PR to the Iron Fish repo. Points are earned if the PR gets accepted and merged.',
+      content: (
+        <>
+          <Link href="https://github.com/iron-fish/ironfish">
+            Submit a Pull Request (PR) to the Iron Fish repo!
+          </Link>{' '}
+          Points are earned if the PR gets accepted and merged.
+        </>
+      ),
+
       points: [
         'Small = 250 points',
         'Medium = 500 points',
         'Large = 1000 points',
       ],
-      ctaText: 'Submit a PR',
-      href: 'https://github.com/iron-fish/ironfish/pulls',
+      ctaText: 'Request points for a PR',
+      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       status: Status.Active,
     },
   ],
@@ -156,7 +163,7 @@ export const callsToAction = {
       ),
 
       points: ['1 bug = 100 points'],
-      ctaText: 'Submit an issue',
+      ctaText: 'Request points for a bug',
       href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       submissionForm: false,
       status: Status.Active,
