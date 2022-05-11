@@ -53,7 +53,7 @@ export const Phase = ({
           Phase {index}
         </h4>
         <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}>
-          Prize pool of {cumulativePoolSize(pools)} total coins
+          {pools.length} Prize pools totalling {cumulativePoolSize(pools)} coins
         </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
         <Link href={isComplete ? '#' : '/signup'} passHref>
@@ -91,12 +91,12 @@ export const Phase = ({
             )}
           </a>
         </Link>
-        {pools.map(({ size, categories }: Pool) => (
+        {pools.map(({ size, categories }: Pool, i: number) => (
           <div
             key={`${size}-${categories.length}`}
             className={clsx('mt-6', 'w-full', 'text-left')}
           >
-            Categories sharing {size.toLocaleString()} coins
+            Prize pool {i + 1}: {size.toLocaleString()} coins
             <ul className="pl-5">
               {categories.map((category: string) => (
                 <li key={category} className={clsx('list-disc', 'pt-2')}>
