@@ -168,18 +168,19 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
           }
           text={
             <p>
-              Our incentivized testnet leaderboard shows you who the top point
-              getters are for all-time score, miners, bug catchers, net
-              promoters, node hosting and more! Click a user name to see a
-              breakdown of their activity.{' '}
-              <Link
-                href="https://phase1.testnet.ironfish.network/leaderboard"
-                passHref
-              >
-                <a className="border-b border-black">
-                  View Phase 1 leaderboard
-                </a>
-              </Link>
+              Our leaderboard shows you who&apos;s earned the most points in the
+              incentivized testnet! Click a user name to see a breakdown of
+              their activity.{' '}
+              <p>
+                <Link
+                  href="https://phase1.testnet.ironfish.network/leaderboard"
+                  passHref
+                >
+                  <a className="border-b border-black">
+                    View Phase 1 leaderboard
+                  </a>
+                </Link>
+              </p>
             </p>
           }
           buttonText={!isLoggedIn ? 'Sign Up' : undefined}
