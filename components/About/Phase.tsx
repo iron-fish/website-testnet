@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import OffsetBox from 'components/OffsetBorder/Box'
 import CheckIcon from 'components/icons/Check'
+import { capitalDigit } from 'utils/number-to-words'
 
 import { Status } from './types'
 
@@ -53,7 +54,8 @@ export const Phase = ({
           Phase {index}
         </h4>
         <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}>
-          {pools.length} Prize {pools.length === 1 ? 'pool' : 'pools'} totalling{' '}
+          {capitalDigit(pools.length)} prize{' '}
+          {pools.length === 1 ? 'pool' : 'pools'} totalling{' '}
           {cumulativePoolSize(pools)} coins
         </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
