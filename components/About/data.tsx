@@ -194,7 +194,7 @@ export const phases = [
   },
   {
     status: Status.ComingSoon,
-    summary: 'Starts May 10 @ 12:00 PDT',
+    summary: 'Started May 10, 2022',
     pools: [
       {
         size: 21e4,
