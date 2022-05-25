@@ -212,7 +212,7 @@ export default function User({ showNotification, loginContext }: Props) {
           'overflow-hidden'
         )}
       >
-        <div style={{ flexBasis: 1138 }}>
+        <div style={{ flexBasis: 1138, width: '100%' }}>
           <OffsetBorderContainer>
             <div
               className={clsx(
@@ -230,7 +230,7 @@ export default function User({ showNotification, loginContext }: Props) {
                 className={clsx('flex', 'justify-between', 'md:mb-8')}
                 style={{ width: '100%' }}
               >
-                <div className={clsx('flex', 'flex-col')}>
+                <div className={clsx('flex', 'flex-col', 'overflow-hidden')}>
                   <h1
                     className={clsx(
                       'font-extended',
