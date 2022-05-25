@@ -13,7 +13,6 @@ import { Toast, Alignment } from 'components/Toast'
 import NoResults from 'components/leaderboard/ImageNoResults'
 import LeaderboardRow from 'components/leaderboard/LeaderboardRow'
 import Loader from 'components/Loader'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
 import PaginationButton from 'components/PaginationButton'
 
 import { countries, CountryWithCode } from 'data/countries'
@@ -170,9 +169,7 @@ export default function Leaderboard({ loginContext }: Props) {
             'md:py-5',
             'md:px-4'
           )}
-        >
-          {isLoggedIn && <CountdownTimer />}
-        </PageBanner>
+        />
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>
             <div
