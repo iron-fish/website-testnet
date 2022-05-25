@@ -30,7 +30,15 @@ export function Box({
           behind
         )}
       />
-      <div className={clsx('relative', 'border', 'border-black', background)}>
+      <div
+        className={clsx(
+          'relative',
+          'border',
+          'border-black',
+          'h-full',
+          background
+        )}
+      >
         {children}
       </div>
     </div>
