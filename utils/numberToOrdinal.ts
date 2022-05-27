@@ -7,13 +7,13 @@ export function numberToOrdinal(num: number): string {
   const k = num % 100
 
   if (j === 1 && k !== 11) {
-    return `${num.toLocaleString()}st`
+    return `${num}st`
   }
   if (j == 2 && k != 12) {
-    return `${num.toLocaleString()}nd`
+    return `${num}nd`
   }
   if (j == 3 && k != 13) {
-    return `${num.toLocaleString()}rd`
+    return `${num}rd`
   }
-  return `${num.toLocaleString()}th`
+  return `${num}th`
 }
