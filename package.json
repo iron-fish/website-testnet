@@ -6,8 +6,7 @@
     "dev": "nps dev",
     "build": "nps build",
     "start": "nps start",
-    "lint": "nps lint",
-    "prepare": "husky install"
+    "lint": "nps lint"
   },
   "dependencies": {
     "base-64": "^1.0.0",
@@ -33,7 +32,6 @@
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.1",
     "nps": "^5.10.0",
     "nps-utils": "^1.7.0",
     "postcss": "^8.3.5",
