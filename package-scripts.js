@@ -20,7 +20,6 @@ module.exports = {
       script: 'nps lint.clean lint.dry',
       dry: 'twly --boring --lines 3 -t .trc',
     },
-    precommit: 'nps care',
     care: concurrent.nps('build', 'lint'),
     dx: concurrent.nps('build', 'lint', 'meta.dependencies'),
     meta: {
