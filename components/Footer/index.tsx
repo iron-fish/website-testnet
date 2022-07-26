@@ -89,7 +89,11 @@ function Footer() {
             <span className="hidden md:inline">. All rights reserved.</span>
           </p>
           <div className="flex justify-between items-center w-40">
-            <a href="https://t.me/ironfishcryptochat">
+            <a
+              href="https://t.me/ironfishcryptochat"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Image
                 src="/footer/telegram.svg"
                 layout="fixed"
@@ -98,7 +102,11 @@ function Footer() {
                 alt="Telegram"
               />
             </a>
-            <a href="https://github.com/iron-fish">
+            <a
+              href="https://github.com/iron-fish"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Image
                 src="/footer/github.svg"
                 layout="fixed"
@@ -107,7 +115,11 @@ function Footer() {
                 alt="Github"
               />
             </a>
-            <a href="http://reddit.com/r/ironfish">
+            <a
+              href="http://reddit.com/r/ironfish"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Image
                 src="/footer/reddit.svg"
                 layout="fixed"
@@ -116,7 +128,11 @@ function Footer() {
                 alt="Reddit"
               />
             </a>
-            <a href="https://twitter.com/ironfishcrypto">
+            <a
+              href="https://twitter.com/ironfishcrypto"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Image
                 src="/footer/twitter.svg"
                 layout="fixed"
@@ -125,7 +141,11 @@ function Footer() {
                 alt="Twitter"
               />
             </a>
-            <a href="https://discord.gg/ironfish">
+            <a
+              href="https://discord.gg/ironfish"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Image
                 src="/footer/discord.svg"
                 layout="fixed"
