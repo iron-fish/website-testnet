@@ -14,14 +14,15 @@ jobs:
         id: waitForVercelPreviewDeployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
+          max_timeout: 120
+
   test_e2e:
     name: Test end-to-end
     needs: test_setup
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Cypress 
+      - name: Cache Cypress
         uses: actions/cache@v2
         with:
           path: |
