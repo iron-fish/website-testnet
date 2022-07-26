@@ -182,10 +182,6 @@ export default function User({ showNotification, loginContext }: Props) {
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
-  const phase2Points =
-    $allTimeMetrics.metrics.node_uptime.points +
-    $allTimeMetrics.metrics.send_transaction.points
-
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
   } - ${$user.total_points.toLocaleString()} total points! #ironfish https://testnet.ironfish.network/users/${userId}`
@@ -331,7 +327,7 @@ export default function User({ showNotification, loginContext }: Props) {
                   <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
                   <LabeledStat
                     label="Phase 2 Points"
-                    value={phase2Points.toLocaleString()}
+                    value={$user.total_points.toLocaleString()}
                   />
                 </div>
               </div>
