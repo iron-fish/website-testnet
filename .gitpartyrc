@@ -22,7 +22,6 @@ config:
   - prettierrc
   - \**/*.lock
   - \**/*.yml
-  - husky/*
   - eslint*
 binary:
   key: B

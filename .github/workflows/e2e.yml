@@ -6,22 +6,25 @@ jobs:
   test_setup:
     name: Test setup
     runs-on: ubuntu-latest
+    permissions:
+      deployments: read
     outputs:
       preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
     steps:
       - name: Wait for Vercel preview deployment to be ready
-        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        uses: nullsoldier/wait-for-vercel-preview@test-fix
         id: waitForVercelPreviewDeployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
+          max_timeout: 240
+
   test_e2e:
     name: Test end-to-end
     needs: test_setup
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Cypress 
+      - name: Cache Cypress
         uses: actions/cache@v2
         with:
           path: |
