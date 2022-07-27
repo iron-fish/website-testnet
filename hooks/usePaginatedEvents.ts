@@ -19,12 +19,12 @@ export function usePaginatedEvents(
   const $hasNext = useMemo(() => events?.metadata.has_next ?? false, [events])
 
   const fetchEvents = useCallback(
-    async (id: number, direction: 'before' | 'after') => {
+    async (occurred_at: string, direction: 'before' | 'after') => {
       const result = await API.listEvents({
         userId: userId,
         limit: limit,
-        ...(direction === 'after' ? { after: id.toString() } : {}),
-        ...(direction === 'before' ? { before: id.toString() } : {}),
+        ...(direction === 'after' ? { after: occurred_at.toString() } : {}),
+        ...(direction === 'before' ? { before: occurred_at.toString() } : {}),
       })
 
       if (!('error' in result)) {
@@ -36,12 +36,13 @@ export function usePaginatedEvents(
 
   const fetchNext = useCallback(
     async () =>
-      events && fetchEvents(events.data[events.data.length - 1].id, 'after'),
+      events &&
+      fetchEvents(events.data[events.data.length - 1].occurred_at, 'after'),
     [fetchEvents, events]
   )
 
   const fetchPrevious = useCallback(
-    async () => events && fetchEvents(events.data[0].id, 'before'),
+    async () => events && fetchEvents(events.data[0].occurred_at, 'before'),
     [fetchEvents, events]
   )
 
