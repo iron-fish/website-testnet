@@ -111,7 +111,8 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
           'font-extended',
           'text-2xl',
           'w-16',
-          'sm:w-24'
+          'sm:w-24',
+          'truncate'
         )}
       >
         {rankStr}
