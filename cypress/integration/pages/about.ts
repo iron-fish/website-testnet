@@ -19,11 +19,12 @@ describe('/about', () => {
         text: 'Whitepaper',
         href: 'https://ironfish.network/docs/whitepaper/1_introduction',
       },
-      {
-        isImage: false,
-        text: 'Roadmap',
-        href: 'https://ironfish.network/roadmap',
-      },
+      // LW 9/22 - Removing this while we figure out Phase 3
+      // {
+      //   isImage: false,
+      //   text: 'Roadmap',
+      //   href: 'https://ironfish.network/roadmap',
+      // },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
@@ -36,11 +37,12 @@ describe('/about', () => {
         text: 'Whitepaper',
         href: 'https://ironfish.network/docs/whitepaper/1_introduction',
       },
-      {
-        isImage: false,
-        text: 'Roadmap',
-        href: 'https://ironfish.network/roadmap',
-      },
+      // LW 9/22 - Removing this while we figure out Phase 3
+      // {
+      //   isImage: false,
+      //   text: 'Roadmap',
+      //   href: 'https://ironfish.network/roadmap',
+      // },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
