@@ -46,10 +46,9 @@ export function NavbarLinks({
       <Link href="https://ironfish.network/docs/whitepaper/1_introduction">
         <a className={cc}>Whitepaper</a>
       </Link>
-      {/* LW 9/22 - Removing this while we figure out phase 3 */}
-      {/* <Link href="https://ironfish.network/roadmap">
+      <Link href="https://ironfish.network/roadmap">
         <a className={cc}>Roadmap</a>
-      </Link> */}
+      </Link>
       <SubnavButton
         label="Company"
         {...buttonStyles}
