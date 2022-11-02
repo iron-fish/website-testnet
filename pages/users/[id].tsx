@@ -35,8 +35,6 @@ interface Props {
   showNotification: boolean
   loginContext: LoginContext
 }
-// const sumValues = (x: Record<string, number>) =>
-//   Object.values(x).reduce((a, b) => a + b, 0)
 
 type LabeledProps = {
   value: string
@@ -69,12 +67,6 @@ export default function User({ showNotification, loginContext }: Props) {
   const [$allTimeMetrics, $setAllTimeMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$weeklyMetrics, $setWeeklyMetrics] = useState<
-    API.UserMetricsResponse | undefined
-  >(undefined)
-  const [$metricsConfig, $setMetricsConfig] = useState<
-    API.MetricsConfigResponse | undefined
-  >(undefined)
   const [$fetched, $setFetched] = useState(false)
 
   useEffect(() => {
@@ -98,10 +90,8 @@ export default function User({ showNotification, loginContext }: Props) {
             limit: EVENTS_LIMIT,
           }),
           API.getUserAllTimeMetrics(userId),
-          API.getUserWeeklyMetrics(userId),
-          API.getMetricsConfig(),
         ])
-        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
+        const [user, events, allTimeMetrics] = raw
         if (isCanceled) {
           return
         }
@@ -112,11 +102,7 @@ export default function User({ showNotification, loginContext }: Props) {
           'error' in events ||
           API.isGenericError(events) ||
           'error' in allTimeMetrics ||
-          API.isGenericError(allTimeMetrics) ||
-          'error' in weeklyMetrics ||
-          API.isGenericError(weeklyMetrics) ||
-          'error' in metricsConfig ||
-          API.isGenericError(metricsConfig)
+          API.isGenericError(allTimeMetrics)
         ) {
           Router.push(
             `/leaderboard?toast=${btoa(
@@ -128,8 +114,6 @@ export default function User({ showNotification, loginContext }: Props) {
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
-        $setWeeklyMetrics(weeklyMetrics)
-        $setMetricsConfig(metricsConfig)
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn(e)
@@ -166,13 +150,7 @@ export default function User({ showNotification, loginContext }: Props) {
     $setActiveTab(t)
   }, [])
 
-  if (
-    !$user ||
-    !$allTimeMetrics ||
-    !$metricsConfig ||
-    !$weeklyMetrics ||
-    !$events
-  ) {
+  if (!$user || !$allTimeMetrics || !$events) {
     return <Loader />
   }
 
@@ -343,8 +321,6 @@ export default function User({ showNotification, loginContext }: Props) {
                 user={$user}
                 authedUser={loginContext.metadata}
                 allTimeMetrics={$allTimeMetrics}
-                weeklyMetrics={$weeklyMetrics}
-                metricsConfig={$metricsConfig}
                 setFetched={$setFetched}
                 setUser={$setUser}
               />
