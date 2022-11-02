@@ -118,7 +118,12 @@ export default function User({ showNotification, loginContext }: Props) {
         // eslint-disable-next-line no-console
         console.warn(e)
 
-        throw e
+        Router.push(
+          `/leaderboard?toast=${btoa(
+            'An error occurred while fetching user data'
+          )}`
+        )
+        return
       }
     }
 
