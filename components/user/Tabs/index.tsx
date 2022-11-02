@@ -12,8 +12,6 @@ export type TabType = 'all' | 'weekly' | 'settings'
 
 type TabsProps = {
   allTimeMetrics: API.UserMetricsResponse
-  weeklyMetrics: API.UserMetricsResponse
-  metricsConfig: API.MetricsConfigResponse
   user: API.ApiUser
   authedUser: API.ApiUserMetadata | null
   activeTab: TabType
@@ -28,8 +26,6 @@ type TabsProps = {
 
 export default function Tabs({
   allTimeMetrics,
-  // weeklyMetrics,
-  // metricsConfig,
   user,
   authedUser,
   activeTab,
@@ -49,12 +45,6 @@ export default function Tabs({
     <div>
       {/* Tabs */}
       <div className="flex font-favorit gap-x-6 mb-8">
-        {/*<TabHeaderButton
-          selected={activeTab === 'weekly'}
-          onClick={() => onTabChange('weekly')}
-        >
-          Weekly Stats
-        </TabHeaderButton> */}
         <TabHeaderButton
           selected={activeTab === 'all'}
           onClick={() => onTabChange('all')}
@@ -72,12 +62,6 @@ export default function Tabs({
       </div>
 
       {/* Tabs Content */}
-      {/*activeTab === 'weekly' && (
-        <WeeklyContent
-          weeklyMetrics={weeklyMetrics}
-          metricsConfig={metricsConfig}
-        />
-      )*/}
       {activeTab === 'all' && (
         <AllTimeContent allTimeMetrics={allTimeMetrics} />
       )}
