@@ -59,7 +59,7 @@ export const guidelines = {
     {
       title: 'Rewards',
       content:
-        'The Incentivized Testnet program will distribute Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points. Rewards for code contributions will grant points in a separate competition pool relative to miners.',
+        'The Incentivized Testnet program will distribute up to 420,000 (1% of the initial supply) Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
       behind: 'bg-white',
     },
     {
@@ -183,17 +183,12 @@ export const phases = [
     pools: [
       {
         size: 42e4,
-        poolNum: 1,
         categories: [
           'Mining Blocks',
           'Finding Bugs',
+          'Submitting Pull Requests',
           'Community Contributions',
         ],
-      },
-      {
-        size: 42e4,
-        poolNum: 3,
-        categories: ['Submitting Pull Requests'],
       },
     ],
   },
@@ -203,10 +198,9 @@ export const phases = [
     pools: [
       {
         size: 21e4,
-        poolNum: 2,
         categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
       },
-      { size: 105e3, poolNum: 3, categories: ['Submitting Pull Requests'] },
+      { size: 105e3, categories: ['Submitting Pull Requests'] },
     ],
   },
 ]

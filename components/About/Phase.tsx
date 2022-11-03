@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import OffsetBox from 'components/OffsetBorder/Box'
 import CheckIcon from 'components/icons/Check'
+import { capitalDigit } from 'utils/number-to-words'
 
 import { Status } from './types'
 
 export type Pool = {
   size: number
   categories: string[]
-  poolNum?: number
 }
 
 export type PhaseProps = {
@@ -53,7 +53,11 @@ export const Phase = ({
         >
           Phase {index}
         </h4>
-        <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}></p>
+        <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}>
+          {capitalDigit(pools.length)} prize{' '}
+          {pools.length === 1 ? 'pool' : 'pools'} totalling{' '}
+          {cumulativePoolSize(pools)} coins
+        </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
         <Link href={isComplete ? '#' : '/signup'} passHref>
           <a
@@ -90,12 +94,12 @@ export const Phase = ({
             )}
           </a>
         </Link>
-        {pools.map(({ size, categories, poolNum }: Pool, i: number) => (
+        {pools.map(({ size, categories }: Pool, i: number) => (
           <div
             key={`${size}-${categories.length}`}
             className={clsx('mt-6', 'w-full', 'text-left')}
           >
-            Prize pool {poolNum || i + 1}:
+            Prize pool {i + 1}: {size.toLocaleString()} coins
             <ul className="pl-5">
               {categories.map((category: string) => (
                 <li key={category} className={clsx('list-disc', 'pt-2')}>
