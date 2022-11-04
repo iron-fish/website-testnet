@@ -3,7 +3,6 @@ import { CustomBox } from 'components/OffsetBorder'
 import { intervalToDuration } from 'date-fns'
 import type { Duration } from 'date-fns'
 
-import { nextMondayFrom } from 'utils/date'
 import { formatEventDate } from 'utils/events'
 
 const customFormatDuration = (x: Duration) =>
@@ -11,10 +10,14 @@ const customFormatDuration = (x: Duration) =>
     x.minutes ? x.minutes + 'min : ' : ''
   }${x.seconds ? x.seconds + 'sec' : '0sec'}`
 
-const CountdownTimer = () => {
+type CountdownTimerProps = {
+  end: Date
+  event: string
+}
+const CountdownTimer = (props: CountdownTimerProps) => {
+  const { end, event } = props
   const now = new Date()
   const [$time, $setTime] = useState(now)
-  const end = nextMondayFrom(now)
   useEffect(() => {
     const i = setInterval(() => $setTime(new Date()), 1000)
     return () => clearInterval(i)
@@ -35,9 +38,7 @@ const CountdownTimer = () => {
         <div className="w-[18.25rem] px-4 py-2 m-auto">
           <div className="flex flex-col justify-center items-center">
             <span className="text-lg">{customFormatDuration(ii)}</span>
-            <span className="uppercase text-sm text-ifmauve">
-              Until Weekly Rollover
-            </span>
+            <span className="uppercase text-sm text-ifmauve">{event}</span>
           </div>
         </div>
       </CustomBox>
