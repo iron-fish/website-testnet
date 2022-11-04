@@ -186,10 +186,10 @@ export const phases = [
         categories: [
           'Mining Blocks',
           'Finding Bugs',
-          'Submitting Pull Requests',
           'Community Contributions',
         ],
       },
+      { size: 105e3, categories: ['Submitting Pull Requests'], poolNum: 3 },
     ],
   },
   {
@@ -199,8 +199,9 @@ export const phases = [
       {
         size: 21e4,
         categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
+        poolNum: 2,
       },
-      { size: 105e3, categories: ['Submitting Pull Requests'] },
+      { size: 105e3, categories: ['Submitting Pull Requests'], poolNum: 3 },
     ],
   },
 ]
