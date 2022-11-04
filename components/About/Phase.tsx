@@ -10,7 +10,7 @@ import { Status } from './types'
 export type Pool = {
   size: number
   categories: string[]
-  poolNum: number
+  poolNum?: number
   additionalText?: string
 }
 
