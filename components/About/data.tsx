@@ -189,7 +189,12 @@ export const phases = [
           'Community Contributions',
         ],
       },
-      { size: 105e3, categories: ['Submitting Pull Requests'], poolNum: 3 },
+      {
+        size: 105e3,
+        categories: ['Submitting Pull Requests'],
+        poolNum: 3,
+        additionalText: '(split across all phases)',
+      },
     ],
   },
   {
@@ -201,7 +206,12 @@ export const phases = [
         categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
         poolNum: 2,
       },
-      { size: 105e3, categories: ['Submitting Pull Requests'], poolNum: 3 },
+      {
+        size: 105e3,
+        categories: ['Submitting Pull Requests'],
+        poolNum: 3,
+        additionalText: '(split across all phases)',
+      },
     ],
   },
 ]
