@@ -10,6 +10,8 @@ import { Status } from './types'
 export type Pool = {
   size: number
   categories: string[]
+  poolNum?: number
+  additionalText?: string
 }
 
 export type PhaseProps = {
@@ -94,21 +96,24 @@ export const Phase = ({
             )}
           </a>
         </Link>
-        {pools.map(({ size, categories }: Pool, i: number) => (
-          <div
-            key={`${size}-${categories.length}`}
-            className={clsx('mt-6', 'w-full', 'text-left')}
-          >
-            Prize pool {i + 1}: {size.toLocaleString()} coins
-            <ul className="pl-5">
-              {categories.map((category: string) => (
-                <li key={category} className={clsx('list-disc', 'pt-2')}>
-                  {category}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {pools.map(
+          ({ size, categories, additionalText, poolNum }: Pool, i: number) => (
+            <div
+              key={`${size}-${categories.length}`}
+              className={clsx('mt-6', 'w-full', 'text-left')}
+            >
+              Prize pool {poolNum || i + 1}: {size.toLocaleString()} coins{' '}
+              {additionalText}
+              <ul className="pl-5">
+                {categories.map((category: string) => (
+                  <li key={category} className={clsx('list-disc', 'pt-2')}>
+                    {category}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        )}
       </div>
     </OffsetBox>
   )
