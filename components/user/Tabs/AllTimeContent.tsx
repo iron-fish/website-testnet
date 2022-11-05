@@ -14,7 +14,7 @@ const summarizePool = ({ categories }: { categories: string[] }) =>
 
 const summarizePhase = ({ pools }: { pools: Pool[] }) =>
   pools.map(
-    (pool, i) => `Pool ${i + 1} categories include:\n- ${summarizePool(pool)}`
+    (pool, i) => `Pool ${i + 2} categories include:\n- ${summarizePool(pool)}`
   )
 
 const plural = (x: string) => (n: number) => n > 1 ? x + 's' : x
@@ -23,7 +23,7 @@ export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
   const { code, main } = allTimeMetrics.pools
-  const [pool1Info, pool2Info] = summarizePhase(phases[1])
+  const [pool2Info, pool3Info] = summarizePhase(phases[1])
   const totalHours = allTimeMetrics.node_uptime.total_hours
   const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
@@ -55,18 +55,18 @@ export default function AllTimeContent({
         metric={allTimeMetrics.metrics.pull_requests_merged}
       />
       <AllTimeMetricCard
-        title="Pool 1 Rank"
+        title="Pool 2 Rank"
         metric={main}
         showInfo
-        info={pool1Info}
+        info={pool2Info}
         useRank
       />
       <AllTimeMetricCard
-        title="Pool 2 Rank"
+        title="Pool 3 Rank"
         metric={code}
         showInfo
         verticalOffset="-4.75rem"
-        info={pool2Info}
+        info={pool3Info}
         useRank
       />
     </div>
