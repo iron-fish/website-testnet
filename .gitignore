@@ -36,3 +36,6 @@ yarn-error.log*
 TODO.md
 cypress/videos
 dependency-graph*
+
+# JetBrains
+.idea/
