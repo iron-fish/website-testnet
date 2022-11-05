@@ -57,7 +57,7 @@ export const Phase = ({
         </h4>
         <p className={clsx('my-2', 'text-left', 'w-full', 'text-lg')}>
           {capitalDigit(pools.length)} prize{' '}
-          {pools.length === 1 ? 'pool' : 'pools'} totalling{' '}
+          {pools.length === 1 ? 'pool' : 'pools'} totalling up to{' '}
           {cumulativePoolSize(pools)} coins
         </p>
         <p className={clsx('text-left', 'w-full')}>{summary}</p>
