@@ -4,6 +4,7 @@ import { intervalToDuration } from 'date-fns'
 import type { Duration } from 'date-fns'
 
 import { formatEventDate } from 'utils/events'
+import clsx from 'clsx'
 
 const customFormatDuration = (x: Duration) =>
   `${x.days ? x.days + 'd : ' : ''}${x.hours ? x.hours + 'hr : ' : ''}${
@@ -32,13 +33,13 @@ const CountdownTimer = (props: CountdownTimerProps) => {
         behind="bg-white"
         rounded
         size="2"
-        className="w-[18.25rem]"
+        className={clsx('w-[18.25rem]', 'mt-4')}
         background="bg-ifpink"
       >
         <div className="w-[18.25rem] px-4 py-2 m-auto">
           <div className="flex flex-col justify-center items-center">
             <span className="text-lg">{customFormatDuration(ii)}</span>
-            <span className="uppercase text-sm text-ifmauve">{event}</span>
+            <span className="uppercase text-sm">{event}</span>
           </div>
         </div>
       </CustomBox>
