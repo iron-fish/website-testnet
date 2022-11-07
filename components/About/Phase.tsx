@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import OffsetBox from 'components/OffsetBorder/Box'
 import CheckIcon from 'components/icons/Check'
-import { capitalDigit } from 'utils/number-to-words'
 
 import { Status } from './types'
 
