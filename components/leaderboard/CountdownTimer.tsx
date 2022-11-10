@@ -15,15 +15,19 @@ type CountdownTimerProps = {
   end: Date
   event: string
 }
-const CountdownTimer = (props: CountdownTimerProps) => {
+
+export const CountdownTimer = (props: CountdownTimerProps) => {
   const { end, event } = props
   const now = new Date()
   const [$time, $setTime] = useState(now)
+
   useEffect(() => {
     const i = setInterval(() => $setTime(new Date()), 1000)
     return () => clearInterval(i)
   }, [])
+
   const ii = intervalToDuration({ start: $time, end })
+
   return (
     <div
       className="w-full flex flex-col justify-center items-center text-center"
@@ -46,4 +50,3 @@ const CountdownTimer = (props: CountdownTimerProps) => {
     </div>
   )
 }
-export default CountdownTimer

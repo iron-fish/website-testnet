@@ -23,7 +23,7 @@ import { useResponsiveCards } from 'components/About/hooks'
 import Loader from 'components/Loader'
 
 import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
+import { CountdownTimer } from 'components/leaderboard/CountdownTimer'
 
 type ArrowButtonProps = {
   children: ReactNode
@@ -99,7 +99,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
       >
         <CountdownTimer
           end={new Date(1668542400000)}
-          event=" until end of Phase 2."
+          event="until end of Phase 2 (block 274,000)"
         />
         <PageBanner
           title={
