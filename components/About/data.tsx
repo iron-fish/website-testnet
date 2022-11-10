@@ -187,7 +187,7 @@ export const callsToAction = {
       earn: 5000,
       points: [
         'Small = 250 points',
-        'Medium = 750 points',
+        'Medium = 500 points',
         'Large = 1000 points',
       ],
       ctaText: 'Submit a PR',
