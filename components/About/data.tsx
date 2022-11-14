@@ -196,13 +196,34 @@ export const phases = [
     ],
   },
   {
-    status: Status.ComingSoon,
-    summary: 'Started May 10, 2022',
+    status: Status.Ended,
+    summary: 'May 10, 2022 - November 22, 2022',
     pools: [
       {
         size: 21e4,
         categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
         poolNum: 2,
+      },
+      {
+        size: 105e3,
+        categories: ['Submitting Pull Requests'],
+        poolNum: 3,
+        additionalText: '(spans all phases)',
+      },
+    ],
+  },
+  {
+    status: Status.ComingSoon,
+    summary: 'Starting January 18, 2022',
+    pools: [
+      {
+        size: 'X',
+        categories: [
+          'Hosting a Node',
+          'Finding Bugs',
+          'Multi Asset Mint/Burn/Transfers',
+        ],
+        poolNum: 4,
       },
       {
         size: 105e3,
