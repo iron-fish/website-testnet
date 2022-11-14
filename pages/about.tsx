@@ -23,7 +23,6 @@ import { useResponsiveCards } from 'components/About/hooks'
 import Loader from 'components/Loader'
 
 import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 type ArrowButtonProps = {
   children: ReactNode
@@ -97,19 +96,15 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           'flex-col'
         )}
       >
-        <CountdownTimer
-          end={new Date(1668542400000)}
-          event=" until end of Phase 2."
-        />
         <PageBanner
           title={
             <>
               Incentivized Testnet
               <br />
-              Welcome to Phase 2.
+              Welcome to Phase 3.
             </>
           }
-          text={`Welcome to Phase 2 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details).`}
+          text={`Welcome to Phase 3 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details).`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
