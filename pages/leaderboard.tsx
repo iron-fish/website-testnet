@@ -24,7 +24,6 @@ import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
 import * as API from 'apiClient'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 type Props = {
   showNotification: boolean
@@ -159,10 +158,6 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
           'flex-col'
         )}
       >
-        <CountdownTimer
-          end={new Date(1669661371000)}
-          event=" until Phase 2 is closed."
-        />
         <PageBanner
           title={
             <>
