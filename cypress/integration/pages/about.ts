@@ -64,11 +64,6 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'Learn more',
-        href: '/faq#transaction-points',
-      },
-      {
-        isImage: false,
         text: 'please submit it as an issue',
         href: 'https://github.com/iron-fish/ironfish/issues',
       },
