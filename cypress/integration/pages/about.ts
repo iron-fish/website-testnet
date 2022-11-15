@@ -83,6 +83,7 @@ describe('/about', () => {
         href: '/about#guidelines',
       },
       { isImage: false, text: 'Phase Complete', href: '/about#' },
+      { isImage: false, text: 'Phase Complete', href: '/about#' },
       { isImage: false, text: 'Sign Up Now', href: '/signup' },
       {
         isImage: false,
