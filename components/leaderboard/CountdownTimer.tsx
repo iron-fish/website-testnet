@@ -7,9 +7,11 @@ import { formatEventDate } from 'utils/events'
 import clsx from 'clsx'
 
 const customFormatDuration = (x: Duration) =>
-  `${x.days ? x.days + 'd : ' : ''}${x.hours ? x.hours + 'hr : ' : ''}${
-    x.minutes ? x.minutes + 'min : ' : ''
-  }${x.seconds ? x.seconds + 'sec' : '0sec'}`
+  `${x.months ? x.months + 'm : ' : ''}${x.days ? x.days + 'd : ' : ''}${
+    x.hours ? x.hours + 'hr : ' : ''
+  }${x.minutes ? x.minutes + 'min : ' : ''}${
+    x.seconds ? x.seconds + 'sec' : '0sec'
+  }`
 
 type CountdownTimerProps = {
   end: Date
