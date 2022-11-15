@@ -219,7 +219,7 @@ export const phases = [
     summary: 'Starting January 18, 2022',
     pools: [
       {
-        size: 'X',
+        size: 0,
         categories: [
           'Hosting a Node',
           'Finding Bugs',
