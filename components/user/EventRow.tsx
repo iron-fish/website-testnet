@@ -183,7 +183,12 @@ const summarizeEvent = (
     const { hash } = metadata as ApiEventMetadataBlockMined
     return <CopyableHash hash={hash} />
   }
-  if (type === EventType.TRANSACTION_SENT) {
+  if (
+    type === EventType.TRANSACTION_SENT ||
+    type === EventType.MASP_BURN ||
+    type === EventType.MASP_MINT ||
+    type === EventType.MASP_TRANSFER
+  ) {
     const { transaction_hash } = metadata as ApiEventMetadataTransactionSent
     return <CopyableHash hash={transaction_hash} unit="Txn" />
   }
@@ -217,12 +222,6 @@ const summarizeEvent = (
       <>
         <SmallOnly>View</SmallOnly>
         <Verbose>Promoted on {hostname}</Verbose>
-      </>
-    )
-  } else if (type === EventType.TRANSACTION_SENT) {
-    return (
-      <>
-        View<Verbose className="ml-1">transaction</Verbose>
       </>
     )
   }

@@ -104,7 +104,7 @@ export const callsToAction = {
       content:
         'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
       points: ['12 hours of continuous uptime = 10 points'],
-      status: Status.New,
+      status: Status.Active,
       ctaText: 'Set up instructions',
       href: '/faq#node-points',
     },
@@ -131,20 +131,18 @@ export const callsToAction = {
   ],
   columnTwo: [
     {
-      title: `Sending a transaction`,
+      title: `Sending Multi Asset Transactions`,
       content: (
         <>
-          For every transaction you send to the Iron Bank of over 0.1 coins, you
-          get 1 point. To make this easier, we made a command that automatically
-          sends this transaction for you:
-          <pre className="bg-iflightgray inline p-1 font-favorit">
-            ironfish deposit
-          </pre>
+          Once a week, you can submit a mint, burn, and transfer of an a custom
+          multi asset, where the asset name is your graffiti:
         </>
       ),
-      points: ['1 point for a transaction of 0.1 coins or more'],
-      ctaText: 'Learn more',
-      href: '/faq#transaction-points',
+      points: [
+        'X points for multi asset mint',
+        'X points for multi asset burn',
+        'X points for multi asset transfer',
+      ],
       status: Status.New,
     },
     {
@@ -198,13 +196,34 @@ export const phases = [
     ],
   },
   {
-    status: Status.ComingSoon,
-    summary: 'Started May 10, 2022',
+    status: Status.Ended,
+    summary: 'May 10, 2022 - November 22, 2022',
     pools: [
       {
         size: 21e4,
         categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
         poolNum: 2,
+      },
+      {
+        size: 105e3,
+        categories: ['Submitting Pull Requests'],
+        poolNum: 3,
+        additionalText: '(spans all phases)',
+      },
+    ],
+  },
+  {
+    status: Status.ComingSoon,
+    summary: 'Starting January 18, 2022',
+    pools: [
+      {
+        size: 0,
+        categories: [
+          'Hosting a Node',
+          'Finding Bugs',
+          'Multi Asset Mint/Burn/Transfers',
+        ],
+        poolNum: 4,
       },
       {
         size: 105e3,
