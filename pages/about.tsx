@@ -126,7 +126,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>
-            Phase 2
+            Phase 3
             <span className={clsx('ml-2', 'md:hidden')} />
             <br className={clsx('hidden', 'md:inline')} />
             <span className={clsx('hidden', 'md:inline')}>Participation</span>
