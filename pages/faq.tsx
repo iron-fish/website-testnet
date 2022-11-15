@@ -219,8 +219,8 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
         )}
       >
         <CountdownTimer
-          end={new Date(1669153203000)}
-          event=" until end of Phase 2."
+          end={new Date(1674072000000)}
+          event=" until start of Phase 3!"
         />
         <PageBanner
           title="Testnet FAQ"
