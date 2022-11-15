@@ -14,6 +14,7 @@ import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 import Loader from 'components/Loader'
 import { scrollTo } from 'utils/scroll'
 import { LoginContext } from 'hooks/useLogin'
+import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 const questions: ReadonlyArray<{
   question: string
@@ -277,6 +278,10 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
           'flex-col'
         )}
       >
+        <CountdownTimer
+          end={new Date(1674072000000)}
+          event=" until start of Phase 3!"
+        />
         <PageBanner
           title="Testnet FAQ"
           text={<PageBannerBody />}
