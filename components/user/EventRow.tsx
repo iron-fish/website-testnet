@@ -224,17 +224,6 @@ const summarizeEvent = (
         <Verbose>Promoted on {hostname}</Verbose>
       </>
     )
-  } else if (
-    type === EventType.TRANSACTION_SENT ||
-    type === EventType.MASP_BURN ||
-    type === EventType.MASP_MINT ||
-    type === EventType.MASP_TRANSFER
-  ) {
-    return (
-      <>
-        View<Verbose className="ml-1">transaction</Verbose>
-      </>
-    )
   }
   return <>UNHANDLED: {type}</>
 }
