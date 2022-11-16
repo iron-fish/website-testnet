@@ -29,7 +29,7 @@ export const PageBanner: FC<PageBannerProps> = ({
           'text-4xl',
           // 'w-3/5',
           'mx-[12.5%]',
-          'mt-24',
+          'mt-8',
           'mb-8',
           'font-extended',
           'md:mx-4',
