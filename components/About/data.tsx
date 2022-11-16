@@ -100,7 +100,7 @@ export const guidelines = {
 export const callsToAction = {
   columnOne: [
     {
-      title: 'Hosting a node',
+      title: 'Host a node',
       content:
         'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
       points: ['12 hours of continuous uptime = 10 points'],
@@ -128,23 +128,7 @@ export const callsToAction = {
       href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       status: Status.Active,
     },
-  ],
-  columnTwo: [
-    {
-      title: `Sending Multi Asset Transactions`,
-      content: (
-        <>
-          Once a week, you can submit a mint, burn, and transfer of an a custom
-          multi asset, where the asset name is your graffiti:
-        </>
-      ),
-      points: [
-        'X points for multi asset mint',
-        'X points for multi asset burn',
-        'X points for multi asset transfer',
-      ],
-      status: Status.New,
-    },
+
     {
       title: 'Finding Bugs',
       content: (
@@ -165,6 +149,41 @@ export const callsToAction = {
       href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       submissionForm: false,
       status: Status.Active,
+    },
+  ],
+  columnTwo: [
+    {
+      title: `Mint Asset`,
+      content: (
+        <>
+          Once a week, you can submit a mint your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+    },
+    {
+      title: `Burn Asset`,
+      content: (
+        <>
+          Once a week, you can submit a burn your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+    },
+    {
+      title: `Send Asset`,
+      content: (
+        <>
+          Once a week, you can submit a send your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
     },
   ],
 }

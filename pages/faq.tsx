@@ -277,7 +277,7 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
           buttonText="Join Now"
           goTo="/signup"
         />
-        <KeepReading background="bg-white" />
+        <KeepReading />
         <div className="mb-24"></div>
       </main>
       <Footer />
