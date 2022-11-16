@@ -35,6 +35,18 @@ const questions: ReadonlyArray<{
           - you get points once a week for each multiasset action: minting,
           transferring, and burning .
         </li>
+        <li>
+          Additionally, we have added a number of commands to the CLI to make
+          participating in the testnet simpler - these will help you set up your
+          graffiti and telemetry. Run <code>ironfish testnet</code> to set up
+          your node to be ready for testnet. Check out our{' '}
+          <span className="underline">
+            <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
+              getting started
+            </Link>
+          </span>{' '}
+          for more details!
+        </li>
       </div>
     ),
   },
@@ -101,8 +113,8 @@ const questions: ReadonlyArray<{
           <Link href="https://phase1.testnet.ironfish.network/leaderboard">
             phase 1
           </Link>
-        </span>
-        and
+        </span>{' '}
+        and{' '}
         <span className="underline">
           <Link href="https://phase2.testnet.ironfish.network/leaderboard">
             phase 2
