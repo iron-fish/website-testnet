@@ -192,8 +192,9 @@ export type Pool = {
   categories: string[]
 }
 
-export const phases = [
+export const phasesRow1 = [
   {
+    phaseNum: 1,
     status: Status.Ended,
     summary: `Dec 1, 2021 - March 11, 2022.`,
     pools: [
@@ -214,6 +215,7 @@ export const phases = [
     ],
   },
   {
+    phaseNum: 2,
     status: Status.Ended,
     summary: 'May 10, 2022 - November 22, 2022',
     pools: [
@@ -230,25 +232,22 @@ export const phases = [
       },
     ],
   },
-  {
-    status: Status.ComingSoon,
-    summary: 'Starting January 18, 2022',
-    pools: [
-      {
-        size: 0,
-        categories: [
-          'Hosting a Node',
-          'Finding Bugs',
-          'Multi Asset Mint/Burn/Transfers',
-        ],
-        poolNum: 4,
-      },
-      {
-        size: 105e3,
-        categories: ['Submitting Pull Requests'],
-        poolNum: 3,
-        additionalText: '(spans all phases)',
-      },
-    ],
-  },
 ]
+export const phasesRow2 = {
+  phaseNum: 3,
+  status: Status.ComingSoon,
+  summary: 'Starting January 18, 2022',
+  pools: [
+    {
+      size: 0,
+      categories: ['Hosting a Node', 'Finding Bugs', 'Asset Mint/Burn/Send'],
+      poolNum: 4,
+    },
+    {
+      size: 105e3,
+      categories: ['Submitting Pull Requests'],
+      poolNum: 3,
+      additionalText: '(spans all phases)',
+    },
+  ],
+}
