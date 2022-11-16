@@ -27,7 +27,7 @@ function Navbar({
 }: NavbarProps) {
   const notification = showNotification ? (
     <>
-      Phase 2 Incentivized Testnet started May 10th @ 12:00 PDT and will end November 15th!
+      Phase 2 Incentivized Testnet ended November 22nd @ 12:00 PDT
       <br className="md:hidden" />
       <span className="hidden md:inline"> </span>
       See the Testnet tab for more details.

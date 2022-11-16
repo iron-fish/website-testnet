@@ -109,7 +109,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               Welcome to Phase 2.
             </>
           }
-          text={`Welcome to Phase 2 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details). Phase 2 will end November 15, 2022.`}
+          text={`Welcome to Phase 2 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details). Phase 2 ended November 22, 2022.`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',

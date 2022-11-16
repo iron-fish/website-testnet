@@ -175,7 +175,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
             <p>
               Our leaderboard shows you who&apos;s earned the most points in the
               incentivized testnet! Click a user name to see a breakdown of
-              their activity. Phase 2 ends November 15, 2022.{' '}
+              their activity. Phase 2 ended November 22, 2022 @ 12:00 PDT.{' '}
               <p>
                 <Link
                   href="https://phase1.testnet.ironfish.network/leaderboard"
