@@ -111,7 +111,6 @@ export const CallToAction = ({
               Earn up to {earn.toLocaleString('en-US')} points a week
             </div>
           )}
-          <div className="mb-8" />
           {disabled ? null : !ended && ctaText && href && button ? (
             <Link href={href}>{button}</Link>
           ) : (
