@@ -14,7 +14,7 @@ const summarizePool = ({ categories }: { categories: string[] }) =>
 
 const summarizePhase = ({ pools }: { pools: Pool[] }) =>
   pools.map(
-    (pool, i) => `Pool ${i + 1} categories include:\n- ${summarizePool(pool)}`
+    pool => `Pool ${pool.poolNum} categories include:\n- ${summarizePool(pool)}`
   )
 
 const plural = (x: string) => (n: number) => n > 1 ? x + 's' : x
@@ -23,7 +23,7 @@ export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
   const { code, main } = allTimeMetrics.pools
-  const [pool1Info, pool2Info] = summarizePhase(phases[1])
+  const [pool1Info, pool2Info] = summarizePhase(phases[2])
   const totalHours = allTimeMetrics.node_uptime.total_hours
   const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
@@ -43,16 +43,24 @@ export default function AllTimeContent({
         }
       />
       <AllTimeMetricCard
-        title="Transactions Sent"
-        metric={allTimeMetrics.metrics.send_transaction}
-      />
-      <AllTimeMetricCard
         title="Bugs Caught"
         metric={allTimeMetrics.metrics.bugs_caught}
       />
       <AllTimeMetricCard
         title="PRs Merged"
         metric={allTimeMetrics.metrics.pull_requests_merged}
+      />
+      <AllTimeMetricCard
+        title="Multi-Asset Mint"
+        metric={allTimeMetrics.metrics.masp_mint}
+      />
+      <AllTimeMetricCard
+        title="Multi-Asset Burn"
+        metric={allTimeMetrics.metrics.masp_burn}
+      />
+      <AllTimeMetricCard
+        title="Multi-Asset Send"
+        metric={allTimeMetrics.metrics.masp_transfer}
       />
       <AllTimeMetricCard
         title="Pool 1 Rank"

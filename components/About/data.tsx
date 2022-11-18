@@ -172,6 +172,7 @@ export const callsToAction = {
 export type Pool = {
   size: number
   categories: string[]
+  poolNum: number
 }
 
 export const phases = [
@@ -181,6 +182,7 @@ export const phases = [
     pools: [
       {
         size: 42e4,
+        poolNum: 1,
         categories: [
           'Mining Blocks',
           'Finding Bugs',
