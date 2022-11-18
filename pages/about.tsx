@@ -157,8 +157,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               'flex-col',
               'mr-2',
               'md:mr-0',
-              'md:flex-row',
-              'mb-12'
+              'md:flex-row'
             )}
           >
             {phasesRow1.map((p: Omit<PhaseProps, 'index'>) => (
