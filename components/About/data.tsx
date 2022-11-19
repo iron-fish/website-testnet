@@ -216,7 +216,7 @@ export const phases = [
   },
   {
     status: Status.ComingSoon,
-    summary: 'Starting January 18, 2022',
+    summary: 'Starting January 18, 2023',
     pools: [
       {
         size: 0,
