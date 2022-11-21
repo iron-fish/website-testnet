@@ -59,11 +59,6 @@ describe('/about', () => {
       },
       {
         isImage: false,
-        text: 'View Testnet Guidelines',
-        href: '/about#guidelines',
-      },
-      {
-        isImage: false,
         text: 'please submit it as an issue',
         href: 'https://github.com/iron-fish/ironfish/issues',
       },
@@ -71,6 +66,11 @@ describe('/about', () => {
         isImage: false,
         text: 'Request points for a bug',
         href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      },
+      {
+        isImage: false,
+        text: 'View Testnet Guidelines',
+        href: '/about#guidelines',
       },
       {
         isImage: false,

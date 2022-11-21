@@ -128,23 +128,6 @@ export const callsToAction = {
       href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       status: Status.Active,
     },
-  ],
-  columnTwo: [
-    {
-      title: `Sending Multi Asset Transactions`,
-      content: (
-        <>
-          Once a week, you can submit a mint, burn, and transfer of an a custom
-          multi asset, where the asset name is your graffiti:
-        </>
-      ),
-      points: [
-        'X points for multi asset mint',
-        'X points for multi asset burn',
-        'X points for multi asset transfer',
-      ],
-      status: Status.New,
-    },
     {
       title: 'Finding Bugs',
       content: (
@@ -167,6 +150,41 @@ export const callsToAction = {
       status: Status.Active,
     },
   ],
+  columnTwo: [
+    {
+      title: `Mint Asset`,
+      content: (
+        <>
+          Once a week, you can submit a mint your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+    },
+    {
+      title: `Burn Asset`,
+      content: (
+        <>
+          Once a week, you can submit a burn your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+    },
+    {
+      title: `Send Asset`,
+      content: (
+        <>
+          Once a week, you can submit a send your asset, where the asset name is
+          your graffiti:
+        </>
+      ),
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+    },
+  ],
 }
 
 export type Pool = {
@@ -175,8 +193,9 @@ export type Pool = {
   poolNum: number
 }
 
-export const phases = [
+export const phasesRow1 = [
   {
+    phaseNum: 1,
     status: Status.Ended,
     summary: `Dec 1, 2021 - March 11, 2022.`,
     pools: [
@@ -198,6 +217,7 @@ export const phases = [
     ],
   },
   {
+    phaseNum: 2,
     status: Status.Ended,
     summary: 'May 10, 2022 - November 22, 2022',
     pools: [
@@ -214,25 +234,22 @@ export const phases = [
       },
     ],
   },
-  {
-    status: Status.ComingSoon,
-    summary: 'Starting January 18, 2022',
-    pools: [
-      {
-        size: 0,
-        categories: [
-          'Hosting a Node',
-          'Finding Bugs',
-          'Multi Asset Mint/Burn/Transfers',
-        ],
-        poolNum: 4,
-      },
-      {
-        size: 105e3,
-        categories: ['Submitting Pull Requests'],
-        poolNum: 3,
-        additionalText: '(spans all phases)',
-      },
-    ],
-  },
 ]
+export const phasesRow2 = {
+  phaseNum: 3,
+  status: Status.ComingSoon,
+  summary: 'Starting January 18, 2022',
+  pools: [
+    {
+      size: 0,
+      categories: ['Hosting a Node', 'Finding Bugs', 'Asset Mint/Burn/Send'],
+      poolNum: 4,
+    },
+    {
+      size: 105e3,
+      categories: ['Submitting Pull Requests'],
+      poolNum: 3,
+      additionalText: '(spans all phases)',
+    },
+  ],
+}
