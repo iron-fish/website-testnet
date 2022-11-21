@@ -268,7 +268,7 @@ export default function User({ showNotification, loginContext }: Props) {
                       'w-full'
                     )}
                   >
-                    Phase 2
+                    Phase 3
                   </div>
                   <div
                     className={clsx(
@@ -307,9 +307,9 @@ export default function User({ showNotification, loginContext }: Props) {
                     'justify-between'
                   )}
                 >
-                  <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
+                  <LabeledStat label="Phase 3 Rank" value={ordinalRank} />
                   <LabeledStat
-                    label="Phase 2 Points"
+                    label="Phase 3 Points"
                     value={$user.total_points.toLocaleString()}
                   />
                 </div>
