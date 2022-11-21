@@ -60,19 +60,19 @@ export const guidelines = {
       title: 'Rewards',
       content:
         'The Incentivized Testnet program will distribute up to 420,000 (1% of the initial supply) Iron Fish tokens to eligible participants, proportional to your Leaderboard points. Token distribution may be canceled at any time due to regulatory concerns. We may at any time amend or eliminate Leaderboard points.',
-      behind: 'bg-white',
+      behind: 'bg-ifyellow',
     },
     {
       title: 'Lost Work',
       content:
         "Points will only be awarded once an account has been created. Points for mining blocks are awarded automatically. Blocks that are mined before an account was created will not be counted. Work will be logged hourly. In the event of a technical problem or a chain reorganization, some of your work may be lost and will not reflect in your reward. If you sign up after you've mined blocks, points will not be assigned retroactively for those blocks.",
-      behind: 'bg-ifpink',
+      behind: 'bg-iflightorange',
     },
     {
       title: 'Unforeseeable',
       content:
         'In the event that legal or regulatory issues arise, rewards may be restructured, postponed, or even canceled.',
-      behind: 'bg-white',
+      behind: 'bg-ifpink',
     },
   ],
   columnTwo: [
@@ -86,13 +86,13 @@ export const guidelines = {
       title: 'Weekly Cycles',
       content:
         'Weekly cycles run from Monday to Sunday, during which a participant can earn points in the defined categories above. Once a participant has earned his or her maximum amount of points in a given category, a participant can no longer earn points in that category until the next cycle.',
-      behind: 'bg-white',
+      behind: 'bg-ifyellow',
     },
     {
       title: 'Maintenance',
       content:
         'Iron Fish might restart the chain regularly for development purposes. Your score will be saved before a restart happens.',
-      behind: 'bg-ifpink',
+      behind: 'bg-iflightorange',
     },
   ],
 }
@@ -100,33 +100,16 @@ export const guidelines = {
 export const callsToAction = {
   columnOne: [
     {
-      title: 'Hosting a node',
-      content:
-        'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
-      points: ['12 hours of continuous uptime = 10 points'],
-      status: Status.Active,
-      ctaText: 'Set up instructions',
-      href: '/faq#node-points',
-    },
-    {
-      title: 'Submit a Pull Request',
+      title: `Mint Asset`,
       content: (
         <>
-          <Link href="https://github.com/iron-fish/ironfish">
-            Submit a Pull Request (PR) to the Iron Fish repo!
-          </Link>{' '}
-          Points are earned if the PR gets accepted and merged.
+          Once a week, you can submit a mint your asset, where the asset name is
+          your graffiti:
         </>
       ),
-
-      points: [
-        'Small = 250 points',
-        'Medium = 500 points',
-        'Large = 1000 points',
-      ],
-      ctaText: 'Request points for a PR',
-      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
-      status: Status.Active,
+      points: ['X points per transaction', 'Weekly limit = 1'],
+      status: Status.New,
+      behind: 'bg-ifyellow',
     },
     {
       title: 'Finding Bugs',
@@ -149,19 +132,18 @@ export const callsToAction = {
       submissionForm: false,
       status: Status.Active,
     },
+    {
+      title: 'Hosting a node',
+      content:
+        'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
+      points: ['12 hours of continuous uptime = 10 points'],
+      status: Status.Active,
+      ctaText: 'Set up instructions',
+      href: '/faq#node-points',
+      behind: 'bg-ifyellow',
+    },
   ],
   columnTwo: [
-    {
-      title: `Mint Asset`,
-      content: (
-        <>
-          Once a week, you can submit a mint your asset, where the asset name is
-          your graffiti:
-        </>
-      ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
-      status: Status.New,
-    },
     {
       title: `Burn Asset`,
       content: (
@@ -183,6 +165,28 @@ export const callsToAction = {
       ),
       points: ['X points per transaction', 'Weekly limit = 1'],
       status: Status.New,
+      behind: 'bg-iflightorange',
+    },
+    {
+      title: 'Submit a Pull Request',
+      content: (
+        <>
+          <Link href="https://github.com/iron-fish/ironfish">
+            Submit a Pull Request (PR) to the Iron Fish repo!
+          </Link>{' '}
+          Points are earned if the PR gets accepted and merged.
+        </>
+      ),
+
+      points: [
+        'Small = 250 points',
+        'Medium = 500 points',
+        'Large = 1000 points',
+      ],
+      ctaText: 'Request points for a PR',
+      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      status: Status.Active,
+      behind: 'bg-iflightorange',
     },
   ],
 }
