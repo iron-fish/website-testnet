@@ -1,8 +1,7 @@
-import { FC } from 'react'
 import clsx from 'clsx'
 import Box from 'components/OffsetBorder/CustomBox'
 
-export const Chip: FC = ({ children = 'New' }) => {
+export const Chip = ({ children = 'New', behind = 'bg-ifpink' }) => {
   return (
     <Box
       cl="ml-[4px]"
@@ -12,7 +11,7 @@ export const Chip: FC = ({ children = 'New' }) => {
       mb="bottom-[-4px]"
       ml="left-[4px]"
       mr="right-[-4px]"
-      behind="bg-ifpink"
+      behind={behind}
       className="h-[3.125rem] max-w-[5rem]"
       background={clsx(
         'uppercase',

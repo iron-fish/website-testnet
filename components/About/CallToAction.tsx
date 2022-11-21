@@ -12,7 +12,7 @@ type CTAProps = {
   title: string
   content?: ReactNode
   children?: ReactNode
-  boxColor?: string
+  behind?: string
   kind?: string
   earn?: number
   points?: string[]
@@ -25,7 +25,7 @@ type CTAProps = {
 
 export const CallToAction = ({
   children,
-  boxColor,
+  behind,
   title,
   points = [],
   kind = 'Earn Points By',
@@ -55,9 +55,9 @@ export const CallToAction = ({
   ) : null
   return (
     <div className="mb-3">
-      <Box behind={boxColor || 'bg-ifpink'}>
+      <Box behind={behind || 'bg-ifpink'}>
         <div className="p-13">
-          {isNew && <Chip />}
+          {isNew && <Chip behind={behind} />}
           {ended || comingSoon ? (
             <div
               className={clsx(
