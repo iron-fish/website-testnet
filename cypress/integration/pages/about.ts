@@ -25,16 +25,6 @@ describe('/about', () => {
         href: 'https://ironfish.network/roadmap',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
-      {
-        isImage: false,
-        text: 'please submit it as an issue',
-        href: 'https://github.com/iron-fish/ironfish/issues',
-      },
-      {
-        isImage: false,
-        text: 'Request points for a bug',
-        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
-      },
       { isImage: false, text: '', href: 'http://ironfish.network/' },
       {
         isImage: false,
@@ -52,6 +42,16 @@ describe('/about', () => {
         href: 'https://ironfish.network/roadmap',
       },
       { isImage: false, text: 'Login to Testnet', href: '/login' },
+      {
+        isImage: false,
+        text: 'please submit it as an issue',
+        href: 'https://github.com/iron-fish/ironfish/issues',
+      },
+      {
+        isImage: false,
+        text: 'Request points for a bug',
+        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      },
       {
         isImage: false,
         text: 'Set up instructions',
