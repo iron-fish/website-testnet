@@ -32,11 +32,10 @@ const CountdownTimer = (props: CountdownTimerProps) => {
       title={`Next week starts: ${formatEventDate(end)}`}
     >
       <CustomBox
-        behind="bg-white"
-        rounded
+        behind="bg-ifpink"
         size="2"
         className={clsx('w-[18.25rem]', 'mt-4')}
-        background="bg-ifpink"
+        background="bg-white"
       >
         <div className="w-[18.25rem] px-4 py-2 m-auto">
           <div className="flex flex-col justify-center items-center">
