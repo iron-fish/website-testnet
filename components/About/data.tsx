@@ -140,7 +140,7 @@ export const callsToAction = {
       status: Status.Active,
       ctaText: 'Set up instructions',
       href: '/faq#node-points',
-      behind: 'bg-ifyellow',
+      behind: 'bg-iflightorange',
     },
   ],
   columnTwo: [
@@ -186,7 +186,7 @@ export const callsToAction = {
       ctaText: 'Request points for a PR',
       href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       status: Status.Active,
-      behind: 'bg-iflightorange',
+      behind: 'bg-ifyellow',
     },
   ],
 }
