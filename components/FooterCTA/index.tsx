@@ -11,7 +11,7 @@ type TubesCTAProps = {
 export function TubesCTA({ cta, goTo, buttonText }: TubesCTAProps) {
   return (
     <>
-      <div className="w-full flex justify-center mt-36 border-black border-b">
+      <div className="w-full flex mt-36 border-black border-b">
         <Intertubes />
       </div>
       <div className="w-full flex mt-16 border-black border-b flex-col">
