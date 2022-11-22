@@ -44,21 +44,6 @@ describe('/about', () => {
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
-        text: 'Set up instructions',
-        href: '/faq#node-points',
-      },
-      {
-        isImage: false,
-        text: 'Submit a Pull Request (PR) to the Iron Fish repo!',
-        href: 'https://github.com/iron-fish/ironfish',
-      },
-      {
-        isImage: false,
-        text: 'Request points for a PR',
-        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
-      },
-      {
-        isImage: false,
         text: 'please submit it as an issue',
         href: 'https://github.com/iron-fish/ironfish/issues',
       },
@@ -69,8 +54,23 @@ describe('/about', () => {
       },
       {
         isImage: false,
+        text: 'Set up instructions',
+        href: '/faq#node-points',
+      },
+      {
+        isImage: false,
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
+      },
+      {
+        isImage: false,
+        text: 'Submit a Pull Request (PR) to the Iron Fish repo!',
+        href: 'https://github.com/iron-fish/ironfish',
+      },
+      {
+        isImage: false,
+        text: 'Request points for a PR',
+        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
       },
       {
         isImage: false,

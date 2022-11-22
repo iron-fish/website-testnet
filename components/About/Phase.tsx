@@ -32,7 +32,10 @@ export const Phase = ({
 }: PhaseProps) => {
   const isComplete = status === Status.Ended
   return (
-    <OffsetBox behind="bg-ifpink" className={clsx('mt-3', 'md:mr-6', 'w-full')}>
+    <OffsetBox
+      behind="bg-ifbackgroundgray"
+      className={clsx('mt-3', 'md:mr-6', 'w-full')}
+    >
       <div
         className={clsx(
           'h-[30rem]',

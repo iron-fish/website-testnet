@@ -59,12 +59,12 @@ export default function About({ showNotification, loginContext }: AboutProps) {
       <Navbar
         showNotification={showNotification}
         fill="black"
-        className={clsx('bg-ifbeige', 'text-black')}
+        className={clsx('bg-ifbackgroundgray', 'text-black')}
         loginContext={loginContext}
       />
       <main
         className={clsx(
-          'bg-ifbeige',
+          'bg-ifbackgroundgray',
           'flex-1',
           'items-center',
           'flex',
