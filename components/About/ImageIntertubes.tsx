@@ -1,9 +1,8 @@
 export default function Intertubes() {
   return (
     <svg
-      width="1106"
-      height="472"
       viewBox="0 0 1106 472"
+      className="max-w-[69rem] w-full max-h-[20rem] h-full m-auto"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
