@@ -24,7 +24,9 @@ const CountdownTimer = (props: CountdownTimerProps) => {
     return () => clearInterval(i)
   }, [])
   const ii = intervalToDuration({ start: $time, end })
-  return (
+  return now > end ? (
+    <></>
+  ) : (
     <div
       className="w-full flex flex-col justify-center items-center text-center"
       title={`Next week starts: ${formatEventDate(end)}`}
