@@ -161,7 +161,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
       >
         <CountdownTimer
           end={new Date(1669661371000)}
-          event=" until deposits are closed."
+          event=" until Phase 2 is closed."
         />
         <PageBanner
           title={
