@@ -42,7 +42,15 @@ export const CallToAction = ({
   const button = ctaText ? (
     <RawButton
       border="border"
-      className={clsx('m-auto', 'w-full', 'max-w-md', 'mb-2', 'text-md', 'p-2')}
+      className={clsx(
+        'm-auto',
+        'w-full',
+        'max-w-md',
+        'mb-2',
+        'mt-6',
+        'text-md',
+        'p-2'
+      )}
       colorClassName={clsx(
         'text-black',
         'bg-transparent',
