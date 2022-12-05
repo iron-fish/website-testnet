@@ -3,7 +3,7 @@ import React from 'react'
 import * as API from 'apiClient'
 import AllTimeMetricCard from '../GenericMetricCard'
 import TimeCard from '../TimeCard'
-import { phasesRow1, Pool } from 'components/About/data'
+import { phasesRow2, Pool } from 'components/About/data'
 
 type AllTimeContentProps = {
   allTimeMetrics: API.UserMetricsResponse
@@ -23,7 +23,8 @@ export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
   const { code, main } = allTimeMetrics.pools
-  const [pool1Info, pool2Info] = summarizePhase(phasesRow1[1])
+  const [pool4, pool3] = phasesRow2.pools
+  const [pool4Info, pool3Info] = summarizePhase(phasesRow2)
   const totalHours = allTimeMetrics.node_uptime.total_hours
   const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
@@ -64,18 +65,18 @@ export default function AllTimeContent({
         metric={allTimeMetrics.metrics.masp_transfer}
       />
       <AllTimeMetricCard
-        title="Pool 1 Rank"
+        title={`Pool ${pool4.poolNum} Rank`}
         metric={main}
         showInfo
-        info={pool1Info}
+        info={pool4Info}
         useRank
       />
       <AllTimeMetricCard
-        title="Pool 2 Rank"
+        title={`Pool ${pool3.poolNum} Rank`}
         metric={code}
         showInfo
         verticalOffset="-4.75rem"
-        info={pool2Info}
+        info={pool3Info}
         useRank
       />
     </div>
