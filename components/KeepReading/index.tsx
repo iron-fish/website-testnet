@@ -12,7 +12,7 @@ type KeepReadingProps = {
 }
 
 export default function KeepReading({
-  background = 'bg-ifbeige',
+  background = 'bg-ifbackgroundgray',
 }: KeepReadingProps) {
   return (
     <div className="mt-24 mx-3 w-full md:w-2/3 mb-24">

@@ -18,6 +18,7 @@ export type PhaseProps = {
   summary: ReactType | ReactElement | string
   pools: Pool[]
   status?: Status
+  phaseNum: number
 }
 
 export const cumulativePoolSize = (pools: Pool[]) =>
@@ -31,11 +32,14 @@ export const Phase = ({
 }: PhaseProps) => {
   const isComplete = status === Status.Ended
   return (
-    <OffsetBox behind="bg-ifpink" className={clsx('mt-3', 'md:mr-6', 'w-full')}>
+    <OffsetBox
+      behind="bg-ifbackgroundgray"
+      className={clsx('mt-3', 'md:mr-6', 'w-full')}
+    >
       <div
         className={clsx(
-          'h-[34rem]',
-          'lg:h-[36rem]',
+          'h-[30rem]',
+          'lg:h-[32rem]',
           'font-favorit',
           'flex',
           'flex-col',
