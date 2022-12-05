@@ -15,21 +15,17 @@ import { BasicLink } from 'components/About/Link'
 import { AboutHeader } from 'components/About/Header'
 import { renderColumn } from 'components/About/CallToAction'
 import { renderGuidelineColumn } from 'components/About/Guidelines'
-import { NFTCard } from 'components/About/NFTCard'
 import { Phase, PhaseProps } from 'components/About/Phase'
-import { cards, guidelines, callsToAction, phases } from 'components/About/data'
-import { useResponsiveCards } from 'components/About/hooks'
+import {
+  guidelines,
+  callsToAction,
+  phasesRow1,
+  phasesRow2,
+} from 'components/About/data'
 
 import Loader from 'components/Loader'
 
-import { ArrowLeft, ArrowRight } from 'components/icons/Arrows'
 import CountdownTimer from 'components/leaderboard/CountdownTimer'
-
-type ArrowButtonProps = {
-  children: ReactNode
-  onClick: () => unknown
-}
-
 const Para = ({
   children,
   className = '',
@@ -44,34 +40,12 @@ const Para = ({
   </p>
 )
 
-const ArrowButton = ({ children, onClick }: ArrowButtonProps) => (
-  <div
-    className={clsx(
-      'border',
-      'border-black',
-      'cursor-pointer',
-      'flex',
-      'h-12',
-      'items-center',
-      'justify-center',
-      'm-2',
-      'mt-16',
-      'rounded-full',
-      'w-12',
-      'hover:bg-ifpink'
-    )}
-    onClick={onClick}
-  >
-    {children}
-  </div>
-)
 type AboutProps = {
   showNotification: boolean
   loginContext: LoginContext
 }
 
 export default function About({ showNotification, loginContext }: AboutProps) {
-  const { scrollLeft, scrollRight, $cards } = useResponsiveCards()
   const { checkLoggedIn, checkLoading } = loginContext
   const loaded = checkLoggedIn()
   return checkLoading() ? (
@@ -85,12 +59,12 @@ export default function About({ showNotification, loginContext }: AboutProps) {
       <Navbar
         showNotification={showNotification}
         fill="black"
-        className={clsx('bg-ifbeige', 'text-black')}
+        className={clsx('bg-ifbackgroundgray', 'text-black')}
         loginContext={loginContext}
       />
       <main
         className={clsx(
-          'bg-ifbeige',
+          'bg-ifbackgroundgray',
           'flex-1',
           'items-center',
           'flex',
@@ -98,18 +72,18 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <CountdownTimer
-          end={new Date(1669661371000)}
-          event=" until Phase 2 is closed."
+          end={new Date(1674084548000)}
+          event=" until start of Phase 3!"
         />
         <PageBanner
           title={
             <>
               Incentivized Testnet
               <br />
-              Welcome to Phase 2.
+              Welcome to Phase 3.
             </>
           }
-          text={`Welcome to Phase 2 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details).`}
+          text={`Welcome to Phase 3 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details).`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
@@ -126,7 +100,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>
-            Phase 2
+            Phase 3
             <span className={clsx('ml-2', 'md:hidden')} />
             <br className={clsx('hidden', 'md:inline')} />
             <span className={clsx('hidden', 'md:inline')}>Participation</span>
@@ -183,25 +157,61 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               'flex-col',
               'mr-2',
               'md:mr-0',
-              'md:flex-row',
-              'mb-12'
+              'md:flex-row'
             )}
           >
-            {phases.map((p: Omit<PhaseProps, 'index'>, index: number) => (
+            {phasesRow1.map((p: Omit<PhaseProps, 'index'>) => (
               <div
                 className={clsx(
                   'flex',
                   'flex-col',
                   'w-full',
                   'md:w-1/2',
-                  index === 0 ? 'md:ml-0' : 'md:ml-3',
+                  p.phaseNum === 0 ? 'md:ml-0' : 'md:ml-3',
                   'md:mr-3'
                 )}
-                key={index}
+                key={p.phaseNum}
               >
-                <Phase {...p} index={index + 1} />
+                <Phase {...p} index={p.phaseNum} />
               </div>
             ))}
+          </div>
+          <div
+            className={clsx(
+              'flex',
+              'flex-col',
+              'mr-2',
+              'md:mr-0',
+              'md:flex-row',
+              'mb-12'
+            )}
+          >
+            <div
+              className={clsx(
+                'flex',
+                'flex-col',
+                'w-full',
+                'md:w-1/2',
+                'md:ml-3',
+                'md:mr-8'
+              )}
+              key={3}
+            >
+              <Phase {...phasesRow2} index={phasesRow2.phaseNum} />
+            </div>
+            {/* had to add a hidden div here to make the double column line up, without
+            this box things wouldn't align since there is a misconfigured overlap in the bounding boxes */}
+            <div
+              className={clsx(
+                'flex',
+                'flex-col',
+                'w-full',
+                'md:w-1/2',
+                'md:ml-0',
+                'md:mr-0'
+              )}
+              key={3}
+            ></div>
           </div>
         </div>
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
@@ -218,56 +228,6 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           <div className={clsx('flex', 'md:ml-24')}>
             <Img src={leaderboardPic} />
           </div>
-        </div>
-        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
-          <AboutHeader
-            className={clsx(
-              'text-left',
-              'w-full',
-              'mt-32',
-              'mx-1.5',
-              'md:mx-0',
-              'md:text-center'
-            )}
-          >
-            Win a Category, win an NFT!
-          </AboutHeader>
-          <div
-            className={clsx(
-              'w-full',
-              'text-xl',
-              'md:text-2xl',
-              'md:w-2/3',
-              'text-left',
-              'm-auto',
-              'mx-1.5',
-              'mb-6',
-              'md:text-center',
-              'md:w-full'
-            )}
-          >
-            <p className={clsx('md:max-w-[50rem]', 'm-auto')}>
-              At the end of the testnet if you’re the leader in any of the
-              categories mentioned above you might be eligible to receive an
-              Iron Fish NFT. Filter the leaderboard to see category leaders.
-            </p>
-          </div>
-        </div>
-        <div
-          className={clsx('flex', 'flex-row', 'w-full', 'overflow-x-auto')}
-          ref={$cards}
-        >
-          {cards.map(nft => (
-            <NFTCard key={nft.title} {...nft} />
-          ))}
-        </div>
-        <div className={clsx('m-auto', 'flex')}>
-          <ArrowButton onClick={scrollLeft}>
-            <ArrowLeft />
-          </ArrowButton>
-          <ArrowButton onClick={scrollRight}>
-            <ArrowRight />
-          </ArrowButton>
         </div>
         <TubesCTA
           cta="Start earning points!"

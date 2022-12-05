@@ -44,8 +44,23 @@ describe('/about', () => {
       { isImage: false, text: 'Login to Testnet', href: '/login' },
       {
         isImage: false,
+        text: 'please submit it as an issue',
+        href: 'https://github.com/iron-fish/ironfish/issues',
+      },
+      {
+        isImage: false,
+        text: 'Request points for a bug',
+        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      },
+      {
+        isImage: false,
         text: 'Set up instructions',
         href: '/faq#node-points',
+      },
+      {
+        isImage: false,
+        text: 'View Testnet Guidelines',
+        href: '/about#guidelines',
       },
       {
         isImage: false,
@@ -62,26 +77,7 @@ describe('/about', () => {
         text: 'View Testnet Guidelines',
         href: '/about#guidelines',
       },
-      {
-        isImage: false,
-        text: 'Learn more',
-        href: '/faq#transaction-points',
-      },
-      {
-        isImage: false,
-        text: 'please submit it as an issue',
-        href: 'https://github.com/iron-fish/ironfish/issues',
-      },
-      {
-        isImage: false,
-        text: 'Request points for a bug',
-        href: 'https://forms.gle/agquNGnS5NDgcfZN6',
-      },
-      {
-        isImage: false,
-        text: 'View Testnet Guidelines',
-        href: '/about#guidelines',
-      },
+      { isImage: false, text: 'Phase Complete', href: '/about#' },
       { isImage: false, text: 'Phase Complete', href: '/about#' },
       { isImage: false, text: 'Sign Up Now', href: '/signup' },
       {
