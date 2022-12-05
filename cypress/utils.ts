@@ -15,7 +15,7 @@ export const linksMatch = (expected: TestLink[]) => {
         href: $el.attr('href'),
       }
     })
-    expect(hrefs.get()).to.deep.eq(expected)
+    expect(expected).to.deep.eq(hrefs.get())
   })
 }
 
