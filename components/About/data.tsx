@@ -246,7 +246,7 @@ export const phasesRow2 = {
   pools: [
     {
       size: 0,
-      categories: ['Hosting a Node', 'Finding Bugs', 'Asset Mint/Burn/Send'],
+      categories: ['Hosting a Node', 'Finding Bugs', 'Mint/Burn/Send Asset'],
       poolNum: 4,
     },
     {
