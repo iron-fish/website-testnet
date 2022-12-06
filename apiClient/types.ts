@@ -58,6 +58,8 @@ export enum EventType {
   MASP_TRANSFER = 'MASP_TRANSFER',
   MASP_BURN = 'MASP_BURN',
   MASP_MINT = 'MASP_MINT',
+  POOL3 = 'POOL3',
+  POOL4 = 'POOL4',
 }
 
 export type ApiError = {
