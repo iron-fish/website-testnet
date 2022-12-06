@@ -51,18 +51,20 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
+      { name: 'Pool 3', value: API.EventType.POOL3 },
       { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
       { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
       { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
       { name: 'Multi-Asset Mint', value: API.EventType.MASP_MINT },
       { name: 'Multi-Asset Burn', value: API.EventType.MASP_BURN },
       { name: 'Multi-Asset Transfer', value: API.EventType.MASP_TRANSFER },
+      { name: TOTAL_POINTS, value: TOTAL_POINTS },
     ],
     validation: () => true,
     defaultErrorText,
     useDefault: true,
-    defaultValue: TOTAL_POINTS,
-    defaultLabel: TOTAL_POINTS,
+    defaultValue: API.EventType.POOL4,
+    defaultLabel: 'Pool 4',
   },
 }
 
