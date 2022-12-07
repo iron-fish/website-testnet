@@ -84,6 +84,9 @@ module.exports = {
         ifgray: {
           DEFAULT: '#6A737D',
         },
+        ifbackgroundgray: {
+          DEFAULT: '#F3F3F4',
+        },
         iflightorange: {
           DEFAULT: '#FFCD85',
         },
@@ -93,6 +96,9 @@ module.exports = {
         ifpink: {
           DEFAULT: '#FFC2EB',
           subtext: '#D089B9',
+        },
+        ifyellow: {
+          DEFAULT: '#FFEC1F',
         },
         ifmauve: {
           DEFAULT: '#9B6288',

@@ -53,8 +53,10 @@ const FIELDS = {
     options: [
       { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
       { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
-      { name: 'Transactions Sent', value: API.EventType.TRANSACTION_SENT },
       { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
+      { name: 'Multi-Asset Mint', value: API.EventType.MASP_MINT },
+      { name: 'Multi-Asset Burn', value: API.EventType.MASP_BURN },
+      { name: 'Multi-Asset Transfer', value: API.EventType.MASP_TRANSFER },
     ],
     validation: () => true,
     defaultErrorText,
@@ -160,15 +162,15 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
         )}
       >
         <CountdownTimer
-          end={new Date(1669153203000)}
-          event=" until end of Phase 2."
+          end={new Date(1674084548000)}
+          event=" until start of Phase 3!"
         />
         <PageBanner
           title={
             <>
               Testnet Leaderboard
               <br />
-              Phase 2.
+              Phase 3.
             </>
           }
           text={
@@ -183,6 +185,15 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
                 >
                   <a className="border-b border-black">
                     View Phase 1 leaderboard
+                  </a>
+                </Link>{' '}
+                or{' '}
+                <Link
+                  href="https://phase2.testnet.ironfish.network/leaderboard"
+                  passHref
+                >
+                  <a className="border-b border-black">
+                    View Phase 2 leaderboard
                   </a>
                 </Link>
               </p>

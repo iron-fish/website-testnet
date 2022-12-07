@@ -3,7 +3,7 @@ import React from 'react'
 import * as API from 'apiClient'
 import AllTimeMetricCard from '../GenericMetricCard'
 import TimeCard from '../TimeCard'
-import { phases, Pool } from 'components/About/data'
+import { phasesRow2, Pool } from 'components/About/data'
 
 type AllTimeContentProps = {
   allTimeMetrics: API.UserMetricsResponse
@@ -14,7 +14,7 @@ const summarizePool = ({ categories }: { categories: string[] }) =>
 
 const summarizePhase = ({ pools }: { pools: Pool[] }) =>
   pools.map(
-    (pool, i) => `Pool ${i + 1} categories include:\n- ${summarizePool(pool)}`
+    pool => `Pool ${pool.poolNum} categories include:\n- ${summarizePool(pool)}`
   )
 
 const plural = (x: string) => (n: number) => n > 1 ? x + 's' : x
@@ -23,7 +23,8 @@ export default function AllTimeContent({
   allTimeMetrics,
 }: AllTimeContentProps) {
   const { code, main } = allTimeMetrics.pools
-  const [pool1Info, pool2Info] = summarizePhase(phases[1])
+  const [pool4, pool3] = phasesRow2.pools
+  const [pool4Info, pool3Info] = summarizePhase(phasesRow2)
   const totalHours = allTimeMetrics.node_uptime.total_hours
   const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
@@ -43,10 +44,6 @@ export default function AllTimeContent({
         }
       />
       <AllTimeMetricCard
-        title="Transactions Sent"
-        metric={allTimeMetrics.metrics.send_transaction}
-      />
-      <AllTimeMetricCard
         title="Bugs Caught"
         metric={allTimeMetrics.metrics.bugs_caught}
       />
@@ -55,18 +52,30 @@ export default function AllTimeContent({
         metric={allTimeMetrics.metrics.pull_requests_merged}
       />
       <AllTimeMetricCard
-        title="Pool 1 Rank"
+        title="Multi-Asset Mint"
+        metric={allTimeMetrics.metrics.masp_mint}
+      />
+      <AllTimeMetricCard
+        title="Multi-Asset Burn"
+        metric={allTimeMetrics.metrics.masp_burn}
+      />
+      <AllTimeMetricCard
+        title="Multi-Asset Send"
+        metric={allTimeMetrics.metrics.masp_transfer}
+      />
+      <AllTimeMetricCard
+        title={`Pool ${pool4.poolNum} Rank`}
         metric={main}
         showInfo
-        info={pool1Info}
+        info={pool4Info}
         useRank
       />
       <AllTimeMetricCard
-        title="Pool 2 Rank"
+        title={`Pool ${pool3.poolNum} Rank`}
         metric={code}
         showInfo
         verticalOffset="-4.75rem"
-        info={pool2Info}
+        info={pool3Info}
         useRank
       />
     </div>
