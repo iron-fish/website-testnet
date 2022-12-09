@@ -19,8 +19,9 @@ import { Phase, PhaseProps } from 'components/About/Phase'
 import {
   guidelines,
   callsToAction,
-  phasesRow1,
-  phasesRow2,
+  Phase1,
+  Phase2,
+  Phase3,
 } from 'components/About/data'
 
 import Loader from 'components/Loader'
@@ -160,14 +161,14 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               'md:flex-row'
             )}
           >
-            {phasesRow1.map((p: Omit<PhaseProps, 'index'>) => (
+            {[Phase1, Phase2].map((p: Omit<PhaseProps, 'index'>) => (
               <div
                 className={clsx(
                   'flex',
                   'flex-col',
                   'w-full',
                   'md:w-1/2',
-                  p.phaseNum === 0 ? 'md:ml-0' : 'md:ml-3',
+                  'md:ml-3',
                   'md:mr-3'
                 )}
                 key={p.phaseNum}
@@ -197,8 +198,9 @@ export default function About({ showNotification, loginContext }: AboutProps) {
               )}
               key={3}
             >
-              <Phase {...phasesRow2} index={phasesRow2.phaseNum} />
+              <Phase {...Phase3} index={Phase3.phaseNum} />
             </div>
+
             {/* had to add a hidden div here to make the double column line up, without
             this box things wouldn't align since there is a misconfigured overlap in the bounding boxes */}
             <div
