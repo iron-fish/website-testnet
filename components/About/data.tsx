@@ -245,7 +245,7 @@ export const phasesRow2 = {
   summary: 'Starting January 18, 2023',
   pools: [
     {
-      size: 0,
+      size: 210000,
       categories: ['Hosting a Node', 'Finding Bugs', 'Mint/Burn/Send Asset'],
       poolNum: 4,
     },
