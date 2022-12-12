@@ -161,8 +161,9 @@ export default function User({ showNotification, loginContext }: Props) {
 
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
-  const startDate = new Date(2021, 11, 1)
-  const endDate = nextMondayFrom(nextMonday(new Date()))
+  const startDate = new Date(2023, 18, 1)
+  const nextMondayDate = nextMondayFrom(nextMonday(new Date()))
+  const endDate = startDate > nextMondayDate ? startDate : nextMondayDate
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
   const tweetText = `Iron Fish Incentivized Testnet: ${

@@ -29,6 +29,9 @@ import {
 } from 'utils/events'
 
 import styles from './EventRow.module.css'
+import ActivityMaspMint from 'components/icons/ActivityMaspMint'
+import ActivityMaspBurn from 'components/icons/ActivityMaspBurn'
+import ActivityMaspTransfer from 'components/icons/ActivityMaspTransfer'
 
 interface IconText {
   icon: ReactElement | string
@@ -78,6 +81,12 @@ export function displayEventType(type: EventType): IconText {
       <ActivityNodeHosted />
     ) : type === EventType.TRANSACTION_SENT ? (
       <ActivityTransactionSent />
+    ) : type === EventType.MASP_MINT ? (
+      <ActivityMaspMint />
+    ) : type === EventType.MASP_BURN ? (
+      <ActivityMaspBurn />
+    ) : type === EventType.MASP_TRANSFER ? (
+      <ActivityMaspTransfer />
     ) : (
       NEEDS_ICON
     )
