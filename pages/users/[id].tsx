@@ -161,9 +161,7 @@ export default function User({ showNotification, loginContext }: Props) {
 
   const avatarColor = graffitiToColor($user.graffiti)
   const ordinalRank = numberToOrdinal($user.rank)
-  const potentialStart = new Date(2023, 18, 1)
-  const startDate =
-    new Date() > potentialStart ? potentialStart : new Date(2021, 11, 1)
+  const startDate = new Date(2021, 11, 1)
   const endDate = nextMondayFrom(nextMonday(new Date()))
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
