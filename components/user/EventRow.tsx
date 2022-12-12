@@ -4,12 +4,15 @@ import useClipboard from 'react-use-clipboard'
 
 import ActivityBlockMined from 'components/icons/ActivityBlockMined'
 import ActivityBugReported from 'components/icons/ActivityBugReport'
-import ActivityPullRequest from 'components/icons/ActivityPullRequest'
-import ActivityCopy from 'components/icons/ActivityCopy'
 import ActivityCommunityContribution from 'components/icons/ActivityCommunityContribution'
+import ActivityCopy from 'components/icons/ActivityCopy'
+import ActivityMaspBurn from 'components/icons/ActivityMaspBurn'
+import ActivityMaspMint from 'components/icons/ActivityMaspMint'
+import ActivityMaspTransfer from 'components/icons/ActivityMaspTransfer'
+import ActivityNodeHosted from 'components/icons/ActivityNodeHosted'
+import ActivityPullRequest from 'components/icons/ActivityPullRequest'
 import ActivitySocial from 'components/icons/ActivitySocial'
 import ActivityTransactionSent from 'components/icons/ActivityTransactionSent'
-import ActivityNodeHosted from 'components/icons/ActivityNodeHosted'
 import ChevronRight from 'components/icons/ChevronRight'
 import { Verbose, SmallOnly } from 'components/Responsive'
 
@@ -78,6 +81,12 @@ export function displayEventType(type: EventType): IconText {
       <ActivityNodeHosted />
     ) : type === EventType.TRANSACTION_SENT ? (
       <ActivityTransactionSent />
+    ) : type === EventType.MASP_MINT ? (
+      <ActivityMaspMint />
+    ) : type === EventType.MASP_BURN ? (
+      <ActivityMaspBurn />
+    ) : type === EventType.MASP_TRANSFER ? (
+      <ActivityMaspTransfer />
     ) : (
       NEEDS_ICON
     )
