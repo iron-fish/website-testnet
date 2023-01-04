@@ -1,4 +1,4 @@
-export const ActivityMaspTransfer = () => (
+export const ActivityMultiAssetTransfer = () => (
   <svg
     width="32"
     height="32"
@@ -13,4 +13,4 @@ export const ActivityMaspTransfer = () => (
     />
   </svg>
 )
-export default ActivityMaspTransfer
+export default ActivityMultiAssetTransfer

@@ -55,9 +55,9 @@ export enum EventType {
   SOCIAL_MEDIA_PROMOTION = 'SOCIAL_MEDIA_PROMOTION',
   NODE_HOSTED = 'NODE_UPTIME',
   TRANSACTION_SENT = 'SEND_TRANSACTION',
-  MASP_TRANSFER = 'MASP_TRANSFER',
-  MASP_BURN = 'MASP_BURN',
-  MASP_MINT = 'MASP_MINT',
+  MULTI_ASSET_TRANSFER = 'MULTI_ASSET_TRANSFER',
+  MULTI_ASSET_BURN = 'MULTI_ASSET_BURN',
+  MULTI_ASSET_MINT = 'MULTI_ASSET_MINT',
 }
 
 export type ApiError = {
@@ -108,9 +108,9 @@ export type UserMetricsResponse = {
     social_media_contributions: UserMetric
     send_transaction: UserMetric
     node_uptime: UserMetric
-    masp_burn: UserMetric
-    masp_mint: UserMetric
-    masp_transfer: UserMetric
+    multi_asset_burn: UserMetric
+    multi_asset_mint: UserMetric
+    multi_asset_transfer: UserMetric
   }
   node_uptime: TimeData
   pools: {

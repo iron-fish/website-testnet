@@ -53,15 +53,15 @@ export default function AllTimeContent({
       />
       <AllTimeMetricCard
         title="Multi-Asset Mint"
-        metric={allTimeMetrics.metrics.masp_mint}
+        metric={allTimeMetrics.metrics.multi_asset_mint}
       />
       <AllTimeMetricCard
         title="Multi-Asset Burn"
-        metric={allTimeMetrics.metrics.masp_burn}
+        metric={allTimeMetrics.metrics.multi_asset_burn}
       />
       <AllTimeMetricCard
         title="Multi-Asset Send"
-        metric={allTimeMetrics.metrics.masp_transfer}
+        metric={allTimeMetrics.metrics.multi_asset_transfer}
       />
       <AllTimeMetricCard
         title={`Pool ${pool4.poolNum} Rank`}
