@@ -307,7 +307,7 @@ const WeekRow = ({ week, start, end }: WeekRowProps) => {
         start
       )} - Ended ${formatEventDate(end)}`
     : `Events from before the testnet started`
-  const headerText = regular ? `Week ${week}` : `Pre-Testnet`
+  const headerText = regular ? `Week ${week}` : `Pre-Phase 3`
   return (
     <tr
       className={clsx('bg-black', 'text-white')}
