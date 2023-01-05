@@ -1,4 +1,4 @@
-export const ActivityMaspMint = () => (
+export const ActivityMultiAsssetMint = () => (
   <svg
     width="32"
     height="32"
@@ -13,4 +13,4 @@ export const ActivityMaspMint = () => (
     />
   </svg>
 )
-export default ActivityMaspMint
+export default ActivityMultiAsssetMint

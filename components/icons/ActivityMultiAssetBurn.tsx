@@ -1,4 +1,4 @@
-export const ActivityMaspBurn = () => (
+export const ActivityMultiAssetBurn = () => (
   <svg
     width="32"
     height="32"
@@ -13,4 +13,4 @@ export const ActivityMaspBurn = () => (
     />
   </svg>
 )
-export default ActivityMaspBurn
+export default ActivityMultiAssetBurn
