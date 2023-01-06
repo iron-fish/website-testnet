@@ -35,8 +35,6 @@ interface Props {
   showNotification: boolean
   loginContext: LoginContext
 }
-// const sumValues = (x: Record<string, number>) =>
-//   Object.values(x).reduce((a, b) => a + b, 0)
 
 type LabeledProps = {
   value: string
@@ -69,12 +67,6 @@ export default function User({ showNotification, loginContext }: Props) {
   const [$allTimeMetrics, $setAllTimeMetrics] = useState<
     API.UserMetricsResponse | undefined
   >(undefined)
-  const [$weeklyMetrics, $setWeeklyMetrics] = useState<
-    API.UserMetricsResponse | undefined
-  >(undefined)
-  const [$metricsConfig, $setMetricsConfig] = useState<
-    API.MetricsConfigResponse | undefined
-  >(undefined)
   const [$fetched, $setFetched] = useState(false)
 
   useEffect(() => {
@@ -98,10 +90,8 @@ export default function User({ showNotification, loginContext }: Props) {
             limit: EVENTS_LIMIT,
           }),
           API.getUserAllTimeMetrics(userId),
-          API.getUserWeeklyMetrics(userId),
-          API.getMetricsConfig(),
         ])
-        const [user, events, allTimeMetrics, weeklyMetrics, metricsConfig] = raw
+        const [user, events, allTimeMetrics] = raw
         if (isCanceled) {
           return
         }
@@ -112,11 +102,7 @@ export default function User({ showNotification, loginContext }: Props) {
           'error' in events ||
           API.isGenericError(events) ||
           'error' in allTimeMetrics ||
-          API.isGenericError(allTimeMetrics) ||
-          'error' in weeklyMetrics ||
-          API.isGenericError(weeklyMetrics) ||
-          'error' in metricsConfig ||
-          API.isGenericError(metricsConfig)
+          API.isGenericError(allTimeMetrics)
         ) {
           Router.push(
             `/leaderboard?toast=${btoa(
@@ -128,13 +114,16 @@ export default function User({ showNotification, loginContext }: Props) {
         $setUser(user)
         $setEvents(events)
         $setAllTimeMetrics(allTimeMetrics)
-        $setWeeklyMetrics(weeklyMetrics)
-        $setMetricsConfig(metricsConfig)
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn(e)
 
-        throw e
+        Router.push(
+          `/leaderboard?toast=${btoa(
+            'An error occurred while fetching user data'
+          )}`
+        )
+        return
       }
     }
 
@@ -166,25 +155,28 @@ export default function User({ showNotification, loginContext }: Props) {
     $setActiveTab(t)
   }, [])
 
-  if (
-    !$user ||
-    !$allTimeMetrics ||
-    !$metricsConfig ||
-    !$weeklyMetrics ||
-    !$events
-  ) {
+  if (!$user || !$allTimeMetrics || !$events) {
     return <Loader />
   }
 
   const avatarColor = graffitiToColor($user.graffiti)
-  const ordinalRank = numberToOrdinal($user.rank)
-  const startDate = new Date(2021, 11, 1)
-  const endDate = nextMondayFrom(nextMonday(new Date()))
+
+  const phase3Rank = $allTimeMetrics.pools.main.rank
+    ? numberToOrdinal($allTimeMetrics.pools.main.rank)
+    : 'NA'
+
+  const phase3Points = $allTimeMetrics.pools.main.points
+
+  const startDate = new Date(2023, 18, 1)
+  const endDate = nextMondayFrom(
+    nextMonday(new Date() < startDate ? startDate : new Date())
+  )
+
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
-  } - ${$user.total_points.toLocaleString()} total points! #ironfish https://testnet.ironfish.network/users/${userId}`
+  } - ${phase3Points.toLocaleString()} points! #ironfish https://testnet.ironfish.network/users/${userId}`
 
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
@@ -285,7 +277,7 @@ export default function User({ showNotification, loginContext }: Props) {
                       'w-full'
                     )}
                   >
-                    Phase 2
+                    Phase 3
                   </div>
                   <div
                     className={clsx(
@@ -324,10 +316,10 @@ export default function User({ showNotification, loginContext }: Props) {
                     'justify-between'
                   )}
                 >
-                  <LabeledStat label="Phase 2 Rank" value={ordinalRank} />
+                  <LabeledStat label="Phase 3 Rank" value={phase3Rank} />
                   <LabeledStat
-                    label="Phase 2 Points"
-                    value={$user.total_points.toLocaleString()}
+                    label="Phase 3 Points"
+                    value={phase3Points.toLocaleString()}
                   />
                 </div>
               </div>
@@ -343,8 +335,6 @@ export default function User({ showNotification, loginContext }: Props) {
                 user={$user}
                 authedUser={loginContext.metadata}
                 allTimeMetrics={$allTimeMetrics}
-                weeklyMetrics={$weeklyMetrics}
-                metricsConfig={$metricsConfig}
                 setFetched={$setFetched}
                 setUser={$setUser}
               />

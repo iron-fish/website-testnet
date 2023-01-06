@@ -24,6 +24,7 @@ import { useQueriedToast } from 'hooks/useToast'
 import { usePaginatedUsers } from 'hooks/usePaginatedUsers'
 
 import * as API from 'apiClient'
+import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 type Props = {
   showNotification: boolean
@@ -50,16 +51,23 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
+      { name: 'Pool 3', value: API.EventType.PULL_REQUEST_MERGED },
       { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
       { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
-      { name: 'Transactions Sent', value: API.EventType.TRANSACTION_SENT },
       { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
+      { name: 'Multi-Asset Mint', value: API.EventType.MULTI_ASSET_MINT },
+      { name: 'Multi-Asset Burn', value: API.EventType.MULTI_ASSET_BURN },
+      {
+        name: 'Multi-Asset Transfer',
+        value: API.EventType.MULTI_ASSET_TRANSFER,
+      },
+      { name: TOTAL_POINTS, value: TOTAL_POINTS },
     ],
     validation: () => true,
     defaultErrorText,
     useDefault: true,
-    defaultValue: TOTAL_POINTS,
-    defaultLabel: TOTAL_POINTS,
+    defaultValue: API.EventType.POOL4,
+    defaultLabel: 'Pool 4',
   },
 }
 
@@ -158,12 +166,16 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
           'flex-col'
         )}
       >
+        <CountdownTimer
+          end={new Date(1674084548000)}
+          event=" until start of Phase 3!"
+        />
         <PageBanner
           title={
             <>
               Testnet Leaderboard
               <br />
-              Phase 2.
+              Phase 3.
             </>
           }
           text={
@@ -178,6 +190,15 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
                 >
                   <a className="border-b border-black">
                     View Phase 1 leaderboard
+                  </a>
+                </Link>{' '}
+                or{' '}
+                <Link
+                  href="https://phase2.testnet.ironfish.network/leaderboard"
+                  passHref
+                >
+                  <a className="border-b border-black">
+                    View Phase 2 leaderboard
                   </a>
                 </Link>
               </p>

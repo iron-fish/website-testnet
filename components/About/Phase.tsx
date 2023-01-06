@@ -10,6 +10,7 @@ export type Pool = {
   size: number
   categories: string[]
   poolNum?: number
+  additionalText?: string
 }
 
 export type PhaseProps = {
@@ -17,6 +18,7 @@ export type PhaseProps = {
   summary: ReactType | ReactElement | string
   pools: Pool[]
   status?: Status
+  phaseNum: number
 }
 
 export const cumulativePoolSize = (pools: Pool[]) =>
@@ -29,12 +31,16 @@ export const Phase = ({
   status = Status.Active,
 }: PhaseProps) => {
   const isComplete = status === Status.Ended
+
   return (
-    <OffsetBox behind="bg-ifpink" className={clsx('mt-3', 'md:mr-6', 'w-full')}>
+    <OffsetBox
+      behind="bg-ifbackgroundgray"
+      className={clsx('mt-3', 'md:mr-6', 'w-full')}
+    >
       <div
         className={clsx(
-          'h-[34rem]',
-          'lg:h-[36rem]',
+          'h-[30rem]',
+          'lg:h-[32rem]',
           'font-favorit',
           'flex',
           'flex-col',
@@ -90,12 +96,12 @@ export const Phase = ({
             )}
           </a>
         </Link>
-        {pools.map(({ size, categories, poolNum }: Pool, i: number) => (
+        {pools.map(({ size, categories, additionalText, poolNum }: Pool) => (
           <div
             key={`${size}-${categories.length}`}
             className={clsx('mt-6', 'w-full', 'text-left')}
           >
-            Prize pool {poolNum || i + 1}:
+            Prize pool {poolNum}: {size.toLocaleString()} coins {additionalText}
             <ul className="pl-5">
               {categories.map((category: string) => (
                 <li key={category} className={clsx('list-disc', 'pt-2')}>

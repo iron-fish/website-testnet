@@ -14,6 +14,7 @@ import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 import Loader from 'components/Loader'
 import { scrollTo } from 'utils/scroll'
 import { LoginContext } from 'hooks/useLogin'
+import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 const questions: ReadonlyArray<{
   question: string
@@ -21,12 +22,7 @@ const questions: ReadonlyArray<{
   id: string
 }> = [
   {
-    question: `How long will the Phase 2 incentivized testnet run for?`,
-    id: `testnet-duration`,
-    answer: `The testnet will run from May 10, 2022 @ 12:00 PDT until the Iron Fish node is stable, feature-complete, and ready for mainnet 🎉`,
-  },
-  {
-    question: `I participated in Phase 1. What’s different?`,
+    question: `I participated in Phase 1 and 2. What’s different?`,
     id: `phase-1-changes`,
     answer: (
       <div>
@@ -36,9 +32,8 @@ const questions: ReadonlyArray<{
             {' '}
             <Link href="/about"> for different actions</Link>
           </span>{' '}
-          - you get points for hosting a node and making transactions, and you
-          no longer get points directly for mining tokens. The other categories
-          for points remain the same.
+          - you get points once a week for each multiasset action: minting,
+          transferring, and burning .
         </li>
         <li>
           Additionally, we have added a number of commands to the CLI to make
@@ -56,33 +51,13 @@ const questions: ReadonlyArray<{
     ),
   },
   {
-    question: `Why the point changes?`,
-    id: `why-changes`,
-    answer: (
-      <div>
-        <li>
-          De-incentivizing direct mining gives you the opportunity to join a
-          mining pool and earn proportional shares of blocks mined by a group of
-          miners. No more need for a crazy mining rig - just join up with a
-          number of other miners and get a proportional share of the new tokens
-          mined!
-        </li>
-        <li>
-          And if you do have that amazing mining rig, don’t worry - you will
-          still be able to earn lots of points by making large transactions with
-          the Iron Bank.
-        </li>
-      </div>
-    ),
-  },
-  {
     question: `How are you rewarding points?`,
     id: `how-do-i-get-points`,
     answer: (
       <div>
         You can see our point structure by viewing the{' '}
         <span className="underline">
-          <Link href="/about">Phase 2 info page here</Link>
+          <Link href="/about">Phase 3 info page here</Link>
         </span>
         {'.'}
       </div>
@@ -112,29 +87,6 @@ const questions: ReadonlyArray<{
     ),
   },
   {
-    question: `How do I send a transaction to earn points?`,
-    id: `transaction-points`,
-    answer: (
-      <div>
-        <li>
-          First, mine some $IRON. You can do this by running either your own
-          miner or joining a mining pool. You can view the{' '}
-          <span className="underline">
-            <Link href="https://ironfish.network/docs/onboarding/miner-iron-fish#set-block-graffiti-optional">
-              options here
-            </Link>
-          </span>
-          .
-        </li>
-        <li>
-          Then, you may send the $IRON to our Iron Bank transaction processing
-          node by running <code>ironfish deposit</code>.
-        </li>
-        <li>You receive points for every transaction of 0.1 $IRON.</li>
-      </div>
-    ),
-  },
-  {
     question: `Will there be a KYC process for participants in order to claim coins?`,
     id: 'kyc-process',
     answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
@@ -152,14 +104,20 @@ const questions: ReadonlyArray<{
     ),
   },
   {
-    question: `What happened to Phase 1 points?`,
+    question: `What happened to Phase 1 and 2 points?`,
     id: `phase-1-points`,
     answer: (
       <div>
-        We have frozen the Phase 1 leaderboard, and it can be{' '}
+        We have frozen the Phase 1 and 2 leaderboards, and it can be found at{' '}
         <span className="underline">
           <Link href="https://phase1.testnet.ironfish.network/leaderboard">
-            found here
+            phase 1
+          </Link>
+        </span>{' '}
+        and{' '}
+        <span className="underline">
+          <Link href="https://phase2.testnet.ironfish.network/leaderboard">
+            phase 2
           </Link>
         </span>
         .
@@ -201,22 +159,17 @@ const questions: ReadonlyArray<{
   {
     question: `Will my accounts transfer?`,
     id: 'account-transfer',
-    answer: `Yes - accounts with identical graffiti will carry over from Phase 1. If you already created an account with your graffiti for Phase 1, you do not have to register again for Phase 2.`,
+    answer: `Yes - accounts with identical graffiti will carry over from Phase 1 and 2. If you already created an account with your graffiti for Phase 1 or 2, you do not have to register again for Phase 3.`,
   },
   {
     question: `Will there be weekly limits on earning points?`,
     id: 'weekly-limits',
-    answer: `No - we have removed weekly point limits in Phase 2.`,
+    answer: `Yes, each graffiti will be able able to earn points once a week for interacting with multiasset transactions.`,
   },
   {
-    question: `How will Phase 2 be fair for new users starting?`,
+    question: `How will Phase 3 be fair for new users starting?`,
     id: 'phase-2-fairness',
-    answer: `We have allocated blocks of the initial pool of $IRON tokens separately for Phase 1 and Phase 2. So even if you were high on the leaderboard in Phase 1, you start at zero for the Phase 2 allocation. Everyone gets an equal shot at the new Phase 2 pool of tokens, so you’re not too late! `,
-  },
-  {
-    question: `If all the miners connect to pool node only how does that help with the Phase 2 objective of telemetry/running node? Are the blocks always signed by the pool?`,
-    id: 'miners-pool',
-    answer: `Hosting a node with enabled telemetry earns you points directly, regardless of your participation in a mining pool. The mining of blocks is no longer worth points, so mining via pool has no bearing on your leaderboard spot. This is part of the reason we moved away from directly incentivizing mining tokens.`,
+    answer: `We have allocated blocks of the initial pool of $IRON tokens separately for Phase 1, Phase 2, and Phase 3. So even if you were high on the leaderboard in Phase 1 or 2, you start at zero for the Phase 3 allocation. Everyone gets an equal shot at the new Phase 3 pool of tokens, so you’re not too late! `,
   },
 ]
 
@@ -277,6 +230,10 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
           'flex-col'
         )}
       >
+        <CountdownTimer
+          end={new Date(1674072000000)}
+          event=" until start of Phase 3!"
+        />
         <PageBanner
           title="Testnet FAQ"
           text={<PageBannerBody />}
