@@ -4,12 +4,15 @@ import useClipboard from 'react-use-clipboard'
 
 import ActivityBlockMined from 'components/icons/ActivityBlockMined'
 import ActivityBugReported from 'components/icons/ActivityBugReport'
-import ActivityPullRequest from 'components/icons/ActivityPullRequest'
-import ActivityCopy from 'components/icons/ActivityCopy'
 import ActivityCommunityContribution from 'components/icons/ActivityCommunityContribution'
+import ActivityCopy from 'components/icons/ActivityCopy'
+import ActivityMultiAssetBurn from 'components/icons/ActivityMultiAssetBurn'
+import ActivityMultiAssetMint from 'components/icons/ActivityMultiAssetMint'
+import ActivityMultiAssetTransfer from 'components/icons/ActivityMultiAssetTransfer'
+import ActivityNodeHosted from 'components/icons/ActivityNodeHosted'
+import ActivityPullRequest from 'components/icons/ActivityPullRequest'
 import ActivitySocial from 'components/icons/ActivitySocial'
 import ActivityTransactionSent from 'components/icons/ActivityTransactionSent'
-import ActivityNodeHosted from 'components/icons/ActivityNodeHosted'
 import ChevronRight from 'components/icons/ChevronRight'
 import { Verbose, SmallOnly } from 'components/Responsive'
 
@@ -78,6 +81,12 @@ export function displayEventType(type: EventType): IconText {
       <ActivityNodeHosted />
     ) : type === EventType.TRANSACTION_SENT ? (
       <ActivityTransactionSent />
+    ) : type === EventType.MULTI_ASSET_MINT ? (
+      <ActivityMultiAssetMint />
+    ) : type === EventType.MULTI_ASSET_BURN ? (
+      <ActivityMultiAssetBurn />
+    ) : type === EventType.MULTI_ASSET_TRANSFER ? (
+      <ActivityMultiAssetTransfer />
     ) : (
       NEEDS_ICON
     )
@@ -185,9 +194,9 @@ const summarizeEvent = (
   }
   if (
     type === EventType.TRANSACTION_SENT ||
-    type === EventType.MASP_BURN ||
-    type === EventType.MASP_MINT ||
-    type === EventType.MASP_TRANSFER
+    type === EventType.MULTI_ASSET_BURN ||
+    type === EventType.MULTI_ASSET_MINT ||
+    type === EventType.MULTI_ASSET_TRANSFER
   ) {
     const { transaction_hash } = metadata as ApiEventMetadataTransactionSent
     return <CopyableHash hash={transaction_hash} unit="Txn" />
