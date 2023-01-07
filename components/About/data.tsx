@@ -197,60 +197,56 @@ export type Pool = {
   poolNum: number
 }
 
-export const phasesRow1 = [
-  {
-    phaseNum: 1,
-    status: Status.Ended,
-    summary: `Dec 1, 2021 - March 11, 2022.`,
-    pools: [
-      {
-        size: 42e4,
-        poolNum: 1,
-        categories: [
-          'Mining Blocks',
-          'Finding Bugs',
-          'Community Contributions',
-        ],
-      },
-      {
-        size: 105e3,
-        categories: ['Submitting Pull Requests'],
-        poolNum: 3,
-        additionalText: '(spans all phases)',
-      },
-    ],
-  },
-  {
-    phaseNum: 2,
-    status: Status.Ended,
-    summary: 'May 10, 2022 - November 22, 2022',
-    pools: [
-      {
-        size: 21e4,
-        categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
-        poolNum: 2,
-      },
-      {
-        size: 105e3,
-        categories: ['Submitting Pull Requests'],
-        poolNum: 3,
-        additionalText: '(spans all phases)',
-      },
-    ],
-  },
-]
-export const phasesRow2 = {
+export const Phase1 = {
+  phaseNum: 1,
+  status: Status.Ended,
+  summary: `Dec 1, 2021 - March 11, 2022.`,
+  pools: [
+    {
+      size: 420000,
+      poolNum: 1,
+      categories: ['Mining Blocks', 'Finding Bugs', 'Community Contributions'],
+    },
+    {
+      size: 105000,
+      categories: ['Submitting Pull Requests'],
+      poolNum: 3,
+      additionalText: '(spans all phases)',
+    },
+  ],
+}
+
+export const Phase2 = {
+  phaseNum: 2,
+  status: Status.Ended,
+  summary: 'May 10, 2022 - November 22, 2022',
+  pools: [
+    {
+      size: 210000,
+      categories: ['Hosting a Node', 'Finding Bugs', 'Sending Transactions'],
+      poolNum: 2,
+    },
+    {
+      size: 105000,
+      categories: ['Submitting Pull Requests'],
+      poolNum: 3,
+      additionalText: '(spans all phases)',
+    },
+  ],
+}
+
+export const Phase3 = {
   phaseNum: 3,
   status: Status.ComingSoon,
   summary: 'Starting January 18, 2023',
   pools: [
     {
-      size: 0,
+      size: 210000,
       categories: ['Hosting a Node', 'Finding Bugs', 'Mint/Burn/Send Asset'],
       poolNum: 4,
     },
     {
-      size: 105e3,
+      size: 105000,
       categories: ['Submitting Pull Requests'],
       poolNum: 3,
       additionalText: '(spans all phases)',

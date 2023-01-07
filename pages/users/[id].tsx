@@ -160,14 +160,23 @@ export default function User({ showNotification, loginContext }: Props) {
   }
 
   const avatarColor = graffitiToColor($user.graffiti)
-  const ordinalRank = numberToOrdinal($user.rank)
-  const startDate = new Date(2021, 11, 1)
-  const endDate = nextMondayFrom(nextMonday(new Date()))
+
+  const phase3Rank = $allTimeMetrics.pools.main.rank
+    ? numberToOrdinal($allTimeMetrics.pools.main.rank)
+    : 'NA'
+
+  const phase3Points = $allTimeMetrics.pools.main.points
+
+  const startDate = new Date(2023, 18, 1)
+  const endDate = nextMondayFrom(
+    nextMonday(new Date() < startDate ? startDate : new Date())
+  )
+
   const joinedOn = formatUTC($user.created_at, `'Joined' MMMM do',' y`)
 
   const tweetText = `Iron Fish Incentivized Testnet: ${
     $user.graffiti
-  } - ${$user.total_points.toLocaleString()} total points! #ironfish https://testnet.ironfish.network/users/${userId}`
+  } - ${phase3Points.toLocaleString()} points! #ironfish https://testnet.ironfish.network/users/${userId}`
 
   return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col')}>
@@ -307,10 +316,10 @@ export default function User({ showNotification, loginContext }: Props) {
                     'justify-between'
                   )}
                 >
-                  <LabeledStat label="Phase 3 Rank" value={ordinalRank} />
+                  <LabeledStat label="Phase 3 Rank" value={phase3Rank} />
                   <LabeledStat
                     label="Phase 3 Points"
-                    value={$user.total_points.toLocaleString()}
+                    value={phase3Points.toLocaleString()}
                   />
                 </div>
               </div>

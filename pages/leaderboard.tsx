@@ -51,6 +51,7 @@ const FIELDS = {
     id: 'eventType',
     label: 'eventType',
     options: [
+      { name: 'Pool 3', value: API.EventType.PULL_REQUEST_MERGED },
       { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
       { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
       { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
@@ -60,12 +61,13 @@ const FIELDS = {
         name: 'Multi-Asset Transfer',
         value: API.EventType.MULTI_ASSET_TRANSFER,
       },
+      { name: TOTAL_POINTS, value: TOTAL_POINTS },
     ],
     validation: () => true,
     defaultErrorText,
     useDefault: true,
-    defaultValue: TOTAL_POINTS,
-    defaultLabel: TOTAL_POINTS,
+    defaultValue: API.EventType.POOL4,
+    defaultLabel: 'Pool 4',
   },
 }
 

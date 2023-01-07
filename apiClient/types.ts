@@ -58,6 +58,7 @@ export enum EventType {
   MULTI_ASSET_TRANSFER = 'MULTI_ASSET_TRANSFER',
   MULTI_ASSET_BURN = 'MULTI_ASSET_BURN',
   MULTI_ASSET_MINT = 'MULTI_ASSET_MINT',
+  POOL4 = 'POOL4',
 }
 
 export type ApiError = {
