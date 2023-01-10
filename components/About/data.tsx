@@ -107,7 +107,7 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
       behind: 'bg-ifyellow',
     },
@@ -152,7 +152,7 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
     },
     {
@@ -163,7 +163,7 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
       behind: 'bg-iflightorange',
     },
