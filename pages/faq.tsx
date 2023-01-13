@@ -80,7 +80,7 @@ const questions: ReadonlyArray<{
     ),
   },
   {
-    question: `How do I burn an asset??`,
+    question: `How do I burn an asset?`,
     id: `how-to-burn`,
     answer: (
       <div>
