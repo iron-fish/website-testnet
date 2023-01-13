@@ -71,6 +71,33 @@ const questions: ReadonlyArray<{
       mainnet launch of $IRON.`,
   },
   {
+    question: `How do I mint an asset?`,
+    id: `how-to-mint`,
+    answer: (
+      <div>
+        You can burn an asset by running <pre>ironfish wallet:mint</pre>
+      </div>
+    ),
+  },
+  {
+    question: `How do I burn an asset?`,
+    id: `how-to-burn`,
+    answer: (
+      <div>
+        You can burn an asset by running <pre>ironfish wallet:burn</pre>
+      </div>
+    ),
+  },
+  {
+    question: `How do I send an asset?`,
+    id: `how-to-send`,
+    answer: (
+      <div>
+        You can burn an asset by running <pre>ironfish wallet:send</pre>
+      </div>
+    ),
+  },
+  {
     question: `How do I host a node in a way that earns me points?`,
     id: `node-points`,
     answer: (
