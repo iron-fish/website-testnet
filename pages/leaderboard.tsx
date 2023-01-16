@@ -54,7 +54,6 @@ const FIELDS = {
       { name: 'Pool 3', value: API.EventType.PULL_REQUEST_MERGED },
       { name: 'Hosting a Node', value: API.EventType.NODE_HOSTED },
       { name: 'Bugs Found', value: API.EventType.BUG_CAUGHT },
-      { name: 'Pull Requests', value: API.EventType.PULL_REQUEST_MERGED },
       { name: 'Multi-Asset Mint', value: API.EventType.MULTI_ASSET_MINT },
       { name: 'Multi-Asset Burn', value: API.EventType.MULTI_ASSET_BURN },
       {
