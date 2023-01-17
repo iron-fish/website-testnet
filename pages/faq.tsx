@@ -75,7 +75,7 @@ const questions: ReadonlyArray<{
     id: `how-to-mint`,
     answer: (
       <div>
-        You can burn an asset by running <pre>ironfish wallet:mint</pre>
+        You can mint an asset by running <pre>ironfish wallet:mint</pre>
       </div>
     ),
   },
@@ -93,7 +93,7 @@ const questions: ReadonlyArray<{
     id: `how-to-send`,
     answer: (
       <div>
-        You can burn an asset by running <pre>ironfish wallet:send</pre>
+        You can send an asset by running <pre>ironfish wallet:send</pre>
       </div>
     ),
   },
