@@ -258,7 +258,7 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
         )}
       >
         <CountdownTimer
-          end={new Date(1674072000000)}
+          end={new Date(1674064800000)}
           event=" until start of Phase 3!"
         />
         <PageBanner
