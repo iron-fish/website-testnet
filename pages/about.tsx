@@ -73,7 +73,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <CountdownTimer
-          end={new Date(1674084548000)}
+          end={new Date(1674021600000)}
           event=" until start of Phase 3!"
         />
         <PageBanner

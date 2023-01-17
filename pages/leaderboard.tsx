@@ -167,7 +167,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
         )}
       >
         <CountdownTimer
-          end={new Date(1674084548000)}
+          end={new Date(1674072000000)}
           event=" until start of Phase 3!"
         />
         <PageBanner
