@@ -110,7 +110,8 @@ function LeaderboardRow({ rank, graffiti, points = 0 }: Props) {
           'md:inline',
           'font-extended',
           'text-2xl',
-          'w-36'
+          'w-16',
+          'sm:w-24'
         )}
       >
         {rankStr}
