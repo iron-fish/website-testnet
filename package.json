@@ -6,7 +6,8 @@
     "dev": "nps dev",
     "build": "nps build",
     "start": "nps start",
-    "lint": "nps lint"
+    "lint": "nps lint",
+    "lint:fix": "nps lint.fix"
   },
   "dependencies": {
     "base-64": "^1.0.0",

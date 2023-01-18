@@ -24,17 +24,21 @@ export function GenericMetricCard({
   metric,
 }: GenericMetricCardProps) {
   const [$over, $setOver] = useState(false)
+
   if (!metric) {
     return <>{title} - Data Missing</>
   }
+
   const value =
     metric && useRank
-      ? (metric?.rank || 0).toLocaleString()
+      ? metric?.rank?.toLocaleString() ?? 'NA'
       : (metric?.count || 0).toLocaleString()
+
   const bottomContent =
     metric && bottom
       ? bottom
       : (metric?.points || 0).toLocaleString() + ' ' + bottomUnit
+
   const styleData = verticalOffset ? (
     <style>{`
   .customOffset::before {
@@ -42,6 +46,7 @@ export function GenericMetricCard({
   }
 `}</style>
   ) : null
+
   return (
     <>
       {styleData}

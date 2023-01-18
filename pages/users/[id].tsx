@@ -165,7 +165,7 @@ export default function User({ showNotification, loginContext }: Props) {
     ? numberToOrdinal($allTimeMetrics.pools.main.rank)
     : 'NA'
 
-  const phase3Points = $allTimeMetrics.pools.main.points
+  const phase3Points = $allTimeMetrics.pools.main.points || 0
 
   const startDate = new Date(2023, 18, 1)
   const endDate = nextMondayFrom(

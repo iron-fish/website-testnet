@@ -71,6 +71,40 @@ const questions: ReadonlyArray<{
       mainnet launch of $IRON.`,
   },
   {
+    question: `How do I mint an asset?`,
+    id: `how-to-mint`,
+    answer: (
+      <div>
+        You can mint an asset by running the command below. Make sure you use
+        your graffit as your asset name.
+        <pre>ironfish wallet:mint</pre>
+      </div>
+    ),
+  },
+  {
+    question: `How do I burn an asset?`,
+    id: `how-to-burn`,
+    answer: (
+      <div>
+        You can burn an asset by running the command{' '}
+        <pre>ironfish wallet:burn</pre>
+      </div>
+    ),
+  },
+  {
+    question: `How do I send an asset?`,
+    id: `how-to-send`,
+    answer: (
+      <div>
+        You can send an asset by running the command:
+        <div style={{ wordWrap: 'break-word' }}>
+          ironfish wallet:send --to
+          dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca
+        </div>
+      </div>
+    ),
+  },
+  {
     question: `How do I host a node in a way that earns me points?`,
     id: `node-points`,
     answer: (
@@ -171,6 +205,12 @@ const questions: ReadonlyArray<{
     id: 'phase-2-fairness',
     answer: `We have allocated blocks of the initial pool of $IRON tokens separately for Phase 1, Phase 2, and Phase 3. So even if you were high on the leaderboard in Phase 1 or 2, you start at zero for the Phase 3 allocation. Everyone gets an equal shot at the new Phase 3 pool of tokens, so you’re not too late! `,
   },
+  {
+    question:
+      'I get the error, "Your database needs to be upgraded (v10 vs v14)."',
+    id: 'database-error',
+    answer: `You are running phase 3 on an old phase 2 database. You need to delete your datadir located at ~/.ironfish`,
+  },
 ]
 
 const PageBannerBody = () => (
@@ -231,7 +271,7 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
         )}
       >
         <CountdownTimer
-          end={new Date(1674072000000)}
+          end={new Date(1674064800000)}
           event=" until start of Phase 3!"
         />
         <PageBanner
