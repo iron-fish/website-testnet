@@ -167,7 +167,7 @@ export default function User({ showNotification, loginContext }: Props) {
 
   const phase3Points = $allTimeMetrics.pools.main.points || 0
 
-  const startDate = new Date(2023, 18, 1)
+  const startDate = new Date(2023, 0, 18)
   const endDate = nextMondayFrom(
     nextMonday(new Date() < startDate ? startDate : new Date())
   )
