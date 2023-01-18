@@ -61,6 +61,12 @@ export function displayEventType(type: EventType): IconText {
         <>Hosted a node</>
       ) : type === EventType.TRANSACTION_SENT ? (
         <>Transaction Sent</>
+      ) : type === EventType.MULTI_ASSET_BURN ? (
+        <>Burn Asset</>
+      ) : type === EventType.MULTI_ASSET_TRANSFER ? (
+        <>Send Asset</>
+      ) : type === EventType.MULTI_ASSET_MINT ? (
+        <>Mint Asset</>
       ) : (
         type
       )}
