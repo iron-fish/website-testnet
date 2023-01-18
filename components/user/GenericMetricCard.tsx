@@ -62,7 +62,7 @@ export function GenericMetricCard({
           >
             {title}
           </div>
-          <div className={clsx('flex', 'flex-col', 'gap-4')}>
+          <div className={clsx('flex', 'gap-4')}>
             <div className="text-5xl">{value}</div>
             <div className={clsx('font-favorit', 'mt-1', 'overflow-hidden')}>
               <div className="leading-tight">{top}</div>
