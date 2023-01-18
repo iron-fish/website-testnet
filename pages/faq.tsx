@@ -205,6 +205,12 @@ const questions: ReadonlyArray<{
     id: 'phase-2-fairness',
     answer: `We have allocated blocks of the initial pool of $IRON tokens separately for Phase 1, Phase 2, and Phase 3. So even if you were high on the leaderboard in Phase 1 or 2, you start at zero for the Phase 3 allocation. Everyone gets an equal shot at the new Phase 3 pool of tokens, so you’re not too late! `,
   },
+  {
+    question:
+      'I get the error, "Your database needs to be upgraded (v10 vs v14)."',
+    id: 'database-error',
+    answer: `You are running phase 3 on an old phase 2 database. You need to delete your datadir located at ~/.ironfish`,
+  },
 ]
 
 const PageBannerBody = () => (
