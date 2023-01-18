@@ -75,7 +75,9 @@ const questions: ReadonlyArray<{
     id: `how-to-mint`,
     answer: (
       <div>
-        You can mint an asset by running <pre>ironfish wallet:mint</pre>
+        You can mint an asset by running the command below. Make sure you use
+        your graffit as your asset name.
+        <pre>ironfish wallet:mint</pre>
       </div>
     ),
   },
@@ -84,7 +86,8 @@ const questions: ReadonlyArray<{
     id: `how-to-burn`,
     answer: (
       <div>
-        You can burn an asset by running <pre>ironfish wallet:burn</pre>
+        You can burn an asset by running the command{' '}
+        <pre>ironfish wallet:burn</pre>
       </div>
     ),
   },
@@ -93,7 +96,11 @@ const questions: ReadonlyArray<{
     id: `how-to-send`,
     answer: (
       <div>
-        You can send an asset by running <pre>ironfish wallet:send</pre>
+        You can send an asset by running the command:
+        <div style={{ wordWrap: 'break-word' }}>
+          ironfish wallet:send --to
+          dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca
+        </div>
       </div>
     ),
   },
