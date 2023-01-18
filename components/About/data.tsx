@@ -103,12 +103,14 @@ export const callsToAction = {
       title: `Mint Asset`,
       content: (
         <>
-          Once a week, you can submit a mint your asset, where the asset name is
-          your graffiti:
+          Once a week, you can mint an asset, where the asset name is your
+          graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
+      ctaText: 'How to mint an asset',
+      href: '/faq#how-to-mint',
       behind: 'bg-ifyellow',
     },
     {
@@ -152,8 +154,10 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
+      ctaText: 'How to burn an asset',
+      href: '/faq#how-to-burn',
     },
     {
       title: `Send Asset`,
@@ -163,8 +167,10 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: ['X points per transaction', 'Weekly limit = 1'],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
+      ctaText: 'How to send an asset',
+      href: '/faq#how-to-send',
       behind: 'bg-iflightorange',
     },
     {

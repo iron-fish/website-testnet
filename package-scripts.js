@@ -17,6 +17,7 @@ module.exports = {
     start: 'next start',
     lint: {
       clean: 'next lint',
+      fix: 'next lint --fix',
       script: 'nps lint.clean lint.dry',
       dry: 'twly --boring --lines 3 -t .trc',
     },
