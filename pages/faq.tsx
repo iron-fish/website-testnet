@@ -76,7 +76,7 @@ const questions: ReadonlyArray<{
     answer: (
       <div>
         You can mint an asset by running the command below. Make sure you use
-        your graffit as your asset name.
+        your graffiti as your asset name.
         <pre>ironfish wallet:mint</pre>
       </div>
     ),
