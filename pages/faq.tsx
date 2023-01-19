@@ -105,6 +105,16 @@ const questions: ReadonlyArray<{
     ),
   },
   {
+    question: `How do I get $IRON to pay for mint, burn, and send fees?`,
+    id: `how-to-i-get-funds`,
+    answer: (
+      <div>
+        You can request $IRON using our faucet. Run the command:
+        <div>ironfish faucet</div>
+      </div>
+    ),
+  },
+  {
     question: `How do I host a node in a way that earns me points?`,
     id: `node-points`,
     answer: (
