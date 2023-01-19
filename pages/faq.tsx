@@ -14,7 +14,6 @@ import QuestionAnswer from 'components/FAQ/QuestionAnswer'
 import Loader from 'components/Loader'
 import { scrollTo } from 'utils/scroll'
 import { LoginContext } from 'hooks/useLogin'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 const questions: ReadonlyArray<{
   question: string
@@ -101,6 +100,16 @@ const questions: ReadonlyArray<{
           ironfish wallet:send --to
           dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca
         </div>
+      </div>
+    ),
+  },
+  {
+    question: `How do I get $IRON to pay for mint, burn, and send fees?`,
+    id: `how-to-i-get-funds`,
+    answer: (
+      <div>
+        You can request $IRON using our faucet. Run the command:
+        <div>ironfish faucet</div>
       </div>
     ),
   },
@@ -270,10 +279,6 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
           'flex-col'
         )}
       >
-        <CountdownTimer
-          end={new Date(1674064800000)}
-          event=" until start of Phase 3!"
-        />
         <PageBanner
           title="Testnet FAQ"
           text={<PageBannerBody />}
