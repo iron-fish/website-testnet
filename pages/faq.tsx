@@ -25,26 +25,26 @@ const questions: ReadonlyArray<{
     id: `phase-1-changes`,
     answer: (
       <div>
-        <li>
-          We are now rewarding points{' '}
-          <span className="underline">
-            {' '}
-            <Link href="/about"> for different actions</Link>
-          </span>{' '}
-          - you get points once a week for each multiasset action: minting,
-          transferring, and burning .
-        </li>
-        <li>
-          Additionally, we have added a number of commands to the CLI to make
-          participating in the testnet simpler - these will help you set up your
-          graffiti and telemetry. Run <code>ironfish testnet</code> to set up
-          your node to be ready for testnet. Check out our{' '}
-          <span className="underline">
-            <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-              getting started
-            </Link>
-          </span>{' '}
-          for more details!
+          <li>
+            We are now rewarding points for various {' '}
+            <span className="underline">{' '}
+              <Link href="/about"> Categories. </Link>
+            </span>{' '}
+          </li>
+          <li>You get points once a week for each multiasset action:</li>
+          <li><b>Mint</b> Asset | <b>Burn</b> Asset | <b>Send</b> Asset</li>
+          <li>
+            We have added a number of commands to the CLI, to make participating 
+            in testnet simpler.
+          </li>
+          <li>These will help you set up your <i>graffiti</i> and <i>telemetry</i>.</li>
+          <li>Run <code><b>ironfish testnet</b></code> to set up your node to be ready for testnet.</li>
+          <li>
+            Check out our{' '}
+            <span className="underline">
+              <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"> Get Started </Link>
+            </span>{' '}
+            tutorial for more details!
         </li>
       </div>
     ),
@@ -54,30 +54,40 @@ const questions: ReadonlyArray<{
     id: `how-do-i-get-points`,
     answer: (
       <div>
-        You can see our point structure by viewing the{' '}
-        <span className="underline">
-          <Link href="/about">Phase 3 info page here</Link>
-        </span>
-        {'.'}
+        <li>
+          You may view our point structure at{' '}
+          <span className="underline">
+            <Link href="/about">Phase 3 Info Page</Link>
+          </span>{'.'}
+        </li>
       </div>
     ),
   },
   {
     question: `What do points do?`,
     id: `what-do-points-do`,
-    answer: `We have set aside a portion of the genesis block for $IRON exclusively for incentivized testnet users.
-      Upon eligibility, your Phase 1 and Phase 2 points will be proportionally translated into tokens from this block upon the
-      mainnet launch of $IRON.`,
+    answer: (
+      <div>
+        <li>
+          We have set aside a portion of the genesis block $IRON 
+          exclusively for incentivized testnet users.
+          </li>
+        <li>
+          Upon eligibility, your Phase 1 & 2 points will be proportionally 
+          translated to tokens from this block upon mainnet launch.
+          </li>
+      </div>
+    ),
   },
   {
     question: `How do I mint an asset?`,
     id: `how-to-mint`,
     answer: (
-      <>
-        You can mint an asset by running the command below. Make sure you use
-        your graffit as your asset name.
-        <div>ironfish wallet:mint</div>
-      </>
+      <div>
+        <li>Make sure you use your registered <i>graffiti</i> as your asset name.</li>
+        <li>Run <code><b>ironfish wallet:mint</b></code> to mint your asset.</li>
+        
+      </div>
     ),
   },
   {
@@ -85,8 +95,7 @@ const questions: ReadonlyArray<{
     id: `how-to-burn`,
     answer: (
       <div>
-        You can burn an asset by running the command{' '}
-        <div>ironfish wallet:burn</div>
+        <li>Run <code><b>ironfish wallet:burn</b></code> to burn your asset.</li>
       </div>
     ),
   },
@@ -94,26 +103,23 @@ const questions: ReadonlyArray<{
     question: `How do I send an asset?`,
     id: `how-to-send`,
     answer: (
-      <>
-        You can burn an asset by running the command:
-        <div>ironfish wallet:send</div>
-        <div style={{ marginTop: '14px' }}>
-          You must send your asset to the iron bank address{' '}
+      <div>
+        <li>Use the following iron bank address: {' '}
           <span style={{ wordWrap: 'break-word' }}>
-            dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca
+            <mark><i>dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca</i></mark>
           </span>
-        </div>
-      </>
+          </li>
+        <li>Run <code><b>ironfish wallet:send</b></code> to send your asset.</li>        
+      </div>
     ),
   },
   {
-    question: `How do I get $IRON to pay for mint, burn, and send fees?`,
+    question: `How do I get $IRON to pay for mint, burn, & send fees?`,
     id: `how-to-i-get-funds`,
     answer: (
-      <>
-        You can request $IRON using our faucet. Run the command:
-        <div>ironfish faucet</div>
-      </>
+      <div>
+        <li>Run <code><b>ironfish faucet</b></code> to request from our faucet.</li>
+      </div>
     ),
   },
   {
@@ -121,31 +127,30 @@ const questions: ReadonlyArray<{
     id: `node-points`,
     answer: (
       <div>
-        <li>
-          First, run <code>ironfish testnet</code> to configure your node with
-          proper graffiti and telemetry settings.
-        </li>
-        <li>
-          Then, run <code>ironfish start</code> and leave that process running.
-        </li>
-        <li>That’s it - you will gain points every 12 hours.</li>
+        <li>Run <code><b>ironfish testnet</b></code> to configure your <i>graffiti</i> and <i>telemetry</i>.</li>
+        <li>Run <code><b>ironfish start</b></code> and leave that process running.</li>
+        <li>That should do it ...to gain points every 12 hours.</li>
       </div>
     ),
   },
   {
-    question: `Will there be a KYC process for participants in order to claim coins?`,
+    question: `Will there be a KYC process for participants to claim coins?`,
     id: 'kyc-process',
-    answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
+    answer: (
+      <div>
+        <li>Coins will be distributed to eligible participants.</li>
+        <li>Most likely a KYC process will be necessary, to determine eligibility.</li>
+      </div>
+    ),
   },
   {
     question: `What are the minimum hardware requirements for running a node? `,
     id: `minimum-hardware-requirements`,
     answer: (
       <div>
-        Recommended minimum requirements from other members in the community
-        are:
-        <li>CPU 4 core</li>
-        <li>RAM 8GB RAM</li>
+        <li>Suggested requirements from our community:</li>
+        <li>CPU: 4 cores</li>
+        <li>RAM: 8 GB</li>
       </div>
     ),
   },
@@ -154,19 +159,24 @@ const questions: ReadonlyArray<{
     id: `phase-1-points`,
     answer: (
       <div>
-        We have frozen the Phase 1 and 2 leaderboards, and it can be found at{' '}
-        <span className="underline">
-          <Link href="https://phase1.testnet.ironfish.network/leaderboard">
-            phase 1
-          </Link>
-        </span>{' '}
-        and{' '}
-        <span className="underline">
-          <Link href="https://phase2.testnet.ironfish.network/leaderboard">
-            phase 2
-          </Link>
-        </span>
-        .
+        <li>We have frozen the leaderboards from prior phases.</li>
+        <li>For reference, you may find them here:</li>
+        <li>
+          <span className="underline">
+            <Link href="https://phase1.testnet.ironfish.network/leaderboard">
+              Phase 1
+            </Link>
+          </span>{' '}
+          leaderboard.
+        </li>
+        <li>
+          <span className="underline">
+            <Link href="https://phase2.testnet.ironfish.network/leaderboard">
+              Phase 2
+            </Link>
+          </span>{' '}
+          leaderboard.
+        </li>
       </div>
     ),
   },
@@ -175,16 +185,16 @@ const questions: ReadonlyArray<{
     id: `graffiti-set-up`,
     answer: (
       <div>
-        Graffiti is your personal identifier. You need to set it up to get
-        credited for your participation in the testnet. We suggest using our new
-        testnet CLI commands to ensure everything is properly set{' '}
-        <code>ironfish testnet</code>. See the{' '}
-        <span className="underline">
-          <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
-            getting started
-          </Link>
-        </span>{' '}
-        for more details.
+        <li>Graffiti is your personal identifier.</li>
+        <li>You need to set it up to get credits for your participation.</li>
+        <li>Run <code><b>ironfish testnet</b></code> for your setup.</li>
+        <li>
+            Check out our{' '}
+            <span className="underline">
+              <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial"> Get Started </Link>
+            </span>{' '}
+            tutorial for more details!
+        </li>
       </div>
     ),
   },
@@ -193,35 +203,57 @@ const questions: ReadonlyArray<{
     id: `different-graffiti`,
     answer: (
       <div>
-        Points can only be earned for blocks with the same graffiti as your
-        testnet account. You must{' '}
-        <span className="underline">
-          <Link href="/signup">register</Link>
-        </span>{' '}
-        with your graffiti before you can start earning points.
+        <li>Please{' '}
+          <span className="underline">
+            <Link href="/signup">Register</Link>
+          </span>{' '}
+          your <i>graffiti</i> to start earning points.
+        </li>
+        <li>Points can be claimed, when you use the same <i>graffiti</i> used in the registration step.</li>
       </div>
     ),
   },
   {
-    question: `Will my accounts transfer?`,
+    question: `Will my accounts transfer from prior phases?`,
     id: 'account-transfer',
-    answer: `Yes - accounts with identical graffiti will carry over from Phase 1 and 2. If you already created an account with your graffiti for Phase 1 or 2, you do not have to register again for Phase 3.`,
+    answer: (
+      <div>
+        <li>If you've setup your <i>graffiti</i> in Phase 1 & 2, you don't have to register again in Phase 3.</li>
+        <li>Yes, accounts with identical <i>graffiti</i> will carry over from Phase 1 & 2.</li>
+      </div>
+    ),
   },
   {
     question: `Will there be weekly limits on earning points?`,
     id: 'weekly-limits',
-    answer: `Yes, each graffiti will be able able to earn points once a week for interacting with multiasset transactions.`,
+    answer: (
+      <div>
+        <li>Yes, each <i>graffiti</i> will be able to earn points, once a week, for creating the multiasset transactions.</li>
+      </div>
+    ),
   },
   {
     question: `How will Phase 3 be fair for new users starting?`,
     id: 'phase-2-fairness',
-    answer: `We have allocated blocks of the initial pool of $IRON tokens separately for Phase 1, Phase 2, and Phase 3. So even if you were high on the leaderboard in Phase 1 or 2, you start at zero for the Phase 3 allocation. Everyone gets an equal shot at the new Phase 3 pool of tokens, so you’re not too late! `,
+    answer: (
+      <div>
+        <li>We have set aside blocks of the initial pool of $IRON tokens separately for Phase 1, Phase 2, and Phase 3.</li>
+        <li>Congratulations!, if you managed to score a high ranking on the leaderboard in Phase 1 or 2.</li>
+        <li>You and Everyone else, start with <mark>zero</mark> points in Phase 3.</li>
+        <li>We designed this, such that everyone gets a fair and equal shot in Phase 3. You’re not too late!</li>
+      </div>
+    ),
   },
   {
     question:
       'I get the error, "Your database needs to be upgraded (v10 vs v14)."',
     id: 'database-error',
-    answer: `You are running phase 3 on an old phase 2 database. You need to delete your datadir located at ~/.ironfish`,
+    answer: (
+      <div>
+        <li>You might be running an old phase 2 database.</li>
+        <li>Delete your <i>datadir</i> located at <code>~/.ironfish</code></li>
+      </div>
+    ),
   },
 ]
 
