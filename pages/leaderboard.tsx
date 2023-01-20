@@ -86,7 +86,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
 
   // Search field hooks
   const [$search, $setSearch] = useState('')
-  const $debouncedSearch = useDebounce($search, 300)
+  const $debouncedSearch = useDebounce($search, 500)
   const [$searching, $setSearching] = useState(false)
   const countryValue = $country?.value
   const eventTypeValue = $eventType?.value

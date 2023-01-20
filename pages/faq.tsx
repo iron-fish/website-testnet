@@ -76,7 +76,7 @@ const questions: ReadonlyArray<{
       <>
         You can mint an asset by running the command below. Make sure you use
         your graffiti as your asset name.
-        <pre>ironfish wallet:mint</pre>
+        <div>ironfish wallet:mint</div>
       </>
     ),
   },
@@ -95,7 +95,7 @@ const questions: ReadonlyArray<{
     id: `how-to-send`,
     answer: (
       <>
-        You can burn an asset by running the command:
+        You can send an asset by running the command:
         <div>ironfish wallet:send</div>
         <div style={{ marginTop: '14px' }}>
           You must send your asset to the iron bank address{' '}
@@ -108,7 +108,7 @@ const questions: ReadonlyArray<{
   },
   {
     question: `How do I get $IRON to pay for mint, burn, and send fees?`,
-    id: `how-to-i-get-funds`,
+    id: `how-do-i-get-funds`,
     answer: (
       <>
         You can request $IRON using our faucet. Run the command:
