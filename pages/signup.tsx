@@ -243,7 +243,7 @@ export default function SignUp({
                           </Note>
                           <p className="p-2 text-center text-sm">
                             Have any questions for our team?{' '}
-                            <Link href="https://discord.gg/ironfish">
+                            <Link href="https://discord.ironfish.network/">
                               <a className=" text-iflightblue">
                                 Find us on Discord.
                               </a>

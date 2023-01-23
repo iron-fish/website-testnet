@@ -75,8 +75,9 @@ const questions: ReadonlyArray<{
     answer: (
       <>
         You can mint an asset by running the command below. Make sure you use
-        your graffiti as your asset name.
-        <div>ironfish wallet:mint</div>
+        your graffiti as your asset name:
+        <br />
+        <code>ironfish wallet:mint</code>
       </>
     ),
   },
@@ -85,8 +86,9 @@ const questions: ReadonlyArray<{
     id: `how-to-burn`,
     answer: (
       <div>
-        You can burn an asset by running the command{' '}
-        <div>ironfish wallet:burn</div>
+        You can burn an asset by running the command:
+        <br />
+        <code>ironfish wallet:burn</code>
       </div>
     ),
   },
@@ -96,7 +98,8 @@ const questions: ReadonlyArray<{
     answer: (
       <>
         You can send an asset by running the command:
-        <div>ironfish wallet:send</div>
+        <br />
+        <code>ironfish wallet:send</code>
         <div style={{ marginTop: '14px' }}>
           You must send your asset to the iron bank address{' '}
           <span style={{ wordWrap: 'break-word' }}>
@@ -112,7 +115,7 @@ const questions: ReadonlyArray<{
     answer: (
       <>
         You can request $IRON using our faucet. Run the command:
-        <div>ironfish faucet</div>
+        <code>ironfish faucet</code>
       </>
     ),
   },
@@ -221,7 +224,38 @@ const questions: ReadonlyArray<{
     question:
       'I get the error, "Your database needs to be upgraded (v10 vs v14)."',
     id: 'database-error',
-    answer: `You are running phase 3 on an old phase 2 database. You need to delete your datadir located at ~/.ironfish`,
+    answer: (
+      <div>
+        Stop your node. Run the command:
+        <br /> <code>ironfish reset</code>
+        <br /> Restart your node.
+      </div>
+    ),
+  },
+  {
+    question:
+      "I submitted my transactions and I don't see my points on the leaderboard!",
+    id: 'sigsegv',
+    answer: (
+      <div>
+        Make sure you have followed the debugging instructions on{' '}
+        <span className="underline">
+          <Link href="https://github.com/iron-fish/ironfish/wiki/FAQ#phase-3-transaction-questions">
+            the wiki FAQ.
+          </Link>
+        </span>{' '}
+        and checked the{' '}
+        <span className="underline">
+          <Link href="https://github.com/iron-fish/ironfish/wiki/Known-Issues">
+            known issues.
+          </Link>
+        </span>{' '}
+        If that does not solve your problem, come post in the{' '}
+        <span className="underline">
+          <Link href="https://discord.ironfish.network/">Discord server</Link>
+        </span>
+      </div>
+    ),
   },
 ]
 
@@ -232,7 +266,7 @@ testnet. If you're looking for more detailed answers, or you
 don't see the question that you'd like to ask, please reach out
 on our `}
     <span className="underline">
-      <Link href="https://discord.gg/ironfish">Discord server</Link>
+      <Link href="https://discord.ironfish.network/">Discord server</Link>
     </span>
     .
   </span>
