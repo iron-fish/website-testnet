@@ -10,7 +10,7 @@ export const makeRelativeConverter = () => {
 }
 
 export const weeksBetween = (start: Date, end: Date) => {
-  const raw = eachWeekOfInterval({ start, end }, { weekStartsOn: 1 })
+  const raw = eachWeekOfInterval({ start, end }, { weekStartsOn: 0 })
   const convert = makeRelativeConverter()
   return raw.map(convert)
 }
