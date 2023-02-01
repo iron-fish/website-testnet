@@ -130,7 +130,7 @@ export const callsToAction = {
 
       points: ['1 bug = 100 points'],
       ctaText: 'Request points for a bug',
-      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      href: 'https://forms.gle/bLfwN9jb14ZWkHkZA',
       submissionForm: false,
       status: Status.Active,
     },
@@ -190,7 +190,7 @@ export const callsToAction = {
         'Large = 1000 points',
       ],
       ctaText: 'Request points for a PR',
-      href: 'https://forms.gle/agquNGnS5NDgcfZN6',
+      href: 'https://forms.gle/bLfwN9jb14ZWkHkZA',
       status: Status.Active,
       behind: 'bg-ifyellow',
     },
