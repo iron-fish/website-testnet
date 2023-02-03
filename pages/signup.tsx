@@ -169,23 +169,23 @@ export default function SignUp({
     const country = $country?.value
     $setLoaded(false)
 
-    let recaptchaToken: string
+    let recaptcha: string
 
     try {
-      recaptchaToken = await executeRecaptcha()
+      recaptcha = await executeRecaptcha()
     } catch (_err) {
-      recaptchaToken = ''
+      recaptcha = ''
     }
 
-    const result = await createUser(
+    const result = await createUser({
       email,
       graffiti,
       socialChoice,
       social,
       country,
+      recaptcha,
       github,
-      recaptchaToken
-    )
+    })
 
     $setLoaded(true)
 
