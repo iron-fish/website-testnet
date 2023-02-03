@@ -26,6 +26,7 @@ export async function createUser(
   socialChoice: string,
   social: string,
   country_code: string,
+  recaptcha: string,
   github?: string
 ): Promise<ApiUser | ApiError> {
   const hub = github ? { github } : {}
@@ -34,6 +35,7 @@ export async function createUser(
     email,
     graffiti,
     country_code,
+    recaptcha,
     [socialChoice]: social,
   })
   const res = await fetch(`${API_URL}/users`, {
