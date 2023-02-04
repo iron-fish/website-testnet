@@ -20,20 +20,32 @@ import {
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-export async function createUser(
-  email: string,
-  graffiti: string,
-  socialChoice: string,
-  social: string,
-  country_code: string,
+type Params = {
+  email: string
+  graffiti: string
+  socialChoice: string
+  social: string
+  country: string
+  recaptcha: string
   github?: string
-): Promise<ApiUser | ApiError> {
+}
+
+export async function createUser({
+  email,
+  graffiti,
+  socialChoice,
+  social,
+  country: country_code,
+  recaptcha,
+  github,
+}: Params): Promise<ApiUser | ApiError> {
   const hub = github ? { github } : {}
   const body = JSON.stringify({
     ...hub,
     email,
     graffiti,
     country_code,
+    recaptcha,
     [socialChoice]: social,
   })
   const res = await fetch(`${API_URL}/users`, {

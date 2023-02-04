@@ -23,8 +23,8 @@ import {
   resetTextField,
 } from 'utils/forms'
 import { encode as btoa } from 'base-64'
-
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export const FIELDS = {
   email: {
@@ -111,6 +111,8 @@ export default function SignUp({
   const $graffiti = useField(FIELDS.graffiti)
   const $github = useField(FIELDS.github)
   const $country = useField(FIELDS.country)
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   const [$error, $setError] = useState<string>(UNSET)
   const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
@@ -147,8 +149,17 @@ export default function SignUp({
     }
     return invalid || untouched
   }, [$country, $email, $graffiti, $github, $social])
+
   const submit = useCallback(async () => {
-    if (!$email || !$github || !$graffiti || !$social || !$country) return
+    if (
+      !$email ||
+      !$github ||
+      !$graffiti ||
+      !$social ||
+      !$country ||
+      !executeRecaptcha
+    )
+      return
     if (testInvalid()) return
     const email = $email?.value
     const graffiti = $graffiti?.value
@@ -158,14 +169,23 @@ export default function SignUp({
     const country = $country?.value
     $setLoaded(false)
 
-    const result = await createUser(
+    let recaptcha: string
+
+    try {
+      recaptcha = await executeRecaptcha()
+    } catch (_err) {
+      recaptcha = ''
+    }
+
+    const result = await createUser({
       email,
       graffiti,
       socialChoice,
       social,
       country,
-      github
-    )
+      recaptcha,
+      github,
+    })
 
     $setLoaded(true)
 
@@ -177,7 +197,16 @@ export default function SignUp({
       scrollUp()
       $router.push(`/login?email=${encodeURIComponent(email)}`)
     }
-  }, [$router, $email, $graffiti, $github, $social, $country, testInvalid])
+  }, [
+    $email,
+    $github,
+    $graffiti,
+    $social,
+    $country,
+    executeRecaptcha,
+    testInvalid,
+    $router,
+  ])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.

@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import ResponsiveToolkit from 'components/ResponsiveToolkit'
 import { useLogin } from 'hooks/useLogin'
 import { useLocalLogin } from 'hooks/useLocalLogin'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const LOCAL_MODE =
   (process.env.NEXT_PUBLIC_LOCAL_USER || '').toLowerCase() === 'true' || false
@@ -26,12 +27,16 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ResponsiveToolkit metadata={metadata} />
-      <Page
-        loginContext={$login}
-        showNotification={showNotification}
-        {...pageProps}
-        className="font-favorit"
-      />
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY ?? ''}
+      >
+        <Page
+          loginContext={$login}
+          showNotification={showNotification}
+          {...pageProps}
+          className="font-favorit"
+        />
+      </GoogleReCaptchaProvider>
     </>
   )
 }
