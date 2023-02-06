@@ -136,8 +136,15 @@ export const callsToAction = {
     },
     {
       title: 'Hosting a node',
-      content:
-        'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
+      content: (
+        <>
+          You can earn points by hosting an Iron Fish full node. To do so, make
+          sure your telemetry is turned on and your graffiti is set. You must
+          update your node within one week after a new version in order to earn
+          points for hosting a node. You will only be rewarded points for
+          hosting one node per graffiti.
+        </>
+      ),
       points: ['12 hours of continuous uptime = 10 points'],
       status: Status.Active,
       ctaText: 'Set up instructions',

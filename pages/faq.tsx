@@ -128,6 +128,10 @@ const questions: ReadonlyArray<{
         <li>
           Then, run <code>ironfish start</code> and leave that process running.
         </li>
+        <li>
+          Finally, be sure to update your node within one week after the release
+          of each new version.
+        </li>
         <li>That’s it - you will gain points every 12 hours.</li>
       </div>
     ),
