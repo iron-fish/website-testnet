@@ -61,6 +61,12 @@ export function displayEventType(type: EventType): IconText {
         <>Hosted a node</>
       ) : type === EventType.TRANSACTION_SENT ? (
         <>Transaction Sent</>
+      ) : type === EventType.MULTI_ASSET_BURN ? (
+        <>Multi-Asset Burn</>
+      ) : type === EventType.MULTI_ASSET_TRANSFER ? (
+        <>Multi-Asset Send</>
+      ) : type === EventType.MULTI_ASSET_MINT ? (
+        <>Multi-Asset Mint</>
       ) : (
         type
       )}
@@ -101,11 +107,17 @@ export type EventRowProps = {
 }
 
 const makeLinkForEvent = (type: EventType, metadata?: ApiEventMetadata) => {
+  const EVENTS_WITH_TRANSACTIONS = [
+    EventType.TRANSACTION_SENT,
+    EventType.MULTI_ASSET_BURN,
+    EventType.MULTI_ASSET_MINT,
+    EventType.MULTI_ASSET_TRANSFER,
+  ]
   if (!metadata) return ''
   if (
     'transaction_hash' in metadata &&
     'block_hash' in metadata &&
-    type === EventType.TRANSACTION_SENT
+    EVENTS_WITH_TRANSACTIONS.includes(type)
   ) {
     return `https://explorer.ironfish.network/transaction/${metadata.transaction_hash}`
   }

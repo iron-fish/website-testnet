@@ -142,7 +142,7 @@ function Footer() {
               />
             </a>
             <a
-              href="https://discord.gg/ironfish"
+              href="https://discord.ironfish.network/"
               target="_blank"
               rel="noreferrer"
             >

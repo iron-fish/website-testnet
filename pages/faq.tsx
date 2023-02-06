@@ -210,7 +210,7 @@ const questions: ReadonlyArray<{
   {
     question: `Will there be weekly limits on earning points?`,
     id: 'weekly-limits',
-    answer: `Yes, each graffiti will be able able to earn points once a week for interacting with multiasset transactions.`,
+    answer: `Yes, each graffiti will be able to earn points once a week for interacting with multiasset transactions.`,
   },
   {
     question: `How will Phase 3 be fair for new users starting?`,
