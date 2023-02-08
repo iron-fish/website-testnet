@@ -130,7 +130,13 @@ const questions: ReadonlyArray<{
         </li>
         <li>
           Finally, be sure to update your node within one week after the release
-          of each new version.
+          of each new version. Follow the{' '}
+          <span className="underline">
+            <Link href="https://discord.com/channels/771503434028941353/816795744680935445">
+              announcements
+            </Link>
+          </span>{' '}
+          channel on our Discord server to hear about new releases.
         </li>
         <li>That’s it - you will gain points every 12 hours.</li>
       </div>
