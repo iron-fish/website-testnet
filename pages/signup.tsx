@@ -172,7 +172,7 @@ export default function SignUp({
     let recaptcha: string
 
     try {
-      recaptcha = await executeRecaptcha()
+      recaptcha = await executeRecaptcha('signup')
     } catch (_err) {
       recaptcha = ''
     }
