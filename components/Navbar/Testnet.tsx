@@ -93,6 +93,14 @@ function Testnet({ condensed = false, showNotification }: TestnetProps) {
                   textClassName={textClassName}
                   cubeClassName="text-iflightblue"
                 />
+                <TestnetGridElement
+                  href="/actions"
+                  header="TEMP KYC LINK"
+                  body="TEMP KYC BODY"
+                  className={elementClassName}
+                  textClassName={textClassName}
+                  cubeClassName="text-iflightblue"
+                />
               </div>
             </div>
           </div>
