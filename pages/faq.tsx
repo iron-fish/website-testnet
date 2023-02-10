@@ -63,10 +63,70 @@ const questions: ReadonlyArray<{
     ),
   },
   {
+    question: `Who is eligible for Incentivized Testnet tokens?`,
+    id: `who-is-eligible-for-tokens`,
+    answer: (
+      <div>
+        <div>
+          To keep things fair and secure, the token eligibility process will be
+          aiming to ensure each recipient has exactly one graffiti and is the
+          person who participated in the Testnet process.
+        </div>
+        <div style={{ marginTop: '14px' }}>
+          To accomplish this, we will enforce the following guidelines:
+        </div>
+        <li style={{ marginTop: '14px' }}>
+          You must have a valid email on your Iron Fish account. We will be
+          communicating verification steps through this email. See the next FAQ
+          on how to change your email if it is not correct.
+        </li>
+        <li style={{ marginTop: '5px' }}>
+          You must be able to log in to the Iron Fish account associated with
+          your graffiti. You can confirm this by clicking "Log In" and seeing
+          this change to your leaderboard graffiti upon clicking the login
+          email.
+        </li>
+        <li style={{ marginTop: '5px' }}>
+          You must provide government-issued identification, used as part of a
+          KYC (Know Your Customer) process.
+        </li>
+        <li style={{ marginTop: '5px' }}>
+          You must pass through our account de-duplication process.
+        </li>
+        <li style={{ marginTop: '5px' }}>
+          Additionally, we will be following US regulations for token
+          distribution.
+        </li>
+      </div>
+    ),
+  },
+  {
+    question: `I cannot login with my email. How do I change it?`,
+    id: `how-do-I-change-email`,
+    answer: (
+      <div>
+        You can do this by filling out our{' '}
+        <span className="underline">
+          <Link href="https://forms.gle/ALa79nhj9uiSQP389">
+            email change form.
+          </Link>
+        </span>{' '}
+        Please note that all email changes will be approved manually, and this
+        may take some time. You can monitor our{' '}
+        <span className="underline">
+          <Link href="https://discord.com/channels/771503434028941353/816795744680935445">
+            announcements on Discord
+          </Link>
+        </span>{' '}
+        for updates on this process.
+      </div>
+    ),
+  },
+  {
     question: `What do points do?`,
     id: `what-do-points-do`,
     answer: `We have set aside a portion of the genesis block for $IRON exclusively for incentivized testnet users.
-      Upon eligibility, your Phase 1 and Phase 2 points will be proportionally translated into tokens from this block upon the
+      Upon eligibility, your points for each Testnet Phase will be proportionally translated into tokens from this block upon the
       mainnet launch of $IRON.`,
   },
   {
@@ -125,10 +185,10 @@ const questions: ReadonlyArray<{
           First, run <code>ironfish testnet</code> to configure your node with
           proper graffiti and telemetry settings.
         </li>
-        <li>
+        <li style={{ marginTop: '5px' }}>
           Then, run <code>ironfish start</code> and leave that process running.
         </li>
-        <li>
+        <li style={{ marginTop: '5px' }}>
           Finally, be sure to update your node within one week after the release
           of each new version. Follow the{' '}
           <span className="underline">
@@ -138,14 +198,11 @@ const questions: ReadonlyArray<{
           </span>{' '}
           channel on our Discord server to hear about new releases.
         </li>
-        <li>That’s it - you will gain points every 12 hours.</li>
+        <li style={{ marginTop: '5px' }}>
+          That’s it - you will gain points every 12 hours.
+        </li>
       </div>
     ),
-  },
-  {
-    question: `Will there be a KYC process for participants in order to claim coins?`,
-    id: 'kyc-process',
-    answer: `Coins will be distributed to eligible participants. It's very likely a KYC process will be part of determining eligibility.`,
   },
   {
     question: `What are the minimum hardware requirements for running a node? `,
@@ -154,8 +211,8 @@ const questions: ReadonlyArray<{
       <div>
         Recommended minimum requirements from other members in the community
         are:
-        <li>CPU 4 core</li>
-        <li>RAM 8GB RAM</li>
+        <li style={{ marginTop: '5px' }}>CPU 4 core</li>
+        <li style={{ marginTop: '5px' }}>RAM 8GB RAM</li>
       </div>
     ),
   },
