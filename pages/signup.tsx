@@ -125,10 +125,9 @@ export default function SignUp({
     const noEmail = !$email?.touched
     const noGraffiti = !$graffiti?.touched
     const noGithub = !$github?.touched
-    const noSocial = !$social?.touched
     // for old men
     const noCountry = !$country?.touched
-    const untouched = noEmail || noGraffiti || noSocial || noCountry
+    const untouched = noEmail || noGraffiti || noCountry
     const invalid =
       !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
 
@@ -138,7 +137,6 @@ export default function SignUp({
         if (noEmail) $email?.setTouched(true)
         if (noGraffiti) $graffiti?.setTouched(true)
         if (noGithub) $github?.setTouched(true)
-        if (noSocial) $social?.setTouched(true)
         if (noCountry) $country?.setTouched(true)
       } else {
         $setError('Please correct the invalid fields below')
