@@ -82,9 +82,9 @@ const questions: ReadonlyArray<{
         </li>
         <li style={{ marginTop: '5px' }}>
           You must be able to log in to the Iron Fish account associated with
-          your graffiti. You can confirm this by clicking "Log In" and seeing
-          this change to your leaderboard graffiti upon clicking the login
-          email.
+          your graffiti. You can confirm this by clicking &quot;Log In&quot; and
+          seeing this change to your leaderboard graffiti upon clicking the
+          login email.
         </li>
         <li style={{ marginTop: '5px' }}>
           You must provide government-issued identification, used as part of a
