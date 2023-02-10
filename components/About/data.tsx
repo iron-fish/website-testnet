@@ -100,14 +100,18 @@ export const guidelines = {
 export const callsToAction = {
   columnOne: [
     {
-      title: `Mint Asset`,
+      title: `Minting Assets`,
       content: (
         <>
           Once a week, you can mint an asset, where the asset name is your
           graffiti:
         </>
       ),
-      points: ['200 points per transaction', 'Weekly limit = 1'],
+      points: [
+        '200 points per transaction',
+        'Weekly limit = 1',
+        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
+      ],
       status: Status.New,
       ctaText: 'How to mint an asset',
       href: '/faq#how-to-mint',
@@ -154,27 +158,35 @@ export const callsToAction = {
   ],
   columnTwo: [
     {
-      title: `Burn Asset`,
+      title: `Burning Assets`,
       content: (
         <>
           Once a week, you can submit a burn your asset, where the asset name is
           your graffiti:
         </>
       ),
-      points: ['200 points per transaction', 'Weekly limit = 1'],
+      points: [
+        '200 points per transaction',
+        'Weekly limit = 1',
+        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
+      ],
       status: Status.New,
       ctaText: 'How to burn an asset',
       href: '/faq#how-to-burn',
     },
     {
-      title: `Send Asset`,
+      title: `Sending Assets`,
       content: (
         <>
           Once a week, you can submit a send your asset, where the asset name is
           your graffiti:
         </>
       ),
-      points: ['200 points per transaction', 'Weekly limit = 1'],
+      points: [
+        '200 points per transaction',
+        'Weekly limit = 1',
+        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
+      ],
       status: Status.New,
       ctaText: 'How to send an asset',
       href: '/faq#how-to-send',
