@@ -7,13 +7,18 @@ import Navbar from 'components/Navbar'
 
 import Loader from 'components/Loader'
 import { useEffect, useState } from 'react'
+import { JumioIframe } from 'components/KYC/JumioIframe/JumioIframe'
 
 type AboutProps = {
   showNotification: boolean
   loginContext: LoginContext
 }
 
-function useJumioTransaction({ userId }: { userId?: number }) {
+function useJumioTransaction({ userId }: { userId?: number }): null | {
+  redirectUrl: string
+  timestamp: string
+  transactionReference: string
+} {
   const [jumioTransaction, setJumioTransaction] = useState(null)
 
   useEffect(() => {
@@ -44,9 +49,7 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
 
   const userId = metadata?.id
 
-  const _result = useJumioTransaction({ userId })
-
-  console.log(_result)
+  const jumioData = useJumioTransaction({ userId })
 
   return checkLoading() ? (
     <Loader />
@@ -71,8 +74,9 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
           'flex-col'
         )}
       >
-        <h1>HELLO WORLD</h1>
-        <div className="mb-24"></div>
+        <div className="mb-24" />
+        {jumioData?.redirectUrl && <JumioIframe src={jumioData.redirectUrl} />}
+        <div className="mb-24" />
       </main>
       <Footer />
     </div>
