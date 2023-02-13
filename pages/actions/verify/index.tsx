@@ -14,12 +14,32 @@ type AboutProps = {
   loginContext: LoginContext
 }
 
+function useWhoAmI() {
+  const [myData, setMyData] = useState(null)
+
+  useEffect(() => {
+    const doFetch = async () => {
+      const res = await fetch('/api/whoami')
+      const json = await res.json()
+      setMyData(json)
+    }
+
+    doFetch()
+  }, [])
+
+  return myData
+}
+
 function useJumioTransaction({ userId }: { userId?: number }): null | {
   redirectUrl: string
   timestamp: string
   transactionReference: string
 } {
   const [jumioTransaction, setJumioTransaction] = useState(null)
+
+  const _data = useWhoAmI()
+  // eslint-disable-next-line no-console
+  console.log(_data)
 
   useEffect(() => {
     if (!userId) {

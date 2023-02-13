@@ -4,13 +4,6 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  // eslint-disable-next-line no-console
-  console.log(request.headers)
-
-  response.status(200).json({})
-
-  return
-
   if (request.method !== 'POST') {
     return response.status(405).json({ error: 'Method not allowed' })
   }
