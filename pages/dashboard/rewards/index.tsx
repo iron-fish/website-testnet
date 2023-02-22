@@ -101,6 +101,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
                     <RewardItem
+                      phase={0}
                       points={1234}
                       iron={null}
                       chips={
@@ -113,6 +114,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                       }
                     />
                     <RewardItem
+                      phase={1}
                       points={1234}
                       iron={null}
                       chips={
@@ -125,6 +127,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                       }
                     />
                     <RewardItem
+                      phase={2}
                       points={1234}
                       iron={null}
                       chips={
@@ -137,6 +140,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                       }
                     />
                     <RewardItem
+                      phase={3}
                       points={1234}
                       iron={null}
                       chips={
