@@ -9,6 +9,7 @@ import Navbar from 'components/Navbar'
 import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
+import useRequireLogin from 'hooks/useRequireLogin'
 
 type AboutProps = {
   showNotification: boolean
@@ -16,12 +17,15 @@ type AboutProps = {
 }
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
-  const { checkLoggedIn, checkLoading, metadata } = loginContext
-  const _loaded = checkLoggedIn()
+  const { checkLoading, metadata } = loginContext
+  const isLoading = checkLoading()
+  useRequireLogin(loginContext)
 
-  return checkLoading() ? (
-    <Loader />
-  ) : (
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>Incentivized Testnet Dashboard</title>

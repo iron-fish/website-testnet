@@ -13,6 +13,7 @@ import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import { RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
 import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
+import useRequireLogin from 'hooks/useRequireLogin'
 
 type AboutProps = {
   showNotification: boolean
@@ -20,12 +21,17 @@ type AboutProps = {
 }
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
-  const { checkLoggedIn, checkLoading } = loginContext
-  const _loaded = checkLoggedIn()
+  const { checkLoading } = loginContext
 
-  return checkLoading() ? (
-    <Loader />
-  ) : (
+  const isLoading = checkLoading()
+
+  useRequireLogin(loginContext)
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>Testnet Rewards</title>
