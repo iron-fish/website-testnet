@@ -11,6 +11,8 @@ import Button from 'components/Button'
 import FishAvatar from 'components/user/FishAvatar'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import { RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
+import Link from 'next/link'
+import BackArrow from 'components/icons/BackArrow'
 
 type AboutProps = {
   showNotification: boolean
@@ -55,6 +57,14 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
             )}
           >
             <div className={clsx('flex', 'flex-col', 'w-full')}>
+              <div className={clsx('mb-8', 'mt-16')}>
+                <Link href="/dashboard">
+                  <a className={clsx('flex', 'items-center', 'gap-2')}>
+                    <BackArrow />
+                    <span>Back to Dashboard</span>
+                  </a>
+                </Link>
+              </div>
               <Box>
                 <div className={clsx('p-16')}>
                   <div className={clsx('flex', 'justify-between', 'mb-8')}>

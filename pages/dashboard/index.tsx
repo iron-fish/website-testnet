@@ -16,7 +16,7 @@ type AboutProps = {
 }
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
-  const { checkLoggedIn, checkLoading } = loginContext
+  const { checkLoggedIn, checkLoading, metadata } = loginContext
   const _loaded = checkLoggedIn()
 
   return checkLoading() ? (
@@ -58,12 +58,13 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                 Testnet Rewards
               </KYCAction>
               <KYCAction
-                title="Required Action for testnet rewards"
+                href={`/users/${metadata?.id}`}
+                title="View User Profile"
                 chip={
                   <InfoChip variant="info">Joined December 5th, 2021</InfoChip>
                 }
               >
-                Jimbo Jambo James
+                JimboJamboJames
               </KYCAction>
             </div>
           </div>
