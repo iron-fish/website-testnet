@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import { Box } from 'components/OffsetBorder/Box'
 import Link from 'next/link'
-import { ReactNode, useMemo } from 'react'
+import { ReactNode } from 'react'
 
 type KYCActionProps = {
   title: string
@@ -19,7 +19,7 @@ function Wrapper({ href, children }: { href?: string; children: ReactNode }) {
   return <div>{children}</div>
 }
 
-function KYCAction({ title, children, chip, href }: KYCActionProps) {
+export function KYCAction({ title, children, chip, href }: KYCActionProps) {
   return (
     <Wrapper href={href}>
       <div className="mb-3">
@@ -44,37 +44,3 @@ function KYCAction({ title, children, chip, href }: KYCActionProps) {
     </Wrapper>
   )
 }
-
-type ChipProps = {
-  children: ReactNode
-  variant: 'info' | 'warning'
-}
-
-function Chip({ children, variant }: ChipProps) {
-  const colors = useMemo(() => {
-    return {
-      info: ['bg-iflightbeige'],
-      warning: ['text-alertred', 'bg-alertred', 'bg-opacity-10'],
-    }[variant]
-  }, [variant])
-  return (
-    <div
-      className={clsx(
-        'text-sm',
-        'md:text-md',
-        'px-2',
-        'py-2',
-        // 'bg-iflightbeige',
-        ...colors,
-        'inline-block',
-        'rounded'
-      )}
-    >
-      {children}
-    </div>
-  )
-}
-
-KYCAction.Chip = Chip
-
-export { KYCAction }

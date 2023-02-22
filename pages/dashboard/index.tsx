@@ -7,7 +7,8 @@ import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 
 import Loader from 'components/Loader'
-import { KYCAction } from 'components/KYC/KYCAction/KYCAction'
+import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
+import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 
 type AboutProps = {
   showNotification: boolean
@@ -23,7 +24,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   ) : (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
-        <title>KYC TEMP TITLE</title>
+        <title>Incentivized Testnet Dashboard</title>
         <meta name="description" content="KYC TEMP DESCRIPTION" />
       </Head>
       <Navbar
@@ -41,27 +42,25 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
           'flex-col'
         )}
       >
-        <PageBanner title="Incentivized Testnet" text="" />
+        <PageBanner title="Incentivized Testnet Dashboard" text="" />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-32')}>
             <div className={clsx('flex', 'flex-col', 'w-full')}>
               <KYCAction
-                href="/actions/verify"
-                title="Required Action for testnet rewards"
+                href="/dashboard/rewards"
+                title="View Your"
                 chip={
-                  <KYCAction.Chip variant="warning">
-                    KYC: Incomplete
-                  </KYCAction.Chip>
+                  <InfoChip variant="warning">
+                    KYC Deadline for Open Source: March 13th
+                  </InfoChip>
                 }
               >
-                Complete KYC Form
+                Testnet Rewards
               </KYCAction>
               <KYCAction
                 title="Required Action for testnet rewards"
                 chip={
-                  <KYCAction.Chip variant="info">
-                    Joined on 10/10/2021
-                  </KYCAction.Chip>
+                  <InfoChip variant="info">Joined December 5th, 2021</InfoChip>
                 }
               >
                 Jimbo Jambo James

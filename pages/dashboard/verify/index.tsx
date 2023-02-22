@@ -7,7 +7,7 @@ import Navbar from 'components/Navbar'
 
 import Loader from 'components/Loader'
 import { useEffect, useState } from 'react'
-import { JumioIframe } from 'components/KYC/JumioIframe/JumioIframe'
+import { JumioIframe } from 'components/Airdrop/JumioIframe/JumioIframe'
 
 type AboutProps = {
   showNotification: boolean
@@ -95,7 +95,9 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <div className="mb-24" />
-        {jumioData?.redirectUrl && <JumioIframe src={jumioData.redirectUrl} />}
+        {jumioData?.redirectUrl && (
+          <JumioIframe src="https://ironfish.network/docs/whitepaper/1_introduction" />
+        )}
         <div className="mb-24" />
       </main>
       <Footer />
