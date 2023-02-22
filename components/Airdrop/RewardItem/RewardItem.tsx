@@ -3,7 +3,7 @@ import { Box } from 'components/OffsetBorder/Box'
 import { ReactNode } from 'react'
 
 type Props = {
-  points: number
+  points: string | number
   iron: number | null
   chips: ReactNode
   phase: 0 | 1 | 2 | 3

@@ -14,6 +14,7 @@ import { RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
 import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
 import useRequireLogin from 'hooks/useRequireLogin'
+import useUserPointsByPhase from 'hooks/useUserPointsByPhase'
 
 type AboutProps = {
   showNotification: boolean
@@ -21,13 +22,15 @@ type AboutProps = {
 }
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
-  const { checkLoading } = loginContext
+  const { checkLoading, metadata } = loginContext
 
   const isLoading = checkLoading()
 
   useRequireLogin(loginContext)
 
-  if (isLoading) {
+  const userPointsByPhase = useUserPointsByPhase(metadata?.id)
+
+  if (isLoading || !userPointsByPhase) {
     return <Loader />
   }
 
@@ -108,7 +111,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
                     <RewardItem
                       phase={0}
-                      points={1234}
+                      points={userPointsByPhase.openSource}
                       iron={null}
                       chips={
                         <>
@@ -121,7 +124,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                     />
                     <RewardItem
                       phase={1}
-                      points={1234}
+                      points={userPointsByPhase.phase1}
                       iron={null}
                       chips={
                         <>
@@ -134,7 +137,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                     />
                     <RewardItem
                       phase={2}
-                      points={1234}
+                      points={userPointsByPhase.phase2}
                       iron={null}
                       chips={
                         <>
@@ -147,7 +150,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                     />
                     <RewardItem
                       phase={3}
-                      points={1234}
+                      points={userPointsByPhase.phase3}
                       iron={null}
                       chips={
                         <>
