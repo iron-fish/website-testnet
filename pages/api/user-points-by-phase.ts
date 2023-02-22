@@ -67,6 +67,6 @@ export default async function handler(
     openSource: openSourcePoints,
     phase1: phase1Points.other,
     phase2: phase2Points.other,
-    phase3: phase3Points.other - phase2Points.other - phase1Points.other,
+    phase3: phase3Points.other,
   })
 }
