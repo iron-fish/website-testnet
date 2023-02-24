@@ -107,11 +107,7 @@ export const callsToAction = {
           graffiti:
         </>
       ),
-      points: [
-        '200 points per transaction',
-        'Weekly limit = 1',
-        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
-      ],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
       ctaText: 'How to mint an asset',
       href: '/faq#how-to-mint',
@@ -165,11 +161,7 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: [
-        '200 points per transaction',
-        'Weekly limit = 1',
-        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
-      ],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
       ctaText: 'How to burn an asset',
       href: '/faq#how-to-burn',
@@ -182,11 +174,7 @@ export const callsToAction = {
           your graffiti:
         </>
       ),
-      points: [
-        '200 points per transaction',
-        'Weekly limit = 1',
-        'You must have 140 points (1 week) in Hosting a node to have these points count towards tokens.',
-      ],
+      points: ['200 points per transaction', 'Weekly limit = 1'],
       status: Status.New,
       ctaText: 'How to send an asset',
       href: '/faq#how-to-send',
