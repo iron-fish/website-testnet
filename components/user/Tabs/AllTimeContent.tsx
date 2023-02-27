@@ -26,9 +26,7 @@ export default function AllTimeContent({
   const [pool4, pool3] = Phase3.pools
   const [pool4Info, pool3Info] = summarizePhase(Phase3)
   const totalHours = allTimeMetrics.node_uptime.total_hours
-  const timeUntilReward = 12 - totalHours
   const pluralHours = plural('hour')
-  const rewardUnits = pluralHours(timeUntilReward)
 
   return (
     <div className="flex gap-3 mt-4 mb-12 flex-wrap">
@@ -38,11 +36,6 @@ export default function AllTimeContent({
         top={pluralHours(totalHours)}
         metric={allTimeMetrics.metrics.node_uptime}
         bottomUnit="points"
-        subline={
-          <div className="text-xs text-iflightblue">
-            {`${timeUntilReward} ${rewardUnits} until next reward`}
-          </div>
-        }
       />
       <AllTimeMetricCard
         title="Bugs Caught"
