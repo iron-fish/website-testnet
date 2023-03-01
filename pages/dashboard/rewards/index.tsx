@@ -15,6 +15,7 @@ import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
 import useRequireLogin from 'hooks/useRequireLogin'
 import useUserPointsByPhase from 'hooks/useUserPointsByPhase'
+import { useRouter } from 'next/router'
 
 type AboutProps = {
   showNotification: boolean
@@ -23,6 +24,7 @@ type AboutProps = {
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
+  const router = useRouter()
 
   const isLoading = checkLoading()
 
@@ -75,13 +77,29 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                 </Link>
               </div>
               <Box>
-                <div className={clsx('p-16')}>
-                  <div className={clsx('flex', 'justify-between', 'mb-8')}>
+                <div className={clsx('p-5', 'md:p-16')}>
+                  <div
+                    className={clsx(
+                      'md:items-center',
+                      'flex',
+                      'justify-between',
+                      'mb-8',
+                      'items-start'
+                    )}
+                  >
                     <div className={clsx('flex', 'flex-col', 'py-3')}>
-                      <h1 className={clsx('text-5xl', 'mb-4', 'font-extended')}>
+                      <h1
+                        className={clsx(
+                          'md:text-5xl',
+                          'md:mb-4',
+                          'text-2xl',
+                          'mb-2',
+                          'font-extended'
+                        )}
+                      >
                         Testnet Rewards
                       </h1>
-                      <p className={clsx('text-2xl', 'mt-auto')}>
+                      <p className={clsx('text-xl', 'md:text-2xl', 'mt-auto')}>
                         JimboJamboJames
                       </p>
                     </div>
@@ -91,19 +109,33 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <Box>
                     <div
                       className={clsx(
-                        'p-8',
+                        'md:flex-row',
+                        'md:items-center',
+                        'md:justify-between',
+                        'md:gap-0',
+                        'md:p-8',
+                        'gap-6',
+                        'items-start',
+                        'flex-col',
                         'flex',
-                        'justify-between',
-                        'items-center'
+                        'p-6'
                       )}
                     >
-                      <InfoChip variant="pending">
-                        KYC Action Processing
-                      </InfoChip>
-                      <p className={clsx('text-sm', 'ml-5', 'mr-auto')}>
+                      <div className={clsx('order-1 md:order-none')}>
+                        <InfoChip variant="pending">KYC Processing</InfoChip>
+                      </div>
+                      <p className={clsx('text-sm', 'md:ml-5', 'mr-auto')}>
                         Airdrop address: 0000...0000...0000
                       </p>
-                      <Button className="mt-8 md:mt-0">View KYC Form</Button>
+                      <div className={clsx('order-3 md:order-none')}>
+                        <Button
+                          onClick={() => {
+                            router.push('/dashboard/verify')
+                          }}
+                        >
+                          View KYC Form
+                        </Button>
+                      </div>
                     </div>
                   </Box>
                   <div className="mb-16" />

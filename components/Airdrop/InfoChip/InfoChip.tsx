@@ -9,9 +9,10 @@ import styles from './InfoChip.module.css'
 type ChipProps = {
   children: ReactNode
   variant: 'info' | 'pending' | 'warning' | 'complete'
+  icon?: boolean
 }
 
-export function InfoChip({ children, variant }: ChipProps) {
+export function InfoChip({ children, variant, icon }: ChipProps) {
   const colors = useMemo(() => {
     return {
       info: styles.info,
@@ -36,10 +37,14 @@ export function InfoChip({ children, variant }: ChipProps) {
         colors
       )}
     >
-      {variant === 'warning' && <WarningIcon />}
-      {variant === 'pending' && <PendingIcon />}
-      {variant === 'complete' && <WarningIcon />}
-      <div>{children}</div>
+      {icon && (
+        <div className={clsx('hidden', 'md:block')}>
+          {variant === 'warning' && <WarningIcon />}
+          {variant === 'pending' && <PendingIcon />}
+          {variant === 'complete' && <WarningIcon />}
+        </div>
+      )}
+      <div className="md:text-center md:whitespace-nowrap">{children}</div>
     </div>
   )
 }

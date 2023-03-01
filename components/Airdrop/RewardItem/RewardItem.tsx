@@ -20,7 +20,17 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
   return (
     <div className="mb-3">
       <Box behind={'transaprent'}>
-        <div className={clsx('flex', 'p-8')}>
+        <div
+          className={clsx(
+            'md:p-8',
+            'md:flex-row',
+            'md:gap-0',
+            'gap-10',
+            'flex-col',
+            'flex',
+            'p-4'
+          )}
+        >
           <div className="mr-8">
             <div className={clsx('relative')}>
               <div
@@ -55,7 +65,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
               >
                 {points !== null ? points.toLocaleString('en-US') : 'n/a'}
               </h3>
-              <span className="mt-2">=</span>
+              <span className={clsx('hidden', 'md:block', 'mt-2')}>=</span>
             </div>
           </div>
           <div>
@@ -66,7 +76,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
               {iron !== null ? iron.toLocaleString('en-US') : 'TBD'}
             </h3>
           </div>
-          <div className={clsx('flex', 'flex-col', 'gap-y-2', 'ml-auto')}>
+          <div className={clsx('flex', 'flex-col', 'gap-y-2', 'md:ml-auto')}>
             {chips}
           </div>
         </div>

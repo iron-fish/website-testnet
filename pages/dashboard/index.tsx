@@ -29,7 +29,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>Incentivized Testnet Dashboard</title>
-        <meta name="description" content="KYC TEMP DESCRIPTION" />
+        <meta name="description" content="" />
       </Head>
       <Navbar
         showNotification={showNotification}

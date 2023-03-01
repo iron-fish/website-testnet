@@ -1,34 +1,6 @@
-.container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0 1rem;
-}
-
-.wrapper {
-  position: relative;
-  border: 1px solid black;
-  min-height: 738px;
-  max-width: 664px;
-  width: 100%;
-}
-
-.wrapper::before {
-  border: 1px solid black;
-  bottom: 0;
-  content: '';
-  display: block;
-  left: 0;
-  right: 0;
-  top: 0;
-  transform: translateX(10px) translateY(10px);
-  z-index: 0;
-  position: absolute;
-}
-
 .iframe {
   padding: 0.5rem 0;
-  background-color: white;
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
 }

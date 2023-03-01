@@ -8,6 +8,8 @@ import Navbar from 'components/Navbar'
 import Loader from 'components/Loader'
 import { useEffect, useState } from 'react'
 import { JumioIframe } from 'components/Airdrop/JumioIframe/JumioIframe'
+import StepSubmitAddress from 'components/Airdrop/StepSubmitAddress/StepSubmitAddress'
+import StepConfirmJumioStart from 'components/Airdrop/StepConfirmJumioStart/StepConfirmJumioStart'
 
 type AboutProps = {
   showNotification: boolean
@@ -65,11 +67,13 @@ function useJumioTransaction({ userId }: { userId?: number }): null | {
 
 export default function Verify({ showNotification, loginContext }: AboutProps) {
   const { checkLoggedIn, checkLoading, metadata } = loginContext
+  const [step, setStep] = useState(0)
+  const [_address, setAddress] = useState('')
+  const [tempUrl, setTempUrl] = useState('')
   const _loggedIn = checkLoggedIn()
+  const _userId = metadata?.id
 
-  const userId = metadata?.id
-
-  const jumioData = useJumioTransaction({ userId })
+  // const jumioData = useJumioTransaction({ userId })
 
   return checkLoading() ? (
     <Loader />
@@ -95,9 +99,23 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <div className="mb-24" />
-        {jumioData?.redirectUrl && (
-          <JumioIframe src="https://ironfish.network/docs/whitepaper/1_introduction" />
+        {step === 0 && (
+          <StepSubmitAddress
+            onNext={userAddress => {
+              setAddress(userAddress)
+              setStep(1)
+            }}
+          />
         )}
+        {step === 1 && (
+          <StepConfirmJumioStart
+            onNext={url => {
+              setTempUrl(url)
+              setStep(2)
+            }}
+          />
+        )}
+        {step === 2 && <JumioIframe src={tempUrl} />}
         <div className="mb-24" />
       </main>
       <Footer />

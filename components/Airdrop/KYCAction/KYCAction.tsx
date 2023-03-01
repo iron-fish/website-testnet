@@ -18,24 +18,34 @@ export function KYCAction({ title, children, chip, href }: KYCActionProps) {
       <a className={clsx('mb-3', 'block')}>
         <Box behind={'bg-ifpink'}>
           <div
-            className={clsx('p-12', 'flex', 'justify-between', 'items-center')}
+            className={clsx(
+              'p-6',
+              'md:p-12',
+              'flex',
+              'justify-between',
+              'items-center'
+            )}
           >
-            <div>
-              <strong className={clsx('text-lg')}>{title}</strong>
+            <div className="w-full">
+              <strong className={clsx('text-md', 'md:text-lg')}>{title}</strong>
               <h3
                 className={clsx(
                   'text-left',
-                  'text-4xl',
+                  'text-2xl',
+                  'md:text-4xl',
                   'mt-3',
                   'mb-4',
-                  'font-extended'
+                  'font-extended',
+                  'break-words'
                 )}
               >
                 {children}
               </h3>
               {chip}
             </div>
-            <ChevronRight width={40} color={'black'} />
+            <div className={clsx('hidden', 'md:block')}>
+              <ChevronRight width={40} color={'black'} />
+            </div>
           </div>
         </Box>
       </a>

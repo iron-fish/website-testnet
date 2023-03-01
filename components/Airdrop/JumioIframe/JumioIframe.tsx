@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
 import styles from './JumioIframe.module.css'
 
 type JumioIframeProps = {
@@ -37,17 +38,15 @@ export function JumioIframe({ src }: JumioIframeProps) {
   useHandleJumioEvents()
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <iframe
-          src={src}
-          className={styles.iframe}
-          width="100%"
-          height="100%"
-          allow="camera;fullscreen;accelerometer;gyroscope;magnetometer"
-          allowFullScreen
-        />
-      </div>
-    </div>
+    <JumioFlowContainer>
+      <iframe
+        src={src}
+        className={styles.iframe}
+        width="100%"
+        height="100%"
+        allow="camera;fullscreen;accelerometer;gyroscope;magnetometer"
+        allowFullScreen
+      />
+    </JumioFlowContainer>
   )
 }
