@@ -13,16 +13,58 @@ import useRequireLogin from 'hooks/useRequireLogin'
 import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
+import { useEffect } from 'react'
+import { magic } from 'utils'
 
 type AboutProps = {
   showNotification: boolean
   loginContext: LoginContext
 }
 
+function useGetKyc() {
+  useEffect(() => {
+    async function doFetch() {
+      let apiKey = ''
+
+      try {
+        apiKey = (await magic?.user.getIdToken()) ?? ''
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
+
+      // eslint-disable-next-line no-console
+      console.log({ apiKey })
+
+      const payload: {
+        method: string
+        headers: {
+          Authorization?: string
+        }
+      } = {
+        method: 'GET',
+        headers: {},
+      }
+
+      if (apiKey) {
+        payload.headers['Authorization'] = `Bearer ${apiKey}`
+      }
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, payload)
+      const data = await res.json()
+      // eslint-disable-next-line no-console
+      console.log({ data })
+    }
+    doFetch()
+  }, [])
+}
+
 export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
+
+  useGetKyc()
 
   const { loading: statusLoading, status } = useJumioStatus()
 
