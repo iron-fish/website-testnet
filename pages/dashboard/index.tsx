@@ -50,10 +50,18 @@ function useGetKyc() {
         payload.headers['Authorization'] = `Bearer ${apiKey}`
       }
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, payload)
-      const data = await res.json()
-      // eslint-disable-next-line no-console
-      console.log({ data })
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
+          payload
+        )
+        const data = await res.json()
+        // eslint-disable-next-line no-console
+        console.log({ data })
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log('fetch error', err)
+      }
     }
     doFetch()
   }, [])
