@@ -93,6 +93,14 @@ function Testnet({ condensed = false, showNotification }: TestnetProps) {
                   textClassName={textClassName}
                   cubeClassName="text-iflightblue"
                 />
+                <TestnetGridElement
+                  href="/dashboard"
+                  header="Testnet Dashboard"
+                  body="Claim your rewards"
+                  className={elementClassName}
+                  textClassName={textClassName}
+                  cubeClassName="text-iflightblue"
+                />
               </div>
             </div>
           </div>

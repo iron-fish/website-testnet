@@ -74,7 +74,10 @@ export const TextField = ({
   value,
   controlled = false,
   explanation = '',
-}: ControlledField) => {
+  className,
+}: ControlledField & {
+  className?: string
+}) => {
   const handleTrim = whitespace !== WHITESPACE.DEFAULT ? { onKeyDown } : {}
   const controller = controlled ? { value: value } : {}
   const inputProps = {
@@ -99,6 +102,7 @@ export const TextField = ({
         errorText={errorText}
         disabled={disabled}
         required={required}
+        className={className}
       >
         {isRadioed && options.length > 0 && (
           <RadioOptions
