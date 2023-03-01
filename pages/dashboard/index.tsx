@@ -10,6 +10,11 @@ import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
+import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
+import { format } from 'date-fns'
+import { getNextEligiblePhase } from 'components/Airdrop/hooks/usePhaseStatus'
+import { useMemo } from 'react'
+import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 
 type AboutProps = {
   showNotification: boolean
@@ -21,7 +26,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
 
-  if (isLoading) {
+  const { loading: statusLoading, status } = useJumioStatus()
+
+  const approvalStatusChip = useApprovalStatusChip(status.verified)
+
+  if (isLoading || statusLoading) {
     return <Loader />
   }
 
@@ -53,11 +62,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
               <KYCAction
                 href="/dashboard/rewards"
                 title="View Your"
-                chip={
-                  <InfoChip variant="warning">
-                    KYC Deadline for Open Source: March 13th
-                  </InfoChip>
-                }
+                chip={approvalStatusChip}
               >
                 Testnet Rewards
               </KYCAction>
@@ -65,7 +70,12 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                 href={`/users/${metadata?.id}`}
                 title="View User Profile"
                 chip={
-                  <InfoChip variant="info">Joined December 5th, 2021</InfoChip>
+                  metadata?.created_at && (
+                    <InfoChip variant="info">
+                      Joined{' '}
+                      {format(new Date(metadata.created_at), 'MMM d, yyyy')}
+                    </InfoChip>
+                  )
                 }
               >
                 JimboJamboJames

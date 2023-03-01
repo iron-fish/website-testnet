@@ -10,12 +10,16 @@ import { Box } from 'components/OffsetBorder'
 import Button from 'components/Button'
 import FishAvatar from 'components/user/FishAvatar'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
-import { RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
+import { PhaseKeys, RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
 import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
 import useRequireLogin from 'hooks/useRequireLogin'
 import useUserPointsByPhase from 'hooks/useUserPointsByPhase'
 import { useRouter } from 'next/router'
+import { PHASE_DATES } from 'components/Airdrop/hooks/usePhaseStatus'
+import { format, isPast } from 'date-fns'
+import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
+import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 
 type AboutProps = {
   showNotification: boolean
@@ -31,8 +35,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   useRequireLogin(loginContext)
 
   const userPointsByPhase = useUserPointsByPhase(metadata?.id)
+  const { loading: statusLoading, status } = useJumioStatus()
 
-  if (isLoading || !userPointsByPhase) {
+  const approvalStatusChip = useApprovalStatusChip(status.verified)
+
+  if (isLoading || !userPointsByPhase || statusLoading) {
     return <Loader />
   }
 
@@ -122,77 +129,55 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                       )}
                     >
                       <div className={clsx('order-1 md:order-none')}>
-                        <InfoChip variant="pending">KYC Processing</InfoChip>
+                        {approvalStatusChip}
                       </div>
                       <p className={clsx('text-sm', 'md:ml-5', 'mr-auto')}>
                         Airdrop address: 0000...0000...0000
                       </p>
                       <div className={clsx('order-3 md:order-none')}>
-                        <Button
-                          onClick={() => {
-                            router.push('/dashboard/verify')
-                          }}
-                        >
-                          View KYC Form
-                        </Button>
+                        {!status.verified && (
+                          <Button
+                            onClick={() => {
+                              router.push('/dashboard/verify')
+                            }}
+                          >
+                            Complete KYC
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </Box>
                   <div className="mb-16" />
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
-                    <RewardItem
-                      phase={0}
-                      points={userPointsByPhase.openSource}
-                      iron={null}
-                      chips={
-                        <>
-                          <InfoChip variant="warning">
-                            KYC Deadline: March 13
-                          </InfoChip>
-                          <InfoChip variant="info">Airdrop: March 16</InfoChip>
-                        </>
+                    {Object.entries(PHASE_DATES).map(
+                      ([phase, { kycDeadline, airdopDate }]) => {
+                        return (
+                          <RewardItem
+                            key={phase}
+                            phase={parseInt(phase) as PhaseKeys}
+                            points={userPointsByPhase.openSource}
+                            iron={null}
+                            chips={
+                              <>
+                                <InfoChip variant="warning">
+                                  KYC Deadline: {format(kycDeadline, 'MMM dd')}
+                                </InfoChip>
+                                {isPast(kycDeadline) ? (
+                                  <InfoChip variant="warning">
+                                    Airdrop: Forfeit
+                                  </InfoChip>
+                                ) : (
+                                  <InfoChip variant="info">
+                                    Airdrop: {format(airdopDate, 'MMM dd')}
+                                  </InfoChip>
+                                )}
+                              </>
+                            }
+                          />
+                        )
                       }
-                    />
-                    <RewardItem
-                      phase={1}
-                      points={userPointsByPhase.phase1}
-                      iron={null}
-                      chips={
-                        <>
-                          <InfoChip variant="info">
-                            KYC Deadline: March 13
-                          </InfoChip>
-                          <InfoChip variant="info">Airdrop: March 16</InfoChip>
-                        </>
-                      }
-                    />
-                    <RewardItem
-                      phase={2}
-                      points={userPointsByPhase.phase2}
-                      iron={null}
-                      chips={
-                        <>
-                          <InfoChip variant="info">
-                            KYC Deadline: March 13
-                          </InfoChip>
-                          <InfoChip variant="info">Airdrop: March 16</InfoChip>
-                        </>
-                      }
-                    />
-                    <RewardItem
-                      phase={3}
-                      points={userPointsByPhase.phase3}
-                      iron={null}
-                      chips={
-                        <>
-                          <InfoChip variant="info">
-                            KYC Deadline: March 13
-                          </InfoChip>
-                          <InfoChip variant="info">Airdrop: March 16</InfoChip>
-                        </>
-                      }
-                    />
+                    )}
                   </div>
                 </div>
               </Box>
