@@ -12,8 +12,6 @@ import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
 import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
 import { format } from 'date-fns'
-import { getNextEligiblePhase } from 'components/Airdrop/hooks/usePhaseStatus'
-import { useMemo } from 'react'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 
 type AboutProps = {
