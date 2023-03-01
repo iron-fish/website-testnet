@@ -116,35 +116,50 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <Box>
                     <div
                       className={clsx(
-                        'md:flex-row',
-                        'md:items-center',
                         'md:justify-between',
-                        'md:gap-0',
                         'md:p-8',
                         'gap-6',
-                        'items-start',
+                        'items-stretch',
                         'flex-col',
                         'flex',
                         'p-6'
                       )}
                     >
-                      <div className={clsx('order-1 md:order-none')}>
-                        {approvalStatusChip}
+                      <div className={clsx('flex', 'items-center')}>
+                        <div className={clsx('order-1 md:order-none')}>
+                          {approvalStatusChip}
+                        </div>
                       </div>
-                      <p className={clsx('text-sm', 'md:ml-5', 'mr-auto')}>
-                        Airdrop address: 0000...0000...0000
-                      </p>
-                      <div className={clsx('order-3 md:order-none')}>
-                        {!status.verified && (
-                          <Button
-                            onClick={() => {
-                              router.push('/dashboard/verify')
-                            }}
+                      {!status.verified && (
+                        <>
+                          <ul className={clsx('list-disc', 'px-4')}>
+                            <li>
+                              Please complete your KYC form to become eligible
+                              for your $IRON airdrop.
+                            </li>
+                            <li>
+                              If your KYC form is not submitted by the noted
+                              deadlines, your rewards will be lost.
+                            </li>
+                            <li>
+                              You can only attempt this form 3 times. Please do
+                              not abandon the flow if possible.
+                            </li>
+                          </ul>
+                          <div
+                            className={clsx('flex', 'items-center', 'gap-8')}
                           >
-                            Complete KYC
-                          </Button>
-                        )}
-                      </div>
+                            <Button
+                              onClick={() => {
+                                router.push('/dashboard/verify')
+                              }}
+                            >
+                              Complete KYC Form
+                            </Button>
+                            <p>Attempts: 0 / 3</p>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </Box>
                   <div className="mb-16" />
