@@ -18,7 +18,7 @@ export function useCreateKycFlow(userAddress: string) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
           method: 'POST',
           headers: {
-            'content-type': 'application/json',
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
