@@ -11,6 +11,7 @@ type PageBannerProps = {
   buttonClassName?: string
   buttonLink?: string
   children?: ReactNode
+  disableButton?: boolean
 }
 export const PageBanner: FC<PageBannerProps> = ({
   title,
