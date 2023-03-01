@@ -98,6 +98,7 @@ export default function About({ showNotification, loginContext }: AboutProps) {
             'md:px-4'
           )}
           buttonLink={!loaded ? '/signup' : ''}
+          disableButton={true}
         />
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>

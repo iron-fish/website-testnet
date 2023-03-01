@@ -217,6 +217,7 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
             'md:py-5',
             'md:px-4'
           )}
+          disableButton={true}
         />
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <div className={clsx('flex', 'flex-col', 'flex-wrap', 'md:flex-row')}>
