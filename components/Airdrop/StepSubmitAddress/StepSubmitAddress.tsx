@@ -11,7 +11,7 @@ const publicAddressField = {
   placeholder: 'Your Iron Fish public address',
   defaultValue: UNSET,
   validation: () => true,
-  defaultErrorText: `Valid email address required`,
+  defaultErrorText: `This field is required`,
   whitespace: WHITESPACE.BANNED,
 }
 

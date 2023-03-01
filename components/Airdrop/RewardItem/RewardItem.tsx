@@ -2,11 +2,13 @@ import clsx from 'clsx'
 import { Box } from 'components/OffsetBorder/Box'
 import { ReactNode } from 'react'
 
+export type PhaseKeys = 0 | 1 | 2 | 3
+
 type Props = {
   points: string | number
   iron: number | null
   chips: ReactNode
-  phase: 0 | 1 | 2 | 3
+  phase: PhaseKeys
 }
 
 const titlesByPhase = {
