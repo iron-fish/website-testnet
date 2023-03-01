@@ -107,7 +107,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                         Testnet Rewards
                       </h1>
                       <p className={clsx('text-xl', 'md:text-2xl', 'mt-auto')}>
-                        JimboJamboJames
+                        {metadata?.graffiti || '—'}
                       </p>
                     </div>
                     <FishAvatar color="pink" />

@@ -76,7 +76,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   )
                 }
               >
-                JimboJamboJames
+                {metadata?.graffiti || '—'}
               </KYCAction>
             </div>
           </div>
