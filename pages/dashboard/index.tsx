@@ -13,7 +13,7 @@ import useRequireLogin from 'hooks/useRequireLogin'
 import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { magic } from 'utils'
 
 type AboutProps = {
@@ -21,53 +21,56 @@ type AboutProps = {
   loginContext: LoginContext
 }
 
-function useGetKyc() {
+type Status =
+  | 'NOT_STARTED'
+  | 'IN_PROGRESS'
+  | 'TRY_AGAIN'
+  | 'FAILED'
+  | 'SUBMITTED'
+  | 'SUCCESS'
+
+function useGetKycStatus() {
+  const [status, setStatus] = useState<Status>('NOT_STARTED')
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     async function doFetch() {
-      let apiKey = ''
+      const apiKey = (await magic?.user.getIdToken()) ?? ''
 
       try {
-        apiKey = (await magic?.user.getIdToken()) ?? ''
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(err)
-      }
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        })
 
-      // eslint-disable-next-line no-console
-      console.log({ apiKey })
+        const contentType = res.headers.get('content-type')
 
-      const payload: {
-        method: string
-        headers: {
-          Authorization?: string
+        if (!contentType || !contentType.includes('application/json')) {
+          setStatus('NOT_STARTED')
+          return
         }
-      } = {
-        method: 'GET',
-        headers: {},
-      }
 
-      if (apiKey) {
-        payload.headers['Authorization'] = `Bearer ${apiKey}`
-      }
-
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
-          payload
-        )
-        const text = await res.text()
-        // eslint-disable-next-line no-console
-        console.log({ text })
         const data = await res.json()
+
         // eslint-disable-next-line no-console
         console.log({ data })
+        setStatus('FAILED')
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log('fetch error', err)
+      } finally {
+        setLoading(false)
       }
     }
     doFetch()
   }, [])
+
+  return {
+    status,
+    loading,
+  }
 }
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
@@ -75,7 +78,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
 
-  useGetKyc()
+  const kycStatusNew = useGetKycStatus()
+
+  // eslint-disable-next-line
+  console.log({ kycStatusNew })
 
   const { loading: statusLoading, status } = useJumioStatus()
 
