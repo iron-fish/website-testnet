@@ -100,7 +100,7 @@ export const guidelines = {
 export const callsToAction = {
   columnOne: [
     {
-      title: `Mint Asset`,
+      title: `Minting Assets`,
       content: (
         <>
           Once a week, you can mint an asset, where the asset name is your
@@ -136,8 +136,15 @@ export const callsToAction = {
     },
     {
       title: 'Hosting a node',
-      content:
-        'You can earn points by hosting an Iron Fish full node. To do so, make sure your telemetry is turned on, and your graffiti is set. You will only be rewarded points for hosting one node per graffiti.',
+      content: (
+        <>
+          You can earn points by hosting an Iron Fish full node. To do so, make
+          sure your telemetry is turned on and your graffiti is set. You must
+          update your node within one week after a new version in order to earn
+          points for hosting a node. You will only be rewarded points for
+          hosting one node per graffiti.
+        </>
+      ),
       points: ['12 hours of continuous uptime = 10 points'],
       status: Status.Active,
       ctaText: 'Set up instructions',
@@ -147,7 +154,7 @@ export const callsToAction = {
   ],
   columnTwo: [
     {
-      title: `Burn Asset`,
+      title: `Burning Assets`,
       content: (
         <>
           Once a week, you can submit a burn your asset, where the asset name is
@@ -160,7 +167,7 @@ export const callsToAction = {
       href: '/faq#how-to-burn',
     },
     {
-      title: `Send Asset`,
+      title: `Sending Assets`,
       content: (
         <>
           Once a week, you can submit a send your asset, where the asset name is
