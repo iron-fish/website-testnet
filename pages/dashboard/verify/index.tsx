@@ -7,9 +7,10 @@ import Navbar from 'components/Navbar'
 
 import Loader from 'components/Loader'
 import { useState } from 'react'
-import { JumioIframe } from 'components/Airdrop/JumioIframe/JumioIframe'
+import StepJumioIframe from 'components/Airdrop/StepJumioIframe/StepJumioIframe'
 import StepSubmitAddress from 'components/Airdrop/StepSubmitAddress/StepSubmitAddress'
 import StepConfirmJumioStart from 'components/Airdrop/StepConfirmJumioStart/StepConfirmJumioStart'
+import StepKYCComplete from 'components/Airdrop/StepKYCComplete/StepKYCComplete'
 
 type AboutProps = {
   showNotification: boolean
@@ -19,14 +20,15 @@ type AboutProps = {
 export default function Verify({ showNotification, loginContext }: AboutProps) {
   const { checkLoggedIn, checkLoading, metadata } = loginContext
   const [step, setStep] = useState(0)
-  const [_address, setAddress] = useState('')
-  const [tempUrl, setTempUrl] = useState('')
+  const [address, setAddress] = useState('')
   const _loggedIn = checkLoggedIn()
   const _userId = metadata?.id
 
-  return checkLoading() ? (
-    <Loader />
-  ) : (
+  if (checkLoading()) {
+    return <Loader />
+  }
+
+  return (
     <div className={clsx('min-h-screen', 'flex', 'flex-col', 'font-favorit')}>
       <Head>
         <title>KYC Form</title>
@@ -58,13 +60,20 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         )}
         {step === 1 && (
           <StepConfirmJumioStart
-            onNext={url => {
-              setTempUrl(url)
+            onNext={() => {
               setStep(2)
             }}
           />
         )}
-        {step === 2 && <JumioIframe src={tempUrl} />}
+        {step === 2 && (
+          <StepJumioIframe
+            userAddress={address}
+            onFinish={() => {
+              setStep(3)
+            }}
+          />
+        )}
+        {step === 3 && <StepKYCComplete />}
         <div className="mb-24" />
       </main>
       <Footer />

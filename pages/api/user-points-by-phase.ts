@@ -30,6 +30,7 @@ export type UserPointsByPhaseResponse = {
   phase1: number
   phase2: number
   phase3: number
+  total: number
 }
 
 export default async function handler(
@@ -68,5 +69,10 @@ export default async function handler(
     phase1: phase1Points.other,
     phase2: phase2Points.other,
     phase3: phase3Points.other,
+    total:
+      openSourcePoints +
+      phase1Points.other +
+      phase2Points.other +
+      phase3Points.other,
   })
 }
