@@ -55,6 +55,9 @@ function useGetKyc() {
           `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
           payload
         )
+        const text = await res.text()
+        // eslint-disable-next-line no-console
+        console.log({ text })
         const data = await res.json()
         // eslint-disable-next-line no-console
         console.log({ data })
