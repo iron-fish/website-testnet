@@ -370,7 +370,7 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
             'md:px-4'
           )}
           buttonLink={!isLoaded ? '/signup' : ''}
-          disableButto={true}
+          disableButton={true}
         />
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <h1
