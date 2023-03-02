@@ -128,7 +128,7 @@ const questions: ReadonlyArray<{
             <Link href="https://ironfish.network/blog/2023/02/28/testnet-rewards">
               rewards blog post
             </Link>
-          </span>{' '}
+          </span>
           . After completing the KYC process, you will see your proposed airdrop
           waiting for approval. Unlike users in other countries, this approval
           will likely not clear up within one month of launch.
