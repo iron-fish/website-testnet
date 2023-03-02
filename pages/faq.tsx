@@ -121,10 +121,17 @@ const questions: ReadonlyArray<{
           it you will hear from us about a US-only airdrop in the future.
         </div>
         <div style={{ marginTop: '14px' }}>
-          As a US user, on your testnet rewards dashboard you will see your
-          proposed airdrop waiting for approval. Unlike users in other
-          countries, this approval will likely not clear up within one month of
-          launch.
+          As a US user, if you wish to have your tokens held in this manner, you
+          must sign up for testnet rewards redemption within the timeframe
+          described on our{' '}
+          <span className="underline">
+            <Link href="https://ironfish.network/blog/2023/02/28/testnet-rewards">
+              rewards blog post
+            </Link>
+          </span>
+          . After completing the KYC process, you will see your proposed airdrop
+          waiting for approval. Unlike users in other countries, this approval
+          will likely not clear up within one month of launch.
         </div>
       </div>
     ),
