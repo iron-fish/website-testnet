@@ -22,7 +22,7 @@ export const PageBanner: FC<PageBannerProps> = ({
   children,
   disableButton = false,
 }) => {
-  const renderButton = (!disableButton) && buttonText && buttonLink
+  const renderButton = !disableButton && buttonText && buttonLink
   return (
     <div className={clsx('w-full', 'md:w-fit', 'md:max-w-[74rem]')}>
       <h1
