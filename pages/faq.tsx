@@ -96,7 +96,7 @@ const questions: ReadonlyArray<{
         </li>
         <li style={{ marginTop: '5px' }}>
           Additionally, we will be following US regulations for token
-          distribution.
+          distribution. See the next FAQ entry for more details.
         </li>
       </div>
     ),
