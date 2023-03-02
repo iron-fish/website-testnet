@@ -1,23 +1,17 @@
 import { useEffect, useState } from 'react'
 import { magic } from 'utils'
-
-type Status =
-  | 'NOT_STARTED'
-  | 'IN_PROGRESS'
-  | 'TRY_AGAIN'
-  | 'FAILED'
-  | 'SUBMITTED'
-  | 'SUCCESS'
+import type { KycStatus, JumioWorkflow } from '../types/JumioTypes'
 
 export function useGetKycStatus() {
-  const [status, setStatus] = useState<Status>('NOT_STARTED')
+  const [status, setStatus] = useState<'NOT_STARTED' | KycStatus>('NOT_STARTED')
   const [loading, setLoading] = useState(true)
+  const [response, setResponse] = useState<JumioWorkflow | null>(null)
 
   useEffect(() => {
     async function doFetch() {
-      const apiKey = (await magic?.user.getIdToken()) ?? ''
-
       try {
+        const apiKey = (await magic?.user.getIdToken()) ?? ''
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
           method: 'GET',
           headers: {
@@ -33,6 +27,7 @@ export function useGetKycStatus() {
         }
 
         const data = await res.json()
+        setResponse(data)
 
         // eslint-disable-next-line no-console
         console.log({ data })
@@ -50,5 +45,6 @@ export function useGetKycStatus() {
   return {
     status,
     loading,
+    response,
   }
 }
