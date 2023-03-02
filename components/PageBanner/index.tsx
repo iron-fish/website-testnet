@@ -11,6 +11,7 @@ type PageBannerProps = {
   buttonClassName?: string
   buttonLink?: string
   children?: ReactNode
+  disableButton?: boolean
 }
 export const PageBanner: FC<PageBannerProps> = ({
   title,
@@ -19,8 +20,9 @@ export const PageBanner: FC<PageBannerProps> = ({
   buttonClassName = '',
   buttonLink = '',
   children,
+  disableButton = false,
 }) => {
-  const renderButton = buttonText && buttonLink
+  const renderButton = !disableButton && buttonText && buttonLink
   return (
     <div className={clsx('w-full', 'md:w-fit', 'md:max-w-[74rem]')}>
       <h1
