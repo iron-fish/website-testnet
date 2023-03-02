@@ -37,6 +37,13 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const userPointsByPhase = useUserPointsByPhase(metadata?.id)
   const { loading: statusLoading, status } = useJumioStatus()
 
+  const phaseMappings = {
+    0: 'openSource',
+    1: 'phase1',
+    2: 'phase2',
+    3: 'phase3',
+  } as const
+
   const approvalStatusChip = useApprovalStatusChip(status.verified)
 
   if (isLoading || !userPointsByPhase || statusLoading) {
@@ -171,7 +178,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           <RewardItem
                             key={phase}
                             phase={parseInt(phase) as PhaseKeys}
-                            points={userPointsByPhase.openSource}
+                            points={
+                              userPointsByPhase[
+                                phaseMappings[parseInt(phase) as PhaseKeys]
+                              ]
+                            }
                             iron={null}
                             chips={
                               <>

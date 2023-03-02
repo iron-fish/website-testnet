@@ -43,7 +43,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
                   'whitespace-nowrap'
                 )}
               >
-                Open Source Points
+                titlesByPhase[phase]
               </div>
               <div
                 className={clsx(
