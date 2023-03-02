@@ -25,7 +25,6 @@ import {
 } from 'components/About/data'
 
 import Loader from 'components/Loader'
-import CountdownTimer from 'components/leaderboard/CountdownTimer'
 
 const Para = ({
   children,
@@ -72,10 +71,6 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           'flex-col'
         )}
       >
-        <CountdownTimer
-          end={new Date(1677369599000)}
-          event=" until end of Phase 3!"
-        />
         <PageBanner
           title={
             <>
