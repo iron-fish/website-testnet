@@ -101,6 +101,33 @@ const questions: ReadonlyArray<{
     ),
   },
   {
+    question: `How are you handling US token distribution?`,
+    id: `us-token-distribution`,
+    answer: (
+      <div>
+        <div>
+          Due to regulatory uncertainty for US crypto airdrops, we cannot send
+          tokens to our US users at this time. We absolutely appreciate all of
+          you who participated in our testnet, and apologize for this outcome.
+        </div>
+        <div style={{ marginTop: '14px' }}>
+          If the regulatory requirements or the risk associated with airdropping
+          to US citizens change, then we can revisit completing the airdrop. As
+          such, we will be allocating the proposed token airdrop amounts for our
+          US users, and holding these tokens in hopes of receiving legal
+          clearance to send. We will work on this clearance, and if we receive
+          it you will hear from us about a US-only airdrop in the future.
+        </div>
+        <div style={{ marginTop: '14px' }}>
+          As a US user, on your testnet rewards dashboard you will see your
+          proposed airdrop waiting for approval. Unlike users in other
+          countries, this approval will likely not clear up within one month of
+          launch.
+        </div>
+      </div>
+    ),
+  },
+  {
     question: `I cannot login with my email. How do I change it?`,
     id: `how-do-I-change-email`,
     answer: (
