@@ -1,7 +1,9 @@
 import clsx from 'clsx'
+import Button from 'components/Button'
 import Loader from 'components/Loader'
-import { useEffect, useRef } from 'react'
-import { useCreateKycFlow } from '../hooks/useCreateKycFlow'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo, useRef } from 'react'
+import { useGetKycWorkflowUrl } from '../hooks/useCreateKycFlow'
 import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
 import styles from './JumioIframe.module.css'
 
@@ -35,44 +37,74 @@ type JumioIframeProps = {
   onFinish: () => void
 }
 
+function Container({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className={clsx(
+        'flex',
+        'flex-col',
+        'absolute',
+        'inset-0',
+        'justify-center',
+        'p-12'
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
 export default function StepJumioIframe({
   userAddress,
   onFinish,
 }: JumioIframeProps) {
   useHandleJumioEvents(onFinish)
 
-  const createKycFlow = useCreateKycFlow(userAddress)
+  const { url, loading, error } = useGetKycWorkflowUrl(userAddress)
+  const router = useRouter()
 
-  // eslint-disable-next-line
-  console.log({ createKycFlow })
-
-  const loading = true
-  const url = ''
-
-  return (
-    <JumioFlowContainer>
-      {loading ? (
-        <div
-          className={clsx(
-            'flex',
-            'flex-col',
-            'absolute',
-            'inset-0',
-            'justify-center'
-          )}
-        >
+  const content = useMemo(() => {
+    if (loading) {
+      return (
+        <Container>
           <Loader />
-        </div>
-      ) : (
-        <iframe
-          src={url}
-          className={styles.iframe}
-          width="100%"
-          height="100%"
-          allow="camera;fullscreen;accelerometer;gyroscope;magnetometer"
-          allowFullScreen
-        />
-      )}
-    </JumioFlowContainer>
-  )
+        </Container>
+      )
+    }
+    if (!url || error) {
+      return (
+        <Container>
+          <h2
+            className={clsx('text-2xl', 'font-extended', 'mb-4', 'text-center')}
+          >
+            Something went wrong
+          </h2>
+          <p className={clsx('text-lg', 'text-center', 'mb-8')}>
+            An error occurred. Please return to the dashboard and try again.
+          </p>
+          <div className={clsx('flex', 'justify-center')}>
+            <Button
+              onClick={() => {
+                router.push('/dashboard')
+              }}
+            >
+              Back to Dashboard
+            </Button>
+          </div>
+        </Container>
+      )
+    }
+    return (
+      <iframe
+        src={url}
+        className={styles.iframe}
+        width="100%"
+        height="100%"
+        allow="camera;fullscreen;accelerometer;gyroscope;magnetometer"
+        allowFullScreen
+      />
+    )
+  }, [error, loading, url, router])
+
+  return <JumioFlowContainer>{content}</JumioFlowContainer>
 }

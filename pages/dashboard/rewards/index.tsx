@@ -42,7 +42,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     1: 'phase1',
     2: 'phase2',
     3: 'phase3',
-  }
+  } as const
 
   const approvalStatusChip = useApprovalStatusChip(status.verified)
 
@@ -179,7 +179,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                             key={phase}
                             phase={parseInt(phase) as PhaseKeys}
                             points={
-                              userPointsByPhase[phaseMappings[parseInt(phase)]]
+                              userPointsByPhase[
+                                phaseMappings[parseInt(phase) as PhaseKeys]
+                              ]
                             }
                             iron={null}
                             chips={
