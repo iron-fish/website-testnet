@@ -31,7 +31,7 @@ export function useGetKycStatus() {
 
         // eslint-disable-next-line no-console
         console.log({ data })
-        setStatus('FAILED')
+        setStatus(data.kyc_status)
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log('fetch error', err)
