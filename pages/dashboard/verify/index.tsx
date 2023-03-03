@@ -11,6 +11,7 @@ import StepJumioIframe from 'components/Airdrop/StepJumioIframe/StepJumioIframe'
 import StepSubmitAddress from 'components/Airdrop/StepSubmitAddress/StepSubmitAddress'
 import StepConfirmJumioStart from 'components/Airdrop/StepConfirmJumioStart/StepConfirmJumioStart'
 import StepKYCComplete from 'components/Airdrop/StepKYCComplete/StepKYCComplete'
+import useRequireLogin from 'hooks/useRequireLogin'
 
 type AboutProps = {
   showNotification: boolean
@@ -18,11 +19,10 @@ type AboutProps = {
 }
 
 export default function Verify({ showNotification, loginContext }: AboutProps) {
-  const { checkLoggedIn, checkLoading, metadata } = loginContext
+  const { checkLoading } = loginContext
   const [step, setStep] = useState(0)
   const [address, setAddress] = useState('')
-  const _loggedIn = checkLoggedIn()
-  const _userId = metadata?.id
+  useRequireLogin(loginContext)
 
   if (checkLoading()) {
     return <Loader />

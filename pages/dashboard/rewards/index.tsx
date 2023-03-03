@@ -18,8 +18,8 @@ import useUserPointsByPhase from 'hooks/useUserPointsByPhase'
 import { useRouter } from 'next/router'
 import { PHASE_DATES } from 'components/Airdrop/hooks/usePhaseStatus'
 import { format, isPast } from 'date-fns'
-import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
+import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 
 type AboutProps = {
   showNotification: boolean
@@ -35,7 +35,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   useRequireLogin(loginContext)
 
   const userPointsByPhase = useUserPointsByPhase(metadata?.id)
-  const { loading: statusLoading, status } = useJumioStatus()
+
+  const kycStatus = useGetKycStatus()
+  const kycAttempts = kycStatus.response?.kyc_attempts
+  const needsKyc = ['NOT_STARTED', 'TRY_AGAIN'].includes(kycStatus.status)
 
   const phaseMappings = {
     0: 'openSource',
@@ -44,9 +47,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     3: 'phase3',
   } as const
 
-  const approvalStatusChip = useApprovalStatusChip(status.verified)
+  const approvalStatusChip = useApprovalStatusChip(kycStatus.status)
 
-  if (isLoading || !userPointsByPhase || statusLoading) {
+  if (isLoading || !userPointsByPhase || kycStatus.loading) {
     return <Loader />
   }
 
@@ -137,7 +140,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           {approvalStatusChip}
                         </div>
                       </div>
-                      {!status.verified && (
+                      {needsKyc && (
                         <>
                           <ul className={clsx('list-disc', 'px-4')}>
                             <li>
@@ -163,7 +166,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                             >
                               Complete KYC Form
                             </Button>
-                            <p>Attempts: 0 / 3</p>
+                            {typeof kycAttempts === 'number' && (
+                              <p>Attempts: {kycAttempts} / 3</p>
+                            )}
                           </div>
                         </>
                       )}

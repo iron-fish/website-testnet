@@ -10,7 +10,6 @@ import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
-import { useJumioStatus } from 'components/Airdrop/hooks/useJumioStatus'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
@@ -25,16 +24,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
 
-  const kycStatusNew = useGetKycStatus()
+  const kycStatus = useGetKycStatus()
 
-  // eslint-disable-next-line
-  console.log({ kycStatusNew })
+  const approvalStatusChip = useApprovalStatusChip(kycStatus.status)
 
-  const { loading: statusLoading, status } = useJumioStatus()
-
-  const approvalStatusChip = useApprovalStatusChip(status.verified)
-
-  if (isLoading || statusLoading) {
+  if (isLoading || kycStatus.loading) {
     return <Loader />
   }
 
