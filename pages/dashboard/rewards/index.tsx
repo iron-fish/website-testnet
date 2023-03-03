@@ -14,7 +14,7 @@ import { PhaseKeys, RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
 import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
 import useRequireLogin from 'hooks/useRequireLogin'
-import useUserPointsByPhase from 'hooks/useUserPointsByPhase'
+import useUserPointsByPhase from 'components/Airdrop/hooks/useUserPointsByPhase'
 import { useRouter } from 'next/router'
 import { PHASE_DATES } from 'components/Airdrop/hooks/usePhaseStatus'
 import { format, isPast } from 'date-fns'
@@ -38,7 +38,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
 
   const kycStatus = useGetKycStatus()
   const kycAttempts = kycStatus.response?.kyc_attempts
-  const needsKyc = ['NOT_STARTED', 'TRY_AGAIN'].includes(kycStatus.status)
+  const canAttemptKyc = kycStatus.response?.can_attempt
+
+  const needsKyc =
+    canAttemptKyc && ['NOT_STARTED', 'TRY_AGAIN'].includes(kycStatus.status)
 
   const phaseMappings = {
     0: 'openSource',
@@ -47,7 +50,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     3: 'phase3',
   } as const
 
-  const approvalStatusChip = useApprovalStatusChip(kycStatus.status)
+  const approvalStatusChip = useApprovalStatusChip(
+    canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE'
+  )
 
   if (isLoading || !userPointsByPhase || kycStatus.loading) {
     return <Loader />

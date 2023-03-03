@@ -4,8 +4,14 @@ import { InfoChip } from '../InfoChip/InfoChip'
 import { getNextEligiblePhase } from './usePhaseStatus'
 import type { KycStatus } from '../types/JumioTypes'
 
-export function useApprovalStatusChip(status: KycStatus | 'NOT_STARTED') {
+export function useApprovalStatusChip(
+  status: KycStatus | 'NOT_STARTED' | 'AIRDROP_INELIGIBLE'
+) {
   return useMemo(() => {
+    if (status === 'AIRDROP_INELIGIBLE') {
+      return <InfoChip variant="warning">Ineligible for Airdrop</InfoChip>
+    }
+
     const nextEligiblePhase = getNextEligiblePhase()
 
     if (!nextEligiblePhase) {
