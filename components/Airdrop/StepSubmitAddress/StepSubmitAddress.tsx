@@ -33,7 +33,7 @@ type Props = {
 export default function StepSubmitAddress({ onNext }: Props) {
   const pubAddress = useField(publicAddressField)
   const confirmPubAddress = useField(confirmAddressField)
-  const [buttonDisabled, setButtonDisabled] = useState(true)
+  const [hasUserApproval, setHasUserApproval] = useState(false)
 
   return (
     <JumioFlowContainer className="flex">
@@ -58,13 +58,7 @@ export default function StepSubmitAddress({ onNext }: Props) {
             <TextField {...confirmPubAddress} className="max-w-full" />
           )}
         </div>
-        <div
-          style={{
-            marginTop: '1em',
-            padding: '.75em',
-            backgroundColor: '#eeeeee',
-          }}
-        >
+        <div className={clsx('p-4', 'bg-gray-100', 'mt-4', 'rounded-md')}>
           <div>
             IMPORTANT: you must have access to this address to receive your
             airdrop. We will not be able to recover lost tokens sent to
@@ -79,20 +73,22 @@ export default function StepSubmitAddress({ onNext }: Props) {
             </a>{' '}
             to ensure you always have access.
           </div>
-          <div style={{ marginTop: '1em' }}>
+          <label className={clsx('block', 'mt-4')}>
             <input
               type="checkbox"
-              onClick={() => {
-                setButtonDisabled(!buttonDisabled)
+              checked={hasUserApproval}
+              onChange={e => {
+                setHasUserApproval(e.target.checked)
               }}
             ></input>{' '}
             I understand, and have exported my account.
-          </div>
+          </label>
         </div>
 
         <div className="mb-auto" />
         <div className={clsx('flex', 'justify-end')}>
           <Button
+            className={!hasUserApproval ? 'opacity-50' : ''}
             onClick={() => {
               if (!pubAddress?.valid) {
                 pubAddress?.setValid(false)
@@ -102,7 +98,7 @@ export default function StepSubmitAddress({ onNext }: Props) {
                 onNext(pubAddress?.value || '')
               }
             }}
-            disabled={buttonDisabled}
+            disabled={!hasUserApproval}
           >
             Next
           </Button>
