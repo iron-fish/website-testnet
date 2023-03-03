@@ -4,7 +4,6 @@ import { JumioWorkflow } from '../types/JumioTypes'
 import { useGetKycStatus } from './useGetKycStatus'
 
 export function useCreateKycFlow(userAddress: string, skip = false) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [response, setResponse] = useState<
     JumioWorkflow | { error: unknown } | null
   >(null)
@@ -39,9 +38,6 @@ export function useCreateKycFlow(userAddress: string, skip = false) {
         if (res.status !== 200) {
           throw data
         }
-
-        // eslint-disable-next-line no-console
-        console.log({ data })
 
         setResponse(data)
         setPostStatus('SUCCESS')

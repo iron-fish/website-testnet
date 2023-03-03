@@ -17,8 +17,6 @@ function useHandleJumioEvents(onFinish: () => void) {
       }
 
       const data = JSON.parse(message.data)
-      // eslint-disable-next-line no-console
-      console.log(data)
 
       if (['success', 'error'].includes(data.payload.value)) {
         finishHandlerRef.current()

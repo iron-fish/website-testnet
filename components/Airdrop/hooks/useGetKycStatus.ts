@@ -29,8 +29,6 @@ export function useGetKycStatus() {
         const data = await res.json()
         setResponse(data)
 
-        // eslint-disable-next-line no-console
-        console.log({ data })
         setStatus(data.kyc_status)
       } catch (err) {
         // eslint-disable-next-line no-console
