@@ -4,19 +4,20 @@ import Button from 'components/Button'
 import TextField from 'components/Form/TextField'
 import { UNSET } from 'utils/forms'
 import { useField, WHITESPACE } from 'hooks/useForm'
+import { useState } from 'react'
 
 const publicAddressField = {
   id: 'address',
   label: 'Public Address',
   placeholder: 'Your Iron Fish public address',
   defaultValue: UNSET,
-  validation: () => true,
-  defaultErrorText: `This field is required`,
+  validation: (address: string) => address.length == 64,
+  defaultErrorText: `A 64-character string is required for public address`,
   whitespace: WHITESPACE.BANNED,
 }
 
 const confirmAddressField = {
-  id: 'address',
+  id: 'confirmAddress',
   label: 'Confirm Public Address',
   placeholder: '',
   defaultValue: UNSET,
@@ -32,6 +33,7 @@ type Props = {
 export default function StepSubmitAddress({ onNext }: Props) {
   const pubAddress = useField(publicAddressField)
   const confirmPubAddress = useField(confirmAddressField)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
   return (
     <JumioFlowContainer className="flex">
@@ -40,7 +42,11 @@ export default function StepSubmitAddress({ onNext }: Props) {
         <p className="mb-2">
           Please provide the{' '}
           <strong className="underline">public wallet address</strong> of the
-          account where you&apos;d like your $IDON airdropped.
+          account where you&apos;d like your $IRON airdropped. You can retrieve
+          this using
+        </p>
+        <p className="mb-2">
+          <code>ironfish wallet:address</code>
         </p>
         <p>
           Once you begin the KYC process, you will not be able to edit your
@@ -52,11 +58,43 @@ export default function StepSubmitAddress({ onNext }: Props) {
             <TextField {...confirmPubAddress} className="max-w-full" />
           )}
         </div>
+        <div
+          style={{
+            marginTop: '1em',
+            padding: '.75em',
+            backgroundColor: '#eeeeee',
+          }}
+        >
+          <div>
+            IMPORTANT: you must have access to this address to receive your
+            airdrop. We will not be able to recover lost tokens sent to
+            inaccessible accounts. We strongly suggest{' '}
+            <a
+              className="underline"
+              target="_blank"
+              href="https://ironfish.network/docs/onboarding/iron-fish-wallet-commands#export-an-account"
+              rel="noreferrer"
+            >
+              exporting your wallet information
+            </a>{' '}
+            to ensure you always have access.
+          </div>
+          <div style={{ marginTop: '1em' }}>
+            <input
+              type="checkbox"
+              onClick={() => {
+                setButtonDisabled(!buttonDisabled)
+              }}
+            ></input>{' '}
+            I understand, and have exported my account.
+          </div>
+        </div>
+
         <div className="mb-auto" />
         <div className={clsx('flex', 'justify-end')}>
           <Button
             onClick={() => {
-              if (!pubAddress?.value) {
+              if (!pubAddress?.valid) {
                 pubAddress?.setValid(false)
               } else if (pubAddress?.value !== confirmPubAddress?.value) {
                 confirmPubAddress?.setValid(false)
@@ -64,6 +102,7 @@ export default function StepSubmitAddress({ onNext }: Props) {
                 onNext(pubAddress?.value || '')
               }
             }}
+            disabled={buttonDisabled}
           >
             Next
           </Button>
