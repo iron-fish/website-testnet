@@ -27,69 +27,99 @@ const confirmAddressField = {
 }
 
 type Props = {
+  storedAddress?: string
   onNext: (address: string) => void
 }
 
-export default function StepSubmitAddress({ onNext }: Props) {
+export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
   const pubAddress = useField(publicAddressField)
   const confirmPubAddress = useField(confirmAddressField)
   const [hasUserApproval, setHasUserApproval] = useState(false)
+  const isNextDisabled = !storedAddress && !hasUserApproval
 
   return (
     <JumioFlowContainer className="flex">
-      <div className={clsx('p-6', 'md:p-12', 'flex', 'flex-col')}>
+      <div className={clsx('p-6', 'md:p-12', 'flex', 'flex-col', 'w-full')}>
         <h1 className={clsx('font-extended', 'text-4xl', 'mb-8')}>KYC Form</h1>
-        <p className="mb-2">
-          Please provide the{' '}
-          <strong className="underline">public wallet address</strong> of the
-          account where you&apos;d like your $IRON airdropped. You can retrieve
-          this using
-        </p>
-        <p className="mb-2">
-          <code>ironfish wallet:address</code>
-        </p>
-        <p>
-          Once you begin the KYC process, you will not be able to edit your
-          address, so please ensure you are submitting the correct address.
-        </p>
-        <div className={clsx('flex', 'flex-col')}>
-          {pubAddress && <TextField className="max-w-full" {...pubAddress} />}
-          {confirmPubAddress && (
-            <TextField {...confirmPubAddress} className="max-w-full" />
-          )}
-        </div>
-        <div className={clsx('p-4', 'bg-gray-100', 'mt-4', 'rounded-md')}>
-          <div>
-            IMPORTANT: you must have access to this address to receive your
-            airdrop. We will not be able to recover lost tokens sent to
-            inaccessible accounts. We strongly suggest{' '}
-            <a
-              className="underline"
-              target="_blank"
-              href="https://ironfish.network/docs/onboarding/iron-fish-wallet-commands#export-an-account"
-              rel="noreferrer"
+        {!storedAddress ? (
+          <>
+            <p className="mb-2">
+              Please provide the{' '}
+              <strong className="underline">public wallet address</strong> of
+              the account where you&apos;d like your $IRON airdropped. You can
+              retrieve this using
+            </p>
+            <p className="mb-2">
+              <code>ironfish wallet:address</code>
+            </p>
+            <p>
+              Once you begin the KYC process, you will not be able to edit your
+              address, so please ensure you are submitting the correct address.
+            </p>
+            <div className={clsx('flex', 'flex-col')}>
+              {pubAddress && (
+                <TextField className="max-w-full" {...pubAddress} />
+              )}
+              {confirmPubAddress && (
+                <TextField {...confirmPubAddress} className="max-w-full" />
+              )}
+            </div>
+            <div className={clsx('p-4', 'bg-gray-100', 'mt-4', 'rounded-md')}>
+              <div>
+                IMPORTANT: you must have access to this address to receive your
+                airdrop. We will not be able to recover lost tokens sent to
+                inaccessible accounts. We strongly suggest{' '}
+                <a
+                  className="underline"
+                  target="_blank"
+                  href="https://ironfish.network/docs/onboarding/iron-fish-wallet-commands#export-an-account"
+                  rel="noreferrer"
+                >
+                  exporting your wallet information
+                </a>{' '}
+                to ensure you always have access.
+              </div>
+              <label className={clsx('block', 'mt-4')}>
+                <input
+                  type="checkbox"
+                  checked={hasUserApproval}
+                  onChange={e => {
+                    setHasUserApproval(e.target.checked)
+                  }}
+                ></input>{' '}
+                <span className="inline-block ml-2">
+                  I understand, and have exported my account.
+                </span>
+              </label>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>Previously submitted wallet address:</p>
+            <div
+              className={clsx(
+                'p-4',
+                'bg-gray-100',
+                'mt-4',
+                'rounded-md',
+                'truncate'
+              )}
             >
-              exporting your wallet information
-            </a>{' '}
-            to ensure you always have access.
-          </div>
-          <label className={clsx('block', 'mt-4')}>
-            <input
-              type="checkbox"
-              checked={hasUserApproval}
-              onChange={e => {
-                setHasUserApproval(e.target.checked)
-              }}
-            ></input>{' '}
-            I understand, and have exported my account.
-          </label>
-        </div>
+              <code>{storedAddress}</code>
+            </div>
+          </>
+        )}
 
         <div className="mb-auto" />
         <div className={clsx('flex', 'justify-end')}>
           <Button
-            className={!hasUserApproval ? 'opacity-50' : ''}
+            className={isNextDisabled ? 'opacity-50' : ''}
             onClick={() => {
+              if (storedAddress) {
+                onNext(storedAddress)
+                return
+              }
+
               if (!pubAddress?.valid) {
                 pubAddress?.setValid(false)
               } else if (pubAddress?.value !== confirmPubAddress?.value) {
@@ -98,7 +128,7 @@ export default function StepSubmitAddress({ onNext }: Props) {
                 onNext(pubAddress?.value || '')
               }
             }}
-            disabled={!hasUserApproval}
+            disabled={isNextDisabled}
           >
             Next
           </Button>

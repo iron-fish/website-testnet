@@ -12,6 +12,7 @@ import StepSubmitAddress from 'components/Airdrop/StepSubmitAddress/StepSubmitAd
 import StepConfirmJumioStart from 'components/Airdrop/StepConfirmJumioStart/StepConfirmJumioStart'
 import StepKYCComplete from 'components/Airdrop/StepKYCComplete/StepKYCComplete'
 import useRequireLogin from 'hooks/useRequireLogin'
+import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 
 type AboutProps = {
   showNotification: boolean
@@ -24,7 +25,9 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
   const [address, setAddress] = useState('')
   useRequireLogin(loginContext)
 
-  if (checkLoading()) {
+  const kycStatus = useGetKycStatus()
+
+  if (checkLoading() || kycStatus.loading) {
     return <Loader />
   }
 
@@ -52,6 +55,7 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         <div className="mb-24" />
         {step === 0 && (
           <StepSubmitAddress
+            storedAddress={kycStatus.response?.public_address}
             onNext={userAddress => {
               setAddress(userAddress)
               setStep(1)
