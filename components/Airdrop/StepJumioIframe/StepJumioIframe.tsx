@@ -2,17 +2,14 @@ import clsx from 'clsx'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
 import { useRouter } from 'next/router'
-import {
-  useEffect,
-  useMemo,
-  // useRef
-} from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGetKycWorkflowUrl } from '../hooks/useCreateKycFlow'
 import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
 import styles from './JumioIframe.module.css'
 
-function useHandleJumioEvents(onFinish: () => void) {
-  // const finishHandlerRef = useRef(onFinish)
+function useHandleJumioEvents(onSuccess: () => void, onError: () => void) {
+  const successHandlerRef = useRef(onSuccess)
+  const errorHandlerRef = useRef(onError)
 
   useEffect(() => {
     function handleMessage(message: MessageEvent) {
@@ -22,11 +19,13 @@ function useHandleJumioEvents(onFinish: () => void) {
 
       const data = JSON.parse(message.data)
 
-      // eslint-disable-next-line no-console
-      console.log('event data', data)
-
-      if (['success', 'error'].includes(data.payload.value)) {
-        // finishHandlerRef.current()
+      if (data.payload.value === 'success') {
+        successHandlerRef.current()
+      }
+      if (data.payload.value === 'error') {
+        // eslint-disable-next-line no-console
+        console.error(data)
+        errorHandlerRef.current()
       }
     }
     window.addEventListener('message', handleMessage)
@@ -34,12 +33,12 @@ function useHandleJumioEvents(onFinish: () => void) {
     return () => {
       window.removeEventListener('message', handleMessage)
     }
-  }, [onFinish])
+  }, [onSuccess, onError])
 }
 
 type JumioIframeProps = {
   userAddress: string
-  onFinish: () => void
+  onSuccess: () => void
 }
 
 function Container({ children }: { children: React.ReactNode }) {
@@ -61,12 +60,15 @@ function Container({ children }: { children: React.ReactNode }) {
 
 export default function StepJumioIframe({
   userAddress,
-  onFinish,
+  onSuccess,
 }: JumioIframeProps) {
-  useHandleJumioEvents(onFinish)
-
   const { url, loading, error } = useGetKycWorkflowUrl(userAddress)
   const router = useRouter()
+
+  const [hasJumioError, setHasJumioError] = useState(false)
+  useHandleJumioEvents(onSuccess, () => {
+    setHasJumioError(true)
+  })
 
   const content = useMemo(() => {
     if (loading) {
@@ -76,7 +78,7 @@ export default function StepJumioIframe({
         </Container>
       )
     }
-    if (!url || error) {
+    if (!url || error || hasJumioError) {
       return (
         <Container>
           <h2
@@ -109,7 +111,7 @@ export default function StepJumioIframe({
         allowFullScreen
       />
     )
-  }, [error, loading, url, router])
+  }, [error, loading, url, router, hasJumioError])
 
   return <JumioFlowContainer>{content}</JumioFlowContainer>
 }

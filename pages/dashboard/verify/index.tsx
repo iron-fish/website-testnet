@@ -72,7 +72,7 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         {step === 2 && (
           <StepJumioIframe
             userAddress={address}
-            onFinish={() => {
+            onSuccess={() => {
               setStep(3)
             }}
           />
