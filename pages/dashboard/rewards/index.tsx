@@ -184,7 +184,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
                     {Object.entries(PHASE_DATES).map(
-                      ([phase, { kycDeadline, airdopDate }]) => {
+                      ([phase, { kycDeadline, airdropDate }]) => {
                         return (
                           <RewardItem
                             key={phase}
@@ -206,7 +206,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                                   </InfoChip>
                                 ) : (
                                   <InfoChip variant="info">
-                                    Airdrop: {format(airdopDate, 'MMM dd')}
+                                    Airdrop: {format(airdropDate, 'MMM dd')}
                                   </InfoChip>
                                 )}
                               </>
