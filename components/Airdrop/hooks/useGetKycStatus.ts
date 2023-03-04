@@ -19,14 +19,13 @@ export function useGetKycStatus() {
           },
         })
 
-        const contentType = res.headers.get('content-type')
+        const data = await res.json()
 
-        if (!contentType || !contentType.includes('application/json')) {
+        if (data?.kyc_status === undefined) {
           setStatus('NOT_STARTED')
           return
         }
 
-        const data = await res.json()
         setResponse(data)
 
         setStatus(data.kyc_status)
