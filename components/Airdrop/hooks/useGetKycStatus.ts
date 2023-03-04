@@ -21,14 +21,8 @@ export function useGetKycStatus() {
 
         const data = await res.json()
 
-        if (data?.kyc_status === undefined) {
-          setStatus('NOT_STARTED')
-          return
-        }
-
         setResponse(data)
-
-        setStatus(data.kyc_status)
+        setStatus(data.kyc_status ?? 'NOT_STARTED')
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log('fetch error', err)
