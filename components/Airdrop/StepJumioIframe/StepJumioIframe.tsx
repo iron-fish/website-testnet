@@ -2,13 +2,17 @@ import clsx from 'clsx'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useRef } from 'react'
+import {
+  useEffect,
+  useMemo,
+  // useRef
+} from 'react'
 import { useGetKycWorkflowUrl } from '../hooks/useCreateKycFlow'
 import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
 import styles from './JumioIframe.module.css'
 
 function useHandleJumioEvents(onFinish: () => void) {
-  const finishHandlerRef = useRef(onFinish)
+  // const finishHandlerRef = useRef(onFinish)
 
   useEffect(() => {
     function handleMessage(message: MessageEvent) {
@@ -18,8 +22,11 @@ function useHandleJumioEvents(onFinish: () => void) {
 
       const data = JSON.parse(message.data)
 
+      // eslint-disable-next-line no-console
+      console.log('event data', data)
+
       if (['success', 'error'].includes(data.payload.value)) {
-        finishHandlerRef.current()
+        // finishHandlerRef.current()
       }
     }
     window.addEventListener('message', handleMessage)
