@@ -11,6 +11,7 @@ export type JumioWorkflow = {
   jumio_web_href: string
   jumio_workflow_execution_id: string
   kyc_attempts: number
+  kyc_max_attempts: number
   kyc_status: KycStatus
   public_address: string
   redemption_id: number

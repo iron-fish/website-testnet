@@ -38,6 +38,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
 
   const kycStatus = useGetKycStatus()
   const kycAttempts = kycStatus.response?.kyc_attempts
+  const kycMaxAttempts = kycStatus.response?.kyc_max_attempts
   const canAttemptKyc = kycStatus.response?.can_attempt
 
   const needsKyc =
@@ -158,8 +159,8 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                               deadlines, your rewards will be lost.
                             </li>
                             <li>
-                              You can only attempt this form 3 times. Please do
-                              not abandon the flow if possible.
+                              You can only attempt this form {kycMaxAttempts}{' '}
+                              times. Please do not abandon the flow if possible.
                             </li>
                           </ul>
                           <div
@@ -173,7 +174,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                               Complete KYC Form
                             </Button>
                             {typeof kycAttempts === 'number' && (
-                              <p>Attempts: {kycAttempts} / 3</p>
+                              <p>
+                                Attempts: {kycAttempts} / {kycMaxAttempts}
+                              </p>
                             )}
                           </div>
                         </>
