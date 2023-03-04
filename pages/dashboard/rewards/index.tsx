@@ -41,7 +41,8 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const canAttemptKyc = kycStatus.response?.can_attempt
 
   const needsKyc =
-    canAttemptKyc && ['NOT_STARTED', 'TRY_AGAIN'].includes(kycStatus.status)
+    canAttemptKyc &&
+    ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(kycStatus.status)
 
   const phaseMappings = {
     0: 'openSource',
