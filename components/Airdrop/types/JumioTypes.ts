@@ -1,5 +1,6 @@
 export type KycStatus =
   | 'IN_PROGRESS'
+  | 'WAITING_FOR_CALLBACK'
   | 'TRY_AGAIN'
   | 'FAILED'
   | 'SUBMITTED'

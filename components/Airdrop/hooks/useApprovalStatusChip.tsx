@@ -22,7 +22,7 @@ export function useApprovalStatusChip(
       return <InfoChip variant="complete">KYC Approved</InfoChip>
     }
 
-    if (status === 'SUBMITTED') {
+    if (status === 'SUBMITTED' || status === 'WAITING_FOR_CALLBACK') {
       return <InfoChip variant="pending">KYC Processing</InfoChip>
     }
 

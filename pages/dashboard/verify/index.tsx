@@ -2,6 +2,7 @@ import Head from 'next/head'
 import clsx from 'clsx'
 
 import { LoginContext } from 'hooks/useLogin'
+import { magic } from 'utils'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 
@@ -17,6 +18,23 @@ import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 type AboutProps = {
   showNotification: boolean
   loginContext: LoginContext
+}
+
+async function setKycStatusProcessing() {
+  try {
+    const apiKey = (await magic?.user.getIdToken()) ?? ''
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc/complete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+    })
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('Error setting processing status:', err)
+  }
 }
 
 export default function Verify({ showNotification, loginContext }: AboutProps) {
@@ -73,6 +91,7 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
           <StepJumioIframe
             userAddress={address}
             onSuccess={() => {
+              setKycStatusProcessing()
               setStep(3)
             }}
           />
