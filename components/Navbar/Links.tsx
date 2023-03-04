@@ -38,6 +38,7 @@ export function NavbarLinks({
   const itemPadding = [`px-2`, `lg:px-3.5`, `3xl:px-5`]
   const cc = clsx([className, ...itemPadding])
   const buttonStyles = { className: cc, selectedClassName }
+
   return (
     <>
       <Link href="https://ironfish.network/docs/onboarding/iron-fish-tutorial">
@@ -70,7 +71,11 @@ export function NavbarLinks({
         condensed={condensed}
       >
         {testnetVisible && (
-          <Testnet showNotification={showNotification} condensed={condensed} />
+          <Testnet
+            showNotification={showNotification}
+            condensed={condensed}
+            showRewardsDashboard={loginContext.metadata?.enable_kyc}
+          />
         )}
       </SubnavButton>
       <LoginButton loginContext={loginContext} />
