@@ -35,7 +35,7 @@ export function useCreateKycFlow(userAddress: string, skip = false) {
 
         const data = await res.json()
 
-        if (res.status !== 200) {
+        if (res.status >= 400) {
           throw data
         }
 
