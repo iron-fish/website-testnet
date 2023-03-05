@@ -72,5 +72,5 @@ export function useApprovalStatusChip({
         KYC Deadline for {nextEligiblePhase.label}: {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [status])
+  }, [attempts, maxAttempts, status])
 }
