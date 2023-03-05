@@ -89,6 +89,7 @@ export default function Verify({ showNotification, loginContext }: AboutProps) {
         )}
         {step === 2 && (
           <StepJumioIframe
+            workflow={kycStatus.response}
             userAddress={address}
             onSuccess={() => {
               setKycStatusProcessing()

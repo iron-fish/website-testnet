@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGetKycWorkflowUrl } from '../hooks/useCreateKycFlow'
 import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
+import { JumioWorkflow } from '../types/JumioTypes'
 import styles from './JumioIframe.module.css'
 
 function useHandleJumioEvents(onSuccess: () => void, onError: () => void) {
@@ -37,6 +38,7 @@ function useHandleJumioEvents(onSuccess: () => void, onError: () => void) {
 }
 
 type JumioIframeProps = {
+  workflow: JumioWorkflow | null
   userAddress: string
   onSuccess: () => void
 }
@@ -59,10 +61,11 @@ function Container({ children }: { children: React.ReactNode }) {
 }
 
 export default function StepJumioIframe({
+  workflow,
   userAddress,
   onSuccess,
 }: JumioIframeProps) {
-  const { url, loading, error } = useGetKycWorkflowUrl(userAddress)
+  const { url, loading, error } = useGetKycWorkflowUrl(workflow, userAddress)
   const router = useRouter()
 
   const [hasJumioError, setHasJumioError] = useState(false)

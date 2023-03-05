@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { magic } from 'utils'
 import { JumioWorkflow } from '../types/JumioTypes'
-import { useGetKycStatus } from './useGetKycStatus'
 
-export function useCreateKycFlow(userAddress: string, skip = false) {
+function useCreateKycFlow(userAddress: string, shouldCreateKycFlow: boolean) {
   const [response, setResponse] = useState<
     JumioWorkflow | { error: unknown } | null
   >(null)
@@ -13,7 +12,7 @@ export function useCreateKycFlow(userAddress: string, skip = false) {
 
   useEffect(() => {
     async function doPost() {
-      if (skip) {
+      if (!shouldCreateKycFlow) {
         return
       }
 
@@ -48,7 +47,7 @@ export function useCreateKycFlow(userAddress: string, skip = false) {
     }
 
     doPost()
-  }, [userAddress, skip])
+  }, [userAddress, shouldCreateKycFlow])
 
   return {
     response,
@@ -56,38 +55,32 @@ export function useCreateKycFlow(userAddress: string, skip = false) {
   }
 }
 
-export function useGetKycWorkflowUrl(address: string) {
-  const {
-    status: getStatus,
-    loading: isGetLoading,
-    response: getResponse,
-  } = useGetKycStatus()
+export function useGetKycWorkflowUrl(
+  workflow: JumioWorkflow | null,
+  address: string
+) {
+  // Skip creating a KYC flow if we have an existing in-progress one
+  const shouldCreateKycFlow = workflow === null || workflow.can_create
 
   const { response: postResponse, postStatus } = useCreateKycFlow(
     address,
-    isGetLoading || getStatus === 'IN_PROGRESS'
+    shouldCreateKycFlow
   )
 
-  // We're loading...
-  if (isGetLoading && postStatus === 'LOADING') {
+  // If we don't need to create a KYC flow, return the href from the prior workflow
+  if (!shouldCreateKycFlow) {
     return {
-      url: null,
-      loading: true,
+      url: workflow.jumio_web_href,
+      loading: false,
       error: null,
     }
   }
 
-  // If we have a response from the GET request, and the user's workflow status is
-  // IN_PROGRESS, then we can return the in-progress workflow URL.0
-  if (
-    !isGetLoading &&
-    getStatus === 'IN_PROGRESS' &&
-    getResponse !== null &&
-    'jumio_web_href' in getResponse
-  ) {
+  // We're loading...
+  if (postStatus === 'LOADING') {
     return {
-      url: getResponse.jumio_web_href,
-      loading: false,
+      url: null,
+      loading: true,
       error: null,
     }
   }

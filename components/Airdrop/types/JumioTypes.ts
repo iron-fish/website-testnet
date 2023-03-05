@@ -7,6 +7,10 @@ export type KycStatus =
   | 'SUCCESS'
 
 export type JumioWorkflow = {
+  can_attempt: boolean
+  can_attempt_reason: string
+  can_create: boolean
+  can_create_reason: string
   jumio_account_id: string
   jumio_web_href: string
   jumio_workflow_execution_id: string
@@ -16,5 +20,4 @@ export type JumioWorkflow = {
   public_address: string
   redemption_id: number
   user_id: number
-  can_attempt: boolean
 }
