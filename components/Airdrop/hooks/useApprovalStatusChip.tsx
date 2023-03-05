@@ -23,7 +23,12 @@ export function useApprovalStatusChip(
     }
 
     if (status === 'SUBMITTED') {
-      return <InfoChip variant="pending">KYC Processing</InfoChip>
+      return (
+        <InfoChip variant="pending">
+          KYC Processing. Status will update before your first token
+          distribution deadline.
+        </InfoChip>
+      )
     }
 
     if (status === 'IN_PROGRESS') {
