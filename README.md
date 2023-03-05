@@ -10,8 +10,8 @@ Create an `.env.local` file. You can copy the existing template (`cp .env.templa
 
 ```
 NEXT_PUBLIC_API_URL=https://api-staging.ironfish.network
-NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY=test
-NEXT_PUBLIC_LOCAL_USER=true
+NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY=pk_live_5395524DA68DA294
+NEXT_PUBLIC_LOCAL_USER=false
 ```
 
 Then, run the development server:

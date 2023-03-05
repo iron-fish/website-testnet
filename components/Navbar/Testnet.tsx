@@ -7,9 +7,14 @@ import SectionHeader from './SectionHeader'
 type TestnetProps = {
   condensed?: boolean
   showNotification?: boolean
+  showRewardsDashboard?: boolean
 }
 
-function Testnet({ condensed = false, showNotification }: TestnetProps) {
+function Testnet({
+  condensed = false,
+  showNotification,
+  showRewardsDashboard,
+}: TestnetProps) {
   const elementClassName = clsx('py-4', condensed ? 'px-2' : 'px-6')
   const textClassName = `ml-4`
   const className = condensed
@@ -93,6 +98,16 @@ function Testnet({ condensed = false, showNotification }: TestnetProps) {
                   textClassName={textClassName}
                   cubeClassName="text-iflightblue"
                 />
+                {showRewardsDashboard && (
+                  <TestnetGridElement
+                    href="/dashboard"
+                    header="Testnet Dashboard"
+                    body="Claim your rewards"
+                    className={elementClassName}
+                    textClassName={textClassName}
+                    cubeClassName="text-iflightblue"
+                  />
+                )}
               </div>
             </div>
           </div>

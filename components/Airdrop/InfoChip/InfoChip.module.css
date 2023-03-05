@@ -1,0 +1,20 @@
+.info {
+  color: #000000;
+  background-color: #F3F3F4;
+}
+
+.pending {
+  color: #7E7400;
+  background-color: #FFF9BC;
+}
+
+.warning {
+  color: #F15929;
+  background-color: #FFEDE8;
+}
+
+.complete {
+  color: #335A48;
+  background-color: #EBFBF4;
+}
+

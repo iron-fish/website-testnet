@@ -144,6 +144,7 @@ export type ApiUserMetadata = {
   telegram: string
   statusCode?: number
   message?: string
+  enable_kyc?: boolean
 }
 
 export type GenericApiError = {

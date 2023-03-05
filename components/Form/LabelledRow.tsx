@@ -9,6 +9,7 @@ interface LabelledRowProps {
   errorText?: string
   disabled?: boolean
   children?: React.ReactNode
+  className?: string
 }
 
 export const LabelledRow = ({
@@ -19,9 +20,10 @@ export const LabelledRow = ({
   required = true,
   errorText = 'This field is required',
   disabled = false,
+  className,
 }: LabelledRowProps) => (
   <>
-    <FormRow valid={valid} disabled={disabled}>
+    <FormRow valid={valid} disabled={disabled} className={className}>
       {label.length > 0 && (
         <label htmlFor={id} className="text-xs mb-px3">
           {label}

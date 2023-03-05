@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
+import Link from 'next/link'
 import { encode as btoa } from 'base-64'
 import { nextMonday } from 'date-fns'
 import clsx from 'clsx'
 
+import Button from 'components/Button'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import Loader from 'components/Loader'
@@ -240,7 +242,7 @@ export default function User({ showNotification, loginContext }: Props) {
                   >
                     {$user.graffiti}
                   </h1>
-                  <div>
+                  <div className={clsx('mb-2')}>
                     <div
                       className={clsx(
                         'text-sm',
@@ -249,13 +251,20 @@ export default function User({ showNotification, loginContext }: Props) {
                         'py-2',
                         'bg-iflightbeige',
                         'inline-block',
-                        'md:mb-12',
                         'rounded'
                       )}
                     >
                       {joinedOn}
                     </div>
                   </div>
+                  {$user.id === loginContext.metadata?.id &&
+                    loginContext.metadata.enable_kyc && (
+                      <Button className={clsx('mb-12')}>
+                        <Link href="/dashboard/rewards">
+                          View your testnet rewards
+                        </Link>
+                      </Button>
+                    )}
                 </div>
                 <div
                   className={clsx(
