@@ -37,8 +37,16 @@ export function useApprovalStatusChip({
       return <InfoChip variant="complete">KYC Approved</InfoChip>
     }
 
-    if (status === 'SUBMITTED' || status === 'WAITING_FOR_CALLBACK') {
+    if (status === 'WAITING_FOR_CALLBACK') {
       return <InfoChip variant="pending">KYC Processing</InfoChip>
+    }
+
+    if (status === 'SUBMITTED') {
+      return (
+        <InfoChip variant="pending">
+          Waiting for Iron Fish to review your KYC 👍
+        </InfoChip>
+      )
     }
 
     if (status === 'IN_PROGRESS') {
