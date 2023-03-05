@@ -67,6 +67,15 @@ export function useGetKycWorkflowUrl(
     shouldCreateKycFlow
   )
 
+  // Should not get here
+  if (workflow === null) {
+    return {
+      url: null,
+      loading: false,
+      error: 'Workflow is null',
+    }
+  }
+
   // If we don't need to create a KYC flow, return the href from the prior workflow
   if (!shouldCreateKycFlow) {
     return {
