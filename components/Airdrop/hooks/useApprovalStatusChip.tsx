@@ -4,11 +4,26 @@ import { InfoChip } from '../InfoChip/InfoChip'
 import { getNextEligiblePhase } from './usePhaseStatus'
 import type { KycStatus } from '../types/JumioTypes'
 
-export function useApprovalStatusChip(
+export function useApprovalStatusChip({
+  status,
+  attempts,
+  maxAttempts,
+}: {
   status: KycStatus | 'NOT_STARTED' | 'AIRDROP_INELIGIBLE'
-) {
+  attempts?: number
+  maxAttempts?: number
+}) {
   return useMemo(() => {
     if (status === 'AIRDROP_INELIGIBLE') {
+      if (
+        attempts !== undefined &&
+        maxAttempts !== undefined &&
+        attempts >= maxAttempts
+      ) {
+        return (
+          <InfoChip variant="warning">{`Failed KYC after ${attempts} attempts`}</InfoChip>
+        )
+      }
       return <InfoChip variant="warning">Ineligible for Airdrop</InfoChip>
     }
 

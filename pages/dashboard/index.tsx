@@ -26,9 +26,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
 
   const { status, response, loading: kycLoading } = useGetKycStatus()
 
-  const approvalStatusChip = useApprovalStatusChip(
-    response?.can_attempt ? status : 'AIRDROP_INELIGIBLE'
-  )
+  const approvalStatusChip = useApprovalStatusChip({
+    status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
+    attempts: response?.kyc_attempts,
+    maxAttempts: response?.kyc_max_attempts,
+  })
 
   if (isLoading || kycLoading) {
     return <Loader />

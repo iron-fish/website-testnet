@@ -52,9 +52,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     3: 'phase3',
   } as const
 
-  const approvalStatusChip = useApprovalStatusChip(
-    canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE'
-  )
+  const approvalStatusChip = useApprovalStatusChip({
+    status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
+    attempts: kycStatus.response?.kyc_attempts,
+    maxAttempts: kycStatus.response?.kyc_max_attempts,
+  })
 
   if (isLoading || !userPointsByPhase || kycStatus.loading) {
     return <Loader />
