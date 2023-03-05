@@ -10,7 +10,7 @@ export default function useRequireKYC(loginContext: LoginContext) {
   const isLoggedIn = checkLoggedIn()
 
   useEffect(() => {
-    if (!isLoading && !isLoggedIn && metadata && !metadata.enable_kyc) {
+    if (!isLoading && isLoggedIn && metadata && !metadata.enable_kyc) {
       router.replace('/')
     }
   }, [isLoading, isLoggedIn, router, metadata])
