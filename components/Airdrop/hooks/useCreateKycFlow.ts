@@ -55,26 +55,14 @@ function useCreateKycFlow(userAddress: string, shouldCreateKycFlow: boolean) {
   }
 }
 
-export function useGetKycWorkflowUrl(
-  workflow: JumioWorkflow | null,
-  address: string
-) {
+export function useGetKycWorkflowUrl(workflow: JumioWorkflow, address: string) {
   // Skip creating a KYC flow if we have an existing in-progress one
-  const shouldCreateKycFlow = workflow === null || workflow.can_create
+  const shouldCreateKycFlow = workflow.can_create
 
   const { response: postResponse, postStatus } = useCreateKycFlow(
     address,
     shouldCreateKycFlow
   )
-
-  // Should not get here
-  if (workflow === null) {
-    return {
-      url: null,
-      loading: false,
-      error: 'Workflow is null',
-    }
-  }
 
   // If we don't need to create a KYC flow, return the href from the prior workflow
   if (!shouldCreateKycFlow) {
@@ -108,7 +96,7 @@ export function useGetKycWorkflowUrl(
     }
   }
 
-  // If were're here, then we have an error.
+  // If we're here, then we have an error.
   return {
     url: null,
     loading: false,

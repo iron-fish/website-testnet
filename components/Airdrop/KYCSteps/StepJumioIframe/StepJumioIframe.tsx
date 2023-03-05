@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import Button from 'components/Button'
-import Loader from 'components/Loader'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useGetKycWorkflowUrl } from '../hooks/useCreateKycFlow'
-import { JumioFlowContainer } from '../JumioFlowContainer/JumioFlowContainer'
-import { JumioWorkflow } from '../types/JumioTypes'
+import { useGetKycWorkflowUrl } from 'components/Airdrop/hooks/useCreateKycFlow'
+import { JumioFlowContainer } from 'components/Airdrop/JumioFlowContainer/JumioFlowContainer'
+import { JumioWorkflow } from 'components/Airdrop/types/JumioTypes'
+import Button from 'components/Button'
+import Loader from 'components/Loader'
 import styles from './JumioIframe.module.css'
 
 function useHandleJumioEvents(onSuccess: () => void, onError: () => void) {
@@ -38,7 +38,7 @@ function useHandleJumioEvents(onSuccess: () => void, onError: () => void) {
 }
 
 type JumioIframeProps = {
-  workflow: JumioWorkflow | null
+  workflow: JumioWorkflow
   userAddress: string
   onSuccess: () => void
 }
