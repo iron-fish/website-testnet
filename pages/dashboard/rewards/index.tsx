@@ -21,6 +21,7 @@ import { format, isPast } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
+import useRequireKYC from 'hooks/useRequireKYC'
 
 type AboutProps = {
   showNotification: boolean
@@ -34,6 +35,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
 
   useRequireLogin(loginContext)
+  useRequireKYC(loginContext)
 
   const userPointsByPhase = useUserPointsByPhase(metadata?.id)
 
