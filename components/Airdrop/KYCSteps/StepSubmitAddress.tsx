@@ -5,6 +5,7 @@ import TextField from 'components/Form/TextField'
 import { UNSET } from 'utils/forms'
 import { useField, WHITESPACE } from 'hooks/useForm'
 import { useState } from 'react'
+import WalletAddress from '../WalletAddress/WalletAddress'
 
 const publicAddressField = {
   id: 'address',
@@ -96,17 +97,7 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
         ) : (
           <>
             <p>Previously submitted wallet address:</p>
-            <div
-              className={clsx(
-                'p-4',
-                'bg-gray-100',
-                'mt-4',
-                'rounded-md',
-                'truncate'
-              )}
-            >
-              <code>{storedAddress}</code>
-            </div>
+            <WalletAddress address={storedAddress} />
           </>
         )}
 

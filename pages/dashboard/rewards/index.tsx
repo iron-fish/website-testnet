@@ -20,6 +20,7 @@ import { PHASE_DATES } from 'components/Airdrop/hooks/usePhaseStatus'
 import { format, isPast } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
+import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
 
 type AboutProps = {
   showNotification: boolean
@@ -44,6 +45,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const needsKyc =
     canAttemptKyc &&
     ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(kycStatus.status)
+
+  const showAddress = ['WAITING_FOR_CALLBACK', 'SUBMITTED'].includes(
+    kycStatus.status
+  )
 
   const phaseMappings = {
     0: 'openSource',
@@ -149,6 +154,14 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           {approvalStatusChip}
                         </div>
                       </div>
+                      {showAddress && kycStatus.response?.public_address && (
+                        <div>
+                          <p>Submitted wallet address:</p>
+                          <WalletAddress
+                            address={kycStatus.response.public_address}
+                          />
+                        </div>
+                      )}
                       {needsKyc && (
                         <>
                           <ul className={clsx('list-disc', 'px-4')}>
