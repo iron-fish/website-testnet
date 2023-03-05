@@ -71,7 +71,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
             </div>
           </div>
           <div>
-            <span className={clsx('text-lg')}>Open Source Reward in $IRON</span>
+            <span className={clsx('text-lg')}>Reward in $IRON</span>
             <h3
               className={clsx('text-left', 'text-3xl', 'mt-3', 'font-extended')}
             >
