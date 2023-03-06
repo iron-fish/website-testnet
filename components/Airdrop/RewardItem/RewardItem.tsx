@@ -10,8 +10,8 @@ type Props = {
   poolName: PoolNames
 }
 
-const titlesByPhase: Record<PoolNames, string> = {
-  pool_three: 'Open Source Points',
+export const titlesByPhase: Record<PoolNames, string> = {
+  pool_three: 'Pull Request Points',
   pool_one: 'Phase 1 Points',
   pool_two: 'Phase 2 Points',
   pool_four: 'Phase 3 Points',

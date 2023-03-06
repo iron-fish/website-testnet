@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { InfoChip } from '../InfoChip/InfoChip'
 import { getNextEligiblePhase } from './usePhaseStatus'
 import type { KycConfig, KycStatus } from '../types/JumioTypes'
+import { titlesByPhase } from '../RewardItem/RewardItem'
 
 export function useApprovalStatusChip({
   status,
@@ -74,8 +75,9 @@ export function useApprovalStatusChip({
 
     return (
       <InfoChip variant={'warning'}>
-        KYC Deadline for {nextEligiblePhase.label}: {nextPhaseDeadline}
+        KYC Deadline for {titlesByPhase[nextEligiblePhase.name]}:{' '}
+        {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [attempts, maxAttempts, status])
+  }, [attempts, maxAttempts, status, kycConfig])
 }
