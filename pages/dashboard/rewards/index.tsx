@@ -41,8 +41,8 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
 
   const kycStatus = useGetKycStatus()
   const { response: kycConfig } = useGetKycConfig()
-  const kycAttempts = kycStatus.response?.kyc_attempts
-  const kycMaxAttempts = kycStatus.response?.kyc_max_attempts
+  const kycAttempts = kycStatus.response?.kyc_attempts ?? 0
+  const kycMaxAttempts = kycStatus.response?.kyc_max_attempts ?? 3
   const canAttemptKyc = kycStatus.response?.can_attempt
 
   const needsKyc =
@@ -185,7 +185,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                             >
                               Complete KYC Form
                             </Button>
-                            {typeof kycAttempts === 'number' && (
+                            {kycAttempts > 0 && (
                               <p>
                                 Attempts: {kycAttempts} / {kycMaxAttempts}
                               </p>
