@@ -1,3 +1,5 @@
+import { PoolNames } from 'apiClient'
+
 export type KycStatus =
   | 'IN_PROGRESS'
   | 'WAITING_FOR_CALLBACK'
@@ -20,4 +22,16 @@ export type JumioWorkflow = {
   public_address: string
   redemption_id: number
   user_id: number
+}
+
+export type KycConfigPool = {
+  airdrop_completed_by: string
+  coins: number
+  kyc_completed_by: string
+  name: PoolNames
+  pool_name: string
+}
+
+export type KycConfig = {
+  data: ReadonlyArray<KycConfigPool>
 }

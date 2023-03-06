@@ -97,10 +97,13 @@ export type TimeData = {
   total_hours: number
 }
 
+export type PoolNames = 'pool_one' | 'pool_two' | 'pool_three' | 'pool_four'
+
 export type UserMetricsResponse = {
   user_id: number
   granularity: 'lifetime' | 'total'
   points: number
+  pool_points: Record<PoolNames, number>
   metrics: {
     blocks_mined: UserMetric
     bugs_caught: UserMetric
