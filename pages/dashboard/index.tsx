@@ -10,10 +10,11 @@ import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
+import useRequireKYC from 'hooks/useRequireKYC'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
-import useRequireKYC from 'hooks/useRequireKYC'
+import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 
 type AboutProps = {
   showNotification: boolean
@@ -26,15 +27,17 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   useRequireLogin(loginContext)
   useRequireKYC(loginContext)
 
-  const { status, response, loading: kycLoading } = useGetKycStatus()
+  const { status, response, loading: kycStatusLoading } = useGetKycStatus()
+  const { response: kycConfig, loading: kycConfigLoading } = useGetKycConfig()
 
   const approvalStatusChip = useApprovalStatusChip({
     status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
+    kycConfig,
     attempts: response?.kyc_attempts,
     maxAttempts: response?.kyc_max_attempts,
   })
 
-  if (isLoading || kycLoading) {
+  if (isLoading || kycConfigLoading || kycStatusLoading) {
     return <Loader />
   }
 

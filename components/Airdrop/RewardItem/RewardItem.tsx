@@ -1,24 +1,23 @@
+import { PoolNames } from 'apiClient'
 import clsx from 'clsx'
 import { Box } from 'components/OffsetBorder/Box'
 import { ReactNode } from 'react'
-
-export type PhaseKeys = 0 | 1 | 2 | 3
 
 type Props = {
   points: string | number
   iron: number | null
   chips: ReactNode
-  phase: PhaseKeys
+  poolName: PoolNames
 }
 
-const titlesByPhase = {
-  0: 'Open Source Points',
-  1: 'Phase 1 Points',
-  2: 'Phase 2 Points',
-  3: 'Phase 3 Points',
+export const titlesByPhase: Record<PoolNames, string> = {
+  pool_three: 'Pull Request Points',
+  pool_one: 'Phase 1 Points',
+  pool_two: 'Phase 2 Points',
+  pool_four: 'Phase 3 Points',
 }
 
-export function RewardItem({ phase, points, iron, chips }: Props) {
+export function RewardItem({ poolName, points, iron, chips }: Props) {
   return (
     <div className="mb-3">
       <Box behind={'transaprent'}>
@@ -43,7 +42,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
                   'whitespace-nowrap'
                 )}
               >
-                titlesByPhase[phase]
+                titlesByPhase[poolName]
               </div>
               <div
                 className={clsx(
@@ -53,7 +52,7 @@ export function RewardItem({ phase, points, iron, chips }: Props) {
                   'whitespace-nowrap'
                 )}
               >
-                {titlesByPhase[phase]}
+                {titlesByPhase[poolName]}
               </div>
             </div>
             <div className={clsx('flex', 'items-center', 'justify-between')}>

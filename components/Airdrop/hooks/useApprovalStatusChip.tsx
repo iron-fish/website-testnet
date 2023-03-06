@@ -2,14 +2,17 @@ import { format } from 'date-fns'
 import { useMemo } from 'react'
 import { InfoChip } from '../InfoChip/InfoChip'
 import { getNextEligiblePhase } from './usePhaseStatus'
-import type { KycStatus } from '../types/JumioTypes'
+import type { KycConfig, KycStatus } from '../types/JumioTypes'
+import { titlesByPhase } from '../RewardItem/RewardItem'
 
 export function useApprovalStatusChip({
   status,
+  kycConfig,
   attempts,
   maxAttempts,
 }: {
   status: KycStatus | 'NOT_STARTED' | 'AIRDROP_INELIGIBLE'
+  kycConfig: KycConfig | null
   attempts?: number
   maxAttempts?: number
 }) {
@@ -27,7 +30,7 @@ export function useApprovalStatusChip({
       return <InfoChip variant="warning">Ineligible for Airdrop</InfoChip>
     }
 
-    const nextEligiblePhase = getNextEligiblePhase()
+    const nextEligiblePhase = getNextEligiblePhase(kycConfig)
 
     if (!nextEligiblePhase) {
       return <InfoChip variant="warning">Airdrop Ended</InfoChip>
@@ -57,7 +60,10 @@ export function useApprovalStatusChip({
       return <InfoChip variant="warning">KYC Declined</InfoChip>
     }
 
-    const nextPhaseDeadline = format(nextEligiblePhase.kycDeadline, 'MMM d')
+    const nextPhaseDeadline = format(
+      new Date(nextEligiblePhase.kyc_completed_by),
+      'MMM d'
+    )
 
     if (status === 'TRY_AGAIN') {
       return (
@@ -69,8 +75,9 @@ export function useApprovalStatusChip({
 
     return (
       <InfoChip variant={'warning'}>
-        KYC Deadline for {nextEligiblePhase.label}: {nextPhaseDeadline}
+        KYC Deadline for {titlesByPhase[nextEligiblePhase.name]}:{' '}
+        {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [attempts, maxAttempts, status])
+  }, [attempts, maxAttempts, status, kycConfig])
 }

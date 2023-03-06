@@ -10,16 +10,16 @@ import { Box } from 'components/OffsetBorder'
 import Button from 'components/Button'
 import FishAvatar from 'components/user/FishAvatar'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
-import { PhaseKeys, RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
+import { RewardItem } from 'components/Airdrop/RewardItem/RewardItem'
 import Link from 'next/link'
 import BackArrow from 'components/icons/BackArrow'
 import useRequireLogin from 'hooks/useRequireLogin'
-import useUserPointsByPhase from 'components/Airdrop/hooks/useUserPointsByPhase'
+import useUserAllTimeMetrics from 'components/Airdrop/hooks/useUserAllTimeMetrics'
 import { useRouter } from 'next/router'
-import { PHASE_DATES } from 'components/Airdrop/hooks/usePhaseStatus'
 import { format, isPast } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
+import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
 import useRequireKYC from 'hooks/useRequireKYC'
 
@@ -37,9 +37,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   useRequireLogin(loginContext)
   useRequireKYC(loginContext)
 
-  const userPointsByPhase = useUserPointsByPhase(metadata?.id)
+  const userAllTimeMetrics = useUserAllTimeMetrics(metadata?.id)
 
   const kycStatus = useGetKycStatus()
+  const { response: kycConfig } = useGetKycConfig()
   const kycAttempts = kycStatus.response?.kyc_attempts
   const kycMaxAttempts = kycStatus.response?.kyc_max_attempts
   const canAttemptKyc = kycStatus.response?.can_attempt
@@ -52,20 +53,14 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     kycStatus.status
   )
 
-  const phaseMappings = {
-    0: 'openSource',
-    1: 'phase1',
-    2: 'phase2',
-    3: 'phase3',
-  } as const
-
   const approvalStatusChip = useApprovalStatusChip({
     status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
+    kycConfig: kycConfig,
     attempts: kycStatus.response?.kyc_attempts,
     maxAttempts: kycStatus.response?.kyc_max_attempts,
   })
 
-  if (isLoading || !userPointsByPhase || kycStatus.loading) {
+  if (isLoading || !kycConfig || !userAllTimeMetrics || kycStatus.loading) {
     return <Loader />
   }
 
@@ -203,38 +198,40 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <div className="mb-16" />
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
-                    {Object.entries(PHASE_DATES).map(
-                      ([phase, { kycDeadline, airdropDate }]) => {
-                        return (
-                          <RewardItem
-                            key={phase}
-                            phase={parseInt(phase) as PhaseKeys}
-                            points={
-                              userPointsByPhase[
-                                phaseMappings[parseInt(phase) as PhaseKeys]
-                              ]
-                            }
-                            iron={null}
-                            chips={
-                              <>
-                                <InfoChip variant="warning">
-                                  KYC Deadline: {format(kycDeadline, 'MMM dd')}
-                                </InfoChip>
-                                {isPast(kycDeadline) ? (
-                                  <InfoChip variant="warning">
-                                    Airdrop: Forfeit
-                                  </InfoChip>
-                                ) : (
-                                  <InfoChip variant="info">
-                                    Airdrop: {format(airdropDate, 'MMM dd')}
-                                  </InfoChip>
+                    {kycConfig.data.map((pool, i) => {
+                      return (
+                        <RewardItem
+                          key={i}
+                          poolName={pool.name}
+                          points={userAllTimeMetrics.pool_points[pool.name]}
+                          iron={null}
+                          chips={
+                            <>
+                              <InfoChip variant="warning">
+                                KYC Deadline:{' '}
+                                {format(
+                                  new Date(pool.kyc_completed_by),
+                                  'MMM dd'
                                 )}
-                              </>
-                            }
-                          />
-                        )
-                      }
-                    )}
+                              </InfoChip>
+                              {isPast(new Date(pool.kyc_completed_by)) ? (
+                                <InfoChip variant="warning">
+                                  Airdrop: Forfeit
+                                </InfoChip>
+                              ) : (
+                                <InfoChip variant="info">
+                                  Airdrop:{' '}
+                                  {format(
+                                    new Date(pool.airdrop_completed_by),
+                                    'MMM dd'
+                                  )}
+                                </InfoChip>
+                              )}
+                            </>
+                          }
+                        />
+                      )
+                    })}
                   </div>
                 </div>
               </Box>
