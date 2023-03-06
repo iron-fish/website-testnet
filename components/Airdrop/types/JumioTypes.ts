@@ -13,15 +13,15 @@ export type JumioWorkflow = {
   can_attempt_reason: string
   can_create: boolean
   can_create_reason: string
-  jumio_account_id: string
-  jumio_web_href: string
-  jumio_workflow_execution_id: string
-  kyc_attempts: number
-  kyc_max_attempts: number
-  kyc_status: KycStatus
-  public_address: string
-  redemption_id: number
-  user_id: number
+  jumio_account_id?: string
+  jumio_web_href?: string
+  jumio_workflow_execution_id?: string
+  kyc_attempts?: number
+  kyc_max_attempts?: number
+  kyc_status?: KycStatus
+  public_address?: string
+  redemption_id?: number
+  user_id?: number
 }
 
 export type KycConfigPool = {
