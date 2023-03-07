@@ -25,16 +25,23 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
 
-  const { status, response, loading: kycStatusLoading } = useGetKycStatus()
+  const {
+    status,
+    response: statusResponse,
+    loading: kycStatusLoading,
+  } = useGetKycStatus()
   const { response: kycConfig, loading: kycConfigLoading } = useGetKycConfig()
 
+  // eslint-disable-next-line no-console
+  console.log({ statusResponse })
+
   const approvalStatusChip = useApprovalStatusChip({
-    status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
+    status: statusResponse?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig,
-    attempts: response?.kyc_attempts,
-    maxAttempts: response?.kyc_max_attempts,
-    ineligibleReason: !response?.can_attempt
-      ? response?.can_attempt_reason
+    attempts: statusResponse?.kyc_attempts,
+    maxAttempts: statusResponse?.kyc_max_attempts,
+    ineligibleReason: !statusResponse?.can_attempt
+      ? statusResponse?.can_attempt_reason
       : undefined,
   })
 

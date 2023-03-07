@@ -86,5 +86,5 @@ export function useApprovalStatusChip({
         {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [attempts, maxAttempts, status, kycConfig])
+  }, [attempts, maxAttempts, status, kycConfig, ineligibleReason])
 }
