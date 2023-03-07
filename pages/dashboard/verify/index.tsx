@@ -5,6 +5,7 @@ import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import StepJumioError from 'components/Airdrop/KYCSteps/StepJumioError'
 import { KYCForm } from 'components/Airdrop/KYCForm/KYCForm'
 import { KYCSteps } from 'components/Airdrop/KYCSteps/KYCSteps'
+import useRequireKYC from 'hooks/useRequireKYC'
 
 type VerifyProps = {
   showNotification: boolean
@@ -19,6 +20,7 @@ export default function Verify({
   useRequireLogin(loginContext)
 
   const kycStatus = useGetKycStatus()
+  useRequireKYC(loginContext)
 
   if (checkLoading() || kycStatus.loading) {
     return <Loader />
