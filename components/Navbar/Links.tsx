@@ -71,11 +71,7 @@ export function NavbarLinks({
         condensed={condensed}
       >
         {testnetVisible && (
-          <Testnet
-            showNotification={showNotification}
-            condensed={condensed}
-            showRewardsDashboard={loginContext.metadata?.enable_kyc}
-          />
+          <Testnet showNotification={showNotification} condensed={condensed} />
         )}
       </SubnavButton>
       <LoginButton loginContext={loginContext} />
