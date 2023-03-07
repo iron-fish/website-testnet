@@ -56,6 +56,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     kycConfig: kycConfig,
     attempts: kycStatus.response?.kyc_attempts,
     maxAttempts: kycStatus.response?.kyc_max_attempts,
+    ineligibleReason: kycStatus.response?.can_attempt
+      ? kycStatus.response?.can_attempt_reason
+      : undefined,
   })
 
   if (isLoading || !kycConfig || !userAllTimeMetrics || kycStatus.loading) {
