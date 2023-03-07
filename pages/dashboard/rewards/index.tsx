@@ -51,6 +51,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     kycStatus.status
   )
 
+  // eslint-disable-next-line no-console
+  console.log({ kycStatus })
+
   const approvalStatusChip = useApprovalStatusChip({
     status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
