@@ -10,7 +10,6 @@ import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
-import useRequireKYC from 'hooks/useRequireKYC'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
@@ -25,7 +24,6 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
-  useRequireKYC(loginContext)
 
   const { status, response, loading: kycStatusLoading } = useGetKycStatus()
   const { response: kycConfig, loading: kycConfigLoading } = useGetKycConfig()
@@ -35,6 +33,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     kycConfig,
     attempts: response?.kyc_attempts,
     maxAttempts: response?.kyc_max_attempts,
+    ineligibleReason: !response?.can_attempt
+      ? response?.can_attempt_reason
+      : undefined,
   })
 
   if (isLoading || kycConfigLoading || kycStatusLoading) {

@@ -21,7 +21,6 @@ import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatu
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
-import useRequireKYC from 'hooks/useRequireKYC'
 
 type AboutProps = {
   showNotification: boolean
@@ -35,7 +34,6 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const isLoading = checkLoading()
 
   useRequireLogin(loginContext)
-  useRequireKYC(loginContext)
 
   const userAllTimeMetrics = useUserAllTimeMetrics(metadata?.id)
 
