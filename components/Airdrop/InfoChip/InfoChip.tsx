@@ -44,7 +44,7 @@ export function InfoChip({
       <div
         className={clsx(
           align ? `text-${align}` : 'md:text-center',
-          wrap && 'md:whitespace-nowrap'
+          !wrap && 'md:whitespace-nowrap'
         )}
       >
         {children}
