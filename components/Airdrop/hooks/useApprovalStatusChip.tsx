@@ -10,24 +10,21 @@ export function useApprovalStatusChip({
   kycConfig,
   attempts,
   maxAttempts,
+  ineligibleReason,
 }: {
   status: KycStatus | 'NOT_STARTED' | 'AIRDROP_INELIGIBLE'
   kycConfig: KycConfig | null
   attempts?: number
   maxAttempts?: number
+  ineligibleReason?: string
 }) {
   return useMemo(() => {
     if (status === 'AIRDROP_INELIGIBLE') {
-      if (
-        attempts !== undefined &&
-        maxAttempts !== undefined &&
-        attempts >= maxAttempts
-      ) {
-        return (
-          <InfoChip variant="warning">{`Failed KYC after ${attempts} attempts`}</InfoChip>
-        )
-      }
-      return <InfoChip variant="warning">Ineligible for Airdrop</InfoChip>
+      return (
+        <InfoChip variant="warning">
+          Airdrop Unavailable{!!ineligibleReason && `: ${ineligibleReason}`}
+        </InfoChip>
+      )
     }
 
     const nextEligiblePhase = getNextEligiblePhase(kycConfig)
@@ -79,5 +76,5 @@ export function useApprovalStatusChip({
         {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [attempts, maxAttempts, status, kycConfig])
+  }, [attempts, maxAttempts, status, kycConfig, ineligibleReason])
 }

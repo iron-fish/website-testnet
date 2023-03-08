@@ -10,7 +10,6 @@ import Loader from 'components/Loader'
 import { KYCAction } from 'components/Airdrop/KYCAction/KYCAction'
 import { InfoChip } from 'components/Airdrop/InfoChip/InfoChip'
 import useRequireLogin from 'hooks/useRequireLogin'
-import useRequireKYC from 'hooks/useRequireKYC'
 import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
@@ -25,16 +24,22 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
-  useRequireKYC(loginContext)
 
-  const { status, response, loading: kycStatusLoading } = useGetKycStatus()
+  const {
+    status,
+    response: statusResponse,
+    loading: kycStatusLoading,
+  } = useGetKycStatus()
   const { response: kycConfig, loading: kycConfigLoading } = useGetKycConfig()
 
   const approvalStatusChip = useApprovalStatusChip({
-    status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
+    status: statusResponse?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig,
-    attempts: response?.kyc_attempts,
-    maxAttempts: response?.kyc_max_attempts,
+    attempts: statusResponse?.kyc_attempts,
+    maxAttempts: statusResponse?.kyc_max_attempts,
+    ineligibleReason: !statusResponse?.can_attempt
+      ? statusResponse?.can_attempt_reason
+      : undefined,
   })
 
   if (isLoading || kycConfigLoading || kycStatusLoading) {

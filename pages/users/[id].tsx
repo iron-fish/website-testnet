@@ -257,14 +257,13 @@ export default function User({ showNotification, loginContext }: Props) {
                       {joinedOn}
                     </div>
                   </div>
-                  {$user.id === loginContext.metadata?.id &&
-                    loginContext.metadata.enable_kyc && (
-                      <Button className={clsx('mb-12')}>
-                        <Link href="/dashboard/rewards">
-                          View your testnet rewards
-                        </Link>
-                      </Button>
-                    )}
+                  {$user.id === loginContext.metadata?.id && (
+                    <Button className={clsx('mb-12')}>
+                      <Link href="/dashboard/rewards">
+                        View your testnet rewards
+                      </Link>
+                    </Button>
+                  )}
                 </div>
                 <div
                   className={clsx(

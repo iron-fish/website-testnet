@@ -65,12 +65,7 @@ interface ApiUserMetadataUI extends ApiUserMetadata {
 
 const HitState = () => <div className={styles.hitState} />
 
-const UserButton = ({
-  id,
-  enable_kyc,
-  graffiti,
-  visible,
-}: ApiUserMetadataUI) => (
+const UserButton = ({ graffiti, visible }: ApiUserMetadataUI) => (
   <div
     className={clsx(
       styles.userButton,
@@ -107,7 +102,7 @@ const UserButton = ({
           'md:relative'
         )}
       >
-        <Link href={enable_kyc ? `/dashboard` : `/users/${id}`} passHref>
+        <Link href={`/dashboard`} passHref>
           <div className={clsx('truncate', 'relative', 'max-w-[20rem]')}>
             {graffiti}
           </div>
