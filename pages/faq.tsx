@@ -77,8 +77,7 @@ const questions: ReadonlyArray<{
         </div>
         <li style={{ marginTop: '14px' }}>
           You must have a valid email on your Iron Fish account. We will be
-          communicating verification steps through this email. See the next FAQ
-          on how to change your email if it is not correct.
+          communicating verification steps through this email.
         </li>
         <li style={{ marginTop: '5px' }}>
           You must be able to log in to the Iron Fish account associated with
@@ -132,28 +131,6 @@ const questions: ReadonlyArray<{
           waiting for approval. Unlike users in other countries, this approval
           will likely not clear up within one month of launch.
         </div>
-      </div>
-    ),
-  },
-  {
-    question: `I cannot login with my email. How do I change it?`,
-    id: `how-do-I-change-email`,
-    answer: (
-      <div>
-        You can do this by filling out our{' '}
-        <span className="underline">
-          <Link href="https://forms.gle/ALa79nhj9uiSQP389">
-            email change form.
-          </Link>
-        </span>{' '}
-        Please note that all email changes will be approved manually, and this
-        may take some time. You can monitor our{' '}
-        <span className="underline">
-          <Link href="https://discord.com/channels/771503434028941353/816795744680935445">
-            announcements on Discord
-          </Link>
-        </span>{' '}
-        for updates on this process.
       </div>
     ),
   },
