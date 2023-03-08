@@ -1,18 +1,22 @@
 import clsx from 'clsx'
 
 import { ReactNode, useMemo } from 'react'
-import PendingIcon from './icons/Pending'
-import WarningIcon from './icons/Warning'
 
 import styles from './InfoChip.module.css'
 
 type ChipProps = {
   children: ReactNode
   variant: 'info' | 'pending' | 'warning' | 'complete'
-  icon?: boolean
+  align?: 'left' | 'center'
+  wrap?: boolean
 }
 
-export function InfoChip({ children, variant, icon }: ChipProps) {
+export function InfoChip({
+  children,
+  variant,
+  align,
+  wrap = false,
+}: ChipProps) {
   const colors = useMemo(() => {
     return {
       info: styles.info,
@@ -37,14 +41,14 @@ export function InfoChip({ children, variant, icon }: ChipProps) {
         colors
       )}
     >
-      {icon && (
-        <div className={clsx('hidden', 'md:block')}>
-          {variant === 'warning' && <WarningIcon />}
-          {variant === 'pending' && <PendingIcon />}
-          {variant === 'complete' && <WarningIcon />}
-        </div>
-      )}
-      <div className="md:text-center md:whitespace-nowrap">{children}</div>
+      <div
+        className={clsx(
+          align ? `text-${align}` : 'md:text-center',
+          wrap && 'md:whitespace-nowrap'
+        )}
+      >
+        {children}
+      </div>
     </div>
   )
 }

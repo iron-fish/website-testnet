@@ -21,7 +21,7 @@ export function useApprovalStatusChip({
   return useMemo(() => {
     if (status === 'AIRDROP_INELIGIBLE') {
       return (
-        <InfoChip variant="warning">
+        <InfoChip align="left" variant="warning" wrap>
           Airdrop Unavailable{!!ineligibleReason && `: ${ineligibleReason}`}
         </InfoChip>
       )
