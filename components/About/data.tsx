@@ -250,7 +250,7 @@ export const Phase2 = {
 
 export const Phase3 = {
   phaseNum: 3,
-  status: Status.ComingSoon,
+  status: Status.Ended,
   summary: 'Starting January 18, 2023',
   pools: [
     {
