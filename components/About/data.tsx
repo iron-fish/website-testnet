@@ -250,8 +250,8 @@ export const Phase2 = {
 
 export const Phase3 = {
   phaseNum: 3,
-  status: Status.ComingSoon,
-  summary: 'Starting January 18, 2023',
+  status: Status.Ended,
+  summary: 'January 18, 2023 - Feburary 25, 2023',
   pools: [
     {
       size: 210000,
