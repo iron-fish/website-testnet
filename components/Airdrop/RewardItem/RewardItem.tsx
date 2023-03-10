@@ -17,6 +17,10 @@ export const titlesByPhase: Record<PoolNames, string> = {
   pool_four: 'Phase 3 Points',
 }
 
+const longestPoolName = Object.values(titlesByPhase).sort(
+  (a, b) => b.length - a.length
+)[0]
+
 export function RewardItem({ poolName, points, iron, chips }: Props) {
   return (
     <div className="mb-3">
@@ -43,7 +47,7 @@ export function RewardItem({ poolName, points, iron, chips }: Props) {
                   'select-none'
                 )}
               >
-                {titlesByPhase[poolName]}
+                {longestPoolName}
               </div>
               <div
                 className={clsx(
