@@ -39,10 +39,11 @@ export function RewardItem({ poolName, points, iron, chips }: Props) {
                 className={clsx(
                   'text-lg',
                   'text-transparent',
-                  'whitespace-nowrap'
+                  'whitespace-nowrap',
+                  'select-none'
                 )}
               >
-                titlesByPhase[poolName]
+                {titlesByPhase[poolName]}
               </div>
               <div
                 className={clsx(
