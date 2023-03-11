@@ -82,7 +82,8 @@ export default function WalletAddress({ address }: { address: string }) {
             'items-start',
             'flex-col-reverse',
             'md:flex-row',
-            'gap-2'
+            'gap-2',
+            'md:items-center'
           )}
         >
           <button
