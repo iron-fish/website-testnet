@@ -19,6 +19,7 @@ export const Toast = ({
         'fixed',
         'z-30',
         'flex',
+        'left-0',
         styles.toast,
         topAligned
           ? showNotification

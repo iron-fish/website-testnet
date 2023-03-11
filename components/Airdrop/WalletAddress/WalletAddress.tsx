@@ -2,39 +2,75 @@ import TextField from 'components/Form/TextField'
 import { UNSET } from 'utils/forms'
 import { useField, WHITESPACE } from 'hooks/useForm'
 import clsx from 'clsx'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { magic } from 'utils'
+import { Toast, Alignment } from 'hooks/useToast'
+
+function useToast() {
+  const [message, setMessage] = useState('')
+  const timeoutRef = useRef<number>()
+
+  return useMemo(() => {
+    return {
+      message: (msg: string) => {
+        setMessage(msg)
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(() => {
+          setMessage('')
+        }, 5000) as unknown as number
+      },
+      renderToast: message ? (
+        <Toast
+          visible
+          message={message}
+          alignment={Alignment.Top}
+          showNotification
+        />
+      ) : null,
+    }
+  }, [message])
+}
 
 export default function WalletAddress({ address }: { address: string }) {
+  const [addressDisplay, setAddressDisplay] = useState(address)
+
   const [isEditing, setIsEditing] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const handleSubmit = useCallback(async (newAddress: string) => {
-    setIsSubmitting(true)
+  const toast = useToast()
 
-    try {
-      const apiKey = (await magic?.user.getIdToken()) ?? ''
+  const handleSubmit = useCallback(
+    async (newAddress: string) => {
+      setIsSubmitting(true)
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          public_address: newAddress,
-        }),
-      })
-      if (!res.ok) {
-        throw new Error('Error fetching KYC workflow')
+      try {
+        const apiKey = (await magic?.user.getIdToken()) ?? ''
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            public_address: newAddress,
+          }),
+        })
+        if (!res.ok) {
+          throw new Error('Error fetching KYC workflow')
+        }
+        setAddressDisplay(newAddress)
+        toast.message('Wallet address updated successfully.')
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+        toast.message('Error updating wallet address. Please try again.')
+      } finally {
+        setIsEditing(false)
+        setIsSubmitting(false)
       }
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err)
-    } finally {
-      setIsEditing(false)
-      setIsSubmitting(false)
-    }
-  }, [])
+    },
+    [toast]
+  )
 
   return (
     <>
@@ -64,10 +100,11 @@ export default function WalletAddress({ address }: { address: string }) {
               'break-all'
             )}
           >
-            <code>{address}</code>
+            <code>{addressDisplay}</code>
           </div>
         </div>
       </div>
+      {toast.renderToast}
       {isEditing && (
         <EditAddressModal
           loading={isSubmitting}
