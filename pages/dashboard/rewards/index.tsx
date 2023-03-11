@@ -57,9 +57,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
       : undefined,
   })
 
-  const userAddress =
-    kycStatus.response?.public_address ??
-    'b04bdad05643e406b160892b4d3a20fac6adbb8b35e0b7ce1bccf2be8ff6eecc'
+  const userAddress = kycStatus.response?.public_address
 
   if (isLoading || !kycConfig || !userAllTimeMetrics || kycStatus.loading) {
     return <Loader />
