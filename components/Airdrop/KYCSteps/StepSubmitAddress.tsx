@@ -53,10 +53,7 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
             <p className="mb-2">
               <code>ironfish wallet:address</code>
             </p>
-            <p>
-              Once you begin the KYC process, you will not be able to edit your
-              address, so please ensure you are submitting the correct address.
-            </p>
+            <p>Please ensure you are submitting the correct address.</p>
             <div className={clsx('flex', 'flex-col')}>
               {pubAddress && (
                 <TextField className="max-w-full" {...pubAddress} />

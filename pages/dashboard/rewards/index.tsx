@@ -47,10 +47,6 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     canAttemptKyc &&
     ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(kycStatus.status)
 
-  const showAddress = ['WAITING_FOR_CALLBACK', 'SUBMITTED'].includes(
-    kycStatus.status
-  )
-
   const approvalStatusChip = useApprovalStatusChip({
     status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
@@ -60,6 +56,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
       ? kycStatus.response?.can_attempt_reason
       : undefined,
   })
+
+  const userAddress =
+    kycStatus.response?.public_address ??
+    'b04bdad05643e406b160892b4d3a20fac6adbb8b35e0b7ce1bccf2be8ff6eecc'
 
   if (isLoading || !kycConfig || !userAllTimeMetrics || kycStatus.loading) {
     return <Loader />
@@ -131,6 +131,11 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                       <p className={clsx('text-xl', 'md:text-2xl', 'mt-auto')}>
                         {metadata?.graffiti || '—'}
                       </p>
+                      {userAddress && (
+                        <div className={clsx('mt-4', 'mr-4')}>
+                          <WalletAddress address={userAddress} />
+                        </div>
+                      )}
                     </div>
                     <FishAvatar color="pink" />
                   </div>
@@ -152,14 +157,6 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           {approvalStatusChip}
                         </div>
                       </div>
-                      {showAddress && kycStatus.response?.public_address && (
-                        <div>
-                          <p>Submitted wallet address:</p>
-                          <WalletAddress
-                            address={kycStatus.response.public_address}
-                          />
-                        </div>
-                      )}
                       {needsKyc && (
                         <>
                           <ul className={clsx('list-disc', 'px-4')}>
