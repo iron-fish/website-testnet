@@ -168,8 +168,21 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                             </li>
                           </ul>
                           <div
-                            className={clsx('flex', 'items-center', 'gap-8')}
+                            className={clsx('flex', 'items-center', 'gap-4')}
                           >
+                            <Button
+                              inverted
+                              onClick={e => {
+                                e.preventDefault()
+                                window?.open(
+                                  'https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf',
+                                  '_blank',
+                                  'noreferrer'
+                                )
+                              }}
+                            >
+                              View KYC Faq
+                            </Button>
                             <Button
                               onClick={() => {
                                 router.push('/dashboard/verify')
@@ -178,7 +191,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                               Complete KYC Form
                             </Button>
                             {kycAttempts > 0 && (
-                              <p>
+                              <p className="ml-4">
                                 Attempts: {kycAttempts} / {kycMaxAttempts}
                               </p>
                             )}

@@ -41,6 +41,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     details: statusResponse?.can_attempt_reason ?? undefined,
   })
 
+  const needsKyc =
+    statusResponse?.can_attempt &&
+    ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(status)
+
   if (isLoading || kycConfigLoading || kycStatusLoading) {
     return <Loader />
   }
@@ -75,27 +79,31 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                 title="View Your"
                 chip={approvalStatusChip}
                 actions={
-                  <>
-                    <Button
-                      inverted
-                      onClick={e => {
-                        e.preventDefault()
-                        router.push(
-                          'https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf'
-                        )
-                      }}
-                    >
-                      View KYC Faq
-                    </Button>
-                    <Button
-                      onClick={e => {
-                        e.preventDefault()
-                        router.push('/dashboard/verify')
-                      }}
-                    >
-                      Complete KYC Form
-                    </Button>
-                  </>
+                  needsKyc && (
+                    <>
+                      <Button
+                        inverted
+                        onClick={e => {
+                          e.preventDefault()
+                          window?.open(
+                            'https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf',
+                            '_blank',
+                            'noreferrer'
+                          )
+                        }}
+                      >
+                        View KYC Faq
+                      </Button>
+                      <Button
+                        onClick={e => {
+                          e.preventDefault()
+                          router.push('/dashboard/verify')
+                        }}
+                      >
+                        Complete KYC Form
+                      </Button>
+                    </>
+                  )
                 }
               >
                 Testnet Rewards
