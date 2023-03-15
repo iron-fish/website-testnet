@@ -5,24 +5,28 @@ import { getNextEligiblePhase } from './usePhaseStatus'
 import type { KycConfig, KycStatus } from '../types/JumioTypes'
 import { titlesByPhase } from '../RewardItem/RewardItem'
 
+function withDetails(message: string, details?: string) {
+  if (!details) {
+    return message
+  }
+
+  return `${message}: ${details}`
+}
+
 export function useApprovalStatusChip({
   status,
   kycConfig,
-  attempts,
-  maxAttempts,
-  ineligibleReason,
+  details,
 }: {
   status: KycStatus | 'NOT_STARTED' | 'AIRDROP_INELIGIBLE'
   kycConfig: KycConfig | null
-  attempts?: number
-  maxAttempts?: number
-  ineligibleReason?: string
+  details?: string
 }) {
   return useMemo(() => {
     if (status === 'AIRDROP_INELIGIBLE') {
       return (
         <InfoChip align="left" variant="warning" wrap>
-          Airdrop Unavailable{!!ineligibleReason && `: ${ineligibleReason}`}
+          {withDetails('Airdrop Unavailable', details)}
         </InfoChip>
       )
     }
@@ -65,7 +69,10 @@ export function useApprovalStatusChip({
     if (status === 'TRY_AGAIN') {
       return (
         <InfoChip variant="warning">
-          KYC Failed, try again before {nextPhaseDeadline}
+          {withDetails(
+            `KYC Failed, try again before ${nextPhaseDeadline}`,
+            details
+          )}
         </InfoChip>
       )
     }
@@ -76,5 +83,5 @@ export function useApprovalStatusChip({
         {nextPhaseDeadline}
       </InfoChip>
     )
-  }, [attempts, maxAttempts, status, kycConfig, ineligibleReason])
+  }, [status, kycConfig, details])
 }
