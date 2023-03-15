@@ -50,9 +50,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const approvalStatusChip = useApprovalStatusChip({
     status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
-    details: !kycStatus.response?.can_attempt
-      ? kycStatus.response?.can_attempt_reason
-      : undefined,
+    details: kycStatus.response?.can_attempt_reason ?? undefined,
   })
 
   const userAddress = kycStatus.response?.public_address

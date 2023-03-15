@@ -58,7 +58,11 @@ export function useApprovalStatusChip({
     }
 
     if (status === 'FAILED') {
-      return <InfoChip variant="warning">KYC Declined</InfoChip>
+      return (
+        <InfoChip variant="warning">
+          {withDetails('KYC Declined', details)}
+        </InfoChip>
+      )
     }
 
     const nextPhaseDeadline = format(

@@ -17,10 +17,10 @@ export default function Verify({
   loginContext,
 }: VerifyProps) {
   const { checkLoading } = loginContext
-  useRequireLogin(loginContext)
+  // useRequireLogin(loginContext)
 
   const kycStatus = useGetKycStatus()
-  useRequireKYC(loginContext)
+  // useRequireKYC(loginContext)
 
   if (checkLoading() || kycStatus.loading) {
     return <Loader />
@@ -28,8 +28,9 @@ export default function Verify({
 
   return (
     <KYCForm loginContext={loginContext} showNotification={showNotification}>
-      {!kycStatus.response && <StepJumioError />}
-      {kycStatus.response && <KYCSteps workflow={kycStatus.response} />}
+      {/* {!kycStatus.response && <StepJumioError />}
+      {kycStatus.response && <KYCSteps workflow={kycStatus.response} />} */}
+      <KYCSteps workflow={{}} />
     </KYCForm>
   )
 }

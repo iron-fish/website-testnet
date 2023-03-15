@@ -7,12 +7,19 @@ import { ReactNode } from 'react'
 
 type KYCActionProps = {
   title: string
-  children: string
+  children: ReactNode
   chip: ReactNode
   href: string
+  actions?: ReactNode
 }
 
-export function KYCAction({ title, children, chip, href }: KYCActionProps) {
+export function KYCAction({
+  title,
+  children,
+  chip,
+  href,
+  actions,
+}: KYCActionProps) {
   return (
     <Link href={href}>
       <a className={clsx('mb-3', 'block')}>
@@ -23,7 +30,11 @@ export function KYCAction({ title, children, chip, href }: KYCActionProps) {
               'md:p-12',
               'flex',
               'justify-between',
-              'items-center'
+              'flex-col',
+              'items-start',
+              'md:flex-row',
+              'md:items-center'
+              // 'lg:gap-0'
             )}
           >
             <div className="w-full">
@@ -43,7 +54,21 @@ export function KYCAction({ title, children, chip, href }: KYCActionProps) {
               </h3>
               {chip}
             </div>
-            <div className={clsx('hidden', 'md:block')}>
+            <div
+              className={clsx(
+                'flex',
+                'gap-2',
+                'flex-col',
+                'xl:flex-row',
+                'mt-4',
+                'md:mt-0',
+                'w-full',
+                'md:w-auto'
+              )}
+            >
+              {actions}
+            </div>
+            <div className={clsx('hidden', 'md:block', 'md:ml-4')}>
               <ChevronRight width={40} color={'black'} />
             </div>
           </div>
