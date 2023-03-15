@@ -45,8 +45,8 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
         {!storedAddress ? (
           <>
             <p className="mb-2">
-              Please provide the public address of the account where you'd like
-              your $IRON airdropped.
+              Please provide the public address of the account where you&#39;d
+              like your $IRON airdropped.
             </p>
             <p className="mb-2">
               If you need help with the KYC process,{' '}
