@@ -75,7 +75,7 @@ export default function WalletAddress({ address }: { address: string }) {
   return (
     <>
       <div>
-        <p className={clsx('mb-2', 'text-lg')}>Submitted wallet address:</p>
+        <p className={clsx('mb-2', 'text-lg')}>Submitted public address:</p>
         <div
           className={clsx(
             'flex',

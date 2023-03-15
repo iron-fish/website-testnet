@@ -93,7 +93,7 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
           </>
         ) : (
           <>
-            <p>Previously submitted wallet address:</p>
+            <p>Previously submitted public address:</p>
             <WalletAddress address={storedAddress} />
           </>
         )}
