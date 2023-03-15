@@ -190,7 +190,7 @@ function EditAddressModal({
                   <div>
                     <p className="mb-2">
                       Please provide the public address of the account where
-                      you'd like your $IRON airdropped.
+                      you&#39;dd like your $IRON airdropped.
                     </p>
                     <p className="mb-2">
                       If you need help with the KYC process,{' '}
