@@ -35,9 +35,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const approvalStatusChip = useApprovalStatusChip({
     status: statusResponse?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig,
-    attempts: statusResponse?.kyc_attempts,
-    maxAttempts: statusResponse?.kyc_max_attempts,
-    ineligibleReason: !statusResponse?.can_attempt
+    details: !statusResponse?.can_attempt
       ? statusResponse?.can_attempt_reason
       : undefined,
   })
