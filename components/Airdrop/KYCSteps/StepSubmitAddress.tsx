@@ -45,6 +45,10 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
         {!storedAddress ? (
           <>
             <p className="mb-2">
+              Please provide the public address of the account where you'd like
+              your $IRON airdropped.
+            </p>
+            <p className="mb-2">
               If you need help with the KYC process,{' '}
               <a
                 className="underline"
@@ -54,7 +58,7 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
               >
                 please visit our KYC FAQ
               </a>{' '}
-              page that will go over, in detail, the entire KYC process.
+              page.
             </p>
             <div className={clsx('flex', 'flex-col')}>
               {pubAddress && (
