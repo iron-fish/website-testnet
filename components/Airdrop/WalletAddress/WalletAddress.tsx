@@ -120,7 +120,6 @@ export default function WalletAddress({ address }: { address: string }) {
 const publicAddressField = {
   id: 'address',
   label: 'Public Address',
-  placeholder: 'Your Iron Fish public address',
   defaultValue: UNSET,
   validation: (address: string) => address.length == 64,
   defaultErrorText: `A 64-character string is required for public address`,
@@ -130,7 +129,6 @@ const publicAddressField = {
 const confirmAddressField = {
   id: 'confirmAddress',
   label: 'Confirm Public Address',
-  placeholder: '',
   defaultValue: UNSET,
   validation: () => true,
   defaultErrorText: `This field must match the public address above`,
@@ -148,6 +146,8 @@ function EditAddressModal({
 }) {
   const pubAddress = useField(publicAddressField)
   const confirmPubAddress = useField(confirmAddressField)
+  const [hasUserApproval, setHasUserApproval] = useState(false)
+  const isNextDisabled = !hasUserApproval
 
   return (
     <div
@@ -189,12 +189,20 @@ function EditAddressModal({
                   </h3>
                   <div>
                     <p className="mb-2">
-                      Please provide the public wallet address of the account
-                      where you&apos;d like your $IRON airdropped. You can
-                      retrieve this using the command:
+                      Please provide the public address of the account where
+                      you&#39;dd like your $IRON airdropped.
                     </p>
                     <p className="mb-2">
-                      <code>ironfish wallet:address</code>
+                      If you need help with the KYC process,{' '}
+                      <a
+                        className="underline"
+                        target="_blank"
+                        href="https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf"
+                        rel="noreferrer"
+                      >
+                        please visit our KYC FAQ
+                      </a>{' '}
+                      page.
                     </p>
                     <div className={clsx('flex', 'flex-col')}>
                       {pubAddress && (
@@ -207,6 +215,29 @@ function EditAddressModal({
                         />
                       )}
                     </div>
+                    <div
+                      className={clsx(
+                        'p-4',
+                        'bg-gray-100',
+                        'mt-4',
+                        'rounded-md'
+                      )}
+                    >
+                      <label className={clsx('block')}>
+                        <input
+                          type="checkbox"
+                          checked={hasUserApproval}
+                          onChange={e => {
+                            setHasUserApproval(e.target.checked)
+                          }}
+                        ></input>{' '}
+                        <span className="ml-2">
+                          I have backed up my wallet used to create the public
+                          address. Iron Fish cannot help me recover my wallet if
+                          lost.
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -214,6 +245,7 @@ function EditAddressModal({
             <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
+                disabled={isNextDisabled}
                 className={clsx(
                   'inline-flex',
                   'w-full',
@@ -227,7 +259,8 @@ function EditAddressModal({
                   'shadow-sm',
                   'sm:ml-3',
                   'sm:w-auto',
-                  'hover:bg-ifpinkdark'
+                  'hover:bg-ifpinkdark',
+                  isNextDisabled ? 'opacity-50' : ''
                 )}
                 onClick={() => {
                   if (!pubAddress?.value || !pubAddress?.valid) {
