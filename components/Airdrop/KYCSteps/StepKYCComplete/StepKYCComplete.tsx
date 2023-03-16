@@ -5,28 +5,20 @@ import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { JumioFlowContainer } from 'components/Airdrop/JumioFlowContainer/JumioFlowContainer'
 import Button from 'components/Button'
 import { useRouter } from 'next/router'
-import { Fragment, ReactElement, useEffect, useState } from 'react'
 import { CoolFish } from './CoolFish'
 
 export default function StepKYCComplete() {
-  return <RefreshChildren>{() => <StepKYCCompleteContents />}</RefreshChildren>
-}
-
-function StepKYCCompleteContents() {
   const router = useRouter()
 
-  const kycStatus = useGetKycStatus()
+  const { response, status, loading } = useGetKycStatus()
   const { response: kycConfig } = useGetKycConfig()
   const approvalStatusChip = useApprovalStatusChip({
-    status: kycStatus.response?.can_attempt
-      ? kycStatus.status
-      : 'AIRDROP_INELIGIBLE',
+    status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
-    details: kycStatus.response?.can_attempt_reason ?? undefined,
+    details: response?.can_attempt_reason ?? undefined,
   })
-  const isStatusPending = ['WAITING_FOR_CALLBACK' || 'IN_PROGRESS'].includes(
-    kycStatus.status
-  )
+  const isStatusPending =
+    loading || ['WAITING_FOR_CALLBACK' || 'IN_PROGRESS'].includes(status)
 
   return (
     <JumioFlowContainer className="flex">
@@ -60,16 +52,4 @@ function StepKYCCompleteContents() {
       </div>
     </JumioFlowContainer>
   )
-}
-
-function RefreshChildren({ children }: { children: () => ReactElement }) {
-  const [pollKey, setPollKey] = useState(true)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPollKey(prev => !prev)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return <Fragment key={pollKey.toString()}>{children()}</Fragment>
 }

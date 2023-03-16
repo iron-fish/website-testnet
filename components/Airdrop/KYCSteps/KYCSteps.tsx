@@ -31,8 +31,6 @@ export function KYCSteps({ workflow }: KYCStepsProps) {
   const [step, setStep] = useState(0)
   const [address, setAddress] = useState('')
 
-  return <StepKYCComplete />
-
   return (
     <>
       {step === 0 && (
