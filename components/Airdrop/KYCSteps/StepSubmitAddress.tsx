@@ -10,7 +10,7 @@ import WalletAddress from '../WalletAddress/WalletAddress'
 const publicAddressField = {
   id: 'address',
   label: 'Public Address',
-  placeholder: 'Your Iron Fish public address',
+  placeholder: '',
   defaultValue: UNSET,
   validation: (address: string) => address.length == 64,
   defaultErrorText: `A 64-character string is required for public address`,
@@ -45,15 +45,21 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
         {!storedAddress ? (
           <>
             <p className="mb-2">
-              Please provide the{' '}
-              <strong className="underline">public wallet address</strong> of
-              the account where you&apos;d like your $IRON airdropped. You can
-              retrieve this using
+              Please provide the public address of the account where you&#39;d
+              like your $IRON airdropped.
             </p>
             <p className="mb-2">
-              <code>ironfish wallet:address</code>
+              If you need help with the KYC process,{' '}
+              <a
+                className="underline"
+                target="_blank"
+                href="https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf"
+                rel="noreferrer"
+              >
+                please visit our KYC FAQ
+              </a>{' '}
+              page.
             </p>
-            <p>Please ensure you are submitting the correct address.</p>
             <div className={clsx('flex', 'flex-col')}>
               {pubAddress && (
                 <TextField className="max-w-full" {...pubAddress} />
@@ -63,21 +69,7 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
               )}
             </div>
             <div className={clsx('p-4', 'bg-gray-100', 'mt-4', 'rounded-md')}>
-              <div>
-                IMPORTANT: you must have access to this address to receive your
-                airdrop. We will not be able to recover lost tokens sent to
-                inaccessible accounts. We strongly suggest{' '}
-                <a
-                  className="underline"
-                  target="_blank"
-                  href="https://ironfish.network/docs/onboarding/iron-fish-wallet-commands#export-an-account"
-                  rel="noreferrer"
-                >
-                  exporting your wallet information
-                </a>{' '}
-                to ensure you always have access.
-              </div>
-              <label className={clsx('block', 'mt-4')}>
+              <label className={clsx('block')}>
                 <input
                   type="checkbox"
                   checked={hasUserApproval}
@@ -85,15 +77,16 @@ export default function StepSubmitAddress({ onNext, storedAddress }: Props) {
                     setHasUserApproval(e.target.checked)
                   }}
                 ></input>{' '}
-                <span className="inline-block ml-2">
-                  I understand, and have exported my account.
+                <span className="ml-2">
+                  I have backed up my wallet used to create the public address.
+                  Iron Fish cannot help me recover my wallet if lost.
                 </span>
               </label>
             </div>
           </>
         ) : (
           <>
-            <p>Previously submitted wallet address:</p>
+            <p>Previously submitted public address:</p>
             <WalletAddress address={storedAddress} />
           </>
         )}
