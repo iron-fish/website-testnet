@@ -34,7 +34,6 @@ export function KYCAction({
               'items-start',
               'md:flex-row',
               'md:items-center'
-              // 'lg:gap-0'
             )}
           >
             <div className="w-full">

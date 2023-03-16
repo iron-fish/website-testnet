@@ -5,12 +5,28 @@ import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { JumioFlowContainer } from 'components/Airdrop/JumioFlowContainer/JumioFlowContainer'
 import Button from 'components/Button'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { Fragment, ReactElement, useEffect, useState } from 'react'
 import { CoolFish } from './CoolFish'
 
 export default function StepKYCComplete() {
-  const pollKey = usePollKey()
+  return <RefreshChildren>{() => <StepKYCCompleteContents />}</RefreshChildren>
+}
+
+function StepKYCCompleteContents() {
   const router = useRouter()
+
+  const kycStatus = useGetKycStatus()
+  const { response: kycConfig } = useGetKycConfig()
+  const approvalStatusChip = useApprovalStatusChip({
+    status: kycStatus.response?.can_attempt
+      ? kycStatus.status
+      : 'AIRDROP_INELIGIBLE',
+    kycConfig: kycConfig,
+    details: kycStatus.response?.can_attempt_reason ?? undefined,
+  })
+  const isStatusPending = ['WAITING_FOR_CALLBACK' || 'IN_PROGRESS'].includes(
+    kycStatus.status
+  )
 
   return (
     <JumioFlowContainer className="flex">
@@ -22,9 +38,15 @@ export default function StepKYCComplete() {
         <h2
           className={clsx('font-extended', 'text-2xl', 'mb-16', 'text-center')}
         >
-          Verifying your documents...
+          {isStatusPending
+            ? 'Verifying your documents...'
+            : 'Verification complete'}
         </h2>
-        <StatusMessage key={pollKey} />
+        {isStatusPending ? null : (
+          <div className={clsx('flex', 'justify-center')}>
+            {approvalStatusChip}
+          </div>
+        )}
         <div className="mb-auto" />
         <div className={clsx('flex', 'justify-end')}>
           <Button
@@ -40,33 +62,14 @@ export default function StepKYCComplete() {
   )
 }
 
-function usePollKey() {
-  const [pollKey, setPollKey] = useState(0)
+function RefreshChildren({ children }: { children: () => ReactElement }) {
+  const [pollKey, setPollKey] = useState(true)
   useEffect(() => {
     const interval = setInterval(() => {
-      setPollKey(prev => prev + 1)
-    }, 5000)
+      setPollKey(prev => !prev)
+    }, 4000)
     return () => clearInterval(interval)
   }, [])
-  return pollKey
-}
 
-function StatusMessage() {
-  const kycStatus = useGetKycStatus()
-  const { response: kycConfig } = useGetKycConfig()
-  const approvalStatusChip = useApprovalStatusChip({
-    status: kycStatus.response?.can_attempt
-      ? kycStatus.status
-      : 'AIRDROP_INELIGIBLE',
-    kycConfig: kycConfig,
-    details: kycStatus.response?.can_attempt_reason ?? undefined,
-  })
-
-  if (['WAITING_FOR_CALLBACK' || 'IN_PROGRESS'].includes(kycStatus.status)) {
-    return null
-  }
-
-  return (
-    <div className={clsx('flex', 'justify-center')}>{approvalStatusChip}</div>
-  )
+  return <Fragment key={pollKey.toString()}>{children()}</Fragment>
 }
