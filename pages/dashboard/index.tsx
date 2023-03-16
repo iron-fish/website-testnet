@@ -14,6 +14,8 @@ import { format } from 'date-fns'
 import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatusChip'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
+import Button from 'components/Button'
+import { useRouter } from 'next/router'
 
 type AboutProps = {
   showNotification: boolean
@@ -24,6 +26,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
   const isLoading = checkLoading()
   useRequireLogin(loginContext)
+  const router = useRouter()
 
   const {
     status,
@@ -35,10 +38,12 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const approvalStatusChip = useApprovalStatusChip({
     status: statusResponse?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig,
-    details: !statusResponse?.can_attempt
-      ? statusResponse?.can_attempt_reason
-      : undefined,
+    details: statusResponse?.can_attempt_reason ?? undefined,
   })
+
+  const needsKyc =
+    statusResponse?.can_attempt &&
+    ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(status)
 
   if (isLoading || kycConfigLoading || kycStatusLoading) {
     return <Loader />
@@ -73,6 +78,33 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                 href="/dashboard/rewards"
                 title="View Your"
                 chip={approvalStatusChip}
+                actions={
+                  needsKyc && (
+                    <>
+                      <Button
+                        inverted
+                        onClick={e => {
+                          e.preventDefault()
+                          window?.open(
+                            'https://coda.io/d/_dte_X_jrtqj/KYC-FAQ_su_vf',
+                            '_blank',
+                            'noreferrer'
+                          )
+                        }}
+                      >
+                        View KYC Faq
+                      </Button>
+                      <Button
+                        onClick={e => {
+                          e.preventDefault()
+                          router.push('/dashboard/verify')
+                        }}
+                      >
+                        Complete KYC Form
+                      </Button>
+                    </>
+                  )
+                }
               >
                 Testnet Rewards
               </KYCAction>

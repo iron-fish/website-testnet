@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { magic } from 'utils'
 import type { KycStatus, JumioWorkflow } from '../types/JumioTypes'
 
-export function useGetKycStatus() {
+export function useGetKycStatus(interval?: number) {
   const [status, setStatus] = useState<'NOT_STARTED' | KycStatus>('NOT_STARTED')
   const [loading, setLoading] = useState(true)
   const [response, setResponse] = useState<JumioWorkflow | null>(null)
@@ -31,7 +31,13 @@ export function useGetKycStatus() {
       }
     }
     doFetch()
-  }, [])
+
+    if (interval) {
+      const intervalId = setInterval(doFetch, interval)
+
+      return () => clearInterval(intervalId)
+    }
+  }, [interval])
 
   return {
     status,

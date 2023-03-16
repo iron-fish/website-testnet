@@ -8,6 +8,7 @@ type ButtonProps = {
   onKeyPress?: (e: KeyboardEvent<HTMLButtonElement>) => void
   border?: string
   disabled?: boolean
+  inverted?: boolean
 }
 export const RawButton: FC<ButtonProps> = ({
   children,
@@ -16,7 +17,10 @@ export const RawButton: FC<ButtonProps> = ({
   onKeyPress,
   disabled = false,
   border = `border-2`,
-  colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
+  inverted,
+  colorClassName = inverted
+    ? 'hover:bg-black hover:text-white bg-transparent text-black'
+    : 'bg-black text-white hover:bg-transparent hover:text-black',
 }) => {
   return (
     <button
@@ -47,9 +51,12 @@ const Button: FC<ButtonProps> = ({
   children,
   className = '',
   onClick,
-  colorClassName = 'bg-black text-white hover:bg-transparent hover:text-black',
   border,
   disabled = false,
+  inverted,
+  colorClassName = inverted
+    ? 'hover:bg-black hover:text-white bg-transparent text-black'
+    : 'bg-black text-white hover:bg-transparent hover:text-black',
 }) => {
   return (
     <RawButton
