@@ -18,7 +18,7 @@ export default function StepKYCComplete() {
     details: response?.can_attempt_reason ?? undefined,
   })
   const isStatusPending =
-    loading || ['WAITING_FOR_CALLBACK' || 'IN_PROGRESS'].includes(status)
+    loading || ['WAITING_FOR_CALLBACK', 'IN_PROGRESS'].includes(status)
 
   return (
     <JumioFlowContainer className="flex">
