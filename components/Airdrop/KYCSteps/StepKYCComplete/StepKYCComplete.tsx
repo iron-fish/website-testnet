@@ -10,7 +10,7 @@ import { CoolFish } from './CoolFish'
 export default function StepKYCComplete() {
   const router = useRouter()
 
-  const { response, status, loading } = useGetKycStatus()
+  const { response, status, loading } = useGetKycStatus(4000)
   const { response: kycConfig } = useGetKycConfig()
   const approvalStatusChip = useApprovalStatusChip({
     status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
