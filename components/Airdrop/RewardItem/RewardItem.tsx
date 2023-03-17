@@ -82,7 +82,15 @@ export function RewardItem({ poolName, points, iron, chips }: Props) {
               {iron !== null ? iron.toLocaleString('en-US') : 'TBD'}
             </h3>
           </div>
-          <div className={clsx('flex', 'flex-col', 'gap-y-2', 'md:ml-auto')}>
+          <div
+            className={clsx(
+              'flex',
+              'flex-col',
+              'justify-center',
+              'gap-y-2',
+              'md:ml-auto'
+            )}
+          >
             {chips}
           </div>
         </div>
