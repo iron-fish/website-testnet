@@ -1,19 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import { LoginContext } from 'hooks/useLogin'
 import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
-import Note from 'components/Form/Note'
 import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
-import { FieldError } from 'components/Form/FieldStatus'
-import SignUpForm from 'components/signup/SignUpForm'
 import { CountryWithCode, countries } from 'data/countries'
-import { createUser } from 'apiClient'
 import { useField, WHITESPACE } from 'hooks/useForm'
 import { useProtectedRoute, STATUS } from 'hooks/useProtectedRoute'
-import { scrollUp } from 'utils/scroll'
 import {
   UNSET,
   validateEmail,
@@ -24,7 +17,6 @@ import {
 } from 'utils/forms'
 import { encode as btoa } from 'base-64'
 import { useQueriedToast, Toast, Alignment } from 'hooks/useToast'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export const FIELDS = {
   email: {
@@ -96,7 +88,7 @@ export default function SignUp({
   showNotification,
   loginContext,
 }: SignUpProps) {
-  const $router = useRouter()
+  // const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/dashboard?toast=${btoa("You're already logged in.")}`,
     loginContext,
@@ -111,100 +103,100 @@ export default function SignUp({
   const $graffiti = useField(FIELDS.graffiti)
   const $github = useField(FIELDS.github)
   const $country = useField(FIELDS.country)
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  // const { executeRecaptcha } = useGoogleReCaptcha()
 
-  const [$error, $setError] = useState<string>(UNSET)
-  const [$signedUp, $setSignedUp] = useState<boolean>(false)
+  // const [$error, $setError] = useState<string>(UNSET)
+  // const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
     if ($country?.label) {
       $setLoaded(true)
     }
   }, [$setLoaded, $country])
-  const testInvalid = useCallback(() => {
-    const noEmail = !$email?.touched
-    const noGraffiti = !$graffiti?.touched
-    const noGithub = !$github?.touched
-    // for old men
-    const noCountry = !$country?.touched
-    const untouched = noEmail || noGraffiti || noCountry
-    const invalid =
-      !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
+  // const testInvalid = useCallback(() => {
+  //   const noEmail = !$email?.touched
+  //   const noGraffiti = !$graffiti?.touched
+  //   const noGithub = !$github?.touched
+  //   // for old men
+  //   const noCountry = !$country?.touched
+  //   const untouched = noEmail || noGraffiti || noCountry
+  //   const invalid =
+  //     !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
 
-    if (invalid || untouched) {
-      if (untouched) {
-        $setError('Please fill out all fields')
-        if (noEmail) $email?.setTouched(true)
-        if (noGraffiti) $graffiti?.setTouched(true)
-        if (noGithub) $github?.setTouched(true)
-        if (noCountry) $country?.setTouched(true)
-      } else {
-        $setError('Please correct the invalid fields below')
-      }
-      scrollUp()
-    } else {
-      $setError(UNSET)
-    }
-    return invalid || untouched
-  }, [$country, $email, $graffiti, $github, $social])
+  //   if (invalid || untouched) {
+  //     if (untouched) {
+  //       $setError('Please fill out all fields')
+  //       if (noEmail) $email?.setTouched(true)
+  //       if (noGraffiti) $graffiti?.setTouched(true)
+  //       if (noGithub) $github?.setTouched(true)
+  //       if (noCountry) $country?.setTouched(true)
+  //     } else {
+  //       $setError('Please correct the invalid fields below')
+  //     }
+  //     scrollUp()
+  //   } else {
+  //     $setError(UNSET)
+  //   }
+  //   return invalid || untouched
+  // }, [$country, $email, $graffiti, $github, $social])
 
-  const submit = useCallback(async () => {
-    if (
-      !$email ||
-      !$github ||
-      !$graffiti ||
-      !$social ||
-      !$country ||
-      !executeRecaptcha
-    )
-      return
-    if (testInvalid()) return
-    const email = $email?.value
-    const graffiti = $graffiti?.value
-    const github = $github?.value
-    const social = $social?.value
-    const socialChoice = $social?.choice
-    const country = $country?.value
-    $setLoaded(false)
+  // const submit = useCallback(async () => {
+  //   if (
+  //     !$email ||
+  //     !$github ||
+  //     !$graffiti ||
+  //     !$social ||
+  //     !$country ||
+  //     !executeRecaptcha
+  //   )
+  //     return
+  //   if (testInvalid()) return
+  //   const email = $email?.value
+  //   const graffiti = $graffiti?.value
+  //   const github = $github?.value
+  //   const social = $social?.value
+  //   const socialChoice = $social?.choice
+  //   const country = $country?.value
+  //   $setLoaded(false)
 
-    let recaptcha: string
+  //   let recaptcha: string
 
-    try {
-      recaptcha = await executeRecaptcha('signup')
-    } catch (_err) {
-      recaptcha = ''
-    }
+  //   try {
+  //     recaptcha = await executeRecaptcha('signup')
+  //   } catch (_err) {
+  //     recaptcha = ''
+  //   }
 
-    const result = await createUser({
-      email,
-      graffiti,
-      socialChoice,
-      social,
-      country,
-      recaptcha,
-      github,
-    })
+  //   const result = await createUser({
+  //     email,
+  //     graffiti,
+  //     socialChoice,
+  //     social,
+  //     country,
+  //     recaptcha,
+  //     github,
+  //   })
 
-    $setLoaded(true)
+  //   $setLoaded(true)
 
-    if ('error' in result) {
-      const error = '' + result.message
-      $setError(error)
-    } else {
-      $setSignedUp(true)
-      scrollUp()
-      $router.push(`/login?email=${encodeURIComponent(email)}`)
-    }
-  }, [
-    $email,
-    $github,
-    $graffiti,
-    $social,
-    $country,
-    executeRecaptcha,
-    testInvalid,
-    $router,
-  ])
+  //   if ('error' in result) {
+  //     const error = '' + result.message
+  //     $setError(error)
+  //   } else {
+  //     $setSignedUp(true)
+  //     scrollUp()
+  //     $router.push(`/login?email=${encodeURIComponent(email)}`)
+  //   }
+  // }, [
+  //   $email,
+  //   $github,
+  //   $graffiti,
+  //   $social,
+  //   $country,
+  //   executeRecaptcha,
+  //   testInvalid,
+  //   $router,
+  // ])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.
@@ -221,7 +213,7 @@ export default function SignUp({
     resetTextField($social)
   }
 
-  const textFields = [$email, $graffiti, $github, $social]
+  // const textFields = [$email, $graffiti, $github, $social]
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
