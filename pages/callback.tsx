@@ -24,14 +24,17 @@ const Callback = () => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const token = await magic!.auth.loginWithCredential()
         if (token === null) {
-          throw new Error('Null token')
+          $router.push(
+            `/login?toast=${btoa(`Auth token is empty`)}&persist=true`
+          )
+          return
         }
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
           $router.push(
             `/login?toast=${btoa(
               `Error get user information: ${details.statusCode} ${details.message}`
-            )}`
+            )}&persist=true`
           )
           return
         }
