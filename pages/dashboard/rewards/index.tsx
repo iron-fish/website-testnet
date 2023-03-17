@@ -181,7 +181,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                                 )
                               }}
                             >
-                              View KYC Faq
+                              View KYC FAQ
                             </Button>
                             <Button
                               onClick={() => {
