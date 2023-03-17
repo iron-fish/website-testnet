@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import leaderboardPic from 'public/leaderboard.png'
 
 import { LoginContext } from 'hooks/useLogin'
-import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
