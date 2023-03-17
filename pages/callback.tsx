@@ -31,7 +31,7 @@ const Callback = () => {
           $router.push(`/signup?toast=${btoa('Please sign up.')}`)
           return
         }
-        $router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
+        $router.push(`/dashboard`)
       }
     }
     call()
