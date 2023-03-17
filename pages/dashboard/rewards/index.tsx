@@ -209,7 +209,9 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           key={i}
                           poolName={pool.name}
                           points={userAllTimeMetrics.pool_points[pool.name]}
-                          iron={null}
+                          iron={
+                            userAllTimeMetrics.pool_points[pool.name] ? null : 0
+                          }
                           chips={
                             <>
                               <InfoChip variant="warning">
