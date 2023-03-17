@@ -90,24 +90,23 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
       const email = $email?.value
 
       const result = await login(email)
+      $setLoaded(true)
       if ('error' in result) {
         const error = '' + result.message
-        $setLoaded(true)
         $setError(error)
       } else if (
         result &&
         'statusCode' in result &&
         result.statusCode !== 200
       ) {
-        $setLoaded(true)
         $setError('' + result.message)
       } else {
-        $setLoaded(true)
         $setMessage('Logged in!')
         $show()
         setTimeout(() => $router.push('/dashboard'), 3e3)
       }
     } catch (e) {
+      $setLoaded(true)
       $setError(e.message)
     }
   }, [$email, testInvalid, $show, $router])
