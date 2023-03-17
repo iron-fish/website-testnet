@@ -12,4 +12,3 @@ const createMagic = (key: string): Magic | undefined => {
 }
 
 export const magic = createMagic(KEY)
-

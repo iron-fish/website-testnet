@@ -197,7 +197,7 @@ export async function login(email: string): Promise<any> {
     return new LocalError('Only runnable in the browser', NOT_ISOMORPHIC)
   }
   try {
-    const req = magic.auth.loginWithMagicLink({
+    await magic.auth.loginWithMagicLink({
       email,
       redirectURI: new URL(`/callback`, window.location.origin).href,
     })
