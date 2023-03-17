@@ -256,11 +256,9 @@ export default function SignUp({
                   ) : (
                     <>
                       <h1 className="text-4xl text-center mb-4 mt-16">
-                        {$signedUp
-                          ? `Thank you for signing up!`
-                          : `Sign up and get incentivized.`}
+                        {`Sign up is disabled.`}
                       </h1>
-                      {$error !== UNSET && (
+                      {/* {$error !== UNSET && (
                         <FieldError text={$error} size="text-md" />
                       )}
                       {$signedUp ? (
@@ -283,7 +281,7 @@ export default function SignUp({
                           country={$country}
                           submit={submit}
                         />
-                      )}
+                      )} */}
                     </>
                   )}
                 </div>

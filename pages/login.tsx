@@ -8,7 +8,6 @@ import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import { RawButton } from 'components/Button'
 import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
-import SignupCTA from 'components/login/SignupCTA'
 
 import { WHITESPACE, useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
@@ -178,7 +177,6 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
                     ) : (
                       <Loader />
                     )}
-                    <SignupCTA />
                   </div>
                 </div>
               </OffsetBorderContainer>

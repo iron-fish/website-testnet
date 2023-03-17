@@ -14,7 +14,7 @@ const Callback = () => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          $router.push(`/signup?toast=${btoa('Please sign up.')}`)
+          throw new Error(`Invalid user`)
         } else if ($error === 'user_unconfirmed') {
           $router.push(`/login?toast=${btoa('Please log in.')}`)
         }
@@ -28,8 +28,7 @@ const Callback = () => {
         }
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
-          $router.push(`/signup?toast=${btoa('Please sign up.')}`)
-          return
+          throw new Error(`Error get user information: ${details.statusCode} ${details.message}`)
         }
         $router.push(`/dashboard`)
       }
