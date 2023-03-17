@@ -1,5 +1,5 @@
 // Client for ironfish-http-api.
-import { magic, RPCError, RPCErrorCode  } from 'utils/magic'
+import { magic, RPCError, RPCErrorCode } from 'utils/magic'
 
 import {
   ApiUserMetadata,
@@ -201,7 +201,7 @@ export async function login(email: string): Promise<any> {
       email,
       redirectURI: new URL(`/callback`, window.location.origin).href,
     })
-    
+
     const token = await magic.user.getIdToken()
     const auth = await fetch(`${API_URL}/login`, {
       method: 'POST',
@@ -224,7 +224,8 @@ export async function login(email: string): Promise<any> {
           return new LocalError('MagicLinkRateLimited', UNABLE_TO_LOGIN)
         case RPCErrorCode.UserAlreadyLoggedIn:
           return new LocalError('UserAlreadyLoggedIn', UNABLE_TO_LOGIN)
-        default: break
+        default:
+          break
       }
     }
 
