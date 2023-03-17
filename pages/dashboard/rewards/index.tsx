@@ -48,7 +48,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(kycStatus.status)
 
   const approvalStatusChip = useApprovalStatusChip({
-    status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
+    status:
+      kycStatus.status === 'SUCCESS' || canAttemptKyc
+        ? kycStatus.status
+        : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
     details: kycStatus.response?.can_attempt_reason ?? undefined,
   })
@@ -212,14 +215,18 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           iron={null}
                           chips={
                             <>
-                              <InfoChip variant="warning">
-                                KYC Deadline:{' '}
-                                {format(
-                                  new Date(pool.kyc_completed_by),
-                                  'MMM dd'
-                                )}
-                              </InfoChip>
-                              {isPast(new Date(pool.kyc_completed_by)) ? (
+                              {kycStatus.status !== 'SUCCESS' && (
+                                <InfoChip variant="warning">
+                                  KYC Deadline:{' '}
+                                  {format(
+                                    new Date(pool.kyc_completed_by),
+                                    'MMM dd'
+                                  )}
+                                </InfoChip>
+                              )}
+
+                              {kycStatus.status !== 'SUCCESS' &&
+                              isPast(new Date(pool.kyc_completed_by)) ? (
                                 <InfoChip variant="warning">
                                   Airdrop: Forfeit
                                 </InfoChip>
