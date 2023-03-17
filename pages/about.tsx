@@ -227,11 +227,11 @@ export default function About({ showNotification, loginContext }: AboutProps) {
             <Img src={leaderboardPic} />
           </div>
         </div>
-        <TubesCTA
+        {/* <TubesCTA
           cta="Start earning points!"
           buttonText="Get Incentivized"
           goTo="/signup"
-        />
+        /> */}
         <div id="guidelines" className={clsx('mt-32', 'mx-3', 'lg:w-2/3')}>
           <AboutHeader className={clsx('text-left', 'text-4xl', 'w-1/2')}>
             Testnet Guidelines
