@@ -107,7 +107,7 @@ export default function User({ showNotification, loginContext }: Props) {
           API.isGenericError(allTimeMetrics)
         ) {
           Router.push(
-            `/leaderboard?toast=${btoa(
+            `/dashboard?toast=${btoa(
               'An error occurred while fetching user data'
             )}`
           )
@@ -121,7 +121,7 @@ export default function User({ showNotification, loginContext }: Props) {
         console.warn(e)
 
         Router.push(
-          `/leaderboard?toast=${btoa(
+          `/dashboard?toast=${btoa(
             'An error occurred while fetching user data'
           )}`
         )

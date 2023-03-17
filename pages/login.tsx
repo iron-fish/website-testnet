@@ -42,7 +42,7 @@ type LoginProps = {
 export default function Login({ showNotification, loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
-    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    ifLoggedIn: `/dashboard?toast=${btoa("You're already logged in.")}`,
     loginContext,
   })
   const {
