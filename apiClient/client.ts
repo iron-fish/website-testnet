@@ -1,6 +1,5 @@
 // Client for ironfish-http-api.
-import { magic } from 'utils/magic'
-
+import { magic, RPCError, RPCErrorCode } from 'utils/magic'
 import {
   ApiUserMetadata,
   ApiError,
@@ -212,8 +211,23 @@ export async function login(email: string): Promise<any> {
     if (auth) {
       return { statusCode: 200, loaded: true }
     }
-  } catch (e) {
-    return new LocalError((e as Error).message, UNABLE_TO_LOGIN)
+  } catch (err) {
+    if (err instanceof RPCError) {
+      switch (err.code) {
+        case RPCErrorCode.MagicLinkFailedVerification:
+          return new LocalError('MagicLinkFailedVerification', UNABLE_TO_LOGIN)
+        case RPCErrorCode.MagicLinkExpired:
+          return new LocalError('MagicLinkExpired', UNABLE_TO_LOGIN)
+        case RPCErrorCode.MagicLinkRateLimited:
+          return new LocalError('MagicLinkRateLimited', UNABLE_TO_LOGIN)
+        case RPCErrorCode.UserAlreadyLoggedIn:
+          return new LocalError('UserAlreadyLoggedIn', UNABLE_TO_LOGIN)
+        default:
+          break
+      }
+    }
+
+    return new LocalError((err as Error).message, UNABLE_TO_LOGIN)
   }
 }
 
