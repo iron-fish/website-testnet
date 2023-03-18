@@ -88,7 +88,6 @@ export default function SignUp({
   showNotification,
   loginContext,
 }: SignUpProps) {
-  // const $router = useRouter()
   const { status } = useProtectedRoute({
     ifLoggedIn: `/dashboard?toast=${btoa("You're already logged in.")}`,
     loginContext,
@@ -103,100 +102,13 @@ export default function SignUp({
   const $graffiti = useField(FIELDS.graffiti)
   const $github = useField(FIELDS.github)
   const $country = useField(FIELDS.country)
-  // const { executeRecaptcha } = useGoogleReCaptcha()
 
-  // const [$error, $setError] = useState<string>(UNSET)
-  // const [$signedUp, $setSignedUp] = useState<boolean>(false)
   const [$loaded, $setLoaded] = useState<boolean>(false)
   useEffect(() => {
     if ($country?.label) {
       $setLoaded(true)
     }
   }, [$setLoaded, $country])
-  // const testInvalid = useCallback(() => {
-  //   const noEmail = !$email?.touched
-  //   const noGraffiti = !$graffiti?.touched
-  //   const noGithub = !$github?.touched
-  //   // for old men
-  //   const noCountry = !$country?.touched
-  //   const untouched = noEmail || noGraffiti || noCountry
-  //   const invalid =
-  //     !$email?.valid || !$graffiti?.valid || !$social?.valid || !$country?.valid
-
-  //   if (invalid || untouched) {
-  //     if (untouched) {
-  //       $setError('Please fill out all fields')
-  //       if (noEmail) $email?.setTouched(true)
-  //       if (noGraffiti) $graffiti?.setTouched(true)
-  //       if (noGithub) $github?.setTouched(true)
-  //       if (noCountry) $country?.setTouched(true)
-  //     } else {
-  //       $setError('Please correct the invalid fields below')
-  //     }
-  //     scrollUp()
-  //   } else {
-  //     $setError(UNSET)
-  //   }
-  //   return invalid || untouched
-  // }, [$country, $email, $graffiti, $github, $social])
-
-  // const submit = useCallback(async () => {
-  //   if (
-  //     !$email ||
-  //     !$github ||
-  //     !$graffiti ||
-  //     !$social ||
-  //     !$country ||
-  //     !executeRecaptcha
-  //   )
-  //     return
-  //   if (testInvalid()) return
-  //   const email = $email?.value
-  //   const graffiti = $graffiti?.value
-  //   const github = $github?.value
-  //   const social = $social?.value
-  //   const socialChoice = $social?.choice
-  //   const country = $country?.value
-  //   $setLoaded(false)
-
-  //   let recaptcha: string
-
-  //   try {
-  //     recaptcha = await executeRecaptcha('signup')
-  //   } catch (_err) {
-  //     recaptcha = ''
-  //   }
-
-  //   const result = await createUser({
-  //     email,
-  //     graffiti,
-  //     socialChoice,
-  //     social,
-  //     country,
-  //     recaptcha,
-  //     github,
-  //   })
-
-  //   $setLoaded(true)
-
-  //   if ('error' in result) {
-  //     const error = '' + result.message
-  //     $setError(error)
-  //   } else {
-  //     $setSignedUp(true)
-  //     scrollUp()
-  //     $router.push(`/login?email=${encodeURIComponent(email)}`)
-  //   }
-  // }, [
-  //   $email,
-  //   $github,
-  //   $graffiti,
-  //   $social,
-  //   $country,
-  //   executeRecaptcha,
-  //   testInvalid,
-  //   $router,
-  // ])
 
   // When loading is stopped with an error, the form fields re-render
   // but are empty, so repopulate them.
@@ -250,30 +162,6 @@ export default function SignUp({
                       <h1 className="text-4xl text-center mb-4 mt-16">
                         {`Sign up is disabled.`}
                       </h1>
-                      {/* {$error !== UNSET && (
-                        <FieldError text={$error} size="text-md" />
-                      )}
-                      {$signedUp ? (
-                        <>
-                          <Note className="mb-8">
-                            Please check your email to validate your account
-                          </Note>
-                          <p className="p-2 text-center text-sm">
-                            Have any questions for our team?{' '}
-                            <Link href="https://discord.gg/ironfish">
-                              <a className=" text-iflightblue">
-                                Find us on Discord.
-                              </a>
-                            </Link>
-                          </p>
-                        </>
-                      ) : (
-                        <SignUpForm
-                          textFields={textFields}
-                          country={$country}
-                          submit={submit}
-                        />
-                      )} */}
                     </>
                   )}
                 </div>
