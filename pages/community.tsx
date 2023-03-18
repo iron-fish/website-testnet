@@ -5,7 +5,6 @@ import KeepReading from 'components/KeepReading'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
-import TubesCTA from 'components/FooterCTA'
 import { LoginContext } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'

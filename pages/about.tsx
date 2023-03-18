@@ -12,16 +12,9 @@ import Navbar from 'components/Navbar'
 import KeepReading from 'components/KeepReading'
 import { BasicLink } from 'components/About/Link'
 import { AboutHeader } from 'components/About/Header'
-import { renderColumn } from 'components/About/CallToAction'
 import { renderGuidelineColumn } from 'components/About/Guidelines'
 import { Phase, PhaseProps } from 'components/About/Phase'
-import {
-  guidelines,
-  callsToAction,
-  Phase1,
-  Phase2,
-  Phase3,
-} from 'components/About/data'
+import { guidelines, Phase1, Phase2, Phase3 } from 'components/About/data'
 
 import Loader from 'components/Loader'
 
