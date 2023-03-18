@@ -61,11 +61,6 @@ export default function Community({
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <Stories />
         </div>
-        <TubesCTA
-          cta="Join the Testnet!"
-          buttonText="Join Now"
-          goTo="/signup"
-        />
         <KeepReading background="bg-ifbeige" />
       </main>
       <Footer />

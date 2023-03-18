@@ -71,14 +71,8 @@ export default function About({ showNotification, loginContext }: AboutProps) {
         )}
       >
         <PageBanner
-          title={
-            <>
-              Incentivized Testnet
-              <br />
-              Welcome to Phase 3.
-            </>
-          }
-          text={`Welcome to Phase 3 of the incentivized testnet! Sign up for the Iron Fish incentivized testnet to help make Iron Fish great 💖. Participate to earn testnet points (see Testnet Guidelines below for more details).`}
+          title={<>Incentivized Testnet</>}
+          text={`Welcome to the incentivized testnet!`}
           buttonText={!loaded ? 'Sign Up' : ''}
           buttonClassName={clsx(
             'm-auto',
@@ -94,57 +88,6 @@ export default function About({ showNotification, loginContext }: AboutProps) {
           buttonLink={!loaded ? '/signup' : ''}
           disableButton={true}
         />
-        <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
-          <AboutHeader className={clsx('md:w-1/2', 'md:ml-4', 'lg:ml-0')}>
-            Phase 3
-            <span className={clsx('ml-2', 'md:hidden')} />
-            <br className={clsx('hidden', 'md:inline')} />
-            <span className={clsx('hidden', 'md:inline')}>Participation</span>
-            <br className={clsx('hidden', 'md:inline')} />
-            Categories
-          </AboutHeader>
-          <div className={clsx('flex', 'flex-col', 'md:flex-row', 'mb-32')}>
-            <div
-              className={clsx(
-                'flex',
-                'flex-col',
-                'w-full',
-                'md:w-1/2',
-                'md:mr-2',
-                'md:ml-4',
-                'lg:ml-0'
-              )}
-            >
-              {callsToAction.columnOne.map(renderColumn)}
-              <div
-                className={clsx('text-center', 'hidden', 'md:flex', 'mx-auto')}
-              >
-                <BasicLink href="#guidelines">
-                  View Testnet Guidelines
-                </BasicLink>
-              </div>
-            </div>
-            <div
-              className={clsx(
-                'flex',
-                'flex-col',
-                'w-full',
-                'md:w-1/2',
-                'md:ml-1',
-                'md:-mt-32',
-                'md:mr-4',
-                'lg:mr-0'
-              )}
-            >
-              {callsToAction.columnTwo.map(renderColumn)}
-            </div>
-            <div
-              className={clsx('text-center', 'flex', 'md:hidden', 'mx-auto')}
-            >
-              <BasicLink href="#guidelines">View Testnet Guidelines</BasicLink>
-            </div>
-          </div>
-        </div>
         <div className={clsx('mx-6', 'px-3', 'w-full', 'lg:w-2/3', 'mb-6')}>
           <AboutHeader className="md:w-1/2">Phase Overview</AboutHeader>
           <div

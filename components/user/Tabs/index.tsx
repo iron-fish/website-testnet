@@ -5,7 +5,6 @@ import { STATUS } from 'hooks/useLogin'
 
 import AllTimeContent from './AllTimeContent'
 import SettingsContent from './SettingsContent'
-// import WeeklyContent from './WeeklyContent'
 import { useQueriedToast } from 'hooks/useToast'
 
 export type TabType = 'all' | 'weekly' | 'settings'
