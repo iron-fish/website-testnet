@@ -103,7 +103,7 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
       } else {
         $setMessage('Logged in!')
         $show()
-        setTimeout(() => $router.push('/dashboard'), 3e3)
+        setTimeout(() => $router.push('/leaderboard'), 3e3)
       }
     } catch (e) {
       $setLoaded(true)

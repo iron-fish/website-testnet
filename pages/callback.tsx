@@ -14,7 +14,8 @@ const Callback = () => {
     const call = async () => {
       if ($error) {
         if ($error === 'user_invalid') {
-          throw new Error(`Invalid user`)
+          $router.push(`/login?toast=${btoa(`Invalid user`)}&persist=true`)
+          return
         } else if ($error === 'user_unconfirmed') {
           $router.push(`/login?toast=${btoa('Please log in.')}`)
         }
@@ -38,7 +39,7 @@ const Callback = () => {
           )
           return
         }
-        $router.push(`/dashboard`)
+        $router.push(`/leaderboard?toast=${btoa('Welcome back!')}`)
       }
     }
     call()
