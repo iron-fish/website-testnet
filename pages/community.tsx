@@ -5,7 +5,6 @@ import KeepReading from 'components/KeepReading'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 import PageBanner from 'components/PageBanner'
-import TubesCTA from 'components/FooterCTA'
 import { LoginContext } from 'hooks/useLogin'
 
 import Stories from 'components/Community/Stories'
@@ -61,11 +60,6 @@ export default function Community({
         <div className={clsx('w-4/5', 'md:w-2/3')}>
           <Stories />
         </div>
-        <TubesCTA
-          cta="Join the Testnet!"
-          buttonText="Join Now"
-          goTo="/signup"
-        />
         <KeepReading background="bg-ifbeige" />
       </main>
       <Footer />
