@@ -4,6 +4,7 @@ import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { JumioFlowContainer } from 'components/Airdrop/JumioFlowContainer/JumioFlowContainer'
 import Button from 'components/Button'
+import Loader from 'components/Loader'
 import { useRouter } from 'next/router'
 import { CoolFish } from './CoolFish'
 
@@ -34,7 +35,9 @@ export default function StepKYCComplete() {
             ? 'Verifying your documents...'
             : 'Verification complete'}
         </h2>
-        {isStatusPending ? null : (
+        {isStatusPending ? (
+          <Loader />
+        ) : (
           <div className={clsx('flex', 'justify-center')}>
             {approvalStatusChip}
           </div>
