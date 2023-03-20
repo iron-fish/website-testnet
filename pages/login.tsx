@@ -167,7 +167,7 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
                           t => t && <TextField key={t.id} {...t} />
                         )}
                         <RawButton
-                          className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
+                          className="w-full mt-8 max-w-md mb-16 text-lg md:text-xl p-3 md:py-5 md:px-4"
                           onClick={submit}
                         >
                           Login
