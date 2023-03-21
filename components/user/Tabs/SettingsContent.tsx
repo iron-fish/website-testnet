@@ -8,16 +8,84 @@ import TextField from 'components/Form/TextField'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
 
-import { useField } from 'hooks/useForm'
-import { FIELDS } from 'pages/signup'
+import {
+  UNSET,
+  validateEmail,
+  validateGraffiti,
+  validateGithub,
+  defaultErrorText,
+  WHITESPACE,
+} from 'utils/forms'
 
 import { scrollUp } from 'utils/scroll'
-import { UNSET } from 'utils/forms'
 import { useQueriedToast } from 'hooks/useToast'
 import { STATUS } from 'hooks/useLogin'
 
 import * as API from 'apiClient'
 import { TabType } from './index'
+import { countries, CountryWithCode } from 'data/countries'
+import { useField } from 'hooks/useForm'
+
+const FIELDS = {
+  email: {
+    id: 'email',
+    label: 'Email',
+    placeholder: 'Your email',
+    defaultValue: UNSET,
+    validation: validateEmail,
+    defaultErrorText: `Valid email address required`,
+    whitespace: WHITESPACE.BANNED,
+  },
+  graffiti: {
+    id: 'graffiti',
+    label: 'Graffiti',
+    placeholder: 'Your tag',
+    defaultValue: UNSET,
+    validation: validateGraffiti,
+    defaultErrorText: `Graffiti is too long`,
+    whitespace: WHITESPACE.TRIMMED,
+    explanation:
+      'A graffiti tag is your Iron Fish username. It is case-sensitive.',
+  },
+  github: {
+    id: 'github',
+    label: 'Github',
+    required: false,
+    placeholder: 'Your github username',
+    defaultValue: UNSET,
+    validation: validateGithub,
+    defaultErrorText: 'Github username is invalid',
+    whitespace: WHITESPACE.BANNED,
+  },
+  social: {
+    id: 'social',
+    label: '',
+    placeholder: 'Your username',
+    defaultValue: UNSET,
+    required: false,
+    validation: () => true,
+    defaultErrorText,
+    isRadioed: true,
+    whitespace: WHITESPACE.BANNED,
+    options: [
+      { name: 'Discord', value: 'discord' },
+      { name: 'Telegram', value: 'telegram' },
+    ],
+  },
+  country: {
+    id: 'country',
+    label: 'Country',
+    defaultValue: UNSET,
+    options: countries.map(({ code, name }: CountryWithCode) => ({
+      name,
+      value: code,
+    })),
+    validation: (x: string) => x !== UNSET,
+    defaultErrorText,
+    useDefault: true,
+    defaultLabel: 'Select a country',
+  },
+}
 
 type Props = {
   anyBlocksMined: boolean
