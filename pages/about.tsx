@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import leaderboardPic from 'public/leaderboard.png'
 
 import { LoginContext } from 'hooks/useLogin'
-import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -227,11 +226,6 @@ export default function About({ showNotification, loginContext }: AboutProps) {
             <Img src={leaderboardPic} />
           </div>
         </div>
-        <TubesCTA
-          cta="Start earning points!"
-          buttonText="Get Incentivized"
-          goTo="/signup"
-        />
         <div id="guidelines" className={clsx('mt-32', 'mx-3', 'lg:w-2/3')}>
           <AboutHeader className={clsx('text-left', 'text-4xl', 'w-1/2')}>
             Testnet Guidelines

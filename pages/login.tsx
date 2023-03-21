@@ -8,7 +8,6 @@ import { Container as OffsetBorderContainer } from 'components/OffsetBorder'
 import { RawButton } from 'components/Button'
 import { FieldError } from 'components/Form/FieldStatus'
 import Loader from 'components/Loader'
-import SignupCTA from 'components/login/SignupCTA'
 
 import { WHITESPACE, useField } from 'hooks/useForm'
 import { useQuery } from 'hooks/useQuery'
@@ -169,7 +168,7 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
                           t => t && <TextField key={t.id} {...t} />
                         )}
                         <RawButton
-                          className="w-full mt-8 max-w-md mb-2 text-lg md:text-xl p-3 md:py-5 md:px-4"
+                          className="w-full mt-8 max-w-md mb-16 text-lg md:text-xl p-3 md:py-5 md:px-4"
                           onClick={submit}
                         >
                           Login
@@ -178,7 +177,6 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
                     ) : (
                       <Loader />
                     )}
-                    <SignupCTA />
                   </div>
                 </div>
               </OffsetBorderContainer>

@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import TubesCTA from 'components/FooterCTA'
 import PageBanner from 'components/PageBanner'
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
@@ -273,11 +272,8 @@ const questions: ReadonlyArray<{
     answer: (
       <div>
         Points can only be earned for blocks with the same graffiti as your
-        testnet account. You must{' '}
-        <span className="underline">
-          <Link href="/signup">register</Link>
-        </span>{' '}
-        with your graffiti before you can start earning points.
+        testnet account. You must sign up with your graffiti before you can
+        start earning points.
       </div>
     ),
   },
@@ -400,11 +396,6 @@ export default function Faq({ showNotification, loginContext }: FaqProps) {
           </div>
         </div>
 
-        <TubesCTA
-          cta="Join the Testnet!"
-          buttonText="Join Now"
-          goTo="/signup"
-        />
         <KeepReading background="bg-white" />
         <div className="mb-24"></div>
       </main>
