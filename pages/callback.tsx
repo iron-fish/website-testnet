@@ -33,9 +33,7 @@ const Callback = () => {
         const details = await getUserDetails(token)
         if ('statusCode' in details && details.statusCode !== 200) {
           $router.push(
-            `/login?toast=${btoa(
-              `Error get user information: ${details.statusCode} ${details.message}`
-            )}&persist=true`
+            `/login?toast=${btoa(`${details.message}`)}&persist=true`
           )
           return
         }
