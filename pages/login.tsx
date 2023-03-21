@@ -41,7 +41,7 @@ type LoginProps = {
 export default function Login({ showNotification, loginContext }: LoginProps) {
   const $router = useRouter()
   const { status } = useProtectedRoute({
-    ifLoggedIn: `/leaderboard?toast=${btoa("You're already logged in.")}`,
+    ifLoggedIn: `/dashboard?toast=${btoa("You're already logged in.")}`,
     loginContext,
   })
   const {
@@ -70,7 +70,7 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
     const invalid = !$email?.valid
     if (invalid || untouched) {
       if (untouched) {
-        $setError('Please fill out all fields')
+        $setError('Please fill out an email')
         if (noEmail) $email?.setTouched(true)
       } else {
         $setError('Please correct the invalid fields below')
@@ -103,7 +103,7 @@ export default function Login({ showNotification, loginContext }: LoginProps) {
       } else {
         $setMessage('Logged in!')
         $show()
-        setTimeout(() => $router.push('/leaderboard'), 3e3)
+        setTimeout(() => $router.push('/dashboard'), 3e3)
       }
     } catch (e) {
       $setLoaded(true)
