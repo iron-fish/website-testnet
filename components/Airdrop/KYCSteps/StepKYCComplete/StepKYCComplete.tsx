@@ -12,11 +12,14 @@ export default function StepKYCComplete() {
 
   const { response, status, loading } = useGetKycStatus(4000)
   const { response: kycConfig } = useGetKycConfig()
+
   const approvalStatusChip = useApprovalStatusChip({
     status: response?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
     details: response?.can_attempt_reason ?? undefined,
+    helpUrl: response?.help_url ?? undefined,
   })
+
   const isStatusPending =
     loading || ['WAITING_FOR_CALLBACK', 'IN_PROGRESS'].includes(status)
 
