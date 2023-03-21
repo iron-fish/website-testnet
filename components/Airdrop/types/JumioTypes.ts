@@ -22,6 +22,7 @@ export type JumioWorkflow = {
   public_address?: string
   redemption_id?: number
   user_id?: number
+  help_url?: string
 }
 
 export type KycConfigPool = {

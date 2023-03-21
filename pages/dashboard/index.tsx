@@ -39,6 +39,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     status: statusResponse?.can_attempt ? status : 'AIRDROP_INELIGIBLE',
     kycConfig,
     details: statusResponse?.can_attempt_reason ?? undefined,
+    helpUrl: statusResponse?.help_url ?? undefined,
   })
 
   const needsKyc =
