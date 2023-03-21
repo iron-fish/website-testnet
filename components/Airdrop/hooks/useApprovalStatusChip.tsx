@@ -20,9 +20,11 @@ function withDetails(
       {helpUrl ? (
         <>
           {' '}
-          <a href={helpUrl} target="_blank" rel="noreferrer">
-            Learn more here
-          </a>
+          <span className="underline">
+            <a href={helpUrl} target="_blank" rel="noreferrer">
+              Learn more here
+            </a>
+          </span>
           .
         </>
       ) : (
