@@ -48,7 +48,10 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
     ['NOT_STARTED', 'TRY_AGAIN', 'IN_PROGRESS'].includes(kycStatus.status)
 
   const approvalStatusChip = useApprovalStatusChip({
-    status: canAttemptKyc ? kycStatus.status : 'AIRDROP_INELIGIBLE',
+    status:
+      kycStatus.status === 'SUCCESS' || canAttemptKyc
+        ? kycStatus.status
+        : 'AIRDROP_INELIGIBLE',
     kycConfig: kycConfig,
     details: kycStatus.response?.can_attempt_reason ?? undefined,
     helpUrl: kycStatus.response?.help_url ?? undefined,
@@ -210,17 +213,23 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           key={i}
                           poolName={pool.name}
                           points={userAllTimeMetrics.pool_points[pool.name]}
-                          iron={null}
+                          iron={
+                            userAllTimeMetrics.pool_points[pool.name] ? null : 0
+                          }
                           chips={
                             <>
-                              <InfoChip variant="warning">
-                                KYC Deadline:{' '}
-                                {format(
-                                  new Date(pool.kyc_completed_by),
-                                  'MMM dd'
-                                )}
-                              </InfoChip>
-                              {isPast(new Date(pool.kyc_completed_by)) ? (
+                              {kycStatus.status !== 'SUCCESS' && (
+                                <InfoChip variant="warning">
+                                  KYC Deadline:{' '}
+                                  {format(
+                                    new Date(pool.kyc_completed_by),
+                                    'MMM dd'
+                                  )}
+                                </InfoChip>
+                              )}
+
+                              {kycStatus.status !== 'SUCCESS' &&
+                              isPast(new Date(pool.kyc_completed_by)) ? (
                                 <InfoChip variant="warning">
                                   Airdrop: Forfeit
                                 </InfoChip>
