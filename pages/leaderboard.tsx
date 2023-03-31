@@ -196,6 +196,15 @@ export default function Leaderboard({ showNotification, loginContext }: Props) {
                     View Phase 2 leaderboard
                   </a>
                 </Link>
+                or{' '}
+                <Link
+                  href="https://phase3.testnet.ironfish.network/leaderboard"
+                  passHref
+                >
+                  <a className="border-b border-black">
+                    View Phase 3 leaderboard
+                  </a>
+                </Link>
               </p>
             </p>
           }
