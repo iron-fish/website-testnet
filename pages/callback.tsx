@@ -31,13 +31,13 @@ const Callback = () => {
           return
         }
         const details = await getUserDetails(token)
-        if (!('statusCode' in details) || details.statusCode !== 200) {
-          $router.push(
-            `/login?toast=${btoa(`${details.message}`)}&persist=true`
-          )
+
+        if (details.email) {
+          $router.push(`/dashboard?toast=${btoa('Welcome back!')}`)
           return
         }
-        $router.push(`/dashboard`)
+
+        $router.push(`/login?toast=${btoa(`${details.message}`)}&persist=true`)
       }
     }
     call()
