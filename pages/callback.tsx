@@ -32,7 +32,7 @@ const Callback = () => {
         }
         const details = await getUserDetails(token)
 
-        if ('statusCode' in details && details.statusCode === 200) {
+        if ('email' in details && details.email.length > 0 ) {
           $router.push(`/dashboard?toast=${btoa('Welcome back!')}`)
           return
         }
