@@ -235,13 +235,21 @@ export async function getUserDetails(
   token: string
 ): Promise<ApiUserMetadata | ApiError | LocalError> {
   try {
-    const data = await fetch(`${API_URL}/me`, {
+    const response = await fetch(`${API_URL}/me`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
-    return data.json()
+
+    const data = await response.json()
+
+    if (response.status !== 200) {
+      data.statusCode = response.status
+      data.error = data.code
+    }
+
+    return data
   } catch (e) {
     return new LocalError((e as Error).message, ENDPOINT_UNAVAILABLE)
   }
