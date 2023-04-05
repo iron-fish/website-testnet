@@ -232,14 +232,19 @@ export async function login(email: string): Promise<any> {
 }
 
 export async function getUserDetails(
-  token: string
+  token?: string
 ): Promise<ApiUserMetadata | ApiError | LocalError> {
   try {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    }
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
+
     const response = await fetch(`${API_URL}/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     })
 
     const data = await response.json()

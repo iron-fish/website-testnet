@@ -43,6 +43,21 @@ export function useLogin(config: LoginProps = {}) {
       token = await magic.user.getIdToken()
     } catch (error) {}
 
+    const jwtToken = getCookie('ironfish_jwt')
+    if (jwtToken !== '') {
+      const details = await getUserDetails()
+      if (
+        !(details instanceof LocalError) &&
+        !('error' in details) &&
+        details.statusCode &&
+        details.statusCode === 200
+      ) {
+        $setStatus(STATUS.LOADED)
+        $setMetadata(details)
+        return true
+      }
+    }
+
     if (!token) {
       if (redirect) {
         // if redirect string is provided and we're not logged in, cya!
@@ -114,6 +129,15 @@ export function useLogin(config: LoginProps = {}) {
     setRawMetadata: $setMetadata,
   }
   return loginContext
+}
+
+function getCookie(name: string) {
+  return (
+    document.cookie
+      .split(/;\s?/)
+      .find(item => item.startsWith(`${name}=`))
+      ?.slice(name.length + 1) ?? ''
+  )
 }
 
 export type LoginContext = ReturnType<typeof useLogin>
