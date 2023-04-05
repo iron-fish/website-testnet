@@ -235,21 +235,17 @@ export async function getUserDetails(
   token?: string
 ): Promise<ApiUserMetadata | ApiError | LocalError> {
   try {
-    let response
-    if (!token) {
-      response = await fetch(`${API_URL}/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-    } else {
-      response = await fetch(`${API_URL}/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
     }
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
+
+    const response = await fetch(`${API_URL}/me`, {
+      headers,
+    })
 
     const data = await response.json()
 
