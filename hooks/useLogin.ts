@@ -45,7 +45,12 @@ export function useLogin(config: LoginProps = {}) {
 
     const jwtToken = getCookie('ironfish_jwt')
     if (jwtToken !== '') {
-      
+      const details = await getUserDetails()
+      if (details.statusCode && details.statusCode === 200) {
+        $setStatus(STATUS.LOADED)
+        $setMetadata(details)
+        return true
+      }
     }
 
     if (!token) {
