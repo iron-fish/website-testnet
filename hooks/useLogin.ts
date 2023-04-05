@@ -43,8 +43,7 @@ export function useLogin(config: LoginProps = {}) {
       token = await magic.user.getIdToken()
     } catch (error) {}
 
-    const jwtToken = getCookie('ironfish_jwt')
-    if (jwtToken !== '') {
+    if (!token) {
       const details = await getUserDetails()
       if (
         !(details instanceof LocalError) &&
@@ -56,9 +55,7 @@ export function useLogin(config: LoginProps = {}) {
         $setMetadata(details)
         return true
       }
-    }
 
-    if (!token) {
       if (redirect) {
         // if redirect string is provided and we're not logged in, cya!
         // if this is kept as a static Router.push, it _does not_ work
