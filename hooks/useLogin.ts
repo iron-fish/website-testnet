@@ -48,8 +48,7 @@ export function useLogin(config: LoginProps = {}) {
       if (
         !(details instanceof LocalError) &&
         !('error' in details) &&
-        details.statusCode &&
-        details.statusCode === 200
+        details.id
       ) {
         $setStatus(STATUS.LOADED)
         $setMetadata(details)
