@@ -245,6 +245,7 @@ export async function getUserDetails(
 
     const response = await fetch(`${API_URL}/me`, {
       headers,
+      credentials: 'include',
     })
 
     const data = await response.json()
