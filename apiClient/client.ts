@@ -231,6 +231,25 @@ export async function login(email: string): Promise<any> {
   }
 }
 
+export async function logout(): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_URL}/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (response.status !== 200) {
+      return false
+    }
+
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 export async function getUserDetails(
   token?: string
 ): Promise<ApiUserMetadata | ApiError | LocalError> {

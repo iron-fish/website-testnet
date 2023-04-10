@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-// import { useRouter } from 'next/router'
 import Router from 'next/router'
 import { magic } from 'utils/magic'
 import Loader from 'components/Loader'
 import { encode as btoa } from 'base-64'
 import { LoginContext, STATUS } from 'hooks/useLogin'
+import { logout } from 'apiClient/client'
 
 type LogoutProps = {
   loginContext: LoginContext
@@ -13,7 +13,12 @@ type LogoutProps = {
 export default function Logout({ loginContext }: LogoutProps) {
   useEffect(() => {
     const sayGoodbye = async () => {
-      const loggedOut = await magic?.user.logout()
+      let loggedOut = await magic?.user.logout()
+
+      if (!loggedOut) {
+        loggedOut = await logout()
+      }
+
       if (loggedOut) {
         loginContext.setStatus(STATUS.NOT_FOUND)
         loginContext.setError(null)
