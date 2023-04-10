@@ -15,7 +15,7 @@ export default function Logout({ loginContext }: LogoutProps) {
     const sayGoodbye = async () => {
       let loggedOut = await magic?.user.logout()
 
-      if (loggedOut === undefined || loggedOut == false) {
+      if (!loggedOut) {
         loggedOut = await logout()
       }
 
