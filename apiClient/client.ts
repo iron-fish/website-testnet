@@ -238,6 +238,7 @@ export async function logout(): Promise<boolean> {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     })
 
     if (response.status !== 200) {
