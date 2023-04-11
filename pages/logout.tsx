@@ -13,7 +13,10 @@ type LogoutProps = {
 export default function Logout({ loginContext }: LogoutProps) {
   useEffect(() => {
     const sayGoodbye = async () => {
-      let loggedOut = await magic?.user.logout()
+      let loggedOut
+      try {
+        loggedOut = await magic?.user.logout()
+      } catch (error) {}
 
       if (!loggedOut) {
         loggedOut = await logout()
