@@ -19,7 +19,10 @@ function useCreateKycFlow(userAddress: string, shouldCreateKycFlow: boolean) {
       setPostStatus('LOADING')
 
       try {
-        const token = await magic?.user.getIdToken()
+        let token
+        try {
+          token = await magic?.user.getIdToken()
+        } catch (error) {}
 
         const headers: HeadersInit = {
           'Content-Type': 'application/json',

@@ -43,14 +43,23 @@ export default function WalletAddress({ address }: { address: string }) {
       setIsSubmitting(true)
 
       try {
-        const apiKey = (await magic?.user.getIdToken()) ?? ''
+        let token
+        try {
+          token = await magic?.user.getIdToken()
+        } catch (error) {}
+
+        const headers: HeadersInit = {
+          'Content-Type': 'application/json',
+        }
+
+        if (token) {
+          headers.Authorization = `Bearer ${token}`
+        }
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${apiKey}`,
-          },
+          headers,
+          credentials: 'include',
           body: JSON.stringify({
             public_address: newAddress,
           }),

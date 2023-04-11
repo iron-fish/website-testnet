@@ -10,8 +10,10 @@ export function useGetKycStatus(interval?: number) {
   useEffect(() => {
     async function doFetch() {
       try {
-        const token = await magic?.user.getIdToken()
-
+        let token
+        try {
+          token = await magic?.user.getIdToken()
+        } catch (error) {}
         const headers: HeadersInit = {}
 
         if (token) {
