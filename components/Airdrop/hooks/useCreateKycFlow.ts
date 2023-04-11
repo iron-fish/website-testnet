@@ -24,7 +24,7 @@ function useCreateKycFlow(userAddress: string, shouldCreateKycFlow: boolean) {
         const headers: HeadersInit = {
           'Content-Type': 'application/json',
         }
-    
+
         if (token) {
           headers.Authorization = `Bearer ${token}`
         }
