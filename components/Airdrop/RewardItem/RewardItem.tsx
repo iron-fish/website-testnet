@@ -79,7 +79,7 @@ export function RewardItem({ poolName, points, iron, chips }: Props) {
             <h3
               className={clsx('text-left', 'text-3xl', 'mt-3', 'font-extended')}
             >
-              {iron !== null ? iron.toLocaleString('en-US') : 'TBD'}
+              {iron !== null ? iron.toLocaleString('en-US') : 'n/a'}
             </h3>
           </div>
           <div

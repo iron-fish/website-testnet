@@ -221,7 +221,7 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                           key={i}
                           poolName={pool.name}
                           points={userAllTimeMetrics.pool_points[pool.name]}
-                          iron={kycStatus?.response?.[tokenKey] ?? 0}
+                          iron={kycStatus?.response?.[tokenKey] ?? null}
                           chips={
                             <>
                               {kycStatus.status !== 'SUCCESS' && (
