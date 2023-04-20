@@ -23,7 +23,7 @@ const longestPoolName = Object.values(titlesByPhase).sort(
 )[0]
 
 export function TotalRewards({ totalPoints, totalIron, airdropHash }: Props) {
-  if (!totalPoints || !totalIron || !airdropHash) {
+  if (!airdropHash) {
     return null
   }
 
