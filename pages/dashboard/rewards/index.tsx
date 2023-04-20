@@ -223,8 +223,8 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
                     <TotalRewards
-                      totalPoints={userAllTimeMetrics?.points ?? 0}
-                      totalIron={totalIron === 0 ? null : totalIron}
+                      totalPoints={userAllTimeMetrics?.points ?? null}
+                      totalIron={totalIron}
                       airdropHash={
                         kycStatus?.response?.airdrop_transaction_hash ?? null
                       }
