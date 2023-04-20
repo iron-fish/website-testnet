@@ -21,6 +21,8 @@ import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatu
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
+import { useMemo } from 'react'
+import { TotalRewards } from 'components/Airdrop/TotalRewards/TotalRewards'
 
 type AboutProps = {
   showNotification: boolean
@@ -49,6 +51,12 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const kycAttempts = kycStatus.response?.kyc_attempts ?? 0
   const kycMaxAttempts = kycStatus.response?.kyc_max_attempts ?? 3
   const canAttemptKyc = kycStatus.response?.can_attempt
+
+  const totalIron = useMemo(() => {
+    return Object.values(POOL_NAME_TO_IRON_REWARD).reduce((acc, poolName) => {
+      return acc + (kycStatus.response?.[poolName] ?? 0)
+    }, 0)
+  }, [kycStatus.response])
 
   const needsKyc =
     canAttemptKyc &&
@@ -214,6 +222,13 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <div className="mb-16" />
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
+                    <TotalRewards
+                      totalPoints={userAllTimeMetrics?.points ?? 0}
+                      totalIron={totalIron === 0 ? null : totalIron}
+                      airdropHash={
+                        kycStatus?.response?.airdrop_transaction_hash ?? null
+                      }
+                    />
                     {kycConfig.data.map((pool, i) => {
                       const tokenKey = POOL_NAME_TO_IRON_REWARD[pool.name]
                       return (
