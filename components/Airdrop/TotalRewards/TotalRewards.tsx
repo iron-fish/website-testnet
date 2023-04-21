@@ -29,7 +29,7 @@ export function TotalRewards({ totalPoints, totalIron, airdropHash }: Props) {
 
   return (
     <div className="mb-3 w-full">
-      <Box behind={'transaprent'} background="bg-black text-white">
+      <Box behind={'transparent'} background="bg-black text-white">
         <div
           className={clsx(
             'md:p-8',
