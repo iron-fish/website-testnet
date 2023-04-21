@@ -27,6 +27,7 @@ export type JumioWorkflow = {
   pool_two_iron?: number
   pool_three_iron?: number
   pool_four_iron?: number
+  airdrop_transaction_hash?: string | null
 }
 
 export type KycConfigPool = {

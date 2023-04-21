@@ -6,9 +6,10 @@ import styles from './InfoChip.module.css'
 
 type ChipProps = {
   children: ReactNode
-  variant: 'info' | 'pending' | 'warning' | 'complete'
+  variant: 'info' | 'pending' | 'warning' | 'complete' | 'airdrop'
   align?: 'left' | 'center'
   wrap?: boolean
+  className?: string
 }
 
 export function InfoChip({
@@ -16,6 +17,7 @@ export function InfoChip({
   variant,
   align,
   wrap = false,
+  className,
 }: ChipProps) {
   const colors = useMemo(() => {
     return {
@@ -23,6 +25,7 @@ export function InfoChip({
       pending: styles.pending,
       warning: styles.warning,
       complete: styles.complete,
+      airdrop: styles.airdrop,
     }[variant]
   }, [variant])
   return (
@@ -38,7 +41,8 @@ export function InfoChip({
         'items-center',
         'gap-2',
         'justify-center',
-        colors
+        colors,
+        className
       )}
     >
       <div
