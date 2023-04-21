@@ -8,14 +8,20 @@ import { JumioWorkflow } from '../types/JumioTypes'
 
 async function setKycStatusProcessing() {
   try {
-    const apiKey = (await magic?.user.getIdToken()) ?? ''
+    const token = await magic?.user.getIdToken()
+
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    }
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
 
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc/complete`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
+      headers,
+      credentials: 'include',
     })
   } catch (err) {
     // eslint-disable-next-line no-console

@@ -10,13 +10,20 @@ export function useGetKycStatus(interval?: number) {
   useEffect(() => {
     async function doFetch() {
       try {
-        const apiKey = (await magic?.user.getIdToken()) ?? ''
+        let token
+        try {
+          token = await magic?.user.getIdToken()
+        } catch (error) {}
+        const headers: HeadersInit = {}
+
+        if (token) {
+          headers.Authorization = `Bearer ${token}`
+        }
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/kyc`, {
           method: 'GET',
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
+          headers,
+          credentials: 'include',
         })
 
         const data = await res.json()

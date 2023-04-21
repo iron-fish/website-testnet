@@ -21,11 +21,20 @@ import { useApprovalStatusChip } from 'components/Airdrop/hooks/useApprovalStatu
 import { useGetKycStatus } from 'components/Airdrop/hooks/useGetKycStatus'
 import { useGetKycConfig } from 'components/Airdrop/hooks/useGetKycConfig'
 import WalletAddress from 'components/Airdrop/WalletAddress/WalletAddress'
+import { useMemo } from 'react'
+import { TotalRewards } from 'components/Airdrop/TotalRewards/TotalRewards'
 
 type AboutProps = {
   showNotification: boolean
   loginContext: LoginContext
 }
+
+const POOL_NAME_TO_IRON_REWARD = {
+  pool_one: 'pool_one_iron',
+  pool_two: 'pool_two_iron',
+  pool_three: 'pool_three_iron',
+  pool_four: 'pool_four_iron',
+} as const
 
 export default function KYC({ showNotification, loginContext }: AboutProps) {
   const { checkLoading, metadata } = loginContext
@@ -42,6 +51,12 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
   const kycAttempts = kycStatus.response?.kyc_attempts ?? 0
   const kycMaxAttempts = kycStatus.response?.kyc_max_attempts ?? 3
   const canAttemptKyc = kycStatus.response?.can_attempt
+
+  const totalIron = useMemo(() => {
+    return Object.values(POOL_NAME_TO_IRON_REWARD).reduce((acc, poolName) => {
+      return acc + (kycStatus.response?.[poolName] ?? 0)
+    }, 0)
+  }, [kycStatus.response])
 
   const needsKyc =
     canAttemptKyc &&
@@ -207,15 +222,21 @@ export default function KYC({ showNotification, loginContext }: AboutProps) {
                   <div className="mb-16" />
                   <h2 className={clsx('text-3xl', 'mb-8')}>Your Rewards</h2>
                   <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
+                    <TotalRewards
+                      totalPoints={userAllTimeMetrics?.points ?? null}
+                      totalIron={totalIron}
+                      airdropHash={
+                        kycStatus?.response?.airdrop_transaction_hash ?? null
+                      }
+                    />
                     {kycConfig.data.map((pool, i) => {
+                      const tokenKey = POOL_NAME_TO_IRON_REWARD[pool.name]
                       return (
                         <RewardItem
                           key={i}
                           poolName={pool.name}
                           points={userAllTimeMetrics.pool_points[pool.name]}
-                          iron={
-                            userAllTimeMetrics.pool_points[pool.name] ? null : 0
-                          }
+                          iron={kycStatus?.response?.[tokenKey] ?? null}
                           chips={
                             <>
                               {kycStatus.status !== 'SUCCESS' && (

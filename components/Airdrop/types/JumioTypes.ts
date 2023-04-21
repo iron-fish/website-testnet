@@ -23,6 +23,11 @@ export type JumioWorkflow = {
   redemption_id?: number
   user_id?: number
   help_url?: string
+  pool_one_iron?: number
+  pool_two_iron?: number
+  pool_three_iron?: number
+  pool_four_iron?: number
+  airdrop_transaction_hash?: string | null
 }
 
 export type KycConfigPool = {

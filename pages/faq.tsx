@@ -238,10 +238,16 @@ const questions: ReadonlyArray<{
             phase 1
           </Link>
         </span>{' '}
-        and{' '}
+        ,{' '}
         <span className="underline">
           <Link href="https://phase2.testnet.ironfish.network/leaderboard">
             phase 2
+          </Link>
+        </span>{' '}
+        and{' '}
+        <span className="underline">
+          <Link href="https://phase3.testnet.ironfish.network/leaderboard">
+            phase 3
           </Link>
         </span>
         .

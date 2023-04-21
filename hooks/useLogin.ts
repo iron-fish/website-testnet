@@ -44,6 +44,17 @@ export function useLogin(config: LoginProps = {}) {
     } catch (error) {}
 
     if (!token) {
+      const details = await getUserDetails()
+      if (
+        !(details instanceof LocalError) &&
+        !('error' in details) &&
+        details.id
+      ) {
+        $setStatus(STATUS.LOADED)
+        $setMetadata(details)
+        return true
+      }
+
       if (redirect) {
         // if redirect string is provided and we're not logged in, cya!
         // if this is kept as a static Router.push, it _does not_ work
@@ -114,6 +125,15 @@ export function useLogin(config: LoginProps = {}) {
     setRawMetadata: $setMetadata,
   }
   return loginContext
+}
+
+function getCookie(name: string) {
+  return (
+    document.cookie
+      .split(/;\s?/)
+      .find(item => item.startsWith(`${name}=`))
+      ?.slice(name.length + 1) ?? ''
+  )
 }
 
 export type LoginContext = ReturnType<typeof useLogin>

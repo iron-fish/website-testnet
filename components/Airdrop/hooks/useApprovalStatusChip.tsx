@@ -56,12 +56,16 @@ export function useApprovalStatusChip({
 
     const nextEligiblePhase = getNextEligiblePhase(kycConfig)
 
-    if (!nextEligiblePhase) {
-      return <InfoChip variant="warning">Airdrop Ended</InfoChip>
+    if (status === 'SUCCESS') {
+      return (
+        <InfoChip variant="complete">
+          KYC Approved, Waiting for Airdrop
+        </InfoChip>
+      )
     }
 
-    if (status === 'SUCCESS') {
-      return <InfoChip variant="complete">KYC Approved</InfoChip>
+    if (!nextEligiblePhase) {
+      return <InfoChip variant="warning">KYC Ended</InfoChip>
     }
 
     if (status === 'WAITING_FOR_CALLBACK') {
